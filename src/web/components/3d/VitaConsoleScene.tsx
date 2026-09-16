@@ -1,5 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
+import { RoomEnvironment } from "three/examples/jsm/environments/RoomEnvironment.js";
+import { EffectComposer } from "three/examples/jsm/postprocessing/EffectComposer.js";
+import { RenderPass } from "three/examples/jsm/postprocessing/RenderPass.js";
+import { UnrealBloomPass } from "three/examples/jsm/postprocessing/UnrealBloomPass.js";
+import { OutputPass } from "three/examples/jsm/postprocessing/OutputPass.js";
 
 export interface SelectedProjectView {
   id: number;
@@ -13,452 +18,636 @@ export interface SelectedProjectView {
 
 interface VitaConsoleSceneProps {
   selectedProject?: SelectedProjectView | null;
-  onSelectNext?: () => void;
-  onSelectPrev?: () => void;
 }
 
-export const VitaConsoleScene: React.FC<VitaConsoleSceneProps> = ({
-  selectedProject
-}) => {
+const STAGE_RAIL = [
+  "announced",
+  "research",
+  "early_wip",
+  "booting",
+  "in_game",
+  "playable",
+  "completable",
+  "released"
+];
+
+const STAGE_META: Record<string, { label: string; color: string }> = {
+  announced: { label: "ANNOUNCED", color: "#64748b" },
+  research: { label: "RESEARCH", color: "#64748b" },
+  early_wip: { label: "EARLY WIP", color: "#f59e0b" },
+  booting: { label: "BOOTING", color: "#f97316" },
+  in_game: { label: "IN-GAME", color: "#eab308" },
+  playable: { label: "PLAYABLE", color: "#06b6d4" },
+  completable: { label: "COMPLETABLE", color: "#22c55e" },
+  released: { label: "RELEASED", color: "#10b981" },
+  unknown: { label: "UNKNOWN", color: "#64748b" }
+};
+
+const MONO = "ui-monospace, SFMono-Regular, Menlo, Consolas, monospace";
+
+function roundedRectShape(w: number, h: number, r: number): THREE.Shape {
+  const s = new THREE.Shape();
+  const x = -w / 2;
+  const y = -h / 2;
+  s.moveTo(x + r, y);
+  s.lineTo(x + w - r, y);
+  s.quadraticCurveTo(x + w, y, x + w, y + r);
+  s.lineTo(x + w, y + h - r);
+  s.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+  s.lineTo(x + r, y + h);
+  s.quadraticCurveTo(x, y + h, x, y + h - r);
+  s.lineTo(x, y + r);
+  s.quadraticCurveTo(x, y, x + r, y);
+  return s;
+}
+
+function radialTexture(inner: string, outer: string, size = 512): THREE.CanvasTexture {
+  const c = document.createElement("canvas");
+  c.width = size;
+  c.height = size;
+  const g = c.getContext("2d");
+  if (g) {
+    const grad = g.createRadialGradient(size / 2, size * 0.58, 0, size / 2, size * 0.58, size * 0.62);
+    grad.addColorStop(0, inner);
+    grad.addColorStop(0.55, outer);
+    grad.addColorStop(1, "rgba(2,4,8,1)");
+    g.fillStyle = grad;
+    g.fillRect(0, 0, size, size);
+  }
+  const t = new THREE.CanvasTexture(c);
+  t.colorSpace = THREE.SRGBColorSpace;
+  return t;
+}
+
+function wrapText(
+  ctx: CanvasRenderingContext2D,
+  text: string,
+  x: number,
+  y: number,
+  maxWidth: number,
+  lineHeight: number,
+  maxLines = 2
+): number {
+  const words = text.split(" ");
+  let line = "";
+  let lines = 0;
+  for (let i = 0; i < words.length; i++) {
+    const test = line ? line + " " + words[i] : words[i];
+    if (ctx.measureText(test).width > maxWidth && line) {
+      ctx.fillText(line, x, y + lines * lineHeight);
+      lines++;
+      if (lines >= maxLines) return y + lines * lineHeight;
+      line = words[i];
+    } else {
+      line = test;
+    }
+  }
+  if (line) {
+    ctx.fillText(line, x, y + lines * lineHeight);
+    lines++;
+  }
+  return y + lines * lineHeight;
+}
+
+export const VitaConsoleScene: React.FC<VitaConsoleSceneProps> = ({ selectedProject }) => {
   const containerRef = useRef<HTMLDivElement>(null);
-  const [isHovered, setIsHovered] = useState(false);
-  const [rendererInfo, setRendererInfo] = useState({ fps: 60, drawCalls: 0 });
+  const projectRef = useRef<SelectedProjectView | null>(null);
+  const [hud, setHud] = useState({ fps: 60, tris: 0 });
+
+  projectRef.current = selectedProject ?? null;
 
   useEffect(() => {
-    if (!containerRef.current) return;
     const container = containerRef.current;
-
-    // Scene, Camera, Renderer
-    const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(
-      38,
-      container.clientWidth / container.clientHeight,
-      0.1,
-      100
-    );
-    camera.position.set(0, 0, 7.2);
+    if (!container) return;
 
     let renderer: THREE.WebGLRenderer;
     try {
-      renderer = new THREE.WebGLRenderer({
-        antialias: true,
-        alpha: true,
-        powerPreference: "high-performance"
-      });
-      renderer.setSize(container.clientWidth, container.clientHeight);
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-      renderer.toneMapping = THREE.ACESFilmicToneMapping;
-      renderer.toneMappingExposure = 1.2;
-      container.appendChild(renderer.domElement);
+      renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false });
     } catch {
-      // Graceful fallback for non-WebGL / test environments
       return;
     }
 
-    // Group for Vita handheld console
-    const vitaGroup = new THREE.Group();
-    scene.add(vitaGroup);
+    const reduceMotion =
+      typeof window.matchMedia === "function" &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-    // 1. Handheld Main Body (Signature Vita ergonomic oval shape)
-    const bodyShape = new THREE.Shape();
-    const w = 4.2, h = 2.1, r = 0.95;
-    bodyShape.moveTo(-w / 2 + r, -h / 2);
-    bodyShape.lineTo(w / 2 - r, -h / 2);
-    bodyShape.absarc(w / 2 - r, 0, r, -Math.PI / 2, Math.PI / 2, false);
-    bodyShape.lineTo(-w / 2 + r, h / 2);
-    bodyShape.absarc(-w / 2 + r, 0, r, Math.PI / 2, (3 * Math.PI) / 2, false);
+    const width = Math.max(container.clientWidth, 320);
+    const height = Math.max(container.clientHeight, 280);
 
-    const extrudeSettings = {
-      depth: 0.28,
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+    renderer.setSize(width, height);
+    renderer.toneMapping = THREE.ACESFilmicToneMapping;
+    renderer.toneMappingExposure = 1.05;
+    container.appendChild(renderer.domElement);
+
+    const scene = new THREE.Scene();
+    scene.background = new THREE.Color("#04070d");
+
+    const camera = new THREE.PerspectiveCamera(34, width / height, 0.1, 100);
+    camera.position.set(0, 0.42, 6.4);
+    camera.lookAt(0, -0.02, 0);
+
+    // Image based lighting for believable metal and glass
+    const pmrem = new THREE.PMREMGenerator(renderer);
+    const envTexture = pmrem.fromScene(new RoomEnvironment(), 0.03).texture;
+    scene.environment = envTexture;
+
+    // Studio backdrop
+    const backdrop = new THREE.Mesh(
+      new THREE.PlaneGeometry(30, 18),
+      new THREE.MeshBasicMaterial({
+        map: radialTexture("rgba(24,48,80,1)", "rgba(7,12,20,1)"),
+        depthWrite: false
+      })
+    );
+    backdrop.position.set(0, 0.4, -8);
+    scene.add(backdrop);
+
+    // Faint perspective grid floor, reads as a hardware lab bench
+    const gridHelper = new THREE.GridHelper(30, 30, 0x0f2536, 0x0a1a26);
+    gridHelper.position.set(0, -2.1, -1);
+    const gridMat = gridHelper.material as THREE.Material;
+    gridMat.transparent = true;
+    gridMat.opacity = 0.35;
+    scene.add(gridHelper);
+
+    // Glow pool under the handheld
+    const pool = new THREE.Mesh(
+      new THREE.PlaneGeometry(11, 11),
+      new THREE.MeshBasicMaterial({
+        map: radialTexture("rgba(0,190,255,0.55)", "rgba(0,90,160,0.05)"),
+        transparent: true,
+        blending: THREE.AdditiveBlending,
+        depthWrite: false
+      })
+    );
+    pool.rotation.x = -Math.PI / 2;
+    pool.position.set(0, -2.08, 0);
+    scene.add(pool);
+
+    const vita = new THREE.Group();
+    scene.add(vita);
+
+    // ---------- Chassis ----------
+    const bodyGeom = new THREE.ExtrudeGeometry(roundedRectShape(4.62, 2.06, 0.62), {
+      depth: 0.2,
       bevelEnabled: true,
-      bevelSegments: 6,
+      bevelSegments: 8,
       steps: 1,
-      bevelSize: 0.08,
-      bevelThickness: 0.08
-    };
-
-    const bodyGeometry = new THREE.ExtrudeGeometry(bodyShape, extrudeSettings);
-    bodyGeometry.center();
-
-    // High-end matte black composite chassis
-    const bodyMaterial = new THREE.MeshPhysicalMaterial({
-      color: new THREE.Color("#080b10"),
-      metalness: 0.4,
-      roughness: 0.45,
-      clearcoat: 0.3,
-      clearcoatRoughness: 0.2
+      bevelSize: 0.07,
+      bevelThickness: 0.075
     });
-    const bodyMesh = new THREE.Mesh(bodyGeometry, bodyMaterial);
-    vitaGroup.add(bodyMesh);
-
-    // 2. Beveled Metallic Silver Rim Accent (Signature Vita outer bezel)
-    const rimGeometry = new THREE.RingGeometry(1.8, 2.05, 48);
-    const rimMaterial = new THREE.MeshStandardMaterial({
-      color: new THREE.Color("#2a374a"),
-      metalness: 0.9,
-      roughness: 0.2
+    bodyGeom.center();
+    const bodyMat = new THREE.MeshPhysicalMaterial({
+      color: new THREE.Color("#0a0d13"),
+      metalness: 0.62,
+      roughness: 0.36,
+      clearcoat: 0.55,
+      clearcoatRoughness: 0.22,
+      envMapIntensity: 1.0
     });
-    const rimLeft = new THREE.Mesh(rimGeometry, rimMaterial);
-    rimLeft.position.set(-1.25, 0, 0.18);
-    rimLeft.scale.set(0.9, 0.9, 1);
-    const rimRight = rimLeft.clone();
-    rimRight.position.set(1.25, 0, 0.18);
-    vitaGroup.add(rimLeft, rimRight);
+    const body = new THREE.Mesh(bodyGeom, bodyMat);
+    vita.add(body);
 
-    // 3. Dynamic Interactive OLED Screen (Canvas Texture)
+    // ---------- Screen stack ----------
+    const trimGeom = new THREE.ShapeGeometry(roundedRectShape(3.12, 1.82, 0.09));
+    const trimMat = new THREE.MeshPhysicalMaterial({
+      color: new THREE.Color("#93a3b5"),
+      metalness: 1.0,
+      roughness: 0.16,
+      envMapIntensity: 1.3
+    });
+    const trim = new THREE.Mesh(trimGeom, trimMat);
+    trim.position.set(0, 0.06, 0.118);
+    vita.add(trim);
+
+    const glassGeom = new THREE.ShapeGeometry(roundedRectShape(3.0, 1.7, 0.07));
+    const glassMat = new THREE.MeshPhysicalMaterial({
+      color: new THREE.Color("#05080d"),
+      metalness: 0.45,
+      roughness: 0.08,
+      envMapIntensity: 0.9
+    });
+    const glass = new THREE.Mesh(glassGeom, glassMat);
+    glass.position.set(0, 0.06, 0.124);
+    vita.add(glass);
+
     const screenCanvas = document.createElement("canvas");
     screenCanvas.width = 960;
-    screenCanvas.height = 544; // Exact PS Vita native resolution!
-    const ctx = screenCanvas.getContext("2d")!;
-
-    function renderScreenContent(project?: SelectedProjectView | null, time = 0) {
-      ctx.fillStyle = "#040608";
-      ctx.fillRect(0, 0, 960, 544);
-
-      // CRT Scanlines & Grid texture
-      ctx.strokeStyle = "rgba(0, 240, 255, 0.06)";
-      ctx.lineWidth = 1;
-      for (let y = 0; y < 544; y += 8) {
-        ctx.beginPath();
-        ctx.moveTo(0, y);
-        ctx.lineTo(960, y);
-        ctx.stroke();
-      }
-
-      // Animated Cyber Radar Sweep
-      const radarX = (Math.sin(time * 1.5) * 0.5 + 0.5) * 960;
-      const gradient = ctx.createLinearGradient(radarX - 100, 0, radarX + 100, 0);
-      gradient.addColorStop(0, "rgba(0, 240, 255, 0)");
-      gradient.addColorStop(0.5, "rgba(0, 240, 255, 0.12)");
-      gradient.addColorStop(1, "rgba(0, 240, 255, 0)");
-      ctx.fillStyle = gradient;
-      ctx.fillRect(radarX - 100, 0, 200, 544);
-
-      // Top Status Bar
-      ctx.fillStyle = "#090d13";
-      ctx.fillRect(0, 0, 960, 48);
-      ctx.fillStyle = "#00f0ff";
-      ctx.font = "bold 16px 'JetBrains Mono', monospace";
-      ctx.fillText("VITAHARBOR // DEV HUD", 24, 30);
-
-      ctx.fillStyle = "#10b981";
-      ctx.fillText("● 60.0 FPS", 720, 30);
-
-      ctx.fillStyle = "#94a3b8";
-      ctx.font = "14px 'JetBrains Mono', monospace";
-      ctx.fillText("OLED 960x544", 840, 30);
-
-      // Screen Center: Game Details
-      if (project) {
-        ctx.fillStyle = "#ffffff";
-        ctx.font = "bold 38px 'Inter', sans-serif";
-        ctx.fillText(project.game_title || "PS Vita Port Project", 60, 160);
-
-        if (project.display_name && project.display_name !== project.game_title) {
-          ctx.fillStyle = "#00b4d8";
-          ctx.font = "20px 'JetBrains Mono', monospace";
-          ctx.fillText("PORT: " + project.display_name, 60, 200);
-        }
-
-        // Status Tag Box
-        ctx.fillStyle = "#00f0ff";
-        ctx.fillRect(60, 240, 160, 36);
-        ctx.fillStyle = "#040608";
-        ctx.font = "bold 16px 'JetBrains Mono', monospace";
-        ctx.fillText("[ " + project.current_stage.toUpperCase() + " ]", 76, 264);
-
-        // Performance / Playability details
-        ctx.fillStyle = "#f1f5f9";
-        ctx.font = "16px 'Inter', sans-serif";
-        const perfText = project.performance_notes || "Stable framerate lock on Cortex-A9.";
-        ctx.fillText("> PERFORMANCE: " + perfText, 60, 330);
-
-        const playText = project.playability_notes || "Fully completable with native controls.";
-        ctx.fillText("> PLAYABILITY: " + playText, 60, 370);
-
-        // Tech specs
-        if (project.technologies && project.technologies.length > 0) {
-          ctx.fillStyle = "#00b4d8";
-          ctx.font = "14px 'JetBrains Mono', monospace";
-          ctx.fillText("> SHADER/ENGINE: " + project.technologies.join(" · "), 60, 420);
-        }
-      } else {
-        ctx.fillStyle = "#f1f5f9";
-        ctx.font = "bold 34px 'Inter', sans-serif";
-        ctx.fillText("PlayStation Vita Port Registry", 60, 220);
-        ctx.fillStyle = "#00f0ff";
-        ctx.font = "18px 'JetBrains Mono', monospace";
-        ctx.fillText("Select any game below to inspect live shaders & benchmarks", 60, 270);
-      }
-
-      // Bottom footer inside OLED
-      ctx.fillStyle = "rgba(100, 116, 139, 0.4)";
-      ctx.fillRect(0, 496, 960, 48);
-      ctx.fillStyle = "#94a3b8";
-      ctx.font = "12px 'JetBrains Mono', monospace";
-      ctx.fillText("HARDWARE EMULATION // CORTEX-A9 // SGX543MP4+ // vitaGL", 24, 524);
-    }
-
-    renderScreenContent(selectedProject, 0);
+    screenCanvas.height = 544;
+    const sctx = screenCanvas.getContext("2d");
 
     const screenTexture = new THREE.CanvasTexture(screenCanvas);
+    screenTexture.colorSpace = THREE.SRGBColorSpace;
     screenTexture.minFilter = THREE.LinearFilter;
     screenTexture.magFilter = THREE.LinearFilter;
 
-    const screenGeometry = new THREE.PlaneGeometry(2.6, 1.48);
-    const screenMaterial = new THREE.MeshPhysicalMaterial({
-      map: screenTexture,
-      emissive: new THREE.Color("#000000"),
-      emissiveMap: screenTexture,
-      emissiveIntensity: 0.85,
-      roughness: 0.1,
-      metalness: 0.2,
-      clearcoat: 1.0,
-      clearcoatRoughness: 0.05
-    });
-    const screenMesh = new THREE.Mesh(screenGeometry, screenMaterial);
-    screenMesh.position.set(0, 0, 0.17);
-    vitaGroup.add(screenMesh);
+    const screenMat = new THREE.MeshBasicMaterial({ map: screenTexture, toneMapped: false });
+    const screen = new THREE.Mesh(new THREE.PlaneGeometry(2.9, 1.643), screenMat);
+    screen.position.set(0, 0.06, 0.129);
+    vita.add(screen);
 
-    // 4. Dual Analog Thumbsticks
-    function createStick(x: number, y: number) {
-      const stickGroup = new THREE.Group();
-
-      // Base ring
-      const baseGeom = new THREE.CylinderGeometry(0.24, 0.26, 0.08, 32);
-      const baseMat = new THREE.MeshStandardMaterial({
-        color: new THREE.Color("#131923"),
-        metalness: 0.5,
-        roughness: 0.6
-      });
-      const base = new THREE.Mesh(baseGeom, baseMat);
-      base.rotation.x = Math.PI / 2;
-      stickGroup.add(base);
-
-      // Rubber Cap
-      const capGeom = new THREE.CylinderGeometry(0.22, 0.2, 0.06, 32);
-      const capMat = new THREE.MeshStandardMaterial({
-        color: new THREE.Color("#090d14"),
-        roughness: 0.8
-      });
-      const cap = new THREE.Mesh(capGeom, capMat);
-      cap.rotation.x = Math.PI / 2;
-      cap.position.z = 0.06;
-      stickGroup.add(cap);
-
-      stickGroup.position.set(x, y, 0.16);
-      return stickGroup;
-    }
-
-    const leftStick = createStick(-1.58, -0.42);
-    const rightStick = createStick(1.58, -0.42);
-    vitaGroup.add(leftStick, rightStick);
-
-    // 5. Directional Pad (Left)
-    function createDpad() {
-      const dpadGroup = new THREE.Group();
-      const crossGeom = new THREE.BoxGeometry(0.48, 0.16, 0.08);
-      const crossMat = new THREE.MeshStandardMaterial({
-        color: new THREE.Color("#161d28"),
-        metalness: 0.2,
-        roughness: 0.5
-      });
-      const hBar = new THREE.Mesh(crossGeom, crossMat);
-      const vBar = hBar.clone();
-      vBar.rotation.z = Math.PI / 2;
-      dpadGroup.add(hBar, vBar);
-      dpadGroup.position.set(-1.58, 0.36, 0.16);
-      return dpadGroup;
-    }
-    vitaGroup.add(createDpad());
-
-    // 6. Action Buttons (Square, Triangle, Circle, Cross on Right)
-    function createActionButtons() {
-      const btnGroup = new THREE.Group();
-      const btnGeom = new THREE.CylinderGeometry(0.085, 0.085, 0.08, 24);
-      const btnMat = new THREE.MeshStandardMaterial({
-        color: new THREE.Color("#161d28"),
-        metalness: 0.3,
-        roughness: 0.4
-      });
-
-      const positions = [
-        [0, 0.2], // Triangle
-        [0.2, 0], // Circle
-        [0, -0.2], // Cross
-        [-0.2, 0] // Square
-      ];
-
-      positions.forEach(([bx, by]) => {
-        const btn = new THREE.Mesh(btnGeom, btnMat);
-        btn.rotation.x = Math.PI / 2;
-        btn.position.set(bx, by, 0);
-        btnGroup.add(btn);
-      });
-
-      btnGroup.position.set(1.58, 0.36, 0.16);
-      return btnGroup;
-    }
-    vitaGroup.add(createActionButtons());
-
-    // 7. Glowing PS Button (Bottom Left)
-    const psBtnGeom = new THREE.CylinderGeometry(0.09, 0.09, 0.04, 24);
-    const psBtnMat = new THREE.MeshStandardMaterial({
-      color: new THREE.Color("#00f0ff"),
-      emissive: new THREE.Color("#00f0ff"),
-      emissiveIntensity: 0.6,
-      roughness: 0.2
-    });
-    const psBtn = new THREE.Mesh(psBtnGeom, psBtnMat);
-    psBtn.rotation.x = Math.PI / 2;
-    psBtn.position.set(-1.75, -0.85, 0.14);
-    vitaGroup.add(psBtn);
-
-    // 8. 3D Floating Particle Nebula
-    const particleCount = 180;
-    const particleGeom = new THREE.BufferGeometry();
-    const particlePositions = new Float32Array(particleCount * 3);
-    for (let i = 0; i < particleCount * 3; i += 3) {
-      particlePositions[i] = (Math.random() - 0.5) * 12;
-      particlePositions[i + 1] = (Math.random() - 0.5) * 8;
-      particlePositions[i + 2] = (Math.random() - 0.5) * 6 - 2;
-    }
-    particleGeom.setAttribute("position", new THREE.BufferAttribute(particlePositions, 3));
-
-    const particleMat = new THREE.PointsMaterial({
-      color: new THREE.Color("#00f0ff"),
-      size: 0.04,
+    // Halo that makes the emissive screen bleed light like a real OLED
+    const haloMat = new THREE.MeshBasicMaterial({
+      map: radialTexture("rgba(0,220,255,0.5)", "rgba(0,120,200,0.05)"),
       transparent: true,
-      opacity: 0.4
+      blending: THREE.AdditiveBlending,
+      depthWrite: false,
+      opacity: 0.34
     });
-    const particleSystem = new THREE.Points(particleGeom, particleMat);
-    scene.add(particleSystem);
+    const halo = new THREE.Mesh(new THREE.PlaneGeometry(5.6, 3.4), haloMat);
+    halo.position.set(0, 0.06, 0.08);
+    vita.add(halo);
 
-    // 9. Cinematic Studio Lighting Setup
-    const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
-    scene.add(ambientLight);
+    // ---------- Controls ----------
+    const darkPlastic = new THREE.MeshPhysicalMaterial({
+      color: new THREE.Color("#12181f"),
+      metalness: 0.35,
+      roughness: 0.45,
+      clearcoat: 0.25,
+      envMapIntensity: 0.85
+    });
 
-    const keyLight = new THREE.DirectionalLight(0x00f0ff, 2.8);
-    keyLight.position.set(-4, 3, 5);
+    // D-pad
+    const dpad = new THREE.Group();
+    const dpadBarA = new THREE.Mesh(new THREE.BoxGeometry(0.5, 0.155, 0.075), darkPlastic);
+    const dpadBarB = dpadBarA.clone();
+    dpadBarB.rotation.z = Math.PI / 2;
+    dpad.add(dpadBarA, dpadBarB);
+    dpad.position.set(-1.85, 0.28, 0.14);
+    vita.add(dpad);
+
+    // Face buttons with brand colours
+    const faceColors = ["#7dd3fc", "#fca5a5", "#86efac", "#c4b5fd"];
+    const facePositions = [
+      [0, 0.19],
+      [0.19, 0],
+      [0, -0.19],
+      [-0.19, 0]
+    ];
+    facePositions.forEach((p, i) => {
+      const mat = new THREE.MeshPhysicalMaterial({
+        color: new THREE.Color(faceColors[i]),
+        emissive: new THREE.Color(faceColors[i]),
+        emissiveIntensity: 0.18,
+        metalness: 0.2,
+        roughness: 0.35,
+        clearcoat: 0.9,
+        envMapIntensity: 0.9
+      });
+      const btn = new THREE.Mesh(new THREE.CylinderGeometry(0.085, 0.085, 0.075, 28), mat);
+      btn.rotation.x = Math.PI / 2;
+      btn.position.set(1.85 + p[0], 0.28 + p[1], 0.14);
+      vita.add(btn);
+    });
+
+    // Analog sticks
+    function buildStick(x: number, y: number): THREE.Group {
+      const g = new THREE.Group();
+      const ring = new THREE.Mesh(new THREE.CylinderGeometry(0.25, 0.25, 0.055, 32), darkPlastic);
+      ring.rotation.x = Math.PI / 2;
+      const cap = new THREE.Mesh(
+        new THREE.CylinderGeometry(0.19, 0.175, 0.1, 32),
+        new THREE.MeshPhysicalMaterial({
+          color: new THREE.Color("#080b10"),
+          metalness: 0.15,
+          roughness: 0.85,
+          envMapIntensity: 0.5
+        })
+      );
+      cap.rotation.x = Math.PI / 2;
+      cap.position.z = 0.07;
+      g.add(ring, cap);
+      g.position.set(x, y, 0.14);
+      return g;
+    }
+    vita.add(buildStick(-1.85, -0.55));
+    vita.add(buildStick(1.85, -0.55));
+
+    // PS button, start and select
+    const psMat = new THREE.MeshPhysicalMaterial({
+      color: new THREE.Color("#0e2230"),
+      emissive: new THREE.Color("#00d5ff"),
+      emissiveIntensity: 0.7,
+      metalness: 0.3,
+      roughness: 0.3
+    });
+    const psBtn = new THREE.Mesh(new THREE.CylinderGeometry(0.075, 0.075, 0.05, 24), psMat);
+    psBtn.rotation.x = Math.PI / 2;
+    psBtn.position.set(-1.0, -0.83, 0.13);
+    vita.add(psBtn);
+
+    [-0.28, 0.02].forEach((sx) => {
+      const pill = new THREE.Mesh(new THREE.BoxGeometry(0.2, 0.06, 0.05), darkPlastic);
+      pill.position.set(sx, -0.83, 0.13);
+      vita.add(pill);
+    });
+
+    // Front camera
+    const cameraDot = new THREE.Mesh(
+      new THREE.CylinderGeometry(0.045, 0.045, 0.03, 20),
+      new THREE.MeshPhysicalMaterial({ color: new THREE.Color("#0b1620"), metalness: 1, roughness: 0.1 })
+    );
+    cameraDot.rotation.x = Math.PI / 2;
+    cameraDot.position.set(0, 1.03, 0.12);
+    vita.add(cameraDot);
+
+    // Shoulder triggers
+    [-1.92, 1.92].forEach((sx) => {
+      const trigger = new THREE.Mesh(
+        new THREE.BoxGeometry(0.86, 0.16, 0.3),
+        new THREE.MeshPhysicalMaterial({
+          color: new THREE.Color("#0d1319"),
+          metalness: 0.55,
+          roughness: 0.4,
+          envMapIntensity: 0.9
+        })
+      );
+      trigger.position.set(sx, 1.02, -0.04);
+      vita.add(trigger);
+    });
+
+    // ---------- Lighting ----------
+    scene.add(new THREE.AmbientLight(0xffffff, 0.22));
+
+    const keyLight = new THREE.DirectionalLight(0xcfeaff, 2.5);
+    keyLight.position.set(-4.5, 4, 4.5);
     scene.add(keyLight);
 
-    const fillLight = new THREE.DirectionalLight(0x0055ff, 1.8);
-    fillLight.position.set(4, -2, 4);
+    const fillLight = new THREE.DirectionalLight(0x2f6bff, 1.5);
+    fillLight.position.set(5, -1.5, 3.5);
     scene.add(fillLight);
 
-    const topLight = new THREE.PointLight(0xffffff, 1.5, 10);
-    topLight.position.set(0, 4, 3);
-    scene.add(topLight);
+    const rimLight = new THREE.PointLight(0x00e5ff, 2.4, 14, 2);
+    rimLight.position.set(0, 2.6, -3.2);
+    scene.add(rimLight);
 
-    // 10. Mouse Interaction & Tilt Physics
-    let targetRotX = 0;
-    let targetRotY = 0;
-    let targetPosZ = 0;
+    const screenLight = new THREE.PointLight(0x00d5ff, 1.7, 6, 2);
+    screenLight.position.set(0, 0.06, 1.15);
+    scene.add(screenLight);
 
-    const onMouseMove = (e: MouseEvent) => {
-      const rect = container.getBoundingClientRect();
-      const nx = ((e.clientX - rect.left) / rect.width) * 2 - 1;
-      const ny = -(((e.clientY - rect.top) / rect.height) * 2 - 1);
+    // ---------- Screen painting ----------
+    function paint(stage: string) {
+      if (!sctx) return;
+      const p = projectRef.current;
+      const meta = STAGE_META[stage] || STAGE_META.unknown;
+      const accent = meta.color;
 
-      targetRotY = nx * 0.35;
-      targetRotX = -ny * 0.25;
-      targetPosZ = Math.abs(nx) * 0.2;
-    };
+      sctx.fillStyle = "#04070c";
+      sctx.fillRect(0, 0, 960, 544);
 
-    window.addEventListener("mousemove", onMouseMove);
+      // Scanlines
+      sctx.fillStyle = "rgba(0,220,255,0.035)";
+      for (let y = 0; y < 544; y += 4) sctx.fillRect(0, y, 960, 1);
 
-    const onResize = () => {
-      if (!container) return;
-      camera.aspect = container.clientWidth / container.clientHeight;
-      camera.updateProjectionMatrix();
-      renderer.setSize(container.clientWidth, container.clientHeight);
-    };
-    window.addEventListener("resize", onResize);
+      // Top bar
+      sctx.fillStyle = "#070c13";
+      sctx.fillRect(0, 0, 960, 44);
+      sctx.fillStyle = accent;
+      sctx.fillRect(0, 43, 960, 1);
+      sctx.font = "bold 17px " + MONO;
+      sctx.fillStyle = "#e2f4ff";
+      sctx.fillText("VITAHARBOR", 26, 29);
+      sctx.font = "14px " + MONO;
+      sctx.fillStyle = "#5b7186";
+      sctx.fillText("// PORT DEVELOPMENT HUD", 158, 29);
+      sctx.fillStyle = "#10b981";
+      sctx.fillText("\u25CF 60.0 FPS", 762, 29);
+      sctx.fillStyle = "#5b7186";
+      sctx.fillText("OLED 960x544", 848, 29);
 
-    // Render Loop
-    let animationFrameId: number;
-    let frameCount = 0;
-    let lastFpsUpdate = performance.now();
+      if (p) {
+        // Title
+        sctx.fillStyle = "#ffffff";
+        sctx.font = "bold 42px " + MONO;
+        let title = p.game_title || p.display_name || "PS VITA PORT";
+        if (title.length > 30) {
+          sctx.font = "bold 34px " + MONO;
+        }
+        sctx.fillText(title, 26, 116);
 
-    const animate = (time: number) => {
-      animationFrameId = requestAnimationFrame(animate);
-      const seconds = time * 0.001;
+        // Port line
+        if (p.display_name && p.display_name !== p.game_title) {
+          sctx.font = "17px " + MONO;
+          sctx.fillStyle = "#48b6d8";
+          sctx.fillText("PORT  " + p.display_name, 28, 148);
+        }
 
-      // Spring damping rotation
-      vitaGroup.rotation.y += (targetRotY - vitaGroup.rotation.y) * 0.07;
-      vitaGroup.rotation.x += (targetRotX - vitaGroup.rotation.x) * 0.07;
-      vitaGroup.position.z += (targetPosZ - vitaGroup.position.z) * 0.07;
+        // Stage chip
+        sctx.fillStyle = accent;
+        sctx.fillRect(26, 166, 8, 30);
+        sctx.font = "bold 20px " + MONO;
+        sctx.fillStyle = "#04070c";
+        const chipW = sctx.measureText(meta.label).width + 34;
+        sctx.fillStyle = accent;
+        sctx.fillRect(34, 166, chipW, 30);
+        sctx.fillStyle = "#04070c";
+        sctx.fillText(meta.label, 51, 188);
 
-      // Subtle levitation float
-      vitaGroup.position.y = Math.sin(seconds * 1.2) * 0.08;
+        sctx.font = "13px " + MONO;
+        sctx.fillStyle = "#5b7186";
+        sctx.fillText("NO FABRICATED PERCENTAGES - DISCRETE STAGES ONLY", 34 + chipW + 16, 187);
 
-      // Rotate particles slowly
-      particleSystem.rotation.y = seconds * 0.03;
+        // Notes
+        sctx.font = "16px " + MONO;
+        sctx.fillStyle = "#7fe3ff";
+        sctx.fillText("PERFORMANCE", 26, 240);
+        sctx.fillStyle = "#cfdae6";
+        sctx.font = "16px " + MONO;
+        let y = wrapText(sctx, p.performance_notes || "No verified performance report logged yet.", 26, 264, 900, 21, 2);
 
-      // Update dynamic OLED canvas screen
-      renderScreenContent(selectedProject, seconds);
-      screenTexture.needsUpdate = true;
+        sctx.fillStyle = "#7fe3ff";
+        sctx.fillText("PLAYABILITY", 26, y + 26);
+        sctx.fillStyle = "#cfdae6";
+        y = wrapText(sctx, p.playability_notes || "No verified playability report logged yet.", 26, y + 50, 900, 21, 2);
 
-      // Performance stats
-      frameCount++;
-      if (time - lastFpsUpdate >= 1000) {
-        setRendererInfo({
-          fps: frameCount,
-          drawCalls: renderer.info.render.calls
-        });
-        frameCount = 0;
-        lastFpsUpdate = time;
+        sctx.fillStyle = "#7fe3ff";
+        sctx.fillText("ENGINE", 26, y + 26);
+        sctx.fillStyle = "#93a9bd";
+        const techs = p.technologies && p.technologies.length > 0 ? p.technologies.join("  /  ") : "Not yet classified";
+        sctx.fillText(techs, 118, y + 26);
+      } else {
+        sctx.fillStyle = "#ffffff";
+        sctx.font = "bold 40px " + MONO;
+        sctx.fillText("PORT INTAKE STANDBY", 26, 150);
+        sctx.fillStyle = "#48b6d8";
+        sctx.font = "17px " + MONO;
+        sctx.fillText("Select a row in the ledger below to load its record.", 28, 186);
       }
 
-      renderer.render(scene, camera);
-    };
+      // Stage rail
+      const railY = 452;
+      const railW = 908;
+      const cellW = railW / STAGE_RAIL.length;
+      const idx = STAGE_RAIL.indexOf(stage);
+      sctx.font = "11px " + MONO;
+      STAGE_RAIL.forEach((s, i) => {
+        const x = 26 + i * cellW;
+        const m = STAGE_META[s];
+        const done = idx >= 0 && i < idx;
+        const current = idx === i;
+        if (current) {
+          sctx.fillStyle = m.color;
+          sctx.fillRect(x, railY, cellW - 6, 26);
+          sctx.fillStyle = "#04070c";
+        } else if (done) {
+          sctx.fillStyle = "rgba(255,255,255,0.14)";
+          sctx.fillRect(x, railY, cellW - 6, 26);
+          sctx.fillStyle = "#94a3b8";
+        } else {
+          sctx.strokeStyle = "rgba(120,140,160,0.35)";
+          sctx.lineWidth = 1;
+          sctx.strokeRect(x + 0.5, railY + 0.5, cellW - 7, 25);
+          sctx.fillStyle = "#3d4d5e";
+        }
+        sctx.fillText(m.label, x + 8, railY + 17);
+      });
 
-    animationFrameId = requestAnimationFrame(animate);
+      // Footer
+      sctx.fillStyle = "#070c13";
+      sctx.fillRect(0, 500, 960, 44);
+      sctx.font = "12px " + MONO;
+      sctx.fillStyle = "#4d6377";
+      sctx.fillText("CORTEX-A9  /  SGX543MP4+  /  vitaGL  /  NO ROMS HOSTED", 26, 527);
+      sctx.fillStyle = "#4d6377";
+      sctx.fillText("VITAHARBOR.VERCEL.APP", 776, 527);
+    }
+
+    // ---------- Post processing ----------
+    const composer = new EffectComposer(renderer);
+    composer.addPass(new RenderPass(scene, camera));
+    const bloom = new UnrealBloomPass(
+      new THREE.Vector2(width * 0.5, height * 0.5),
+      0.62,
+      0.55,
+      0.72
+    );
+    composer.addPass(bloom);
+    composer.addPass(new OutputPass());
+    composer.setSize(width, height);
+
+    // ---------- Interaction ----------
+    let pointerX = 0;
+    let pointerY = 0;
+    const onPointerMove = (e: PointerEvent) => {
+      const rect = container.getBoundingClientRect();
+      pointerX = ((e.clientX - rect.left) / rect.width) * 2 - 1;
+      pointerY = -(((e.clientY - rect.top) / rect.height) * 2 - 1);
+    };
+    const onPointerLeave = () => {
+      pointerX = 0;
+      pointerY = 0;
+    };
+    container.addEventListener("pointermove", onPointerMove);
+    container.addEventListener("pointerleave", onPointerLeave);
+
+    const resize = () => {
+      const w = Math.max(container.clientWidth, 320);
+      const h = Math.max(container.clientHeight, 280);
+      camera.aspect = w / h;
+      camera.updateProjectionMatrix();
+      renderer.setSize(w, h);
+      composer.setSize(w, h);
+      bloom.setSize(w * 0.5, h * 0.5);
+    };
+    const observer = new ResizeObserver(resize);
+    observer.observe(container);
+
+    // ---------- Loop ----------
+    let raf = 0;
+    let lastFps = performance.now();
+    let frames = 0;
+    let lastStage = "";
+    let glow = 0.34;
+    const clock = new THREE.Clock();
+
+    const tick = () => {
+      raf = requestAnimationFrame(tick);
+      const t = clock.getElapsedTime();
+
+      const stage = projectRef.current?.current_stage || "announced";
+      if (stage !== lastStage) {
+        lastStage = stage;
+        paint(stage);
+        screenTexture.needsUpdate = true;
+      }
+
+      const meta = STAGE_META[stage] || STAGE_META.unknown;
+      screenLight.color.set(meta.color);
+      haloMat.color.set(meta.color);
+
+      if (!reduceMotion) {
+        const idleYaw = Math.sin(t * 0.32) * 0.2;
+        vita.rotation.y += (idleYaw + pointerX * 0.34 - vita.rotation.y) * 0.06;
+        vita.rotation.x += (-0.02 + pointerY * 0.14 - vita.rotation.x) * 0.06;
+        vita.position.y = Math.sin(t * 1.1) * 0.055;
+        halo.position.z = 0.08 + Math.sin(t * 1.6) * 0.005;
+        glow = 0.3 + Math.sin(t * 1.6) * 0.06;
+        haloMat.opacity = glow;
+        rimLight.intensity = 2.2 + Math.sin(t * 0.9) * 0.35;
+      } else {
+        vita.rotation.y = 0.16;
+        vita.rotation.x = -0.02;
+        vita.position.y = 0;
+      }
+
+      composer.render();
+
+      frames++;
+      const now = performance.now();
+      if (now - lastFps >= 1000) {
+        setHud({ fps: frames, tris: renderer.info.render.triangles });
+        frames = 0;
+        lastFps = now;
+      }
+    };
+    tick();
 
     return () => {
-      cancelAnimationFrame(animationFrameId);
-      window.removeEventListener("mousemove", onMouseMove);
-      window.removeEventListener("resize", onResize);
-      renderer.dispose();
-      bodyGeometry.dispose();
-      bodyMaterial.dispose();
+      cancelAnimationFrame(raf);
+      observer.disconnect();
+      container.removeEventListener("pointermove", onPointerMove);
+      container.removeEventListener("pointerleave", onPointerLeave);
+      composer.dispose();
+      pmrem.dispose();
+      envTexture.dispose();
+      scene.traverse((obj) => {
+        const mesh = obj as THREE.Mesh;
+        if (mesh.geometry) mesh.geometry.dispose();
+        const mat = mesh.material as THREE.Material | THREE.Material[] | undefined;
+        if (Array.isArray(mat)) mat.forEach((m) => m.dispose());
+        else if (mat) mat.dispose();
+      });
       screenTexture.dispose();
+      renderer.dispose();
       if (container.contains(renderer.domElement)) {
         container.removeChild(renderer.domElement);
       }
     };
-  }, [selectedProject]);
+  }, []);
 
   return (
     <div
       ref={containerRef}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-      className="relative w-full h-[400px] sm:h-[460px] overflow-hidden bg-[#040608] border-b border-[#1a2332]"
-      style={{ cursor: isHovered ? "grab" : "default" }}
+      className="relative h-[340px] w-full overflow-hidden bg-[#04070d] sm:h-[440px] lg:h-[560px]"
     >
-      {/* Precision WebGL HUD Overlay (Awwwards Style) */}
-      <div className="absolute top-3 left-4 z-10 flex items-center gap-2 font-mono text-[10px] text-[#64748b]">
-        <span className="w-1.5 h-1.5 rounded-full bg-[#00f0ff] animate-ping" />
-        <span className="text-[#00f0ff] font-bold tracking-wider">
-          REAL-TIME 3D VIEWPORT // PS VITA SYSTEM
-        </span>
-        <span className="text-[#29374e]">|</span>
-        <span>INTERACTIVE PARALLAX TILT</span>
-      </div>
-
-      <div className="absolute top-3 right-4 z-10 hidden sm:flex items-center gap-3 font-mono text-[10px] text-[#64748b]">
-        <span>WEBGL 2.0</span>
-        <span className="text-[#29374e]">|</span>
-        <span className="text-[#10b981]">{rendererInfo.fps} FPS</span>
-        <span className="text-[#29374e]">|</span>
-        <span>CORTEX-A9 444MHz</span>
-      </div>
-
-      {/* Floating control hint */}
-      <div className="absolute bottom-3 left-4 z-10 font-mono text-[9px] text-[#64748b] tracking-wider uppercase">
-        Move cursor to tilt console · Select any port in ledger below to load into OLED display
+      <div className="pointer-events-none absolute inset-0 z-10">
+        <div className="absolute top-3 left-4 flex items-center gap-2 font-mono text-[10px] text-[#4d6377]">
+          <span className="h-1.5 w-1.5 rounded-full bg-[#00d5ff]" />
+          <span className="font-bold tracking-wider text-[#7fe3ff]">LIVE 3D DEVICE</span>
+        </div>
+        <div className="absolute top-3 right-4 hidden items-center gap-3 font-mono text-[10px] text-[#4d6377] sm:flex">
+          <span>WEBGL</span>
+          <span className="text-[#1d2d3d]">|</span>
+          <span className="text-[#10b981]">{hud.fps} FPS</span>
+          <span className="text-[#1d2d3d]">|</span>
+          <span>{hud.tris.toLocaleString("en-US")} TRIS</span>
+        </div>
+        <div className="absolute bottom-3 left-4 font-mono text-[9px] tracking-wider text-[#4d6377] uppercase">
+          Move pointer to orbit · Select a ledger row to load its record onto the OLED
+        </div>
       </div>
     </div>
   );
 };
+
