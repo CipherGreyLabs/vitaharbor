@@ -142,19 +142,19 @@ export const AdminPage: React.FC = () => {
     <div className="space-y-6">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-bold text-[#edf5ff] flex items-center gap-2">
-            <Shield className="w-6 h-6 text-[#249cf4]" />
+          <h1 className="text-2xl font-bold text-[#f4f6f8] flex items-center gap-2">
+            <Shield className="w-6 h-6 text-[#3ad2ff]" />
             <span>Moderation & Admin Panel</span>
           </h1>
           <p className="text-xs text-[#9aaabd] mt-1">Review incoming discovery candidates and manage project records</p>
         </div>
 
         {/* Tab Selection */}
-        <div className="flex items-center gap-1 bg-[#151b24] p-1 rounded-lg border border-[#202a38]">
+        <div className="flex items-center gap-1 bg-[#1c2024] p-1 rounded-lg border border-[#2c313a]">
           <button
             onClick={() => setActiveTab("queue")}
             className={`px-3 py-1.5 rounded-md text-xs font-medium transition-colors ${
-              activeTab === "queue" ? "bg-[#249cf4] text-white" : "text-[#9aaabd] hover:text-[#edf5ff]"
+              activeTab === "queue" ? "bg-[#3ad2ff] text-white" : "text-[#9aaabd] hover:text-[#f4f6f8]"
             }`}
           >
             Discovery Queue ({queueItems.length})
@@ -162,7 +162,7 @@ export const AdminPage: React.FC = () => {
           <button
             onClick={() => setActiveTab("create")}
             className={`px-3 py-1.5 rounded-md text-xs font-medium transition-colors ${
-              activeTab === "create" ? "bg-[#249cf4] text-white" : "text-[#9aaabd] hover:text-[#edf5ff]"
+              activeTab === "create" ? "bg-[#3ad2ff] text-white" : "text-[#9aaabd] hover:text-[#f4f6f8]"
             }`}
           >
             Add Project
@@ -173,7 +173,7 @@ export const AdminPage: React.FC = () => {
               loadAuditLogs();
             }}
             className={`px-3 py-1.5 rounded-md text-xs font-medium transition-colors ${
-              activeTab === "audit" ? "bg-[#249cf4] text-white" : "text-[#9aaabd] hover:text-[#edf5ff]"
+              activeTab === "audit" ? "bg-[#3ad2ff] text-white" : "text-[#9aaabd] hover:text-[#f4f6f8]"
             }`}
           >
             Audit Log
@@ -185,24 +185,24 @@ export const AdminPage: React.FC = () => {
       {activeTab === "queue" && (
         <div className="space-y-4">
           {loading ? (
-            <div className="card-panel p-12 text-center text-xs text-[#68788c] animate-pulse">Loading moderation queue...</div>
+            <div className="card-panel p-12 text-center text-xs text-[#7c848d] animate-pulse">Loading moderation queue...</div>
           ) : queueItems.length > 0 ? (
             queueItems.map((item) => {
               const obs = item.observations && item.observations[0];
               return (
                 <div key={item.id} className="card-panel p-5 space-y-4">
-                  <div className="flex flex-wrap items-center justify-between gap-2 border-b border-[#202a38] pb-3">
+                  <div className="flex flex-wrap items-center justify-between gap-2 border-b border-[#2c313a] pb-3">
                     <div className="flex items-center gap-2">
-                      <span className="text-xs font-semibold text-[#edf5ff]">
+                      <span className="text-xs font-semibold text-[#f4f6f8]">
                         r/{item.source_item?.community || "Reddit"}
                       </span>
-                      <span className="text-xs text-[#68788c]">by u/{item.source_item?.author_username}</span>
+                      <span className="text-xs text-[#7c848d]">by u/{item.source_item?.author_username}</span>
                       {item.source_item?.canonical_url && (
                         <a
                           href={item.source_item.canonical_url}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="text-[#249cf4] text-xs hover:text-[#4fb5ff] inline-flex items-center gap-1"
+                          className="text-[#3ad2ff] text-xs hover:text-[#7fe3ff] inline-flex items-center gap-1"
                         >
                           <span>Open Reddit</span>
                           <ExternalLink className="w-3 h-3" />
@@ -210,19 +210,19 @@ export const AdminPage: React.FC = () => {
                       )}
                     </div>
                     <div className="text-xs text-[#9aaabd]">
-                      Confidence: <span className="font-semibold text-[#249cf4]">{Math.round(item.confidence_score * 100)}%</span>
+                      Confidence: <span className="font-semibold text-[#3ad2ff]">{Math.round(item.confidence_score * 100)}%</span>
                     </div>
                   </div>
 
                   <div className="space-y-2">
-                    <p className="text-xs text-[#edf5ff] bg-[#090c11] p-3 rounded border border-[#202a38] leading-relaxed">
+                    <p className="text-xs text-[#f4f6f8] bg-[#0f1113] p-3 rounded border border-[#2c313a] leading-relaxed">
                       {obs?.claim_text || "No claim text provided."}
                     </p>
 
                     <div className="flex flex-wrap items-center gap-4 text-xs text-[#9aaabd]">
                       <div>
                         Matched Project:{" "}
-                        <span className="text-[#edf5ff] font-medium">
+                        <span className="text-[#f4f6f8] font-medium">
                           {item.suggested_project?.display_name || "Unmatched (New Port Candidate)"}
                         </span>
                       </div>
@@ -245,7 +245,7 @@ export const AdminPage: React.FC = () => {
                     </button>
                     <button
                       onClick={() => handleApprove(item.id)}
-                      className="px-3 py-1.5 rounded-md text-xs font-medium bg-[#249cf4] text-white hover:bg-[#4fb5ff] inline-flex items-center gap-1.5 transition-colors"
+                      className="px-3 py-1.5 rounded-md text-xs font-medium bg-[#3ad2ff] text-white hover:bg-[#7fe3ff] inline-flex items-center gap-1.5 transition-colors"
                     >
                       <CheckCircle2 className="w-4 h-4" />
                       <span>Approve & Publish Update</span>
@@ -255,7 +255,7 @@ export const AdminPage: React.FC = () => {
               );
             })
           ) : (
-            <div className="card-panel p-12 text-center text-xs text-[#68788c]">
+            <div className="card-panel p-12 text-center text-xs text-[#7c848d]">
               Discovery queue is currently clear. No pending items to review.
             </div>
           )}
@@ -265,9 +265,9 @@ export const AdminPage: React.FC = () => {
       {/* Add Project Tab */}
       {activeTab === "create" && (
         <form onSubmit={handleCreateProject} className="card-panel p-6 sm:p-8 space-y-4 max-w-2xl">
-          <h3 className="text-base font-semibold text-[#edf5ff]">Register New Game & Port Project</h3>
+          <h3 className="text-base font-semibold text-[#f4f6f8]">Register New Game & Port Project</h3>
 
-          {createMsg && <div className="p-3 rounded bg-[#151b24] border border-[#202a38] text-xs text-[#249cf4]">{createMsg}</div>}
+          {createMsg && <div className="p-3 rounded bg-[#1c2024] border border-[#2c313a] text-xs text-[#3ad2ff]">{createMsg}</div>}
 
           <div className="space-y-1.5">
             <label className="text-xs font-medium text-[#9aaabd]">Game Title (Required)</label>
@@ -277,7 +277,7 @@ export const AdminPage: React.FC = () => {
               placeholder="e.g. Grand Theft Auto: Vice City"
               value={newTitle}
               onChange={(e) => setNewTitle(e.target.value)}
-              className="w-full bg-[#090c11] border border-[#202a38] rounded-md px-3 py-2 text-xs text-[#edf5ff] focus:outline-none focus:border-[#249cf4]"
+              className="w-full bg-[#0f1113] border border-[#2c313a] rounded-md px-3 py-2 text-xs text-[#f4f6f8] focus:outline-none focus:border-[#3ad2ff]"
             />
           </div>
 
@@ -289,7 +289,7 @@ export const AdminPage: React.FC = () => {
                 placeholder="e.g. PC, PS2, Android"
                 value={newPlatform}
                 onChange={(e) => setNewPlatform(e.target.value)}
-                className="w-full bg-[#090c11] border border-[#202a38] rounded-md px-3 py-2 text-xs text-[#edf5ff] focus:outline-none focus:border-[#249cf4]"
+                className="w-full bg-[#0f1113] border border-[#2c313a] rounded-md px-3 py-2 text-xs text-[#f4f6f8] focus:outline-none focus:border-[#3ad2ff]"
               />
             </div>
             <div className="space-y-1.5">
@@ -299,7 +299,7 @@ export const AdminPage: React.FC = () => {
                 placeholder="e.g. 2002"
                 value={newYear}
                 onChange={(e) => setNewYear(e.target.value)}
-                className="w-full bg-[#090c11] border border-[#202a38] rounded-md px-3 py-2 text-xs text-[#edf5ff] focus:outline-none focus:border-[#249cf4]"
+                className="w-full bg-[#0f1113] border border-[#2c313a] rounded-md px-3 py-2 text-xs text-[#f4f6f8] focus:outline-none focus:border-[#3ad2ff]"
               />
             </div>
           </div>
@@ -309,7 +309,7 @@ export const AdminPage: React.FC = () => {
             <select
               value={newStage}
               onChange={(e) => setNewStage(e.target.value)}
-              className="w-full bg-[#090c11] border border-[#202a38] rounded-md px-3 py-2 text-xs text-[#edf5ff] focus:outline-none focus:border-[#249cf4]"
+              className="w-full bg-[#0f1113] border border-[#2c313a] rounded-md px-3 py-2 text-xs text-[#f4f6f8] focus:outline-none focus:border-[#3ad2ff]"
             >
               <option value="announced">Announced</option>
               <option value="early_wip">Early WIP</option>
@@ -327,7 +327,7 @@ export const AdminPage: React.FC = () => {
               placeholder="Technical approach, wrapper details, etc."
               value={newSummary}
               onChange={(e) => setNewSummary(e.target.value)}
-              className="w-full bg-[#090c11] border border-[#202a38] rounded-md px-3 py-2 text-xs text-[#edf5ff] focus:outline-none focus:border-[#249cf4]"
+              className="w-full bg-[#0f1113] border border-[#2c313a] rounded-md px-3 py-2 text-xs text-[#f4f6f8] focus:outline-none focus:border-[#3ad2ff]"
             />
           </div>
 
@@ -345,17 +345,17 @@ export const AdminPage: React.FC = () => {
             auditLogs.map((log) => (
               <div key={log.id} className="card-panel p-4 flex items-center justify-between gap-4 text-xs">
                 <div>
-                  <span className="font-semibold text-[#edf5ff]">{log.action}</span>
-                  <span className="text-[#68788c] ml-2">by {log.user_id || "system"}</span>
-                  <pre className="text-[10px] text-[#9aaabd] mt-1 bg-[#090c11] p-2 rounded max-w-xl overflow-x-auto">
+                  <span className="font-semibold text-[#f4f6f8]">{log.action}</span>
+                  <span className="text-[#7c848d] ml-2">by {log.user_id || "system"}</span>
+                  <pre className="text-[10px] text-[#9aaabd] mt-1 bg-[#0f1113] p-2 rounded max-w-xl overflow-x-auto">
                     {JSON.stringify(log.details)}
                   </pre>
                 </div>
-                <span className="text-[#68788c] flex-shrink-0">{formatDate(log.created_at)}</span>
+                <span className="text-[#7c848d] flex-shrink-0">{formatDate(log.created_at)}</span>
               </div>
             ))
           ) : (
-            <div className="card-panel p-12 text-center text-xs text-[#68788c]">No audit log events recorded yet.</div>
+            <div className="card-panel p-12 text-center text-xs text-[#7c848d]">No audit log events recorded yet.</div>
           )}
         </div>
       )}

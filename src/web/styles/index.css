@@ -4,17 +4,17 @@
 
 @layer base {
   :root {
-    --bg-oled: #040608;
-    --surface-panel: #090d13;
-    --surface-card: #0d131b;
-    --surface-hover: #131a24;
-    --border-subtle: #1a2332;
-    --border-bright: #29374e;
-    --vita-cyan: #00f0ff;
-    --vita-blue: #00b4d8;
-    --text-high: #f1f5f9;
-    --text-mid: #94a3b8;
-    --text-low: #64748b;
+    --bg-oled: #08090a;
+    --surface-panel: #0f1113;
+    --surface-card: #15181b;
+    --surface-hover: #1c2024;
+    --border-subtle: #242830;
+    --border-bright: #343a42;
+    --vita-cyan: #3ad2ff;
+    --vita-blue: #3ad2ff;
+    --text-high: #f4f6f8;
+    --text-mid: #a3acb5;
+    --text-low: #7c848d;
   }
 
   body {
@@ -32,35 +32,53 @@
     height: 6px;
   }
   ::-webkit-scrollbar-track {
-    background: #040608;
+    background: #08090a;
   }
   ::-webkit-scrollbar-thumb {
-    background: #1a2332;
+    background: #242830;
     border-radius: 2px;
   }
   ::-webkit-scrollbar-thumb:hover {
-    background: #29374e;
+    background: #343a42;
   }
 }
 
 @layer components {
-  /* Precision terminal panel */
+  /*
+   * Editorial surfaces.
+   *
+   * A record is a typographic block separated by a hairline, not a box. Boxes
+   * are reserved for things the user can act on (cards, filters, controls), so
+   * the interface reads as a document rather than a dashboard of widgets.
+   */
   .terminal-panel {
-    background-color: var(--surface-panel);
-    border: 1px solid var(--border-subtle);
-    border-radius: 2px;
+    background-color: transparent;
+    border-top: 1px solid var(--border-subtle);
   }
 
-  /* Precision interactive item */
   .terminal-card {
-    background-color: var(--surface-card);
+    background-color: var(--surface-panel);
     border: 1px solid var(--border-subtle);
-    border-radius: 2px;
-    transition: border-color 0.15s ease, background-color 0.15s ease;
+    transition: border-color 0.18s ease, background-color 0.18s ease;
   }
   .terminal-card:hover {
     background-color: var(--surface-hover);
-    border-color: var(--border-bright);
+    border-color: color-mix(in srgb, var(--vita-cyan) 45%, var(--border-bright));
+  }
+
+  /* Aliases kept so every route shares one visual language. */
+  .card-panel {
+    background-color: transparent;
+    border-top: 1px solid var(--border-subtle);
+  }
+  .card-panel-hover {
+    background-color: var(--surface-panel);
+    border: 1px solid var(--border-subtle);
+    transition: border-color 0.18s ease, background-color 0.18s ease;
+  }
+  .card-panel-hover:hover {
+    background-color: var(--surface-hover);
+    border-color: color-mix(in srgb, var(--vita-cyan) 45%, var(--border-bright));
   }
 
   /* Hardware badge */
@@ -82,19 +100,18 @@
     align-items: center;
     justify-content: center;
     gap: 6px;
-    background-color: #00b4d8;
-    color: #040608;
+    background-color: #3ad2ff;
+    color: #08090a;
     font-family: 'JetBrains Mono', monospace;
     font-size: 11px;
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.05em;
     padding: 6px 14px;
-    border-radius: 2px;
     transition: background-color 0.15s ease;
   }
   .btn-terminal-primary:hover {
-    background-color: #00f0ff;
+    background-color: #8ce6ff;
   }
 
   .btn-terminal-secondary {
@@ -111,12 +128,30 @@
     text-transform: uppercase;
     letter-spacing: 0.05em;
     padding: 6px 14px;
-    border-radius: 2px;
     transition: border-color 0.15s ease, background-color 0.15s ease;
   }
   .btn-terminal-secondary:hover {
-    background-color: var(--surface-hover);
-    border-color: var(--border-bright);
+    border-color: var(--vita-cyan);
+    color: var(--text-high);
+  }
+
+  .btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    background-color: transparent;
+    color: var(--text-high);
+    border: 1px solid var(--border-subtle);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 6px 14px;
+    transition: border-color 0.15s ease, color 0.15s ease;
+  }
+  .btn-secondary:hover {
+    border-color: var(--vita-cyan);
   }
 }
-

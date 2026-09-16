@@ -4,6 +4,7 @@ import { StatusBadge } from "../components/ui/StatusBadge";
 import { StageHistoryVisualizer, type StageHistoryRecord } from "../components/projects/StageHistoryVisualizer";
 import { UpdateCard, type UpdateCardData } from "../components/updates/UpdateCard";
 import { formatRelativeTime, formatDate, deriveActivityLevel } from "@/shared/utils";
+import { apiGet } from "../lib/api";
 import type { DevelopmentStage, ProjectLifecycle } from "@/shared/types";
 import { ChevronLeft } from "lucide-react";
 
@@ -38,9 +39,8 @@ export const ProjectDetailPage: React.FC = () => {
       if (!slug) return;
       setLoading(true);
       try {
-        const res = await fetch(`/api/projects/${slug}`);
-        if (res.ok) {
-          const data = (await res.json()) as { project: ProjectDetailData };
+        const data = await apiGet<{ project: ProjectDetailData }>(`/api/projects/${slug}`);
+        if (data.project) {
           setProject(data.project);
 
           try {
@@ -60,7 +60,7 @@ export const ProjectDetailPage: React.FC = () => {
 
   if (loading) {
     return (
-      <div className="terminal-panel p-12 text-center font-mono text-xs text-[#64748b] animate-pulse">
+      <div className="terminal-panel p-12 text-center font-mono text-xs text-[#7c848d] animate-pulse">
         [ SYSTEM: LOADING PROJECT RECORD... ]
       </div>
     );
@@ -69,8 +69,8 @@ export const ProjectDetailPage: React.FC = () => {
   if (!project) {
     return (
       <div className="terminal-panel p-12 text-center space-y-4">
-        <h2 className="font-mono text-sm font-bold text-[#f1f5f9]">PROJECT RECORD NOT FOUND</h2>
-        <p className="text-xs text-[#94a3b8]">The requested project identifier does not exist in the catalog.</p>
+        <h2 className="font-mono text-sm font-bold text-[#f4f6f8]">PROJECT RECORD NOT FOUND</h2>
+        <p className="text-xs text-[#a3acb5]">The requested project identifier does not exist in the catalog.</p>
         <Link to="/projects" className="btn-terminal-secondary text-xs">
           Return to directory
         </Link>
@@ -86,7 +86,7 @@ export const ProjectDetailPage: React.FC = () => {
       {/* Back button */}
       <Link
         to="/projects"
-        className="inline-flex items-center gap-1 font-mono text-[11px] text-[#94a3b8] hover:text-[#00f0ff] transition-colors"
+        className="inline-flex items-center gap-1 font-mono text-[11px] text-[#a3acb5] hover:text-[#3ad2ff] transition-colors"
       >
         <ChevronLeft className="w-3.5 h-3.5" />
         <span>[ Back to Directory ]</span>
@@ -94,17 +94,17 @@ export const ProjectDetailPage: React.FC = () => {
 
       {/* Header Block */}
       <div className="terminal-panel p-5 space-y-4">
-        <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4 border-b border-[#1a2332] pb-4">
+        <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4 border-b border-[#242830] pb-4">
           <div>
-            <span className="font-mono text-[10px] text-[#64748b] uppercase tracking-wider block">
+            <span className="font-mono text-[10px] text-[#7c848d] uppercase tracking-wider block">
               {project.original_platform || "Original Game"}
               {project.original_release_year ? ` // ${project.original_release_year}` : ""}
             </span>
-            <h1 className="text-xl sm:text-2xl font-bold text-[#f1f5f9] mt-1 tracking-tight">
+            <h1 className="text-xl sm:text-2xl font-bold text-[#f4f6f8] mt-1 tracking-tight">
               {project.game_title}
             </h1>
             {isDistinctPortName && (
-              <p className="font-mono text-xs text-[#00b4d8] mt-1">
+              <p className="font-mono text-xs text-[#3ad2ff] mt-1">
                 PORT IDENTIFIER: {project.display_name}
               </p>
             )}
@@ -118,28 +118,28 @@ export const ProjectDetailPage: React.FC = () => {
         </div>
 
         {/* Overview */}
-        <p className="text-xs sm:text-sm text-[#94a3b8] leading-relaxed">
+        <p className="text-xs sm:text-sm text-[#a3acb5] leading-relaxed">
           {project.summary || "No technical description recorded."}
         </p>
 
         {/* Hardware details bar */}
-        <div className="flex flex-wrap items-center gap-x-6 gap-y-2 pt-2 text-[10px] font-mono text-[#64748b]">
+        <div className="flex flex-wrap items-center gap-x-6 gap-y-2 pt-2 text-[10px] font-mono text-[#7c848d]">
           <div>
             AUTHORS:{" "}
-            <span className="text-[#f1f5f9]">
+            <span className="text-[#f4f6f8]">
               {project.developers && project.developers.length > 0
                 ? project.developers.map((d) => d.display_name).join(", ")
                 : "Independent / Anonymous"}
             </span>
           </div>
-          <div>FIRST SEEN: <span className="text-[#94a3b8]">{formatDate(project.first_seen_at)}</span></div>
-          <div>LAST UPDATED: <span className="text-[#00b4d8]">{formatRelativeTime(project.last_activity_at)}</span></div>
+          <div>FIRST SEEN: <span className="text-[#a3acb5]">{formatDate(project.first_seen_at)}</span></div>
+          <div>LAST UPDATED: <span className="text-[#3ad2ff]">{formatRelativeTime(project.last_activity_at)}</span></div>
         </div>
       </div>
 
       {/* Stage History */}
       <section className="terminal-panel p-5 space-y-3">
-        <h2 className="font-mono text-xs font-bold uppercase tracking-wider text-[#f1f5f9] border-b border-[#1a2332] pb-2">
+        <h2 className="font-mono text-xs font-bold uppercase tracking-wider text-[#f4f6f8] border-b border-[#242830] pb-2">
           VERIFIED MILESTONE HISTORY
         </h2>
         <StageHistoryVisualizer
@@ -151,28 +151,28 @@ export const ProjectDetailPage: React.FC = () => {
       {/* Technical Notes */}
       {(project.playability_notes || project.performance_notes || (project.technologies && project.technologies.length > 0)) && (
         <section className="terminal-panel p-5 space-y-3">
-          <h2 className="font-mono text-xs font-bold uppercase tracking-wider text-[#f1f5f9] border-b border-[#1a2332] pb-2">
+          <h2 className="font-mono text-xs font-bold uppercase tracking-wider text-[#f4f6f8] border-b border-[#242830] pb-2">
             TECHNICAL & PLAYABILITY BENCHMARKS
           </h2>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
             {project.playability_notes && (
-              <div className="space-y-1 bg-[#040608] border border-[#1a2332] p-3 rounded-[2px]">
-                <h3 className="font-mono text-[10px] text-[#00b4d8] uppercase tracking-wider">
+              <div className="space-y-1 bg-[#08090a] border border-[#242830] p-3 rounded-[2px]">
+                <h3 className="font-mono text-[10px] text-[#3ad2ff] uppercase tracking-wider">
                   // PLAYABILITY VERDICT
                 </h3>
-                <p className="text-xs text-[#f1f5f9] leading-relaxed">
+                <p className="text-xs text-[#f4f6f8] leading-relaxed">
                   {project.playability_notes}
                 </p>
               </div>
             )}
 
             {project.performance_notes && (
-              <div className="space-y-1 bg-[#040608] border border-[#1a2332] p-3 rounded-[2px]">
+              <div className="space-y-1 bg-[#08090a] border border-[#242830] p-3 rounded-[2px]">
                 <h3 className="font-mono text-[10px] text-[#10b981] uppercase tracking-wider">
                   // PERFORMANCE & SHADERS
                 </h3>
-                <p className="text-xs text-[#f1f5f9] leading-relaxed">
+                <p className="text-xs text-[#f4f6f8] leading-relaxed">
                   {project.performance_notes}
                 </p>
               </div>
@@ -181,14 +181,14 @@ export const ProjectDetailPage: React.FC = () => {
 
           {project.technologies && project.technologies.length > 0 && (
             <div className="pt-2">
-              <span className="font-mono text-[10px] text-[#64748b] block mb-1 uppercase">
+              <span className="font-mono text-[10px] text-[#7c848d] block mb-1 uppercase">
                 ENGINE & WRAPPERS:
               </span>
               <div className="flex flex-wrap gap-1.5">
                 {project.technologies.map((t) => (
                   <span
                     key={t}
-                    className="font-mono text-[10px] text-[#94a3b8] bg-[#040608] border border-[#1a2332] px-2 py-0.5 rounded-[2px]"
+                    className="font-mono text-[10px] text-[#a3acb5] bg-[#08090a] border border-[#242830] px-2 py-0.5 rounded-[2px]"
                   >
                     {t}
                   </span>
@@ -201,7 +201,7 @@ export const ProjectDetailPage: React.FC = () => {
 
       {/* Verified Timeline Updates */}
       <section className="space-y-3">
-        <h2 className="font-mono text-xs font-bold uppercase tracking-wider text-[#f1f5f9] border-b border-[#1a2332] pb-2">
+        <h2 className="font-mono text-xs font-bold uppercase tracking-wider text-[#f4f6f8] border-b border-[#242830] pb-2">
           VERIFIED TIMELINE EVENTS
         </h2>
         {project.updates && project.updates.length > 0 ? (
@@ -211,7 +211,7 @@ export const ProjectDetailPage: React.FC = () => {
             ))}
           </div>
         ) : (
-          <div className="terminal-panel p-6 text-center font-mono text-xs text-[#64748b]">
+          <div className="terminal-panel p-6 text-center font-mono text-xs text-[#7c848d]">
             No verified timeline events recorded for this port yet.
           </div>
         )}

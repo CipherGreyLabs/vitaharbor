@@ -3,36 +3,36 @@ import React from "react";
 export const AboutPage: React.FC = () => {
   return (
     <div className="max-w-3xl mx-auto space-y-8 py-2">
-      <div className="border-b border-[#1a2332] pb-3 space-y-1">
-        <h1 className="font-mono text-sm font-bold uppercase tracking-wider text-[#f1f5f9] flex items-center gap-2">
-          <span className="w-2 h-2 rounded-full bg-[#00f0ff]" />
+      <div className="border-b border-[#242830] pb-3 space-y-1">
+        <h1 className="font-mono text-sm font-bold uppercase tracking-wider text-[#f4f6f8] flex items-center gap-2">
+          <span className="w-2 h-2 rounded-full bg-[#3ad2ff]" />
           <span>ABOUT VITAHARBOR</span>
         </h1>
-        <p className="text-[11px] font-mono text-[#64748b]">
+        <p className="text-[11px] font-mono text-[#7c848d]">
           Open-access intelligence ledger for PlayStation Vita game ports.
         </p>
       </div>
 
       <section className="terminal-panel p-5 space-y-2.5">
-        <h2 className="font-mono text-xs font-bold uppercase tracking-wider text-[#00b4d8]">
+        <h2 className="font-mono text-xs font-bold uppercase tracking-wider text-[#3ad2ff]">
           // THE CENTRAL PROBLEM
         </h2>
-        <p className="text-xs text-[#94a3b8] leading-relaxed">
+        <p className="text-xs text-[#a3acb5] leading-relaxed">
           The PlayStation Vita homebrew ecosystem is one of the most technically ambitious in gaming history. Developers reverse-engineer Android ARM binaries, decompile engines, rewrite OpenGL ES shaders in vitaGL, and recompile whole PC classics natively for ARM Cortex-A9.
         </p>
-        <p className="text-xs text-[#94a3b8] leading-relaxed">
+        <p className="text-xs text-[#a3acb5] leading-relaxed">
           However, project updates, first-boot milestones, and beta builds remain scattered across isolated Reddit threads, comment replies, and GitHub gists. VitaHarbor exists as the central, verifiable reference point.
         </p>
       </section>
 
       <section className="terminal-panel p-5 space-y-3.5">
-        <h2 className="font-mono text-xs font-bold uppercase tracking-wider text-[#00b4d8]">
+        <h2 className="font-mono text-xs font-bold uppercase tracking-wider text-[#3ad2ff]">
           // SYSTEM INVARIANTS
         </h2>
 
-        <div className="space-y-3 text-xs text-[#94a3b8]">
+        <div className="space-y-3 text-xs text-[#a3acb5]">
           <div>
-            <span className="text-[#f1f5f9] font-mono font-bold text-[11px] block">
+            <span className="text-[#f4f6f8] font-mono font-bold text-[11px] block">
               1. DIRECT EVIDENCE PROVENANCE
             </span>
             <span>
@@ -41,7 +41,7 @@ export const AboutPage: React.FC = () => {
           </div>
 
           <div>
-            <span className="text-[#f1f5f9] font-mono font-bold text-[11px] block">
+            <span className="text-[#f4f6f8] font-mono font-bold text-[11px] block">
               2. DISCRETE MILESTONES (NO FAKE PERCENTAGES)
             </span>
             <span>
@@ -50,7 +50,7 @@ export const AboutPage: React.FC = () => {
           </div>
 
           <div>
-            <span className="text-[#f1f5f9] font-mono font-bold text-[11px] block">
+            <span className="text-[#f4f6f8] font-mono font-bold text-[11px] block">
               3. STRICT METADATA ONLY (ZERO PIRACY)
             </span>
             <span>
@@ -60,7 +60,7 @@ export const AboutPage: React.FC = () => {
         </div>
       </section>
 
-      <section className="terminal-panel p-4 border-l-2 border-l-[#f59e0b] space-y-1 text-[11px] font-mono text-[#64748b]">
+      <section className="terminal-panel p-4 border-l-2 border-l-[#f59e0b] space-y-1 text-[11px] font-mono text-[#7c848d]">
         <span className="text-[#f59e0b] font-bold block">// LEGAL DISCLAIMER</span>
         <p>
           VitaHarbor is an independent community project. Not affiliated with or endorsed by Sony Interactive Entertainment or Reddit.

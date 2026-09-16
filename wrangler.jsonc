@@ -2,7 +2,11 @@
   "name": "vitaharbor",
   "main": "src/worker/index.ts",
   "compatibility_date": "2025-01-01",
-  "assets": { "directory": "dist/web", "binding": "ASSETS" },
+  "assets": {
+    "directory": "dist/web",
+    "binding": "ASSETS",
+    "not_found_handling": "single-page-application"
+  },
   "d1_databases": [
     {
       "binding": "DB",

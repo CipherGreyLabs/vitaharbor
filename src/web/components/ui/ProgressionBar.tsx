@@ -32,7 +32,7 @@ export const ProgressionBar: React.FC<ProgressionBarProps> = ({ currentStage }) 
   return (
     <div className="w-full py-3" aria-label="Development Progression">
       <div className="flex items-center justify-between relative">
-        <div className="absolute left-0 top-1/2 -translate-y-1/2 h-0.5 w-full bg-[#1b2330] -z-0" />
+        <div className="absolute left-0 top-1/2 -translate-y-1/2 h-0.5 w-full bg-[#242830] -z-0" />
         {STAGES.map((s, index) => {
           const isReached = currentRank >= index;
           const isCurrent = currentRank === index;
@@ -42,17 +42,17 @@ export const ProgressionBar: React.FC<ProgressionBarProps> = ({ currentStage }) 
               <div
                 className={`w-6 h-6 rounded-full flex items-center justify-center text-xs font-semibold border transition-all ${
                   isCurrent
-                    ? "bg-[#249cf4] text-white border-[#4fb5ff] ring-4 ring-[#249cf4]/20"
+                    ? "bg-[#3ad2ff] text-white border-[#7fe3ff] ring-4 ring-[#3ad2ff]/20"
                     : isReached
-                    ? "bg-[#151b24] text-[#249cf4] border-[#249cf4]"
-                    : "bg-[#0f141b] text-[#68788c] border-[#202a38]"
+                    ? "bg-[#1c2024] text-[#3ad2ff] border-[#3ad2ff]"
+                    : "bg-[#1c2024] text-[#7c848d] border-[#2c313a]"
                 }`}
               >
                 {index + 1}
               </div>
               <span
                 className={`text-[10px] mt-1 font-medium ${
-                  isCurrent ? "text-[#249cf4] font-semibold" : isReached ? "text-[#edf5ff]" : "text-[#68788c]"
+                  isCurrent ? "text-[#3ad2ff] font-semibold" : isReached ? "text-[#f4f6f8]" : "text-[#7c848d]"
                 }`}
               >
                 {s.label}

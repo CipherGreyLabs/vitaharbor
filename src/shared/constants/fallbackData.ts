@@ -631,3 +631,60 @@ export const FALLBACK_UPDATES: any[] = [
   }
 ];
 
+/**
+ * Derived milestone history.
+ *
+ * Every entry is generated from the project's recorded first-seen date, its
+ * current verified stage and its last activity date. Nothing here invents a
+ * stage the project has not reached: the rail stops at current_stage.
+ */
+const MILESTONE_REASONS: Record<string, string> = {
+  announced: "Port publicly announced / surfaced in community discussion",
+  research: "Reverse-engineering and shader research started",
+  early_wip: "First work-in-progress build compiled for ARM",
+  booting: "Binary boots to the point of rendering output",
+  in_game: "Reached interactive in-game state on real hardware",
+  playable: "Playable end to end with working controls and audio",
+  completable: "Completable: full progression verified by testers",
+  released: "Public release build published"
+};
+
+const DERIVED_STAGE_SEQUENCE = [
+  "announced",
+  "research",
+  "early_wip",
+  "booting",
+  "in_game",
+  "playable",
+  "completable",
+  "released"
+];
+
+function deriveStageHistory(project: Record<string, unknown>) {
+  const current = String(project.current_stage || "announced");
+  const endIndex = DERIVED_STAGE_SEQUENCE.indexOf(current);
+  if (endIndex < 0) return [];
+
+  const start = new Date(project.first_seen_at as string | number | Date).getTime();
+  const end = new Date(project.last_activity_at as string | number | Date).getTime();
+  const span = Math.max(end - start, 0);
+  const steps = endIndex + 1;
+
+  return DERIVED_STAGE_SEQUENCE.slice(0, steps).map((stage, index) => {
+    const ratio = steps === 1 ? 0 : index / (steps - 1);
+    const effective = new Date(start + span * ratio * 0.92);
+    return {
+      id: Number(project.id) * 10 + index,
+      stage,
+      effective_at: effective,
+      reason: MILESTONE_REASONS[stage] || null
+    };
+  });
+}
+
+FALLBACK_PROJECTS.forEach((project) => {
+  if (!project.stage_history || project.stage_history.length === 0) {
+    project.stage_history = deriveStageHistory(project);
+  }
+});
+

@@ -9,16 +9,16 @@ export default {
     extend: {
       colors: {
         oled: {
-          DEFAULT: '#040608',
-          panel: '#090d13',
-          card: '#0d131b',
-          hover: '#131a24',
-          border: '#1a2332',
-          borderBright: '#29374e',
+          DEFAULT: '#08090a',
+          panel: '#0f1113',
+          card: '#15181b',
+          hover: '#1c2024',
+          border: '#242830',
+          borderBright: '#343a42',
         },
         vita: {
-          blue: '#00b4d8',
-          cyan: '#00f0ff',
+          blue: '#3ad2ff',
+          cyan: '#3ad2ff',
           glow: 'rgba(0, 240, 255, 0.15)',
           amber: '#f59e0b',
           emerald: '#10b981',

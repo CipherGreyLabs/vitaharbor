@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useMemo } from "react";
 import { useParams, Link } from "react-router-dom";
 import { StatusBadge } from "../components/ui/StatusBadge";
+import { apiGet } from "../lib/api";
 import { User, ChevronLeft, ExternalLink } from "lucide-react";
 
 interface DeveloperDetailData {
@@ -31,11 +32,8 @@ export const DeveloperDetailPage: React.FC = () => {
       if (!slug) return;
       setLoading(true);
       try {
-        const res = await fetch(`/api/developers/${slug}`);
-        if (res.ok) {
-          const data = (await res.json()) as { developer: DeveloperDetailData };
-          setDeveloper(data.developer);
-        }
+        const data = await apiGet<{ developer: DeveloperDetailData }>(`/api/developers/${slug}`);
+        if (data.developer) setDeveloper(data.developer);
       } catch (e) {
         console.error("Failed to load developer detail", e);
       } finally {
@@ -56,7 +54,7 @@ export const DeveloperDetailPage: React.FC = () => {
 
   if (loading) {
     return (
-      <div className="card-panel p-12 text-center text-xs text-[#68788c] animate-pulse">
+      <div className="card-panel p-12 text-center text-xs text-[#7c848d] animate-pulse">
         Loading developer profile...
       </div>
     );
@@ -65,7 +63,7 @@ export const DeveloperDetailPage: React.FC = () => {
   if (!developer) {
     return (
       <div className="card-panel p-12 text-center space-y-4">
-        <h2 className="text-base font-bold text-[#edf5ff]">Developer Not Found</h2>
+        <h2 className="text-base font-bold text-[#f4f6f8]">Developer Not Found</h2>
         <p className="text-xs text-[#9aaabd]">The requested developer profile does not exist.</p>
         <Link to="/developers" className="btn-secondary text-xs">
           Return to developers
@@ -78,7 +76,7 @@ export const DeveloperDetailPage: React.FC = () => {
     <div className="max-w-4xl mx-auto space-y-8">
       <Link
         to="/developers"
-        className="inline-flex items-center gap-1 text-xs text-[#9aaabd] hover:text-[#edf5ff] transition-colors"
+        className="inline-flex items-center gap-1 text-xs text-[#9aaabd] hover:text-[#f4f6f8] transition-colors"
       >
         <ChevronLeft className="w-3.5 h-3.5" />
         <span>Back to developers directory</span>
@@ -87,11 +85,11 @@ export const DeveloperDetailPage: React.FC = () => {
       {/* Blueprint §79: Header */}
       <div className="card-panel p-6 space-y-4">
         <div className="flex items-center gap-4">
-          <div className="w-12 h-12 rounded-full bg-[#151b24] border border-[#202a38] flex items-center justify-center text-[#249cf4]">
+          <div className="w-12 h-12 rounded-full bg-[#1c2024] border border-[#2c313a] flex items-center justify-center text-[#3ad2ff]">
             <User className="w-6 h-6" />
           </div>
           <div>
-            <h1 className="text-xl font-bold text-[#edf5ff]">{developer.display_name}</h1>
+            <h1 className="text-xl font-bold text-[#f4f6f8]">{developer.display_name}</h1>
             {developer.identities && developer.identities.length > 0 && (
               <div className="flex flex-wrap items-center gap-2 mt-1">
                 {developer.identities.map((id) => (
@@ -100,7 +98,7 @@ export const DeveloperDetailPage: React.FC = () => {
                     href={`https://reddit.com/user/${id.username}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1 text-xs text-[#249cf4] hover:text-[#4fb5ff]"
+                    className="inline-flex items-center gap-1 text-xs text-[#3ad2ff] hover:text-[#7fe3ff]"
                   >
                     <span>u/{id.username}</span>
                     <ExternalLink className="w-3 h-3" />
@@ -120,7 +118,7 @@ export const DeveloperDetailPage: React.FC = () => {
       <div className="space-y-6">
         {groupedProjects.active.length > 0 && (
           <section className="space-y-3">
-            <h2 className="text-xs font-bold uppercase tracking-wider text-[#edf5ff]">
+            <h2 className="text-xs font-bold uppercase tracking-wider text-[#f4f6f8]">
               Active Development ({groupedProjects.active.length})
             </h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -131,11 +129,11 @@ export const DeveloperDetailPage: React.FC = () => {
                   className="card-panel-hover p-4 space-y-2 block"
                 >
                   <div className="flex items-center justify-between">
-                    <h3 className="text-xs font-semibold text-[#edf5ff]">{p.display_name}</h3>
+                    <h3 className="text-xs font-semibold text-[#f4f6f8]">{p.display_name}</h3>
                     <StatusBadge type="stage" value={p.current_stage} />
                   </div>
                   <p className="text-[11px] text-[#9aaabd] line-clamp-2">{p.summary}</p>
-                  <div className="text-[10px] text-[#68788c]">Role: {p.role}</div>
+                  <div className="text-[10px] text-[#7c848d]">Role: {p.role}</div>
                 </Link>
               ))}
             </div>
@@ -144,7 +142,7 @@ export const DeveloperDetailPage: React.FC = () => {
 
         {groupedProjects.released.length > 0 && (
           <section className="space-y-3">
-            <h2 className="text-xs font-bold uppercase tracking-wider text-[#edf5ff]">
+            <h2 className="text-xs font-bold uppercase tracking-wider text-[#f4f6f8]">
               Completed / Released Ports ({groupedProjects.released.length})
             </h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -155,11 +153,11 @@ export const DeveloperDetailPage: React.FC = () => {
                   className="card-panel-hover p-4 space-y-2 block"
                 >
                   <div className="flex items-center justify-between">
-                    <h3 className="text-xs font-semibold text-[#edf5ff]">{p.display_name}</h3>
+                    <h3 className="text-xs font-semibold text-[#f4f6f8]">{p.display_name}</h3>
                     <StatusBadge type="stage" value="released" />
                   </div>
                   <p className="text-[11px] text-[#9aaabd] line-clamp-2">{p.summary}</p>
-                  <div className="text-[10px] text-[#68788c]">Role: {p.role}</div>
+                  <div className="text-[10px] text-[#7c848d]">Role: {p.role}</div>
                 </Link>
               ))}
             </div>
@@ -168,7 +166,7 @@ export const DeveloperDetailPage: React.FC = () => {
 
         {groupedProjects.archived.length > 0 && (
           <section className="space-y-3">
-            <h2 className="text-xs font-bold uppercase tracking-wider text-[#edf5ff]">
+            <h2 className="text-xs font-bold uppercase tracking-wider text-[#f4f6f8]">
               Stalled / Archived ({groupedProjects.archived.length})
             </h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -179,7 +177,7 @@ export const DeveloperDetailPage: React.FC = () => {
                   className="card-panel-hover p-4 space-y-2 block opacity-75"
                 >
                   <div className="flex items-center justify-between">
-                    <h3 className="text-xs font-semibold text-[#edf5ff]">{p.display_name}</h3>
+                    <h3 className="text-xs font-semibold text-[#f4f6f8]">{p.display_name}</h3>
                     <StatusBadge type="lifecycle" value={p.lifecycle} />
                   </div>
                   <p className="text-[11px] text-[#9aaabd] line-clamp-2">{p.summary}</p>
@@ -190,7 +188,7 @@ export const DeveloperDetailPage: React.FC = () => {
         )}
 
         {developer.projects?.length === 0 && (
-          <div className="card-panel p-6 text-center text-xs text-[#68788c]">
+          <div className="card-panel p-6 text-center text-xs text-[#7c848d]">
             No projects currently associated with this developer.
           </div>
         )}
@@ -198,4 +196,3 @@ export const DeveloperDetailPage: React.FC = () => {
     </div>
   );
 };
-

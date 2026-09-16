@@ -16,5 +16,8 @@ logs
 
 screenshot.png
 shot_*.png
+dev_*.png
+r_*.png
+part*.png
 
 .vercel

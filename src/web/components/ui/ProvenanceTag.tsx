@@ -18,7 +18,7 @@ export const ProvenanceTag: React.FC<ProvenanceTagProps> = ({
       <span className="flex items-center gap-1">
         {verificationLevel === "developer_direct" && (
           <span title="Developer Direct Statement">
-            <CheckCircle2 className="w-3.5 h-3.5 text-[#249cf4]" />
+            <CheckCircle2 className="w-3.5 h-3.5 text-[#3ad2ff]" />
           </span>
         )}
         {verificationLevel === "maintainer_confirmed" && (
@@ -38,7 +38,7 @@ export const ProvenanceTag: React.FC<ProvenanceTagProps> = ({
           href={url}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center gap-0.5 text-[#249cf4] hover:text-[#4fb5ff] underline underline-offset-2"
+          className="inline-flex items-center gap-0.5 text-[#3ad2ff] hover:text-[#7fe3ff] underline underline-offset-2"
         >
           <span>View source</span>
           <ExternalLink className="w-3 h-3" />

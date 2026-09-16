@@ -28,15 +28,23 @@ export function formatDate(date: Date | string): string {
   return d.toISOString().split('T')[0];
 }
 
+function plural(value: number, unit: string): string {
+  return `${value} ${unit}${value === 1 ? '' : 's'} ago`;
+}
+
 export function formatRelativeTime(date: Date | string): string {
   const d = typeof date === 'string' ? new Date(date) : date;
   const seconds = Math.floor((Date.now() - d.getTime()) / 1000);
 
+  if (Number.isNaN(seconds)) return 'unknown';
+  if (seconds < 0) return 'just now';
   if (seconds < 60) return 'just now';
-  if (seconds < 3600) return `${Math.floor(seconds / 60)} minutes ago`;
-  if (seconds < 86400) return `${Math.floor(seconds / 3600)} hours ago`;
-  if (seconds < 604800) return `${Math.floor(seconds / 86400)} days ago`;
-  return formatDate(d);
+  if (seconds < 3600) return plural(Math.floor(seconds / 60), 'minute');
+  if (seconds < 86400) return plural(Math.floor(seconds / 3600), 'hour');
+  if (seconds < 604800) return plural(Math.floor(seconds / 86400), 'day');
+  if (seconds < 2592000) return plural(Math.floor(seconds / 604800), 'week');
+  if (seconds < 31536000) return plural(Math.floor(seconds / 2592000), 'month');
+  return plural(Math.floor(seconds / 31536000), 'year');
 }
 
 export function generateId(): string {

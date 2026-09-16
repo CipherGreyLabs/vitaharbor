@@ -2,6 +2,7 @@ import React, { useState, useEffect, useMemo } from "react";
 import { useSearchParams } from "react-router-dom";
 import { ProjectCard, type ProjectCardData } from "../components/projects/ProjectCard";
 import { deriveActivityLevel } from "@/shared/utils";
+import { apiGet } from "../lib/api";
 import { Search } from "lucide-react";
 
 const STAGE_FILTERS = [
@@ -57,11 +58,11 @@ export const ProjectsPage: React.FC = () => {
         if (lifecycleParam) queryParams.set("lifecycle", lifecycleParam);
         queryParams.set("limit", "100");
 
-        const res = await fetch(`/api/projects?${queryParams.toString()}`);
-        if (res.ok) {
-          const data = (await res.json()) as { projects: ProjectCardData[] };
-          setProjects(data.projects || []);
-        }
+        const data = await apiGet<{ projects: ProjectCardData[] }>(
+          `/api/projects?${queryParams.toString()}`,
+          "projects"
+        );
+        setProjects(data.projects || []);
       } catch (e) {
         console.error("Failed to load projects", e);
       } finally {
@@ -112,12 +113,12 @@ export const ProjectsPage: React.FC = () => {
   return (
     <div className="space-y-6">
       {/* Title strip */}
-      <div className="flex flex-wrap items-baseline justify-between gap-2 border-b border-[#1a2332] pb-2">
+      <div className="flex flex-wrap items-baseline justify-between gap-2 border-b border-[#242830] pb-2">
         <div>
-          <h1 className="font-mono text-sm font-bold uppercase tracking-wider text-[#f1f5f9]">
+          <h1 className="font-mono text-sm font-bold uppercase tracking-wider text-[#f4f6f8]">
             PS VITA PORT REGISTRY
           </h1>
-          <p className="text-[11px] font-mono text-[#64748b]">
+          <p className="text-[11px] font-mono text-[#7c848d]">
             Showing {filteredProjects.length} port projects from r/VitaPiracy and r/vitahacks
           </p>
         </div>
@@ -131,16 +132,16 @@ export const ProjectsPage: React.FC = () => {
             placeholder="Search port name, original platform, developer, engine, or alias..."
             value={searchParam}
             onChange={(e) => updateParam("search", e.target.value)}
-            className="w-full bg-[#040608] border border-[#1a2332] rounded-[2px] pl-8 pr-3 py-1.5 text-xs font-mono text-[#f1f5f9] placeholder-[#64748b] focus:outline-none focus:border-[#00f0ff]"
+            className="w-full bg-[#08090a] border border-[#242830] rounded-[2px] pl-8 pr-3 py-1.5 text-xs font-mono text-[#f4f6f8] placeholder-[#7c848d] focus:outline-none focus:border-[#3ad2ff]"
           />
-          <Search className="w-3.5 h-3.5 text-[#64748b] absolute left-2.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+          <Search className="w-3.5 h-3.5 text-[#7c848d] absolute left-2.5 top-1/2 -translate-y-1/2 pointer-events-none" />
         </div>
 
         <div className="flex flex-wrap items-center gap-1.5 pt-1 text-[10px] font-mono">
           <select
             value={stageParam}
             onChange={(e) => updateParam("stage", e.target.value)}
-            className="bg-[#040608] border border-[#1a2332] text-[#94a3b8] rounded-[2px] px-2 py-1 focus:outline-none focus:border-[#00f0ff]"
+            className="bg-[#08090a] border border-[#242830] text-[#a3acb5] rounded-[2px] px-2 py-1 focus:outline-none focus:border-[#3ad2ff]"
           >
             {STAGE_FILTERS.map((s) => (
               <option key={s.value} value={s.value}>
@@ -152,7 +153,7 @@ export const ProjectsPage: React.FC = () => {
           <select
             value={lifecycleParam}
             onChange={(e) => updateParam("lifecycle", e.target.value)}
-            className="bg-[#040608] border border-[#1a2332] text-[#94a3b8] rounded-[2px] px-2 py-1 focus:outline-none focus:border-[#00f0ff]"
+            className="bg-[#08090a] border border-[#242830] text-[#a3acb5] rounded-[2px] px-2 py-1 focus:outline-none focus:border-[#3ad2ff]"
           >
             {LIFECYCLE_FILTERS.map((l) => (
               <option key={l.value} value={l.value}>
@@ -164,7 +165,7 @@ export const ProjectsPage: React.FC = () => {
           <select
             value={activityParam}
             onChange={(e) => updateParam("activity", e.target.value)}
-            className="bg-[#040608] border border-[#1a2332] text-[#94a3b8] rounded-[2px] px-2 py-1 focus:outline-none focus:border-[#00f0ff]"
+            className="bg-[#08090a] border border-[#242830] text-[#a3acb5] rounded-[2px] px-2 py-1 focus:outline-none focus:border-[#3ad2ff]"
           >
             {ACTIVITY_FILTERS.map((a) => (
               <option key={a.value} value={a.value}>
@@ -177,7 +178,7 @@ export const ProjectsPage: React.FC = () => {
             <select
               value={sortParam}
               onChange={(e) => updateParam("sort", e.target.value)}
-              className="bg-[#040608] border border-[#1a2332] text-[#00b4d8] font-bold rounded-[2px] px-2 py-1 focus:outline-none focus:border-[#00f0ff]"
+              className="bg-[#08090a] border border-[#242830] text-[#3ad2ff] font-bold rounded-[2px] px-2 py-1 focus:outline-none focus:border-[#3ad2ff]"
             >
               {SORT_OPTIONS.map((s) => (
                 <option key={s.value} value={s.value}>
@@ -193,7 +194,7 @@ export const ProjectsPage: React.FC = () => {
       {loading ? (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
           {[1, 2, 3, 4, 5, 6].map((i) => (
-            <div key={i} className="terminal-card p-4 h-32 animate-pulse bg-[#0d131b]" />
+            <div key={i} className="terminal-card p-4 h-32 animate-pulse bg-[#15181b]" />
           ))}
         </div>
       ) : filteredProjects.length > 0 ? (
@@ -203,7 +204,7 @@ export const ProjectsPage: React.FC = () => {
           ))}
         </div>
       ) : (
-        <div className="terminal-panel p-12 text-center font-mono text-xs text-[#64748b]">
+        <div className="terminal-panel p-12 text-center font-mono text-xs text-[#7c848d]">
           NO PORT PROJECTS MATCH CURRENT CRITERIA
         </div>
       )}

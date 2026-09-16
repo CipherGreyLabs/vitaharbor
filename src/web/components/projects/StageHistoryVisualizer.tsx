@@ -31,7 +31,7 @@ export const StageHistoryVisualizer: React.FC<StageHistoryVisualizerProps> = ({
 
   return (
     <div className="space-y-2.5">
-      <div className="relative pl-5 space-y-4 before:absolute before:left-1.5 before:top-2 before:bottom-2 before:w-0.5 before:bg-[#202a38]">
+      <div className="relative pl-5 space-y-4 before:absolute before:left-1.5 before:top-2 before:bottom-2 before:w-0.5 before:bg-[#2c313a]">
         {history.map((entry, idx) => {
           const isLatest = idx === history.length - 1;
           return (
@@ -39,20 +39,20 @@ export const StageHistoryVisualizer: React.FC<StageHistoryVisualizerProps> = ({
               <div
                 className={`absolute -left-5 top-1.5 w-3 h-3 rounded-full border ${
                   isLatest
-                    ? "bg-[#249cf4] border-[#4fb5ff] ring-2 ring-[#249cf4]/20"
-                    : "bg-[#151b24] border-[#249cf4]/60"
+                    ? "bg-[#3ad2ff] border-[#7fe3ff] ring-2 ring-[#3ad2ff]/20"
+                    : "bg-[#1c2024] border-[#3ad2ff]/60"
                 }`}
               />
               <div className="flex flex-wrap items-baseline justify-between gap-2">
                 <div className="flex items-center gap-2">
                   <StatusBadge type="stage" value={entry.stage} />
                   {entry.reason && (
-                    <span className="text-xs text-[#edf5ff] font-medium">
+                    <span className="text-xs text-[#f4f6f8] font-medium">
                       {entry.reason}
                     </span>
                   )}
                 </div>
-                <span className="text-[11px] font-mono text-[#68788c]">
+                <span className="text-[11px] font-mono text-[#7c848d]">
                   {formatDate(entry.effective_at)}
                 </span>
               </div>
