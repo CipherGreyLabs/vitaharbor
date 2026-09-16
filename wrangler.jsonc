@@ -1,0 +1,32 @@
+{
+  "name": "vitaportwatch",
+  "main": "src/worker/index.ts",
+  "compatibility_date": "2025-01-01",
+  "assets": { "directory": "dist/web", "binding": "ASSETS" },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "vitaportwatch",
+      "database_id": "vitaportwatch-db-id",
+      "migrations_dir": "migrations"
+    }
+  ],
+  "triggers": {
+    "crons": ["*/15 * * * *", "0 3 * * *"]
+  },
+  "observability": { "enabled": true },
+  "keep_vars": true,
+  "env": {
+    "staging": {
+      "name": "vitaportwatch-staging",
+      "d1_databases": [
+        {
+          "binding": "DB",
+          "database_name": "vitaportwatch-staging",
+          "database_id": "vitaportwatch-staging-db-id",
+          "migrations_dir": "migrations"
+        }
+      ]
+    }
+  }
+}
