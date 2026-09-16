@@ -1,9 +1,11 @@
 import React, { useState, useEffect, useMemo } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { VitaConsoleScene, type SelectedProjectView } from "../components/3d/VitaConsoleScene";
+import { PortMatrixTable } from "../components/projects/PortMatrixTable";
 import { ProjectCard, type ProjectCardData } from "../components/projects/ProjectCard";
 import { UpdateCard, type UpdateCardData } from "../components/updates/UpdateCard";
 import { DeveloperCard, type DeveloperCardData } from "../components/developers/DeveloperCard";
-import { Search, ArrowRight, Clock, Radio, Terminal, Cpu } from "lucide-react";
+import { Search, ArrowRight, Clock, Radio, Terminal, Cpu, LayoutGrid, List } from "lucide-react";
 
 interface StatsData {
   total_projects: number;
@@ -29,10 +31,11 @@ export const HomePage: React.FC = () => {
   const [recentUpdates, setRecentUpdates] = useState<UpdateCardData[]>([]);
   const [activeDevs, setActiveDevs] = useState<DeveloperCardData[]>([]);
   const [selectedFilter, setSelectedFilter] = useState("all");
+  const [selectedProject, setSelectedProject] = useState<SelectedProjectView | null>(null);
+  const [viewMode, setViewMode] = useState<"table" | "grid">("table");
   const [newSinceLastVisit, setNewSinceLastVisit] = useState<number | null>(null);
   const [searchTerm, setSearchTerm] = useState("");
   const [loading, setLoading] = useState(true);
-  const navigate = useNavigate();
 
   useEffect(() => {
     // "Since your last visit" check (Blueprint §82)
@@ -66,7 +69,7 @@ export const HomePage: React.FC = () => {
           fetch("/api/projects?limit=50").then((r) =>
             r.ok ? (r.json() as Promise<{ projects: ProjectCardData[] }>) : { projects: [] }
           ),
-          fetch("/api/updates?limit=5").then((r) =>
+          fetch("/api/updates?limit=6").then((r) =>
             r.ok ? (r.json() as Promise<{ updates: UpdateCardData[] }>) : { updates: [] }
           ),
           fetch("/api/developers?limit=6").then((r) =>
@@ -75,7 +78,20 @@ export const HomePage: React.FC = () => {
         ]);
 
         if (statsRes) setStats(statsRes);
-        if (projectsRes?.projects) setProjects(projectsRes.projects);
+        if (projectsRes?.projects && projectsRes.projects.length > 0) {
+          setProjects(projectsRes.projects);
+          // Set initial 3D display game
+          const first = projectsRes.projects[0];
+          setSelectedProject({
+            id: first.id,
+            game_title: first.game_title || first.display_name || "GTA: San Andreas",
+            display_name: first.display_name || "GTA San Andreas Vita",
+            current_stage: first.current_stage,
+            performance_notes: first.performance_notes,
+            playability_notes: first.playability_notes,
+            technologies: first.technologies
+          });
+        }
         if (updatesRes?.updates) setRecentUpdates(updatesRes.updates);
         if (devsRes?.developers) setActiveDevs(devsRes.developers);
       } catch (e) {
@@ -87,21 +103,45 @@ export const HomePage: React.FC = () => {
     loadHomeData();
   }, []);
 
-  const handleSearchSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (searchTerm.trim()) {
-      navigate(`/projects?search=${encodeURIComponent(searchTerm.trim())}`);
+  const filteredProjects = useMemo(() => {
+    let list = projects;
+    if (selectedFilter !== "all") {
+      list = list.filter((p) => p.current_stage === selectedFilter);
     }
+    if (searchTerm.trim()) {
+      const term = searchTerm.toLowerCase().trim();
+      list = list.filter(
+        (p) =>
+          p.game_title?.toLowerCase().includes(term) ||
+          p.display_name?.toLowerCase().includes(term) ||
+          p.summary?.toLowerCase().includes(term) ||
+          p.technologies?.some((t) => t.toLowerCase().includes(term)) ||
+          p.developers?.some((d) => d.display_name.toLowerCase().includes(term))
+      );
+    }
+    return list;
+  }, [projects, selectedFilter, searchTerm]);
+
+  const handleSelectProject = (p: ProjectCardData) => {
+    setSelectedProject({
+      id: p.id,
+      game_title: p.game_title || p.display_name || "",
+      display_name: p.display_name || "",
+      current_stage: p.current_stage,
+      performance_notes: p.performance_notes,
+      playability_notes: p.playability_notes,
+      technologies: p.technologies
+    });
   };
 
-  const filteredProjects = useMemo(() => {
-    if (selectedFilter === "all") return projects;
-    return projects.filter((p) => p.current_stage === selectedFilter);
-  }, [projects, selectedFilter]);
-
   return (
-    <div className="space-y-8">
-      {/* Precision Hardware Status Strip (Blueprint §70 & §71) */}
+    <div className="space-y-6">
+      {/* 3D Interactive WebGL PS Vita Viewport (Awwwards 3D Experience) */}
+      <div className="border border-[#1a2332] rounded-[2px] overflow-hidden shadow-2xl">
+        <VitaConsoleScene selectedProject={selectedProject} />
+      </div>
+
+      {/* Hardware Status & Command Strip */}
       <section className="terminal-panel p-3.5 space-y-3">
         <div className="flex flex-wrap items-center justify-between gap-3 text-[10px] font-mono border-b border-[#1a2332] pb-2.5">
           <div className="flex items-center gap-2">
@@ -115,31 +155,30 @@ export const HomePage: React.FC = () => {
 
           <div className="flex items-center gap-3 text-[#64748b]">
             <span>
-              PORTS: <strong className="text-[#f1f5f9]">{stats?.total_projects ?? "24"}</strong>
+              TOTAL: <strong className="text-[#f1f5f9]">{stats?.total_projects ?? "24"}</strong>
             </span>
             <span>
               PLAYABLE+: <strong className="text-[#10b981]">{stats?.playable_or_better ?? "21"}</strong>
             </span>
             <span>
-              DEVS: <strong className="text-[#00b4d8]">{stats?.total_developers ?? "7"}</strong>
+              REVERSE ENGINEERS: <strong className="text-[#00b4d8]">{stats?.total_developers ?? "7"}</strong>
             </span>
           </div>
         </div>
 
-        {/* Global Search Bar */}
+        {/* Search Bar & Stage Switchers */}
         <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5">
-          <form onSubmit={handleSearchSubmit} className="relative flex-1">
+          <div className="relative flex-1">
             <input
               type="text"
-              placeholder="Filter or search ports (e.g. San Andreas, TheFloW, ARMv7, Fallout)..."
+              placeholder="Search ports (e.g. San Andreas, Max Payne, TheFloW, ARMv7)..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               className="w-full bg-[#040608] border border-[#1a2332] rounded-[2px] pl-9 pr-4 py-1.5 text-xs text-[#f1f5f9] font-mono placeholder-[#64748b] focus:outline-none focus:border-[#00f0ff] transition-all"
             />
             <Search className="w-3.5 h-3.5 text-[#64748b] absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
-          </form>
+          </div>
 
-          {/* Quick Filter Switcher */}
           <div className="flex items-center gap-1 overflow-x-auto no-scrollbar py-0.5">
             {QUICK_FILTERS.map((f) => (
               <button
@@ -154,10 +193,32 @@ export const HomePage: React.FC = () => {
                 {f.label}
               </button>
             ))}
+
+            {/* View Mode Toggle */}
+            <div className="hidden sm:flex items-center ml-2 border-l border-[#1a2332] pl-2 gap-1">
+              <button
+                onClick={() => setViewMode("table")}
+                className={`p-1 rounded-[2px] border ${
+                  viewMode === "table" ? "bg-[#00b4d8] text-[#040608] border-[#00f0ff]" : "text-[#64748b] border-transparent hover:text-white"
+                }`}
+                title="Table Ledger View"
+              >
+                <List className="w-3.5 h-3.5" />
+              </button>
+              <button
+                onClick={() => setViewMode("grid")}
+                className={`p-1 rounded-[2px] border ${
+                  viewMode === "grid" ? "bg-[#00b4d8] text-[#040608] border-[#00f0ff]" : "text-[#64748b] border-transparent hover:text-white"
+                }`}
+                title="Card Grid View"
+              >
+                <LayoutGrid className="w-3.5 h-3.5" />
+              </button>
+            </div>
           </div>
         </div>
 
-        {/* "Since your last visit" banner */}
+        {/* "Since your last visit" notice */}
         {newSinceLastVisit !== null && newSinceLastVisit > 0 && (
           <div className="bg-[#040608] border border-[#00b4d8]/40 px-3 py-1.5 rounded-[2px] flex items-center justify-between text-[11px] font-mono text-[#00f0ff]">
             <span className="flex items-center gap-1.5">
@@ -171,86 +232,88 @@ export const HomePage: React.FC = () => {
         )}
       </section>
 
-      {/* Main Content Grid: Projects on Left, Live Signals & Devs on Right */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-start">
-        {/* Left 2 Columns: Project Ledger */}
+      {/* Main Compatibility & Development Ledger Table */}
+      <section className="space-y-3">
+        <div className="flex items-baseline justify-between border-b border-[#1a2332] pb-1.5">
+          <h2 className="font-mono text-xs font-bold uppercase tracking-wider text-[#f1f5f9] flex items-center gap-1.5">
+            <Cpu className="w-3.5 h-3.5 text-[#00f0ff]" />
+            <span>PORT COMPATIBILITY & PROGRESS MATRIX ({filteredProjects.length})</span>
+          </h2>
+          <span className="font-mono text-[10px] text-[#64748b]">
+            SELECT ROW TO INSPECT ON 3D VITA
+          </span>
+        </div>
+
+        {loading ? (
+          <div className="terminal-panel p-8 text-center font-mono text-xs text-[#64748b] animate-pulse">
+            LOADING PORT LEDGER...
+          </div>
+        ) : filteredProjects.length > 0 ? (
+          viewMode === "table" ? (
+            <PortMatrixTable
+              projects={filteredProjects}
+              selectedId={selectedProject?.id}
+              onSelectProject={handleSelectProject}
+            />
+          ) : (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+              {filteredProjects.map((p) => (
+                <div key={p.id} onClick={() => handleSelectProject(p)}>
+                  <ProjectCard project={p} />
+                </div>
+              ))}
+            </div>
+          )
+        ) : (
+          <div className="terminal-panel p-12 text-center font-mono text-xs text-[#64748b]">
+            NO MATCHING PORTS FOUND
+          </div>
+        )}
+      </section>
+
+      {/* Live Stream & Developers Grid */}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-start pt-4 border-t border-[#1a2332]">
+        {/* Recent Milestone Signals */}
         <div className="lg:col-span-2 space-y-3">
           <div className="flex items-baseline justify-between border-b border-[#1a2332] pb-1.5">
             <h2 className="font-mono text-xs font-bold uppercase tracking-wider text-[#f1f5f9] flex items-center gap-1.5">
-              <Cpu className="w-3.5 h-3.5 text-[#00f0ff]" />
-              <span>TRACKED PORT REGISTRY ({filteredProjects.length})</span>
+              <Terminal className="w-3.5 h-3.5 text-[#10b981]" />
+              <span>LIVE EVIDENCE STREAM (r/vitahacks · r/VitaPiracy)</span>
             </h2>
             <Link
-              to="/projects"
+              to="/updates"
               className="font-mono text-[11px] text-[#00b4d8] hover:text-[#00f0ff] inline-flex items-center gap-1"
             >
-              <span>Full directory</span>
+              <span>All events</span>
               <ArrowRight className="w-3 h-3" />
             </Link>
           </div>
 
-          {loading ? (
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-              {[1, 2, 3, 4].map((i) => (
-                <div key={i} className="terminal-card p-4 h-32 animate-pulse bg-[#0d131b]" />
-              ))}
-            </div>
-          ) : filteredProjects.length > 0 ? (
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-              {filteredProjects.map((p) => (
-                <ProjectCard key={p.id} project={p} />
-              ))}
-            </div>
-          ) : (
-            <div className="terminal-panel p-8 text-center font-mono text-xs text-[#64748b]">
-              No ports matching stage: {selectedFilter.toUpperCase()}
-            </div>
-          )}
+          <div className="space-y-2.5">
+            {recentUpdates.map((u) => (
+              <UpdateCard key={u.id} update={u} />
+            ))}
+          </div>
         </div>
 
-        {/* Right Column: Live Development Signals & Engineers */}
-        <div className="space-y-6">
-          {/* Recent Signals */}
-          <div className="space-y-3">
-            <div className="flex items-baseline justify-between border-b border-[#1a2332] pb-1.5">
-              <h2 className="font-mono text-xs font-bold uppercase tracking-wider text-[#f1f5f9] flex items-center gap-1.5">
-                <Terminal className="w-3.5 h-3.5 text-[#10b981]" />
-                <span>MILESTONE STREAM</span>
-              </h2>
-              <Link
-                to="/updates"
-                className="font-mono text-[11px] text-[#00b4d8] hover:text-[#00f0ff]"
-              >
-                Feed →
-              </Link>
-            </div>
-
-            <div className="space-y-2.5">
-              {recentUpdates.map((u) => (
-                <UpdateCard key={u.id} update={u} />
-              ))}
-            </div>
+        {/* Reverse Engineers */}
+        <div className="space-y-3">
+          <div className="flex items-baseline justify-between border-b border-[#1a2332] pb-1.5">
+            <h2 className="font-mono text-xs font-bold uppercase tracking-wider text-[#f1f5f9]">
+              ACTIVE REVERSE ENGINEERS
+            </h2>
+            <Link
+              to="/developers"
+              className="font-mono text-[11px] text-[#00b4d8] hover:text-[#00f0ff]"
+            >
+              Directory →
+            </Link>
           </div>
 
-          {/* Active Reverse Engineers */}
-          <div className="space-y-3">
-            <div className="flex items-baseline justify-between border-b border-[#1a2332] pb-1.5">
-              <h2 className="font-mono text-xs font-bold uppercase tracking-wider text-[#f1f5f9]">
-                PORT DEVELOPERS
-              </h2>
-              <Link
-                to="/developers"
-                className="font-mono text-[11px] text-[#00b4d8] hover:text-[#00f0ff]"
-              >
-                All →
-              </Link>
-            </div>
-
-            <div className="space-y-2">
-              {activeDevs.map((d) => (
-                <DeveloperCard key={d.id} developer={d} />
-              ))}
-            </div>
+          <div className="space-y-2">
+            {activeDevs.map((d) => (
+              <DeveloperCard key={d.id} developer={d} />
+            ))}
           </div>
         </div>
       </div>

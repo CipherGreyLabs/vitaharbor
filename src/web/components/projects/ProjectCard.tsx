@@ -13,6 +13,8 @@ export interface ProjectCardData {
   current_stage: DevelopmentStage;
   lifecycle: ProjectLifecycle;
   summary: string;
+  playability_notes?: string | null;
+  performance_notes?: string | null;
   last_activity_at: string | Date;
   technologies?: string[];
   developers?: { id: number; display_name: string; role: string; slug: string }[];
@@ -88,4 +90,3 @@ export const ProjectCard: React.FC<{ project: ProjectCardData }> = ({ project })
     </Link>
   );
 };
-

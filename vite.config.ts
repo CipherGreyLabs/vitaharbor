@@ -4,7 +4,21 @@ import path from "node:path";
 
 export default defineConfig({
   plugins: [react()],
-  build: { outDir: "dist/web", emptyOutDir: true, sourcemap: true },
+  build: {
+    outDir: "dist/web",
+    emptyOutDir: true,
+    sourcemap: true,
+    chunkSizeWarningLimit: 700,
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          three: ["three"],
+          react: ["react", "react-dom", "react-router-dom"],
+          icons: ["lucide-react"]
+        }
+      }
+    }
+  },
   test: { environment: "jsdom", globals: true },
   resolve: {
     alias: {

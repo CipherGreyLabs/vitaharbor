@@ -14,4 +14,6 @@ test-results
 logs
 *.tsbuildinfo
 
+screenshot.png
+
 .vercel
