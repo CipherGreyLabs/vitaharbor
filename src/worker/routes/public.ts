@@ -13,11 +13,34 @@ import {
   ProjectRelationsRepository
 } from "../repositories";
 import type { DevelopmentStage, ProjectLifecycle } from "../../shared/types";
+import {
+  FALLBACK_PROJECTS,
+  FALLBACK_DEVELOPERS,
+  FALLBACK_UPDATES,
+  FALLBACK_GAMES
+} from "../../shared/constants/fallbackData";
 
 export const publicApi = new Hono<{ Bindings: Env }>();
 
 // GET /api/stats - Summary statistics for homepage
 publicApi.get("/stats", async (c) => {
+  if (!c.env?.DB) {
+    const activeCount = FALLBACK_PROJECTS.filter((p) => p.lifecycle === "active").length;
+    const playableCount = FALLBACK_PROJECTS.filter(
+      (p) => p.current_stage === "playable" || p.current_stage === "completable" || p.current_stage === "released"
+    ).length;
+    const releasedCount = FALLBACK_PROJECTS.filter((p) => p.current_stage === "released").length;
+
+    return c.json({
+      total_projects: FALLBACK_PROJECTS.length,
+      active_projects: activeCount,
+      playable_or_better: playableCount,
+      released_projects: releasedCount,
+      total_developers: FALLBACK_DEVELOPERS.length,
+      recent_updates_count: FALLBACK_UPDATES.length
+    });
+  }
+
   const projectsRepo = new ProjectsRepository(c.env.DB);
   const devRepo = new DevelopersRepository(c.env.DB);
   const updatesRepo = new UpdatesRepository(c.env.DB);
@@ -29,7 +52,9 @@ publicApi.get("/stats", async (c) => {
   ]);
 
   const activeCount = allProjects.filter((p) => p.lifecycle === "active").length;
-  const playableCount = allProjects.filter((p) => p.current_stage === "playable" || p.current_stage === "completable" || p.current_stage === "released").length;
+  const playableCount = allProjects.filter(
+    (p) => p.current_stage === "playable" || p.current_stage === "completable" || p.current_stage === "released"
+  ).length;
   const releasedCount = allProjects.filter((p) => p.current_stage === "released").length;
 
   return c.json({
@@ -46,10 +71,30 @@ publicApi.get("/stats", async (c) => {
 publicApi.get("/projects", async (c) => {
   const stage = c.req.query("stage") as DevelopmentStage | undefined;
   const lifecycle = c.req.query("lifecycle") as ProjectLifecycle | undefined;
-  const search = c.req.query("search");
+  const search = c.req.query("search")?.toLowerCase().trim();
   const isFeatured = c.req.query("featured") ? c.req.query("featured") === "true" : undefined;
   const limit = Math.min(Number(c.req.query("limit") || 20), 100);
   const offset = Number(c.req.query("offset") || 0);
+
+  if (!c.env?.DB) {
+    let list = [...FALLBACK_PROJECTS];
+    if (stage) list = list.filter((p) => p.current_stage === stage);
+    if (lifecycle) list = list.filter((p) => p.lifecycle === lifecycle);
+    if (isFeatured !== undefined) list = list.filter((p) => p.is_featured === isFeatured);
+    if (search) {
+      list = list.filter(
+        (p) =>
+          p.display_name?.toLowerCase().includes(search) ||
+          p.game_title?.toLowerCase().includes(search) ||
+          p.slug?.toLowerCase().includes(search) ||
+          p.summary?.toLowerCase().includes(search) ||
+          p.technologies?.some((t: string) => t.toLowerCase().includes(search)) ||
+          p.developers?.some((d: any) => d.display_name.toLowerCase().includes(search))
+      );
+    }
+    const paginated = list.slice(offset, offset + limit);
+    return c.json({ projects: paginated, limit, offset });
+  }
 
   const projectsRepo = new ProjectsRepository(c.env.DB);
   const gamesRepo = new GamesRepository(c.env.DB);
@@ -107,6 +152,19 @@ publicApi.get("/projects", async (c) => {
 // GET /api/projects/:slug - Detailed project view
 publicApi.get("/projects/:slug", async (c) => {
   const slug = c.req.param("slug");
+
+  if (!c.env?.DB) {
+    const project = FALLBACK_PROJECTS.find((p) => p.slug === slug);
+    if (!project) return c.json({ error: "Project not found" }, 404);
+    const updates = FALLBACK_UPDATES.filter((u) => u.project_slug === slug || u.port_project_id === project.id);
+    return c.json({
+      project: {
+        ...project,
+        updates
+      }
+    });
+  }
+
   const projectsRepo = new ProjectsRepository(c.env.DB);
   const gamesRepo = new GamesRepository(c.env.DB);
   const techRepo = new TechnologiesRepository(c.env.DB);
@@ -174,6 +232,14 @@ publicApi.get("/projects/:slug", async (c) => {
 // GET /api/games/:slug - Game metadata with associated port projects (Blueprint §83)
 publicApi.get("/games/:slug", async (c) => {
   const slug = c.req.param("slug");
+
+  if (!c.env?.DB) {
+    const game = FALLBACK_GAMES.find((g) => g.slug === slug);
+    if (!game) return c.json({ error: "Game not found" }, 404);
+    const projects = FALLBACK_PROJECTS.filter((p) => p.game_id === game.id);
+    return c.json({ game: { ...game, projects } });
+  }
+
   const gamesRepo = new GamesRepository(c.env.DB);
   const projectsRepo = new ProjectsRepository(c.env.DB);
 
@@ -197,6 +263,11 @@ publicApi.get("/games/:slug", async (c) => {
 publicApi.get("/developers", async (c) => {
   const limit = Math.min(Number(c.req.query("limit") || 50), 100);
   const offset = Number(c.req.query("offset") || 0);
+
+  if (!c.env?.DB) {
+    const paginated = FALLBACK_DEVELOPERS.slice(offset, offset + limit);
+    return c.json({ developers: paginated, limit, offset });
+  }
 
   const devRepo = new DevelopersRepository(c.env.DB);
   const identitiesRepo = new DeveloperIdentitiesRepository(c.env.DB);
@@ -243,6 +314,13 @@ publicApi.get("/developers", async (c) => {
 // GET /api/developers/:slug - Developer detail
 publicApi.get("/developers/:slug", async (c) => {
   const slug = c.req.param("slug");
+
+  if (!c.env?.DB) {
+    const developer = FALLBACK_DEVELOPERS.find((d) => d.slug === slug);
+    if (!developer) return c.json({ error: "Developer not found" }, 404);
+    return c.json({ developer });
+  }
+
   const devRepo = new DevelopersRepository(c.env.DB);
   const identitiesRepo = new DeveloperIdentitiesRepository(c.env.DB);
   const projDevRepo = new ProjectDevelopersRepository(c.env.DB);
@@ -287,6 +365,11 @@ publicApi.get("/updates", async (c) => {
   const limit = Math.min(Number(c.req.query("limit") || 20), 50);
   const offset = Number(c.req.query("offset") || 0);
 
+  if (!c.env?.DB) {
+    const paginated = FALLBACK_UPDATES.slice(offset, offset + limit);
+    return c.json({ updates: paginated, limit, offset });
+  }
+
   const updatesRepo = new UpdatesRepository(c.env.DB);
   const projectsRepo = new ProjectsRepository(c.env.DB);
   const devRepo = new DevelopersRepository(c.env.DB);
@@ -318,3 +401,4 @@ publicApi.get("/updates", async (c) => {
     offset
   });
 });
+

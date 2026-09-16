@@ -13,3 +13,5 @@ test-results
 *.local
 logs
 *.tsbuildinfo
+
+.vercel
