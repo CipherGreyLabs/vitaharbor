@@ -19,5 +19,10 @@ shot_*.png
 dev_*.png
 r_*.png
 part*.png
+check_*.png
+live_*.png
+live_*.json
+resp*.html
+resp*.json
 
 .vercel
