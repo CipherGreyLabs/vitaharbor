@@ -15,5 +15,6 @@ logs
 *.tsbuildinfo
 
 screenshot.png
+shot_*.png
 
 .vercel
