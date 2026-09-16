@@ -3,6 +3,13 @@
 > Production-quality, zero-cost-first development tracker for active PS Vita game ports.
 > Unofficial community project. Not affiliated with Sony Interactive Entertainment.
 
+**Live:** https://vitaharbor.vercel.app
+
+> **Starting work on this repo? Read [HANDOVER.md](./HANDOVER.md) first.** It contains the
+> current state, architecture, design system, deployment steps, known pitfalls and the
+> open work item. The sections below describe the Cloudflare Worker design; the deployed
+> site currently runs on Vercel as a static build served from the bundled dataset.
+
 ---
 
 ## 1. Project Overview
@@ -122,5 +129,4 @@ npm run deploy
 ## 9. License & Disclaimer
 
 Unofficial community project. Not affiliated with Sony Interactive Entertainment, Reddit, or any represented game publishers.
-
 
