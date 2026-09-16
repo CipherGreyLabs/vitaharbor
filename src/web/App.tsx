@@ -15,8 +15,14 @@ import { NotFoundPage } from "./routes/NotFoundPage";
 export default function App() {
   return (
     <div className="min-h-screen bg-[#090c11] text-[#edf5ff] flex flex-col selection:bg-[#249cf4]/30 selection:text-[#edf5ff]">
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-50 focus:px-4 focus:py-2 focus:bg-[#249cf4] focus:text-white focus:rounded focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-white"
+      >
+        Skip to content
+      </a>
       <Navbar />
-      <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <main id="main-content" className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/projects" element={<ProjectsPage />} />

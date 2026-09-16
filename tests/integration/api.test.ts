@@ -186,6 +186,11 @@ class IntegrationMockStatement {
       return (found || null) as T;
     }
 
+    if (q.includes("from games where slug = ?")) {
+      const found = this.db.tables.games.find((g) => g.slug === this.bindings[0]);
+      return (found || null) as T;
+    }
+
     if (q.includes("from developers where slug = ?")) {
       const found = this.db.tables.developers.find((d) => d.slug === this.bindings[0]);
       return (found || null) as T;
@@ -364,6 +369,16 @@ describe("VitaHarbor API Integration Tests", () => {
     expect(body.project.display_name).toBe("Grand Theft Auto: San Andreas Vita");
     expect(body.project.developers[0].display_name).toBe("TheFloW");
     expect(body.project.updates.length).toBe(1);
+  });
+
+  it("GET /api/games/:slug should return game metadata and associated projects", async () => {
+    const res = await app.fetch(new Request("http://localhost/api/games/gta-san-andreas"), env);
+    expect(res.status).toBe(200);
+
+    const body = (await res.json()) as any;
+    expect(body.game.title).toBe("Grand Theft Auto: San Andreas");
+    expect(body.game.projects.length).toBe(1);
+    expect(body.game.projects[0].slug).toBe("gta-san-andreas-vita");
   });
 
   it("GET /api/developers should return developers with linked projects and identities", async () => {

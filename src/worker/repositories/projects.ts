@@ -172,9 +172,16 @@ export class ProjectsRepository {
       bindings.push(filter.is_featured ? 1 : 0);
     }
     if (filter.search) {
-      conditions.push("(display_name LIKE ? OR slug LIKE ?)");
-      const term = `%${filter.search}%`;
-      bindings.push(term, term);
+      conditions.push(`(
+        port_projects.display_name LIKE ?
+        OR port_projects.slug LIKE ?
+        OR EXISTS (SELECT 1 FROM games g WHERE g.id = port_projects.game_id AND (g.title LIKE ? OR g.normalized_title LIKE ?))
+        OR EXISTS (SELECT 1 FROM project_aliases pa WHERE pa.port_project_id = port_projects.id AND (pa.alias LIKE ? OR pa.normalized_alias LIKE ?))
+        OR EXISTS (SELECT 1 FROM project_developers pd JOIN developers d ON pd.developer_id = d.id WHERE pd.port_project_id = port_projects.id AND d.display_name LIKE ?)
+        OR EXISTS (SELECT 1 FROM project_technologies pt JOIN technologies t ON pt.technology_id = t.id WHERE pt.port_project_id = port_projects.id AND t.name LIKE ?)
+      )`);
+      const term = `%${filter.search.trim()}%`;
+      bindings.push(term, term, term, term, term, term, term, term);
     }
 
     const limit = filter.limit ?? 20;
@@ -208,4 +215,3 @@ export class ProjectsRepository {
     };
   }
 }
-

@@ -171,6 +171,28 @@ publicApi.get("/projects/:slug", async (c) => {
   });
 });
 
+// GET /api/games/:slug - Game metadata with associated port projects (Blueprint §83)
+publicApi.get("/games/:slug", async (c) => {
+  const slug = c.req.param("slug");
+  const gamesRepo = new GamesRepository(c.env.DB);
+  const projectsRepo = new ProjectsRepository(c.env.DB);
+
+  const game = await gamesRepo.findBySlug(slug);
+  if (!game) {
+    return c.json({ error: "Game not found" }, 404);
+  }
+
+  const allProjects = await projectsRepo.list({ limit: 50 });
+  const matchingProjects = allProjects.filter((p) => p.game_id === game.id);
+
+  return c.json({
+    game: {
+      ...game,
+      projects: matchingProjects
+    }
+  });
+});
+
 // GET /api/developers - Developers listing
 publicApi.get("/developers", async (c) => {
   const limit = Math.min(Number(c.req.query("limit") || 50), 100);
@@ -296,4 +318,3 @@ publicApi.get("/updates", async (c) => {
     offset
   });
 });
-
