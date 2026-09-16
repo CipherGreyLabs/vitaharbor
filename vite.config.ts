@@ -4,7 +4,7 @@ import path from "node:path";
 
 export default defineConfig({
   plugins: [react()],
-  build: { outDir: "dist", emptyOutDir: true, sourcemap: true },
+  build: { outDir: "dist/web", emptyOutDir: true, sourcemap: true },
   test: { environment: "jsdom", globals: true },
   resolve: {
     alias: {
