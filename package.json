@@ -9,6 +9,7 @@
     "dev:worker": "wrangler dev",
     "build": "vite build",
     "preview": "vite preview",
+    "preview:worker": "wrangler dev --local --ip 127.0.0.1 --port 8787",
     "lint": "eslint src",
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
