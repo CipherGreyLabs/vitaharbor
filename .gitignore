@@ -24,5 +24,7 @@ live_*.png
 live_*.json
 resp*.html
 resp*.json
+f_*.png
+m_*.png
 
 .vercel
