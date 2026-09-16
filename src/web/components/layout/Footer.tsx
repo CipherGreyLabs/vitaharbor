@@ -3,60 +3,50 @@ import { ExternalLink } from "lucide-react";
 
 export const Footer: React.FC = () => {
   return (
-    <footer className="bg-[#090c11] border-t border-[#202a38] mt-16 py-12 text-[#68788c] text-xs">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
-          <div>
-            <div className="flex items-center gap-2 text-[#edf5ff] font-bold text-sm mb-3">
-              <span>VitaHarbor</span>
-            </div>
-            <p className="text-[#9aaabd] leading-relaxed">
-              Open intelligence tracker for active PS Vita game ports. Verified provenance, direct developer attribution, and structured timeline events.
-            </p>
+    <footer className="border-t border-[#1a2332] bg-[#040608] mt-20 py-8 text-[11px] font-mono text-[#64748b]">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-4">
+        {/* Top Status Strip */}
+        <div className="flex flex-wrap items-center justify-between gap-3 pb-4 border-b border-[#1a2332]">
+          <div className="flex items-center gap-2">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#10b981] animate-pulse" />
+            <span className="text-[#f1f5f9] font-bold tracking-wider uppercase">
+              VitaHarbor
+            </span>
+            <span className="text-[#29374e]">|</span>
+            <span className="text-[#94a3b8]">PS Vita Port Development Registry</span>
           </div>
 
-          <div>
-            <h4 className="text-[#edf5ff] font-semibold mb-3">Discovery Sources</h4>
-            <ul className="space-y-1.5">
-              <li>
-                <a
-                  href="https://reddit.com/r/vitahacks"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hover:text-[#249cf4] inline-flex items-center gap-1"
-                >
-                  <span>r/vitahacks</span>
-                  <ExternalLink className="w-3 h-3" />
-                </a>
-              </li>
-              <li>
-                <a
-                  href="https://reddit.com/r/VitaPiracy"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hover:text-[#249cf4] inline-flex items-center gap-1"
-                >
-                  <span>r/VitaPiracy</span>
-                  <ExternalLink className="w-3 h-3" />
-                </a>
-              </li>
-            </ul>
-          </div>
-
-          <div>
-            <h4 className="text-[#edf5ff] font-semibold mb-3">Legal & Disclaimer</h4>
-            <p className="text-[#9aaabd] leading-relaxed">
-              Unofficial community project. Not affiliated with, sponsored by, or endorsed by Sony Interactive Entertainment or Reddit. No game binaries, ROMs, or copyrighted data are hosted on this platform.
-            </p>
+          <div className="flex items-center gap-4 text-[#94a3b8]">
+            <span>SOURCES:</span>
+            <a
+              href="https://reddit.com/r/vitahacks"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-[#00f0ff] inline-flex items-center gap-1 transition-colors"
+            >
+              <span>r/vitahacks</span>
+              <ExternalLink className="w-2.5 h-2.5" />
+            </a>
+            <a
+              href="https://reddit.com/r/VitaPiracy"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-[#00f0ff] inline-flex items-center gap-1 transition-colors"
+            >
+              <span>r/VitaPiracy</span>
+              <ExternalLink className="w-2.5 h-2.5" />
+            </a>
           </div>
         </div>
 
-        <div className="pt-8 border-t border-[#202a38] flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p>© {new Date().getFullYear()} VitaHarbor. Zero-cost-first open architecture.</p>
-          <div className="flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-            <span className="text-[#9aaabd]">Tracking Active Ports</span>
-          </div>
+        {/* Legal notice */}
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 text-[10px] text-[#64748b] leading-relaxed">
+          <p>
+            Unofficial community intelligence tracker. Not affiliated with Sony Interactive Entertainment. No ROMs, VPKs, or copyrighted files are hosted on this platform.
+          </p>
+          <span className="flex-shrink-0">
+            © {new Date().getFullYear()} VitaHarbor · Zero-cost edge architecture
+          </span>
         </div>
       </div>
     </footer>

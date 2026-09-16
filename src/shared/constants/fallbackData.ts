@@ -1,4 +1,4 @@
-import type { PortProject, Developer, Update, Game } from "../types";
+import type { Game } from "../types";
 
 export const FALLBACK_GAMES: Game[] = [
   { id: 1, slug: "grand-theft-auto-san-andreas", title: "Grand Theft Auto: San Andreas", normalized_title: "grand theft auto: san andreas", original_release_year: 2004, original_platform: "PS2 / Android", created_at: new Date(), updated_at: new Date() },
@@ -356,4 +356,3 @@ export const FALLBACK_UPDATES: any[] = [
     sources: [{ source_item_id: "src_kotor", relationship: "primary", canonical_url: "https://www.reddit.com/r/vitahacks/comments/kotor1/star_wars_kotor_vita_port_research_and_shader_compilation/" }]
   }
 ];
-

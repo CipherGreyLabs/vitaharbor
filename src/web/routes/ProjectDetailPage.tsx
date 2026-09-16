@@ -5,7 +5,7 @@ import { StageHistoryVisualizer, type StageHistoryRecord } from "../components/p
 import { UpdateCard, type UpdateCardData } from "../components/updates/UpdateCard";
 import { formatRelativeTime, formatDate, deriveActivityLevel } from "@/shared/utils";
 import type { DevelopmentStage, ProjectLifecycle } from "@/shared/types";
-import { ChevronLeft, User, Calendar } from "lucide-react";
+import { ChevronLeft } from "lucide-react";
 
 interface ProjectDetailData {
   id: number;
@@ -43,7 +43,6 @@ export const ProjectDetailPage: React.FC = () => {
           const data = (await res.json()) as { project: ProjectDetailData };
           setProject(data.project);
 
-          // Mark project as viewed in browser localStorage (Blueprint §82)
           try {
             localStorage.setItem(`vitaharbor_viewed_${slug}`, String(Date.now()));
           } catch {
@@ -61,21 +60,19 @@ export const ProjectDetailPage: React.FC = () => {
 
   if (loading) {
     return (
-      <div className="card-panel p-12 text-center text-xs text-[#68788c] animate-pulse">
-        Loading project details...
+      <div className="terminal-panel p-12 text-center font-mono text-xs text-[#64748b] animate-pulse">
+        [ SYSTEM: LOADING PROJECT RECORD... ]
       </div>
     );
   }
 
   if (!project) {
     return (
-      <div className="card-panel p-12 text-center space-y-4">
-        <h2 className="text-base font-bold text-[#edf5ff]">Project Not Found</h2>
-        <p className="text-xs text-[#9aaabd]">
-          The requested project record could not be found.
-        </p>
-        <Link to="/projects" className="btn-secondary text-xs">
-          Return to projects
+      <div className="terminal-panel p-12 text-center space-y-4">
+        <h2 className="font-mono text-sm font-bold text-[#f1f5f9]">PROJECT RECORD NOT FOUND</h2>
+        <p className="text-xs text-[#94a3b8]">The requested project identifier does not exist in the catalog.</p>
+        <Link to="/projects" className="btn-terminal-secondary text-xs">
+          Return to directory
         </Link>
       </div>
     );
@@ -85,30 +82,30 @@ export const ProjectDetailPage: React.FC = () => {
   const isDistinctPortName = project.display_name && project.game_title && project.display_name !== project.game_title;
 
   return (
-    <div className="max-w-4xl mx-auto space-y-8">
+    <div className="max-w-4xl mx-auto space-y-6">
       {/* Back button */}
       <Link
         to="/projects"
-        className="inline-flex items-center gap-1 text-xs text-[#9aaabd] hover:text-[#edf5ff] transition-colors"
+        className="inline-flex items-center gap-1 font-mono text-[11px] text-[#94a3b8] hover:text-[#00f0ff] transition-colors"
       >
         <ChevronLeft className="w-3.5 h-3.5" />
-        <span>Back to projects directory</span>
+        <span>[ Back to Directory ]</span>
       </Link>
 
-      {/* Blueprint §74: Header */}
-      <div className="card-panel p-6 space-y-4">
-        <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4">
+      {/* Header Block */}
+      <div className="terminal-panel p-5 space-y-4">
+        <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4 border-b border-[#1a2332] pb-4">
           <div>
-            <span className="text-[11px] font-mono text-[#68788c] uppercase tracking-wider">
+            <span className="font-mono text-[10px] text-[#64748b] uppercase tracking-wider block">
               {project.original_platform || "Original Game"}
-              {project.original_release_year ? ` (${project.original_release_year})` : ""}
+              {project.original_release_year ? ` // ${project.original_release_year}` : ""}
             </span>
-            <h1 className="text-2xl font-bold text-[#edf5ff] mt-0.5">
+            <h1 className="text-xl sm:text-2xl font-bold text-[#f1f5f9] mt-1 tracking-tight">
               {project.game_title}
             </h1>
             {isDistinctPortName && (
-              <p className="text-xs text-[#249cf4] font-medium mt-1">
-                Port Project: {project.display_name}
+              <p className="font-mono text-xs text-[#00b4d8] mt-1">
+                PORT IDENTIFIER: {project.display_name}
               </p>
             )}
           </div>
@@ -120,36 +117,30 @@ export const ProjectDetailPage: React.FC = () => {
           </div>
         </div>
 
-        {/* Overview Summary */}
-        <p className="text-xs sm:text-sm text-[#edf5ff] leading-relaxed pt-2">
-          {project.summary || "No description provided."}
+        {/* Overview */}
+        <p className="text-xs sm:text-sm text-[#94a3b8] leading-relaxed">
+          {project.summary || "No technical description recorded."}
         </p>
 
-        {/* Meta details bar */}
-        <div className="flex flex-wrap items-center gap-x-6 gap-y-2 pt-3 border-t border-[#202a38] text-[11px] text-[#68788c]">
-          <div className="flex items-center gap-1">
-            <User className="w-3 h-3 text-[#249cf4]" />
-            <span>
+        {/* Hardware details bar */}
+        <div className="flex flex-wrap items-center gap-x-6 gap-y-2 pt-2 text-[10px] font-mono text-[#64748b]">
+          <div>
+            AUTHORS:{" "}
+            <span className="text-[#f1f5f9]">
               {project.developers && project.developers.length > 0
                 ? project.developers.map((d) => d.display_name).join(", ")
                 : "Independent / Anonymous"}
             </span>
           </div>
-          <div className="flex items-center gap-1">
-            <Calendar className="w-3 h-3" />
-            <span>First seen: {formatDate(project.first_seen_at)}</span>
-          </div>
-          <div className="flex items-center gap-1">
-            <Calendar className="w-3 h-3" />
-            <span>Last activity: {formatRelativeTime(project.last_activity_at)}</span>
-          </div>
+          <div>FIRST SEEN: <span className="text-[#94a3b8]">{formatDate(project.first_seen_at)}</span></div>
+          <div>LAST UPDATED: <span className="text-[#00b4d8]">{formatRelativeTime(project.last_activity_at)}</span></div>
         </div>
       </div>
 
-      {/* Blueprint §75: Development Progression History */}
-      <section className="card-panel p-6 space-y-4">
-        <h2 className="text-xs font-bold uppercase tracking-wider text-[#edf5ff]">
-          Verified Stage History
+      {/* Stage History */}
+      <section className="terminal-panel p-5 space-y-3">
+        <h2 className="font-mono text-xs font-bold uppercase tracking-wider text-[#f1f5f9] border-b border-[#1a2332] pb-2">
+          VERIFIED MILESTONE HISTORY
         </h2>
         <StageHistoryVisualizer
           currentStage={project.current_stage}
@@ -157,31 +148,31 @@ export const ProjectDetailPage: React.FC = () => {
         />
       </section>
 
-      {/* Blueprint §77: Technical Details (hiding empty/unknown fields) */}
+      {/* Technical Notes */}
       {(project.playability_notes || project.performance_notes || (project.technologies && project.technologies.length > 0)) && (
-        <section className="card-panel p-6 space-y-4">
-          <h2 className="text-xs font-bold uppercase tracking-wider text-[#edf5ff]">
-            Technical Details
+        <section className="terminal-panel p-5 space-y-3">
+          <h2 className="font-mono text-xs font-bold uppercase tracking-wider text-[#f1f5f9] border-b border-[#1a2332] pb-2">
+            TECHNICAL & PLAYABILITY BENCHMARKS
           </h2>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
             {project.playability_notes && (
-              <div className="space-y-1">
-                <h3 className="text-[11px] font-semibold text-[#68788c] uppercase tracking-wider">
-                  Playability Notes
+              <div className="space-y-1 bg-[#040608] border border-[#1a2332] p-3 rounded-[2px]">
+                <h3 className="font-mono text-[10px] text-[#00b4d8] uppercase tracking-wider">
+                  // PLAYABILITY VERDICT
                 </h3>
-                <p className="text-xs text-[#9aaabd] bg-[#090c11] p-3 rounded border border-[#202a38] leading-relaxed">
+                <p className="text-xs text-[#f1f5f9] leading-relaxed">
                   {project.playability_notes}
                 </p>
               </div>
             )}
 
             {project.performance_notes && (
-              <div className="space-y-1">
-                <h3 className="text-[11px] font-semibold text-[#68788c] uppercase tracking-wider">
-                  Performance & Target
+              <div className="space-y-1 bg-[#040608] border border-[#1a2332] p-3 rounded-[2px]">
+                <h3 className="font-mono text-[10px] text-[#10b981] uppercase tracking-wider">
+                  // PERFORMANCE & SHADERS
                 </h3>
-                <p className="text-xs text-[#9aaabd] bg-[#090c11] p-3 rounded border border-[#202a38] leading-relaxed">
+                <p className="text-xs text-[#f1f5f9] leading-relaxed">
                   {project.performance_notes}
                 </p>
               </div>
@@ -190,14 +181,14 @@ export const ProjectDetailPage: React.FC = () => {
 
           {project.technologies && project.technologies.length > 0 && (
             <div className="pt-2">
-              <span className="text-[11px] text-[#68788c] block mb-1.5 font-semibold uppercase tracking-wider">
-                Technologies & Tools
+              <span className="font-mono text-[10px] text-[#64748b] block mb-1 uppercase">
+                ENGINE & WRAPPERS:
               </span>
               <div className="flex flex-wrap gap-1.5">
                 {project.technologies.map((t) => (
                   <span
                     key={t}
-                    className="px-2 py-0.5 rounded bg-[#151b24] border border-[#202a38] text-xs text-[#9aaabd]"
+                    className="font-mono text-[10px] text-[#94a3b8] bg-[#040608] border border-[#1a2332] px-2 py-0.5 rounded-[2px]"
                   >
                     {t}
                   </span>
@@ -208,52 +199,23 @@ export const ProjectDetailPage: React.FC = () => {
         </section>
       )}
 
-      {/* Developers Section */}
-      {project.developers && project.developers.length > 0 && (
-        <section className="card-panel p-6 space-y-3">
-          <h2 className="text-xs font-bold uppercase tracking-wider text-[#edf5ff]">
-            Contributing Developers
-          </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-            {project.developers.map((dev) => (
-              <Link
-                key={dev.id}
-                to={`/developers/${dev.slug}`}
-                className="card-panel-hover p-3.5 flex items-center justify-between"
-              >
-                <div>
-                  <h4 className="text-xs font-semibold text-[#edf5ff] hover:text-[#249cf4]">
-                    {dev.display_name}
-                  </h4>
-                  <span className="text-[10px] text-[#68788c] uppercase">
-                    Role: {dev.role}
-                  </span>
-                </div>
-                <span className="text-xs text-[#249cf4]">Profile →</span>
-              </Link>
-            ))}
-          </div>
-        </section>
-      )}
-
-      {/* Blueprint §76: Timeline Updates */}
+      {/* Verified Timeline Updates */}
       <section className="space-y-3">
-        <h2 className="text-xs font-bold uppercase tracking-wider text-[#edf5ff]">
-          Development Timeline
+        <h2 className="font-mono text-xs font-bold uppercase tracking-wider text-[#f1f5f9] border-b border-[#1a2332] pb-2">
+          VERIFIED TIMELINE EVENTS
         </h2>
         {project.updates && project.updates.length > 0 ? (
-          <div className="space-y-3">
+          <div className="space-y-2.5">
             {project.updates.map((u) => (
               <UpdateCard key={u.id} update={u} />
             ))}
           </div>
         ) : (
-          <div className="card-panel p-6 text-center text-xs text-[#68788c]">
-            No verified timeline events recorded yet.
+          <div className="terminal-panel p-6 text-center font-mono text-xs text-[#64748b]">
+            No verified timeline events recorded for this port yet.
           </div>
         )}
       </section>
     </div>
   );
 };
-

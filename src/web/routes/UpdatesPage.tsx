@@ -2,20 +2,20 @@ import React, { useState, useEffect, useMemo } from "react";
 import { UpdateCard, type UpdateCardData } from "../components/updates/UpdateCard";
 
 const EVENT_TYPE_FILTERS = [
-  { value: "", label: "All Event Types" },
-  { value: "release", label: "Releases" },
-  { value: "playability_progress", label: "Playability Progress" },
-  { value: "first_boot", label: "First Boot" },
-  { value: "first_in_game", label: "In-Game" },
-  { value: "technical_progress", label: "Technical Progress" },
-  { value: "project_announced", label: "Announcements" }
+  { value: "", label: "TYPE: ALL" },
+  { value: "release", label: "RELEASE" },
+  { value: "playability_progress", label: "PLAYABILITY" },
+  { value: "first_boot", label: "FIRST BOOT" },
+  { value: "first_in_game", label: "IN-GAME" },
+  { value: "technical_progress", label: "TECH PROGRESS" },
+  { value: "project_announced", label: "ANNOUNCEMENT" }
 ];
 
 const VERIFICATION_FILTERS = [
-  { value: "", label: "All Verification" },
-  { value: "developer_direct", label: "Developer Direct" },
-  { value: "maintainer_confirmed", label: "Maintainer Confirmed" },
-  { value: "community_report", label: "Community Report" }
+  { value: "", label: "VERIFICATION: ALL" },
+  { value: "developer_direct", label: "DEV DIRECT" },
+  { value: "maintainer_confirmed", label: "VERIFIED" },
+  { value: "community_report", label: "COMMUNITY REPORT" }
 ];
 
 export const UpdatesPage: React.FC = () => {
@@ -51,21 +51,21 @@ export const UpdatesPage: React.FC = () => {
 
   return (
     <div className="max-w-4xl mx-auto space-y-6">
-      <div>
-        <h1 className="text-xl font-bold tracking-tight text-[#edf5ff]">
-          Development Updates Feed
+      <div className="border-b border-[#1a2332] pb-2">
+        <h1 className="font-mono text-sm font-bold uppercase tracking-wider text-[#f1f5f9]">
+          DEVELOPMENT MILESTONE STREAM
         </h1>
-        <p className="text-xs text-[#9aaabd] mt-0.5">
-          Chronological timeline of verified PlayStation Vita porting milestones with direct evidence provenance.
+        <p className="text-[11px] font-mono text-[#64748b]">
+          Chronological evidence feed linking to verified Reddit releases and progress logs.
         </p>
       </div>
 
-      {/* Blueprint §80: Filters */}
-      <div className="card-panel p-3.5 flex flex-wrap items-center gap-2">
+      {/* Filter Bar */}
+      <div className="terminal-panel p-2.5 flex flex-wrap items-center gap-2 text-[10px] font-mono">
         <select
           value={eventTypeFilter}
           onChange={(e) => setEventTypeFilter(e.target.value)}
-          className="bg-[#090c11] border border-[#202a38] text-[11px] text-[#edf5ff] rounded px-2.5 py-1.5 focus:outline-none focus:border-[#249cf4]"
+          className="bg-[#040608] border border-[#1a2332] text-[#94a3b8] rounded-[2px] px-2.5 py-1 focus:outline-none focus:border-[#00f0ff]"
         >
           {EVENT_TYPE_FILTERS.map((f) => (
             <option key={f.value} value={f.value}>
@@ -77,7 +77,7 @@ export const UpdatesPage: React.FC = () => {
         <select
           value={verificationFilter}
           onChange={(e) => setVerificationFilter(e.target.value)}
-          className="bg-[#090c11] border border-[#202a38] text-[11px] text-[#edf5ff] rounded px-2.5 py-1.5 focus:outline-none focus:border-[#249cf4]"
+          className="bg-[#040608] border border-[#1a2332] text-[#94a3b8] rounded-[2px] px-2.5 py-1 focus:outline-none focus:border-[#00f0ff]"
         >
           {VERIFICATION_FILTERS.map((f) => (
             <option key={f.value} value={f.value}>
@@ -86,27 +86,27 @@ export const UpdatesPage: React.FC = () => {
           ))}
         </select>
 
-        <span className="ml-auto text-[11px] text-[#68788c]">
-          Showing {filteredUpdates.length} of {updates.length} events
+        <span className="ml-auto text-[10px] text-[#64748b]">
+          {filteredUpdates.length} of {updates.length} events
         </span>
       </div>
 
-      {/* Feed Stream */}
+      {/* Stream */}
       {loading ? (
-        <div className="space-y-3">
+        <div className="space-y-2.5">
           {[1, 2, 3].map((i) => (
-            <div key={i} className="card-panel p-4 h-28 animate-pulse bg-[#0f141b]" />
+            <div key={i} className="terminal-card p-4 h-24 animate-pulse bg-[#0d131b]" />
           ))}
         </div>
       ) : filteredUpdates.length > 0 ? (
-        <div className="space-y-3">
+        <div className="space-y-2.5">
           {filteredUpdates.map((u) => (
             <UpdateCard key={u.id} update={u} />
           ))}
         </div>
       ) : (
-        <div className="card-panel p-12 text-center text-xs text-[#68788c]">
-          No development events match the selected criteria.
+        <div className="terminal-panel p-12 text-center font-mono text-xs text-[#64748b]">
+          NO EVENTS MATCH SELECTED FILTERS
         </div>
       )}
     </div>

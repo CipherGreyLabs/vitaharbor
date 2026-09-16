@@ -5,38 +5,35 @@ import { deriveActivityLevel } from "@/shared/utils";
 import { Search } from "lucide-react";
 
 const STAGE_FILTERS = [
-  { value: "", label: "All Stages" },
-  { value: "released", label: "Released" },
-  { value: "playable", label: "Playable" },
-  { value: "completable", label: "Completable" },
-  { value: "in_game", label: "In-Game" },
-  { value: "booting", label: "Booting" },
-  { value: "early_wip", label: "Early WIP" },
-  { value: "research", label: "Research" },
-  { value: "announced", label: "Announced" }
+  { value: "", label: "STAGE: ALL" },
+  { value: "released", label: "RELEASED" },
+  { value: "playable", label: "PLAYABLE" },
+  { value: "completable", label: "COMPLETABLE" },
+  { value: "in_game", label: "IN-GAME" },
+  { value: "booting", label: "BOOTING" },
+  { value: "early_wip", label: "EARLY WIP" },
+  { value: "announced", label: "ANNOUNCED" }
 ];
 
 const LIFECYCLE_FILTERS = [
-  { value: "", label: "All Lifecycle" },
-  { value: "active", label: "Active" },
-  { value: "stalled", label: "Stalled" },
-  { value: "abandoned", label: "Abandoned" },
-  { value: "archived", label: "Archived" }
+  { value: "", label: "LIFECYCLE: ALL" },
+  { value: "active", label: "ACTIVE" },
+  { value: "stalled", label: "STALLED" },
+  { value: "archived", label: "ARCHIVED" }
 ];
 
 const ACTIVITY_FILTERS = [
-  { value: "", label: "All Activity" },
-  { value: "hot", label: "Hot (<= 7 days)" },
-  { value: "active", label: "Active (<= 30 days)" },
-  { value: "quiet", label: "Quiet (<= 90 days)" },
-  { value: "dormant", label: "Dormant (<= 180 days)" },
-  { value: "stale", label: "Stale (> 180 days)" }
+  { value: "", label: "ACTIVITY: ALL" },
+  { value: "hot", label: "HOT (<= 7D)" },
+  { value: "active", label: "ACTIVE (<= 30D)" },
+  { value: "quiet", label: "QUIET (<= 90D)" },
+  { value: "dormant", label: "DORMANT" }
 ];
 
 const SORT_OPTIONS = [
-  { value: "recent", label: "Recently Updated" },
-  { value: "alpha", label: "Alphabetical" },
-  { value: "first_seen", label: "Newest Discovered" }
+  { value: "recent", label: "SORT: RECENT ACTIVITY" },
+  { value: "alpha", label: "SORT: A-Z" },
+  { value: "first_seen", label: "SORT: NEWEST DISCOVERY" }
 ];
 
 export const ProjectsPage: React.FC = () => {
@@ -84,7 +81,6 @@ export const ProjectsPage: React.FC = () => {
     setSearchParams(updated);
   };
 
-  // Filter by activity on frontend + sort
   const filteredProjects = useMemo(() => {
     let result = [...projects];
 
@@ -102,10 +98,8 @@ export const ProjectsPage: React.FC = () => {
         )
       );
     } else if (sortParam === "first_seen") {
-      // Newest discovered first
       result.sort((a, b) => (b.id || 0) - (a.id || 0));
     } else {
-      // Default: recently updated
       result.sort(
         (a, b) =>
           new Date(b.last_activity_at).getTime() - new Date(a.last_activity_at).getTime()
@@ -116,35 +110,37 @@ export const ProjectsPage: React.FC = () => {
   }, [projects, activityParam, sortParam]);
 
   return (
-    <div className="max-w-6xl mx-auto space-y-6">
-      <div>
-        <h1 className="text-xl font-bold tracking-tight text-[#edf5ff]">
-          Port Projects Directory
-        </h1>
-        <p className="text-xs text-[#9aaabd] mt-0.5">
-          Structured index of active, playable, and released PlayStation Vita community ports.
-        </p>
+    <div className="space-y-6">
+      {/* Title strip */}
+      <div className="flex flex-wrap items-baseline justify-between gap-2 border-b border-[#1a2332] pb-2">
+        <div>
+          <h1 className="font-mono text-sm font-bold uppercase tracking-wider text-[#f1f5f9]">
+            PS VITA PORT REGISTRY
+          </h1>
+          <p className="text-[11px] font-mono text-[#64748b]">
+            Showing {filteredProjects.length} port projects from r/VitaPiracy and r/vitahacks
+          </p>
+        </div>
       </div>
 
-      {/* Blueprint §72: Search & Multi-filter Controls */}
-      <div className="card-panel p-4 space-y-3">
+      {/* Hardware Filter Bar */}
+      <div className="terminal-panel p-3 space-y-2.5">
         <div className="relative">
           <input
             type="text"
-            placeholder="Search by game title, port name, or keyword..."
+            placeholder="Search port name, original platform, developer, engine, or alias..."
             value={searchParam}
             onChange={(e) => updateParam("search", e.target.value)}
-            className="w-full bg-[#090c11] border border-[#202a38] rounded-md pl-9 pr-3 py-1.5 text-xs text-[#edf5ff] placeholder-[#68788c] focus:outline-none focus:border-[#249cf4]"
+            className="w-full bg-[#040608] border border-[#1a2332] rounded-[2px] pl-8 pr-3 py-1.5 text-xs font-mono text-[#f1f5f9] placeholder-[#64748b] focus:outline-none focus:border-[#00f0ff]"
           />
-          <Search className="w-4 h-4 text-[#68788c] absolute left-2.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+          <Search className="w-3.5 h-3.5 text-[#64748b] absolute left-2.5 top-1/2 -translate-y-1/2 pointer-events-none" />
         </div>
 
-        <div className="flex flex-wrap items-center gap-2 pt-1 border-t border-[#202a38]/60">
-          {/* Stage */}
+        <div className="flex flex-wrap items-center gap-1.5 pt-1 text-[10px] font-mono">
           <select
             value={stageParam}
             onChange={(e) => updateParam("stage", e.target.value)}
-            className="bg-[#090c11] border border-[#202a38] text-[11px] text-[#edf5ff] rounded px-2.5 py-1.5 focus:outline-none focus:border-[#249cf4]"
+            className="bg-[#040608] border border-[#1a2332] text-[#94a3b8] rounded-[2px] px-2 py-1 focus:outline-none focus:border-[#00f0ff]"
           >
             {STAGE_FILTERS.map((s) => (
               <option key={s.value} value={s.value}>
@@ -153,11 +149,10 @@ export const ProjectsPage: React.FC = () => {
             ))}
           </select>
 
-          {/* Lifecycle */}
           <select
             value={lifecycleParam}
             onChange={(e) => updateParam("lifecycle", e.target.value)}
-            className="bg-[#090c11] border border-[#202a38] text-[11px] text-[#edf5ff] rounded px-2.5 py-1.5 focus:outline-none focus:border-[#249cf4]"
+            className="bg-[#040608] border border-[#1a2332] text-[#94a3b8] rounded-[2px] px-2 py-1 focus:outline-none focus:border-[#00f0ff]"
           >
             {LIFECYCLE_FILTERS.map((l) => (
               <option key={l.value} value={l.value}>
@@ -166,11 +161,10 @@ export const ProjectsPage: React.FC = () => {
             ))}
           </select>
 
-          {/* Activity */}
           <select
             value={activityParam}
             onChange={(e) => updateParam("activity", e.target.value)}
-            className="bg-[#090c11] border border-[#202a38] text-[11px] text-[#edf5ff] rounded px-2.5 py-1.5 focus:outline-none focus:border-[#249cf4]"
+            className="bg-[#040608] border border-[#1a2332] text-[#94a3b8] rounded-[2px] px-2 py-1 focus:outline-none focus:border-[#00f0ff]"
           >
             {ACTIVITY_FILTERS.map((a) => (
               <option key={a.value} value={a.value}>
@@ -179,13 +173,11 @@ export const ProjectsPage: React.FC = () => {
             ))}
           </select>
 
-          {/* Sort */}
-          <div className="ml-auto flex items-center gap-1.5">
-            <span className="text-[11px] text-[#68788c]">Sort:</span>
+          <div className="ml-auto">
             <select
               value={sortParam}
               onChange={(e) => updateParam("sort", e.target.value)}
-              className="bg-[#090c11] border border-[#202a38] text-[11px] text-[#edf5ff] rounded px-2.5 py-1.5 focus:outline-none focus:border-[#249cf4]"
+              className="bg-[#040608] border border-[#1a2332] text-[#00b4d8] font-bold rounded-[2px] px-2 py-1 focus:outline-none focus:border-[#00f0ff]"
             >
               {SORT_OPTIONS.map((s) => (
                 <option key={s.value} value={s.value}>
@@ -197,11 +189,11 @@ export const ProjectsPage: React.FC = () => {
         </div>
       </div>
 
-      {/* Projects Grid */}
+      {/* Grid */}
       {loading ? (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
           {[1, 2, 3, 4, 5, 6].map((i) => (
-            <div key={i} className="card-panel p-4 h-36 animate-pulse bg-[#0f141b]" />
+            <div key={i} className="terminal-card p-4 h-32 animate-pulse bg-[#0d131b]" />
           ))}
         </div>
       ) : filteredProjects.length > 0 ? (
@@ -211,11 +203,10 @@ export const ProjectsPage: React.FC = () => {
           ))}
         </div>
       ) : (
-        <div className="card-panel p-12 text-center text-xs text-[#68788c]">
-          No matching PS Vita port projects found for the selected filter combination.
+        <div className="terminal-panel p-12 text-center font-mono text-xs text-[#64748b]">
+          NO PORT PROJECTS MATCH CURRENT CRITERIA
         </div>
       )}
     </div>
   );
 };
-

@@ -1,86 +1,69 @@
 import React from "react";
-import { Disc, CheckCircle2 } from "lucide-react";
 
 export const AboutPage: React.FC = () => {
   return (
-    <div className="max-w-3xl mx-auto space-y-10 py-2">
-      {/* Title */}
-      <div className="space-y-2">
-        <div className="flex items-center gap-2">
-          <Disc className="w-5 h-5 text-[#249cf4]" />
-          <h1 className="text-xl font-bold tracking-tight text-[#edf5ff]">
-            About VitaHarbor
-          </h1>
-        </div>
-        <p className="text-xs text-[#9aaabd] leading-relaxed">
-          Open, zero-cost intelligence platform tracking active PlayStation Vita game-port development.
+    <div className="max-w-3xl mx-auto space-y-8 py-2">
+      <div className="border-b border-[#1a2332] pb-3 space-y-1">
+        <h1 className="font-mono text-sm font-bold uppercase tracking-wider text-[#f1f5f9] flex items-center gap-2">
+          <span className="w-2 h-2 rounded-full bg-[#00f0ff]" />
+          <span>ABOUT VITAHARBOR</span>
+        </h1>
+        <p className="text-[11px] font-mono text-[#64748b]">
+          Open-access intelligence ledger for PlayStation Vita game ports.
         </p>
       </div>
 
-      {/* Core Mission */}
-      <section className="card-panel p-6 space-y-3">
-        <h2 className="text-xs font-bold uppercase tracking-wider text-[#edf5ff]">
-          The Purpose
+      <section className="terminal-panel p-5 space-y-2.5">
+        <h2 className="font-mono text-xs font-bold uppercase tracking-wider text-[#00b4d8]">
+          // THE CENTRAL PROBLEM
         </h2>
-        <p className="text-xs text-[#9aaabd] leading-relaxed">
-          The PlayStation Vita homebrew community continues to deliver extraordinary technical feats: ARM wrappers, reverse-engineered bytecode translators, OpenGL ES / vitaGL shaders, and native source-port reimplementations.
+        <p className="text-xs text-[#94a3b8] leading-relaxed">
+          The PlayStation Vita homebrew ecosystem is one of the most technically ambitious in gaming history. Developers reverse-engineer Android ARM binaries, decompile engines, rewrite OpenGL ES shaders in vitaGL, and recompile whole PC classics natively for ARM Cortex-A9.
         </p>
-        <p className="text-xs text-[#9aaabd] leading-relaxed">
-          VitaHarbor answers one fundamental question:
+        <p className="text-xs text-[#94a3b8] leading-relaxed">
+          However, project updates, first-boot milestones, and beta builds remain scattered across isolated Reddit threads, comment replies, and GitHub gists. VitaHarbor exists as the central, verifiable reference point.
         </p>
-        <blockquote className="text-xs text-[#edf5ff] border-l-2 border-[#249cf4] pl-3 py-1 font-medium bg-[#090c11]/50 rounded-r">
-          What PS Vita game ports are currently being developed, by whom, how far have they progressed, and what changed recently?
-        </blockquote>
       </section>
 
-      {/* Principles & Anti-Hype */}
-      <section className="card-panel p-6 space-y-4">
-        <h2 className="text-xs font-bold uppercase tracking-wider text-[#edf5ff]">
-          Product Principles
+      <section className="terminal-panel p-5 space-y-3.5">
+        <h2 className="font-mono text-xs font-bold uppercase tracking-wider text-[#00b4d8]">
+          // SYSTEM INVARIANTS
         </h2>
 
-        <div className="space-y-3 text-xs text-[#9aaabd]">
-          <div className="flex items-start gap-2.5">
-            <CheckCircle2 className="w-4 h-4 text-[#249cf4] flex-shrink-0 mt-0.5" />
-            <div>
-              <strong className="text-[#edf5ff] block">Verified Source Provenance</strong>
-              Every factual milestone, boot claim, or release statement links back directly to the original developer post, repository commit, or public community statement.
-            </div>
+        <div className="space-y-3 text-xs text-[#94a3b8]">
+          <div>
+            <span className="text-[#f1f5f9] font-mono font-bold text-[11px] block">
+              1. DIRECT EVIDENCE PROVENANCE
+            </span>
+            <span>
+              Every milestone claim is linked to the primary Reddit statement or repository release where the developer announced it.
+            </span>
           </div>
 
-          <div className="flex items-start gap-2.5">
-            <CheckCircle2 className="w-4 h-4 text-[#249cf4] flex-shrink-0 mt-0.5" />
-            <div>
-              <strong className="text-[#edf5ff] block">Never Fake Progress Percentages</strong>
-              Software development cannot be reduced to arbitrary percentages like "76% done". We track verifiable discrete stages: Announced → Booting → In-Game → Playable → Released.
-            </div>
+          <div>
+            <span className="text-[#f1f5f9] font-mono font-bold text-[11px] block">
+              2. DISCRETE MILESTONES (NO FAKE PERCENTAGES)
+            </span>
+            <span>
+              Software development cannot be reduced to synthetic percentages like "78% done". VitaHarbor tracks empirical milestones: Announced, Booting, In-Game, Playable, and Released.
+            </span>
           </div>
 
-          <div className="flex items-start gap-2.5">
-            <CheckCircle2 className="w-4 h-4 text-[#249cf4] flex-shrink-0 mt-0.5" />
-            <div>
-              <strong className="text-[#edf5ff] block">No Piracy, No ROMs, No Binaries</strong>
-              VitaHarbor hosts strictly structured metadata and news. We do not distribute VPKs, copyrighted game assets, data files, or ROMs.
-            </div>
-          </div>
-
-          <div className="flex items-start gap-2.5">
-            <CheckCircle2 className="w-4 h-4 text-[#249cf4] flex-shrink-0 mt-0.5" />
-            <div>
-              <strong className="text-[#edf5ff] block">Zero-Cost-First Architecture</strong>
-              Built to operate sustainably on Cloudflare free-tier serverless primitives (Workers, D1 SQLite, Static Assets, and Cron Triggers), ensuring long-term community availability without advertising, accounts, or donations.
-            </div>
+          <div>
+            <span className="text-[#f1f5f9] font-mono font-bold text-[11px] block">
+              3. STRICT METADATA ONLY (ZERO PIRACY)
+            </span>
+            <span>
+              VitaHarbor hosts exclusively structured technical data and changelogs. No ROMs, VPKs, copyrighted assets, or game binaries are distributed.
+            </span>
           </div>
         </div>
       </section>
 
-      {/* Disclaimer */}
-      <section className="card-panel p-6 space-y-2 border-l-2 border-l-amber-500/50">
-        <h2 className="text-xs font-bold uppercase tracking-wider text-[#edf5ff]">
-          Legal Notice & Disclaimer
-        </h2>
-        <p className="text-[11px] text-[#68788c] leading-relaxed">
-          VitaHarbor is an independent, non-commercial community project. It is not affiliated with, endorsed by, or connected to Sony Interactive Entertainment, Reddit, or any represented game publishers. PlayStation and PS Vita are trademarks of Sony Interactive Entertainment Inc.
+      <section className="terminal-panel p-4 border-l-2 border-l-[#f59e0b] space-y-1 text-[11px] font-mono text-[#64748b]">
+        <span className="text-[#f59e0b] font-bold block">// LEGAL DISCLAIMER</span>
+        <p>
+          VitaHarbor is an independent community project. Not affiliated with or endorsed by Sony Interactive Entertainment or Reddit.
         </p>
       </section>
     </div>

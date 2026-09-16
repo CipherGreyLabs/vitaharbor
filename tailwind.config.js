@@ -8,32 +8,29 @@ export default {
   theme: {
     extend: {
       colors: {
-        bg: {
-          DEFAULT: '#090c11',
-          surface1: '#0f141b',
-          surface2: '#151b24',
-          surface3: '#1b2330',
+        oled: {
+          DEFAULT: '#040608',
+          panel: '#090d13',
+          card: '#0d131b',
+          hover: '#131a24',
+          border: '#1a2332',
+          borderBright: '#29374e',
         },
-        border: {
-          subtle: '#202a38',
-          bright: '#2f3d52',
-        },
-        content: {
-          primary: '#edf5ff',
-          secondary: '#9aaabd',
-          muted: '#68788c',
-        },
-        accent: {
-          DEFAULT: '#249cf4',
-          hover: '#4fb5ff',
-          soft: 'rgba(36, 156, 244, 0.12)',
+        vita: {
+          blue: '#00b4d8',
+          cyan: '#00f0ff',
+          glow: 'rgba(0, 240, 255, 0.15)',
+          amber: '#f59e0b',
+          emerald: '#10b981',
+          rose: '#f43f5e',
         }
       },
       fontFamily: {
         sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
-        mono: ['JetBrains Mono', 'ui-monospace', 'monospace'],
+        mono: ['JetBrains Mono', 'Menlo', 'monospace'],
       }
     },
   },
   plugins: [],
 }
+

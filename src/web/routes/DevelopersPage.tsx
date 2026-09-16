@@ -24,25 +24,29 @@ export const DevelopersPage: React.FC = () => {
 
   return (
     <div className="space-y-6">
-      <div>
-        <h1 className="text-2xl font-bold text-[#edf5ff]">PS Vita Port Developers</h1>
-        <p className="text-xs text-[#9aaabd] mt-1">Community programmers and engine reverse-engineers</p>
+      <div className="border-b border-[#1a2332] pb-2">
+        <h1 className="font-mono text-sm font-bold uppercase tracking-wider text-[#f1f5f9]">
+          PS VITA REVERSE ENGINEERS & PORTERS
+        </h1>
+        <p className="text-[11px] font-mono text-[#64748b]">
+          Verified homebrew creators responsible for native recompilations and ARM wrappers.
+        </p>
       </div>
 
       {loading ? (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
           {[1, 2, 3].map((i) => (
-            <div key={i} className="card-panel p-5 h-36 animate-pulse bg-[#0f141b]" />
+            <div key={i} className="terminal-card p-4 h-28 animate-pulse bg-[#0d131b]" />
           ))}
         </div>
       ) : developers.length > 0 ? (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
           {developers.map((d) => (
             <DeveloperCard key={d.id} developer={d} />
           ))}
         </div>
       ) : (
-        <div className="card-panel p-12 text-center text-xs text-[#68788c]">
+        <div className="terminal-panel p-12 text-center font-mono text-xs text-[#64748b]">
           No developers registered yet.
         </div>
       )}

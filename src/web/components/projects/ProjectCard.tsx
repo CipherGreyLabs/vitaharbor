@@ -26,52 +26,64 @@ export const ProjectCard: React.FC<{ project: ProjectCardData }> = ({ project })
   return (
     <Link
       to={`/projects/${project.slug}`}
-      className="card-panel-hover p-4 flex flex-col justify-between group block"
+      className="terminal-card p-3.5 flex flex-col justify-between group block text-left"
     >
-      <div>
-        {/* Stage & Activity Badges (Blueprint §73) */}
-        <div className="flex items-center justify-between gap-2 mb-2.5">
+      <div className="space-y-2">
+        {/* Top Status Strip */}
+        <div className="flex items-center justify-between gap-2 border-b border-[#1a2332]/80 pb-2">
           <StatusBadge type="stage" value={project.current_stage} />
-          <StatusBadge type="activity" value={activityLevel} />
+          <div className="flex items-center gap-1.5">
+            {project.original_platform && (
+              <span className="font-mono text-[9px] text-[#64748b] uppercase tracking-wider">
+                {project.original_platform}
+              </span>
+            )}
+            <StatusBadge type="activity" value={activityLevel} />
+          </div>
         </div>
 
-        {/* Game Title */}
-        <h3 className="text-sm font-semibold text-[#edf5ff] group-hover:text-[#249cf4] transition-colors leading-snug">
-          {project.game_title || project.display_name || project.slug}
-        </h3>
+        {/* Title */}
+        <div>
+          <h3 className="text-sm font-semibold text-[#f1f5f9] group-hover:text-[#00f0ff] transition-colors leading-snug">
+            {project.game_title || project.display_name || project.slug}
+          </h3>
+          {isDistinctPortName && (
+            <p className="text-[11px] text-[#00b4d8] font-mono mt-0.5">
+              {project.display_name}
+            </p>
+          )}
+        </div>
 
-        {/* Port Differentiator if needed */}
-        {isDistinctPortName && (
-          <p className="text-[11px] text-[#9aaabd] mt-0.5 font-medium">
-            {project.display_name}
-          </p>
-        )}
-
-        {/* Summary */}
-        <p className="text-xs text-[#9aaabd] line-clamp-2 leading-relaxed mt-2">
-          {project.summary || "No description available."}
+        {/* Summary Snippet */}
+        <p className="text-xs text-[#94a3b8] line-clamp-2 leading-relaxed">
+          {project.summary || "No technical description recorded."}
         </p>
+
+        {/* Tech tags */}
+        {project.technologies && project.technologies.length > 0 && (
+          <div className="flex flex-wrap gap-1 pt-1">
+            {project.technologies.slice(0, 3).map((tech) => (
+              <span
+                key={tech}
+                className="font-mono text-[9px] text-[#94a3b8] bg-[#090d13] border border-[#1a2332] px-1.5 py-0.5 rounded-[2px]"
+              >
+                {tech}
+              </span>
+            ))}
+          </div>
+        )}
       </div>
 
-      <div className="mt-4 pt-3 border-t border-[#202a38] space-y-1.5">
-        {/* Developers & Method */}
-        <div className="flex items-center justify-between text-[11px] text-[#9aaabd]">
-          <span className="truncate max-w-[65%]">
-            {project.developers && project.developers.length > 0
-              ? project.developers.map((d) => d.display_name).join(" · ")
-              : "Independent"}
-          </span>
-          <span className="text-[#68788c] font-mono text-[10px] truncate max-w-[35%] text-right">
-            {project.technologies && project.technologies.length > 0
-              ? project.technologies[0]
-              : project.original_platform || "Native"}
-          </span>
-        </div>
-
-        {/* Relative Timestamp */}
-        <div className="text-[10px] text-[#68788c]">
-          Updated {formatRelativeTime(project.last_activity_at)}
-        </div>
+      {/* Footer Ledger Line */}
+      <div className="mt-3.5 pt-2.5 border-t border-[#1a2332] flex items-center justify-between text-[10px] font-mono text-[#64748b]">
+        <span className="truncate max-w-[60%] text-[#94a3b8]">
+          {project.developers && project.developers.length > 0
+            ? project.developers.map((d) => d.display_name).join(", ")
+            : "Independent"}
+        </span>
+        <span className="flex-shrink-0 text-right">
+          {formatRelativeTime(project.last_activity_at)}
+        </span>
       </div>
     </Link>
   );

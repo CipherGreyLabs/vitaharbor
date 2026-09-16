@@ -1,6 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { User, Code2 } from "lucide-react";
 
 export interface DeveloperCardData {
   id: number;
@@ -16,40 +15,34 @@ export const DeveloperCard: React.FC<{ developer: DeveloperCardData }> = ({ deve
   return (
     <Link
       to={`/developers/${developer.slug}`}
-      className="card-panel-hover p-5 flex flex-col justify-between group block"
+      className="terminal-card p-3.5 flex flex-col justify-between group block text-left"
     >
-      <div>
-        <div className="flex items-center gap-3 mb-3">
-          <div className="w-10 h-10 rounded-full bg-[#151b24] border border-[#202a38] flex items-center justify-center text-[#249cf4] group-hover:border-[#249cf4]/50 transition-colors">
-            <User className="w-5 h-5" />
-          </div>
-          <div>
-            <h3 className="text-sm font-semibold text-[#edf5ff] group-hover:text-[#249cf4] transition-colors">
+      <div className="space-y-1.5">
+        <div className="flex items-center justify-between border-b border-[#1a2332] pb-2">
+          <div className="flex items-center gap-1.5">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#00f0ff]" />
+            <h3 className="text-xs font-semibold text-[#f1f5f9] group-hover:text-[#00f0ff] transition-colors font-mono">
               {developer.display_name}
             </h3>
-            {developer.identities && developer.identities.length > 0 && (
-              <p className="text-[11px] text-[#68788c]">
-                u/{developer.identities[0].username}
-              </p>
-            )}
           </div>
+          {developer.identities && developer.identities.length > 0 && (
+            <span className="font-mono text-[9px] text-[#64748b]">
+              u/{developer.identities[0].username}
+            </span>
+          )}
         </div>
 
-        <p className="text-xs text-[#9aaabd] line-clamp-2 leading-relaxed mb-4">
-          {developer.description || "Active PlayStation Vita community homebrew developer."}
+        <p className="text-[11px] text-[#94a3b8] line-clamp-2 leading-relaxed">
+          {developer.description || "Active community homebrew developer for PlayStation Vita."}
         </p>
       </div>
 
-      <div className="pt-3 border-t border-[#202a38] flex items-center justify-between text-xs text-[#68788c]">
-        <div className="flex items-center gap-1">
-          <Code2 className="w-3.5 h-3.5 text-[#249cf4]" />
-          <span>{developer.projects?.length || 0} Port Projects</span>
-        </div>
-        <span className="text-[#249cf4] text-[11px] group-hover:translate-x-0.5 transition-transform">
-          View Profile →
+      <div className="mt-3 pt-2 border-t border-[#1a2332] flex items-center justify-between font-mono text-[10px] text-[#64748b]">
+        <span className="text-[#00b4d8] font-medium">
+          {developer.projects?.length || 1} Port{developer.projects?.length === 1 ? "" : "s"}
         </span>
+        <span className="group-hover:text-[#f1f5f9] transition-colors">Inspect →</span>
       </div>
     </Link>
   );
 };
-
