@@ -54,7 +54,7 @@ export const HomePage: React.FC = () => {
           </h1>
 
           <p className="text-sm sm:text-base text-[#9aaabd] leading-relaxed max-w-2xl">
-            VitaPortWatch continuously tracks porting milestones, shader translation, and playability progress with verifiable source provenance.
+            VitaHarbor continuously tracks porting milestones, shader translation, and playability progress with verifiable source provenance.
           </p>
 
           <div className="flex flex-wrap items-center gap-3 pt-2">
@@ -153,4 +153,3 @@ export const HomePage: React.FC = () => {
     </div>
   );
 };
-

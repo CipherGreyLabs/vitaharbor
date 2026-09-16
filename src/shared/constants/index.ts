@@ -1,4 +1,4 @@
-export const SITE_NAME = "VitaPortWatch";
+export const SITE_NAME = "VitaHarbor";
 
 export const DISCLAIMER = "Unofficial community project. Not affiliated with Sony Interactive Entertainment.";
 
@@ -47,4 +47,3 @@ export const POLL_INTERVAL_MINUTES = 15;
 export const DEFAULT_PAGE_SIZE = 20;
 
 export const ADMIN_ROLES = ["admin", "moderator"] as const;
-

@@ -1,6 +1,6 @@
 import fs from "node:fs";
 
-console.log("Seeding VitaPortWatch development database...");
+console.log("Seeding VitaHarbor development database...");
 
 // Helper SQL statement for local testing seeds
 const SEED_SQL = `

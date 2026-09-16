@@ -25,7 +25,7 @@ export const Navbar: React.FC = () => {
               <Cpu className="w-4 h-4 text-[#249cf4]" />
             </div>
             <span className="text-lg font-bold tracking-tight text-[#edf5ff]">
-              VitaPort<span className="text-[#249cf4]">Watch</span>
+              Vita<span className="text-[#249cf4]">Harbor</span>
             </span>
           </Link>
 
@@ -121,4 +121,3 @@ export const Navbar: React.FC = () => {
     </header>
   );
 };
-

@@ -1,13 +1,13 @@
 {
-  "name": "vitaportwatch",
+  "name": "vitaharbor",
   "main": "src/worker/index.ts",
   "compatibility_date": "2025-01-01",
   "assets": { "directory": "dist/web", "binding": "ASSETS" },
   "d1_databases": [
     {
       "binding": "DB",
-      "database_name": "vitaportwatch",
-      "database_id": "vitaportwatch-db-id",
+      "database_name": "vitaharbor",
+      "database_id": "vitaharbor-db-id",
       "migrations_dir": "migrations"
     }
   ],
@@ -18,12 +18,12 @@
   "keep_vars": true,
   "env": {
     "staging": {
-      "name": "vitaportwatch-staging",
+      "name": "vitaharbor-staging",
       "d1_databases": [
         {
           "binding": "DB",
-          "database_name": "vitaportwatch-staging",
-          "database_id": "vitaportwatch-staging-db-id",
+          "database_name": "vitaharbor-staging",
+          "database_id": "vitaharbor-staging-db-id",
           "migrations_dir": "migrations"
         }
       ]

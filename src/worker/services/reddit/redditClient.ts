@@ -101,7 +101,7 @@ export class RedditClient {
         headers: {
           Authorization: `Basic ${basicAuth}`,
           "Content-Type": "application/x-www-form-urlencoded",
-          "User-Agent": this.config.userAgent || "VitaPortWatch/1.0"
+          "User-Agent": this.config.userAgent || "VitaHarbor/1.0"
         },
         body: body.toString()
       });
@@ -132,7 +132,7 @@ export class RedditClient {
 
     const token = await this.ensureAccessToken();
     const headers: Record<string, string> = {
-      "User-Agent": this.config.userAgent || "VitaPortWatch/1.0"
+      "User-Agent": this.config.userAgent || "VitaHarbor/1.0"
     };
 
     let url: string;
@@ -212,7 +212,7 @@ export class RedditClient {
 
     const token = await this.ensureAccessToken();
     const headers: Record<string, string> = {
-      "User-Agent": this.config.userAgent || "VitaPortWatch/1.0"
+      "User-Agent": this.config.userAgent || "VitaHarbor/1.0"
     };
 
     let url: string;
@@ -292,3 +292,5 @@ export class RedditClient {
     if (reset) this.rateLimit.resetSeconds = parseFloat(reset);
   }
 }
+
+

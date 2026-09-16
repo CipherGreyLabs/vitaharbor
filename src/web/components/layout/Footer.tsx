@@ -8,7 +8,7 @@ export const Footer: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
           <div>
             <div className="flex items-center gap-2 text-[#edf5ff] font-bold text-sm mb-3">
-              <span>VitaPortWatch</span>
+              <span>VitaHarbor</span>
             </div>
             <p className="text-[#9aaabd] leading-relaxed">
               Open intelligence tracker for active PS Vita game ports. Verified provenance, direct developer attribution, and structured timeline events.
@@ -52,7 +52,7 @@ export const Footer: React.FC = () => {
         </div>
 
         <div className="pt-8 border-t border-[#202a38] flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p>© {new Date().getFullYear()} VitaPortWatch. Zero-cost-first open architecture.</p>
+          <p>© {new Date().getFullYear()} VitaHarbor. Zero-cost-first open architecture.</p>
           <div className="flex items-center gap-2">
             <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
             <span className="text-[#9aaabd]">Tracking Active Ports</span>

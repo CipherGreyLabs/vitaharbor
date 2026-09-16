@@ -3,5 +3,4 @@ Allow: /
 Disallow: /admin
 Disallow: /api/admin
 
-Sitemap: https://vitaportwatch.example/sitemap.xml
-
+Sitemap: https://vitaharbor.example/sitemap.xml

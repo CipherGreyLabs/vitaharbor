@@ -303,7 +303,7 @@ class IntegrationMockStatement {
   }
 }
 
-describe("VitaPortWatch API Integration Tests", () => {
+describe("VitaHarbor API Integration Tests", () => {
   let app: Hono<{ Bindings: Env }>;
   let env: Env;
   let mockDb: IntegrationMockD1;
@@ -397,4 +397,3 @@ describe("VitaPortWatch API Integration Tests", () => {
     expect(body.project.current_stage).toBe("playable");
   });
 });
-
