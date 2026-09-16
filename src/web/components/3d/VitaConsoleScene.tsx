@@ -857,9 +857,10 @@ export const VitaConsoleScene: React.FC<VitaConsoleSceneProps> = ({ selectedProj
       aria-label="Interactive 3D PlayStation Vita displaying the selected port record"
     >
         <div className="pointer-events-none absolute inset-0 z-10">
-          {/* Keep the copy column on a darker field than the hardware without
-              crushing the chassis: dark to ~30%, gone by ~70%. */}
-          <div className="absolute inset-0 bg-[linear-gradient(94deg,rgba(6,7,10,0.95)_0%,rgba(6,7,10,0.8)_24%,rgba(6,7,10,0.3)_46%,rgba(6,7,10,0.04)_62%,rgba(6,7,10,0)_72%)]" />
+          {/* Desktop keeps the copy column on a darker field than the hardware
+              without crushing the chassis: dark to ~30%, gone by ~70%. Below lg
+              the copy is not over the stage, so the plate stays uncovered. */}
+          <div className="absolute inset-0 hidden bg-[linear-gradient(94deg,rgba(6,7,10,0.95)_0%,rgba(6,7,10,0.8)_24%,rgba(6,7,10,0.3)_46%,rgba(6,7,10,0.04)_62%,rgba(6,7,10,0)_72%)] lg:block" />
           <div className="absolute inset-x-0 top-0 h-24 bg-[linear-gradient(180deg,rgba(6,7,10,0.85)_0%,rgba(6,7,10,0)_100%)]" />
           <div className="absolute inset-x-0 bottom-0 h-20 bg-[linear-gradient(0deg,rgba(6,7,10,0.9)_0%,rgba(6,7,10,0)_100%)]" />
           <div className="absolute right-5 bottom-5 hidden items-center gap-2 font-mono text-[9px] tracking-[0.18em] text-[#5b636c] uppercase lg:flex">

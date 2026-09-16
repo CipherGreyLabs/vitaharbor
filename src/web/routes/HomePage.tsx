@@ -171,17 +171,19 @@ export const HomePage: React.FC = () => {
   return (
     <div className="-mx-0 pb-2">
       {/* Hero stage: the console is the page */}
-      <section className="relative isolate h-[560px] w-full overflow-hidden border-b border-[#1b1f24] sm:h-[600px] lg:h-[min(70vh,660px)]">
-        <div className="absolute inset-0">
+      <section className="relative isolate flex w-full flex-col overflow-hidden border-b border-[#1b1f24] lg:block lg:h-[min(70vh,660px)]">
+        {/* Console plate. From lg up it fills the stage behind the copy; on small
+            screens it stacks below the headline instead of burying it. */}
+        <div className="relative order-2 aspect-[1.35] w-full overflow-hidden lg:absolute lg:inset-0 lg:order-none lg:aspect-auto lg:h-full">
           <VitaConsoleScene selectedProject={selectedProject} />
+
+          {/* The scene carries its own scrims; these hairlines only mark the plate
+              edges so the stage reads as a framed plane rather than a bleed. */}
+          <div className="pointer-events-none absolute inset-x-0 top-0 z-10 h-2 bg-[repeating-linear-gradient(90deg,rgba(255,255,255,0.22)_0px,rgba(255,255,255,0.22)_1px,transparent_1px,transparent_28px)] opacity-25" />
+          <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 h-2 bg-[repeating-linear-gradient(90deg,rgba(255,255,255,0.22)_0px,rgba(255,255,255,0.22)_1px,transparent_1px,transparent_28px)] opacity-25" />
         </div>
 
-        {/* The scene carries its own scrims; these hairlines only mark the stage
-            edges so the hero reads as a framed plate rather than a bleed. */}
-        <div className="pointer-events-none absolute inset-x-0 top-0 z-10 h-2 bg-[repeating-linear-gradient(90deg,rgba(255,255,255,0.22)_0px,rgba(255,255,255,0.22)_1px,transparent_1px,transparent_28px)] opacity-25" />
-        <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 h-2 bg-[repeating-linear-gradient(90deg,rgba(255,255,255,0.22)_0px,rgba(255,255,255,0.22)_1px,transparent_1px,transparent_28px)] opacity-25" />
-
-        <div className="pointer-events-none absolute inset-0 z-20 mx-auto flex h-full max-w-7xl flex-col px-5 pt-9 pb-8 sm:px-6 lg:px-8">
+        <div className="pointer-events-none relative z-20 order-1 mx-auto flex w-full max-w-7xl flex-col px-5 pt-8 pb-9 sm:px-6 lg:absolute lg:inset-0 lg:order-none lg:h-full lg:px-8 lg:pt-9 lg:pb-8">
           <div className="flex items-start justify-between gap-6 font-mono text-[10px] tracking-[0.18em] uppercase">
             <span className="flex items-center gap-2 text-[#dfe5ea]">
               <span className="relative flex h-1.5 w-1.5">
@@ -198,7 +200,7 @@ export const HomePage: React.FC = () => {
             </span>
           </div>
 
-          <div className="mt-auto w-full max-w-[500px] lg:max-w-[43%]">
+          <div className="mt-8 w-full max-w-[500px] lg:mt-auto lg:max-w-[43%]">
             <p className="font-mono text-[10px] tracking-[0.24em] text-[#5b636c] uppercase">
               One hub for every port
             </p>
@@ -228,7 +230,7 @@ export const HomePage: React.FC = () => {
               </Link>
             </div>
 
-            <div className="mt-9 grid max-w-[520px] grid-cols-2 gap-x-8 gap-y-5 border-t border-[#242830] pt-6 sm:grid-cols-4 sm:gap-x-4">
+            <div className="mt-9 grid max-w-[520px] grid-cols-2 gap-x-6 gap-y-5 border-t border-[#242830] pt-6 sm:grid-cols-4 sm:gap-x-4">
               <HeroStat label="Ports tracked" value={stats?.total_projects ?? 24} />
               <HeroStat label="Playable +" value={stats?.playable_or_better ?? 21} accent />
               <HeroStat label="Released" value={stats?.released_projects ?? 15} />
@@ -246,14 +248,18 @@ export const HomePage: React.FC = () => {
             Newest
           </span>
           <div className="flex min-w-0 flex-1 items-center gap-5 overflow-hidden">
-            {recentUpdates.slice(0, 3).map((u) => (
+            {/* The newest signal carries the row on narrow screens; the rest only
+                appear once there is room for them. */}
+            {recentUpdates.slice(0, 3).map((u, index) => (
               <Link
                 key={u.id}
                 to={u.project_slug ? `/projects/${u.project_slug}` : "/updates"}
-                className="flex min-w-0 items-center gap-2 text-[#a3acb5] transition-colors hover:text-[#f4f6f8]"
+                className={`min-w-0 items-center gap-2 text-[#a3acb5] transition-colors hover:text-[#f4f6f8] ${
+                  index === 0 ? "flex flex-1 sm:flex-initial" : "hidden sm:flex"
+                }`}
               >
                 <span className="h-1 w-1 flex-shrink-0 rounded-full bg-[#343a42]" />
-                <span className="hidden truncate sm:inline">{u.title}</span>
+                <span className="truncate">{u.title}</span>
               </Link>
             ))}
             {recentUpdates.length === 0 && (

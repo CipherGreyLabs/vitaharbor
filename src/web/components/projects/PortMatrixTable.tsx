@@ -92,7 +92,9 @@ export const PortMatrixTable: React.FC<PortMatrixTableProps> = ({
 
                 {/* Last Signal / Expand Action */}
                 <div className="col-span-3 sm:col-span-2 flex items-center justify-end gap-2 font-mono text-[10px] text-[#7c848d]">
-                  <span>{formatRelativeTime(p.last_activity_at)}</span>
+                  <span className="whitespace-nowrap text-[9px] sm:text-[10px]">
+                    {formatRelativeTime(p.last_activity_at)}
+                  </span>
                   <button
                     onClick={(e) => toggleExpand(p.id, e)}
                     className="p-1 hover:text-[#3ad2ff] text-[#a3acb5] transition-colors"
