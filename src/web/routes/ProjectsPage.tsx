@@ -3,6 +3,7 @@ import { useSearchParams } from "react-router-dom";
 import { ProjectCard, type ProjectCardData } from "../components/projects/ProjectCard";
 import { deriveActivityLevel } from "@/shared/utils";
 import { apiGet } from "../lib/api";
+import { useDocumentMeta } from "../lib/useDocumentMeta";
 import { Search } from "lucide-react";
 
 const STAGE_FILTERS = [
@@ -44,6 +45,12 @@ export const ProjectsPage: React.FC = () => {
   const lifecycleParam = searchParams.get("lifecycle") || "";
   const activityParam = searchParams.get("activity") || "";
   const sortParam = searchParams.get("sort") || "recent";
+
+  useDocumentMeta({
+    title: "Port ledger",
+    description:
+      "Filter every tracked PlayStation Vita port by stage, lifecycle and activity, then open the full project record."
+  });
 
   const [projects, setProjects] = useState<ProjectCardData[]>([]);
   const [loading, setLoading] = useState(true);

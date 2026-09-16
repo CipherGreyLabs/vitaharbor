@@ -1,8 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { DeveloperCard, type DeveloperCardData } from "../components/developers/DeveloperCard";
 import { apiGet } from "../lib/api";
+import { useDocumentMeta } from "../lib/useDocumentMeta";
 
 export const DevelopersPage: React.FC = () => {
+  useDocumentMeta({
+    title: "Reverse engineers",
+    description:
+      "The developers, porters and reverse engineers behind every PlayStation Vita port in the ledger."
+  });
+
   const [developers, setDevelopers] = useState<DeveloperCardData[]>([]);
   const [loading, setLoading] = useState(true);
 

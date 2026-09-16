@@ -1,6 +1,13 @@
 import React from "react";
+import { useDocumentMeta } from "../lib/useDocumentMeta";
 
 export const AboutPage: React.FC = () => {
+  useDocumentMeta({
+    title: "About",
+    description:
+      "How VitaHarbor verifies PlayStation Vita port milestones, what counts as evidence, and the zero-ROM policy behind the ledger."
+  });
+
   return (
     <div className="max-w-3xl mx-auto space-y-8 py-2">
       <div className="border-b border-[#242830] pb-3 space-y-1">

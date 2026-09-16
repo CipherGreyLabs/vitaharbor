@@ -17,6 +17,8 @@
     "test:unit": "vitest run tests/unit",
     "test:integration": "vitest run tests/integration",
     "test:e2e": "playwright test",
+    "assets:og": "node scripts/make-og.mjs",
+    "assets:sitemap": "node scripts/make-sitemap.mjs",
     "db:migrate:local": "wrangler d1 migrations apply DB --local",
     "db:migrate:remote": "wrangler d1 migrations apply DB --remote",
     "seed:dev": "tsx scripts/seed-dev.ts",

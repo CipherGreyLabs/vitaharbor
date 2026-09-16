@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useMemo } from "react";
 import { UpdateCard, type UpdateCardData } from "../components/updates/UpdateCard";
 import { apiGet } from "../lib/api";
+import { useDocumentMeta } from "../lib/useDocumentMeta";
 
 const EVENT_TYPE_FILTERS = [
   { value: "", label: "TYPE: ALL" },
@@ -20,6 +21,12 @@ const VERIFICATION_FILTERS = [
 ];
 
 export const UpdatesPage: React.FC = () => {
+  useDocumentMeta({
+    title: "Signal stream",
+    description:
+      "Every milestone observation from r/vitahacks and r/VitaPiracy, filtered by event type and verification status."
+  });
+
   const [updates, setUpdates] = useState<UpdateCardData[]>([]);
   const [eventTypeFilter, setEventTypeFilter] = useState("");
   const [verificationFilter, setVerificationFilter] = useState("");

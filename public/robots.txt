@@ -3,4 +3,4 @@ Allow: /
 Disallow: /admin
 Disallow: /api/admin
 
-Sitemap: https://vitaharbor.example/sitemap.xml
+Sitemap: https://vitaharbor.vercel.app/sitemap.xml

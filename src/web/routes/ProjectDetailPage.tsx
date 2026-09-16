@@ -5,6 +5,7 @@ import { StageHistoryVisualizer, type StageHistoryRecord } from "../components/p
 import { UpdateCard, type UpdateCardData } from "../components/updates/UpdateCard";
 import { formatRelativeTime, formatDate, deriveActivityLevel } from "@/shared/utils";
 import { apiGet } from "../lib/api";
+import { useDocumentMeta } from "../lib/useDocumentMeta";
 import type { DevelopmentStage, ProjectLifecycle } from "@/shared/types";
 import { ChevronLeft } from "lucide-react";
 
@@ -57,6 +58,15 @@ export const ProjectDetailPage: React.FC = () => {
     }
     loadProject();
   }, [slug]);
+
+  useDocumentMeta({
+    title: project
+      ? `${project.game_title} Vita port`
+      : "Project record",
+    description: project
+      ? `${project.game_title} on PlayStation Vita — stage, playability, performance and verified source history.`
+      : "Verified PlayStation Vita port record."
+  });
 
   if (loading) {
     return (

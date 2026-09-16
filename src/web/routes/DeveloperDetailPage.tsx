@@ -2,6 +2,7 @@ import React, { useState, useEffect, useMemo } from "react";
 import { useParams, Link } from "react-router-dom";
 import { StatusBadge } from "../components/ui/StatusBadge";
 import { apiGet } from "../lib/api";
+import { useDocumentMeta } from "../lib/useDocumentMeta";
 import { User, ChevronLeft, ExternalLink } from "lucide-react";
 
 interface DeveloperDetailData {
@@ -51,6 +52,15 @@ export const DeveloperDetailPage: React.FC = () => {
       archived: list.filter((p) => p.lifecycle === "stalled" || p.lifecycle === "archived" || p.lifecycle === "abandoned")
     };
   }, [developer]);
+
+  useDocumentMeta({
+    title: developer
+      ? `${developer.display_name}`
+      : "Engineer profile",
+    description: developer
+      ? `${developer.display_name} — PlayStation Vita ports and reverse-engineering work tracked in the ledger.`
+      : "PlayStation Vita port developer profile."
+  });
 
   if (loading) {
     return (

@@ -6,6 +6,7 @@ import { ProjectCard, type ProjectCardData } from "../components/projects/Projec
 import { UpdateCard, type UpdateCardData } from "../components/updates/UpdateCard";
 import { DeveloperCard, type DeveloperCardData } from "../components/developers/DeveloperCard";
 import { apiGet } from "../lib/api";
+import { useDocumentMeta } from "../lib/useDocumentMeta";
 import {
   Search,
   ArrowRight,
@@ -54,6 +55,12 @@ const HeroStat: React.FC<{ label: string; value: number | string; accent?: boole
 );
 
 export const HomePage: React.FC = () => {
+  useDocumentMeta({
+    title: "PS Vita Port Development Tracker",
+    description:
+      "Every PlayStation Vita port project in one verified ledger: current stage, hardware notes, engineering team and source links."
+  });
+
   const [stats, setStats] = useState<StatsData | null>(null);
   const [projects, setProjects] = useState<ProjectCardData[]>([]);
   const [recentUpdates, setRecentUpdates] = useState<UpdateCardData[]>([]);
