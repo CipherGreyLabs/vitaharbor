@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { ProjectCard, type ProjectCardData } from "../components/projects/ProjectCard";
 import { UpdateCard, type UpdateCardData } from "../components/updates/UpdateCard";
-import { Gamepad2, Activity, ArrowRight } from "lucide-react";
+import { DeveloperCard, type DeveloperCardData } from "../components/developers/DeveloperCard";
+import { Search, ArrowRight, Clock } from "lucide-react";
 
 interface StatsData {
   total_projects: number;
@@ -15,22 +16,64 @@ interface StatsData {
 
 export const HomePage: React.FC = () => {
   const [stats, setStats] = useState<StatsData | null>(null);
-  const [featuredProjects, setFeaturedProjects] = useState<ProjectCardData[]>([]);
+  const [activeProjects, setActiveProjects] = useState<ProjectCardData[]>([]);
+  const [releasedProjects, setReleasedProjects] = useState<ProjectCardData[]>([]);
   const [recentUpdates, setRecentUpdates] = useState<UpdateCardData[]>([]);
+  const [activeDevs, setActiveDevs] = useState<DeveloperCardData[]>([]);
+  const [newSinceLastVisit, setNewSinceLastVisit] = useState<number | null>(null);
+  const [searchTerm, setSearchTerm] = useState("");
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
 
   useEffect(() => {
+    // Check "Since your last visit" (Blueprint §82)
+    try {
+      const lastVisit = localStorage.getItem("vitaharbor_last_visit");
+      const currentTimestamp = Date.now();
+      localStorage.setItem("vitaharbor_last_visit", String(currentTimestamp));
+
+      if (lastVisit) {
+        const lastVisitDate = new Date(Number(lastVisit));
+        // Count updates newer than lastVisit
+        fetch("/api/updates?limit=50")
+          .then((r) => r.json() as Promise<{ updates: UpdateCardData[] }>)
+          .then((data) => {
+            if (data.updates) {
+              const count = data.updates.filter(
+                (u) => new Date(u.event_at).getTime() > lastVisitDate.getTime()
+              ).length;
+              if (count > 0) setNewSinceLastVisit(count);
+            }
+          })
+          .catch(() => {});
+      }
+    } catch {
+      // Graceful fallback if localStorage is unavailable
+    }
+
     async function loadHomeData() {
       try {
-        const [statsRes, projectsRes, updatesRes] = await Promise.all([
+        const [statsRes, activeProjectsRes, releasedProjectsRes, updatesRes, devsRes] = await Promise.all([
           fetch("/api/stats").then((r) => (r.ok ? (r.json() as Promise<StatsData>) : null)),
-          fetch("/api/projects?limit=6").then((r) => (r.ok ? (r.json() as Promise<{ projects: ProjectCardData[] }>) : { projects: [] })),
-          fetch("/api/updates?limit=4").then((r) => (r.ok ? (r.json() as Promise<{ updates: UpdateCardData[] }>) : { updates: [] }))
+          fetch("/api/projects?lifecycle=active&limit=6").then((r) =>
+            r.ok ? (r.json() as Promise<{ projects: ProjectCardData[] }>) : { projects: [] }
+          ),
+          fetch("/api/projects?stage=released&limit=3").then((r) =>
+            r.ok ? (r.json() as Promise<{ projects: ProjectCardData[] }>) : { projects: [] }
+          ),
+          fetch("/api/updates?limit=3").then((r) =>
+            r.ok ? (r.json() as Promise<{ updates: UpdateCardData[] }>) : { updates: [] }
+          ),
+          fetch("/api/developers?limit=4").then((r) =>
+            r.ok ? (r.json() as Promise<{ developers: DeveloperCardData[] }>) : { developers: [] }
+          )
         ]);
 
         if (statsRes) setStats(statsRes);
-        if (projectsRes && "projects" in projectsRes) setFeaturedProjects(projectsRes.projects);
-        if (updatesRes && "updates" in updatesRes) setRecentUpdates(updatesRes.updates);
+        if (activeProjectsRes?.projects) setActiveProjects(activeProjectsRes.projects);
+        if (releasedProjectsRes?.projects) setReleasedProjects(releasedProjectsRes.projects);
+        if (updatesRes?.updates) setRecentUpdates(updatesRes.updates);
+        if (devsRes?.developers) setActiveDevs(devsRes.developers);
       } catch (e) {
         console.error("Failed to load home data", e);
       } finally {
@@ -40,116 +83,184 @@ export const HomePage: React.FC = () => {
     loadHomeData();
   }, []);
 
+  const handleSearchSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (searchTerm.trim()) {
+      navigate(`/projects?search=${encodeURIComponent(searchTerm.trim())}`);
+    }
+  };
+
   return (
-    <div className="space-y-12">
-      <section className="relative overflow-hidden rounded-2xl bg-gradient-to-b from-[#151b24] to-[#0f141b] border border-[#202a38] p-8 sm:p-12">
-        <div className="max-w-3xl space-y-4">
-          <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-full bg-[#249cf4]/10 border border-[#249cf4]/30 text-xs font-medium text-[#249cf4]">
-            <Activity className="w-3.5 h-3.5 animate-pulse" />
-            <span>Active PS Vita Port Development Intelligence</span>
-          </div>
-
-          <h1 className="text-3xl sm:text-4xl font-bold tracking-tight text-[#edf5ff] leading-tight">
-            Track PlayStation Vita ports from first boot to final release.
+    <div className="max-w-5xl mx-auto space-y-12">
+      {/* Blueprint §70 Header: Data first, branding second */}
+      <section className="space-y-4 pt-2">
+        <div>
+          <h1 className="text-xl font-bold tracking-wider uppercase text-[#edf5ff]">
+            Vita<span className="text-[#249cf4]">Harbor</span>
           </h1>
-
-          <p className="text-sm sm:text-base text-[#9aaabd] leading-relaxed max-w-2xl">
-            VitaHarbor continuously tracks porting milestones, shader translation, and playability progress with verifiable source provenance.
+          <p className="text-sm text-[#9aaabd] mt-0.5">
+            Track PS Vita game-port development with verified provenance.
           </p>
-
-          <div className="flex flex-wrap items-center gap-3 pt-2">
-            <Link to="/projects" className="btn-accent text-sm">
-              <Gamepad2 className="w-4 h-4" />
-              <span>Explore Active Ports</span>
-            </Link>
-            <Link to="/updates" className="btn-secondary text-sm">
-              <span>View Latest Events</span>
-              <ArrowRight className="w-4 h-4" />
-            </Link>
-          </div>
         </div>
 
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-8 pt-8 border-t border-[#202a38]">
-          <div className="card-panel p-4 bg-[#090c11]/80">
-            <p className="text-xs text-[#68788c]">Total Projects</p>
-            <p className="text-2xl font-bold text-[#edf5ff] mt-1">{stats?.total_projects ?? "—"}</p>
-          </div>
-          <div className="card-panel p-4 bg-[#090c11]/80">
-            <p className="text-xs text-[#68788c]">Active In Dev</p>
-            <p className="text-2xl font-bold text-emerald-400 mt-1">{stats?.active_projects ?? "—"}</p>
-          </div>
-          <div className="card-panel p-4 bg-[#090c11]/80">
-            <p className="text-xs text-[#68788c]">Playable / Released</p>
-            <p className="text-2xl font-bold text-[#249cf4] mt-1">{stats?.playable_or_better ?? "—"}</p>
-          </div>
-          <div className="card-panel p-4 bg-[#090c11]/80">
-            <p className="text-xs text-[#68788c]">Tracked Devs</p>
-            <p className="text-2xl font-bold text-[#edf5ff] mt-1">{stats?.total_developers ?? "—"}</p>
-          </div>
+        {/* Global Search Bar */}
+        <form onSubmit={handleSearchSubmit} className="relative max-w-xl">
+          <input
+            type="text"
+            placeholder="Search ports, original games, or developers..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            className="w-full bg-[#0f141b] border border-[#202a38] rounded-lg pl-10 pr-4 py-2 text-xs text-[#edf5ff] placeholder-[#68788c] focus:outline-none focus:border-[#249cf4] focus:ring-1 focus:ring-[#249cf4] transition-all"
+          />
+          <Search className="w-4 h-4 text-[#68788c] absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
+        </form>
+
+        {/* Blueprint §71 Subtle Metrics Line */}
+        <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-xs text-[#68788c]">
+          <span>{stats?.active_projects ?? "—"} active projects</span>
+          <span>·</span>
+          <span>{stats?.playable_or_better ?? "—"} playable or better</span>
+          <span>·</span>
+          <span>{stats?.total_developers ?? "—"} developers tracked</span>
+
+          {newSinceLastVisit !== null && newSinceLastVisit > 0 && (
+            <>
+              <span>·</span>
+              <span className="inline-flex items-center gap-1 text-[#249cf4] font-medium">
+                <Clock className="w-3 h-3" />
+                <span>{newSinceLastVisit} new update{newSinceLastVisit > 1 ? "s" : ""} since your last visit</span>
+              </span>
+            </>
+          )}
         </div>
       </section>
 
-      <section className="space-y-4">
-        <div className="flex items-center justify-between">
-          <div>
-            <h2 className="text-lg font-bold text-[#edf5ff]">Recently Active Projects</h2>
-            <p className="text-xs text-[#68788c]">Ports with latest verified milestone progression</p>
-          </div>
-          <Link to="/projects" className="text-xs font-medium text-[#249cf4] hover:text-[#4fb5ff] flex items-center gap-1">
-            <span>All projects</span>
-            <ArrowRight className="w-3.5 h-3.5" />
+      {/* Blueprint §70: Latest development */}
+      <section className="space-y-3">
+        <div className="flex items-baseline justify-between border-b border-[#202a38] pb-2">
+          <h2 className="text-xs font-bold uppercase tracking-wider text-[#edf5ff]">
+            Latest development
+          </h2>
+          <Link
+            to="/updates"
+            className="text-[11px] font-medium text-[#249cf4] hover:text-[#4fb5ff] inline-flex items-center gap-1"
+          >
+            <span>All updates</span>
+            <ArrowRight className="w-3 h-3" />
           </Link>
         </div>
 
         {loading ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {[1, 2, 3].map((i) => (
-              <div key={i} className="card-panel p-5 h-44 animate-pulse bg-[#0f141b]" />
-            ))}
-          </div>
-        ) : featuredProjects.length > 0 ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {featuredProjects.map((p) => (
-              <ProjectCard key={p.id} project={p} />
-            ))}
-          </div>
-        ) : (
-          <div className="card-panel p-8 text-center text-xs text-[#68788c]">
-            No projects ingested yet. Apply seed data or run discovery backfill.
-          </div>
-        )}
-      </section>
-
-      <section className="space-y-4">
-        <div className="flex items-center justify-between">
-          <div>
-            <h2 className="text-lg font-bold text-[#edf5ff]">Recent Verified Updates</h2>
-            <p className="text-xs text-[#68788c]">Chronological development statements and milestone evidence</p>
-          </div>
-          <Link to="/updates" className="text-xs font-medium text-[#249cf4] hover:text-[#4fb5ff] flex items-center gap-1">
-            <span>Full feed</span>
-            <ArrowRight className="w-3.5 h-3.5" />
-          </Link>
-        </div>
-
-        {loading ? (
-          <div className="space-y-3">
+          <div className="space-y-2.5">
             {[1, 2].map((i) => (
-              <div key={i} className="card-panel p-5 h-28 animate-pulse bg-[#0f141b]" />
+              <div key={i} className="card-panel p-4 h-24 animate-pulse bg-[#0f141b]" />
             ))}
           </div>
         ) : recentUpdates.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="space-y-3">
             {recentUpdates.map((u) => (
               <UpdateCard key={u.id} update={u} />
             ))}
           </div>
         ) : (
-          <div className="card-panel p-8 text-center text-xs text-[#68788c]">
-            No development updates recorded yet.
+          <div className="card-panel p-6 text-center text-xs text-[#68788c]">
+            No development updates logged yet.
           </div>
         )}
       </section>
+
+      {/* Blueprint §70: Active development */}
+      <section className="space-y-3">
+        <div className="flex items-baseline justify-between border-b border-[#202a38] pb-2">
+          <h2 className="text-xs font-bold uppercase tracking-wider text-[#edf5ff]">
+            Active development
+          </h2>
+          <Link
+            to="/projects"
+            className="text-[11px] font-medium text-[#249cf4] hover:text-[#4fb5ff] inline-flex items-center gap-1"
+          >
+            <span>All projects</span>
+            <ArrowRight className="w-3 h-3" />
+          </Link>
+        </div>
+
+        {loading ? (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+            {[1, 2, 3].map((i) => (
+              <div key={i} className="card-panel p-4 h-36 animate-pulse bg-[#0f141b]" />
+            ))}
+          </div>
+        ) : activeProjects.length > 0 ? (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+            {activeProjects.map((p) => (
+              <ProjectCard key={p.id} project={p} />
+            ))}
+          </div>
+        ) : (
+          <div className="card-panel p-6 text-center text-xs text-[#68788c]">
+            No active projects found.
+          </div>
+        )}
+      </section>
+
+      {/* Blueprint §70: Recently active developers */}
+      <section className="space-y-3">
+        <div className="flex items-baseline justify-between border-b border-[#202a38] pb-2">
+          <h2 className="text-xs font-bold uppercase tracking-wider text-[#edf5ff]">
+            Recently active developers
+          </h2>
+          <Link
+            to="/developers"
+            className="text-[11px] font-medium text-[#249cf4] hover:text-[#4fb5ff] inline-flex items-center gap-1"
+          >
+            <span>All developers</span>
+            <ArrowRight className="w-3 h-3" />
+          </Link>
+        </div>
+
+        {loading ? (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+            {[1, 2, 3, 4].map((i) => (
+              <div key={i} className="card-panel p-4 h-28 animate-pulse bg-[#0f141b]" />
+            ))}
+          </div>
+        ) : activeDevs.length > 0 ? (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+            {activeDevs.map((d) => (
+              <DeveloperCard key={d.id} developer={d} />
+            ))}
+          </div>
+        ) : (
+          <div className="card-panel p-6 text-center text-xs text-[#68788c]">
+            No developers listed yet.
+          </div>
+        )}
+      </section>
+
+      {/* Blueprint §70: Recently released */}
+      {releasedProjects.length > 0 && (
+        <section className="space-y-3">
+          <div className="flex items-baseline justify-between border-b border-[#202a38] pb-2">
+            <h2 className="text-xs font-bold uppercase tracking-wider text-[#edf5ff]">
+              Recently released
+            </h2>
+            <Link
+              to="/projects?stage=released"
+              className="text-[11px] font-medium text-[#249cf4] hover:text-[#4fb5ff] inline-flex items-center gap-1"
+            >
+              <span>View all released</span>
+              <ArrowRight className="w-3 h-3" />
+            </Link>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            {releasedProjects.map((p) => (
+              <ProjectCard key={p.id} project={p} />
+            ))}
+          </div>
+        </section>
+      )}
     </div>
   );
 };
+

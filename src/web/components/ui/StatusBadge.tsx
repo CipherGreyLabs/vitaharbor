@@ -1,8 +1,8 @@
 import React from "react";
-import type { DevelopmentStage, ProjectLifecycle, VerificationLevel } from "../../../shared/types";
+import type { DevelopmentStage, ProjectLifecycle, VerificationLevel, ActivityLevel } from "../../../shared/types";
 
 interface StatusBadgeProps {
-  type: "stage" | "lifecycle" | "verification";
+  type: "stage" | "lifecycle" | "verification" | "activity";
   value: string;
   className?: string;
 }
@@ -34,6 +34,14 @@ const VERIFICATION_CONFIG: Record<VerificationLevel, { label: string; bg: string
   unverified: { label: "Unverified", bg: "bg-gray-900/50", text: "text-gray-400", border: "border-gray-800" }
 };
 
+const ACTIVITY_CONFIG: Record<ActivityLevel, { label: string; bg: string; text: string; border: string }> = {
+  hot: { label: "Hot", bg: "bg-cyan-950/40", text: "text-cyan-300", border: "border-cyan-800/40" },
+  active: { label: "Active", bg: "bg-emerald-950/30", text: "text-emerald-400", border: "border-emerald-800/30" },
+  quiet: { label: "Quiet", bg: "bg-slate-900/50", text: "text-slate-400", border: "border-slate-800/40" },
+  dormant: { label: "Dormant", bg: "bg-zinc-900/50", text: "text-zinc-400", border: "border-zinc-800/40" },
+  stale: { label: "Stale", bg: "bg-gray-950/50", text: "text-gray-500", border: "border-gray-800/30" }
+};
+
 export const StatusBadge: React.FC<StatusBadgeProps> = ({ type, value, className = "" }) => {
   let config: { label: string; bg: string; text: string; border: string };
 
@@ -41,13 +49,15 @@ export const StatusBadge: React.FC<StatusBadgeProps> = ({ type, value, className
     config = STAGE_CONFIG[value as DevelopmentStage] || STAGE_CONFIG.unknown;
   } else if (type === "lifecycle") {
     config = LIFECYCLE_CONFIG[value as ProjectLifecycle] || LIFECYCLE_CONFIG.unknown;
+  } else if (type === "activity") {
+    config = ACTIVITY_CONFIG[value as ActivityLevel] || ACTIVITY_CONFIG.quiet;
   } else {
     config = VERIFICATION_CONFIG[value as VerificationLevel] || VERIFICATION_CONFIG.unverified;
   }
 
   return (
     <span
-      className={`inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium border ${config.bg} ${config.text} ${config.border} ${className}`}
+      className={`inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-medium border uppercase tracking-wider ${config.bg} ${config.text} ${config.border} ${className}`}
     >
       {config.label}
     </span>

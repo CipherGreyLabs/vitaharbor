@@ -8,6 +8,7 @@ import { ProjectDetailPage } from "./routes/ProjectDetailPage";
 import { DevelopersPage } from "./routes/DevelopersPage";
 import { DeveloperDetailPage } from "./routes/DeveloperDetailPage";
 import { UpdatesPage } from "./routes/UpdatesPage";
+import { AboutPage } from "./routes/AboutPage";
 import { AdminPage } from "./routes/AdminPage";
 import { NotFoundPage } from "./routes/NotFoundPage";
 
@@ -23,6 +24,7 @@ export default function App() {
           <Route path="/developers" element={<DevelopersPage />} />
           <Route path="/developers/:slug" element={<DeveloperDetailPage />} />
           <Route path="/updates" element={<UpdatesPage />} />
+          <Route path="/about" element={<AboutPage />} />
           <Route path="/admin" element={<AdminPage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
@@ -31,4 +33,3 @@ export default function App() {
     </div>
   );
 }
-

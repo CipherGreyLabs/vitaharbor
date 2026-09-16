@@ -1,9 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { StatusBadge } from "../ui/StatusBadge";
-import { formatRelativeTime } from "@/shared/utils";
+import { formatRelativeTime, deriveActivityLevel } from "@/shared/utils";
 import type { DevelopmentStage, ProjectLifecycle } from "@/shared/types";
-import { Clock, User } from "lucide-react";
 
 export interface ProjectCardData {
   id: number;
@@ -20,63 +19,58 @@ export interface ProjectCardData {
 }
 
 export const ProjectCard: React.FC<{ project: ProjectCardData }> = ({ project }) => {
+  const dateObj = typeof project.last_activity_at === "string" ? new Date(project.last_activity_at) : project.last_activity_at;
+  const activityLevel = deriveActivityLevel(dateObj);
+  const isDistinctPortName = project.display_name && project.game_title && project.display_name !== project.game_title;
+
   return (
     <Link
       to={`/projects/${project.slug}`}
-      className="card-panel-hover p-5 flex flex-col justify-between group block"
+      className="card-panel-hover p-4 flex flex-col justify-between group block"
     >
       <div>
-        <div className="flex items-start justify-between gap-3 mb-2">
-          <h3 className="text-base font-semibold text-[#edf5ff] group-hover:text-[#249cf4] transition-colors line-clamp-1">
-            {project.display_name || project.game_title || project.slug}
-          </h3>
-          <div className="flex items-center gap-1.5 flex-shrink-0">
-            <StatusBadge type="stage" value={project.current_stage} />
-          </div>
+        {/* Stage & Activity Badges (Blueprint §73) */}
+        <div className="flex items-center justify-between gap-2 mb-2.5">
+          <StatusBadge type="stage" value={project.current_stage} />
+          <StatusBadge type="activity" value={activityLevel} />
         </div>
 
-        {project.game_title && project.game_title !== project.display_name && (
-          <p className="text-xs text-[#9aaabd] mb-2 line-clamp-1">
-            Original game: <span className="text-[#edf5ff]">{project.game_title}</span>
-            {project.original_platform ? ` (${project.original_platform})` : ""}
+        {/* Game Title */}
+        <h3 className="text-sm font-semibold text-[#edf5ff] group-hover:text-[#249cf4] transition-colors leading-snug">
+          {project.game_title || project.display_name || project.slug}
+        </h3>
+
+        {/* Port Differentiator if needed */}
+        {isDistinctPortName && (
+          <p className="text-[11px] text-[#9aaabd] mt-0.5 font-medium">
+            {project.display_name}
           </p>
         )}
 
-        <p className="text-xs text-[#9aaabd] line-clamp-2 leading-relaxed mb-4">
-          {project.summary || "No description provided."}
+        {/* Summary */}
+        <p className="text-xs text-[#9aaabd] line-clamp-2 leading-relaxed mt-2">
+          {project.summary || "No description available."}
         </p>
-
-        {project.technologies && project.technologies.length > 0 && (
-          <div className="flex flex-wrap gap-1.5 mb-4">
-            {project.technologies.slice(0, 3).map((tech) => (
-              <span
-                key={tech}
-                className="px-2 py-0.5 rounded bg-[#151b24] border border-[#202a38] text-[10px] text-[#9aaabd]"
-              >
-                {tech}
-              </span>
-            ))}
-            {project.technologies.length > 3 && (
-              <span className="px-1.5 py-0.5 text-[10px] text-[#68788c]">
-                +{project.technologies.length - 3}
-              </span>
-            )}
-          </div>
-        )}
       </div>
 
-      <div className="pt-3 border-t border-[#202a38] flex items-center justify-between text-[11px] text-[#68788c]">
-        <div className="flex items-center gap-1">
-          <User className="w-3 h-3 text-[#68788c]" />
-          <span>
+      <div className="mt-4 pt-3 border-t border-[#202a38] space-y-1.5">
+        {/* Developers & Method */}
+        <div className="flex items-center justify-between text-[11px] text-[#9aaabd]">
+          <span className="truncate max-w-[65%]">
             {project.developers && project.developers.length > 0
-              ? project.developers.map((d) => d.display_name).join(", ")
+              ? project.developers.map((d) => d.display_name).join(" · ")
               : "Independent"}
           </span>
+          <span className="text-[#68788c] font-mono text-[10px] truncate max-w-[35%] text-right">
+            {project.technologies && project.technologies.length > 0
+              ? project.technologies[0]
+              : project.original_platform || "Native"}
+          </span>
         </div>
-        <div className="flex items-center gap-1">
-          <Clock className="w-3 h-3 text-[#68788c]" />
-          <span>{formatRelativeTime(project.last_activity_at)}</span>
+
+        {/* Relative Timestamp */}
+        <div className="text-[10px] text-[#68788c]">
+          Updated {formatRelativeTime(project.last_activity_at)}
         </div>
       </div>
     </Link>
