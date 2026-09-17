@@ -1,0 +1,41 @@
+name: Autonomous VitaHarbor Reddit Scanner
+
+on:
+  schedule:
+    # Runs twice daily at 08:00 and 20:00 UTC
+    - cron: '0 8,20 * * *'
+  workflow_dispatch:
+
+jobs:
+  scan-reddit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run Reddit RSS & Ingestion Scanner
+        run: node scripts/cron-reddit-scan.mjs
+
+      - name: Regenerate Open API feeds
+        run: npx tsx scripts/make-feeds.ts
+
+      - name: Commit and push changes if updated
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          git add src/shared/constants/fallbackData.ts public/api/
+          if git diff --staged --quiet; then
+            echo "No new ports discovered this run."
+          else
+            git commit -m "Auto-ingest latest PS Vita port developments from Reddit"
+            git push
+          fi
