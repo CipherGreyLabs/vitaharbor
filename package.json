@@ -7,7 +7,7 @@
   "scripts": {
     "dev": "vite",
     "dev:worker": "wrangler dev",
-    "build": "vite build",
+    "build": "vite build && tsx scripts/prerender.mjs",
     "preview": "vite preview",
     "preview:worker": "wrangler dev --local --ip 127.0.0.1 --port 8787",
     "tunnel": "localtunnel --port 8787 --subdomain vitaharbor",
@@ -28,7 +28,8 @@
     "seed:dev": "tsx scripts/seed-dev.ts",
     "reddit:backfill": "tsx scripts/reddit-backfill.ts",
     "deploy:staging": "wrangler deploy --env staging",
-    "deploy": "wrangler deploy --env production"
+    "deploy": "wrangler deploy --env production",
+    "build:prerender": "tsx scripts/prerender.mjs"
   },
   "dependencies": {
     "@types/three": "^0.186.0",

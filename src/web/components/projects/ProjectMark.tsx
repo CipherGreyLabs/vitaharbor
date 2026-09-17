@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useId } from "react";
 
 /**
  * A deterministic mark per project, derived from its slug.
@@ -43,7 +43,8 @@ export const ProjectMark: React.FC<{ seed: string; size?: number; className?: st
   const [from, to] = PALETTES[hash % PALETTES.length];
   const motif = Math.floor(hash / 7) % 6;
   const tilt = (hash % 90) - 45;
-  const id = "mark-" + hash.toString(36);
+  const instanceId = useId().replace(/[^a-zA-Z0-9]/g, "");
+  const id = "mark-" + hash.toString(36) + "-" + instanceId;
 
   return (
     <svg
