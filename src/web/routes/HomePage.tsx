@@ -78,14 +78,8 @@ export const HomePage: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const [soundEnabled, setSoundEnabled] = useState(true);
   const [copiedId, setCopiedId] = useState<number | null>(null);
-  const [submitModalOpen, setSubmitModalOpen] = useState(false);
-  const [submissionSuccess, setSubmissionSuccess] = useState(false);
 
   // Community submission form state
-  const [submitTitle, setSubmitTitle] = useState("");
-  const [submitUrl, setSubmitUrl] = useState("");
-  const [submitStage, setSubmitStage] = useState("in_game");
-  const [submitNotes, setSubmitNotes] = useState("");
 
   const heroRef = useRef<HTMLDivElement>(null);
 
@@ -255,35 +249,6 @@ export const HomePage: React.FC = () => {
     setTimeout(() => setCopiedId(null), 2000);
   };
 
-  const handleSubmitPort = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!submitTitle.trim() || !submitUrl.trim()) return;
-    playSound("boot");
-    
-    // Optimistically save to local queue
-    const submission = {
-      title: submitTitle.trim(),
-      reddit_url: submitUrl.trim(),
-      stage: submitStage,
-      notes: submitNotes.trim(),
-      timestamp: new Date().toISOString()
-    };
-    try {
-      const existing = JSON.parse(localStorage.getItem("vitaharbor_user_submissions") || "[]");
-      existing.push(submission);
-      localStorage.setItem("vitaharbor_user_submissions", JSON.stringify(existing));
-    } catch {}
-
-    setSubmissionSuccess(true);
-    setTimeout(() => {
-      setSubmitModalOpen(false);
-      setSubmissionSuccess(false);
-      setSubmitTitle("");
-      setSubmitUrl("");
-      setSubmitNotes("");
-    }, 2000);
-  };
-
   const getStageColor = (stage: string) => {
     switch (stage) {
       case "released":
@@ -364,17 +329,14 @@ export const HomePage: React.FC = () => {
           </div>
 
           <div className="flex items-center gap-3">
-            {/* Submit a Port Button */}
-            <button
-              onClick={() => {
-                playSound("blip");
-                setSubmitModalOpen(true);
-              }}
-              className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-sky-500/15 hover:bg-sky-500/25 border border-sky-500/30 text-xs font-mono font-medium text-sky-300 transition-all shadow-sm"
+            <Link
+              to="/about"
+              className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.08] text-xs font-mono text-slate-300 hover:text-white transition-all shadow-sm"
             >
-              <Plus className="w-3.5 h-3.5" />
-              <span>SUBMIT PORT</span>
-            </button>
+              <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
+              <span className="hidden sm:inline">VERIFIED PROVENANCE</span>
+              <span className="sm:hidden">VERIFIED</span>
+            </Link>
 
             {/* Sound Toggle Button */}
             <button
@@ -990,103 +952,6 @@ export const HomePage: React.FC = () => {
                 )}
               </div>
             </div>
-          </div>
-        </div>
-      )}
-
-      {/* COMMUNITY "SUBMIT A PORT" MODAL */}
-      {submitModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/80 backdrop-blur-md">
-          <div className="relative w-full max-w-lg rounded-3xl border border-white/10 bg-[#0d101a] p-6 sm:p-8 shadow-2xl text-left">
-            <div className="flex items-center justify-between border-b border-white/10 pb-4 mb-6">
-              <div className="flex items-center gap-2 text-white font-bold text-lg">
-                <Plus className="w-5 h-5 text-sky-400" />
-                <span>Submit a PS Vita Port</span>
-              </div>
-              <button
-                onClick={() => setSubmitModalOpen(false)}
-                className="p-1.5 rounded-lg bg-white/[0.05] hover:bg-white/[0.1] text-slate-400 hover:text-white"
-              >
-                <X className="w-4 h-4" />
-              </button>
-            </div>
-
-            {submissionSuccess ? (
-              <div className="py-12 text-center space-y-3">
-                <CheckCircle2 className="w-10 h-10 text-emerald-400 mx-auto animate-bounce" />
-                <h3 className="text-lg font-bold text-white">Thread Submitted!</h3>
-                <p className="text-xs text-slate-400">
-                  Thank you! The scanner and community pipeline will verify and index this port on the ledger.
-                </p>
-              </div>
-            ) : (
-              <form onSubmit={handleSubmitPort} className="space-y-4">
-                <div>
-                  <label className="block text-xs font-mono text-slate-400 mb-1.5">Game / Port Title *</label>
-                  <input
-                    type="text"
-                    required
-                    placeholder="e.g. Portal 2 Vita Port"
-                    value={submitTitle}
-                    onChange={(e) => setSubmitTitle(e.target.value)}
-                    className="w-full bg-[#101420] border border-white/[0.08] rounded-xl px-4 py-2.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-sky-500"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-xs font-mono text-slate-400 mb-1.5">Reddit Thread URL *</label>
-                  <input
-                    type="url"
-                    required
-                    placeholder="https://www.reddit.com/r/vitahacks/comments/..."
-                    value={submitUrl}
-                    onChange={(e) => setSubmitUrl(e.target.value)}
-                    className="w-full bg-[#101420] border border-white/[0.08] rounded-xl px-4 py-2.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-sky-500"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-xs font-mono text-slate-400 mb-1.5">Current Progress Milestone</label>
-                  <select
-                    value={submitStage}
-                    onChange={(e) => setSubmitStage(e.target.value)}
-                    className="w-full bg-[#101420] border border-white/[0.08] rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-sky-500"
-                  >
-                    <option value="early_wip">Early Research / WIP</option>
-                    <option value="booting">Booting (Menu / First Assets)</option>
-                    <option value="in_game">In-Game Gameplay</option>
-                    <option value="playable">Playable / Released</option>
-                  </select>
-                </div>
-
-                <div>
-                  <label className="block text-xs font-mono text-slate-400 mb-1.5">Hardware Notes / FPS (Optional)</label>
-                  <textarea
-                    placeholder="e.g. Boots into level 1, runs at 25 FPS with vitaGL."
-                    value={submitNotes}
-                    onChange={(e) => setSubmitNotes(e.target.value)}
-                    rows={3}
-                    className="w-full bg-[#101420] border border-white/[0.08] rounded-xl p-3 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-sky-500"
-                  />
-                </div>
-
-                <div className="pt-4 flex items-center justify-end gap-3">
-                  <button
-                    type="button"
-                    onClick={() => setSubmitModalOpen(false)}
-                    className="px-4 py-2 rounded-xl text-xs font-mono text-slate-400 hover:text-white"
-                  >
-                    Cancel
-                  </button>
-                  <button
-                    type="submit"
-                    className="px-5 py-2.5 rounded-xl bg-sky-500 hover:bg-sky-400 text-slate-950 font-bold text-xs shadow-lg shadow-sky-500/20"
-                  >
-                    Submit to Ledger
-                  </button>
-                </div>
-              </form>
-            )}
           </div>
         </div>
       )}
