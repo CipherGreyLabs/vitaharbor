@@ -12,14 +12,9 @@ import {
   ArrowRight,
   ArrowUpRight,
   Clock,
+  Terminal,
   LayoutGrid,
   List,
-  Sparkles,
-  Flame,
-  Gamepad2,
-  Cpu,
-  Layers,
-  Terminal,
   ExternalLink
 } from "lucide-react";
 
@@ -41,11 +36,30 @@ const QUICK_FILTERS = [
   { key: "released", label: "Released" }
 ];
 
+const HeroStat: React.FC<{ label: string; value: number | string; accent?: boolean }> = ({
+  label,
+  value,
+  accent
+}) => (
+  <div>
+    <div
+      className={`font-mono text-2xl leading-none tracking-[-0.03em] tabular-nums ${
+        accent ? "text-[#3ad2ff]" : "text-[#f4f6f8]"
+      }`}
+    >
+      {value}
+    </div>
+    <div className="mt-1.5 font-mono text-[9px] tracking-[0.16em] text-[#8a9199] uppercase">
+      {label}
+    </div>
+  </div>
+);
+
 export const HomePage: React.FC = () => {
   useDocumentMeta({
     title: "PlayStation Vita Port & WIP Pipeline — VitaHarbor",
     description:
-      "Centralized tracker for active PlayStation Vita ports and community decompilations from r/vitahacks and r/VitaPiracy before they reach VitaDB."
+      "Every active PlayStation Vita port and decompilation project in one verified ledger: live 3D console screen, hardware notes, and direct Reddit source links."
   });
 
   const [stats, setStats] = useState<StatsData | null>(null);
@@ -131,117 +145,80 @@ export const HomePage: React.FC = () => {
   };
 
   return (
-    <div className="space-y-16 pb-16">
-      {/* 2026 Minimalist Hero Section */}
-      <section className="relative pt-6 lg:pt-10 overflow-hidden">
-        {/* Ambient subtle glow background */}
-        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[350px] bg-cyan-500/10 blur-[130px] rounded-full pointer-events-none" />
+    <div className="-mx-0 pb-6 space-y-12">
+      {/* Big Cinematic 3D Vita Hero Stage */}
+      <section className="relative isolate flex w-full flex-col overflow-hidden border-b border-white/10 lg:block lg:h-[min(74vh,700px)]">
+        {/* Full-width 3D Console Stage */}
+        <div className="relative order-2 aspect-[1.35] w-full overflow-hidden lg:absolute lg:inset-0 lg:order-none lg:aspect-auto lg:h-full">
+          <VitaConsoleScene selectedProject={selectedProject} />
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
-            
-            {/* Left Column: Direct Human-Centered Value Proposition */}
-            <div className="lg:col-span-7 space-y-7 text-left z-10">
-              <div className="inline-flex items-center gap-2.5 px-3 py-1.5 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 text-xs font-medium">
-                <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
-                <span>Monitoring r/vitahacks & r/VitaPiracy Live</span>
-              </div>
+          {/* Subtly framed edge gradients */}
+          <div className="pointer-events-none absolute inset-x-0 top-0 z-10 h-3 bg-gradient-to-b from-[#060709] to-transparent opacity-80" />
+          <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 h-3 bg-gradient-to-t from-[#060709] to-transparent opacity-80" />
+        </div>
 
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-white leading-[1.08]">
-                Every PS Vita port. <br />
-                <span className="bg-gradient-to-r from-cyan-400 via-sky-300 to-blue-500 bg-clip-text text-transparent">
-                  Caught before VitaDB.
-                </span>
-              </h1>
+        {/* Hero Overlay Copy */}
+        <div className="pointer-events-none relative z-20 order-1 mx-auto flex w-full max-w-7xl flex-col px-5 pt-8 pb-9 sm:px-6 lg:absolute lg:inset-0 lg:order-none lg:h-full lg:px-8 lg:pt-10 lg:pb-8">
+          <div className="flex items-start justify-between gap-6 font-mono text-[11px] tracking-widest uppercase">
+            <span className="flex items-center gap-2 text-white">
+              <span className="relative flex h-2 w-2">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#3ad2ff] opacity-75" />
+                <span className="relative inline-flex h-2 w-2 rounded-full bg-[#3ad2ff]" />
+              </span>
+              Signal feed active
+              <span className="hidden text-slate-400 sm:inline">— r/vitahacks · r/VitaPiracy</span>
+            </span>
+            <span className="hidden text-right leading-relaxed text-slate-400 md:block font-mono text-[10px]">
+              PS Vita Port Pipeline
+              <br />
+              Caught before VitaDB
+            </span>
+          </div>
 
-              <p className="text-base text-slate-300 max-w-xl leading-relaxed">
-                Homebrew port progress and decompilation milestones are scattered across Reddit discussions and GitHub branches. VitaHarbor tracks active work-in-progress ports, booting builds, and release milestones with verified links to original developer updates.
-              </p>
+          <div className="mt-8 w-full max-w-[540px] lg:mt-auto lg:max-w-[46%] pb-4">
+            <p className="font-mono text-xs tracking-widest text-cyan-400 uppercase font-semibold">
+              Live Homebrew Tracker
+            </p>
+            <h1 className="mt-3 text-[42px] leading-[0.96] font-bold tracking-tight text-white sm:text-[52px] lg:text-[58px]">
+              Every Vita port.
+              <span className="block text-slate-400">Caught before VitaDB.</span>
+            </h1>
+            <p className="mt-4 max-w-[460px] text-[13px] leading-relaxed text-slate-300">
+              Community decompilations and ports live scattered across r/vitahacks and r/VitaPiracy before they ever hit VitaDB. VitaHarbor monitors homebrew discussions, tracking playable milestones, booting builds, and active WIPs directly back to their source threads.
+            </p>
 
-              {/* Action Buttons */}
-              <div className="flex flex-wrap items-center gap-3 pt-1">
-                <a
-                  href="#pipeline-ledger"
-                  className="btn-action-primary"
-                >
-                  <Gamepad2 className="w-4 h-4" />
-                  <span>Explore Port Pipeline</span>
-                  <ArrowRight className="w-4 h-4" />
-                </a>
-                <Link
-                  to="/updates"
-                  className="btn-action-secondary"
-                >
-                  <Terminal className="w-4 h-4 text-cyan-400" />
-                  <span>Latest Reddit Signals</span>
-                </Link>
-              </div>
-
-              {/* Metrics Bar */}
-              <div className="grid grid-cols-3 sm:grid-cols-4 gap-4 pt-4 border-t border-white/10 max-w-lg">
-                <div>
-                  <div className="text-2xl font-bold font-mono text-white">
-                    {projects.length || 18}
-                  </div>
-                  <div className="text-xs text-slate-400 font-medium mt-0.5">Ports Tracked</div>
-                </div>
-                <div>
-                  <div className="text-2xl font-bold font-mono text-amber-400">
-                    {projects.filter(p => ["in_game", "booting", "early_wip"].includes(p.current_stage)).length || 8}
-                  </div>
-                  <div className="text-xs text-slate-400 font-medium mt-0.5">Active WIPs</div>
-                </div>
-                <div>
-                  <div className="text-2xl font-bold font-mono text-emerald-400">
-                    {projects.filter(p => ["playable", "released"].includes(p.current_stage)).length || 10}
-                  </div>
-                  <div className="text-xs text-slate-400 font-medium mt-0.5">Playable +</div>
-                </div>
-                <div className="hidden sm:block">
-                  <div className="text-2xl font-bold font-mono text-cyan-400">
-                    {stats?.total_developers || 12}
-                  </div>
-                  <div className="text-xs text-slate-400 font-medium mt-0.5">Engineers</div>
-                </div>
-              </div>
+            <div className="mt-6 flex flex-wrap items-center gap-3">
+              <a
+                href="#pipeline-matrix"
+                className="pointer-events-auto btn-action-primary"
+              >
+                <span>Open the port ledger</span>
+                <ArrowRight className="h-4 w-4" />
+              </a>
+              <Link
+                to="/about"
+                className="pointer-events-auto btn-action-secondary"
+              >
+                <span>Methodology</span>
+              </Link>
             </div>
 
-            {/* Right Column: High-Fidelity 3D Console Pedestal */}
-            <div className="lg:col-span-5 relative flex items-center justify-center">
-              <div className="relative w-full aspect-[1.25] max-w-[540px] rounded-2xl glass-card overflow-hidden p-2 shadow-2xl flex flex-col items-center justify-center">
-                {/* 3D Scene Viewport */}
-                <div className="w-full h-full min-h-[300px] relative">
-                  <VitaConsoleScene selectedProject={selectedProject} />
-                </div>
-
-                {/* Pedestal Bottom Pill */}
-                <div className="absolute bottom-3 inset-x-4 py-2 px-3 rounded-lg bg-black/60 backdrop-blur-md border border-white/10 flex items-center justify-between text-xs font-mono">
-                  <div className="flex items-center gap-2 truncate">
-                    <span className="w-2 h-2 rounded-full bg-cyan-400" />
-                    <span className="text-slate-300 font-semibold truncate">
-                      {selectedProject?.game_title || "Select a port below"}
-                    </span>
-                  </div>
-                  <span className="px-2 py-0.5 rounded bg-white/10 text-cyan-300 uppercase text-[10px] font-semibold flex-shrink-0">
-                    {selectedProject?.current_stage.replace('_', ' ') || "ACTIVE"}
-                  </span>
-                </div>
-              </div>
+            <div className="mt-8 grid max-w-[520px] grid-cols-2 gap-x-6 gap-y-4 border-t border-white/10 pt-5 sm:grid-cols-4 sm:gap-x-4">
+              <HeroStat label="Ports tracked" value={projects.length || 18} />
+              <HeroStat label="Active WIPs" value={projects.filter(p => ["in_game", "booting", "early_wip"].includes(p.current_stage)).length || 8} accent />
+              <HeroStat label="Playable +" value={projects.filter(p => ["playable", "released"].includes(p.current_stage)).length || 9} />
+              <HeroStat label="Engineers" value={stats?.total_developers ?? 12} />
             </div>
-
           </div>
         </div>
       </section>
 
       {/* Real-time Reddit Signal Stream */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="rounded-xl bg-[#0e1117] border border-white/10 p-3.5 flex flex-col md:flex-row items-start md:items-center justify-between gap-3 shadow-lg">
+        <div className="rounded-xl bg-[#0e1117] border border-white/10 p-3 flex flex-col md:flex-row items-start md:items-center justify-between gap-3 shadow-lg">
           <div className="flex items-center gap-2.5 flex-shrink-0 text-cyan-400 font-semibold text-xs tracking-wider uppercase font-mono">
-            <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75" />
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-cyan-500" />
-            </span>
-            Latest Reddit Updates:
+            <Terminal className="h-3.5 w-3.5" />
+            <span>Latest Reddit Signals:</span>
           </div>
 
           <div className="flex items-center gap-4 overflow-x-auto no-scrollbar w-full text-xs">
@@ -264,89 +241,96 @@ export const HomePage: React.FC = () => {
             to="/updates"
             className="text-xs font-mono text-cyan-400 hover:text-cyan-300 whitespace-nowrap flex items-center gap-1 flex-shrink-0"
           >
-            <span>All Signals</span>
-            <ArrowUpRight className="w-3.5 h-3.5" />
+            <span>All signals</span>
+            <ArrowUpRight className="h-3.5 w-3.5" />
           </Link>
         </div>
       </section>
 
-      {/* Main Port Ledger & Pipeline Matrix */}
-      <section id="pipeline-ledger" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
-        {/* Ledger Header & Search/Filter Bar */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-white/10 pb-5">
-          <div>
-            <div className="text-xs font-mono text-cyan-400 uppercase tracking-widest font-semibold">
-              Live Database
+      {/* Main Port Ledger Table Section */}
+      <div id="pipeline-matrix" className="mx-auto max-w-7xl space-y-8 px-4 sm:px-6 lg:px-8">
+        <section className="space-y-5">
+          <div className="flex flex-wrap items-end justify-between gap-4 border-b border-white/10 pb-4">
+            <div>
+              <p className="font-mono text-xs tracking-widest text-cyan-400 uppercase font-semibold">
+                Live Database
+              </p>
+              <h2 className="mt-1 text-2xl font-bold tracking-tight text-white sm:text-3xl">
+                Active Port & WIP Pipeline
+              </h2>
             </div>
-            <h2 className="text-2xl sm:text-3xl font-bold text-white tracking-tight mt-1">
-              Active Port & WIP Pipeline
-            </h2>
-            <p className="text-sm text-slate-400 mt-1">
-              Select any project to inspect hardware framerates, decompilation notes, and real-time 3D display.
-            </p>
+            <div className="flex flex-wrap items-center gap-x-5 gap-y-1 font-mono text-xs text-slate-400">
+              <span>
+                <strong className="text-white">{filteredProjects.length}</strong> shown
+              </span>
+              <span>
+                <strong className="text-emerald-400">{projects.filter(p => ["playable", "released"].includes(p.current_stage)).length || 9}</strong> playable+
+              </span>
+              <span className="hidden lg:inline text-slate-500">click any row to load into the 3D console</span>
+            </div>
           </div>
 
-          {/* View Toggle */}
-          <div className="flex items-center gap-2">
-            <button
-              onClick={() => setViewMode("table")}
-              className={`p-2 rounded-lg border text-xs transition-colors ${
-                viewMode === "table"
-                  ? "bg-cyan-500 text-slate-950 border-cyan-400 font-semibold"
-                  : "bg-white/5 border-white/10 text-slate-300 hover:text-white"
-              }`}
-              title="Matrix Table View"
-            >
-              <List className="w-4 h-4" />
-            </button>
-            <button
-              onClick={() => setViewMode("grid")}
-              className={`p-2 rounded-lg border text-xs transition-colors ${
-                viewMode === "grid"
-                  ? "bg-cyan-500 text-slate-950 border-cyan-400 font-semibold"
-                  : "bg-white/5 border-white/10 text-slate-300 hover:text-white"
-              }`}
-              title="Card Grid View"
-            >
-              <LayoutGrid className="w-4 h-4" />
-            </button>
-          </div>
-        </div>
+          {/* Filter Capsules & Search Bar */}
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
+            <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar py-1">
+              {QUICK_FILTERS.map((f) => (
+                <button
+                  key={f.key}
+                  onClick={() => setSelectedFilter(f.key)}
+                  className="chip-pill"
+                  data-active={selectedFilter === f.key}
+                >
+                  {f.label}
+                </button>
+              ))}
+            </div>
 
-        {/* Filter Chips & Search Bar */}
-        <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
-          {/* Filter Pills */}
-          <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar py-1">
-            {QUICK_FILTERS.map((f) => (
-              <button
-                key={f.key}
-                onClick={() => setSelectedFilter(f.key)}
-                className="chip-pill"
-                data-active={selectedFilter === f.key}
-              >
-                {f.label}
-              </button>
-            ))}
-          </div>
+            <div className="flex items-center gap-3">
+              <div className="relative flex-1 sm:w-72">
+                <input
+                  type="text"
+                  placeholder="Search ports, engines, devs..."
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  className="w-full bg-[#0f131a] border border-white/10 rounded-full pl-9 pr-4 py-2 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400/50"
+                />
+                <Search className="w-3.5 h-3.5 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
+              </div>
 
-          {/* Search Input */}
-          <div className="relative min-w-[260px] sm:w-72">
-            <input
-              type="text"
-              placeholder="Search ports, engines, devs..."
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full bg-[#0f131a] border border-white/10 rounded-full pl-9 pr-4 py-2 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400/50"
-            />
-            <Search className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
+              {/* View Toggle */}
+              <div className="hidden sm:flex items-center gap-1 border-l border-white/10 pl-3">
+                <button
+                  onClick={() => setViewMode("table")}
+                  className={`p-1.5 rounded-lg border text-xs transition-colors ${
+                    viewMode === "table"
+                      ? "bg-cyan-500 text-slate-950 border-cyan-400 font-semibold"
+                      : "bg-white/5 border-white/10 text-slate-300 hover:text-white"
+                  }`}
+                  title="Matrix Table View"
+                >
+                  <List className="w-4 h-4" />
+                </button>
+                <button
+                  onClick={() => setViewMode("grid")}
+                  className={`p-1.5 rounded-lg border text-xs transition-colors ${
+                    viewMode === "grid"
+                      ? "bg-cyan-500 text-slate-950 border-cyan-400 font-semibold"
+                      : "bg-white/5 border-white/10 text-slate-300 hover:text-white"
+                  }`}
+                  title="Card Grid View"
+                >
+                  <LayoutGrid className="w-4 h-4" />
+                </button>
+              </div>
+            </div>
           </div>
-        </div>
+        </section>
 
-        {/* Render View: Table or Grid */}
-        <div>
+        {/* Main Matrix Table */}
+        <section>
           {loading ? (
-            <div className="glass-card p-12 text-center text-slate-400 font-mono text-sm">
-              Loading port pipeline data...
+            <div className="glass-card p-12 text-center text-slate-400 font-mono text-xs animate-pulse">
+              LOADING PORT LEDGER...
             </div>
           ) : filteredProjects.length > 0 ? (
             viewMode === "table" ? (
@@ -365,39 +349,12 @@ export const HomePage: React.FC = () => {
               </div>
             )
           ) : (
-            <div className="glass-card p-12 text-center text-slate-400 font-mono text-sm">
-              No matching port projects found.
+            <div className="glass-card p-12 text-center text-slate-400 font-mono text-xs">
+              NO MATCHING PORTS FOUND
             </div>
           )}
-        </div>
-      </section>
-
-      {/* Featured Community Engineers Section */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
-        <div className="flex items-center justify-between border-b border-white/10 pb-4">
-          <div>
-            <div className="text-xs font-mono text-cyan-400 uppercase tracking-widest font-semibold">
-              Ecosystem
-            </div>
-            <h2 className="text-2xl font-bold text-white tracking-tight mt-1">
-              Active Homebrew Engineers
-            </h2>
-          </div>
-          <Link
-            to="/developers"
-            className="text-xs font-mono text-cyan-400 hover:text-cyan-300 flex items-center gap-1"
-          >
-            <span>All Engineers</span>
-            <ArrowUpRight className="w-3.5 h-3.5" />
-          </Link>
-        </div>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          {activeDevs.slice(0, 6).map((dev) => (
-            <DeveloperCard key={dev.id} developer={dev} />
-          ))}
-        </div>
-      </section>
+        </section>
+      </div>
     </div>
   );
 };
