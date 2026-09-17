@@ -14,18 +14,17 @@ import { NotFoundPage } from "./routes/NotFoundPage";
 
 export default function App() {
   const { pathname } = useLocation();
-  // The home stage runs edge to edge; every other route stays on the readable grid.
   const isFullBleed = pathname === "/";
 
   return (
-    <div className="min-h-screen bg-[#FAFAFA] text-slate-900 flex flex-col selection:bg-[#3ad2ff]/30 selection:text-[#f4f6f8]">
+    <div className="min-h-screen bg-[#f8fafc] text-slate-900 flex flex-col selection:bg-blue-100 selection:text-blue-900 antialiased font-sans">
       <a
         href="#main-content"
-        className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-50 focus:px-4 focus:py-2 focus:bg-[#3ad2ff] focus:text-white focus:rounded focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-white"
+        className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-50 focus:px-4 focus:py-2 focus:bg-blue-600 focus:text-white focus:rounded-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-600 text-xs font-semibold shadow-lg"
       >
         Skip to content
       </a>
-      {!isFullBleed && <Navbar />}
+      <Navbar />
       <main
         id="main-content"
         className={
@@ -46,9 +45,7 @@ export default function App() {
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </main>
-      {!isFullBleed && <Footer />}
+      <Footer />
     </div>
   );
 }
-
-

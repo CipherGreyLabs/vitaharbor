@@ -15,7 +15,9 @@ import {
   Check,
   ChevronLeft,
   ChevronRight,
-  ArrowUpRight
+  ArrowUpRight,
+  Gamepad2,
+  Radio
 } from "lucide-react";
 
 interface StatsData {
@@ -30,9 +32,9 @@ interface StatsData {
 const CATEGORY_TABS = [
   { key: "all", label: "All Ports" },
   { key: "wip", label: "Active WIPs" },
-  { key: "in_game", label: "In-Game" },
-  { key: "booting", label: "Booting" },
-  { key: "playable", label: "Playable" }
+  { key: "in_game", label: "In-Game Builds" },
+  { key: "booting", label: "Booting & Decomp" },
+  { key: "playable", label: "Playable / Released" }
 ];
 
 export const HomePage: React.FC = () => {
@@ -68,16 +70,16 @@ export const HomePage: React.FC = () => {
 
       if (type === "boot") {
         osc.type = "sine";
-        osc.frequency.setValueAtTime(280, ctx.currentTime);
-        osc.frequency.exponentialRampToValueAtTime(560, ctx.currentTime + 0.1);
+        osc.frequency.setValueAtTime(320, ctx.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(640, ctx.currentTime + 0.1);
         gain.gain.setValueAtTime(0.04, ctx.currentTime);
         gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.18);
         osc.start(ctx.currentTime);
         osc.stop(ctx.currentTime + 0.18);
       } else {
         osc.type = "sine";
-        osc.frequency.setValueAtTime(480, ctx.currentTime);
-        osc.frequency.exponentialRampToValueAtTime(720, ctx.currentTime + 0.04);
+        osc.frequency.setValueAtTime(520, ctx.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(780, ctx.currentTime + 0.04);
         gain.gain.setValueAtTime(0.03, ctx.currentTime);
         gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.05);
         osc.start(ctx.currentTime);
@@ -194,6 +196,21 @@ export const HomePage: React.FC = () => {
     setTimeout(() => setCopiedId(null), 1800);
   };
 
+  const getStageChipStyle = (stage: string) => {
+    switch (stage) {
+      case "released":
+      case "playable":
+      case "completable":
+        return "bg-emerald-50 text-emerald-700 border-emerald-200";
+      case "in_game":
+        return "bg-blue-50 text-blue-700 border-blue-200";
+      case "booting":
+        return "bg-amber-50 text-amber-700 border-amber-200";
+      default:
+        return "bg-purple-50 text-purple-700 border-purple-200";
+    }
+  };
+
   const formatStageLabel = (stage: string) => {
     switch (stage) {
       case "in_game": return "In-Game";
@@ -207,183 +224,154 @@ export const HomePage: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#0c0d0f] text-[#f4f4f5] selection:bg-neutral-800 selection:text-white font-sans">
+    <div className="min-h-screen bg-[#f8fafc] text-slate-900 selection:bg-blue-100 selection:text-blue-900 font-sans">
       
-      {/* MINIMAL TOP UTILITY BAR */}
-      <div className="border-b border-neutral-800/80 bg-[#0c0d0f]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-9 flex items-center justify-between text-[11px] font-mono text-neutral-400">
-          <div className="flex items-center gap-2.5">
-            <span className="w-1.5 h-1.5 rounded-full bg-neutral-400" />
-            <span>COMMUNITY TRACKER</span>
-            <span className="text-neutral-700">/</span>
-            <span>r/vitahacks & r/VitaPiracy</span>
-          </div>
-
-          <div className="flex items-center gap-4">
-            <Link to="/about" className="text-neutral-400 hover:text-white transition-colors">
-              Methodology & Non-Piracy
-            </Link>
-            <span className="text-neutral-700">·</span>
-            <button
-              onClick={() => {
-                playSound("blip");
-                setSoundEnabled(!soundEnabled);
-              }}
-              className="flex items-center gap-1 text-neutral-400 hover:text-white transition-colors"
-            >
-              {soundEnabled ? (
-                <>
-                  <Volume2 className="w-3.5 h-3.5 text-neutral-200" />
-                  <span>Audio On</span>
-                </>
-              ) : (
-                <>
-                  <VolumeX className="w-3.5 h-3.5 text-neutral-500" />
-                  <span>Muted</span>
-                </>
-              )}
-            </button>
-          </div>
-        </div>
-      </div>
+      {/* LUMINOUS TOP RADIAL GRADIENT */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-[550px] bg-[radial-gradient(ellipse_80%_60%_at_50%_-10%,rgba(191,219,254,0.45),rgba(248,250,252,0))] pointer-events-none z-0" />
 
       {/* HERO SECTION */}
-      <section ref={stageRef} className="pt-12 pb-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+      <section ref={stageRef} className="relative z-10 pt-10 pb-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
         
-        {/* EDITORIAL HEADER TITLE */}
-        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-8 pb-10 border-b border-neutral-800/80 mb-12">
+        {/* TOP STATUS BADGE & AUDIO TOGGLE */}
+        <div className="flex items-center justify-between gap-4 mb-6">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white border border-slate-200/80 shadow-sm text-xs text-slate-600 font-medium">
+            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+            <span>Community Radar</span>
+            <span className="text-slate-300">·</span>
+            <span className="text-slate-500">r/vitahacks & r/VitaPiracy</span>
+          </div>
+
+          <button
+            onClick={() => {
+              playSound("blip");
+              setSoundEnabled(!soundEnabled);
+            }}
+            className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-white border border-slate-200/80 text-xs font-medium text-slate-600 hover:text-slate-900 shadow-sm transition-all"
+            title={soundEnabled ? "Mute interface audio" : "Enable interface audio"}
+          >
+            {soundEnabled ? (
+              <>
+                <Volume2 className="w-3.5 h-3.5 text-blue-600" />
+                <span>Sound On</span>
+              </>
+            ) : (
+              <>
+                <VolumeX className="w-3.5 h-3.5 text-slate-400" />
+                <span>Muted</span>
+              </>
+            )}
+          </button>
+        </div>
+
+        {/* HERO TITLE & STATS ROW */}
+        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-8 pb-8 border-b border-slate-200/80 mb-10">
           <div className="max-w-2xl">
-            <span className="font-mono text-xs text-neutral-400 uppercase tracking-widest block mb-3">
-              Open Engineering Archive
-            </span>
-            <h1 className="text-4xl sm:text-6xl font-bold tracking-tight text-white leading-none">
-              VitaHarbor
+            <h1 className="text-4xl sm:text-6xl font-bold tracking-tight text-slate-900 leading-[1.05]">
+              PlayStation Vita <br />
+              Port Archive
             </h1>
-            <p className="text-base text-neutral-400 mt-4 leading-relaxed font-normal">
-              An independent archive monitoring active PlayStation Vita engine recreations, ARM wrappers, and decompilations surfacing across Reddit.
+            <p className="text-base sm:text-lg text-slate-600 mt-4 font-normal leading-relaxed">
+              An independent ledger tracking engine decompilations, ARM wrappers, and homebrew builds surfacing on Reddit before reaching VitaDB.
             </p>
           </div>
 
-          {/* Clean Metric Readouts */}
-          <div className="flex items-center gap-8 font-mono text-left shrink-0">
-            <div>
-              <span className="text-3xl font-semibold text-white block">
+          {/* Clean Light Stats */}
+          <div className="flex items-center gap-4 sm:gap-6 shrink-0">
+            <div className="bg-white border border-slate-200/80 rounded-2xl px-5 py-3 shadow-sm text-left">
+              <span className="text-2xl sm:text-3xl font-bold text-slate-900 block leading-tight">
                 {projects.length || 18}
               </span>
-              <span className="text-[11px] text-neutral-500 uppercase tracking-wider">Total Ports</span>
+              <span className="text-xs text-slate-500 font-medium">Monitored</span>
             </div>
-            <div className="w-px h-8 bg-neutral-800" />
-            <div>
-              <span className="text-3xl font-semibold text-neutral-200 block">
+            <div className="bg-white border border-slate-200/80 rounded-2xl px-5 py-3 shadow-sm text-left">
+              <span className="text-2xl sm:text-3xl font-bold text-blue-600 block leading-tight">
                 {projects.filter((p) => ["in_game", "booting", "early_wip"].includes(String(p.current_stage))).length || 8}
               </span>
-              <span className="text-[11px] text-neutral-500 uppercase tracking-wider">In Progress</span>
+              <span className="text-xs text-slate-500 font-medium">In Progress</span>
             </div>
-            <div className="w-px h-8 bg-neutral-800" />
-            <div>
-              <span className="text-3xl font-semibold text-neutral-200 block">
+            <div className="bg-white border border-slate-200/80 rounded-2xl px-5 py-3 shadow-sm text-left">
+              <span className="text-2xl sm:text-3xl font-bold text-emerald-600 block leading-tight">
                 {projects.filter((p) => ["playable", "released"].includes(String(p.current_stage))).length || 10}
               </span>
-              <span className="text-[11px] text-neutral-500 uppercase tracking-wider">Playable</span>
+              <span className="text-xs text-slate-500 font-medium">Playable</span>
             </div>
           </div>
         </div>
 
-        {/* 3D HARDWARE STAGE (SPACIOUS & UNBOXED) */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center mb-16">
+        {/* 3D CONSOLE SHOWCASE */}
+        <div className="relative w-full rounded-3xl bg-gradient-to-b from-white via-white to-slate-50/50 border border-slate-200/80 p-6 sm:p-8 shadow-sm mb-8">
           
-          {/* Left Column: Interactive Project Index */}
-          <div className="lg:col-span-5 space-y-3 order-2 lg:order-1">
-            <div className="flex items-center justify-between pb-2 border-b border-neutral-800 font-mono text-xs text-neutral-400">
-              <span className="uppercase tracking-wider font-medium text-neutral-300">Specimen Queue</span>
-              <span>Click to inspect</span>
+          {/* Quick Switcher Dock */}
+          <div className="flex items-center justify-between gap-3 pb-4 border-b border-slate-100 overflow-x-auto no-scrollbar">
+            <div className="flex items-center gap-2 text-xs font-semibold text-slate-700 shrink-0">
+              <Gamepad2 className="w-4 h-4 text-blue-600" />
+              <span>Preview on Console:</span>
             </div>
 
-            <div className="space-y-1.5 max-h-[440px] overflow-y-auto no-scrollbar pr-1">
-              {projects.slice(0, 7).map((p, idx) => {
+            <div className="flex items-center gap-2 overflow-x-auto no-scrollbar">
+              {projects.slice(0, 6).map((p) => {
                 const isActive = selectedProject?.id === p.id;
                 return (
-                  <div
+                  <button
                     key={p.id}
                     onClick={() => handleSelectFor3D(p)}
-                    className={`p-3.5 rounded-lg border transition-all duration-150 cursor-pointer flex items-center justify-between gap-3 ${
+                    className={`px-3.5 py-1.5 rounded-full text-xs font-medium whitespace-nowrap transition-all border ${
                       isActive
-                        ? "bg-neutral-800/60 border-neutral-600 text-white"
-                        : "bg-neutral-900/40 border-neutral-800/80 hover:bg-neutral-800/30 hover:border-neutral-700 text-neutral-300"
+                        ? "bg-blue-600 border-blue-600 text-white shadow-sm font-semibold"
+                        : "bg-slate-50 border-slate-200 text-slate-600 hover:bg-slate-100 hover:text-slate-900"
                     }`}
                   >
-                    <div className="flex items-center gap-3 min-w-0">
-                      <span className="font-mono text-xs text-neutral-400 shrink-0">
-                        {String(idx + 1).padStart(2, "0")}
-                      </span>
-                      <div className="min-w-0">
-                        <h4 className="text-sm font-medium truncate text-white leading-tight">
-                          {p.display_name?.split(" (")[0] || p.game_title}
-                        </h4>
-                        <span className="text-[11px] font-mono text-neutral-400 truncate block mt-0.5">
-                          {p.performance_notes || p.playability_notes || p.original_platform}
-                        </span>
-                      </div>
-                    </div>
-
-                    <span className="shrink-0 text-[10px] font-mono uppercase px-2 py-0.5 rounded bg-neutral-800 border border-neutral-700 text-neutral-300">
-                      {formatStageLabel(p.current_stage)}
-                    </span>
-                  </div>
+                    <span>{p.display_name?.split(" (")[0] || p.game_title}</span>
+                  </button>
                 );
               })}
             </div>
+          </div>
 
-            {/* Cycle Controls */}
-            <div className="flex items-center justify-between pt-3 border-t border-neutral-800 font-mono text-xs">
-              <button
-                onClick={() => handleCycleProject("prev")}
-                className="flex items-center gap-1 text-neutral-400 hover:text-white transition-colors"
-              >
-                <ChevronLeft className="w-3.5 h-3.5" />
-                <span>Prev (L)</span>
-              </button>
-              <span className="text-neutral-500 text-[11px]">
-                {selectedProject ? selectedProject.game_title.slice(0, 22) + "..." : ""}
+          {/* 3D Interactive Canvas */}
+          <div className="relative w-full h-[380px] sm:h-[480px] lg:h-[520px] flex items-center justify-center">
+            <VitaConsoleScene selectedProject={selectedProject} align="center" />
+          </div>
+
+          {/* Hardware Telemetry Strip */}
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-4 border-t border-slate-100 text-left">
+            <div>
+              <span className="text-[11px] text-slate-400 font-medium uppercase tracking-wider block">Target Device</span>
+              <span className="text-sm font-semibold text-slate-800 mt-0.5 block">PS Vita PCH-1000 OLED</span>
+              <span className="text-xs text-slate-500">960 × 544 @ 60Hz</span>
+            </div>
+            <div>
+              <span className="text-[11px] text-slate-400 font-medium uppercase tracking-wider block">Processing</span>
+              <span className="text-sm font-semibold text-slate-800 mt-0.5 block">Quad ARM Cortex-A9</span>
+              <span className="text-xs text-slate-500">444MHz / SGX543MP4+</span>
+            </div>
+            <div>
+              <span className="text-[11px] text-slate-400 font-medium uppercase tracking-wider block">Tested Status</span>
+              <span className="text-sm font-semibold text-blue-600 mt-0.5 block">
+                {formatStageLabel(selectedProject?.current_stage || "in_game")}
               </span>
-              <button
-                onClick={() => handleCycleProject("next")}
-                className="flex items-center gap-1 text-neutral-400 hover:text-white transition-colors"
-              >
-                <span>Next (R)</span>
-                <ChevronRight className="w-3.5 h-3.5" />
-              </button>
+              <span className="text-xs text-slate-500 truncate block">
+                {selectedProject?.performance_notes || "Real hardware execution"}
+              </span>
+            </div>
+            <div>
+              <span className="text-[11px] text-slate-400 font-medium uppercase tracking-wider block">Community Provenance</span>
+              <span className="text-sm font-semibold text-emerald-600 mt-0.5 block">
+                Verified Discussions
+              </span>
+              <span className="text-xs text-slate-500">r/vitahacks & r/VitaPiracy</span>
             </div>
           </div>
-
-          {/* Right Column: Freestanding 3D Console */}
-          <div className="lg:col-span-7 flex flex-col items-center justify-center relative order-1 lg:order-2">
-            <div className="relative w-full h-[360px] sm:h-[440px] lg:h-[480px]">
-              <VitaConsoleScene selectedProject={selectedProject} align="center" />
-            </div>
-
-            {/* Hardware Specification Bar */}
-            <div className="w-full max-w-lg mt-3 px-4 py-2 rounded-lg bg-neutral-900/60 border border-neutral-800 text-[11px] font-mono text-neutral-400 flex items-center justify-between">
-              <span>SONY PCH-1000 OLED</span>
-              <span className="text-neutral-700">·</span>
-              <span>CORTEX-A9 @ 444MHz</span>
-              <span className="text-neutral-700">·</span>
-              <span>512MB RAM</span>
-              <span className="text-neutral-700">·</span>
-              <span>vitaGL ES 2.0</span>
-            </div>
-          </div>
-
         </div>
 
-        {/* RECENT REDDIT THREADS TICKER */}
-        <div className="border border-neutral-800 bg-neutral-900/30 rounded-lg p-3.5 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 font-mono text-xs">
-          <div className="flex items-center gap-2 text-neutral-400 shrink-0 uppercase tracking-wider text-[11px]">
-            <span className="w-1.5 h-1.5 rounded-full bg-neutral-400" />
-            <span className="text-white font-medium">Latest Signals:</span>
+        {/* RECENT REDDIT UPDATES STRIP */}
+        <div className="bg-white border border-slate-200/80 rounded-2xl p-4 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 shadow-sm">
+          <div className="flex items-center gap-2 text-xs font-semibold text-slate-800 shrink-0">
+            <Radio className="w-4 h-4 text-blue-600 animate-pulse" />
+            <span>Latest Reddit Signals:</span>
           </div>
 
-          <div className="flex items-center gap-4 overflow-x-auto no-scrollbar w-full text-xs">
+          <div className="flex items-center gap-3 overflow-x-auto no-scrollbar w-full text-xs">
             {recentUpdates.slice(0, 3).map((u) => {
               const subName = u.sources?.[0]?.canonical_url?.includes("r/VitaPiracy") ? "r/VitaPiracy" : "r/vitahacks";
               return (
@@ -393,11 +381,11 @@ export const HomePage: React.FC = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={() => playSound("blip")}
-                  className="inline-flex items-center gap-2 text-neutral-300 hover:text-white transition-colors shrink-0 group"
+                  className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-slate-50 hover:bg-slate-100 border border-slate-200/60 text-slate-700 hover:text-blue-600 transition-all shrink-0 group"
                 >
-                  <span className="text-neutral-400 text-[11px]">[{subName}]</span>
+                  <span className="text-[10px] font-semibold text-blue-600">[{subName}]</span>
                   <span className="max-w-[240px] sm:max-w-[320px] truncate">{u.title}</span>
-                  <ExternalLink className="w-3 h-3 text-neutral-400 group-hover:text-white shrink-0" />
+                  <ExternalLink className="w-3.5 h-3.5 text-slate-400 group-hover:text-blue-600 shrink-0" />
                 </a>
               );
             })}
@@ -406,57 +394,54 @@ export const HomePage: React.FC = () => {
           <Link
             to="/updates"
             onClick={() => playSound("blip")}
-            className="text-neutral-400 hover:text-white shrink-0 flex items-center gap-1 text-[11px]"
+            className="text-xs font-semibold text-blue-600 hover:text-blue-700 shrink-0 flex items-center gap-1"
           >
-            <span>All reports</span>
-            <ArrowUpRight className="w-3 h-3" />
+            <span>All signals</span>
+            <ArrowUpRight className="w-3.5 h-3.5" />
           </Link>
         </div>
 
       </section>
 
       {/* PORT LEDGER DIRECTORY */}
-      <section id="directory" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 border-t border-neutral-800/80">
+      <section id="directory" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 border-t border-slate-200/80">
         
         {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-6 border-b border-neutral-800/80 mb-8">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-6 border-b border-slate-200/80 mb-8">
           <div>
-            <span className="font-mono text-xs text-neutral-400 uppercase tracking-widest block mb-2">
-              Verified Technical Ledger
-            </span>
-            <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-white">
+            <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900">
               Port Directory
             </h2>
-            <p className="text-sm text-neutral-400 mt-1 font-normal">
+            <p className="text-sm text-slate-500 mt-1 font-normal">
               Indexed development milestones, hardware notes, and primary Reddit discussion threads.
             </p>
           </div>
 
           {/* View Mode Toggle */}
-          <div className="flex items-center gap-1 p-1 rounded-lg bg-neutral-900 border border-neutral-800">
+          <div className="flex items-center gap-1 p-1 rounded-xl bg-slate-100 border border-slate-200/80">
             <button
               onClick={() => {
                 playSound("blip");
                 setViewMode("cards");
               }}
-              className={`p-1.5 rounded text-xs transition-colors ${
-                viewMode === "cards" ? "bg-neutral-800 text-white" : "text-neutral-500 hover:text-white"
+              className={`p-1.5 rounded-lg text-xs font-medium transition-colors ${
+                viewMode === "cards" ? "bg-white text-slate-900 shadow-sm" : "text-slate-500 hover:text-slate-900"
               }`}
               title="Card View"
             >
-              <LayoutGrid className="w-3.5 h-3.5" />
+              <LayoutGrid className="w-4 h-4" />
             </button>
             <button
               onClick={() => {
                 playSound("blip");
                 setViewMode("table");
               }}
-              className={`p-1.5 rounded text-xs transition-colors ${
-                viewMode === "table" ? "bg-neutral-800 text-white" : "text-neutral-500 hover:text-white"
+              className={`p-1.5 rounded-lg text-xs font-medium transition-colors ${
+                viewMode === "table" ? "bg-white text-slate-900 shadow-sm" : "text-slate-500 hover:text-slate-900"
               }`}
               title="Table View"
             >
-              <List className="w-3.5 h-3.5" />
+              <List className="w-4 h-4" />
             </button>
           </div>
         </div>
@@ -473,10 +458,10 @@ export const HomePage: React.FC = () => {
                     playSound("blip");
                     setSelectedFilter(tab.key);
                   }}
-                  className={`px-3.5 py-1.5 rounded-lg text-xs font-mono transition-colors whitespace-nowrap border ${
+                  className={`px-4 py-2 rounded-xl text-xs font-semibold transition-all whitespace-nowrap border ${
                     active
-                      ? "bg-white text-black border-white font-semibold"
-                      : "bg-neutral-900 border-neutral-800 text-neutral-400 hover:text-white hover:border-neutral-700"
+                      ? "bg-slate-900 text-white border-slate-900 shadow-sm"
+                      : "bg-white border-slate-200/80 text-slate-600 hover:bg-slate-50 hover:text-slate-900"
                   }`}
                 >
                   {tab.label}
@@ -486,18 +471,18 @@ export const HomePage: React.FC = () => {
           </div>
 
           <div className="relative w-full sm:w-72">
-            <Search className="w-3.5 h-3.5 text-neutral-400 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
+            <Search className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
             <input
               type="text"
-              placeholder="Filter by game, engine, developer..."
+              placeholder="Search title, engine, developer..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full bg-neutral-900 border border-neutral-800 rounded-lg pl-9 pr-8 py-1.5 text-xs font-mono text-white placeholder-neutral-400 focus:outline-none focus:border-neutral-600"
+              className="w-full bg-white border border-slate-200/80 rounded-xl pl-9 pr-8 py-2 text-xs text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 shadow-sm"
             />
             {searchTerm && (
               <button
                 onClick={() => setSearchTerm("")}
-                className="absolute right-2.5 top-1/2 -translate-y-1/2 text-neutral-400 hover:text-white text-xs"
+                className="absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 text-xs"
               >
                 ✕
               </button>
@@ -507,12 +492,12 @@ export const HomePage: React.FC = () => {
 
         {/* DIRECTORY CONTENT */}
         {loading ? (
-          <div className="py-24 text-center text-neutral-500 font-mono text-xs">
+          <div className="py-24 text-center text-slate-400 text-sm">
             Loading port ledger...
           </div>
         ) : filteredProjects.length > 0 ? (
           viewMode === "cards" ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {filteredProjects.map((p) => {
                 const subName = p.reddit_url?.includes("r/VitaPiracy") ? "r/VitaPiracy" : "r/vitahacks";
                 const isSelected = selectedProject?.id === p.id;
@@ -521,68 +506,71 @@ export const HomePage: React.FC = () => {
                 return (
                   <div
                     key={p.id}
-                    className={`rounded-lg border p-5 flex flex-col justify-between transition-all duration-150 bg-[#111214] ${
+                    className={`bg-white rounded-3xl border p-6 flex flex-col justify-between transition-all duration-300 shadow-sm hover:shadow-xl hover:-translate-y-1 ${
                       isSelected
-                        ? "border-neutral-500"
-                        : "border-neutral-800/80 hover:border-neutral-700"
+                        ? "border-blue-400 ring-2 ring-blue-100"
+                        : "border-slate-200/80 hover:border-slate-300"
                     }`}
                   >
                     <div>
-                      {/* Top Metadata */}
-                      <div className="flex items-center justify-between gap-2 mb-3 font-mono text-[10px]">
-                        <div className="flex items-center gap-1.5 text-neutral-400">
-                          <span className="bg-neutral-800/80 px-2 py-0.5 rounded border border-neutral-700/60 uppercase">
+                      {/* Top Badges */}
+                      <div className="flex items-center justify-between gap-2 mb-4">
+                        <div className="flex items-center gap-1.5">
+                          <span className="text-[11px] font-semibold uppercase text-slate-600 bg-slate-100 px-2.5 py-0.5 rounded-lg border border-slate-200/60">
                             {p.original_platform || "PC"}
                           </span>
-                          <span className="text-neutral-400">
+                          <span className="text-[11px] font-semibold text-slate-500">
                             {subName}
                           </span>
                         </div>
 
-                        <span className="text-neutral-300 font-medium uppercase px-2 py-0.5 rounded bg-neutral-800/80 border border-neutral-700/60">
+                        <span
+                          className={`text-[11px] font-semibold uppercase px-2.5 py-0.5 rounded-lg border ${getStageChipStyle(p.current_stage)}`}
+                        >
                           {formatStageLabel(p.current_stage)}
                         </span>
                       </div>
 
                       {/* Game Title */}
                       <Link to={`/projects/${p.slug}`} className="block group">
-                        <h3 className="text-base font-semibold text-white group-hover:text-neutral-200 transition-colors leading-snug">
+                        <h3 className="text-lg font-bold text-slate-900 group-hover:text-blue-600 transition-colors leading-snug">
                           {p.game_title || p.display_name}
                         </h3>
                       </Link>
 
                       {/* Summary */}
-                      <p className="text-xs text-neutral-400 mt-2 line-clamp-2 leading-relaxed font-normal">
+                      <p className="text-sm text-slate-600 mt-2 line-clamp-2 leading-relaxed">
                         {p.summary}
                       </p>
 
-                      {/* Hardware Notes */}
-                      <div className="mt-3.5 p-2.5 rounded bg-[#16181b] border border-neutral-800/80 font-mono text-[11px]">
-                        <span className="text-neutral-400 block text-[9px] uppercase tracking-wider mb-0.5">
+                      {/* Hardware Status Callout */}
+                      <div className="mt-4 p-3 rounded-xl bg-slate-50 border border-slate-100 text-xs">
+                        <span className="text-slate-400 font-semibold block text-[10px] uppercase tracking-wider mb-0.5">
                           Hardware Status:
                         </span>
-                        <span className="text-neutral-300 block">
+                        <span className="text-slate-800 font-medium block">
                           {p.performance_notes || p.playability_notes || "ARM binary execution."}
                         </span>
                       </div>
                     </div>
 
                     {/* Bottom Actions Bar */}
-                    <div className="pt-4 mt-5 border-t border-neutral-800 flex items-center justify-between gap-3 font-mono text-xs">
+                    <div className="pt-4 mt-5 border-t border-slate-100 flex items-center justify-between gap-3 text-xs">
                       <button
                         onClick={() => handleSelectFor3D(p)}
-                        className="text-neutral-400 hover:text-white transition-colors flex items-center gap-1.5"
+                        className="text-slate-600 hover:text-blue-600 font-medium transition-colors flex items-center gap-1.5"
                       >
-                        <span>Inspect on 3D Vita</span>
+                        <Gamepad2 className="w-3.5 h-3.5 text-blue-600" />
+                        <span>Preview on Vita</span>
                       </button>
 
                       <div className="flex items-center gap-2">
                         <button
                           onClick={(e) => handleCopyLink(p, e)}
-                          className="p-1 rounded text-neutral-400 hover:text-white transition-colors"
+                          className="p-1.5 rounded-lg text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition-colors"
                           title="Copy project link"
                         >
-                          {isCopied ? <Check className="w-3.5 h-3.5 text-neutral-200" /> : <Share2 className="w-3.5 h-3.5" />}
+                          {isCopied ? <Check className="w-3.5 h-3.5 text-emerald-600" /> : <Share2 className="w-3.5 h-3.5" />}
                         </button>
 
                         {p.reddit_url && (
@@ -591,9 +579,9 @@ export const HomePage: React.FC = () => {
                             target="_blank"
                             rel="noopener noreferrer"
                             onClick={() => playSound("blip")}
-                            className="text-neutral-300 hover:text-white transition-colors flex items-center gap-1 underline underline-offset-4 decoration-neutral-700 hover:decoration-white"
+                            className="inline-flex items-center gap-1 font-semibold text-blue-600 hover:text-blue-700 transition-colors"
                           >
-                            <span>Reddit</span>
+                            <span>Reddit Thread</span>
                             <ExternalLink className="w-3 h-3" />
                           </a>
                         )}
@@ -611,29 +599,11 @@ export const HomePage: React.FC = () => {
             />
           )
         ) : (
-          <div className="py-24 text-center text-neutral-500 font-mono text-xs">
+          <div className="py-24 text-center text-slate-400 text-sm">
             No projects matched your search.
           </div>
         )}
       </section>
-
-      {/* FOOTER */}
-      <footer className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 border-t border-neutral-800 font-mono text-xs text-neutral-400 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
-        <div className="max-w-2xl leading-relaxed">
-          <span className="text-neutral-300 font-medium uppercase block mb-1">Non-Infringing Documentation</span>
-          VitaHarbor indexes public engineering discussions on r/vitahacks and r/VitaPiracy. Zero game binaries, ISOs, or ROMs are hosted or distributed. All ports require legitimately acquired game assets.
-        </div>
-
-        <div className="flex items-center gap-4 shrink-0 text-neutral-400">
-          <a href="/api/feed.json" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">
-            JSON Feed
-          </a>
-          <span className="text-neutral-700">·</span>
-          <a href="/api/rss.xml" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">
-            RSS 2.0
-          </a>
-        </div>
-      </footer>
 
     </div>
   );

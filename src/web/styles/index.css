@@ -4,26 +4,22 @@
 
 @layer base {
   :root {
-    --bg-canvas: #090a0c;
-    --bg-surface: #101216;
-    --bg-surface-elevated: #16191f;
-    --border-hairline: rgba(255, 255, 255, 0.08);
-    --border-strong: rgba(255, 255, 255, 0.16);
-    --text-primary: #f1f3f5;
-    --text-secondary: #9aa2ac;
-    --text-tertiary: #636b75;
-    --accent: #38bdf8;
-    --accent-subtle: rgba(56, 189, 248, 0.12);
+    --bg-canvas: #f8fafc;
+    --bg-surface: #ffffff;
+    --border-hairline: rgba(226, 232, 240, 0.8);
+    --text-primary: #0f172a;
+    --text-secondary: #475569;
+    --text-tertiary: #94a3b8;
+    --accent: #2563eb;
   }
 
   html {
     scroll-behavior: smooth;
-    color-scheme: dark;
   }
 
   body {
-    background-color: var(--bg-canvas);
-    color: var(--text-primary);
+    background-color: #f8fafc;
+    color: #0f172a;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     letter-spacing: -0.01em;
     overflow-x: hidden;
@@ -32,8 +28,8 @@
   }
 
   ::selection {
-    background: rgba(56, 189, 248, 0.25);
-    color: #ffffff;
+    background: rgba(37, 99, 235, 0.15);
+    color: #1e3a8a;
   }
 
   ::-webkit-scrollbar {
@@ -41,88 +37,25 @@
     height: 6px;
   }
   ::-webkit-scrollbar-track {
-    background: var(--bg-canvas);
+    background: #f1f5f9;
   }
   ::-webkit-scrollbar-thumb {
-    background: #242933;
+    background: #cbd5e1;
     border-radius: 3px;
   }
   ::-webkit-scrollbar-thumb:hover {
-    background: #343c4a;
+    background: #94a3b8;
   }
 }
 
 @layer components {
-  /* Editorial precision navbar */
   .editorial-header {
-    background: rgba(9, 10, 12, 0.85);
+    background: rgba(255, 255, 255, 0.88);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
-    border-bottom: 1px solid var(--border-hairline);
-  }
-
-  /* Quiet, high-density matrix row */
-  .ledger-row {
-    transition: background-color 0.12s ease;
-    border-bottom: 1px solid var(--border-hairline);
-  }
-  .ledger-row:hover {
-    background-color: rgba(255, 255, 255, 0.03);
-  }
-  .ledger-row[data-active="true"] {
-    background-color: rgba(56, 189, 248, 0.05);
-    border-left: 2px solid var(--accent);
-  }
-
-  /* Editorial filter pill */
-  .filter-tab {
-    font-size: 13px;
-    font-weight: 500;
-    padding: 6px 14px;
-    border-radius: 6px;
-    color: var(--text-secondary);
-    transition: all 0.14s ease;
-    border: 1px solid transparent;
-  }
-  .filter-tab:hover {
-    color: var(--text-primary);
-    background-color: rgba(255, 255, 255, 0.04);
-  }
-  .filter-tab[data-selected="true"] {
-    color: #ffffff;
-    background-color: var(--bg-surface-elevated);
-    border-color: var(--border-strong);
-  }
-
-  /* Minimalist status badge */
-  .status-tag {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 0.04em;
-    padding: 2px 8px;
-    border-radius: 4px;
-    text-transform: uppercase;
-  }
-
-  /* Quiet link */
-  .link-external {
-    display: inline-flex;
-    align-items: center;
-    gap: 4px;
-    font-size: 12px;
-    color: var(--text-secondary);
-    transition: color 0.12s ease;
-  }
-  .link-external:hover {
-    color: var(--accent);
+    border-bottom: 1px solid rgba(226, 232, 240, 0.8);
   }
 }
 
 .no-scrollbar::-webkit-scrollbar { display: none; }
 .no-scrollbar { scrollbar-width: none; }
-
-
-
