@@ -76,6 +76,12 @@
       transparent
     );
   }
+
+  /* Soft accent halo behind the hero copy. */
+  .vh-hero-wash {
+    background: radial-gradient(60% 100% at 50% 0%, rgb(var(--vh-accent-rgb) / 0.16), transparent 72%);
+  }
+
 }
 
 @keyframes vh-ticker {
@@ -120,6 +126,10 @@
   animation: vh-rise 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
+.vh-row {
+  animation: vh-rise 0.55s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
 @keyframes vh-rise {
   from { opacity: 0; transform: translateY(8px); }
   to { opacity: 1; transform: none; }
@@ -129,6 +139,7 @@
   html { scroll-behavior: auto; }
   .vh-ticker,
   .vh-rise,
+  .vh-row,
   .vh-skeleton {
     animation: none;
   }

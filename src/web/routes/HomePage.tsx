@@ -1,7 +1,8 @@
-import React, { Suspense, lazy, useEffect, useMemo, useRef, useState } from "react";
+import React, { Suspense, lazy, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import { apiGet } from "../lib/api";
 import { useDocumentMeta } from "../lib/useDocumentMeta";
 import { Search, ExternalLink, X, ChevronDown, Link2, Check } from "lucide-react";
+import { ProjectMark } from "../components/projects/ProjectMark";
 
 const VitaConsoleScene = lazy(() =>
   import("../components/3d/VitaConsoleScene").then((module) => ({ default: module.VitaConsoleScene }))
@@ -48,6 +49,110 @@ const SPECS: Array<[string, string]> = [
   ["Display", "960 × 544 OLED"],
   ["Memory", "512 MB unified"]
 ];
+
+const STAGE_CHIP: Record<string, string> = {
+  released: "bg-emerald-100 text-emerald-800",
+  completable: "bg-emerald-100 text-emerald-800",
+  playable: "bg-emerald-100 text-emerald-800",
+  in_game: "bg-blue-100 text-blue-800",
+  booting: "bg-amber-100 text-amber-800",
+  early_wip: "bg-slate-200 text-slate-700",
+  research: "bg-slate-200 text-slate-700",
+  announced: "bg-slate-200 text-slate-700"
+};
+
+type CountMode = "idle" | "animate" | "instant";
+
+/**
+ * Counts up once, but falls back to the true value whenever the animation is not
+ * going to be seen: reduced motion, or a band the visitor jumped straight past.
+ * A figure of zero must never be shown for a real count.
+ */
+function useCountUp(target: number, mode: CountMode) {
+  const [value, setValue] = useState(target);
+
+  useEffect(() => {
+    if (mode === "animate") return;
+    setValue(target);
+  }, [mode, target]);
+
+  useEffect(() => {
+    if (mode !== "animate") return;
+    let frame = 0;
+    const started = performance.now();
+    const step = (now: number) => {
+      const progress = Math.min(1, (now - started) / 850);
+      setValue(Math.round(target * (1 - Math.pow(1 - progress, 3))));
+      if (progress < 1) frame = requestAnimationFrame(step);
+    };
+    setValue(0);
+    frame = requestAnimationFrame(step);
+    return () => cancelAnimationFrame(frame);
+  }, [mode, target]);
+
+  return value;
+}
+
+const StatFigure: React.FC<{ label: string; value: number; note: string; mode: CountMode }> = ({
+  label,
+  value,
+  note,
+  mode
+}) => {
+  const shown = useCountUp(value, mode);
+  return (
+    <div className="bg-deep px-5 py-6">
+      <p className="text-micro font-medium uppercase text-white/45">{label}</p>
+      <p className="vh-tnum mt-2 text-title font-semibold text-white">{shown}</p>
+      <p className="mt-1 text-caption text-white/45">{note}</p>
+    </div>
+  );
+};
+
+const StatBand: React.FC<{ items: Array<[string, number, string]> }> = ({ items }) => {
+  const ref = useRef<HTMLDivElement>(null);
+  const [mode, setMode] = useState<CountMode>("idle");
+
+  // Decide before paint whether this band is even going to be seen animating.
+  useLayoutEffect(() => {
+    const node = ref.current;
+    if (!node) return;
+    const reduced = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
+    const alreadyPassed = node.getBoundingClientRect().bottom < 0;
+    if (reduced || alreadyPassed) setMode("instant");
+  }, []);
+
+  useEffect(() => {
+    const node = ref.current;
+    if (!node || typeof IntersectionObserver === "undefined") {
+      setMode("instant");
+      return;
+    }
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            setMode("animate");
+            observer.disconnect();
+          }
+        }
+      },
+      { threshold: 0.35 }
+    );
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <div ref={ref} className="mx-auto max-w-5xl px-6 py-10">
+      <div className="grid grid-cols-2 gap-px overflow-hidden rounded-2xl bg-white/10 sm:grid-cols-4">
+        {items.map(([label, value, note]) => (
+          <StatFigure key={label} label={label} value={value} note={note} mode={mode} />
+        ))}
+      </div>
+    </div>
+  );
+};
 
 function splitTitle(raw: unknown) {
   const value = String(raw || "Untitled port").trim();
@@ -377,7 +482,8 @@ export const HomePage: React.FC = () => {
       )}
 
       <main id="main-content">
-        <section className="mx-auto max-w-5xl px-6 pb-2 pt-14 text-center">
+        <section className="relative mx-auto max-w-5xl px-6 pb-2 pt-14 text-center">
+          <div aria-hidden="true" className="vh-hero-wash pointer-events-none absolute inset-x-0 -top-10 h-72" />
           <p className="flex items-center justify-center gap-2 text-micro font-medium uppercase tracking-[0.2em] text-ink-medium">
             <span aria-hidden="true" className="h-1.5 w-1.5 rounded-full bg-accent" />
             Independent hardware archive
@@ -510,35 +616,25 @@ export const HomePage: React.FC = () => {
         </section>
 
         <section aria-label="Archive at a glance" className="mt-20 bg-deep">
-          <div className="mx-auto max-w-5xl px-6 py-10">
-            <div className="grid grid-cols-2 gap-px overflow-hidden rounded-2xl bg-white/10 sm:grid-cols-4">
-            {[
-              ["Indexed ports", String(projects.length), "Across both boards"],
+          <StatBand
+            items={[
+              ["Indexed ports", projects.length, "Across both boards"],
               [
                 "In development",
-                String(
-                  projects.filter((p) => ["in_game", "booting", "early_wip", "research"].includes(String(p.current_stage)))
-                    .length
-                ),
+                projects.filter((p) =>
+                  ["in_game", "booting", "early_wip", "research"].includes(String(p.current_stage))
+                ).length,
                 "Active work"
               ],
               [
                 "Playable",
-                String(
-                  projects.filter((p) => ["playable", "released", "completable"].includes(String(p.current_stage))).length
-                ),
+                projects.filter((p) => ["playable", "released", "completable"].includes(String(p.current_stage)))
+                  .length,
                 "Verified end to end"
               ],
-              ["Sources", "2", "r/vitahacks · r/VitaPiracy"]
-              ].map(([label, value, note]) => (
-                <div key={label} className="bg-deep px-5 py-6">
-                  <p className="text-micro font-medium uppercase text-white/45">{label}</p>
-                  <p className="vh-tnum mt-2 text-title font-semibold text-white">{value}</p>
-                  <p className="mt-1 text-caption text-white/45">{note}</p>
-                </div>
-              ))}
-            </div>
-          </div>
+              ["Sources", 2, "r/vitahacks · r/VitaPiracy"]
+            ]}
+          />
         </section>
 
 
@@ -657,7 +753,7 @@ export const HomePage: React.FC = () => {
               </div>
             ) : (
               <ul className="divide-y divide-hairline">
-                {visible.map((project) => {
+                {visible.map((project, index) => {
                   const title = splitTitle(project.game_title || project.display_name);
                   const expanded = expandedId === project.id;
                   const selected = selectedId === project.id;
@@ -668,7 +764,8 @@ export const HomePage: React.FC = () => {
                     <li
                       key={project.id}
                       id={"entry-" + project.slug}
-                      className={selected ? "bg-sunken/60" : ""}
+                      style={{ animationDelay: Math.min(index, 14) * 22 + "ms" }}
+                      className={"vh-row " + (selected ? "bg-sunken/60" : "")}
                     >
                       <div
                         role="button"
@@ -686,6 +783,7 @@ export const HomePage: React.FC = () => {
                       >
                         <div className="md:col-span-5">
                           <span className="flex items-center gap-2.5">
+                            <ProjectMark seed={project.slug} size={30} className="shrink-0 rounded-[9px]" />
                             <span
                               className={
                                 "h-1.5 w-1.5 shrink-0 rounded-full " +
@@ -700,7 +798,10 @@ export const HomePage: React.FC = () => {
                         </div>
 
                         <div className="pl-4 md:col-span-2 md:pl-0">
-                          <span className="inline-flex rounded-md bg-sunken px-2 py-1 text-micro font-semibold uppercase text-ink-medium">
+                          <span className={
+                              "inline-flex rounded-md px-2 py-1 text-micro font-semibold uppercase " +
+                              (STAGE_CHIP[String(project.current_stage)] || "bg-sunken text-ink-medium")
+                            }>
                             {prettyStage(project.current_stage)}
                           </span>
                           {project.verification === "detected" && (
