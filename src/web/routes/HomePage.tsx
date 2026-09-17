@@ -284,7 +284,7 @@ export const HomePage: React.FC = () => {
               Ledger
             </p>
             <h2 className="mt-2 text-xl font-semibold tracking-[-0.02em] text-[#f4f6f8] sm:text-2xl">
-              Port compatibility matrix
+              Active Port & WIP Pipeline
             </h2>
           </div>
           <div className="flex flex-wrap items-center gap-x-5 gap-y-1 font-mono text-[10px] tracking-[0.14em] text-[#5b636c] uppercase">
@@ -303,7 +303,7 @@ export const HomePage: React.FC = () => {
           <div className="relative flex-1">
             <input
               type="text"
-              placeholder="Search ports (e.g. San Andreas, Max Payne, TheFloW, ARMv7)..."
+              placeholder="Search ports (e.g. OpenMoHAA, Melee, Hollow Knight, Twilight Princess, Rinnegatamante)..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               className="w-full border border-[#242830] bg-transparent py-2 pl-9 pr-4 font-mono text-xs text-[#f4f6f8] transition-colors placeholder-[#5f676f] focus:border-[#3ad2ff] focus:outline-none"
