@@ -31,6 +31,8 @@ export default {
           caution: 'rgb(var(--vh-caution-rgb) / <alpha-value>)',
           idle: 'rgb(var(--vh-idle-rgb) / <alpha-value>)',
         },
+        deep: 'rgb(var(--vh-deep-rgb) / <alpha-value>)',
+        accent: 'rgb(var(--vh-accent-rgb) / <alpha-value>)',
         // Legacy palettes retained for the archived route components.
         oled: {
           DEFAULT: '#08090a',
@@ -72,4 +74,3 @@ export default {
   },
   plugins: [],
 }
-

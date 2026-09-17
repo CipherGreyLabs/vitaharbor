@@ -349,10 +349,10 @@ export const HomePage: React.FC = () => {
                     target={item.sources?.[0]?.canonical_url ? "_blank" : undefined}
                     rel="noopener noreferrer"
                     tabIndex={pass === 0 ? 0 : -1}
-                    className="mx-7 inline-flex items-center gap-2.5 whitespace-nowrap transition-colors hover:text-ink"
+                    className="mx-7 inline-flex items-center gap-2.5 whitespace-nowrap transition-colors hover:text-accent"
                   >
                     <span className="vh-tnum text-ink-muted">{relativeTime(item.event_at)}</span>
-                    <span className="h-1 w-1 rounded-full bg-hairline-strong" />
+                    <span className="h-1 w-1 rounded-full bg-accent" />
                     <span>{item.title}</span>
                   </a>
                 ))}
@@ -376,104 +376,114 @@ export const HomePage: React.FC = () => {
           </p>
         </section>
 
-        <section aria-labelledby="console-heading" className="mx-auto max-w-4xl px-6 pt-6">
+                <section aria-labelledby="console-heading" className="mx-auto max-w-4xl px-6 pt-8">
           <h2 id="console-heading" className="sr-only">
             Interactive console preview
           </h2>
 
-          <div ref={consoleRef} className="h-[420px] sm:h-[520px]">
-            {webgl === false ? (
-              <figure className="flex h-full w-full items-center justify-center">
-                <img
-                  src="/vita-render.png"
-                  alt="PlayStation Vita PCH-1000"
-                  className="max-h-full w-auto object-contain"
-                />
-              </figure>
-            ) : (
-              <Suspense fallback={<ConsoleSkeleton />}>
-                <div className="vh-rise h-full w-full">
-                  <VitaConsoleScene selectedProject={selectedProject} />
-                </div>
-              </Suspense>
-            )}
-          </div>
+          <div className="relative overflow-hidden rounded-3xl border border-hairline bg-surface shadow-card">
+            <div aria-hidden="true" className="vh-glow pointer-events-none absolute inset-x-0 top-0 h-[560px]" />
+            <div aria-hidden="true" className="vh-dots pointer-events-none absolute inset-0 opacity-70" />
 
-          {preview && (
-            <div className="mt-2 flex flex-col gap-4 rounded-2xl border border-hairline bg-surface px-5 py-4 shadow-card sm:flex-row sm:items-center sm:justify-between">
-              <div className="min-w-0">
-                <p className="text-micro font-medium uppercase text-ink-muted">On the display</p>
-                <p className="mt-1 truncate text-subtitle font-medium text-ink">{preview.name}</p>
-                <p className="mt-0.5 text-caption text-ink-muted">
-                  {prettyStage(selectedProject?.current_stage)}
-                  {selectedProject?.original_platform ? " · " + selectedProject.original_platform : ""}
-                </p>
-              </div>
-              <div className="flex shrink-0 items-center gap-2">
-                <button
-                  type="button"
-                  onClick={() => copyEntryLink(selectedProject)}
-                  className="inline-flex items-center gap-1.5 rounded-lg border border-hairline px-3 py-2 text-caption font-medium text-ink-medium transition-colors hover:border-hairline-strong hover:text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink/20"
-                >
-                  {copiedSlug === selectedProject?.slug ? (
-                    <>
-                      <Check className="h-3.5 w-3.5" />
-                      Copied
-                    </>
-                  ) : (
-                    <>
-                      <Link2 className="h-3.5 w-3.5" />
-                      Copy link
-                    </>
-                  )}
-                </button>
-                {selectedProject?.reddit_url && (
-                  <a
-                    href={selectedProject.reddit_url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 rounded-lg bg-ink px-3.5 py-2 text-caption font-medium text-white transition-colors hover:bg-ink/90"
-                  >
-                    Source discussion
-                    <ExternalLink className="h-3.5 w-3.5" />
-                  </a>
+            <div className="relative px-4 pt-4 sm:px-8">
+              <div ref={consoleRef} className="h-[400px] sm:h-[500px]">
+                {webgl === false ? (
+                  <figure className="flex h-full w-full items-center justify-center">
+                    <img
+                      src="/vita-render.png"
+                      alt="PlayStation Vita PCH-1000"
+                      className="max-h-full w-auto object-contain"
+                    />
+                  </figure>
+                ) : (
+                  <Suspense fallback={<ConsoleSkeleton />}>
+                    <div className="vh-rise h-full w-full">
+                      <VitaConsoleScene selectedProject={selectedProject} />
+                    </div>
+                  </Suspense>
                 )}
               </div>
+              <div aria-hidden="true" className="vh-floor mx-auto h-px w-[84%]" />
             </div>
-          )}
 
-          <div className="mt-5 flex justify-center">
-            <div
-              aria-label="Choose a project to preview"
-              className="no-scrollbar flex max-w-full gap-1 overflow-x-auto rounded-full border border-hairline bg-sunken p-1"
-            >
-              {projects.slice(0, 6).map((project) => {
-                const active = selectedId === project.id;
-                return (
-                  <button
-                    key={project.id}
-                    type="button"
-                    aria-pressed={active}
-                    onClick={() => selectProject(project, false)}
-                    className={
-                      "whitespace-nowrap rounded-full px-3.5 py-1.5 text-caption font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink/20 " +
-                      (active
-                        ? "border border-hairline bg-surface text-ink shadow-card"
-                        : "border border-transparent text-ink-muted hover:text-ink")
-                    }
-                  >
-                    {splitTitle(project.game_title || project.display_name).name}
-                  </button>
-                );
-              })}
+            <div className="relative px-4 pb-7 pt-6 sm:px-8">
+              {preview && (
+                <div className="flex flex-col gap-4 rounded-2xl border border-hairline bg-canvas px-5 py-4 sm:flex-row sm:items-center sm:justify-between">
+                  <div className="min-w-0">
+                    <p className="text-micro font-medium uppercase text-ink-muted">On the display</p>
+                    <p className="mt-1 truncate text-subtitle font-medium text-ink">{preview.name}</p>
+                    <p className="mt-0.5 text-caption text-ink-muted">
+                      {prettyStage(selectedProject?.current_stage)}
+                      {selectedProject?.original_platform ? " · " + selectedProject.original_platform : ""}
+                    </p>
+                  </div>
+                  <div className="flex shrink-0 items-center gap-2">
+                    <button
+                      type="button"
+                      onClick={() => copyEntryLink(selectedProject)}
+                      className="inline-flex items-center gap-1.5 rounded-lg border border-hairline bg-surface px-3 py-2 text-caption font-medium text-ink-medium transition-colors hover:border-hairline-strong hover:text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink/20"
+                    >
+                      {copiedSlug === selectedProject?.slug ? (
+                        <>
+                          <Check className="h-3.5 w-3.5" />
+                          Copied
+                        </>
+                      ) : (
+                        <>
+                          <Link2 className="h-3.5 w-3.5" />
+                          Copy link
+                        </>
+                      )}
+                    </button>
+                    {selectedProject?.reddit_url && (
+                      <a
+                        href={selectedProject.reddit_url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1.5 rounded-lg bg-ink px-3.5 py-2 text-caption font-medium text-white transition-colors hover:bg-ink/90"
+                      >
+                        Source discussion
+                        <ExternalLink className="h-3.5 w-3.5" />
+                      </a>
+                    )}
+                  </div>
+                </div>
+              )}
+
+              <div className="mt-5 flex justify-center">
+                <div
+                  aria-label="Choose a project to preview"
+                  className="no-scrollbar flex max-w-full gap-1 overflow-x-auto rounded-full border border-hairline bg-sunken p-1"
+                >
+                  {projects.slice(0, 6).map((project) => {
+                    const active = selectedId === project.id;
+                    return (
+                      <button
+                        key={project.id}
+                        type="button"
+                        aria-pressed={active}
+                        onClick={() => selectProject(project, false)}
+                        className={
+                          "whitespace-nowrap rounded-full px-3.5 py-1.5 text-caption font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink/20 " +
+                          (active
+                            ? "border border-hairline bg-surface text-ink shadow-card"
+                            : "border border-transparent text-ink-muted hover:text-ink")
+                        }
+                      >
+                        {splitTitle(project.game_title || project.display_name).name}
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+
+              <p className="mt-4 text-center text-micro uppercase text-ink-muted">
+                Drag to rotate · Press <span className="font-mono">/</span> to search the directory
+              </p>
             </div>
           </div>
 
-          <p className="mt-4 text-center text-micro uppercase text-ink-muted">
-            Drag to rotate · Press <span className="font-mono">/</span> to search the directory
-          </p>
-
-          <dl className="mx-auto mt-12 grid max-w-3xl grid-cols-2 gap-x-8 gap-y-7 border-t border-hairline pt-8 sm:grid-cols-4">
+          <dl className="mx-auto mt-14 grid max-w-3xl grid-cols-2 gap-x-8 gap-y-7 sm:grid-cols-4">
             {SPECS.map(([term, value]) => (
               <div key={term}>
                 <dt className="text-micro font-medium uppercase text-ink-muted">{term}</dt>
@@ -482,6 +492,37 @@ export const HomePage: React.FC = () => {
             ))}
           </dl>
         </section>
+
+        <section aria-label="Archive at a glance" className="mx-auto mt-20 max-w-5xl px-6">
+          <div className="grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-hairline bg-hairline sm:grid-cols-4">
+            {[
+              ["Indexed ports", String(projects.length), "Across both boards"],
+              [
+                "In development",
+                String(
+                  projects.filter((p) => ["in_game", "booting", "early_wip", "research"].includes(String(p.current_stage)))
+                    .length
+                ),
+                "Active work"
+              ],
+              [
+                "Playable",
+                String(
+                  projects.filter((p) => ["playable", "released", "completable"].includes(String(p.current_stage))).length
+                ),
+                "Verified end to end"
+              ],
+              ["Sources", "2", "r/vitahacks · r/VitaPiracy"]
+            ].map(([label, value, note]) => (
+              <div key={label} className="bg-surface px-5 py-6">
+                <p className="text-micro font-medium uppercase text-ink-muted">{label}</p>
+                <p className="vh-tnum mt-2 text-title font-semibold text-ink">{value}</p>
+                <p className="mt-1 text-caption text-ink-muted">{note}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+
 
         <section
           id="directory"
@@ -828,26 +869,42 @@ export const HomePage: React.FC = () => {
           ref={methodReveal}
           data-reveal=""
           aria-labelledby="methodology-heading"
-          className="mx-auto mt-28 max-w-5xl px-6"
+          className="mt-24 bg-deep"
         >
-          <div className="rounded-2xl border border-hairline bg-surface px-6 py-8 shadow-card">
-            <h2 id="methodology-heading" className="text-subtitle font-semibold text-ink">
+          <div className="mx-auto max-w-5xl px-6 py-16">
+            <p className="text-micro font-medium uppercase tracking-[0.22em] text-white/45">Method</p>
+            <h2 id="methodology-heading" className="mt-3 text-title font-semibold text-white">
               How entries get listed
             </h2>
-            <div className="mt-6 grid gap-7 sm:grid-cols-3">
+            <div className="mt-10 grid gap-10 sm:grid-cols-3">
               {[
-                ["Sourced", "Every entry links to the original engineering thread on r/vitahacks or r/VitaPiracy."],
-                ["Verified", "Stage and performance notes come from the people running the build on real hardware."],
-                ["Non-infringing", "Only discussion and source repositories are indexed. No ROMs, ISOs or game data are hosted."]
-              ].map(([title, body]) => (
+                [
+                  "01",
+                  "Sourced",
+                  "Every entry links to the original engineering thread on r/vitahacks or r/VitaPiracy."
+                ],
+                [
+                  "02",
+                  "Verified",
+                  "Stage and performance notes come from the people running the build on real hardware."
+                ],
+                [
+                  "03",
+                  "Non-infringing",
+                  "Only discussion and source repositories are indexed. No ROMs, ISOs or game data are hosted."
+                ]
+              ].map(([number, title, body]) => (
                 <div key={title}>
-                  <h3 className="text-body font-medium text-ink">{title}</h3>
-                  <p className="mt-2 text-body text-ink-medium">{body}</p>
+                  <p className="vh-tnum text-micro font-medium text-white/40">{number}</p>
+                  <h3 className="mt-3 text-subtitle font-medium text-white">{title}</h3>
+                  <p className="mt-2 text-body text-white/65">{body}</p>
                 </div>
               ))}
             </div>
           </div>
         </section>
+
+
       </main>
 
       <footer className="mx-auto mt-24 max-w-5xl border-t border-hairline px-6 py-10">
