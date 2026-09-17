@@ -334,9 +334,9 @@ export const HomePage: React.FC = () => {
           >
             VitaHarbor
           </a>
-          <nav aria-label="Sections" className="flex items-center gap-5 text-body text-ink-medium">
+          <nav aria-label="Sections" className="flex items-center gap-4 text-body text-ink-medium sm:gap-5">
             <a href="#directory" className="rounded-md transition-colors hover:text-ink">Directory</a>
-            <a href="#methodology" className="hidden rounded-md transition-colors hover:text-ink sm:inline">Methodology</a>
+            <a href="#methodology" className="rounded-md transition-colors hover:text-ink">Methodology</a>
             <span className="hidden items-center gap-1.5 rounded-full bg-sunken px-2.5 py-1 text-micro font-medium uppercase text-ink-medium sm:inline-flex">
               <span className="h-1.5 w-1.5 rounded-full bg-ink-muted" />
               <span className="vh-tnum">{loading ? "—" : projects.length}</span>
@@ -703,6 +703,11 @@ export const HomePage: React.FC = () => {
                           <span className="inline-flex rounded-md bg-sunken px-2 py-1 text-micro font-semibold uppercase text-ink-medium">
                             {prettyStage(project.current_stage)}
                           </span>
+                          {project.verification === "detected" && (
+                            <span className="ml-1.5 inline-flex rounded-md border border-hairline px-2 py-1 text-micro font-semibold uppercase text-ink-muted">
+                              Unverified
+                            </span>
+                          )}
                         </div>
 
                         <div className="pl-4 md:col-span-4 md:pl-0">
@@ -756,6 +761,13 @@ export const HomePage: React.FC = () => {
                           id={"panel-" + project.slug}
                           className="border-t border-hairline bg-sunken/50 px-5 py-6"
                         >
+                          {project.verification === "detected" && (
+                            <p className="mb-6 max-w-3xl rounded-lg border border-hairline bg-surface px-4 py-3 text-caption text-ink-medium">
+                              <span className="font-medium text-ink">Unverified entry.</span> Promoted
+                              automatically from a detected thread. There is no hardware report yet, so
+                              playability and performance are deliberately left empty.
+                            </p>
+                          )}
                           <div className="grid gap-8 lg:grid-cols-3">
                             <div className="lg:col-span-2">
                               <h3 className="text-micro font-semibold uppercase text-ink-muted">

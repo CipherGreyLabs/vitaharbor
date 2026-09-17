@@ -18,7 +18,8 @@ export const FALLBACK_GAMES: Game[] = [
   { id: 15, slug: "fallout-2", title: "Fallout 2 Community Edition", normalized_title: "fallout 2 community edition", original_release_year: 1998, original_platform: "PC", created_at: new Date('2026-09-17T15:34:00.000Z'), updated_at: new Date('2026-09-17T15:34:00.000Z') },
   { id: 16, slug: "render96-sm64", title: "Render96 HD SM64 Vita", normalized_title: "render96 hd sm64 vita", original_release_year: 2020, original_platform: "PC Decomp", created_at: new Date('2026-09-17T15:34:00.000Z'), updated_at: new Date('2026-09-17T15:34:00.000Z') },
   { id: 17, slug: "celeste-classic", title: "Celeste Classic Vita", normalized_title: "celeste classic vita", original_release_year: 2016, original_platform: "PICO-8 / C", created_at: new Date('2026-09-17T15:34:00.000Z'), updated_at: new Date('2026-09-17T15:34:00.000Z') },
-  { id: 18, slug: "cave-story-nxengine", title: "Cave Story (NXEngine-evo)", normalized_title: "cave story (nxengine-evo)", original_release_year: 2004, original_platform: "PC", created_at: new Date('2026-09-17T15:34:00.000Z'), updated_at: new Date('2026-09-17T15:34:00.000Z') }
+  { id: 18, slug: "cave-story-nxengine", title: "Cave Story (NXEngine-evo)", normalized_title: "cave story (nxengine-evo)", original_release_year: 2004, original_platform: "PC", created_at: new Date('2026-09-17T15:34:00.000Z'), updated_at: new Date('2026-09-17T15:34:00.000Z') },
+  { id: 19, slug: "renegade-vita-demo-release", title: "Renegade Vita - Demo Release", normalized_title: "renegade vita - demo release", original_release_year: null, original_platform: "Unknown", created_at: new Date('2026-09-15T03:40:12.000Z'), updated_at: new Date('2026-09-17T15:34:20.988Z') }
 ];
 
 export const FALLBACK_PROJECTS: any[] = [
@@ -417,6 +418,29 @@ export const FALLBACK_PROJECTS: any[] = [
     original_release_year: 2004,
     technologies: ["Native C++", "SDL2"],
     developers: [{ id: 9, role: "lead", display_name: "Northfear", slug: "northfear" }]
+  },
+  {
+    id: 19,
+    game_id: 19,
+    slug: "renegade-vita-demo-release",
+    reddit_url: "https://www.reddit.com/r/vitahacks/comments/1wgp613/renegade_vita_demo_release/",
+    display_name: "Renegade Vita - Demo Release",
+    current_stage: "announced",
+    lifecycle: "active",
+    summary: "Detected by the scanner on r/vitahacks. Awaiting independent verification on hardware.",
+    playability_notes: null,
+    performance_notes: null,
+    first_seen_at: new Date('2026-09-15T03:40:12.000Z'),
+    last_activity_at: new Date('2026-09-17T15:34:20.988Z'),
+    released_at: null,
+    is_featured: false,
+    is_archived: false,
+    verification: "detected",
+    game_title: "Renegade Vita - Demo Release",
+    original_platform: "Unknown",
+    original_release_year: null,
+    technologies: [],
+    developers: []
   }
 ];
 
