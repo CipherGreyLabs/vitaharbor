@@ -4,154 +4,55 @@
 
 @layer base {
   :root {
-    --bg-oled: #08090a;
-    --surface-panel: #0f1113;
-    --surface-card: #15181b;
-    --surface-hover: #1c2024;
-    --border-subtle: #242830;
-    --border-bright: #343a42;
-    --vita-cyan: #3ad2ff;
-    --vita-blue: #3ad2ff;
-    --text-high: #f4f6f8;
-    --text-mid: #a3acb5;
-    --text-low: #7c848d;
+    --ink-0:#050505; --ink-1:#0f0f0f; --ink-2:#171717; --ink-3:#262626;
+    --line:#262626; --line-strong:#404040;
+    --tx-1:#f5f5f5; --tx-2:#a3a3a3; --tx-3:#737373;
   }
-
+  html { scroll-behavior:smooth; }
   body {
-    background-color: var(--bg-oled);
-    color: var(--text-high);
-    font-family: 'Inter', system-ui, -apple-system, sans-serif;
-    letter-spacing: -0.01em;
-    overflow-x: hidden;
-    -webkit-font-smoothing: antialiased;
+    background:var(--ink-0); color:var(--tx-1);
+    font-family:Inter,system-ui,sans-serif; overflow-x:hidden;
+    -webkit-font-smoothing:antialiased;
   }
-
-  /* Custom minimal scrollbar */
-  ::-webkit-scrollbar {
-    width: 6px;
-    height: 6px;
-  }
-  ::-webkit-scrollbar-track {
-    background: #08090a;
-  }
-  ::-webkit-scrollbar-thumb {
-    background: #242830;
-    border-radius: 2px;
-  }
-  ::-webkit-scrollbar-thumb:hover {
-    background: #343a42;
-  }
+  ::selection { background:rgba(255,255,255,.2); }
+  ::-webkit-scrollbar { width:8px; }
+  ::-webkit-scrollbar-track { background:var(--ink-0); }
+  ::-webkit-scrollbar-thumb { background:var(--line-strong); border-radius:4px; }
 }
 
 @layer components {
-  /*
-   * Editorial surfaces.
-   *
-   * A record is a typographic block separated by a hairline, not a box. Boxes
-   * are reserved for things the user can act on (cards, filters, controls), so
-   * the interface reads as a document rather than a dashboard of widgets.
-   */
-  .terminal-panel {
-    background-color: transparent;
-    border-top: 1px solid var(--border-subtle);
-  }
+  .eyebrow { display:inline-flex; align-items:center; gap:8px; font-size:11px; letter-spacing:0.1em; text-transform:uppercase; color:var(--tx-3); font-weight: 500; }
+  .kinetic { font-weight:500; letter-spacing:-0.03em; line-height:1.1; }
 
-  .terminal-card {
-    background-color: var(--surface-panel);
-    border: 1px solid var(--border-subtle);
-    transition: border-color 0.18s ease, background-color 0.18s ease;
-  }
-  .terminal-card:hover {
-    background-color: var(--surface-hover);
-    border-color: color-mix(in srgb, var(--vita-cyan) 45%, var(--border-bright));
-  }
+  .btn-primary { display:inline-flex; align-items:center; gap:8px; padding:10px 20px; border-radius:4px; font-size:13px; font-weight:500; color:#000; background:#fff; transition:background .2s; }
+  .btn-primary:hover { background:#e5e5e5; }
+  .btn-ghost { display:inline-flex; align-items:center; gap:8px; padding:10px 20px; border-radius:4px; border:1px solid var(--line-strong); color:var(--tx-1); font-size:13px; font-weight:500; transition:border-color .2s, background .2s; }
+  .btn-ghost:hover { border-color:var(--tx-2); background:var(--ink-1); }
 
-  /* Aliases kept so every route shares one visual language. */
-  .card-panel {
-    background-color: transparent;
-    border-top: 1px solid var(--border-subtle);
-  }
-  .card-panel-hover {
-    background-color: var(--surface-panel);
-    border: 1px solid var(--border-subtle);
-    transition: border-color 0.18s ease, background-color 0.18s ease;
-  }
-  .card-panel-hover:hover {
-    background-color: var(--surface-hover);
-    border-color: color-mix(in srgb, var(--vita-cyan) 45%, var(--border-bright));
-  }
+  .chip { padding:6px 12px; border-radius:4px; font-size:11px; font-weight:500; border:1px solid var(--line); color:var(--tx-3); transition:all .2s; white-space:nowrap; }
+  .chip:hover { color:var(--tx-1); border-color:var(--line-strong); background:var(--ink-1); }
+  .chip[data-on=true] { background:#fff; border-color:#fff; color:#000; }
 
-  /* Hardware badge */
-  .tag-mono {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 10px;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-    padding: 2px 6px;
-    border-radius: 2px;
-    display: inline-flex;
-    align-items: center;
-    gap: 4px;
-  }
+  .stage-pill { display:inline-flex; align-items:center; gap:6px; padding:3px 8px; border-radius:4px; font-size:10px; font-weight:600; letter-spacing:0.05em; text-transform:uppercase; border: 1px solid var(--line); color: var(--tx-2); }
+  .stage-announced,.stage-research,.stage-early_wip { color:#a8a29e; }
+  .stage-booting,.stage-in_game { color:#fbbf24; border-color: rgba(251, 191, 36, 0.3); }
+  .stage-playable,.stage-completable { color:#34d399; border-color: rgba(52, 211, 153, 0.3); }
+  .stage-released { color:#fff; border-color: #fff; background: rgba(255,255,255,0.1); }
+  .stage-unknown { color:var(--tx-3); background:rgba(255,255,255,.05); }
 
-  /* Monospace hardware button */
-  .btn-terminal-primary {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 6px;
-    background-color: #3ad2ff;
-    color: #08090a;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    padding: 6px 14px;
-    transition: background-color 0.15s ease;
-  }
-  .btn-terminal-primary:hover {
-    background-color: #8ce6ff;
-  }
-
-  .btn-terminal-secondary {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 6px;
-    background-color: var(--surface-card);
-    color: var(--text-high);
-    border: 1px solid var(--border-subtle);
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
-    font-weight: 500;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    padding: 6px 14px;
-    transition: border-color 0.15s ease, background-color 0.15s ease;
-  }
-  .btn-terminal-secondary:hover {
-    border-color: var(--vita-cyan);
-    color: var(--text-high);
-  }
-
-  .btn-secondary {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 6px;
-    background-color: transparent;
-    color: var(--text-high);
-    border: 1px solid var(--border-subtle);
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
-    font-weight: 500;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    padding: 6px 14px;
-    transition: border-color 0.15s ease, color 0.15s ease;
-  }
-  .btn-secondary:hover {
-    border-color: var(--vita-cyan);
-  }
+  .link-quiet { color:var(--tx-3); transition:color .2s; }
+  .link-quiet:hover { color:var(--tx-1); }
 }
+
+.terminal-panel { background:transparent; border-top:1px solid var(--line); }
+.terminal-card { background:var(--ink-1); border:1px solid var(--line); border-radius:6px; transition:border-color .22s, background .22s, transform .22s; }
+.terminal-card:hover { background:var(--ink-2); border-color:var(--line-strong); }
+.card-panel { background:transparent; border-top:1px solid var(--line); }
+.card-panel-hover { background:var(--ink-1); border:1px solid var(--line); border-radius:6px; }
+.btn-terminal-primary { display:inline-flex; align-items:center; gap:7px; background:#fff; color:#000; font-weight:500; font-size:12px; padding:9px 18px; border-radius:4px; }
+.btn-terminal-secondary,.btn-secondary { display:inline-flex; align-items:center; gap:7px; border:1px solid var(--line-strong); color:var(--tx-1); font-size:12px; padding:9px 18px; border-radius:4px; transition:border-color .2s; }
+.btn-terminal-secondary:hover,.btn-secondary:hover { border-color:var(--tx-2); }
+.btn-accent { color:#fff; }
+.vita-object { position:relative; width:100%; height:100%; min-height:240px; touch-action:pan-y; }
+.scene-unavailable { padding:2rem; text-align:center; color:var(--tx-3); }
+.no-scrollbar::-webkit-scrollbar{display:none} .no-scrollbar{scrollbar-width:none}
