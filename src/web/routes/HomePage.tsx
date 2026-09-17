@@ -118,8 +118,8 @@ export const HomePage: React.FC = () => {
           const first = projectsRes.projects[0];
           setSelectedProject({
             id: first.id,
-            game_title: first.game_title || first.display_name || "GTA: San Andreas",
-            display_name: first.display_name || "GTA San Andreas Vita",
+            game_title: first.game_title || first.display_name || "Medal of Honor: Allied Assault",
+            display_name: first.display_name || "OpenMoHAA Vita",
             current_stage: first.current_stage,
             performance_notes: first.performance_notes,
             playability_notes: first.playability_notes,
