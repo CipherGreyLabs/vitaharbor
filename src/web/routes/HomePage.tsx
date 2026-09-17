@@ -32,6 +32,17 @@ const STAGE_TONE: Record<string, string> = {
   announced: "bg-stage-idle"
 };
 
+const STAGE_STEP: Record<string, number> = {
+  announced: 1,
+  research: 1,
+  early_wip: 2,
+  booting: 3,
+  in_game: 4,
+  playable: 5,
+  completable: 5,
+  released: 5
+};
+
 const STAGE_RANK: Record<string, number> = {
   announced: 0,
   research: 0,
@@ -531,6 +542,7 @@ export const HomePage: React.FC = () => {
             <div className="relative px-4 pb-7 pt-6 sm:px-8">
               {preview && (
                 <div className="flex flex-col gap-4 rounded-2xl border border-hairline bg-canvas px-5 py-4 sm:flex-row sm:items-center sm:justify-between">
+                  <ProjectMark seed={selectedProject?.slug || "vita"} size={46} className="hidden shrink-0 rounded-xl sm:block" />
                   <div className="min-w-0">
                     <p className="text-micro font-medium uppercase text-ink-muted">On the display</p>
                     <p className="mt-1 truncate text-subtitle font-medium text-ink">{preview.name}</p>
@@ -779,21 +791,40 @@ export const HomePage: React.FC = () => {
                             toggleEntry(project);
                           }
                         }}
-                        className="grid cursor-pointer grid-cols-1 gap-2.5 px-5 py-4 transition-colors hover:bg-sunken/70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ink/20 md:grid-cols-12 md:items-center md:gap-4"
+                        className="group/row relative grid cursor-pointer grid-cols-1 gap-2.5 px-5 py-4 transition-colors hover:bg-sunken/70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ink/20 md:grid-cols-12 md:items-center md:gap-4"
                       >
+                        <span
+                          aria-hidden="true"
+                          className="absolute left-0 top-0 h-full w-0.5 origin-top scale-y-0 bg-accent transition-transform duration-200 group-hover/row:scale-y-100"
+                        />
                         <div className="md:col-span-5">
                           <span className="flex items-center gap-2.5">
-                            <ProjectMark seed={project.slug} size={30} className="shrink-0 rounded-[9px]" />
-                            <span
-                              className={
-                                "h-1.5 w-1.5 shrink-0 rounded-full " +
-                                (STAGE_TONE[String(project.current_stage)] || "bg-stage-idle")
-                              }
+                            <ProjectMark
+                              seed={project.slug}
+                              size={30}
+                              className="shrink-0 rounded-[9px] transition-transform duration-200 group-hover/row:scale-105"
                             />
-                            <span className="text-subtitle font-medium text-ink">{title.name}</span>
+                            <span className="min-w-0">
+                              <span className="block truncate text-subtitle font-medium text-ink transition-colors group-hover/row:text-accent">
+                                {title.name}
+                              </span>
+                              <span className="mt-0.5 block font-mono text-micro uppercase text-ink-muted">
+                                {title.engine || project.original_platform || "Port"}
+                              </span>
+                            </span>
                           </span>
-                          <span className="mt-1 block pl-4 font-mono text-micro uppercase text-ink-muted">
-                            {title.engine || project.original_platform || "Port"}
+                          <span aria-hidden="true" className="mt-2.5 flex gap-1 pl-[38px]">
+                            {[1, 2, 3, 4, 5].map((segment) => (
+                              <span
+                                key={segment}
+                                className={
+                                  "h-[3px] w-5 rounded-full " +
+                                  (segment <= (STAGE_STEP[String(project.current_stage)] || 1)
+                                    ? STAGE_TONE[String(project.current_stage)] || "bg-stage-idle"
+                                    : "bg-hairline")
+                                }
+                              />
+                            ))}
                           </span>
                         </div>
 
@@ -1097,20 +1128,54 @@ export const HomePage: React.FC = () => {
 
       </main>
 
-      <footer className="mx-auto mt-24 max-w-5xl border-t border-hairline px-6 py-10">
-        <div className="flex flex-col items-start justify-between gap-5 text-body text-ink-muted sm:flex-row sm:items-center">
-          <p className="max-w-md">
-            VitaHarbor is an independent research index. Nothing here bypasses licensing or
-            distributes copyrighted game data.
-          </p>
-          <div className="flex items-center gap-5">
-            <a href="/api/feed.json" target="_blank" rel="noopener noreferrer" className="transition-colors hover:text-ink">
-              JSON feed
-            </a>
-            <a href="/api/rss.xml" target="_blank" rel="noopener noreferrer" className="transition-colors hover:text-ink">
-              RSS
-            </a>
+      <footer className="bg-surface">
+        <div className="mx-auto max-w-5xl px-6 py-14">
+          <div className="grid gap-10 sm:grid-cols-3">
+            <div>
+              <p className="flex items-center gap-2 text-subtitle font-semibold tracking-tight text-ink">
+                <span aria-hidden="true" className="h-2 w-2 rounded-full bg-accent" />
+                VitaHarbor
+              </p>
+              <p className="mt-3 max-w-xs text-body text-ink-medium">
+                An independent archive of PlayStation Vita ports, assembled from public engineering threads.
+              </p>
+            </div>
+            <div>
+              <h2 className="text-micro font-semibold uppercase text-ink-muted">Archive</h2>
+              <ul className="mt-3 space-y-2 text-body">
+                <li>
+                  <a href="#directory" className="text-ink-medium transition-colors hover:text-accent">Directory</a>
+                </li>
+                <li>
+                  <a href="#methodology" className="text-ink-medium transition-colors hover:text-accent">Methodology</a>
+                </li>
+                <li>
+                  <a href="/data/discovered.json" target="_blank" rel="noopener noreferrer" className="text-ink-medium transition-colors hover:text-accent">
+                    Discovery log
+                  </a>
+                </li>
+              </ul>
+            </div>
+            <div>
+              <h2 className="text-micro font-semibold uppercase text-ink-muted">Feeds</h2>
+              <ul className="mt-3 space-y-2 text-body">
+                <li>
+                  <a href="/api/feed.json" target="_blank" rel="noopener noreferrer" className="text-ink-medium transition-colors hover:text-accent">
+                    JSON Feed 1.1
+                  </a>
+                </li>
+                <li>
+                  <a href="/api/rss.xml" target="_blank" rel="noopener noreferrer" className="text-ink-medium transition-colors hover:text-accent">
+                    RSS 2.0
+                  </a>
+                </li>
+              </ul>
+            </div>
           </div>
+          <p className="mt-12 border-t border-hairline pt-6 text-caption text-ink-muted">
+            Nothing here bypasses licensing or distributes copyrighted game data. Every entry links to its
+            original public thread.
+          </p>
         </div>
       </footer>
     </div>
