@@ -12,7 +12,7 @@ import { NotFoundPage } from "./routes/NotFoundPage";
 
 export default function App() {
   return (
-    <div className="min-h-screen bg-[#0d0e11] text-[#e4e5e9] flex flex-col antialiased">
+    <div className="min-h-screen bg-white text-[#1d1d1f] flex flex-col antialiased">
       <main className="flex-1 w-full">
         <Routes>
           <Route path="/" element={<HomePage />} />

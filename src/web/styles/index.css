@@ -3,57 +3,13 @@
 @tailwind utilities;
 
 @layer base {
-  :root {
-    --bg-canvas: #f8fafc;
-    --bg-surface: #ffffff;
-    --border-hairline: rgba(226, 232, 240, 0.8);
-    --text-primary: #0f172a;
-    --text-secondary: #475569;
-    --text-tertiary: #94a3b8;
-    --accent: #2563eb;
-  }
-
-  html {
-    scroll-behavior: smooth;
-  }
-
   body {
-    background-color: #f8fafc;
-    color: #0f172a;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background-color: #ffffff;
+    color: #1d1d1f;
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     letter-spacing: -0.01em;
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
-
-  ::selection {
-    background: rgba(37, 99, 235, 0.15);
-    color: #1e3a8a;
-  }
-
-  ::-webkit-scrollbar {
-    width: 6px;
-    height: 6px;
-  }
-  ::-webkit-scrollbar-track {
-    background: #f1f5f9;
-  }
-  ::-webkit-scrollbar-thumb {
-    background: #cbd5e1;
-    border-radius: 3px;
-  }
-  ::-webkit-scrollbar-thumb:hover {
-    background: #94a3b8;
-  }
-}
-
-@layer components {
-  .editorial-header {
-    background: rgba(255, 255, 255, 0.88);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border-bottom: 1px solid rgba(226, 232, 240, 0.8);
   }
 }
 
