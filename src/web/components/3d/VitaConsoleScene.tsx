@@ -15,12 +15,13 @@ export interface SelectedProjectView {
 export interface VitaConsoleSceneProps {
   selectedProject?: SelectedProjectView | null;
   align?: "center" | "split";
+  onConsoleClick?: () => void;
 }
 
 // PCH-1000 dimensions in millimetres. Screen: 5-inch, 960:544 aspect.
 export const VITA_DIMENSIONS = { width: 182, height: 83.5, depth: 18.6, screenWidth: 110.6, screenHeight: 62.7 };
 
-// Front silhouette and control islands traced in the supplied 600 × 270 reference.
+// Front silhouette and control islands traced in reference coordinates
 function referenceShape(commands: Array<[string, ...number[]]>) {
   const shape = new THREE.Shape();
   const x = (v: number) => (v - 300) * 182 / 600;
@@ -43,7 +44,11 @@ const BODY_TRACE: Array<[string, ...number[]]> = [
   ['C',3,96,12,63,37,38],['C',50,25,67,26,84,21],['C',97,17,101,3,115,3]
 ];
 
-export const VitaConsoleScene: React.FC<VitaConsoleSceneProps> = ({ selectedProject, align = "center" }) => {
+export const VitaConsoleScene: React.FC<VitaConsoleSceneProps> = ({
+  selectedProject,
+  align = "center",
+  onConsoleClick
+}) => {
   const host = useRef<HTMLDivElement>(null);
   const selected = useRef(selectedProject);
   selected.current = selectedProject;
@@ -63,7 +68,7 @@ export const VitaConsoleScene: React.FC<VitaConsoleSceneProps> = ({ selectedProj
 
     renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.75));
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
-    renderer.toneMappingExposure = 1.05;
+    renderer.toneMappingExposure = 1.08;
     el.appendChild(renderer.domElement);
 
     const scene = new THREE.Scene();
@@ -79,12 +84,12 @@ export const VitaConsoleScene: React.FC<VitaConsoleSceneProps> = ({ selectedProj
     scene.add(vita);
 
     const textures: THREE.Texture[] = [];
-    const shell = new THREE.MeshPhysicalMaterial({ color: '#141519', roughness: 0.27, metalness: 0.12, clearcoat: 0.8 });
-    const face = new THREE.MeshPhysicalMaterial({ color: '#090b0e', roughness: 0.18, metalness: 0.05, clearcoat: 1 });
-    const silver = new THREE.MeshStandardMaterial({ color: '#8f959e', roughness: 0.24, metalness: 0.9 });
-    const button = new THREE.MeshStandardMaterial({ color: '#25282c', roughness: 0.33, metalness: 0.1 });
-    const rubber = new THREE.MeshStandardMaterial({ color: '#202125', roughness: 0.86 });
-    const black = new THREE.MeshBasicMaterial({ color: '#070809' });
+    const shell = new THREE.MeshPhysicalMaterial({ color: '#131418', roughness: 0.28, metalness: 0.14, clearcoat: 0.85 });
+    const face = new THREE.MeshPhysicalMaterial({ color: '#08090d', roughness: 0.16, metalness: 0.06, clearcoat: 1 });
+    const silver = new THREE.MeshStandardMaterial({ color: '#9aa0aa', roughness: 0.22, metalness: 0.92 });
+    const button = new THREE.MeshStandardMaterial({ color: '#23262a', roughness: 0.35, metalness: 0.12 });
+    const rubber = new THREE.MeshStandardMaterial({ color: '#1d1e22', roughness: 0.88 });
+    const black = new THREE.MeshBasicMaterial({ color: '#060708' });
 
     function traced(shape: THREE.Shape, depth: number, z: number, mat: THREE.Material, bevel = 0.22) {
       const geometry = new THREE.ExtrudeGeometry(shape, { depth, bevelEnabled: true, bevelSize: bevel, bevelThickness: bevel, bevelSegments: 4, curveSegments: 32, steps: 1 });
@@ -169,45 +174,48 @@ export const VitaConsoleScene: React.FC<VitaConsoleSceneProps> = ({ selectedProj
         g.fillStyle = off;
         g.fillRect(0, 0, 960, 544);
         g.fillStyle = '#64748b';
-        g.font = '22px Arial';
+        g.font = 'bold 22px Arial';
         g.fillText('SELECT A PORT BELOW TO PREVIEW', 280, 272);
         screenTexture.needsUpdate = true;
         return;
       }
 
+      // Rich atmospheric LiveArea gradient
       const gradient = g.createLinearGradient(0, 0, 960, 544);
-      gradient.addColorStop(0, '#061730');
-      gradient.addColorStop(0.5, '#0b2b56');
-      gradient.addColorStop(1, '#081e3d');
+      gradient.addColorStop(0, '#041226');
+      gradient.addColorStop(0.4, '#092344');
+      gradient.addColorStop(1, '#06162d');
       g.fillStyle = gradient;
       g.fillRect(0, 0, 960, 544);
 
-      for (let i = 0; i < 4; i++) {
+      // Glowing fluid waves
+      for (let i = 0; i < 5; i++) {
         g.beginPath();
-        g.moveTo(-100, 340 + i * 35);
-        g.bezierCurveTo(250, 60 + i * 55, 490, 650 - i * 40, 1100, 170 + i * 48);
+        g.moveTo(-100, 310 + i * 36);
+        g.bezierCurveTo(240, 50 + i * 55, 480, 640 - i * 40, 1100, 160 + i * 48);
         g.lineTo(1100, 600);
         g.lineTo(-100, 600);
         g.closePath();
-        g.fillStyle = 'rgba(56, 189, 248, 0.12)';
+        g.fillStyle = `rgba(56, 189, 248, ${0.06 + i * 0.025})`;
         g.fill();
       }
 
       // Top Status Bar (OLED system bar)
-      g.fillStyle = 'rgba(0, 0, 0, 0.4)';
+      g.fillStyle = 'rgba(0, 0, 0, 0.45)';
       g.fillRect(0, 0, 960, 42);
       g.fillStyle = '#bae6fd';
-      g.font = '600 16px -apple-system, sans-serif';
+      g.font = '600 15px -apple-system, Arial, sans-serif';
       g.fillText('PS VITA · HENKAKU 3.65', 38, 27);
-      g.fillText('100% 🔋  ·  5GHz 📶', 780, 27);
+      g.fillText('100% 🔋  ·  5GHz 📶', 785, 27);
 
       g.fillStyle = '#e0f2fe';
       g.font = '20px Arial';
       g.fillText('VitaHarbor Port Ledger', 42, 78);
-      g.font = '600 15px Arial';
+      g.font = 'bold 14px Arial';
       g.fillStyle = '#38bdf8';
       g.fillText('ACTIVE WIP HARDWARE TEST', 710, 78);
 
+      // Game Title
       g.fillStyle = '#ffffff';
       g.font = 'bold 50px Arial';
       const title = current.game_title || current.display_name || 'Homebrew Project';
@@ -217,7 +225,7 @@ export const VitaConsoleScene: React.FC<VitaConsoleSceneProps> = ({ selectedProj
         const next = line + word + ' ';
         if (g.measureText(next).width > 840 && line) {
           g.fillText(line, 44, y);
-          y += 60;
+          y += 58;
           line = word + ' ';
         } else {
           line = next;
@@ -225,36 +233,39 @@ export const VitaConsoleScene: React.FC<VitaConsoleSceneProps> = ({ selectedProj
       }
       g.fillText(line, 44, y);
 
+      // Stage Pill Badge
       const stageRaw = (current.current_stage || 'in_game').replace('_', ' ').toUpperCase();
-      g.fillStyle = 'rgba(56, 189, 248, 0.22)';
+      g.fillStyle = 'rgba(56, 189, 248, 0.25)';
       g.beginPath();
       g.roundRect(44, y + 20, 240, 36, 18);
       g.fill();
-      g.strokeStyle = 'rgba(56, 189, 248, 0.6)';
+      g.strokeStyle = 'rgba(56, 189, 248, 0.7)';
       g.lineWidth = 1.5;
       g.stroke();
       g.fillStyle = '#38bdf8';
       g.font = 'bold 15px Arial';
       g.fillText(`● STAGE: ${stageRaw}`, 64, y + 43);
 
+      // Performance Notes
       const perf = current.performance_notes || current.playability_notes || 'Tested on real hardware; ARM Cortex-A9 execution.';
       g.fillStyle = '#cbd5e1';
       g.font = '20px Arial';
       g.fillText(perf.slice(0, 78) + (perf.length > 78 ? '...' : ''), 44, y + 95);
 
-      g.fillStyle = 'rgba(0, 0, 0, 0.45)';
+      // OLED Bottom Telemetry Bar
+      g.fillStyle = 'rgba(0, 0, 0, 0.5)';
       g.fillRect(0, 488, 960, 56);
       g.fillStyle = '#38bdf8';
-      g.font = '600 15px Arial';
+      g.font = 'bold 14px Arial';
       g.fillText('DIRECT REDDIT THREAD VERIFIED · r/vitahacks & r/VitaPiracy', 44, 523);
-      g.fillStyle = '#64748b';
+      g.fillStyle = '#94a3b8';
       g.fillText('512MB RAM · SGX543MP4+', 740, 523);
 
       screenTexture.needsUpdate = true;
     }
 
-    const recessMat = new THREE.MeshStandardMaterial({color:'#151719',roughness:0.52,metalness:0.12});
-    const rimMat = new THREE.MeshStandardMaterial({color:'#202226',roughness:0.62,metalness:0.06});
+    const recessMat = new THREE.MeshStandardMaterial({color:'#14161a',roughness:0.52,metalness:0.12});
+    const rimMat = new THREE.MeshStandardMaterial({color:'#1f2125',roughness:0.62,metalness:0.06});
 
     const island = referenceShape([['M',56,53],['C',29,53,15,70,15,96],['C',15,114,26,123,43,130],['C',60,136,48,144,47,156],['C',42,179,57,190,74,190],['C',93,190,104,176,101,159],['C',100,145,88,139,89,128],['C',106,110,103,82,91,66],['C',82,56,70,53,56,53]]);
     for (const sign of [1, -1]) {
@@ -320,13 +331,20 @@ export const VitaConsoleScene: React.FC<VitaConsoleSceneProps> = ({ selectedProj
       }
     }
 
-    scene.add(new THREE.HemisphereLight('#ffffff', '#7e8795', 0.8));
-    const light = new THREE.DirectionalLight('#ffffff', 1.7);
+    // STUDIO LIGHTING SETUP WITH EDGE RIM ILLUMINATION
+    scene.add(new THREE.HemisphereLight('#ffffff', '#64748b', 0.85));
+    const light = new THREE.DirectionalLight('#ffffff', 1.8);
     light.position.set(-80, 160, 260);
     scene.add(light);
-    const fill = new THREE.DirectionalLight('#dae7f7', 1.3);
+    const fill = new THREE.DirectionalLight('#c8e1ff', 1.3);
     fill.position.set(180, 0, 100);
     scene.add(fill);
+    const rimLight = new THREE.DirectionalLight('#38bdf8', 1.15);
+    rimLight.position.set(0, -140, -180);
+    scene.add(rimLight);
+    const topRimLight = new THREE.DirectionalLight('#818cf8', 0.9);
+    topRimLight.position.set(0, 180, -120);
+    scene.add(topRimLight);
 
     let px = 0, py = 0, visible = true, raf = 0, previous = '';
     const reduced = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
@@ -406,7 +424,8 @@ export const VitaConsoleScene: React.FC<VitaConsoleSceneProps> = ({ selectedProj
   return (
     <div
       ref={host}
-      className="vita-object relative w-full h-full cursor-grab active:cursor-grabbing"
+      onClick={onConsoleClick}
+      className="vita-object relative w-full h-full cursor-grab active:cursor-grabbing select-none"
       style={{ minHeight: 320, touchAction: "pan-y" }}
       role="img"
       aria-label="Interactive 3D model of the PS Vita PCH-1000"

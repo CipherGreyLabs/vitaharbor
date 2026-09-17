@@ -8,12 +8,18 @@ import {
   Search,
   ArrowRight,
   ExternalLink,
-  Activity,
   Layers,
   List,
   LayoutGrid,
   Gamepad2,
-  Radio
+  Radio,
+  Volume2,
+  VolumeX,
+  Share2,
+  Check,
+  ArrowUpDown,
+  Filter,
+  Sparkles
 } from "lucide-react";
 
 interface StatsData {
@@ -33,6 +39,18 @@ const CATEGORY_TABS = [
   { key: "playable", label: "Playable / Released" }
 ];
 
+const ENGINE_TABS = [
+  "All Engines",
+  "vitaGL",
+  "ARMv7",
+  "Decomp",
+  "Unity",
+  "Native C++"
+];
+
+// 5 Standard Milestones
+const STAGES_ORDER = ["research", "early_wip", "booting", "in_game", "playable", "released"];
+
 export const HomePage: React.FC = () => {
   useDocumentMeta({
     title: "VitaHarbor — Independent PS Vita Port Ledger",
@@ -44,12 +62,51 @@ export const HomePage: React.FC = () => {
   const [projects, setProjects] = useState<any[]>([]);
   const [recentUpdates, setRecentUpdates] = useState<any[]>([]);
   const [selectedFilter, setSelectedFilter] = useState("all");
+  const [selectedEngine, setSelectedEngine] = useState("All Engines");
+  const [sortBy, setSortBy] = useState<"activity" | "stage" | "name">("activity");
   const [selectedProject, setSelectedProject] = useState<SelectedProjectView | null>(null);
   const [viewMode, setViewMode] = useState<"grid" | "table">("grid");
   const [searchTerm, setSearchTerm] = useState("");
   const [loading, setLoading] = useState(true);
+  const [soundEnabled, setSoundEnabled] = useState(true);
+  const [copiedId, setCopiedId] = useState<number | null>(null);
 
   const heroRef = useRef<HTMLDivElement>(null);
+
+  // Synthesize authentic Vita LiveArea click blip
+  const playSound = (type: "blip" | "boot" = "blip") => {
+    if (!soundEnabled) return;
+    try {
+      const AudioCtx = window.AudioContext || (window as any).webkitAudioContext;
+      if (!AudioCtx) return;
+      const ctx = new AudioCtx();
+      if (ctx.state === "suspended") ctx.resume();
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+
+      if (type === "boot") {
+        osc.type = "sine";
+        osc.frequency.setValueAtTime(340, ctx.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(720, ctx.currentTime + 0.12);
+        gain.gain.setValueAtTime(0.06, ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.22);
+        osc.start(ctx.currentTime);
+        osc.stop(ctx.currentTime + 0.22);
+      } else {
+        osc.type = "sine";
+        osc.frequency.setValueAtTime(560, ctx.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(840, ctx.currentTime + 0.04);
+        gain.gain.setValueAtTime(0.04, ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.06);
+        osc.start(ctx.currentTime);
+        osc.stop(ctx.currentTime + 0.06);
+      }
+    } catch {
+      // Audio not supported
+    }
+  };
 
   useEffect(() => {
     async function loadHomeData() {
@@ -85,7 +142,9 @@ export const HomePage: React.FC = () => {
   }, []);
 
   const filteredProjects = useMemo(() => {
-    let list = projects;
+    let list = [...projects];
+
+    // Category filter
     if (selectedFilter === "wip") {
       list = list.filter((p) => ["in_game", "booting", "early_wip", "research"].includes(String(p.current_stage)));
     } else if (selectedFilter === "playable") {
@@ -96,6 +155,17 @@ export const HomePage: React.FC = () => {
       list = list.filter((p) => String(p.current_stage) === selectedFilter);
     }
 
+    // Engine filter
+    if (selectedEngine !== "All Engines") {
+      const q = selectedEngine.toLowerCase();
+      list = list.filter(
+        (p) =>
+          p.technologies?.some((t: string) => t.toLowerCase().includes(q)) ||
+          p.summary?.toLowerCase().includes(q)
+      );
+    }
+
+    // Search query
     if (searchTerm.trim()) {
       const term = searchTerm.toLowerCase().trim();
       list = list.filter(
@@ -107,10 +177,28 @@ export const HomePage: React.FC = () => {
           p.developers?.some((d: any) => d.display_name?.toLowerCase().includes(term))
       );
     }
+
+    // Sorting
+    list.sort((a, b) => {
+      if (sortBy === "name") {
+        return (a.display_name || a.game_title || "").localeCompare(b.display_name || b.game_title || "");
+      }
+      if (sortBy === "stage") {
+        const orderA = STAGES_ORDER.indexOf(String(a.current_stage));
+        const orderB = STAGES_ORDER.indexOf(String(b.current_stage));
+        return orderB - orderA;
+      }
+      // Default: activity timestamp
+      const tA = new Date(a.last_activity_at || 0).getTime();
+      const tB = new Date(b.last_activity_at || 0).getTime();
+      return tB - tA;
+    });
+
     return list;
-  }, [projects, selectedFilter, searchTerm]);
+  }, [projects, selectedFilter, selectedEngine, sortBy, searchTerm]);
 
   const handleSelectFor3D = (p: any) => {
+    playSound("boot");
     setSelectedProject({
       id: p.id,
       game_title: p.game_title || p.display_name || "",
@@ -125,80 +213,144 @@ export const HomePage: React.FC = () => {
     }
   };
 
+  const handleCopyLink = (p: any, e: React.MouseEvent) => {
+    e.stopPropagation();
+    playSound("blip");
+    const url = `${window.location.origin}/projects/${p.slug}`;
+    navigator.clipboard?.writeText(url);
+    setCopiedId(p.id);
+    setTimeout(() => setCopiedId(null), 2000);
+  };
+
   const getStageColor = (stage: string) => {
     switch (stage) {
       case "released":
       case "playable":
       case "completable":
         return {
-          bg: "bg-emerald-500/10",
-          border: "border-emerald-500/30",
+          bg: "bg-emerald-500/15",
+          border: "border-emerald-500/40",
           text: "text-emerald-400",
-          dot: "bg-emerald-400"
+          dot: "bg-emerald-400",
+          glow: "shadow-emerald-500/20"
         };
       case "in_game":
         return {
-          bg: "bg-sky-500/10",
-          border: "border-sky-500/30",
+          bg: "bg-sky-500/15",
+          border: "border-sky-500/40",
           text: "text-sky-400",
-          dot: "bg-sky-400"
+          dot: "bg-sky-400",
+          glow: "shadow-sky-500/20"
         };
       case "booting":
         return {
-          bg: "bg-amber-500/10",
-          border: "border-amber-500/30",
+          bg: "bg-amber-500/15",
+          border: "border-amber-500/40",
           text: "text-amber-400",
-          dot: "bg-amber-400"
+          dot: "bg-amber-400",
+          glow: "shadow-amber-500/20"
         };
       default:
         return {
-          bg: "bg-purple-500/10",
-          border: "border-purple-500/30",
+          bg: "bg-purple-500/15",
+          border: "border-purple-500/40",
           text: "text-purple-400",
-          dot: "bg-purple-400"
+          dot: "bg-purple-400",
+          glow: "shadow-purple-500/20"
         };
     }
   };
 
+  const getStageStep = (stage: string) => {
+    switch (stage) {
+      case "research": return 1;
+      case "early_wip": return 2;
+      case "booting": return 3;
+      case "in_game": return 4;
+      case "playable":
+      case "released":
+      case "completable": return 5;
+      default: return 2;
+    }
+  };
+
+  const getSubredditInfo = (url?: string | null) => {
+    if (!url) return null;
+    if (url.includes("r/vitahacks")) {
+      return { name: "r/vitahacks", color: "text-sky-400 bg-sky-500/10 border-sky-500/20" };
+    }
+    if (url.includes("r/VitaPiracy")) {
+      return { name: "r/VitaPiracy", color: "text-purple-400 bg-purple-500/10 border-purple-500/20" };
+    }
+    return { name: "Reddit", color: "text-slate-400 bg-white/[0.04] border-white/[0.08]" };
+  };
+
   return (
-    <div className="min-h-screen bg-[#07080c] text-[#f1f3f5] selection:bg-sky-500/30 selection:text-white relative overflow-hidden">
-      {/* Subtle Atmospheric Light Gradients */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1200px] h-[650px] bg-gradient-to-b from-sky-600/10 via-indigo-600/5 to-transparent blur-[140px] pointer-events-none z-0" />
+    <div className="min-h-screen bg-[#080912] text-[#f1f3f5] selection:bg-sky-500/30 selection:text-white relative overflow-hidden">
+      
+      {/* ATMOSPHERIC GRADIENTS & GLOWS */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1300px] h-[700px] bg-gradient-to-b from-blue-600/15 via-indigo-600/10 to-transparent blur-[140px] pointer-events-none z-0" />
+      <div className="absolute top-[750px] right-0 w-[650px] h-[650px] bg-purple-900/15 blur-[170px] pointer-events-none z-0" />
+      <div className="absolute top-[1400px] left-0 w-[600px] h-[600px] bg-sky-900/10 blur-[180px] pointer-events-none z-0" />
 
       {/* HERO SECTION */}
       <section ref={heroRef} className="relative z-10 pt-10 pb-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-        {/* Top Status Pill */}
-        <div className="flex items-center justify-center mb-6">
-          <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-white/[0.04] border border-white/[0.08] backdrop-blur-md text-xs font-mono text-slate-300 shadow-sm">
+        
+        {/* TOP STATUS PILL & SOUND TOGGLE */}
+        <div className="flex items-center justify-between gap-4 mb-6">
+          <div className="flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-white/[0.04] border border-white/[0.08] backdrop-blur-md text-xs font-mono text-slate-300 shadow-sm">
             <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
             <span className="font-semibold text-white">LIVE HOMEBREW RADAR</span>
             <span className="text-slate-500">·</span>
             <span className="text-slate-400">r/vitahacks & r/VitaPiracy</span>
           </div>
+
+          <button
+            onClick={() => {
+              playSound("blip");
+              setSoundEnabled(!soundEnabled);
+            }}
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.08] text-xs font-mono text-slate-400 hover:text-white transition-all"
+            title={soundEnabled ? "Mute interface sound" : "Enable interface sound"}
+          >
+            {soundEnabled ? (
+              <>
+                <Volume2 className="w-3.5 h-3.5 text-sky-400" />
+                <span>SOUND ON</span>
+              </>
+            ) : (
+              <>
+                <VolumeX className="w-3.5 h-3.5 text-slate-500" />
+                <span>MUTED</span>
+              </>
+            )}
+          </button>
         </div>
 
-        {/* Hero Headline */}
+        {/* HERO DISPLAY HEADLINE */}
         <div className="text-center max-w-3xl mx-auto space-y-4 mb-8">
-          <h1 className="text-4xl sm:text-6xl font-bold tracking-tight text-white leading-[1.08]">
+          <h1 className="text-4xl sm:text-6xl lg:text-7xl font-bold tracking-[-0.03em] text-white leading-[1.05]">
             The Underground <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-sky-400 via-blue-400 to-indigo-400">
               PS Vita Port Ledger
             </span>
           </h1>
-          <p className="text-base sm:text-lg text-slate-400 font-normal leading-relaxed max-w-2xl mx-auto">
+          <p className="text-base sm:text-lg text-slate-300 font-normal leading-relaxed max-w-2xl mx-auto">
             Engine recreations, ARM wrappers, and community experiments surface on Reddit long before homebrew databases. We index active development on real Vita hardware.
           </p>
         </div>
 
-        {/* 3D CONSOLE STAGE */}
-        <div className="relative w-full rounded-3xl border border-white/[0.08] bg-gradient-to-b from-[#0c0e14]/90 to-[#07080c]/90 backdrop-blur-xl p-4 sm:p-8 shadow-2xl overflow-hidden mb-10">
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(56,189,248,0.06)_0%,_transparent_70%)] pointer-events-none" />
+        {/* 3D CONSOLE SHOWCASE PODIUM */}
+        <div className="relative w-full rounded-3xl border border-white/[0.08] bg-gradient-to-b from-[#0f121d]/95 via-[#0c0e17]/95 to-[#080911]/95 backdrop-blur-2xl p-4 sm:p-8 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.7)] overflow-hidden mb-10 group/podium">
+          
+          {/* Subtle Stage Ambient Halo */}
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(56,189,248,0.08)_0%,_transparent_65%)] pointer-events-none" />
 
           {/* Quick Boot Bar */}
           <div className="relative z-20 flex items-center justify-between gap-4 pb-4 border-b border-white/[0.06] overflow-x-auto no-scrollbar">
             <div className="flex items-center gap-2 text-xs font-mono text-slate-400 shrink-0">
               <Gamepad2 className="w-4 h-4 text-sky-400" />
-              <span>TEST ON CONSOLE:</span>
+              <span className="font-semibold text-slate-300">BOOT ON OLED:</span>
             </div>
             <div className="flex items-center gap-2 overflow-x-auto no-scrollbar">
               {projects.slice(0, 6).map((p) => {
@@ -207,12 +359,13 @@ export const HomePage: React.FC = () => {
                   <button
                     key={p.id}
                     onClick={() => handleSelectFor3D(p)}
-                    className={`px-3 py-1.5 rounded-lg text-xs font-medium whitespace-nowrap transition-all duration-200 border ${
+                    className={`px-3.5 py-1.5 rounded-lg text-xs font-medium whitespace-nowrap transition-all duration-200 border flex items-center gap-1.5 ${
                       isActive
-                        ? "bg-sky-500/20 border-sky-500/50 text-sky-300 shadow-sm shadow-sky-500/20"
+                        ? "bg-sky-500/20 border-sky-500/60 text-sky-300 shadow-md shadow-sky-500/20 font-semibold"
                         : "bg-white/[0.03] border-white/[0.06] text-slate-400 hover:text-white hover:bg-white/[0.08]"
                     }`}
                   >
+                    <span className={`w-1.5 h-1.5 rounded-full ${isActive ? "bg-sky-400 animate-ping" : "bg-slate-600"}`} />
                     <span>{p.display_name?.split(" (")[0] || p.game_title}</span>
                   </button>
                 );
@@ -220,9 +373,26 @@ export const HomePage: React.FC = () => {
             </div>
           </div>
 
-          {/* 3D Vita Scene */}
+          {/* 3D Vita Model */}
           <div className="relative w-full h-[380px] sm:h-[480px] lg:h-[540px] flex items-center justify-center">
-            <VitaConsoleScene selectedProject={selectedProject} align="center" />
+            <VitaConsoleScene
+              selectedProject={selectedProject}
+              align="center"
+              onConsoleClick={() => {
+                if (selectedProject) {
+                  const card = document.getElementById(`card-${selectedProject.id}`);
+                  if (card) card.scrollIntoView({ behavior: "smooth", block: "center" });
+                }
+              }}
+            />
+
+            {/* 3D Interaction Prompt Badge */}
+            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 pointer-events-none z-20">
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#0b0e17]/85 border border-white/10 backdrop-blur-md text-[11px] font-mono text-slate-400 shadow-lg">
+                <Sparkles className="w-3.5 h-3.5 text-sky-400" />
+                <span>Drag to tilt · Click to inspect card</span>
+              </div>
+            </div>
           </div>
 
           {/* Telemetry Bar */}
@@ -257,31 +427,40 @@ export const HomePage: React.FC = () => {
           </div>
         </div>
 
-        {/* RECENT REDDIT SIGNALS STRIP */}
-        <div className="rounded-2xl bg-gradient-to-r from-[#0d1017] to-[#10141d] border border-white/[0.08] p-4 sm:p-5 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 shadow-lg">
+        {/* FRESH REDDIT SIGNALS BAR */}
+        <div className="rounded-2xl bg-gradient-to-r from-[#0e121d] via-[#111624] to-[#0f1422] border border-white/[0.08] p-4 sm:p-5 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 shadow-xl">
           <div className="flex items-center gap-2.5 text-xs font-mono shrink-0">
             <Radio className="w-4 h-4 text-sky-400 animate-pulse" />
             <span className="text-white font-bold tracking-wide uppercase">Fresh Reddit Signals:</span>
           </div>
 
           <div className="flex items-center gap-4 overflow-x-auto no-scrollbar w-full text-xs">
-            {recentUpdates.slice(0, 3).map((u) => (
-              <a
-                key={u.id}
-                href={u.sources?.[0]?.canonical_url || "#"}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-white/[0.03] hover:bg-white/[0.08] border border-white/[0.06] text-slate-300 hover:text-sky-300 transition-all shrink-0 group"
-              >
-                <span className="text-sky-400 font-mono text-[10px]">[{new Date(u.event_at).toLocaleDateString()}]</span>
-                <span className="max-w-[240px] sm:max-w-[320px] truncate">{u.title}</span>
-                <ExternalLink className="w-3.5 h-3.5 text-slate-500 group-hover:text-white shrink-0" />
-              </a>
-            ))}
+            {recentUpdates.slice(0, 4).map((u) => {
+              const sub = getSubredditInfo(u.sources?.[0]?.canonical_url);
+              return (
+                <a
+                  key={u.id}
+                  href={u.sources?.[0]?.canonical_url || "#"}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => playSound("blip")}
+                  className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-white/[0.03] hover:bg-white/[0.08] border border-white/[0.06] text-slate-300 hover:text-sky-300 transition-all shrink-0 group"
+                >
+                  {sub && (
+                    <span className={`font-mono text-[10px] px-1.5 py-0.5 rounded border ${sub.color}`}>
+                      {sub.name}
+                    </span>
+                  )}
+                  <span className="max-w-[220px] sm:max-w-[300px] truncate">{u.title}</span>
+                  <ExternalLink className="w-3.5 h-3.5 text-slate-500 group-hover:text-white shrink-0" />
+                </a>
+              );
+            })}
           </div>
 
           <Link
             to="/updates"
+            onClick={() => playSound("blip")}
             className="text-xs font-medium text-sky-400 hover:text-sky-300 hover:underline shrink-0 flex items-center gap-1"
           >
             <span>All signals</span>
@@ -290,8 +469,10 @@ export const HomePage: React.FC = () => {
         </div>
       </section>
 
-      {/* PORT LEDGER SECTION */}
+      {/* PORT LEDGER DIRECTORY */}
       <section id="ledger" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 relative z-10">
+        
+        {/* Section Header & View Controls */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-6 border-b border-white/[0.08] mb-8">
           <div>
             <div className="flex items-center gap-2 text-xs font-mono text-sky-400 mb-1">
@@ -302,75 +483,137 @@ export const HomePage: React.FC = () => {
               The Port Directory
             </h2>
             <p className="text-sm text-slate-400 mt-1 max-w-xl">
-              Select any project to inspect playability status, target framerates, and boot it on the live 3D console.
+              Real hardware playability, active engine wrappers, and direct verified Reddit development threads.
             </p>
           </div>
 
-          {/* View Mode Switcher */}
-          <div className="flex items-center gap-1.5 p-1 rounded-xl bg-white/[0.04] border border-white/[0.08]">
-            <button
-              onClick={() => setViewMode("grid")}
-              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${
-                viewMode === "grid"
-                  ? "bg-sky-500 text-white shadow-sm shadow-sky-500/20"
-                  : "text-slate-400 hover:text-white"
-              }`}
-            >
-              <LayoutGrid className="w-3.5 h-3.5" />
-              <span>Cards</span>
-            </button>
-            <button
-              onClick={() => setViewMode("table")}
-              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${
-                viewMode === "table"
-                  ? "bg-sky-500 text-white shadow-sm shadow-sky-500/20"
-                  : "text-slate-400 hover:text-white"
-              }`}
-            >
-              <List className="w-3.5 h-3.5" />
-              <span>Table</span>
-            </button>
+          {/* Controls: Sort Dropdown & View Mode Switcher */}
+          <div className="flex flex-wrap items-center gap-3">
+            {/* Sort Dropdown */}
+            <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white/[0.04] border border-white/[0.08] text-xs font-mono text-slate-300">
+              <ArrowUpDown className="w-3.5 h-3.5 text-sky-400" />
+              <span className="text-slate-500 text-[10px] uppercase">Sort:</span>
+              <select
+                value={sortBy}
+                onChange={(e) => {
+                  playSound("blip");
+                  setSortBy(e.target.value as any);
+                }}
+                className="bg-transparent text-white border-none focus:outline-none cursor-pointer text-xs"
+              >
+                <option value="activity" className="bg-[#0f121d] text-white">Recently Active</option>
+                <option value="stage" className="bg-[#0f121d] text-white">Stage Progress</option>
+                <option value="name" className="bg-[#0f121d] text-white">Name (A–Z)</option>
+              </select>
+            </div>
+
+            {/* View Mode Switcher */}
+            <div className="flex items-center gap-1 p-1 rounded-xl bg-white/[0.04] border border-white/[0.08]">
+              <button
+                onClick={() => {
+                  playSound("blip");
+                  setViewMode("grid");
+                }}
+                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${
+                  viewMode === "grid"
+                    ? "bg-sky-500 text-white shadow-sm shadow-sky-500/20"
+                    : "text-slate-400 hover:text-white"
+                }`}
+              >
+                <LayoutGrid className="w-3.5 h-3.5" />
+                <span>Cards</span>
+              </button>
+              <button
+                onClick={() => {
+                  playSound("blip");
+                  setViewMode("table");
+                }}
+                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${
+                  viewMode === "table"
+                    ? "bg-sky-500 text-white shadow-sm shadow-sky-500/20"
+                    : "text-slate-400 hover:text-white"
+                }`}
+              >
+                <List className="w-3.5 h-3.5" />
+                <span>Table</span>
+              </button>
+            </div>
           </div>
         </div>
 
-        {/* Filter Controls & Search */}
-        <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4 mb-8">
-          <div className="flex items-center gap-2 overflow-x-auto no-scrollbar pb-1">
-            {CATEGORY_TABS.map((tab) => {
-              const active = selectedFilter === tab.key;
+        {/* Filter Controls: Category Tabs & Search */}
+        <div className="space-y-4 mb-8">
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4">
+            
+            {/* Category Stage Pills */}
+            <div className="flex items-center gap-2 overflow-x-auto no-scrollbar pb-1">
+              {CATEGORY_TABS.map((tab) => {
+                const active = selectedFilter === tab.key;
+                return (
+                  <button
+                    key={tab.key}
+                    onClick={() => {
+                      playSound("blip");
+                      setSelectedFilter(tab.key);
+                    }}
+                    className={`px-4 py-2 rounded-xl text-xs font-medium transition-all whitespace-nowrap border ${
+                      active
+                        ? "bg-white text-slate-950 border-white font-semibold shadow-sm"
+                        : "bg-white/[0.03] border-white/[0.06] text-slate-400 hover:text-white hover:bg-white/[0.06]"
+                    }`}
+                  >
+                    {tab.label}
+                  </button>
+                );
+              })}
+            </div>
+
+            {/* Instant Search Input */}
+            <div className="relative w-full sm:w-72">
+              <Search className="w-4 h-4 text-slate-500 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+              <input
+                type="text"
+                placeholder="Search game, engine, developer..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className="w-full bg-[#101420] border border-white/[0.08] rounded-xl pl-10 pr-8 py-2 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-sky-500/50 focus:ring-1 focus:ring-sky-500/30 transition-all shadow-inner"
+              />
+              {searchTerm && (
+                <button
+                  onClick={() => setSearchTerm("")}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 hover:text-white text-xs"
+                >
+                  ✕
+                </button>
+              )}
+            </div>
+          </div>
+
+          {/* Engine / Tech Filter Pills */}
+          <div className="flex items-center gap-2 overflow-x-auto no-scrollbar pt-1 text-xs">
+            <span className="text-slate-500 font-mono text-[11px] shrink-0 flex items-center gap-1 mr-1">
+              <Filter className="w-3 h-3 text-sky-400" />
+              <span>TECH:</span>
+            </span>
+            {ENGINE_TABS.map((engine) => {
+              const active = selectedEngine === engine;
               return (
                 <button
-                  key={tab.key}
-                  onClick={() => setSelectedFilter(tab.key)}
-                  className={`px-4 py-2 rounded-xl text-xs font-medium transition-all whitespace-nowrap border ${
+                  key={engine}
+                  onClick={() => {
+                    playSound("blip");
+                    setSelectedEngine(engine);
+                  }}
+                  className={`px-2.5 py-1 rounded-lg text-[11px] font-mono transition-all whitespace-nowrap border ${
                     active
-                      ? "bg-white text-slate-950 border-white font-semibold shadow-sm"
-                      : "bg-white/[0.03] border-white/[0.06] text-slate-400 hover:text-white hover:bg-white/[0.06]"
+                      ? "bg-sky-500/20 border-sky-500/50 text-sky-300 font-semibold"
+                      : "bg-white/[0.02] border-white/[0.04] text-slate-400 hover:text-slate-200 hover:bg-white/[0.05]"
                   }`}
                 >
-                  {tab.label}
+                  {engine}
                 </button>
               );
             })}
-          </div>
-
-          <div className="relative w-full sm:w-72">
-            <Search className="w-4 h-4 text-slate-500 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
-            <input
-              type="text"
-              placeholder="Search game, engine, developer..."
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full bg-[#10131a] border border-white/[0.08] rounded-xl pl-10 pr-4 py-2 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-sky-500/50 focus:ring-1 focus:ring-sky-500/30 transition-all shadow-inner"
-            />
-            {searchTerm && (
-              <button
-                onClick={() => setSearchTerm("")}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 hover:text-white text-xs"
-              >
-                ✕
-              </button>
-            )}
           </div>
         </div>
 
@@ -385,22 +628,35 @@ export const HomePage: React.FC = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {filteredProjects.map((p) => {
                 const stageStyle = getStageColor(p.current_stage);
+                const step = getStageStep(p.current_stage);
                 const isSelected = selectedProject?.id === p.id;
+                const sub = getSubredditInfo(p.reddit_url);
+                const isCopied = copiedId === p.id;
+
                 return (
                   <div
+                    id={`card-${p.id}`}
                     key={p.id}
-                    className={`rounded-2xl border p-5 flex flex-col justify-between transition-all duration-300 bg-[#0d1017]/90 backdrop-blur-sm relative group hover:-translate-y-1 hover:shadow-xl ${
+                    className={`rounded-2xl border p-5 flex flex-col justify-between transition-all duration-300 bg-gradient-to-b from-[#0f1320]/90 to-[#0a0d17]/90 backdrop-blur-md relative group hover:-translate-y-1.5 hover:shadow-2xl hover:shadow-sky-500/10 ${
                       isSelected
-                        ? "border-sky-500/50 shadow-lg shadow-sky-500/10"
+                        ? "border-sky-500/60 shadow-lg shadow-sky-500/15 ring-1 ring-sky-500/20"
                         : "border-white/[0.08] hover:border-white/20"
                     }`}
                   >
                     <div>
-                      {/* Top Header: Platform & Stage */}
+                      {/* Top Header: Platform & Stage Badges */}
                       <div className="flex items-center justify-between gap-2 mb-3">
-                        <span className="text-[10px] font-mono uppercase tracking-wider text-slate-400 bg-white/[0.04] px-2.5 py-1 rounded-md border border-white/[0.06]">
-                          {p.original_platform || "PC / Console"}
-                        </span>
+                        <div className="flex items-center gap-1.5">
+                          <span className="text-[10px] font-mono uppercase tracking-wider text-slate-300 bg-white/[0.05] px-2.5 py-1 rounded-md border border-white/[0.08]">
+                            {p.original_platform || "PC / Console"}
+                          </span>
+                          {sub && (
+                            <span className={`text-[10px] font-mono px-2 py-0.5 rounded border ${sub.color}`}>
+                              {sub.name}
+                            </span>
+                          )}
+                        </div>
+
                         <span
                           className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-[10px] font-mono font-bold uppercase tracking-wider border ${stageStyle.bg} ${stageStyle.border} ${stageStyle.text}`}
                         >
@@ -409,7 +665,7 @@ export const HomePage: React.FC = () => {
                         </span>
                       </div>
 
-                      {/* Title */}
+                      {/* Game Title */}
                       <Link to={`/projects/${p.slug}`} className="block group-hover:text-sky-300 transition-colors">
                         <h3 className="text-lg font-bold text-white tracking-tight leading-snug">
                           {p.game_title || p.display_name}
@@ -421,11 +677,29 @@ export const HomePage: React.FC = () => {
                         {p.summary || "Native PlayStation Vita porting effort."}
                       </p>
 
-                      {/* Performance & Playability Hardware Note */}
-                      <div className="mt-3.5 p-2.5 rounded-lg bg-black/40 border border-white/[0.04] text-[11px] font-mono">
+                      {/* Stage Progress Stepper (5 Milestones) */}
+                      <div className="mt-4 pt-3 border-t border-white/[0.04]">
+                        <div className="flex items-center justify-between text-[10px] font-mono text-slate-500 mb-1.5">
+                          <span>MILESTONE PROGRESS:</span>
+                          <span className="text-sky-400 font-semibold">STAGE {step}/5</span>
+                        </div>
+                        <div className="grid grid-cols-5 gap-1.5">
+                          {[1, 2, 3, 4, 5].map((s) => (
+                            <div
+                              key={s}
+                              className={`h-1.5 rounded-full transition-all duration-300 ${
+                                s <= step ? "bg-sky-400 shadow-sm shadow-sky-400/50" : "bg-white/[0.06]"
+                              }`}
+                            />
+                          ))}
+                        </div>
+                      </div>
+
+                      {/* Hardware Status Callout */}
+                      <div className="mt-3.5 p-2.5 rounded-xl bg-black/40 border border-white/[0.05] text-[11px] font-mono">
                         <span className="text-slate-500 block mb-0.5 uppercase tracking-wider text-[9px]">Hardware Status:</span>
-                        <span className="text-slate-300">
-                          {p.performance_notes || p.playability_notes || "Geometry & controls compiled for ARM Cortex-A9."}
+                        <span className="text-slate-200">
+                          {p.performance_notes || p.playability_notes || "ARMv7 execution targeting SGX543MP4+."}
                         </span>
                       </div>
 
@@ -444,28 +718,42 @@ export const HomePage: React.FC = () => {
                       )}
                     </div>
 
-                    {/* Bottom Actions */}
-                    <div className="pt-4 mt-5 border-t border-white/[0.06] flex items-center justify-between gap-3">
+                    {/* Bottom Actions Bar */}
+                    <div className="pt-4 mt-5 border-t border-white/[0.06] flex items-center justify-between gap-2">
+                      {/* Boot on 3D Console */}
                       <button
                         onClick={() => handleSelectFor3D(p)}
-                        className="inline-flex items-center gap-1.5 text-xs text-slate-400 hover:text-white transition-colors"
+                        className="inline-flex items-center gap-1.5 text-xs font-medium text-slate-400 hover:text-white transition-colors"
                         title="Render this port on the 3D console screen"
                       >
                         <Gamepad2 className="w-3.5 h-3.5 text-sky-400" />
                         <span>Boot on 3D Vita</span>
                       </button>
 
-                      {p.reddit_url && (
-                        <a
-                          href={p.reddit_url}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="inline-flex items-center gap-1.5 text-xs font-semibold px-3 py-1.5 rounded-lg bg-sky-500/10 hover:bg-sky-500/20 text-sky-400 border border-sky-500/20 transition-all group/btn"
+                      <div className="flex items-center gap-2">
+                        {/* Share Button */}
+                        <button
+                          onClick={(e) => handleCopyLink(p, e)}
+                          className="p-1.5 rounded-lg bg-white/[0.03] hover:bg-white/[0.08] text-slate-400 hover:text-white transition-colors border border-white/[0.06]"
+                          title="Copy direct link to this project"
                         >
-                          <span>Reddit Thread</span>
-                          <ExternalLink className="w-3 h-3 group-hover/btn:translate-x-0.5 transition-transform" />
-                        </a>
-                      )}
+                          {isCopied ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Share2 className="w-3.5 h-3.5" />}
+                        </button>
+
+                        {/* Direct Verified Reddit Thread Link */}
+                        {p.reddit_url && (
+                          <a
+                            href={p.reddit_url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            onClick={() => playSound("blip")}
+                            className="inline-flex items-center gap-1.5 text-xs font-semibold px-3 py-1.5 rounded-lg bg-sky-500/15 hover:bg-sky-500/25 text-sky-400 border border-sky-500/25 transition-all group/btn"
+                          >
+                            <span>Reddit Thread</span>
+                            <ExternalLink className="w-3 h-3 group-hover/btn:translate-x-0.5 transition-transform" />
+                          </a>
+                        )}
+                      </div>
                     </div>
                   </div>
                 );
@@ -485,7 +773,7 @@ export const HomePage: React.FC = () => {
         )}
       </section>
 
-      {/* ZERO PIRACY & COMMUNITY RESEARCH DISCLAIMER */}
+      {/* ZERO PIRACY & COMMUNITY RESEARCH NOTICE */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 border-t border-white/[0.06] text-xs text-slate-500 font-mono leading-relaxed flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div className="max-w-3xl">
           <strong className="text-slate-400 uppercase tracking-wider block mb-1">Independent Community Engineering Tracker</strong>
