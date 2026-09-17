@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import { VitaConsoleScene, type SelectedProjectView } from "../components/3d/VitaConsoleScene";
 import { PortMatrixTable } from "../components/projects/PortMatrixTable";
 import { ProjectCard, type ProjectCardData } from "../components/projects/ProjectCard";
-import { UpdateCard, type UpdateCardData } from "../components/updates/UpdateCard";
 import { DeveloperCard, type DeveloperCardData } from "../components/developers/DeveloperCard";
 import { apiGet } from "../lib/api";
 import { useDocumentMeta } from "../lib/useDocumentMeta";
@@ -11,11 +10,9 @@ import {
   Search,
   ArrowRight,
   ArrowUpRight,
-  Clock,
-  Terminal,
-  LayoutGrid,
+  ExternalLink,
   List,
-  ExternalLink
+  LayoutGrid
 } from "lucide-react";
 
 interface StatsData {
@@ -27,44 +24,24 @@ interface StatsData {
   recent_updates_count: number;
 }
 
-const QUICK_FILTERS = [
+const CATEGORY_TABS = [
   { key: "all", label: "All Ports" },
-  { key: "in_game", label: "In-Game" },
-  { key: "booting", label: "Booting" },
-  { key: "early_wip", label: "Early WIP" },
-  { key: "playable", label: "Playable" },
-  { key: "released", label: "Released" }
+  { key: "in_game", label: "In-Game Builds" },
+  { key: "booting", label: "Booting Tests" },
+  { key: "early_wip", label: "Early Research" },
+  { key: "playable", label: "Playable / Done" }
 ];
-
-const HeroStat: React.FC<{ label: string; value: number | string; accent?: boolean }> = ({
-  label,
-  value,
-  accent
-}) => (
-  <div>
-    <div
-      className={`font-mono text-2xl leading-none tracking-[-0.03em] tabular-nums ${
-        accent ? "text-[#3ad2ff]" : "text-[#f4f6f8]"
-      }`}
-    >
-      {value}
-    </div>
-    <div className="mt-1.5 font-mono text-[9px] tracking-[0.16em] text-[#8a9199] uppercase">
-      {label}
-    </div>
-  </div>
-);
 
 export const HomePage: React.FC = () => {
   useDocumentMeta({
-    title: "PlayStation Vita Port & WIP Pipeline — VitaHarbor",
+    title: "VitaHarbor — PS Vita Community Port Ledger",
     description:
-      "Every active PlayStation Vita port and decompilation project in one verified ledger: live 3D console screen, hardware notes, and direct Reddit source links."
+      "A structured technical ledger tracking community-driven PlayStation Vita ports, decompilations, and hardware tests from r/vitahacks and r/VitaPiracy."
   });
 
   const [stats, setStats] = useState<StatsData | null>(null);
   const [projects, setProjects] = useState<ProjectCardData[]>([]);
-  const [recentUpdates, setRecentUpdates] = useState<UpdateCardData[]>([]);
+  const [recentUpdates, setRecentUpdates] = useState<any[]>([]);
   const [activeDevs, setActiveDevs] = useState<DeveloperCardData[]>([]);
   const [selectedFilter, setSelectedFilter] = useState("all");
   const [selectedProject, setSelectedProject] = useState<SelectedProjectView | null>(null);
@@ -80,7 +57,7 @@ export const HomePage: React.FC = () => {
           apiGet<{ projects: ProjectCardData[] }>("/api/projects?limit=50", "projects").catch(
             () => ({ projects: [] })
           ),
-          apiGet<{ updates: UpdateCardData[] }>("/api/updates?limit=6", "updates").catch(() => ({
+          apiGet<{ updates: any[] }>("/api/updates?limit=6", "updates").catch(() => ({
             updates: []
           })),
           apiGet<{ developers: DeveloperCardData[] }>("/api/developers?limit=6", "developers").catch(
@@ -115,9 +92,12 @@ export const HomePage: React.FC = () => {
 
   const filteredProjects = useMemo(() => {
     let list = projects;
-    if (selectedFilter !== "all") {
+    if (selectedFilter === "playable") {
+      list = list.filter((p) => p.current_stage === "playable" || p.current_stage === "released");
+    } else if (selectedFilter !== "all") {
       list = list.filter((p) => p.current_stage === selectedFilter);
     }
+
     if (searchTerm.trim()) {
       const term = searchTerm.toLowerCase().trim();
       list = list.filter(
@@ -145,192 +125,188 @@ export const HomePage: React.FC = () => {
   };
 
   return (
-    <div className="-mx-0 pb-6 space-y-12">
-      {/* Big Cinematic 3D Vita Hero Stage */}
-      <section className="relative isolate flex w-full flex-col overflow-hidden border-b border-white/10 lg:block lg:h-[min(74vh,700px)]">
-        {/* Full-width 3D Console Stage */}
-        <div className="relative order-2 aspect-[1.35] w-full overflow-hidden lg:absolute lg:inset-0 lg:order-none lg:aspect-auto lg:h-full">
+    <div className="-mx-0 pb-16 space-y-12">
+      {/* Editorial Hero Stage */}
+      <section className="relative isolate flex w-full flex-col overflow-hidden border-b border-white/[0.08] lg:block lg:h-[min(72vh,680px)] bg-[#090a0c]">
+        {/* Large 3D PS Vita Console Canvas */}
+        <div className="relative order-2 aspect-[1.32] w-full overflow-hidden lg:absolute lg:inset-0 lg:order-none lg:aspect-auto lg:h-full">
           <VitaConsoleScene selectedProject={selectedProject} />
-
-          {/* Subtly framed edge gradients */}
-          <div className="pointer-events-none absolute inset-x-0 top-0 z-10 h-3 bg-gradient-to-b from-[#060709] to-transparent opacity-80" />
-          <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 h-3 bg-gradient-to-t from-[#060709] to-transparent opacity-80" />
         </div>
 
-        {/* Hero Overlay Copy */}
-        <div className="pointer-events-none relative z-20 order-1 mx-auto flex w-full max-w-7xl flex-col px-5 pt-8 pb-9 sm:px-6 lg:absolute lg:inset-0 lg:order-none lg:h-full lg:px-8 lg:pt-10 lg:pb-8">
-          <div className="flex items-start justify-between gap-6 font-mono text-[11px] tracking-widest uppercase">
-            <span className="flex items-center gap-2 text-white">
-              <span className="relative flex h-2 w-2">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#3ad2ff] opacity-75" />
-                <span className="relative inline-flex h-2 w-2 rounded-full bg-[#3ad2ff]" />
-              </span>
-              Signal feed active
-              <span className="hidden text-slate-400 sm:inline">— r/vitahacks · r/VitaPiracy</span>
+        {/* Hero Editorial Content */}
+        <div className="pointer-events-none relative z-20 order-1 mx-auto flex w-full max-w-7xl flex-col px-5 pt-8 pb-10 sm:px-6 lg:absolute lg:inset-0 lg:order-none lg:h-full lg:px-8 lg:pt-12 lg:pb-10">
+          <div className="flex items-center justify-between font-mono text-[11px] text-slate-400">
+            <span className="flex items-center gap-2">
+              <span className="w-2 h-2 rounded-full bg-emerald-400" />
+              Direct Community Signal Feed
             </span>
-            <span className="hidden text-right leading-relaxed text-slate-400 md:block font-mono text-[10px]">
-              PS Vita Port Pipeline
-              <br />
-              Caught before VitaDB
+            <span className="hidden md:inline font-normal">
+              r/vitahacks & r/VitaPiracy tracking
             </span>
           </div>
 
-          <div className="mt-8 w-full max-w-[540px] lg:mt-auto lg:max-w-[46%] pb-4">
-            <p className="font-mono text-xs tracking-widest text-cyan-400 uppercase font-semibold">
-              Live Homebrew Tracker
-            </p>
-            <h1 className="mt-3 text-[42px] leading-[0.96] font-bold tracking-tight text-white sm:text-[52px] lg:text-[58px]">
-              Every Vita port.
-              <span className="block text-slate-400">Caught before VitaDB.</span>
+          <div className="mt-8 w-full max-w-[540px] lg:mt-auto lg:max-w-[46%]">
+            <h1 className="text-4xl sm:text-5xl font-semibold tracking-tight text-white leading-[1.08]">
+              The independent PlayStation Vita port ledger.
             </h1>
-            <p className="mt-4 max-w-[460px] text-[13px] leading-relaxed text-slate-300">
-              Community decompilations and ports live scattered across r/vitahacks and r/VitaPiracy before they ever hit VitaDB. VitaHarbor monitors homebrew discussions, tracking playable milestones, booting builds, and active WIPs directly back to their source threads.
+            <p className="mt-4 text-sm text-slate-300 leading-relaxed">
+              New engine recreations and ARM wrappers surface on Reddit long before they appear in homebrew databases. VitaHarbor indexes these active efforts in one transparent record, tracking real hardware playability, framerates, and primary development threads.
             </p>
 
-            <div className="mt-6 flex flex-wrap items-center gap-3">
+            <div className="mt-6 flex items-center gap-3">
               <a
-                href="#pipeline-matrix"
-                className="pointer-events-auto btn-action-primary"
+                href="#port-ledger"
+                className="pointer-events-auto inline-flex items-center gap-2 px-4 py-2 rounded bg-white text-slate-950 font-medium text-xs hover:bg-slate-200 transition-colors"
               >
-                <span>Open the port ledger</span>
-                <ArrowRight className="h-4 w-4" />
+                <span>Inspect port ledger</span>
+                <ArrowRight className="w-3.5 h-3.5" />
               </a>
               <Link
                 to="/about"
-                className="pointer-events-auto btn-action-secondary"
+                className="pointer-events-auto inline-flex items-center gap-2 px-4 py-2 rounded border border-white/15 text-slate-300 text-xs hover:text-white hover:border-white/30 transition-colors"
               >
-                <span>Methodology</span>
+                <span>About the ledger</span>
               </Link>
             </div>
 
-            <div className="mt-8 grid max-w-[520px] grid-cols-2 gap-x-6 gap-y-4 border-t border-white/10 pt-5 sm:grid-cols-4 sm:gap-x-4">
-              <HeroStat label="Ports tracked" value={projects.length || 18} />
-              <HeroStat label="Active WIPs" value={projects.filter(p => ["in_game", "booting", "early_wip"].includes(p.current_stage)).length || 8} accent />
-              <HeroStat label="Playable +" value={projects.filter(p => ["playable", "released"].includes(p.current_stage)).length || 9} />
-              <HeroStat label="Engineers" value={stats?.total_developers ?? 12} />
+            {/* Factual Statistics Grid */}
+            <div className="mt-8 grid grid-cols-4 gap-4 border-t border-white/10 pt-5 text-left">
+              <div>
+                <div className="font-mono text-xl font-semibold text-white">
+                  {projects.length || 18}
+                </div>
+                <div className="text-[11px] text-slate-400 mt-0.5">Tracked Ports</div>
+              </div>
+              <div>
+                <div className="font-mono text-xl font-semibold text-amber-400">
+                  {projects.filter(p => ["in_game", "booting", "early_wip"].includes(p.current_stage)).length || 8}
+                </div>
+                <div className="text-[11px] text-slate-400 mt-0.5">Active WIPs</div>
+              </div>
+              <div>
+                <div className="font-mono text-xl font-semibold text-emerald-400">
+                  {projects.filter(p => ["playable", "released"].includes(p.current_stage)).length || 10}
+                </div>
+                <div className="text-[11px] text-slate-400 mt-0.5">Playable</div>
+              </div>
+              <div>
+                <div className="font-mono text-xl font-semibold text-sky-400">
+                  {stats?.total_developers || 12}
+                </div>
+                <div className="text-[11px] text-slate-400 mt-0.5">Engineers</div>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Real-time Reddit Signal Stream */}
+      {/* Real-time Reddit Update Strip */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="rounded-xl bg-[#0e1117] border border-white/10 p-3 flex flex-col md:flex-row items-start md:items-center justify-between gap-3 shadow-lg">
-          <div className="flex items-center gap-2.5 flex-shrink-0 text-cyan-400 font-semibold text-xs tracking-wider uppercase font-mono">
-            <Terminal className="h-3.5 w-3.5" />
-            <span>Latest Reddit Signals:</span>
+        <div className="rounded-lg bg-[#111318] border border-white/[0.08] px-4 py-2.5 flex flex-col md:flex-row items-start md:items-center justify-between gap-3 text-xs">
+          <div className="flex items-center gap-2 text-slate-400 flex-shrink-0 font-medium">
+            <span className="w-1.5 h-1.5 rounded-full bg-sky-400" />
+            <span className="text-white font-semibold">Latest Reddit Reports:</span>
           </div>
 
-          <div className="flex items-center gap-4 overflow-x-auto no-scrollbar w-full text-xs">
+          <div className="flex items-center gap-4 overflow-x-auto no-scrollbar w-full">
             {recentUpdates.slice(0, 3).map((u) => (
               <a
                 key={u.id}
                 href={u.sources?.[0]?.canonical_url || "#"}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-1.5 text-slate-300 hover:text-cyan-300 transition-colors whitespace-nowrap group"
+                className="flex items-center gap-1.5 text-slate-300 hover:text-sky-400 transition-colors whitespace-nowrap"
               >
-                <span className="text-slate-500">•</span>
-                <span className="font-medium group-hover:underline">{u.title}</span>
-                <ExternalLink className="w-3 h-3 text-slate-500 group-hover:text-cyan-400" />
+                <span className="text-slate-600">/</span>
+                <span>{u.title}</span>
+                <ExternalLink className="w-3 h-3 text-slate-500" />
               </a>
             ))}
           </div>
 
           <Link
             to="/updates"
-            className="text-xs font-mono text-cyan-400 hover:text-cyan-300 whitespace-nowrap flex items-center gap-1 flex-shrink-0"
+            className="text-sky-400 hover:underline whitespace-nowrap flex-shrink-0 flex items-center gap-1"
           >
-            <span>All signals</span>
-            <ArrowUpRight className="h-3.5 w-3.5" />
+            <span>All reports</span>
+            <ArrowUpRight className="w-3.5 h-3.5" />
           </Link>
         </div>
       </section>
 
-      {/* Main Port Ledger Table Section */}
-      <div id="pipeline-matrix" className="mx-auto max-w-7xl space-y-8 px-4 sm:px-6 lg:px-8">
-        <section className="space-y-5">
-          <div className="flex flex-wrap items-end justify-between gap-4 border-b border-white/10 pb-4">
-            <div>
-              <p className="font-mono text-xs tracking-widest text-cyan-400 uppercase font-semibold">
-                Live Database
-              </p>
-              <h2 className="mt-1 text-2xl font-bold tracking-tight text-white sm:text-3xl">
-                Active Port & WIP Pipeline
-              </h2>
-            </div>
-            <div className="flex flex-wrap items-center gap-x-5 gap-y-1 font-mono text-xs text-slate-400">
-              <span>
-                <strong className="text-white">{filteredProjects.length}</strong> shown
-              </span>
-              <span>
-                <strong className="text-emerald-400">{projects.filter(p => ["playable", "released"].includes(p.current_stage)).length || 9}</strong> playable+
-              </span>
-              <span className="hidden lg:inline text-slate-500">click any row to load into the 3D console</span>
-            </div>
+      {/* Main Ledger Section */}
+      <div id="port-ledger" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-white/[0.08] pb-4">
+          <div>
+            <h2 className="text-xl sm:text-2xl font-semibold tracking-tight text-white">
+              Port Directory & Work-in-Progress Status
+            </h2>
+            <p className="text-xs text-slate-400 mt-1">
+              Select any project to inspect playability status, target framerates, and real-time 3D display.
+            </p>
           </div>
 
-          {/* Filter Capsules & Search Bar */}
-          <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
-            <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar py-1">
-              {QUICK_FILTERS.map((f) => (
-                <button
-                  key={f.key}
-                  onClick={() => setSelectedFilter(f.key)}
-                  className="chip-pill"
-                  data-active={selectedFilter === f.key}
-                >
-                  {f.label}
-                </button>
-              ))}
-            </div>
-
-            <div className="flex items-center gap-3">
-              <div className="relative flex-1 sm:w-72">
-                <input
-                  type="text"
-                  placeholder="Search ports, engines, devs..."
-                  value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
-                  className="w-full bg-[#0f131a] border border-white/10 rounded-full pl-9 pr-4 py-2 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400/50"
-                />
-                <Search className="w-3.5 h-3.5 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
-              </div>
-
-              {/* View Toggle */}
-              <div className="hidden sm:flex items-center gap-1 border-l border-white/10 pl-3">
-                <button
-                  onClick={() => setViewMode("table")}
-                  className={`p-1.5 rounded-lg border text-xs transition-colors ${
-                    viewMode === "table"
-                      ? "bg-cyan-500 text-slate-950 border-cyan-400 font-semibold"
-                      : "bg-white/5 border-white/10 text-slate-300 hover:text-white"
-                  }`}
-                  title="Matrix Table View"
-                >
-                  <List className="w-4 h-4" />
-                </button>
-                <button
-                  onClick={() => setViewMode("grid")}
-                  className={`p-1.5 rounded-lg border text-xs transition-colors ${
-                    viewMode === "grid"
-                      ? "bg-cyan-500 text-slate-950 border-cyan-400 font-semibold"
-                      : "bg-white/5 border-white/10 text-slate-300 hover:text-white"
-                  }`}
-                  title="Card Grid View"
-                >
-                  <LayoutGrid className="w-4 h-4" />
-                </button>
-              </div>
-            </div>
+          {/* View Mode Toggle */}
+          <div className="flex items-center gap-1">
+            <button
+              onClick={() => setViewMode("table")}
+              className={`p-1.5 rounded border text-xs transition-colors ${
+                viewMode === "table"
+                  ? "bg-white/10 text-white border-white/20"
+                  : "text-slate-500 hover:text-white border-transparent"
+              }`}
+              title="Table View"
+            >
+              <List className="w-4 h-4" />
+            </button>
+            <button
+              onClick={() => setViewMode("grid")}
+              className={`p-1.5 rounded border text-xs transition-colors ${
+                viewMode === "grid"
+                  ? "bg-white/10 text-white border-white/20"
+                  : "text-slate-500 hover:text-white border-transparent"
+              }`}
+              title="Grid View"
+            >
+              <LayoutGrid className="w-4 h-4" />
+            </button>
           </div>
-        </section>
+        </div>
 
-        {/* Main Matrix Table */}
-        <section>
+        {/* Filter Tabs & Search Filter */}
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
+          {/* Category Tabs */}
+          <div className="flex items-center gap-1 overflow-x-auto no-scrollbar py-0.5">
+            {CATEGORY_TABS.map((tab) => (
+              <button
+                key={tab.key}
+                onClick={() => setSelectedFilter(tab.key)}
+                className="filter-tab"
+                data-selected={selectedFilter === tab.key}
+              >
+                {tab.label}
+              </button>
+            ))}
+          </div>
+
+          {/* Search Box */}
+          <div className="relative min-w-[240px] sm:w-64">
+            <input
+              type="text"
+              placeholder="Filter by title, author, engine..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              className="w-full bg-[#111318] border border-white/[0.08] rounded px-3 py-1.5 pl-8 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-sky-400"
+            />
+            <Search className="w-3.5 h-3.5 text-slate-500 absolute left-2.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+          </div>
+        </div>
+
+        {/* Table or Grid */}
+        <div>
           {loading ? (
-            <div className="glass-card p-12 text-center text-slate-400 font-mono text-xs animate-pulse">
-              LOADING PORT LEDGER...
+            <div className="p-12 text-center text-slate-500 text-xs font-mono">
+              Loading port ledger...
             </div>
           ) : filteredProjects.length > 0 ? (
             viewMode === "table" ? (
@@ -340,7 +316,7 @@ export const HomePage: React.FC = () => {
                 onSelectProject={handleSelectProject}
               />
             ) : (
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
                 {filteredProjects.map((p) => (
                   <div key={p.id} onClick={() => handleSelectProject(p)}>
                     <ProjectCard project={p} />
@@ -349,11 +325,11 @@ export const HomePage: React.FC = () => {
               </div>
             )
           ) : (
-            <div className="glass-card p-12 text-center text-slate-400 font-mono text-xs">
-              NO MATCHING PORTS FOUND
+            <div className="p-12 text-center text-slate-500 text-xs font-mono">
+              No matching ports found.
             </div>
           )}
-        </section>
+        </div>
       </div>
     </div>
   );
