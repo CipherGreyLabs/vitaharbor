@@ -26,7 +26,7 @@
     --vh-caution-rgb: 217 119 6;
     --vh-idle-rgb: 148 163 184;
     --vh-deep-rgb: 15 17 21;
-    --vh-accent-rgb: 29 78 216;
+    --vh-accent-rgb: 0 112 209;
   }
 
   html {
@@ -104,6 +104,20 @@
   animation: vh-veil 1.6s ease-in-out infinite alternate;
 }
 
+/* LiveArea ribbons: offset drifts so the layers never move as one block. */
+@keyframes vh-wave-drift {
+  0% { transform: translate3d(-2.2%, 0.6%, 0); }
+  100% { transform: translate3d(2.2%, -1.2%, 0); }
+}
+
+.vh-wave {
+  animation: vh-wave-drift 24s ease-in-out infinite alternate;
+  will-change: transform;
+}
+
+.vh-wave-slow { animation-duration: 32s; }
+.vh-wave-fast { animation-duration: 18s; }
+
 @keyframes vh-veil {
   from { opacity: 0.4; }
   to { opacity: 0.9; }
@@ -140,6 +154,7 @@
   .vh-ticker,
   .vh-rise,
   .vh-row,
+  .vh-wave,
   .vh-skeleton {
     animation: none;
   }

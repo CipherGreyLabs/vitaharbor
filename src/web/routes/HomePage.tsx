@@ -3,6 +3,7 @@ import { apiGet } from "../lib/api";
 import { useDocumentMeta } from "../lib/useDocumentMeta";
 import { Search, ExternalLink, X, ChevronDown, Link2, Check, ShieldCheck, Scale } from "lucide-react";
 import { ProjectMark } from "../components/projects/ProjectMark";
+import { LiveAreaWaves } from "../components/visual/LiveAreaWaves";
 
 const VitaConsoleScene = lazy(() =>
   import("../components/3d/VitaConsoleScene").then((module) => ({ default: module.VitaConsoleScene }))
@@ -514,6 +515,11 @@ export const HomePage: React.FC = () => {
           </h2>
 
           <div className="relative overflow-hidden rounded-3xl border border-hairline-strong bg-gradient-to-b from-surface via-surface to-sunken shadow-lift">
+            <LiveAreaWaves className="pointer-events-none absolute inset-x-0 bottom-0 h-[78%] w-full" />
+            <div
+              aria-hidden="true"
+              className="pointer-events-none absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-surface/85 to-transparent"
+            />
             <div aria-hidden="true" className="vh-glow pointer-events-none absolute inset-x-0 top-0 h-[620px]" />
             <div aria-hidden="true" className="vh-dots pointer-events-none absolute inset-0 opacity-80" />
             <div aria-hidden="true" className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-sunken to-transparent" />
