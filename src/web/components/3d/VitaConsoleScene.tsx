@@ -59,15 +59,17 @@ export const VitaConsoleScene: React.FC<VitaConsoleSceneProps> = ({
     const el = host.current;
     if (!el) return;
 
+    // Phones get a lighter render: no multisampling and a lower pixel ratio.
+    const lightDevice = window.innerWidth < 760;
     let renderer: THREE.WebGLRenderer;
     try {
-      renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+      renderer = new THREE.WebGLRenderer({ antialias: !lightDevice, alpha: true });
     } catch {
       setUnavailable(true);
       return;
     }
 
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.75));
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, lightDevice ? 1.25 : 1.75));
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
     renderer.toneMappingExposure = 1.08;
     el.appendChild(renderer.domElement);

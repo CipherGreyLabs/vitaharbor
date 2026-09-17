@@ -3,6 +3,7 @@ import { apiGet } from "../lib/api";
 import { useDocumentMeta } from "../lib/useDocumentMeta";
 import { Search, ExternalLink, X, ChevronDown, Link2, Check, ShieldCheck, Scale } from "lucide-react";
 import { ProjectMark } from "../components/projects/ProjectMark";
+import { FALLBACK_PROJECTS, FALLBACK_UPDATES } from "@/shared/constants/fallbackData";
 import { LiveAreaWaves } from "../components/visual/LiveAreaWaves";
 
 const VitaConsoleScene = lazy(() =>
@@ -252,8 +253,8 @@ export const HomePage: React.FC = () => {
       "An independent archive of PlayStation Vita engine decompilations, ARM wrappers and homebrew builds, sourced from community engineering boards."
   });
 
-  const [projects, setProjects] = useState<any[]>([]);
-  const [recentUpdates, setRecentUpdates] = useState<any[]>([]);
+  const [projects, setProjects] = useState<any[]>(() => FALLBACK_PROJECTS as any[]);
+  const [recentUpdates, setRecentUpdates] = useState<any[]>(() => FALLBACK_UPDATES as any[]);
   const [discovered, setDiscovered] = useState<any[]>([]);
   const [scannedAt, setScannedAt] = useState("");
   const [selectedId, setSelectedId] = useState<number | null>(null);
@@ -261,10 +262,11 @@ export const HomePage: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [activeFilter, setActiveFilter] = useState("all");
   const [activeSort, setActiveSort] = useState("recent");
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [copiedSlug, setCopiedSlug] = useState("");
   const [announcement, setAnnouncement] = useState("");
   const [scrolled, setScrolled] = useState(false);
+  const [tickerPaused, setTickerPaused] = useState(false);
   const [webgl, setWebgl] = useState<boolean | null>(null);
 
   const consoleRef = useRef<HTMLDivElement>(null);
@@ -285,43 +287,44 @@ export const HomePage: React.FC = () => {
   }, []);
 
   useEffect(() => {
+    // The ledger ships inside the bundle, so the first paint is already complete.
+    // The API call below only refreshes it when it answers.
+    const bundled = FALLBACK_PROJECTS as any[];
+    const wanted = slugFromLocation(window.location.pathname, window.location.hash);
+    const deep = wanted ? bundled.find((item) => item.slug === wanted) : null;
+    const initial = deep || bundled[0];
+    if (initial) setSelectedId(initial.id);
+    if (deep) {
+      setExpandedId(deep.id);
+      requestAnimationFrame(() => {
+        document.getElementById("entry-" + deep.slug)?.scrollIntoView({ behavior: "smooth", block: "center" });
+      });
+    }
+
     let cancelled = false;
-    async function load() {
+
+    async function refresh() {
       const [projectsRes, updatesRes] = await Promise.all([
-        apiGet<{ projects: any[] }>("/api/projects?limit=50", "projects").catch(() => ({ projects: [] })),
-        apiGet<{ updates: any[] }>("/api/updates?limit=8", "updates").catch(() => ({ updates: [] }))
+        apiGet<{ projects: any[] }>("/api/projects?limit=50", "projects").catch(() => null),
+        apiGet<{ updates: any[] }>("/api/updates?limit=8", "updates").catch(() => null)
       ]);
       if (cancelled) return;
-      const list = projectsRes?.projects || [];
-      setProjects(list);
-      setRecentUpdates(updatesRes?.updates || []);
+      if (projectsRes?.projects?.length) setProjects(projectsRes.projects);
+      if (updatesRes?.updates?.length) setRecentUpdates(updatesRes.updates);
 
       try {
         const res = await fetch("/data/discovered.json", { headers: { accept: "application/json" } });
-        if (res.ok) {
-          const body = (await res.json()) as { items?: unknown[]; generated_at?: unknown };
-          if (Array.isArray(body?.items)) setDiscovered(body.items);
-          if (typeof body?.generated_at === "string") setScannedAt(body.generated_at);
-        }
+        if (!res.ok) return;
+        const body = (await res.json()) as { items?: unknown[]; generated_at?: unknown };
+        if (cancelled) return;
+        if (Array.isArray(body?.items)) setDiscovered(body.items);
+        if (typeof body?.generated_at === "string") setScannedAt(body.generated_at);
       } catch {
         // The scanner has not run yet; the band stays hidden.
       }
-      setLoading(false);
-
-      const wanted = slugFromLocation(window.location.pathname, window.location.hash);
-      const deep = wanted ? list.find((item) => item.slug === wanted) : null;
-      const initial = deep || list[0];
-      if (initial) {
-        setSelectedId(initial.id);
-        if (deep) {
-          setExpandedId(deep.id);
-          requestAnimationFrame(() => {
-            document.getElementById("entry-" + deep.slug)?.scrollIntoView({ behavior: "smooth", block: "center" });
-          });
-        }
-      }
     }
-    load();
+
+    refresh();
     return () => {
       cancelled = true;
     };
@@ -467,9 +470,9 @@ export const HomePage: React.FC = () => {
         <div
           role="region"
           aria-label="Latest community signals"
-          className="relative flex h-9 items-center overflow-hidden border-b border-hairline bg-surface"
+          className="relative flex h-9 items-center overflow-hidden border-b border-hairline bg-surface pr-20"
         >
-          <div className="vh-ticker text-caption text-ink-muted">
+          <div className={"vh-ticker text-caption text-ink-muted" + (tickerPaused ? " vh-ticker-paused" : "")}>
             {[0, 1].map((pass) => (
               <React.Fragment key={pass}>
                 {recentUpdates.map((item, index) => (
@@ -490,6 +493,14 @@ export const HomePage: React.FC = () => {
               </React.Fragment>
             ))}
           </div>
+          <button
+            type="button"
+            onClick={() => setTickerPaused((value) => !value)}
+            aria-pressed={tickerPaused}
+            className="absolute right-2 top-1/2 -translate-y-1/2 rounded-md border border-hairline bg-surface px-2 py-0.5 text-micro font-medium text-ink-medium transition-colors hover:text-ink"
+          >
+            {tickerPaused ? "Play" : "Pause"}
+          </button>
         </div>
       )}
 
@@ -520,7 +531,6 @@ export const HomePage: React.FC = () => {
               aria-hidden="true"
               className="pointer-events-none absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-surface/85 to-transparent"
             />
-            <div aria-hidden="true" className="vh-glow pointer-events-none absolute inset-x-0 top-0 h-[620px]" />
             <div aria-hidden="true" className="vh-dots pointer-events-none absolute inset-0 opacity-80" />
             <div aria-hidden="true" className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-sunken to-transparent" />
 

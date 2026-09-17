@@ -96,6 +96,7 @@
   animation: vh-ticker 52s linear infinite;
 }
 
+.vh-ticker-paused,
 .vh-ticker:hover {
   animation-play-state: paused;
 }

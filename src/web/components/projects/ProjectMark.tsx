@@ -14,7 +14,9 @@ const PALETTES: Array<[string, string]> = [
   ["#b91c1c", "#fb923c"],
   ["#6d28d9", "#c084fc"],
   ["#0f766e", "#2dd4bf"],
-  ["#9d174d", "#f472b6"]
+  ["#9d174d", "#f472b6"],
+  ["#0369a1", "#38bdf8"],
+  ["#a16207", "#facc15"]
 ];
 
 const DOT_GRID: Array<[number, number]> = [
@@ -39,7 +41,7 @@ export const ProjectMark: React.FC<{ seed: string; size?: number; className?: st
 }) => {
   const hash = seedOf(seed || "vita");
   const [from, to] = PALETTES[hash % PALETTES.length];
-  const motif = Math.floor(hash / 7) % 4;
+  const motif = Math.floor(hash / 7) % 6;
   const tilt = (hash % 90) - 45;
   const id = "mark-" + hash.toString(36);
 
@@ -96,6 +98,21 @@ export const ProjectMark: React.FC<{ seed: string; size?: number; className?: st
             <path d="M-8 62 L32 34 L72 62" stroke="#ffffff" strokeWidth="9" fill="none" opacity="0.13" />
           </>
         )}
+        {motif === 4 && (
+          <>
+            <rect x="9" y="9" width="46" height="46" rx="11" fill="none" stroke="#ffffff" strokeWidth="4" opacity="0.18" />
+            <rect x="20" y="20" width="24" height="24" rx="7" fill="#ffffff" opacity="0.16" />
+          </>
+        )}
+
+        {motif === 5 && (
+          <>
+            <path d="M-12 60 L28 -8" stroke="#ffffff" strokeWidth="10" opacity="0.16" />
+            <path d="M14 76 L54 8" stroke="#ffffff" strokeWidth="10" opacity="0.12" />
+            <path d="M40 92 L80 24" stroke="#ffffff" strokeWidth="10" opacity="0.09" />
+          </>
+        )}
+
       </g>
     </svg>
   );

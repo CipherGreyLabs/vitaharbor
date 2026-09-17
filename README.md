@@ -1,132 +1,61 @@
 # VitaHarbor
 
-> Production-quality, zero-cost-first development tracker for active PS Vita game ports.
-> Unofficial community project. Not affiliated with Sony Interactive Entertainment.
+An independent archive of PlayStation Vita ports, built from public engineering
+threads on r/vitahacks and r/VitaPiracy.
 
-**Live:** https://vitaharbor.vercel.app
+## What it does
 
-> **Starting work on this repo? Read [HANDOVER.md](./HANDOVER.md) first.** It contains the
-> current state, architecture, design system, deployment steps, known pitfalls and the
-> open work item. The sections below describe the Cloudflare Worker design; the deployed
-> site currently runs on Vercel as a static build served from the bundled dataset.
+The ledger is a curated, hand-verified set of entries. Each entry records the stage
+a port has reached, what it does on real hardware, who is behind it and which thread
+it came from. A separate scanner watches both subreddits and records newly surfaced
+threads as unverified candidates, which never reach the ledger without review.
 
----
+## Layout
 
-## 1. Project Overview
-
-VitaHarbor answers one primary question:
-**What PS Vita game ports are currently being developed, by whom, how far have they progressed, and what changed recently?**
-
-The system operates as a structured development intelligence tracker that ingests public Reddit signals (r/VitaPiracy, r/vitahacks), parses observations into a verified evidence model, and displays project progression with strict provenance.
-
----
-
-## 2. Architecture Summary
-
-- **Runtime & Hosting**: Cloudflare Workers + Workers Static Assets
-- **Database**: Cloudflare D1 (Serverless SQLite)
-- **Frontend**: React 19, TypeScript, Vite, Tailwind CSS, Lucide Icons, React Router v7
-- **Backend API**: Hono framework on Cloudflare Workers
-- **Ingestion**: Reddit API via OAuth2, normalized into Source Items -> Observations -> Verified Updates
-- **Scheduling**: Cloudflare Cron Triggers (15-min discovery poll + daily maintenance)
-
----
-
-## 3. Requirements
-
-- Node.js >= 20.0.0
-- npm >= 10.0.0
-- Wrangler CLI >= 3.100.0 (bundled in devDependencies)
-- Cloudflare account with D1 database access
-
----
-
-## 4. Installation & Local Setup
-
-```bash
-# 1. Clone repository and install dependencies
-npm install
-
-# 2. Configure local environment variables
-cp .env.example .env
-
-# 3. Apply local D1 migrations
-npm run db:migrate:local
-
-# 4. (Optional) Seed development data
-npm run seed:dev
-
-# 5. Start development servers
-# Frontend dev server:
-npm run dev
-
-# Worker dev server:
-npm run dev:worker
+```
+src/shared/constants/fallbackData.ts   the single authored dataset
+src/shared/data/staticApi.ts           resolves /api/* from that dataset
+src/worker/                            the API, deployed on Vercel Edge
+src/web/routes/HomePage.tsx            the archive surface
+src/web/components/projects/           ProjectMark (generated identity)
+src/web/components/visual/             LiveAreaWaves (stage backdrop)
+scripts/                               scanner, promotion, feeds, sitemap
+tests/                                 data invariants and unit tests
+docs/AUTOMATION.md                     how the scheduled chain is meant to run
 ```
 
----
+Both the browser and the edge API read `fallbackData.ts`, so there is one source of
+truth. The homepage renders from that same dataset on the first paint and treats the
+API call as a refresh, which is why the list is never empty.
 
-## 5. D1 Database & Migrations
+## Commands
 
-VitaHarbor uses versioned SQL migrations stored in `migrations/`:
-
-```bash
-# Apply to local SQLite D1
-npm run db:migrate:local
-
-# Apply to production Cloudflare D1
-npm run db:migrate:remote
+```
+npm run dev            local development
+npm run build          production build
+npm test               data invariants plus unit tests
+npm run typecheck      TypeScript
+npm run data:scan      record new candidate threads
+npm run data:list      show the candidate queue
+npm run data:promote   move a candidate into the ledger, marked unverified
+npm run data:feeds     rebuild the JSON and RSS feeds
 ```
 
----
+## Rules the data must keep
 
-## 6. Reddit Ingestion Configuration
+`tests/unit/data.test.ts` enforces these, so a regression fails the build:
 
-Configure your Reddit script application credentials in `.env` (and Cloudflare Worker secrets for production):
+- ids and slugs stay unique
+- every project carries a Reddit source URL
+- every update points at a project that exists
+- timestamps are absolute and in the past; deriving them from the clock is banned, so
+  the archive can never look fresher than it is
+- stage values come from the agreed set
 
-```env
-REDDIT_CLIENT_ID=your_reddit_app_id
-REDDIT_CLIENT_SECRET=your_reddit_app_secret
-REDDIT_USER_AGENT=VitaHarbor/1.0 (+https://vitaharbor.example)
-REDDIT_REFRESH_TOKEN=your_oauth_refresh_token
-```
+## Design system
 
----
-
-## 7. Quality Gates & Testing
-
-```bash
-# Run linting
-npm run lint
-
-# Run strict TypeScript typechecking
-npm run typecheck
-
-# Run unit tests
-npm run test:unit
-
-# Run full test suite
-npm run test
-
-# Build production bundle
-npm run build
-```
-
----
-
-## 8. Deployment
-
-```bash
-# Deploy to staging environment
-npm run deploy:staging
-
-# Deploy to production environment
-npm run deploy
-```
-
----
-
-## 9. License & Disclaimer
-
-Unofficial community project. Not affiliated with Sony Interactive Entertainment, Reddit, or any represented game publishers.
+Colour, spacing and type come from tokens declared in `src/web/styles/index.css` and
+exposed as Tailwind names (`canvas`, `surface`, `sunken`, `hairline`, `ink`,
+`stage.*`, `accent`). Text sizes are seven deliberate steps. Change a token rather
+than a component.
 
