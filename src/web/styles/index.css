@@ -13,14 +13,14 @@
 
 @layer base {
   :root {
-    --vh-canvas-rgb: 243 244 246;
+    --vh-canvas-rgb: 232 235 240;
     --vh-surface-rgb: 255 255 255;
-    --vh-sunken-rgb: 237 239 242;
-    --vh-hairline-rgb: 224 227 232;
-    --vh-hairline-strong-rgb: 203 208 215;
+    --vh-sunken-rgb: 221 226 234;
+    --vh-hairline-rgb: 211 217 226;
+    --vh-hairline-strong-rgb: 186 194 206;
     --vh-ink-rgb: 29 29 31;
     --vh-ink-medium-rgb: 71 85 105;
-    --vh-ink-muted-rgb: 100 116 139;
+    --vh-ink-muted-rgb: 75 85 99;
     --vh-done-rgb: 5 150 105;
     --vh-progress-rgb: 37 99 235;
     --vh-caution-rgb: 217 119 6;
@@ -58,11 +58,11 @@
 
   /* Studio set behind the hardware: soft accent wash plus a faint dot grid. */
   .vh-glow {
-    background: radial-gradient(55% 62% at 50% 30%, rgb(var(--vh-accent-rgb) / 0.11), transparent 72%);
+    background: radial-gradient(55% 62% at 50% 30%, rgb(var(--vh-accent-rgb) / 0.18), transparent 72%);
   }
 
   .vh-dots {
-    background-image: radial-gradient(rgb(var(--vh-ink-rgb) / 0.07) 1px, transparent 1px);
+    background-image: radial-gradient(rgb(var(--vh-ink-rgb) / 0.10) 1px, transparent 1px);
     background-size: 22px 22px;
     background-position: 0 0;
   }

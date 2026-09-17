@@ -363,8 +363,9 @@ export const HomePage: React.FC = () => {
       )}
 
       <main id="main-content">
-        <section className="mx-auto max-w-5xl px-6 pb-2 pt-20 text-center">
-          <p className="text-micro font-medium uppercase tracking-[0.2em] text-ink-muted">
+        <section className="mx-auto max-w-5xl px-6 pb-2 pt-14 text-center">
+          <p className="flex items-center justify-center gap-2 text-micro font-medium uppercase tracking-[0.2em] text-ink-medium">
+            <span aria-hidden="true" className="h-1.5 w-1.5 rounded-full bg-accent" />
             Independent hardware archive
           </p>
           <h1 className="mx-auto mt-5 max-w-3xl text-display font-semibold text-ink sm:text-displaylg">
@@ -381,9 +382,10 @@ export const HomePage: React.FC = () => {
             Interactive console preview
           </h2>
 
-          <div className="relative overflow-hidden rounded-3xl border border-hairline bg-surface shadow-card">
-            <div aria-hidden="true" className="vh-glow pointer-events-none absolute inset-x-0 top-0 h-[560px]" />
-            <div aria-hidden="true" className="vh-dots pointer-events-none absolute inset-0 opacity-70" />
+          <div className="relative overflow-hidden rounded-3xl border border-hairline-strong bg-gradient-to-b from-surface via-surface to-sunken shadow-lift">
+            <div aria-hidden="true" className="vh-glow pointer-events-none absolute inset-x-0 top-0 h-[620px]" />
+            <div aria-hidden="true" className="vh-dots pointer-events-none absolute inset-0 opacity-80" />
+            <div aria-hidden="true" className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-sunken to-transparent" />
 
             <div className="relative px-4 pt-4 sm:px-8">
               <div ref={consoleRef} className="h-[400px] sm:h-[500px]">
@@ -493,8 +495,9 @@ export const HomePage: React.FC = () => {
           </dl>
         </section>
 
-        <section aria-label="Archive at a glance" className="mx-auto mt-20 max-w-5xl px-6">
-          <div className="grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-hairline bg-hairline sm:grid-cols-4">
+        <section aria-label="Archive at a glance" className="mt-20 bg-deep">
+          <div className="mx-auto max-w-5xl px-6 py-10">
+            <div className="grid grid-cols-2 gap-px overflow-hidden rounded-2xl bg-white/10 sm:grid-cols-4">
             {[
               ["Indexed ports", String(projects.length), "Across both boards"],
               [
@@ -513,13 +516,14 @@ export const HomePage: React.FC = () => {
                 "Verified end to end"
               ],
               ["Sources", "2", "r/vitahacks · r/VitaPiracy"]
-            ].map(([label, value, note]) => (
-              <div key={label} className="bg-surface px-5 py-6">
-                <p className="text-micro font-medium uppercase text-ink-muted">{label}</p>
-                <p className="vh-tnum mt-2 text-title font-semibold text-ink">{value}</p>
-                <p className="mt-1 text-caption text-ink-muted">{note}</p>
-              </div>
-            ))}
+              ].map(([label, value, note]) => (
+                <div key={label} className="bg-deep px-5 py-6">
+                  <p className="text-micro font-medium uppercase text-white/45">{label}</p>
+                  <p className="vh-tnum mt-2 text-title font-semibold text-white">{value}</p>
+                  <p className="mt-1 text-caption text-white/45">{note}</p>
+                </div>
+              ))}
+            </div>
           </div>
         </section>
 
