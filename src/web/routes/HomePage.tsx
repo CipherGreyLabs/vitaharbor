@@ -1,7 +1,7 @@
 import React, { Suspense, lazy, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import { apiGet } from "../lib/api";
 import { useDocumentMeta } from "../lib/useDocumentMeta";
-import { Search, ExternalLink, X, ChevronDown, Link2, Check } from "lucide-react";
+import { Search, ExternalLink, X, ChevronDown, Link2, Check, ShieldCheck, Scale } from "lucide-react";
 import { ProjectMark } from "../components/projects/ProjectMark";
 
 const VitaConsoleScene = lazy(() =>
@@ -893,6 +893,25 @@ export const HomePage: React.FC = () => {
                           id={"panel-" + project.slug}
                           className="border-t border-hairline bg-sunken/50 px-5 py-6"
                         >
+                          <div className="mb-6 flex items-center gap-4">
+                            <ProjectMark seed={project.slug} size={56} className="shrink-0 rounded-2xl" />
+                            <div className="min-w-0">
+                              <p className="truncate text-lead font-semibold tracking-tight text-ink">
+                                {title.name}
+                              </p>
+                              <p className="mt-1.5 flex flex-wrap items-center gap-2 text-caption text-ink-muted">
+                                <span
+                                  className={
+                                    "rounded-md px-2 py-0.5 text-micro font-semibold uppercase " +
+                                    (STAGE_CHIP[String(project.current_stage)] || "bg-sunken text-ink-medium")
+                                  }
+                                >
+                                  {prettyStage(project.current_stage)}
+                                </span>
+                                <span>{title.engine || project.original_platform || "Port"}</span>
+                              </p>
+                            </div>
+                          </div>
                           {project.verification === "detected" && (
                             <p className="mb-6 max-w-3xl rounded-lg border border-hairline bg-surface px-4 py-3 text-caption text-ink-medium">
                               <span className="font-medium text-ink">Unverified entry.</span> Promoted
@@ -1098,29 +1117,33 @@ export const HomePage: React.FC = () => {
               How entries get listed
             </h2>
             <div className="mt-10 grid gap-10 sm:grid-cols-3">
-              {[
+              {([
                 [
-                  "01",
+                  Link2,
                   "Sourced",
                   "Every entry links to the original engineering thread on r/vitahacks or r/VitaPiracy."
                 ],
                 [
-                  "02",
+                  ShieldCheck,
                   "Verified",
                   "Stage and performance notes come from the people running the build on real hardware."
                 ],
                 [
-                  "03",
+                  Scale,
                   "Non-infringing",
                   "Only discussion and source repositories are indexed. No ROMs, ISOs or game data are hosted."
                 ]
-              ].map(([number, title, body]) => (
-                <div key={title}>
-                  <p className="vh-tnum text-micro font-medium text-white/40">{number}</p>
-                  <h3 className="mt-3 text-subtitle font-medium text-white">{title}</h3>
-                  <p className="mt-2 text-body text-white/65">{body}</p>
-                </div>
-              ))}
+              ] as Array<[React.ComponentType<{ className?: string }>, string, string]>).map(
+                ([Icon, title, body]) => (
+                  <div key={title}>
+                    <span className="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-white/10 text-white">
+                      <Icon className="h-4.5 w-4.5" />
+                    </span>
+                    <h3 className="mt-4 text-subtitle font-medium text-white">{title}</h3>
+                    <p className="mt-2 text-body text-white/65">{body}</p>
+                  </div>
+                )
+              )}
             </div>
           </div>
         </section>
