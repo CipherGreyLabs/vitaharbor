@@ -10,6 +10,7 @@ export interface SelectedProjectView {
   performance_notes?: string | null;
   playability_notes?: string | null;
   technologies?: string[];
+  original_platform?: string | null;
 }
 
 export interface VitaConsoleSceneProps {
@@ -84,6 +85,29 @@ export const VitaConsoleScene: React.FC<VitaConsoleSceneProps> = ({
     scene.add(vita);
 
     const textures: THREE.Texture[] = [];
+
+    // Soft contact shadow, fixed to the floor so the hardware reads as resting on a surface
+    // instead of floating in empty space.
+    const shadowCanvas = document.createElement('canvas');
+    shadowCanvas.width = 256;
+    shadowCanvas.height = 128;
+    const shadowCtx = shadowCanvas.getContext('2d');
+    if (shadowCtx) {
+      const pool = shadowCtx.createRadialGradient(128, 64, 4, 128, 64, 124);
+      pool.addColorStop(0, 'rgba(15, 23, 42, 0.30)');
+      pool.addColorStop(0.45, 'rgba(15, 23, 42, 0.13)');
+      pool.addColorStop(1, 'rgba(15, 23, 42, 0)');
+      shadowCtx.fillStyle = pool;
+      shadowCtx.fillRect(0, 0, 256, 128);
+    }
+    const shadowTexture = new THREE.CanvasTexture(shadowCanvas);
+    textures.push(shadowTexture);
+    const contactShadow = new THREE.Mesh(
+      new THREE.PlaneGeometry(250, 62),
+      new THREE.MeshBasicMaterial({ map: shadowTexture, transparent: true, depthWrite: false })
+    );
+    contactShadow.position.set(0, -50, 0);
+    scene.add(contactShadow);
     const shell = new THREE.MeshPhysicalMaterial({ color: '#131418', roughness: 0.28, metalness: 0.14, clearcoat: 0.85 });
     const face = new THREE.MeshPhysicalMaterial({ color: '#08090d', roughness: 0.16, metalness: 0.06, clearcoat: 1 });
     const silver = new THREE.MeshStandardMaterial({ color: '#9aa0aa', roughness: 0.22, metalness: 0.92 });
@@ -164,107 +188,99 @@ export const VitaConsoleScene: React.FC<VitaConsoleSceneProps> = ({
 
     const g = screenCanvas.getContext('2d');
 
-    function paint() {
+            function paint() {
       if (!g) return;
       const current = selected.current;
+
       if (!current) {
-        const off = g.createLinearGradient(0, 0, 960, 544);
-        off.addColorStop(0, '#0a0e17');
-        off.addColorStop(1, '#05070c');
-        g.fillStyle = off;
+        const idle = g.createLinearGradient(0, 0, 0, 544);
+        idle.addColorStop(0, '#101320');
+        idle.addColorStop(1, '#05060a');
+        g.fillStyle = idle;
         g.fillRect(0, 0, 960, 544);
-        g.fillStyle = '#64748b';
-        g.font = 'bold 22px Arial';
-        g.fillText('SELECT A PORT BELOW TO PREVIEW', 280, 272);
+        g.fillStyle = 'rgba(255,255,255,0.28)';
+        g.font = '500 17px -apple-system, Helvetica, Arial, sans-serif';
+        g.textAlign = 'center';
+        g.fillText('SELECT A PORT', 480, 272);
         screenTexture.needsUpdate = true;
         return;
       }
 
-      // Rich atmospheric LiveArea gradient
-      const gradient = g.createLinearGradient(0, 0, 960, 544);
-      gradient.addColorStop(0, '#041226');
-      gradient.addColorStop(0.4, '#092344');
-      gradient.addColorStop(1, '#06162d');
-      g.fillStyle = gradient;
+      const rawTitle = String(current.game_title || current.display_name || 'Homebrew');
+      const title = rawTitle.split('(')[0].trim();
+      const platform = String(current.original_platform || 'PlayStation Vita');
+      const stage = String(current.current_stage || 'wip').replace(/_/g, ' ').toUpperCase();
+
+      // Cinematic key art: deep base, one soft light source, faint screen texture.
+      const base = g.createLinearGradient(0, 0, 960, 544);
+      base.addColorStop(0, '#12141d');
+      base.addColorStop(0.55, '#0a0c14');
+      base.addColorStop(1, '#05060a');
+      g.fillStyle = base;
       g.fillRect(0, 0, 960, 544);
 
-      // Glowing fluid waves
-      for (let i = 0; i < 5; i++) {
-        g.beginPath();
-        g.moveTo(-100, 310 + i * 36);
-        g.bezierCurveTo(240, 50 + i * 55, 480, 640 - i * 40, 1100, 160 + i * 48);
-        g.lineTo(1100, 600);
-        g.lineTo(-100, 600);
-        g.closePath();
-        g.fillStyle = `rgba(56, 189, 248, ${0.06 + i * 0.025})`;
-        g.fill();
+      const accents = ['#2f6bff', '#0f9d8a', '#c2410c', '#7c3aed', '#be123c'];
+      const accent = accents[title.length % accents.length];
+      const glow = g.createRadialGradient(720, 110, 10, 720, 110, 640);
+      glow.addColorStop(0, accent + '59');
+      glow.addColorStop(1, 'rgba(0,0,0,0)');
+      g.fillStyle = glow;
+      g.fillRect(0, 0, 960, 544);
+
+      const vignette = g.createRadialGradient(480, 280, 200, 480, 280, 640);
+      vignette.addColorStop(0, 'rgba(0,0,0,0)');
+      vignette.addColorStop(1, 'rgba(0,0,0,0.72)');
+      g.fillStyle = vignette;
+      g.fillRect(0, 0, 960, 544);
+
+      g.fillStyle = 'rgba(255,255,255,0.02)';
+      for (let scan = 0; scan < 544; scan += 3) g.fillRect(0, scan, 960, 1);
+
+      g.textAlign = 'left';
+      g.textBaseline = 'alphabetic';
+      g.fillStyle = 'rgba(255,255,255,0.40)';
+      g.font = '500 15px -apple-system, Helvetica, Arial, sans-serif';
+      g.fillText('VITAHARBOR', 56, 72);
+
+      const words = title.split(' ').filter(Boolean);
+      const longest = words.reduce((a, b) => (b.length > a.length ? b : a), '');
+      let size = 94;
+      g.font = '700 ' + size + 'px -apple-system, Helvetica, Arial, sans-serif';
+      while (g.measureText(longest).width > 780 && size > 32) {
+        size -= 4;
+        g.font = '700 ' + size + 'px -apple-system, Helvetica, Arial, sans-serif';
       }
 
-      // Top Status Bar (OLED system bar)
-      g.fillStyle = 'rgba(0, 0, 0, 0.45)';
-      g.fillRect(0, 0, 960, 42);
-      g.fillStyle = '#bae6fd';
-      g.font = '600 15px -apple-system, Arial, sans-serif';
-      g.fillText('PS VITA · HENKAKU 3.65', 38, 27);
-      g.fillText('100% 🔋  ·  5GHz 📶', 785, 27);
-
-      g.fillStyle = '#e0f2fe';
-      g.font = '20px Arial';
-      g.fillText('VitaHarbor Port Ledger', 42, 78);
-      g.font = 'bold 14px Arial';
-      g.fillStyle = '#38bdf8';
-      g.fillText('ACTIVE WIP HARDWARE TEST', 710, 78);
-
-      // Game Title
       g.fillStyle = '#ffffff';
-      g.font = 'bold 50px Arial';
-      const title = current.game_title || current.display_name || 'Homebrew Project';
-      const words = title.split(' ');
-      let line = '', y = 175;
+      let line = '';
+      let cursorY = words.length > 1 ? 236 : 268;
       for (const word of words) {
-        const next = line + word + ' ';
-        if (g.measureText(next).width > 840 && line) {
-          g.fillText(line, 44, y);
-          y += 58;
-          line = word + ' ';
+        const next = line ? line + ' ' + word : word;
+        if (g.measureText(next).width > 820 && line) {
+          g.fillText(line, 56, cursorY);
+          cursorY += size * 1.04;
+          line = word;
         } else {
           line = next;
         }
       }
-      g.fillText(line, 44, y);
+      g.fillText(line, 56, cursorY);
 
-      // Stage Pill Badge
-      const stageRaw = (current.current_stage || 'in_game').replace('_', ' ').toUpperCase();
-      g.fillStyle = 'rgba(56, 189, 248, 0.25)';
-      g.beginPath();
-      g.roundRect(44, y + 20, 240, 36, 18);
-      g.fill();
-      g.strokeStyle = 'rgba(56, 189, 248, 0.7)';
-      g.lineWidth = 1.5;
-      g.stroke();
-      g.fillStyle = '#38bdf8';
-      g.font = 'bold 15px Arial';
-      g.fillText(`● STAGE: ${stageRaw}`, 64, y + 43);
+      g.fillStyle = 'rgba(255,255,255,0.52)';
+      g.font = '500 18px -apple-system, Helvetica, Arial, sans-serif';
+      g.fillText(platform.toUpperCase(), 56, cursorY + size * 0.95);
 
-      // Performance Notes
-      const perf = current.performance_notes || current.playability_notes || 'Tested on real hardware; ARM Cortex-A9 execution.';
-      g.fillStyle = '#cbd5e1';
-      g.font = '20px Arial';
-      g.fillText(perf.slice(0, 78) + (perf.length > 78 ? '...' : ''), 44, y + 95);
-
-      // OLED Bottom Telemetry Bar
-      g.fillStyle = 'rgba(0, 0, 0, 0.5)';
-      g.fillRect(0, 488, 960, 56);
-      g.fillStyle = '#38bdf8';
-      g.font = 'bold 14px Arial';
-      g.fillText('DIRECT REDDIT THREAD VERIFIED · r/vitahacks & r/VitaPiracy', 44, 523);
-      g.fillStyle = '#94a3b8';
-      g.fillText('512MB RAM · SGX543MP4+', 740, 523);
+      g.fillStyle = accent;
+      g.fillRect(56, cursorY + size * 1.24, 40, 3);
+      g.fillStyle = 'rgba(255,255,255,0.60)';
+      g.font = '500 15px -apple-system, Helvetica, Arial, sans-serif';
+      g.fillText(stage, 110, cursorY + size * 1.32);
 
       screenTexture.needsUpdate = true;
     }
 
-    const recessMat = new THREE.MeshStandardMaterial({color:'#14161a',roughness:0.52,metalness:0.12});
+
+const recessMat = new THREE.MeshStandardMaterial({color:'#14161a',roughness:0.52,metalness:0.12});
     const rimMat = new THREE.MeshStandardMaterial({color:'#1f2125',roughness:0.62,metalness:0.06});
 
     const island = referenceShape([['M',56,53],['C',29,53,15,70,15,96],['C',15,114,26,123,43,130],['C',60,136,48,144,47,156],['C',42,179,57,190,74,190],['C',93,190,104,176,101,159],['C',100,145,88,139,89,128],['C',106,110,103,82,91,66],['C',82,56,70,53,56,53]]);
@@ -365,8 +381,8 @@ export const VitaConsoleScene: React.FC<VitaConsoleSceneProps> = ({
       const tan = Math.tan(THREE.MathUtils.degToRad(15));
       const wide = camera.aspect > 1.45;
       const isSplit = align === "split";
-      const widthFrac = isSplit ? (wide ? 0.502 : 0.92) : (wide ? 0.75 : 0.92);
-      const distance = Math.max(182 / (2 * tan * camera.aspect * widthFrac), 86 / (2 * tan * 0.8));
+      const widthFrac = isSplit ? (wide ? 0.502 : 0.92) : (wide ? 0.70 : 0.88);
+      const distance = Math.max(182 / (2 * tan * camera.aspect * widthFrac), 116 / (2 * tan * 0.9));
       camera.position.set(0, 0, distance);
       const targetX = isSplit && wide ? (0.735 - 0.5) * 2 * tan * distance * camera.aspect : 0;
       vita.userData.targetX = targetX;

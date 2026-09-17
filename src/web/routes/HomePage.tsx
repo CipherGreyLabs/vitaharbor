@@ -1,369 +1,433 @@
 import React, { useState, useEffect, useMemo, useRef } from "react";
-import { Link } from "react-router-dom";
 import { VitaConsoleScene, type SelectedProjectView } from "../components/3d/VitaConsoleScene";
 import { apiGet } from "../lib/api";
 import { useDocumentMeta } from "../lib/useDocumentMeta";
-import {
-  Search,
-  ExternalLink,
-  ChevronRight,
-  ArrowUpRight
-} from "lucide-react";
+import { Search, ExternalLink, X, ChevronDown } from "lucide-react";
 
-interface StatsData {
-  total_projects: number;
-  active_projects: number;
-  playable_or_better: number;
+const FILTERS = [
+  { key: "all", label: "All ports" },
+  { key: "wip", label: "In development" },
+  { key: "playable", label: "Playable" },
+  { key: "booting", label: "Early boot" }
+];
+
+const STAGE_DOT: Record<string, string> = {
+  released: "bg-emerald-500",
+  playable: "bg-emerald-500",
+  completable: "bg-emerald-500",
+  in_game: "bg-blue-500",
+  booting: "bg-amber-500",
+  early_wip: "bg-slate-400",
+  research: "bg-slate-400"
+};
+
+function splitTitle(raw: unknown) {
+  const value = String(raw || "Unknown port").trim();
+  const open = value.indexOf("(");
+  if (open === -1) return { name: value, engine: "" };
+  return { name: value.slice(0, open).trim(), engine: value.slice(open).replace(/[()]/g, "").trim() };
 }
 
-const CATEGORY_TABS = [
-  { key: "all", label: "All Ports" },
-  { key: "wip", label: "In Development" },
-  { key: "playable", label: "Playable" },
-  { key: "booting", label: "Early Boot" }
-];
+function prettyStage(stage: unknown) {
+  return String(stage || "wip").replace(/_/g, " ");
+}
+
+function relativeTime(value: unknown) {
+  const time = new Date(String(value)).getTime();
+  if (Number.isNaN(time)) return "";
+  const hours = Math.round((Date.now() - time) / 3600000);
+  if (hours < 1) return "just now";
+  if (hours < 24) return hours + "h ago";
+  return Math.round(hours / 24) + "d ago";
+}
 
 export const HomePage: React.FC = () => {
   useDocumentMeta({
-    title: "VitaHarbor — PlayStation Vita Port Hub",
-    description: "Real hardware progress and verified Reddit threads for PlayStation Vita ports."
+    title: "VitaHarbor — PlayStation Vita Port Archive",
+    description:
+      "An independent archive of PlayStation Vita engine decompilations, ARM wrappers and homebrew builds, sourced from community engineering boards."
   });
 
-  const [stats, setStats] = useState<StatsData | null>(null);
   const [projects, setProjects] = useState<any[]>([]);
   const [recentUpdates, setRecentUpdates] = useState<any[]>([]);
-  const [selectedFilter, setSelectedFilter] = useState("all");
   const [selectedProject, setSelectedProject] = useState<SelectedProjectView | null>(null);
   const [searchTerm, setSearchTerm] = useState("");
+  const [activeFilter, setActiveFilter] = useState("all");
+  const [expandedId, setExpandedId] = useState<number | null>(null);
   const [loading, setLoading] = useState(true);
 
-  const consoleStageRef = useRef<HTMLDivElement>(null);
+  const consoleRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    async function loadHomeData() {
-      try {
-        const [statsRes, projectsRes, updatesRes] = await Promise.all([
-          apiGet<StatsData>("/api/stats").catch(() => null),
-          apiGet<{ projects: any[] }>("/api/projects?limit=50", "projects").catch(() => ({ projects: [] })),
-          apiGet<{ updates: any[] }>("/api/updates?limit=6", "updates").catch(() => ({ updates: [] }))
-        ]);
-
-        if (statsRes) setStats(statsRes);
-        if (projectsRes?.projects && projectsRes.projects.length > 0) {
-          setProjects(projectsRes.projects);
-          const first = projectsRes.projects[0];
-          setSelectedProject({
-            id: first.id,
-            game_title: first.game_title || first.display_name || "Medal of Honor: Allied Assault",
-            display_name: first.display_name || "OpenMoHAA Vita",
-            current_stage: first.current_stage || "in_game",
-            performance_notes: first.performance_notes,
-            playability_notes: first.playability_notes,
-            technologies: first.technologies
-          });
-        }
-        if (updatesRes?.updates) setRecentUpdates(updatesRes.updates);
-      } catch (e) {
-        console.error("Failed to load data", e);
-      } finally {
-        setLoading(false);
-      }
+    let cancelled = false;
+    async function load() {
+      const [projectsRes, updatesRes] = await Promise.all([
+        apiGet<{ projects: any[] }>("/api/projects?limit=50", "projects").catch(() => ({ projects: [] })),
+        apiGet<{ updates: any[] }>("/api/updates?limit=8", "updates").catch(() => ({ updates: [] }))
+      ]);
+      if (cancelled) return;
+      const list = projectsRes?.projects || [];
+      setProjects(list);
+      if (list.length > 0) setSelectedProject(list[0]);
+      setRecentUpdates(updatesRes?.updates || []);
+      setLoading(false);
     }
-    loadHomeData();
+    load();
+    return () => {
+      cancelled = true;
+    };
   }, []);
 
-  const filteredProjects = useMemo(() => {
+  const visible = useMemo(() => {
     let list = [...projects];
-
-    if (selectedFilter === "wip") {
+    if (activeFilter === "wip") {
       list = list.filter((p) => ["in_game", "booting", "early_wip", "research"].includes(String(p.current_stage)));
-    } else if (selectedFilter === "playable") {
+    } else if (activeFilter === "playable") {
       list = list.filter((p) => ["playable", "released", "completable"].includes(String(p.current_stage)));
-    } else if (selectedFilter === "booting") {
+    } else if (activeFilter === "booting") {
       list = list.filter((p) => ["booting", "early_wip", "research"].includes(String(p.current_stage)));
-    } else if (selectedFilter !== "all") {
-      list = list.filter((p) => String(p.current_stage) === selectedFilter);
     }
-
-    if (searchTerm.trim()) {
-      const term = searchTerm.toLowerCase().trim();
-      list = list.filter(
-        (p) =>
-          p.game_title?.toLowerCase().includes(term) ||
-          p.display_name?.toLowerCase().includes(term) ||
-          p.summary?.toLowerCase().includes(term) ||
-          p.technologies?.some((t: string) => t.toLowerCase().includes(term)) ||
-          p.developers?.some((d: any) => d.display_name?.toLowerCase().includes(term))
+    const term = searchTerm.trim().toLowerCase();
+    if (term) {
+      list = list.filter((p) =>
+        [p.game_title, p.display_name, p.summary, p.original_platform]
+          .filter(Boolean)
+          .some((field: string) => String(field).toLowerCase().includes(term)) ||
+        (p.technologies || []).some((tech: string) => String(tech).toLowerCase().includes(term))
       );
     }
-
     return list;
-  }, [projects, selectedFilter, searchTerm]);
+  }, [projects, activeFilter, searchTerm]);
 
-  const handleSelectFor3D = (p: any) => {
-    setSelectedProject({
-      id: p.id,
-      game_title: p.game_title || p.display_name || "",
-      display_name: p.display_name || "",
-      current_stage: p.current_stage,
-      performance_notes: p.performance_notes,
-      playability_notes: p.playability_notes,
-      technologies: p.technologies
-    });
-    if (consoleStageRef.current) {
-      consoleStageRef.current.scrollIntoView({ behavior: "smooth", block: "center" });
-    }
-  };
+  const dockItems = useMemo(() => projects.slice(0, 6), [projects]);
+  const tickerItems = useMemo(() => (recentUpdates.length > 0 ? recentUpdates : []), [recentUpdates]);
 
-  const formatStage = (stage: string) => {
-    switch (stage) {
-      case "in_game": return "In-Game";
-      case "booting": return "Booting";
-      case "early_wip": return "In Development";
-      case "playable": return "Playable";
-      case "released": return "Released";
-      default: return stage;
+  const selectProject = (project: any) => {
+    setSelectedProject(project);
+    if (consoleRef.current) {
+      consoleRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
     }
   };
 
   return (
-    <div className="min-h-screen bg-[#ffffff] text-[#1d1d1f] font-sans antialiased selection:bg-[#0071e3] selection:text-white">
-      
-      {/* 1. CLEAN APPLE-STYLE GLOBAL NAVIGATION */}
-      <nav className="border-b border-[#d2d2d7]/40 bg-white/80 backdrop-blur-xl sticky top-0 z-50">
-        <div className="max-w-6xl mx-auto px-6 h-12 flex items-center justify-between text-xs font-medium text-[#86868b]">
-          <Link to="/" className="text-[#1d1d1f] font-semibold text-sm flex items-center gap-2 hover:opacity-80 transition-opacity">
-            <span className="w-2.5 h-2.5 rounded-full bg-[#0071e3]" />
+    <div id="top" className="min-h-screen bg-[#fbfbfd] text-[#1d1d1f] antialiased">
+      <nav className="sticky top-0 z-50 border-b border-slate-200/70 bg-white/80 backdrop-blur-xl">
+        <div className="mx-auto flex h-14 max-w-5xl items-center justify-between px-6">
+          <a href="#top" className="text-[17px] font-semibold tracking-tight text-slate-900">
             VitaHarbor
-          </Link>
-
-          <div className="flex items-center gap-6">
-            <a href="#directory" className="hover:text-[#1d1d1f] transition-colors">Directory</a>
-            <Link to="/about" className="hover:text-[#1d1d1f] transition-colors">Methodology</Link>
-            <span className="text-[#d2d2d7]">|</span>
-            <span className="text-[#86868b]">r/vitahacks & r/VitaPiracy</span>
+          </a>
+          <div className="flex items-center gap-5 text-[13px] text-slate-500">
+            <a href="#directory" className="transition-colors hover:text-slate-900">Directory</a>
+            <a href="#methodology" className="transition-colors hover:text-slate-900">Methodology</a>
+            <span className="hidden items-center gap-1.5 rounded-full bg-slate-100 px-2.5 py-1 text-[11px] font-medium text-slate-600 sm:inline-flex">
+              <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-emerald-500" />
+              Reddit sync active
+            </span>
           </div>
         </div>
       </nav>
 
-      {/* 2. HERO SHOWCASE (BRIGHT STUDIO WHITE, CLEAR TYPOGRAPHY) */}
-      <section className="pt-16 pb-20 px-6 max-w-6xl mx-auto">
-        
-        <div className="text-center max-w-3xl mx-auto mb-12">
-          <p className="text-xs uppercase tracking-widest font-semibold text-[#0071e3] mb-3">
-            Hardware Port Tracker
-          </p>
-          <h1 className="text-5xl sm:text-6xl font-bold tracking-tight text-[#1d1d1f] leading-[1.05]">
-            PlayStation Vita Ports. <br />
-            Live on hardware.
-          </h1>
-          <p className="text-lg text-[#6e6e73] mt-5 leading-relaxed font-normal">
-            Before community engine recreations and ARM wrappers appear on VitaDB, we document their real-world performance, frame rates, and development threads on Reddit.
-          </p>
+      {tickerItems.length > 0 && (
+        <div className="relative flex h-9 items-center overflow-hidden border-b border-slate-200/70 bg-white">
+          <div className="vh-ticker text-[12px] text-slate-500">
+            {[0, 1].map((pass) => (
+              <React.Fragment key={pass}>
+                {tickerItems.map((item, index) => (
+                  <span key={pass + "-" + index} className="mx-7 inline-flex items-center gap-2.5 whitespace-nowrap">
+                    <span className="tabular-nums text-slate-400">{relativeTime(item.event_at)}</span>
+                    <span className="h-1 w-1 rounded-full bg-slate-300" />
+                    <span className="text-slate-600">{item.title}</span>
+                  </span>
+                ))}
+              </React.Fragment>
+            ))}
+          </div>
+        </div>
+      )}
+
+      <header className="mx-auto max-w-5xl px-6 pt-20 pb-2 text-center">
+        <p className="text-[12px] font-medium uppercase tracking-[0.2em] text-slate-400">
+          Independent hardware archive
+        </p>
+        <h1 className="mt-5 text-[40px] font-semibold leading-[1.06] tracking-[-0.035em] text-slate-900 sm:text-[56px]">
+          PlayStation Vita port archive.
+        </h1>
+        <p className="mx-auto mt-6 max-w-xl text-[17px] leading-relaxed text-slate-500">
+          Engine decompilations, ARM wrappers and homebrew builds documented at the
+          moment they surface on community engineering boards.
+        </p>
+      </header>
+
+      <section ref={consoleRef} className="mx-auto max-w-4xl px-6 pt-6">
+        <div className="h-[420px] sm:h-[520px]">
+          <VitaConsoleScene
+            selectedProject={selectedProject}
+            onConsoleClick={() => selectedProject && setExpandedId(selectedProject.id)}
+          />
         </div>
 
-        {/* 3D Hardware Console Display */}
-        <div ref={consoleStageRef} className="relative w-full bg-[#f5f5f7] rounded-3xl p-8 sm:p-12 mb-12 flex flex-col items-center">
-          
-          {/* Quick Select Buttons */}
-          <div className="flex items-center justify-center gap-2 flex-wrap mb-8">
-            {projects.slice(0, 5).map((p) => {
-              const active = selectedProject?.id === p.id;
+        <div className="mt-1 flex justify-center">
+          <div className="no-scrollbar flex max-w-full gap-1 overflow-x-auto rounded-full border border-slate-200 bg-slate-50 p-1">
+            {dockItems.map((project) => {
+              const active = selectedProject?.id === project.id;
               return (
                 <button
-                  key={p.id}
-                  onClick={() => handleSelectFor3D(p)}
-                  className={`px-4 py-2 rounded-full text-xs font-medium transition-all ${
-                    active
-                      ? "bg-[#1d1d1f] text-white shadow-sm font-semibold"
-                      : "bg-white text-[#515154] hover:bg-[#e8e8ed] hover:text-[#1d1d1f]"
-                  }`}
+                  key={project.id}
+                  type="button"
+                  onClick={() => selectProject(project)}
+                  className={
+                    "whitespace-nowrap rounded-full px-3.5 py-1.5 text-[12px] font-medium transition-all " +
+                    (active
+                      ? "border border-slate-200 bg-white text-slate-900 shadow-sm"
+                      : "border border-transparent text-slate-500 hover:text-slate-900")
+                  }
                 >
-                  {p.display_name?.split(" (")[0] || p.game_title}
+                  {splitTitle(project.game_title || project.display_name).name}
                 </button>
               );
             })}
           </div>
-
-          {/* Interactive 3D Model */}
-          <div className="relative w-full h-[380px] sm:h-[480px] flex items-center justify-center">
-            <VitaConsoleScene selectedProject={selectedProject} align="center" />
-          </div>
-
-          {/* Clean Hardware Spec Footnote */}
-          <div className="mt-8 flex flex-wrap items-center justify-center gap-6 text-xs text-[#86868b]">
-            <span>Sony PS Vita PCH-1000 OLED</span>
-            <span>·</span>
-            <span>Quad-Core Cortex-A9 (444MHz)</span>
-            <span>·</span>
-            <span>512MB RAM</span>
-            <span>·</span>
-            <span className="text-[#0071e3] font-medium">Tested on Real Hardware</span>
-          </div>
         </div>
 
-        {/* Recent Reddit Signals Bar */}
-        <div className="bg-[#f5f5f7] rounded-2xl p-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 text-xs text-[#515154]">
-          <div className="flex items-center gap-2 text-[#1d1d1f] font-semibold shrink-0">
-            <span className="w-2 h-2 rounded-full bg-[#0071e3]" />
-            <span>Latest Reddit Reports:</span>
-          </div>
+        <p className="mt-4 text-center text-[11px] uppercase tracking-[0.16em] text-slate-400">
+          Drag to rotate · Select a port to preview it on the display
+        </p>
 
-          <div className="flex items-center gap-6 overflow-x-auto no-scrollbar w-full">
-            {recentUpdates.slice(0, 3).map((u) => (
-              <a
-                key={u.id}
-                href={u.sources?.[0]?.canonical_url || "#"}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-[#515154] hover:text-[#0071e3] transition-colors shrink-0 flex items-center gap-1.5"
-              >
-                <span className="truncate max-w-[280px]">{u.title}</span>
-                <ArrowUpRight className="w-3.5 h-3.5 text-[#86868b]" />
-              </a>
-            ))}
-          </div>
-
-          <Link to="/updates" className="text-[#0071e3] font-medium hover:underline shrink-0">
-            All reports →
-          </Link>
-        </div>
-
+        <dl className="mx-auto mt-12 grid max-w-3xl grid-cols-2 gap-x-8 gap-y-7 border-t border-slate-200 pt-8 sm:grid-cols-4">
+          {[
+            ["Architecture", "Quad Cortex-A9"],
+            ["Graphics", "SGX543MP4+"],
+            ["Display", "960 × 544 OLED"],
+            ["Memory", "512 MB unified"]
+          ].map(([term, value]) => (
+            <div key={term}>
+              <dt className="text-[11px] font-medium uppercase tracking-[0.12em] text-slate-400">{term}</dt>
+              <dd className="mt-1.5 text-[14px] text-slate-800">{value}</dd>
+            </div>
+          ))}
+        </dl>
       </section>
 
-      {/* 3. PORT DIRECTORY (CLEAN WHITE, NO BOXES INSIDE BOXES) */}
-      <section id="directory" className="py-16 px-6 max-w-6xl mx-auto border-t border-[#d2d2d7]/50">
-        
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-10">
+      <section id="directory" className="mx-auto mt-28 max-w-5xl px-6">
+        <div className="flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
           <div>
-            <h2 className="text-3xl font-bold tracking-tight text-[#1d1d1f]">
-              Port Directory
-            </h2>
-            <p className="text-sm text-[#6e6e73] mt-1">
-              Click any game to preview it on the 3D console or jump to the verified Reddit thread.
+            <h2 className="text-[26px] font-semibold tracking-[-0.02em] text-slate-900">Directory</h2>
+            <p className="mt-1.5 text-[14px] text-slate-500">
+              {loading
+                ? "Loading indexed projects…"
+                : visible.length === projects.length
+                  ? projects.length + " projects indexed"
+                  : "Showing " + visible.length + " of " + projects.length + " projects"}
             </p>
           </div>
-
-          {/* Filter Pills & Search */}
-          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
-            <div className="flex items-center gap-1 bg-[#f5f5f7] p-1 rounded-xl">
-              {CATEGORY_TABS.map((tab) => {
-                const active = selectedFilter === tab.key;
-                return (
-                  <button
-                    key={tab.key}
-                    onClick={() => setSelectedFilter(tab.key)}
-                    className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${
-                      active
-                        ? "bg-white text-[#1d1d1f] shadow-sm font-semibold"
-                        : "text-[#6e6e73] hover:text-[#1d1d1f]"
-                    }`}
-                  >
-                    {tab.label}
-                  </button>
-                );
-              })}
-            </div>
-
-            <div className="relative">
-              <Search className="w-3.5 h-3.5 text-[#86868b] absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
-              <input
-                type="text"
-                placeholder="Search games..."
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full sm:w-56 bg-[#f5f5f7] border-0 rounded-xl pl-9 pr-3 py-2 text-xs text-[#1d1d1f] placeholder-[#86868b] focus:outline-none focus:ring-2 focus:ring-[#0071e3]/30"
-              />
-            </div>
+          <div className="relative w-full sm:w-72">
+            <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />
+            <input
+              type="search"
+              value={searchTerm}
+              onChange={(event) => setSearchTerm(event.target.value)}
+              placeholder="Filter by game, engine or platform"
+              className="w-full rounded-xl border border-slate-200 bg-white py-2.5 pl-9 pr-9 text-[13px] text-slate-900 placeholder-slate-400 outline-none transition-all focus:border-slate-300 focus:ring-4 focus:ring-slate-900/5"
+            />
+            {searchTerm && (
+              <button
+                type="button"
+                onClick={() => setSearchTerm("")}
+                aria-label="Clear search"
+                className="absolute right-2.5 top-1/2 -translate-y-1/2 rounded-md p-1 text-slate-400 transition-colors hover:bg-slate-100 hover:text-slate-700"
+              >
+                <X className="h-3.5 w-3.5" />
+              </button>
+            )}
           </div>
         </div>
 
-        {/* The Clean Directory List */}
-        {loading ? (
-          <div className="py-20 text-center text-[#86868b] text-sm">
-            Loading port directory...
-          </div>
-        ) : filteredProjects.length > 0 ? (
-          <div className="divide-y divide-[#d2d2d7]/60">
-            {filteredProjects.map((p) => {
-              const isSelected = selectedProject?.id === p.id;
+        <div className="mt-6 flex flex-wrap gap-1.5">
+          {FILTERS.map((filter) => (
+            <button
+              key={filter.key}
+              type="button"
+              onClick={() => setActiveFilter(filter.key)}
+              className={
+                "rounded-full px-3.5 py-1.5 text-[12px] font-medium transition-all " +
+                (activeFilter === filter.key
+                  ? "bg-slate-900 text-white"
+                  : "bg-slate-100 text-slate-600 hover:bg-slate-200/80 hover:text-slate-900")
+              }
+            >
+              {filter.label}
+            </button>
+          ))}
+        </div>
 
-              return (
-                <div
-                  key={p.id}
-                  onClick={() => handleSelectFor3D(p)}
-                  className={`py-6 flex flex-col sm:flex-row sm:items-center justify-between gap-6 cursor-pointer transition-colors px-4 -mx-4 rounded-2xl ${
-                    isSelected ? "bg-[#f5f5f7]" : "hover:bg-[#fbfbfd]"
-                  }`}
-                >
-                  <div className="max-w-xl">
-                    <div className="flex items-center gap-3 mb-1.5">
-                      <h3 className="text-xl font-bold text-[#1d1d1f]">
-                        {p.game_title || p.display_name}
-                      </h3>
-                      <span className="text-[11px] font-semibold px-2.5 py-0.5 rounded-full bg-[#f5f5f7] text-[#515154] border border-[#d2d2d7]/50">
-                        {formatStage(p.current_stage)}
-                      </span>
+        <div className="mt-6 overflow-hidden rounded-2xl border border-slate-200 bg-white">
+          <div className="hidden grid-cols-12 gap-4 border-b border-slate-200 bg-slate-50/70 px-5 py-3 text-[11px] font-semibold uppercase tracking-[0.12em] text-slate-400 md:grid">
+            <div className="col-span-5">Project</div>
+            <div className="col-span-2">Stage</div>
+            <div className="col-span-4">Hardware notes</div>
+            <div className="col-span-1 text-right">Source</div>
+          </div>
+
+          {visible.length === 0 ? (
+            <div className="px-6 py-16 text-center text-[14px] text-slate-500">
+              No projects match this filter.
+            </div>
+          ) : (
+            <ul className="divide-y divide-slate-100">
+              {visible.map((project) => {
+                const title = splitTitle(project.game_title || project.display_name);
+                const expanded = expandedId === project.id;
+                const selected = selectedProject?.id === project.id;
+                return (
+                  <li key={project.id} className={selected ? "bg-slate-50/60" : ""}>
+                    <div
+                      role="button"
+                      tabIndex={0}
+                      onClick={() => setExpandedId(expanded ? null : project.id)}
+                      onKeyDown={(event) => {
+                        if (event.key === "Enter" || event.key === " ") {
+                          event.preventDefault();
+                          setExpandedId(expanded ? null : project.id);
+                        }
+                      }}
+                      className="grid cursor-pointer grid-cols-1 gap-2.5 px-5 py-4 transition-colors hover:bg-slate-50/70 md:grid-cols-12 md:items-center md:gap-4"
+                    >
+                      <div className="md:col-span-5">
+                        <span className="flex items-center gap-2.5">
+                          <span className={"h-1.5 w-1.5 shrink-0 rounded-full " + (STAGE_DOT[String(project.current_stage)] || "bg-slate-400")} />
+                          <span className="text-[15px] font-medium text-slate-900">{title.name}</span>
+                        </span>
+                        {title.engine && (
+                          <span className="mt-1 block pl-4 font-mono text-[11px] uppercase tracking-[0.08em] text-slate-400">
+                            {title.engine}
+                          </span>
+                        )}
+                      </div>
+
+                      <div className="pl-4 md:col-span-2 md:pl-0">
+                        <span className="inline-flex rounded-md bg-slate-100 px-2 py-1 text-[10px] font-semibold uppercase tracking-[0.08em] text-slate-600">
+                          {prettyStage(project.current_stage)}
+                        </span>
+                      </div>
+
+                      <div className="pl-4 md:col-span-4 md:pl-0">
+                        <p className="line-clamp-2 text-[13px] leading-relaxed text-slate-500 md:line-clamp-1">
+                          {project.performance_notes || project.playability_notes || "Tested on native hardware."}
+                        </p>
+                      </div>
+
+                      <div className="flex items-center gap-2 pl-4 md:col-span-1 md:justify-end md:pl-0">
+                        {project.reddit_url && (
+                          <a
+                            href={project.reddit_url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            onClick={(event) => event.stopPropagation()}
+                            title="Open the source discussion"
+                            className="rounded-md p-1.5 text-slate-400 transition-colors hover:bg-slate-100 hover:text-slate-900"
+                          >
+                            <ExternalLink className="h-4 w-4" />
+                          </a>
+                        )}
+                        <ChevronDown
+                          className={
+                            "h-4 w-4 text-slate-300 transition-transform " + (expanded ? "rotate-180" : "")
+                          }
+                        />
+                      </div>
                     </div>
 
-                    <p className="text-sm text-[#6e6e73] leading-relaxed">
-                      {p.summary}
-                    </p>
+                    {expanded && (
+                      <div className="border-t border-slate-100 bg-slate-50/50 px-5 py-5">
+                        <p className="max-w-3xl text-[14px] leading-relaxed text-slate-600">
+                          {project.summary || "No summary recorded for this project yet."}
+                        </p>
 
-                    <p className="text-xs font-medium text-[#1d1d1f] mt-2">
-                      <span className="text-[#86868b]">Performance: </span>
-                      {p.performance_notes || p.playability_notes || "ARM binary execution."}
-                    </p>
-                  </div>
+                        {project.technologies?.length > 0 && (
+                          <div className="mt-4 flex flex-wrap gap-1.5">
+                            {project.technologies.map((tech: string) => (
+                              <span
+                                key={tech}
+                                className="rounded-md border border-slate-200 bg-white px-2 py-1 font-mono text-[11px] text-slate-500"
+                              >
+                                {tech}
+                              </span>
+                            ))}
+                          </div>
+                        )}
 
-                  <div className="flex items-center gap-4 shrink-0" onClick={(e) => e.stopPropagation()}>
-                    <button
-                      onClick={() => handleSelectFor3D(p)}
-                      className="text-xs font-medium text-[#0071e3] hover:underline"
-                    >
-                      Preview in 3D
-                    </button>
+                        {project.playability_notes && (
+                          <p className="mt-4 max-w-3xl text-[13px] leading-relaxed text-slate-500">
+                            <span className="font-medium text-slate-700">Playability: </span>
+                            {project.playability_notes}
+                          </p>
+                        )}
 
-                    {p.reddit_url && (
-                      <a
-                        href={p.reddit_url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-[#0071e3] hover:bg-[#0077ed] text-white text-xs font-semibold shadow-sm transition-colors"
-                      >
-                        <span>Reddit Thread</span>
-                        <ExternalLink className="w-3 h-3" />
-                      </a>
+                        <div className="mt-5 flex flex-wrap items-center gap-3">
+                          <button
+                            type="button"
+                            onClick={() => selectProject(project)}
+                            className="rounded-lg bg-slate-900 px-3.5 py-2 text-[12px] font-medium text-white transition-colors hover:bg-slate-800"
+                          >
+                            Preview on hardware
+                          </button>
+                          {project.reddit_url && (
+                            <a
+                              href={project.reddit_url}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="inline-flex items-center gap-1.5 text-[12px] font-medium text-slate-500 transition-colors hover:text-slate-900"
+                            >
+                              Open source discussion
+                              <ExternalLink className="h-3.5 w-3.5" />
+                            </a>
+                          )}
+                        </div>
+                      </div>
                     )}
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        ) : (
-          <div className="py-20 text-center text-[#86868b] text-sm">
-            No projects matched your criteria.
-          </div>
-        )}
-
+                  </li>
+                );
+              })}
+            </ul>
+          )}
+        </div>
       </section>
 
-      {/* 4. CLEAN FOOTER */}
-      <footer className="border-t border-[#d2d2d7]/50 py-12 px-6 max-w-6xl mx-auto text-xs text-[#86868b] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
-        <div className="max-w-xl leading-relaxed">
-          <p className="font-semibold text-[#1d1d1f] mb-1">VitaHarbor Open Research</p>
-          <p>We document reverse-engineering progress from public Reddit forums. No ROMs, ISOs, or game data are hosted or distributed.</p>
+      <section id="methodology" className="mx-auto mt-28 max-w-5xl px-6">
+        <div className="rounded-2xl border border-slate-200 bg-white px-6 py-8">
+          <h2 className="text-[15px] font-semibold text-slate-900">How entries get listed</h2>
+          <div className="mt-6 grid gap-7 sm:grid-cols-3">
+            {[
+              ["Sourced", "Every entry links to the original engineering thread on r/vitahacks or r/VitaPiracy."],
+              ["Verified", "Stage and performance notes are taken from reports by the people running the build."],
+              ["Non-infringing", "Only discussion and source repositories are indexed. No ROMs, ISOs or game data are hosted."]
+            ].map(([title, body]) => (
+              <div key={title}>
+                <p className="text-[13px] font-medium text-slate-800">{title}</p>
+                <p className="mt-2 text-[13px] leading-relaxed text-slate-500">{body}</p>
+              </div>
+            ))}
+          </div>
         </div>
+      </section>
 
-        <div className="flex items-center gap-4 shrink-0 text-[#0071e3] font-medium">
-          <Link to="/about" className="hover:underline">About & Methodology</Link>
-          <span className="text-[#d2d2d7]">·</span>
-          <a href="/api/feed.json" target="_blank" rel="noopener noreferrer" className="hover:underline">JSON Feed</a>
-          <span className="text-[#d2d2d7]">·</span>
-          <a href="/api/rss.xml" target="_blank" rel="noopener noreferrer" className="hover:underline">RSS</a>
+      <footer className="mx-auto mt-24 max-w-5xl border-t border-slate-200 px-6 py-10">
+        <div className="flex flex-col items-start justify-between gap-5 text-[13px] text-slate-500 sm:flex-row sm:items-center">
+          <p className="max-w-md leading-relaxed">
+            VitaHarbor is an independent research index. Nothing here bypasses licensing
+            or distributes copyrighted game data.
+          </p>
+          <div className="flex items-center gap-5">
+            <a href="/api/feed.json" target="_blank" rel="noopener noreferrer" className="transition-colors hover:text-slate-900">
+              JSON feed
+            </a>
+            <a href="/api/rss.xml" target="_blank" rel="noopener noreferrer" className="transition-colors hover:text-slate-900">
+              RSS
+            </a>
+          </div>
         </div>
       </footer>
-
     </div>
   );
 };
+

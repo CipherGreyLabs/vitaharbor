@@ -13,5 +13,25 @@
   }
 }
 
+@keyframes vh-ticker {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+.vh-ticker {
+  display: inline-flex;
+  align-items: center;
+  width: max-content;
+  animation: vh-ticker 52s linear infinite;
+}
+
+.vh-ticker:hover {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .vh-ticker { animation: none; }
+}
+
 .no-scrollbar::-webkit-scrollbar { display: none; }
 .no-scrollbar { scrollbar-width: none; }
