@@ -1,27 +1,51 @@
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url("/fonts/inter-latin-var.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
+  :root {
+    --vh-canvas-rgb: 251 251 253;
+    --vh-surface-rgb: 255 255 255;
+    --vh-sunken-rgb: 244 245 247;
+    --vh-hairline-rgb: 230 232 236;
+    --vh-hairline-strong-rgb: 211 214 220;
+    --vh-ink-rgb: 29 29 31;
+    --vh-ink-medium-rgb: 71 85 105;
+    --vh-ink-muted-rgb: 100 116 139;
+    --vh-done-rgb: 5 150 105;
+    --vh-progress-rgb: 37 99 235;
+    --vh-caution-rgb: 217 119 6;
+    --vh-idle-rgb: 148 163 184;
+  }
+
   html {
     scroll-behavior: smooth;
   }
 
-  @media (prefers-reduced-motion: reduce) {
-    html { scroll-behavior: auto; }
-  }
-
   body {
-    background-color: #fbfbfd;
-    color: #1d1d1f;
-    font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    font-feature-settings: "cv11", "ss01";
+    background-color: rgb(var(--vh-canvas-rgb));
+    color: rgb(var(--vh-ink-rgb));
+    font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
   }
 
-  section[id] {
+  section[id],
+  div[id^="entry-"] {
     scroll-margin-top: 4.5rem;
+  }
+
+  ::selection {
+    background: rgba(37, 99, 235, 0.16);
   }
 }
 
@@ -47,32 +71,51 @@
   animation-play-state: paused;
 }
 
-@keyframes vh-rise {
-  from { opacity: 0; transform: translateY(8px); }
-  to { opacity: 1; transform: none; }
+.vh-skeleton {
+  animation: vh-veil 1.6s ease-in-out infinite alternate;
+}
+
+@keyframes vh-veil {
+  from { opacity: 0.4; }
+  to { opacity: 0.9; }
+}
+
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(12px);
+}
+
+[data-reveal="in"] {
+  opacity: 1;
+  transform: none;
+  transition:
+    opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .vh-rise {
   animation: vh-rise 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
-@keyframes vh-veil {
-  from { opacity: 0.35; }
-  to { opacity: 0.85; }
-}
-
-.vh-skeleton {
-  animation: vh-veil 1.6s ease-in-out infinite alternate;
+@keyframes vh-rise {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: none; }
 }
 
 @media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
   .vh-ticker,
   .vh-rise,
   .vh-skeleton {
     animation: none;
   }
+  [data-reveal],
+  [data-reveal="in"] {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
 }
 
 .no-scrollbar::-webkit-scrollbar { display: none; }
 .no-scrollbar { scrollbar-width: none; }
-
