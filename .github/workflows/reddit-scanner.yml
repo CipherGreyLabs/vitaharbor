@@ -1,41 +1,51 @@
-name: Autonomous VitaHarbor Reddit Scanner
+name: Reddit discovery scan
 
+# Records newly surfaced port threads as unverified candidates. Promotion into the
+# curated ledger stays a human decision, so this job never rewrites ledger content.
 on:
   schedule:
-    # Runs twice daily at 08:00 and 20:00 UTC
-    - cron: '0 8,20 * * *'
+    - cron: "0 8,20 * * *"
   workflow_dispatch:
 
+permissions:
+  contents: write
+
+concurrency:
+  group: reddit-scan
+  cancel-in-progress: false
+
 jobs:
-  scan-reddit:
+  scan:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: 'npm'
+          cache: npm
 
       - name: Install dependencies
         run: npm ci
 
-      - name: Run Reddit RSS & Ingestion Scanner
+      - name: Verify ledger integrity
+        run: npm test
+
+      - name: Scan Reddit for new port threads
         run: node scripts/cron-reddit-scan.mjs
 
-      - name: Regenerate Open API feeds
+      - name: Rebuild public feeds
         run: npx tsx scripts/make-feeds.ts
 
-      - name: Commit and push changes if updated
+      - name: Commit discovery results
         run: |
-          git config --global user.name 'github-actions[bot]'
-          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-          git add src/shared/constants/fallbackData.ts public/api/
-          if git diff --staged --quiet; then
-            echo "No new ports discovered this run."
+          git config user.name "vitaharbor-scan"
+          git config user.email "scan@users.noreply.github.com"
+          git add public/data public/api
+          if git diff --cached --quiet; then
+            echo "Nothing new detected this run."
           else
-            git commit -m "Auto-ingest latest PS Vita port developments from Reddit"
+            git commit -m "Scan: record newly surfaced port threads"
             git push
           fi
+

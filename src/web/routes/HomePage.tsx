@@ -137,6 +137,8 @@ export const HomePage: React.FC = () => {
 
   const [projects, setProjects] = useState<any[]>([]);
   const [recentUpdates, setRecentUpdates] = useState<any[]>([]);
+  const [discovered, setDiscovered] = useState<any[]>([]);
+  const [scannedAt, setScannedAt] = useState("");
   const [selectedId, setSelectedId] = useState<number | null>(null);
   const [expandedId, setExpandedId] = useState<number | null>(null);
   const [searchTerm, setSearchTerm] = useState("");
@@ -176,6 +178,17 @@ export const HomePage: React.FC = () => {
       const list = projectsRes?.projects || [];
       setProjects(list);
       setRecentUpdates(updatesRes?.updates || []);
+
+      try {
+        const res = await fetch("/data/discovered.json", { headers: { accept: "application/json" } });
+        if (res.ok) {
+          const body = (await res.json()) as { items?: unknown[]; generated_at?: unknown };
+          if (Array.isArray(body?.items)) setDiscovered(body.items);
+          if (typeof body?.generated_at === "string") setScannedAt(body.generated_at);
+        }
+      } catch {
+        // The scanner has not run yet; the band stays hidden.
+      }
       setLoading(false);
 
       const wanted = slugFromLocation(window.location.pathname, window.location.hash);
@@ -325,7 +338,7 @@ export const HomePage: React.FC = () => {
             <a href="#directory" className="rounded-md transition-colors hover:text-ink">Directory</a>
             <a href="#methodology" className="hidden rounded-md transition-colors hover:text-ink sm:inline">Methodology</a>
             <span className="hidden items-center gap-1.5 rounded-full bg-sunken px-2.5 py-1 text-micro font-medium uppercase text-ink-medium sm:inline-flex">
-              <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-stage-done" />
+              <span className="h-1.5 w-1.5 rounded-full bg-ink-muted" />
               <span className="vh-tnum">{loading ? "—" : projects.length}</span>
               <span>indexed</span>
             </span>
@@ -349,6 +362,7 @@ export const HomePage: React.FC = () => {
                     target={item.sources?.[0]?.canonical_url ? "_blank" : undefined}
                     rel="noopener noreferrer"
                     tabIndex={pass === 0 ? 0 : -1}
+                    aria-hidden={pass === 1}
                     className="mx-7 inline-flex items-center gap-2.5 whitespace-nowrap transition-colors hover:text-accent"
                   >
                     <span className="vh-tnum text-ink-muted">{relativeTime(item.event_at)}</span>
@@ -798,6 +812,21 @@ export const HomePage: React.FC = () => {
                                     <span className="text-ink-muted"> · {relativeTime(project.last_activity_at)}</span>
                                   </dd>
                                 </div>
+                                {project.original_release_year && (
+                                  <div>
+                                    <dt className="text-micro font-medium uppercase text-ink-muted">Original release</dt>
+                                    <dd className="mt-1.5 text-body text-ink">
+                                      {project.original_release_year}
+                                      {project.original_platform ? " · " + project.original_platform : ""}
+                                    </dd>
+                                  </div>
+                                )}
+                                {project.released_at && (
+                                  <div>
+                                    <dt className="text-micro font-medium uppercase text-ink-muted">Vita release</dt>
+                                    <dd className="mt-1.5 text-body text-ink">{formatDay(project.released_at)}</dd>
+                                  </div>
+                                )}
                               </dl>
                             </div>
 
@@ -868,8 +897,52 @@ export const HomePage: React.FC = () => {
           </div>
         </section>
 
+        {discovered.length > 0 && (
+          <section aria-labelledby="detected-heading" className="mx-auto mt-24 max-w-5xl px-6">
+            <div className="rounded-2xl border border-hairline bg-surface p-6 shadow-card">
+              <div className="flex flex-wrap items-baseline justify-between gap-3">
+                <div className="max-w-2xl">
+                  <h2 id="detected-heading" className="text-subtitle font-semibold text-ink">
+                    Detected, pending review
+                  </h2>
+                  <p className="mt-1.5 text-body text-ink-medium">
+                    Threads the scanner picked up that are not in the curated ledger yet. They stay
+                    unverified until someone checks the build on real hardware.
+                  </p>
+                </div>
+                {scannedAt && (
+                  <p className="vh-tnum text-caption text-ink-muted">Last scan {formatDay(scannedAt)}</p>
+                )}
+              </div>
+
+              <ul className="mt-5 divide-y divide-hairline border-t border-hairline">
+                {discovered.map((item) => (
+                  <li key={item.id} className="flex flex-wrap items-center justify-between gap-3 py-3.5">
+                    <div className="min-w-0">
+                      <p className="truncate text-body font-medium text-ink">{item.title}</p>
+                      <p className="mt-0.5 text-caption text-ink-muted">
+                        r/{item.subreddit} · {item.author} · {relativeTime(item.published_at || item.detected_at)}
+                      </p>
+                    </div>
+                    <a
+                      href={item.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex shrink-0 items-center gap-1.5 text-caption font-medium text-ink-medium transition-colors hover:text-accent"
+                    >
+                      Open thread
+                      <ExternalLink className="h-3.5 w-3.5" />
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </section>
+        )}
+
         <section
           id="methodology"
+
           ref={methodReveal}
           data-reveal=""
           aria-labelledby="methodology-heading"

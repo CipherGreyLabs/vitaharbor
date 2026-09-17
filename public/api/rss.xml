@@ -5,131 +5,131 @@
     <link>https://vitaharbor.vercel.app/</link>
     <description>Community PlayStation Vita ports tracked from r/vitahacks and r/VitaPiracy</description>
     <language>en-us</language>
-    <lastBuildDate>Thu, 17 Sep 2026 13:43:47 GMT</lastBuildDate>
+    <lastBuildDate>Thu, 17 Sep 2026 15:34:57 GMT</lastBuildDate>
     <item>
       <title><![CDATA[Medal of Honor: Allied Assault (OpenMoHAA) - IN_GAME]]></title>
       <link>https://www.reddit.com/r/vitahacks/comments/1tapf2b/wip_openmohaa_on_ps_vita_medal_of_honor_allied/</link>
       <guid isPermaLink="false">openmohaa-vita</guid>
-      <pubDate>Wed, 16 Sep 2026 13:43:47 GMT</pubDate>
+      <pubDate>Wed, 16 Sep 2026 15:34:00 GMT</pubDate>
       <description><![CDATA[Native PlayStation Vita port of OpenMoHAA. Geometry, sound engine, mission scripts, and player controls functioning. Hardware Status: 5–15 FPS in heavy outdoor combat scenes. Memory allocation optimization and shader pipeline tuning in progress.]]></description>
     </item>
     <item>
       <title><![CDATA[Super Smash Bros. Melee Vita - BOOTING]]></title>
       <link>https://www.reddit.com/r/vitahacks/comments/1whm4hp/smash_bros_melee_vita/</link>
       <guid isPermaLink="false">smash-melee-vita</guid>
-      <pubDate>Tue, 15 Sep 2026 13:43:47 GMT</pubDate>
+      <pubDate>Tue, 15 Sep 2026 15:34:00 GMT</pubDate>
       <description><![CDATA[Early native recreation and decompilation rebuild of Melee targeting the ARM Cortex-A9. Hardware Status: Experimental build. Frequent memory faults on complex stages like Fountain of Dreams.]]></description>
     </item>
     <item>
       <title><![CDATA[Hollow Knight Vita Port - BOOTING]]></title>
       <link>https://www.reddit.com/r/vitahacks/comments/17eneu2/upcoming_hollow_knight_ps_vita_port_wip/</link>
       <guid isPermaLink="false">hollow-knight-vita</guid>
-      <pubDate>Mon, 14 Sep 2026 13:43:47 GMT</pubDate>
+      <pubDate>Mon, 14 Sep 2026 15:34:00 GMT</pubDate>
       <description><![CDATA[Complete C# / Unity decompilation translated into native ARM bytecode for the PS Vita. Hardware Status: Memory exhaustion crashes during room transitions. Asset cache streaming currently being rewritten.]]></description>
     </item>
     <item>
       <title><![CDATA[Zelda: Twilight Princess Vita - EARLY_WIP]]></title>
       <link>https://www.reddit.com/r/vitahacks/comments/1w9ys9f/the_new_psvita_ports/</link>
       <guid isPermaLink="false">zelda-twilight-princess-vita</guid>
-      <pubDate>Tue, 15 Sep 2026 13:43:47 GMT</pubDate>
+      <pubDate>Tue, 15 Sep 2026 15:34:00 GMT</pubDate>
       <description><![CDATA[Reverse-engineering project evaluating GC/Wii decompiled shaders on Vita hardware. Hardware Status: 15–20 FPS in static test scenes. High RAM footprint requiring custom texture compression.]]></description>
     </item>
     <item>
       <title><![CDATA[Portal Vita Port - IN_GAME]]></title>
       <link>https://www.reddit.com/r/vitahacks/comments/16l8h0m/portal_vita_status/</link>
       <guid isPermaLink="false">portal-vita</guid>
-      <pubDate>Sun, 13 Sep 2026 13:43:47 GMT</pubDate>
+      <pubDate>Sun, 13 Sep 2026 15:34:00 GMT</pubDate>
       <description><![CDATA[Portal mechanics and chamber physics ported via standalone engine recreation. Hardware Status: Smooth 30 FPS indoors; dips to 20 FPS when looking through recursive dual portals.]]></description>
     </item>
     <item>
       <title><![CDATA[Spider-Man: Total Mayhem Vita - IN_GAME]]></title>
       <link>https://www.reddit.com/r/VitaPiracy/comments/1ij1vzf/how_to_port_android_games/</link>
       <guid isPermaLink="false">spider-man-total-mayhem-vita</guid>
-      <pubDate>Wed, 16 Sep 2026 13:43:47 GMT</pubDate>
+      <pubDate>Wed, 16 Sep 2026 15:34:00 GMT</pubDate>
       <description><![CDATA[Gameloft action brawler reverse-engineered and wrapped with dual analog combat controls. Hardware Status: Runs at 25–30 FPS in combat arenas; shader cleanup in progress.]]></description>
     </item>
     <item>
       <title><![CDATA[The Simpsons: Hit & Run Vita - IN_GAME]]></title>
       <link>https://www.reddit.com/r/vitahacks/comments/126a9bf/release_ship_of_harkinian_vita_port/</link>
       <guid isPermaLink="false">simpsons-hit-and-run-vita</guid>
-      <pubDate>Mon, 14 Sep 2026 13:43:47 GMT</pubDate>
+      <pubDate>Mon, 14 Sep 2026 15:34:00 GMT</pubDate>
       <description><![CDATA[Reverse-engineered port of Simpsons Hit and Run compiled for PlayStation Vita. Hardware Status: Targeting 30 FPS. Stuttering observed during rapid vehicular streaming.]]></description>
     </item>
     <item>
       <title><![CDATA[Star Wars: KOTOR Vita - EARLY_WIP]]></title>
       <link>https://www.reddit.com/r/VitaPiracy/comments/1iuoe4u/rinnegatamante_is_going_all_out/</link>
       <guid isPermaLink="false">kotor-vita</guid>
-      <pubDate>Tue, 15 Sep 2026 13:43:47 GMT</pubDate>
+      <pubDate>Tue, 15 Sep 2026 15:34:00 GMT</pubDate>
       <description><![CDATA[Community reverse-engineering and ARM wrapper research for Knights of the Old Republic. Hardware Status: Early technical research stage.]]></description>
     </item>
     <item>
       <title><![CDATA[Baldur's Gate: Dark Alliance Vita - RESEARCH]]></title>
       <link>https://www.reddit.com/r/VitaPiracy/comments/1inclw4/any_listcollection_of_homebrew_fanmade_ports_of/</link>
       <guid isPermaLink="false">baldurs-gate-dark-alliance-vita</guid>
-      <pubDate>Tue, 15 Sep 2026 13:43:47 GMT</pubDate>
+      <pubDate>Tue, 15 Sep 2026 15:34:00 GMT</pubDate>
       <description><![CDATA[Engine evaluation and reverse-engineering research for the Snowblind Studios engine on Vita. Hardware Status: Pre-alpha technical analysis.]]></description>
     </item>
     <item>
       <title><![CDATA[Need for Speed: Hot Pursuit Vita - PLAYABLE]]></title>
       <link>https://www.reddit.com/r/vitahacks/comments/18zdtep/new_port_psvita_hot_pursuit/</link>
       <guid isPermaLink="false">nfs-hot-pursuit-vita</guid>
-      <pubDate>Mon, 14 Sep 2026 13:43:47 GMT</pubDate>
+      <pubDate>Mon, 14 Sep 2026 15:34:00 GMT</pubDate>
       <description><![CDATA[ARM wrapper port of NFS Hot Pursuit mobile with analog steering and custom Vita shaders. Hardware Status: Smooth 30 FPS across sprint and pursuit courses.]]></description>
     </item>
     <item>
       <title><![CDATA[Class of '09 Vita Port - RELEASED]]></title>
       <link>https://www.reddit.com/r/vitahacks/comments/192k7s9/the_class_of_09_vita_port_is_finally_released/</link>
       <guid isPermaLink="false">class-of-09-vita</guid>
-      <pubDate>Tue, 15 Sep 2026 13:43:47 GMT</pubDate>
+      <pubDate>Tue, 15 Sep 2026 15:34:00 GMT</pubDate>
       <description><![CDATA[Native port of the viral dark comedy visual novel powered by the updated Ren'Py Vita engine. Hardware Status: Instant route transitions, flawless audio and touch/button dialogue progression.]]></description>
     </item>
     <item>
       <title><![CDATA[Ren'Py 8 Vita Engine Runtime - RELEASED]]></title>
       <link>https://www.reddit.com/r/vitahacks/comments/1h4yhyi/release_renpy_vita_8_port/</link>
       <guid isPermaLink="false">renpy-8-runtime-engine</guid>
-      <pubDate>Wed, 16 Sep 2026 13:43:47 GMT</pubDate>
+      <pubDate>Wed, 16 Sep 2026 15:34:00 GMT</pubDate>
       <description><![CDATA[Major architectural breakthrough bringing Python 3.11 and modern Ren'Py 8.x games natively to Vita. Hardware Status: Significantly lower memory usage and accelerated text rendering.]]></description>
     </item>
     <item>
       <title><![CDATA[Zelda: Ship of Harkinian (OOT) - PLAYABLE]]></title>
       <link>https://www.reddit.com/r/vitahacks/comments/126a9bf/release_ship_of_harkinian_vita_port/</link>
       <guid isPermaLink="false">zelda-ship-of-harkinian-vita</guid>
-      <pubDate>Sun, 13 Sep 2026 13:43:47 GMT</pubDate>
+      <pubDate>Sun, 13 Sep 2026 15:34:00 GMT</pubDate>
       <description><![CDATA[Direct native Vita build of the Harbour Masters reverse-engineered Ocarina of Time decompilation. Hardware Status: Solid 30-60 FPS depending on enhancement settings.]]></description>
     </item>
     <item>
       <title><![CDATA[Slingshot Racing Vita - RELEASED]]></title>
       <link>https://www.reddit.com/r/VitaPiracy/comments/1iuoe4u/rinnegatamante_is_going_all_out/</link>
       <guid isPermaLink="false">slingshot-racing-vita</guid>
-      <pubDate>Tue, 15 Sep 2026 13:43:47 GMT</pubDate>
+      <pubDate>Tue, 15 Sep 2026 15:34:00 GMT</pubDate>
       <description><![CDATA[One-touch steampunk racer ported via ARMv7 wrapper with full physical trigger integration. Hardware Status: Locked 60 FPS at native OLED resolution.]]></description>
     </item>
     <item>
       <title><![CDATA[Fallout 2 Community Edition - PLAYABLE]]></title>
       <link>https://www.reddit.com/r/vitahacks/comments/q1910a/release_fallout_2_ce_ps_vita_port/</link>
       <guid isPermaLink="false">fallout-2-ce-vita</guid>
-      <pubDate>Sat, 12 Sep 2026 13:43:47 GMT</pubDate>
+      <pubDate>Sat, 12 Sep 2026 15:34:00 GMT</pubDate>
       <description><![CDATA[Open-source recreation of Fallout 2 engine compiled natively for PlayStation Vita. Hardware Status: Smooth 60 FPS in exploration and combat.]]></description>
     </item>
     <item>
       <title><![CDATA[Render96 HD SM64 Vita - RELEASED]]></title>
       <link>https://www.reddit.com/r/vitahacks/comments/1whm4hp/smash_bros_melee_vita/</link>
       <guid isPermaLink="false">render96-sm64-hd-vita</guid>
-      <pubDate>Wed, 02 Sep 2026 13:43:47 GMT</pubDate>
+      <pubDate>Wed, 02 Sep 2026 15:34:00 GMT</pubDate>
       <description><![CDATA[High-fidelity SGI CGI pre-rendered asset recreation of Super Mario 64 ported natively to Vita. Hardware Status: 30-60 FPS with custom texture compression.]]></description>
     </item>
     <item>
       <title><![CDATA[Celeste Classic Vita - RELEASED]]></title>
       <link>https://www.reddit.com/r/VitaPiracy/comments/1inclw4/any_listcollection_of_homebrew_fanmade_ports_of/</link>
       <guid isPermaLink="false">celeste-classic-vita</guid>
-      <pubDate>Tue, 18 Aug 2026 13:43:47 GMT</pubDate>
+      <pubDate>Tue, 18 Aug 2026 15:34:00 GMT</pubDate>
       <description><![CDATA[C-rewrite of the original PICO-8 Celeste prototype compiled directly for PlayStation Vita. Hardware Status: Locked 60 FPS with pixel-perfect integer scaling.]]></description>
     </item>
     <item>
       <title><![CDATA[Cave Story (NXEngine-evo) - RELEASED]]></title>
       <link>https://www.reddit.com/r/VitaPiracy/comments/1inclw4/any_listcollection_of_homebrew_fanmade_ports_of/</link>
       <guid isPermaLink="false">cave-story-evo-vita</guid>
-      <pubDate>Fri, 28 Aug 2026 13:43:47 GMT</pubDate>
+      <pubDate>Fri, 28 Aug 2026 15:34:00 GMT</pubDate>
       <description><![CDATA[Complete open-source NXEngine-evo upgrade supporting remastered music and wide aspect ratio. Hardware Status: Rock solid 60 FPS.]]></description>
     </item>
   </channel>

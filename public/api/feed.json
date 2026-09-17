@@ -10,7 +10,7 @@
       "url": "https://www.reddit.com/r/vitahacks/comments/1tapf2b/wip_openmohaa_on_ps_vita_medal_of_honor_allied/",
       "title": "Medal of Honor: Allied Assault (OpenMoHAA)",
       "content_text": "Stage: in_game | Platform: PC | Summary: Native PlayStation Vita port of OpenMoHAA. Geometry, sound engine, mission scripts, and player controls functioning. | Hardware: 5–15 FPS in heavy outdoor combat scenes. Memory allocation optimization and shader pipeline tuning in progress.",
-      "date_modified": "2026-09-16T13:43:47.722Z",
+      "date_modified": "2026-09-16T15:34:00.000Z",
       "tags": [
         "in_game",
         "PC",
@@ -24,7 +24,7 @@
       "url": "https://www.reddit.com/r/vitahacks/comments/1whm4hp/smash_bros_melee_vita/",
       "title": "Super Smash Bros. Melee Vita",
       "content_text": "Stage: booting | Platform: GameCube / Decomp | Summary: Early native recreation and decompilation rebuild of Melee targeting the ARM Cortex-A9. | Hardware: Experimental build. Frequent memory faults on complex stages like Fountain of Dreams.",
-      "date_modified": "2026-09-15T13:43:47.722Z",
+      "date_modified": "2026-09-15T15:34:00.000Z",
       "tags": [
         "booting",
         "GameCube / Decomp",
@@ -37,7 +37,7 @@
       "url": "https://www.reddit.com/r/vitahacks/comments/17eneu2/upcoming_hollow_knight_ps_vita_port_wip/",
       "title": "Hollow Knight Vita Port",
       "content_text": "Stage: booting | Platform: PC / Unity | Summary: Complete C# / Unity decompilation translated into native ARM bytecode for the PS Vita. | Hardware: Memory exhaustion crashes during room transitions. Asset cache streaming currently being rewritten.",
-      "date_modified": "2026-09-14T13:43:47.722Z",
+      "date_modified": "2026-09-14T15:34:00.000Z",
       "tags": [
         "booting",
         "PC / Unity",
@@ -50,7 +50,7 @@
       "url": "https://www.reddit.com/r/vitahacks/comments/1w9ys9f/the_new_psvita_ports/",
       "title": "Zelda: Twilight Princess Vita",
       "content_text": "Stage: early_wip | Platform: GameCube / Wii Decomp | Summary: Reverse-engineering project evaluating GC/Wii decompiled shaders on Vita hardware. | Hardware: 15–20 FPS in static test scenes. High RAM footprint requiring custom texture compression.",
-      "date_modified": "2026-09-15T13:43:47.722Z",
+      "date_modified": "2026-09-15T15:34:00.000Z",
       "tags": [
         "early_wip",
         "GameCube / Wii Decomp",
@@ -63,7 +63,7 @@
       "url": "https://www.reddit.com/r/vitahacks/comments/16l8h0m/portal_vita_status/",
       "title": "Portal Vita Port",
       "content_text": "Stage: in_game | Platform: PC | Summary: Portal mechanics and chamber physics ported via standalone engine recreation. | Hardware: Smooth 30 FPS indoors; dips to 20 FPS when looking through recursive dual portals.",
-      "date_modified": "2026-09-13T13:43:47.722Z",
+      "date_modified": "2026-09-13T15:34:00.000Z",
       "tags": [
         "in_game",
         "PC",
@@ -76,7 +76,7 @@
       "url": "https://www.reddit.com/r/VitaPiracy/comments/1ij1vzf/how_to_port_android_games/",
       "title": "Spider-Man: Total Mayhem Vita",
       "content_text": "Stage: in_game | Platform: Android ARMv7 | Summary: Gameloft action brawler reverse-engineered and wrapped with dual analog combat controls. | Hardware: Runs at 25–30 FPS in combat arenas; shader cleanup in progress.",
-      "date_modified": "2026-09-16T13:43:47.722Z",
+      "date_modified": "2026-09-16T15:34:00.000Z",
       "tags": [
         "in_game",
         "Android ARMv7",
@@ -89,7 +89,7 @@
       "url": "https://www.reddit.com/r/vitahacks/comments/126a9bf/release_ship_of_harkinian_vita_port/",
       "title": "The Simpsons: Hit & Run Vita",
       "content_text": "Stage: in_game | Platform: PS2 / GameCube | Summary: Reverse-engineered port of Simpsons Hit and Run compiled for PlayStation Vita. | Hardware: Targeting 30 FPS. Stuttering observed during rapid vehicular streaming.",
-      "date_modified": "2026-09-14T13:43:47.722Z",
+      "date_modified": "2026-09-14T15:34:00.000Z",
       "tags": [
         "in_game",
         "PS2 / GameCube",
@@ -101,7 +101,7 @@
       "url": "https://www.reddit.com/r/VitaPiracy/comments/1iuoe4u/rinnegatamante_is_going_all_out/",
       "title": "Star Wars: KOTOR Vita",
       "content_text": "Stage: early_wip | Platform: Xbox / PC / Android | Summary: Community reverse-engineering and ARM wrapper research for Knights of the Old Republic. | Hardware: Early technical research stage.",
-      "date_modified": "2026-09-15T13:43:47.722Z",
+      "date_modified": "2026-09-15T15:34:00.000Z",
       "tags": [
         "early_wip",
         "Xbox / PC / Android",
@@ -113,7 +113,7 @@
       "url": "https://www.reddit.com/r/VitaPiracy/comments/1inclw4/any_listcollection_of_homebrew_fanmade_ports_of/",
       "title": "Baldur's Gate: Dark Alliance Vita",
       "content_text": "Stage: research | Platform: PS2 / GameCube | Summary: Engine evaluation and reverse-engineering research for the Snowblind Studios engine on Vita. | Hardware: Pre-alpha technical analysis.",
-      "date_modified": "2026-09-15T13:43:47.722Z",
+      "date_modified": "2026-09-15T15:34:00.000Z",
       "tags": [
         "research",
         "PS2 / GameCube",
@@ -126,7 +126,7 @@
       "url": "https://www.reddit.com/r/vitahacks/comments/18zdtep/new_port_psvita_hot_pursuit/",
       "title": "Need for Speed: Hot Pursuit Vita",
       "content_text": "Stage: playable | Platform: Android | Summary: ARM wrapper port of NFS Hot Pursuit mobile with analog steering and custom Vita shaders. | Hardware: Smooth 30 FPS across sprint and pursuit courses.",
-      "date_modified": "2026-09-14T13:43:47.722Z",
+      "date_modified": "2026-09-14T15:34:00.000Z",
       "tags": [
         "playable",
         "Android",
@@ -139,7 +139,7 @@
       "url": "https://www.reddit.com/r/vitahacks/comments/192k7s9/the_class_of_09_vita_port_is_finally_released/",
       "title": "Class of '09 Vita Port",
       "content_text": "Stage: released | Platform: PC / Ren'Py | Summary: Native port of the viral dark comedy visual novel powered by the updated Ren'Py Vita engine. | Hardware: Instant route transitions, flawless audio and touch/button dialogue progression.",
-      "date_modified": "2026-09-15T13:43:47.722Z",
+      "date_modified": "2026-09-15T15:34:00.000Z",
       "tags": [
         "released",
         "PC / Ren'Py",
@@ -152,7 +152,7 @@
       "url": "https://www.reddit.com/r/vitahacks/comments/1h4yhyi/release_renpy_vita_8_port/",
       "title": "Ren'Py 8 Vita Engine Runtime",
       "content_text": "Stage: released | Platform: Multiplatform Engine | Summary: Major architectural breakthrough bringing Python 3.11 and modern Ren'Py 8.x games natively to Vita. | Hardware: Significantly lower memory usage and accelerated text rendering.",
-      "date_modified": "2026-09-16T13:43:47.722Z",
+      "date_modified": "2026-09-16T15:34:00.000Z",
       "tags": [
         "released",
         "Multiplatform Engine",
@@ -166,7 +166,7 @@
       "url": "https://www.reddit.com/r/vitahacks/comments/126a9bf/release_ship_of_harkinian_vita_port/",
       "title": "Zelda: Ship of Harkinian (OOT)",
       "content_text": "Stage: playable | Platform: N64 / PC Decomp | Summary: Direct native Vita build of the Harbour Masters reverse-engineered Ocarina of Time decompilation. | Hardware: Solid 30-60 FPS depending on enhancement settings.",
-      "date_modified": "2026-09-13T13:43:47.722Z",
+      "date_modified": "2026-09-13T15:34:00.000Z",
       "tags": [
         "playable",
         "N64 / PC Decomp",
@@ -180,7 +180,7 @@
       "url": "https://www.reddit.com/r/VitaPiracy/comments/1iuoe4u/rinnegatamante_is_going_all_out/",
       "title": "Slingshot Racing Vita",
       "content_text": "Stage: released | Platform: Android / iOS | Summary: One-touch steampunk racer ported via ARMv7 wrapper with full physical trigger integration. | Hardware: Locked 60 FPS at native OLED resolution.",
-      "date_modified": "2026-09-15T13:43:47.722Z",
+      "date_modified": "2026-09-15T15:34:00.000Z",
       "tags": [
         "released",
         "Android / iOS",
@@ -193,7 +193,7 @@
       "url": "https://www.reddit.com/r/vitahacks/comments/q1910a/release_fallout_2_ce_ps_vita_port/",
       "title": "Fallout 2 Community Edition",
       "content_text": "Stage: playable | Platform: PC | Summary: Open-source recreation of Fallout 2 engine compiled natively for PlayStation Vita. | Hardware: Smooth 60 FPS in exploration and combat.",
-      "date_modified": "2026-09-12T13:43:47.722Z",
+      "date_modified": "2026-09-12T15:34:00.000Z",
       "tags": [
         "playable",
         "PC",
@@ -205,7 +205,7 @@
       "url": "https://www.reddit.com/r/vitahacks/comments/1whm4hp/smash_bros_melee_vita/",
       "title": "Render96 HD SM64 Vita",
       "content_text": "Stage: released | Platform: PC Decomp | Summary: High-fidelity SGI CGI pre-rendered asset recreation of Super Mario 64 ported natively to Vita. | Hardware: 30-60 FPS with custom texture compression.",
-      "date_modified": "2026-09-02T13:43:47.722Z",
+      "date_modified": "2026-09-02T15:34:00.000Z",
       "tags": [
         "released",
         "PC Decomp",
@@ -218,7 +218,7 @@
       "url": "https://www.reddit.com/r/VitaPiracy/comments/1inclw4/any_listcollection_of_homebrew_fanmade_ports_of/",
       "title": "Celeste Classic Vita",
       "content_text": "Stage: released | Platform: PICO-8 / C | Summary: C-rewrite of the original PICO-8 Celeste prototype compiled directly for PlayStation Vita. | Hardware: Locked 60 FPS with pixel-perfect integer scaling.",
-      "date_modified": "2026-08-18T13:43:47.722Z",
+      "date_modified": "2026-08-18T15:34:00.000Z",
       "tags": [
         "released",
         "PICO-8 / C",
@@ -231,7 +231,7 @@
       "url": "https://www.reddit.com/r/VitaPiracy/comments/1inclw4/any_listcollection_of_homebrew_fanmade_ports_of/",
       "title": "Cave Story (NXEngine-evo)",
       "content_text": "Stage: released | Platform: PC | Summary: Complete open-source NXEngine-evo upgrade supporting remastered music and wide aspect ratio. | Hardware: Rock solid 60 FPS.",
-      "date_modified": "2026-08-28T13:43:47.722Z",
+      "date_modified": "2026-08-28T15:34:00.000Z",
       "tags": [
         "released",
         "PC",
