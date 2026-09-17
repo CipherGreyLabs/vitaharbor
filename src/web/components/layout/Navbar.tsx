@@ -41,7 +41,7 @@ export const Navbar: React.FC = () => {
                 }`
               }
             >
-              [ Home ]
+              Home
             </NavLink>
             <NavLink
               to="/projects"
@@ -51,7 +51,7 @@ export const Navbar: React.FC = () => {
                 }`
               }
             >
-              [ Projects ]
+              Projects
             </NavLink>
             <NavLink
               to="/developers"
@@ -61,7 +61,7 @@ export const Navbar: React.FC = () => {
                 }`
               }
             >
-              [ Developers ]
+              Developers
             </NavLink>
             <NavLink
               to="/updates"
@@ -71,7 +71,7 @@ export const Navbar: React.FC = () => {
                 }`
               }
             >
-              [ Updates ]
+              Updates
             </NavLink>
             <NavLink
               to="/about"
@@ -81,7 +81,7 @@ export const Navbar: React.FC = () => {
                 }`
               }
             >
-              [ About ]
+              About
             </NavLink>
           </nav>
 
@@ -131,35 +131,35 @@ export const Navbar: React.FC = () => {
               onClick={() => setMobileMenuOpen(false)}
               className="px-2 py-1.5 text-[#a3acb5] hover:text-[#f4f6f8]"
             >
-              [ Home ]
+              Home
             </Link>
             <Link
               to="/projects"
               onClick={() => setMobileMenuOpen(false)}
               className="px-2 py-1.5 text-[#a3acb5] hover:text-[#f4f6f8]"
             >
-              [ Projects ]
+              Projects
             </Link>
             <Link
               to="/developers"
               onClick={() => setMobileMenuOpen(false)}
               className="px-2 py-1.5 text-[#a3acb5] hover:text-[#f4f6f8]"
             >
-              [ Developers ]
+              Developers
             </Link>
             <Link
               to="/updates"
               onClick={() => setMobileMenuOpen(false)}
               className="px-2 py-1.5 text-[#a3acb5] hover:text-[#f4f6f8]"
             >
-              [ Updates ]
+              Updates
             </Link>
             <Link
               to="/about"
               onClick={() => setMobileMenuOpen(false)}
               className="px-2 py-1.5 text-[#a3acb5] hover:text-[#f4f6f8]"
             >
-              [ About ]
+              About
             </Link>
           </div>
         </div>
