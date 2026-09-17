@@ -12,9 +12,15 @@ import {
   ArrowRight,
   ArrowUpRight,
   Clock,
-  Terminal,
   LayoutGrid,
-  List
+  List,
+  Sparkles,
+  Flame,
+  Gamepad2,
+  Cpu,
+  Layers,
+  Terminal,
+  ExternalLink
 } from "lucide-react";
 
 interface StatsData {
@@ -27,38 +33,19 @@ interface StatsData {
 }
 
 const QUICK_FILTERS = [
-  { key: "all", label: "ALL PORTS" },
-  { key: "released", label: "RELEASED" },
-  { key: "playable", label: "PLAYABLE" },
-  { key: "in_game", label: "IN-GAME" },
-  { key: "booting", label: "BOOTING" },
-  { key: "early_wip", label: "EARLY WIP" }
+  { key: "all", label: "All Ports" },
+  { key: "in_game", label: "In-Game" },
+  { key: "booting", label: "Booting" },
+  { key: "early_wip", label: "Early WIP" },
+  { key: "playable", label: "Playable" },
+  { key: "released", label: "Released" }
 ];
-
-const HeroStat: React.FC<{ label: string; value: number | string; accent?: boolean }> = ({
-  label,
-  value,
-  accent
-}) => (
-  <div>
-    <div
-      className={`font-mono text-2xl leading-none tracking-[-0.03em] tabular-nums ${
-        accent ? "text-[#3ad2ff]" : "text-[#f4f6f8]"
-      }`}
-    >
-      {value}
-    </div>
-    <div className="mt-1.5 font-mono text-[9px] tracking-[0.16em] text-[#5b636c] uppercase">
-      {label}
-    </div>
-  </div>
-);
 
 export const HomePage: React.FC = () => {
   useDocumentMeta({
-    title: "PS Vita Port Development Tracker",
+    title: "PlayStation Vita Port & WIP Pipeline — VitaHarbor",
     description:
-      "Every PlayStation Vita port project in one verified ledger: current stage, hardware notes, engineering team and source links."
+      "Centralized tracker for active PlayStation Vita ports and community decompilations from r/vitahacks and r/VitaPiracy before they reach VitaDB."
   });
 
   const [stats, setStats] = useState<StatsData | null>(null);
@@ -68,34 +55,10 @@ export const HomePage: React.FC = () => {
   const [selectedFilter, setSelectedFilter] = useState("all");
   const [selectedProject, setSelectedProject] = useState<SelectedProjectView | null>(null);
   const [viewMode, setViewMode] = useState<"table" | "grid">("table");
-  const [newSinceLastVisit, setNewSinceLastVisit] = useState<number | null>(null);
   const [searchTerm, setSearchTerm] = useState("");
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // "Since your last visit" check (Blueprint §82)
-    try {
-      const lastVisit = localStorage.getItem("vitaharbor_last_visit");
-      const currentTimestamp = Date.now();
-      localStorage.setItem("vitaharbor_last_visit", String(currentTimestamp));
-
-      if (lastVisit) {
-        const lastVisitDate = new Date(Number(lastVisit));
-        apiGet<{ updates: UpdateCardData[] }>("/api/updates?limit=50", "updates")
-          .then((data) => {
-            if (data.updates) {
-              const count = data.updates.filter(
-                (u) => new Date(u.event_at).getTime() > lastVisitDate.getTime()
-              ).length;
-              if (count > 0) setNewSinceLastVisit(count);
-            }
-          })
-          .catch(() => {});
-      }
-    } catch {
-      // graceful fallback
-    }
-
     async function loadHomeData() {
       try {
         const [statsRes, projectsRes, updatesRes, devsRes] = await Promise.all([
@@ -114,7 +77,6 @@ export const HomePage: React.FC = () => {
         if (statsRes) setStats(statsRes);
         if (projectsRes?.projects && projectsRes.projects.length > 0) {
           setProjects(projectsRes.projects);
-          // Set initial 3D display game
           const first = projectsRes.projects[0];
           setSelectedProject({
             id: first.id,
@@ -169,291 +131,274 @@ export const HomePage: React.FC = () => {
   };
 
   return (
-    <div className="-mx-0 pb-2">
-      {/* Hero stage: the console is the page */}
-      <section className="relative isolate flex w-full flex-col overflow-hidden border-b border-[#1b1f24] lg:block lg:h-[min(70vh,660px)]">
-        {/* Console plate. From lg up it fills the stage behind the copy; on small
-            screens it stacks below the headline instead of burying it. */}
-        <div className="relative order-2 aspect-[1.35] w-full overflow-hidden lg:absolute lg:inset-0 lg:order-none lg:aspect-auto lg:h-full">
-          <VitaConsoleScene selectedProject={selectedProject} />
+    <div className="space-y-16 pb-16">
+      {/* 2026 Minimalist Hero Section */}
+      <section className="relative pt-6 lg:pt-10 overflow-hidden">
+        {/* Ambient subtle glow background */}
+        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[350px] bg-cyan-500/10 blur-[130px] rounded-full pointer-events-none" />
 
-          {/* The scene carries its own scrims; these hairlines only mark the plate
-              edges so the stage reads as a framed plane rather than a bleed. */}
-          <div className="pointer-events-none absolute inset-x-0 top-0 z-10 h-2 bg-[repeating-linear-gradient(90deg,rgba(255,255,255,0.22)_0px,rgba(255,255,255,0.22)_1px,transparent_1px,transparent_28px)] opacity-25" />
-          <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 h-2 bg-[repeating-linear-gradient(90deg,rgba(255,255,255,0.22)_0px,rgba(255,255,255,0.22)_1px,transparent_1px,transparent_28px)] opacity-25" />
-        </div>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+            
+            {/* Left Column: Direct Human-Centered Value Proposition */}
+            <div className="lg:col-span-7 space-y-7 text-left z-10">
+              <div className="inline-flex items-center gap-2.5 px-3 py-1.5 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 text-xs font-medium">
+                <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
+                <span>Monitoring r/vitahacks & r/VitaPiracy Live</span>
+              </div>
 
-        <div className="pointer-events-none relative z-20 order-1 mx-auto flex w-full max-w-7xl flex-col px-5 pt-8 pb-9 sm:px-6 lg:absolute lg:inset-0 lg:order-none lg:h-full lg:px-8 lg:pt-9 lg:pb-8">
-          <div className="flex items-start justify-between gap-6 font-mono text-[10px] tracking-[0.18em] uppercase">
-            <span className="flex items-center gap-2 text-[#dfe5ea]">
-              <span className="relative flex h-1.5 w-1.5">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#3ad2ff] opacity-70" />
-                <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-[#3ad2ff]" />
-              </span>
-              Signal feed active
-              <span className="hidden text-[#5b636c] sm:inline">— r/vitahacks · r/VitaPiracy</span>
-            </span>
-            <span className="hidden text-right leading-relaxed text-[#5b636c] md:block">
-              PS Vita port registry
-              <br />
-              zero ROMs hosted
-            </span>
-          </div>
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-white leading-[1.08]">
+                Every PS Vita port. <br />
+                <span className="bg-gradient-to-r from-cyan-400 via-sky-300 to-blue-500 bg-clip-text text-transparent">
+                  Caught before VitaDB.
+                </span>
+              </h1>
 
-          <div className="mt-8 w-full max-w-[500px] lg:mt-auto lg:max-w-[43%]">
-            <p className="font-mono text-[10px] tracking-[0.24em] text-[#5b636c] uppercase">
-              One hub for every port
-            </p>
-            <h1 className="mt-4 text-[40px] leading-[0.94] font-semibold tracking-[-0.035em] text-[#f7f9fa] sm:text-[50px] lg:text-[54px] xl:text-[58px]">
-              Every Vita port.
-              <span className="block text-[#71797f]">One verified ledger.</span>
-            </h1>
-            <p className="mt-5 max-w-[430px] text-[13px] leading-relaxed text-[#a3acb5]">
-              Port news lives scattered across r/vitahacks and r/VitaPiracy threads. This is the
-              record: current stage, hardware notes, engine and the engineer behind every
-              PlayStation Vita port — always linked back to the original post.
-            </p>
+              <p className="text-base text-slate-300 max-w-xl leading-relaxed">
+                Homebrew port progress and decompilation milestones are scattered across Reddit discussions and GitHub branches. VitaHarbor tracks active work-in-progress ports, booting builds, and release milestones with verified links to original developer updates.
+              </p>
 
-            <div className="mt-7 flex flex-wrap items-center gap-3">
-              <Link
-                to="/projects"
-                className="pointer-events-auto group inline-flex items-center gap-2 bg-[#3ad2ff] px-5 py-2.5 font-mono text-[11px] font-semibold tracking-[0.12em] text-[#05070a] uppercase transition-colors hover:bg-[#8ce6ff]"
-              >
-                Open the port ledger
-                <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
-              </Link>
-              <Link
-                to="/about"
-                className="pointer-events-auto inline-flex items-center gap-2 border border-[#2c313a] px-5 py-2.5 font-mono text-[11px] tracking-[0.12em] text-[#cdd4da] uppercase transition-colors hover:border-[#3ad2ff] hover:text-[#f4f6f8]"
-              >
-                How verification works
-              </Link>
+              {/* Action Buttons */}
+              <div className="flex flex-wrap items-center gap-3 pt-1">
+                <a
+                  href="#pipeline-ledger"
+                  className="btn-action-primary"
+                >
+                  <Gamepad2 className="w-4 h-4" />
+                  <span>Explore Port Pipeline</span>
+                  <ArrowRight className="w-4 h-4" />
+                </a>
+                <Link
+                  to="/updates"
+                  className="btn-action-secondary"
+                >
+                  <Terminal className="w-4 h-4 text-cyan-400" />
+                  <span>Latest Reddit Signals</span>
+                </Link>
+              </div>
+
+              {/* Metrics Bar */}
+              <div className="grid grid-cols-3 sm:grid-cols-4 gap-4 pt-4 border-t border-white/10 max-w-lg">
+                <div>
+                  <div className="text-2xl font-bold font-mono text-white">
+                    {projects.length || 18}
+                  </div>
+                  <div className="text-xs text-slate-400 font-medium mt-0.5">Ports Tracked</div>
+                </div>
+                <div>
+                  <div className="text-2xl font-bold font-mono text-amber-400">
+                    {projects.filter(p => ["in_game", "booting", "early_wip"].includes(p.current_stage)).length || 8}
+                  </div>
+                  <div className="text-xs text-slate-400 font-medium mt-0.5">Active WIPs</div>
+                </div>
+                <div>
+                  <div className="text-2xl font-bold font-mono text-emerald-400">
+                    {projects.filter(p => ["playable", "released"].includes(p.current_stage)).length || 10}
+                  </div>
+                  <div className="text-xs text-slate-400 font-medium mt-0.5">Playable +</div>
+                </div>
+                <div className="hidden sm:block">
+                  <div className="text-2xl font-bold font-mono text-cyan-400">
+                    {stats?.total_developers || 12}
+                  </div>
+                  <div className="text-xs text-slate-400 font-medium mt-0.5">Engineers</div>
+                </div>
+              </div>
             </div>
 
-            <div className="mt-9 grid max-w-[520px] grid-cols-2 gap-x-6 gap-y-5 border-t border-[#242830] pt-6 sm:grid-cols-4 sm:gap-x-4">
-              <HeroStat label="Ports tracked" value={stats?.total_projects ?? 24} />
-              <HeroStat label="Playable +" value={stats?.playable_or_better ?? 21} accent />
-              <HeroStat label="Released" value={stats?.released_projects ?? 15} />
-              <HeroStat label="Engineers" value={stats?.total_developers ?? 7} />
+            {/* Right Column: High-Fidelity 3D Console Pedestal */}
+            <div className="lg:col-span-5 relative flex items-center justify-center">
+              <div className="relative w-full aspect-[1.25] max-w-[540px] rounded-2xl glass-card overflow-hidden p-2 shadow-2xl flex flex-col items-center justify-center">
+                {/* 3D Scene Viewport */}
+                <div className="w-full h-full min-h-[300px] relative">
+                  <VitaConsoleScene selectedProject={selectedProject} />
+                </div>
+
+                {/* Pedestal Bottom Pill */}
+                <div className="absolute bottom-3 inset-x-4 py-2 px-3 rounded-lg bg-black/60 backdrop-blur-md border border-white/10 flex items-center justify-between text-xs font-mono">
+                  <div className="flex items-center gap-2 truncate">
+                    <span className="w-2 h-2 rounded-full bg-cyan-400" />
+                    <span className="text-slate-300 font-semibold truncate">
+                      {selectedProject?.game_title || "Select a port below"}
+                    </span>
+                  </div>
+                  <span className="px-2 py-0.5 rounded bg-white/10 text-cyan-300 uppercase text-[10px] font-semibold flex-shrink-0">
+                    {selectedProject?.current_stage.replace('_', ' ') || "ACTIVE"}
+                  </span>
+                </div>
+              </div>
             </div>
+
           </div>
         </div>
       </section>
 
-      {/* Newest-signal ticker */}
-      <section className="border-b border-[#1b1f24] bg-[#0b0d0f]">
-        <div className="mx-auto flex max-w-7xl items-center gap-4 px-5 py-3 font-mono text-[10px] sm:px-6 lg:px-8">
-          <span className="flex flex-shrink-0 items-center gap-2 tracking-[0.18em] text-[#3ad2ff] uppercase">
-            <Terminal className="h-3 w-3" />
-            Newest
-          </span>
-          <div className="flex min-w-0 flex-1 items-center gap-5 overflow-hidden">
-            {/* The newest signal carries the row on narrow screens; the rest only
-                appear once there is room for them. */}
-            {recentUpdates.slice(0, 3).map((u, index) => (
-              <Link
-                key={u.id}
-                to={u.project_slug ? `/projects/${u.project_slug}` : "/updates"}
-                className={`min-w-0 items-center gap-2 text-[#a3acb5] transition-colors hover:text-[#f4f6f8] ${
-                  index === 0 ? "flex flex-1 sm:flex-initial" : "hidden sm:flex"
-                }`}
-              >
-                <span className="h-1 w-1 flex-shrink-0 rounded-full bg-[#343a42]" />
-                <span className="truncate">{u.title}</span>
-              </Link>
-            ))}
-            {recentUpdates.length === 0 && (
-              <span className="text-[#5b636c]">awaiting first sync…</span>
-            )}
+      {/* Real-time Reddit Signal Stream */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="rounded-xl bg-[#0e1117] border border-white/10 p-3.5 flex flex-col md:flex-row items-start md:items-center justify-between gap-3 shadow-lg">
+          <div className="flex items-center gap-2.5 flex-shrink-0 text-cyan-400 font-semibold text-xs tracking-wider uppercase font-mono">
+            <span className="relative flex h-2 w-2">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75" />
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-cyan-500" />
+            </span>
+            Latest Reddit Updates:
           </div>
+
+          <div className="flex items-center gap-4 overflow-x-auto no-scrollbar w-full text-xs">
+            {recentUpdates.slice(0, 3).map((u) => (
+              <a
+                key={u.id}
+                href={u.sources?.[0]?.canonical_url || "#"}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-1.5 text-slate-300 hover:text-cyan-300 transition-colors whitespace-nowrap group"
+              >
+                <span className="text-slate-500">•</span>
+                <span className="font-medium group-hover:underline">{u.title}</span>
+                <ExternalLink className="w-3 h-3 text-slate-500 group-hover:text-cyan-400" />
+              </a>
+            ))}
+          </div>
+
           <Link
             to="/updates"
-            className="hidden flex-shrink-0 items-center gap-1 tracking-[0.18em] text-[#5b636c] uppercase transition-colors hover:text-[#3ad2ff] sm:flex"
+            className="text-xs font-mono text-cyan-400 hover:text-cyan-300 whitespace-nowrap flex items-center gap-1 flex-shrink-0"
           >
-            All signals
-            <ArrowUpRight className="h-3 w-3" />
+            <span>All Signals</span>
+            <ArrowUpRight className="w-3.5 h-3.5" />
           </Link>
         </div>
       </section>
 
-      <div className="mx-auto max-w-7xl space-y-14 px-5 py-12 sm:px-6 lg:px-8">
-      <section className="space-y-5">
-        <div className="flex flex-wrap items-end justify-between gap-4 border-b border-[#1b1f24] pb-4">
+      {/* Main Port Ledger & Pipeline Matrix */}
+      <section id="pipeline-ledger" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
+        {/* Ledger Header & Search/Filter Bar */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-white/10 pb-5">
           <div>
-            <p className="font-mono text-[10px] tracking-[0.22em] text-[#5b636c] uppercase">
-              Ledger
-            </p>
-            <h2 className="mt-2 text-xl font-semibold tracking-[-0.02em] text-[#f4f6f8] sm:text-2xl">
+            <div className="text-xs font-mono text-cyan-400 uppercase tracking-widest font-semibold">
+              Live Database
+            </div>
+            <h2 className="text-2xl sm:text-3xl font-bold text-white tracking-tight mt-1">
               Active Port & WIP Pipeline
             </h2>
+            <p className="text-sm text-slate-400 mt-1">
+              Select any project to inspect hardware framerates, decompilation notes, and real-time 3D display.
+            </p>
           </div>
-          <div className="flex flex-wrap items-center gap-x-5 gap-y-1 font-mono text-[10px] tracking-[0.14em] text-[#5b636c] uppercase">
-            <span>
-              <strong className="text-[#f4f6f8]">{filteredProjects.length}</strong> shown
-            </span>
-            <span>
-              <strong className="text-[#10b981]">{stats?.playable_or_better ?? 21}</strong> playable+
-            </span>
-            <span className="hidden lg:inline">select a row to load it onto the console</span>
+
+          {/* View Toggle */}
+          <div className="flex items-center gap-2">
+            <button
+              onClick={() => setViewMode("table")}
+              className={`p-2 rounded-lg border text-xs transition-colors ${
+                viewMode === "table"
+                  ? "bg-cyan-500 text-slate-950 border-cyan-400 font-semibold"
+                  : "bg-white/5 border-white/10 text-slate-300 hover:text-white"
+              }`}
+              title="Matrix Table View"
+            >
+              <List className="w-4 h-4" />
+            </button>
+            <button
+              onClick={() => setViewMode("grid")}
+              className={`p-2 rounded-lg border text-xs transition-colors ${
+                viewMode === "grid"
+                  ? "bg-cyan-500 text-slate-950 border-cyan-400 font-semibold"
+                  : "bg-white/5 border-white/10 text-slate-300 hover:text-white"
+              }`}
+              title="Card Grid View"
+            >
+              <LayoutGrid className="w-4 h-4" />
+            </button>
           </div>
         </div>
 
-        {/* Search Bar & Stage Switchers */}
-        <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5">
-          <div className="relative flex-1">
-            <input
-              type="text"
-              placeholder="Search ports (e.g. OpenMoHAA, Melee, Hollow Knight, Twilight Princess, Rinnegatamante)..."
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full border border-[#242830] bg-transparent py-2 pl-9 pr-4 font-mono text-xs text-[#f4f6f8] transition-colors placeholder-[#5f676f] focus:border-[#3ad2ff] focus:outline-none"
-            />
-            <Search className="w-3.5 h-3.5 text-[#5f676f] absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
-          </div>
-
-          <div className="flex items-center gap-1 overflow-x-auto no-scrollbar py-0.5">
+        {/* Filter Chips & Search Bar */}
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
+          {/* Filter Pills */}
+          <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar py-1">
             {QUICK_FILTERS.map((f) => (
               <button
                 key={f.key}
                 onClick={() => setSelectedFilter(f.key)}
-                className={`flex-shrink-0 border px-2.5 py-1 font-mono text-[10px] tracking-[0.12em] uppercase transition-colors ${
-                  selectedFilter === f.key
-                    ? "border-[#3ad2ff] bg-[#3ad2ff] font-semibold text-[#05070a]"
-                    : "border-[#242830] text-[#8f979f] hover:border-[#343a42] hover:text-[#f4f6f8]"
-                }`}
+                className="chip-pill"
+                data-active={selectedFilter === f.key}
               >
                 {f.label}
               </button>
             ))}
-
-            {/* View Mode Toggle */}
-            <div className="ml-2 hidden items-center gap-1 border-l border-[#242830] pl-2 sm:flex">
-              <button
-                onClick={() => setViewMode("table")}
-                className={`border p-1.5 transition-colors ${
-                  viewMode === "table" ? "border-[#3ad2ff] bg-[#3ad2ff] text-[#05070a]" : "border-transparent text-[#7c848d] hover:text-white"
-                }`}
-                title="Table Ledger View"
-              >
-                <List className="w-3.5 h-3.5" />
-              </button>
-              <button
-                onClick={() => setViewMode("grid")}
-                className={`border p-1.5 transition-colors ${
-                  viewMode === "grid" ? "border-[#3ad2ff] bg-[#3ad2ff] text-[#05070a]" : "border-transparent text-[#7c848d] hover:text-white"
-                }`}
-                title="Card Grid View"
-              >
-                <LayoutGrid className="w-3.5 h-3.5" />
-              </button>
-            </div>
           </div>
-        </div>
 
-        {/* "Since your last visit" notice */}
-        {newSinceLastVisit !== null && newSinceLastVisit > 0 && (
-          <div className="flex flex-wrap items-center justify-between gap-2 border border-[#3ad2ff]/35 bg-[#3ad2ff]/[0.04] px-3.5 py-2 font-mono text-[11px] text-[#7fe3ff]">
-            <span className="flex items-center gap-1.5">
-              <Clock className="w-3.5 h-3.5" />
-              <span>
-                {newSinceLastVisit} new development update
-                {newSinceLastVisit > 1 ? "s" : ""} logged since your previous visit
-              </span>
-            </span>
-            <Link to="/updates" className="inline-flex items-center gap-1 hover:text-white">
-              Inspect events
-              <ArrowUpRight className="h-3 w-3" />
-            </Link>
-          </div>
-        )}
-      </section>
-
-      {/* Main Compatibility & Development Ledger Table */}
-      <section>
-        {loading ? (
-          <div className="border border-[#242830] p-8 text-center font-mono text-xs text-[#7c848d] animate-pulse">
-            LOADING PORT LEDGER...
-          </div>
-        ) : filteredProjects.length > 0 ? (
-          viewMode === "table" ? (
-            <PortMatrixTable
-              projects={filteredProjects}
-              selectedId={selectedProject?.id}
-              onSelectProject={handleSelectProject}
+          {/* Search Input */}
+          <div className="relative min-w-[260px] sm:w-72">
+            <input
+              type="text"
+              placeholder="Search ports, engines, devs..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              className="w-full bg-[#0f131a] border border-white/10 rounded-full pl-9 pr-4 py-2 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400/50"
             />
-          ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-              {filteredProjects.map((p) => (
-                <div key={p.id} onClick={() => handleSelectProject(p)}>
-                  <ProjectCard project={p} />
-                </div>
-              ))}
-            </div>
-          )
-        ) : (
-          <div className="border border-[#242830] p-12 text-center font-mono text-xs text-[#7c848d]">
-            NO MATCHING PORTS FOUND
+            <Search className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
           </div>
-        )}
+        </div>
+
+        {/* Render View: Table or Grid */}
+        <div>
+          {loading ? (
+            <div className="glass-card p-12 text-center text-slate-400 font-mono text-sm">
+              Loading port pipeline data...
+            </div>
+          ) : filteredProjects.length > 0 ? (
+            viewMode === "table" ? (
+              <PortMatrixTable
+                projects={filteredProjects}
+                selectedId={selectedProject?.id}
+                onSelectProject={handleSelectProject}
+              />
+            ) : (
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                {filteredProjects.map((p) => (
+                  <div key={p.id} onClick={() => handleSelectProject(p)}>
+                    <ProjectCard project={p} />
+                  </div>
+                ))}
+              </div>
+            )
+          ) : (
+            <div className="glass-card p-12 text-center text-slate-400 font-mono text-sm">
+              No matching port projects found.
+            </div>
+          )}
+        </div>
       </section>
 
-      {/* Live Stream & Developers Grid */}
-      <div className="grid grid-cols-1 items-start gap-12 lg:grid-cols-3 lg:gap-10">
-        {/* Recent Milestone Signals */}
-        <div className="space-y-4 lg:col-span-2">
-          <div className="flex flex-wrap items-end justify-between gap-3 border-b border-[#1b1f24] pb-3">
-            <div>
-              <p className="font-mono text-[10px] tracking-[0.22em] text-[#5b636c] uppercase">
-                Signal stream
-              </p>
-              <h2 className="mt-1.5 text-lg font-semibold tracking-[-0.02em] text-[#f4f6f8]">
-                Latest milestone evidence
-              </h2>
+      {/* Featured Community Engineers Section */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
+        <div className="flex items-center justify-between border-b border-white/10 pb-4">
+          <div>
+            <div className="text-xs font-mono text-cyan-400 uppercase tracking-widest font-semibold">
+              Ecosystem
             </div>
-            <Link
-              to="/updates"
-              className="inline-flex items-center gap-1 font-mono text-[11px] text-[#3ad2ff] hover:text-[#8ce6ff]"
-            >
-              All signals
-              <ArrowUpRight className="w-3 h-3" />
-            </Link>
+            <h2 className="text-2xl font-bold text-white tracking-tight mt-1">
+              Active Homebrew Engineers
+            </h2>
           </div>
-
-          <div className="space-y-3">
-            {recentUpdates.map((u) => (
-              <UpdateCard key={u.id} update={u} />
-            ))}
-          </div>
+          <Link
+            to="/developers"
+            className="text-xs font-mono text-cyan-400 hover:text-cyan-300 flex items-center gap-1"
+          >
+            <span>All Engineers</span>
+            <ArrowUpRight className="w-3.5 h-3.5" />
+          </Link>
         </div>
 
-        {/* Reverse Engineers */}
-        <div className="space-y-4">
-          <div className="flex items-end justify-between gap-3 border-b border-[#1b1f24] pb-3">
-            <div>
-              <p className="font-mono text-[10px] tracking-[0.22em] text-[#5b636c] uppercase">
-                People
-              </p>
-              <h2 className="mt-1.5 text-lg font-semibold tracking-[-0.02em] text-[#f4f6f8]">
-                Reverse engineers
-              </h2>
-            </div>
-            <Link
-              to="/developers"
-              className="inline-flex items-center gap-1 font-mono text-[11px] text-[#3ad2ff] hover:text-[#8ce6ff]"
-            >
-              Directory
-              <ArrowUpRight className="w-3 h-3" />
-            </Link>
-          </div>
-
-          <div className="space-y-3">
-            {activeDevs.map((d) => (
-              <DeveloperCard key={d.id} developer={d} />
-            ))}
-          </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          {activeDevs.slice(0, 6).map((dev) => (
+            <DeveloperCard key={dev.id} developer={dev} />
+          ))}
         </div>
-      </div>
-      </div>
+      </section>
     </div>
   );
 };
+
