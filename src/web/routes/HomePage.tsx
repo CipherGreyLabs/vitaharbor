@@ -64,14 +64,14 @@ const SPECS: Array<[string, string]> = [
 ];
 
 const STAGE_CHIP: Record<string, string> = {
-  released: "bg-emerald-100 text-emerald-800",
-  completable: "bg-emerald-100 text-emerald-800",
-  playable: "bg-emerald-100 text-emerald-800",
-  in_game: "bg-blue-100 text-blue-800",
-  booting: "bg-amber-100 text-amber-800",
-  early_wip: "bg-slate-200 text-slate-700",
-  research: "bg-slate-200 text-slate-700",
-  announced: "bg-slate-200 text-slate-700"
+  released: "bg-emerald-100 text-emerald-800 dark:bg-emerald-500/15 dark:text-emerald-300",
+  completable: "bg-emerald-100 text-emerald-800 dark:bg-emerald-500/15 dark:text-emerald-300",
+  playable: "bg-emerald-100 text-emerald-800 dark:bg-emerald-500/15 dark:text-emerald-300",
+  in_game: "bg-blue-100 text-blue-800 dark:bg-blue-500/15 dark:text-blue-300",
+  booting: "bg-amber-100 text-amber-800 dark:bg-amber-500/15 dark:text-amber-300",
+  early_wip: "bg-slate-200 text-slate-700 dark:bg-slate-500/20 dark:text-slate-300",
+  research: "bg-slate-200 text-slate-700 dark:bg-slate-500/20 dark:text-slate-300",
+  announced: "bg-slate-200 text-slate-700 dark:bg-slate-500/20 dark:text-slate-300"
 };
 
 type CountMode = "idle" | "animate" | "instant";
@@ -115,9 +115,9 @@ const StatFigure: React.FC<{ label: string; value: number; note: string; mode: C
   const shown = useCountUp(value, mode);
   return (
     <div className="bg-deep px-5 py-6">
-      <p className="text-micro font-medium uppercase text-white/45">{label}</p>
+      <p className="text-micro font-medium uppercase text-ink-medium">{label}</p>
       <p className="vh-tnum mt-2 text-title font-semibold text-white">{shown}</p>
-      <p className="mt-1 text-caption text-white/45">{note}</p>
+      <p className="mt-1 text-caption text-ink-medium">{note}</p>
     </div>
   );
 };
@@ -432,7 +432,7 @@ export const HomePage: React.FC = () => {
     <div id="top" className="min-h-screen bg-canvas text-ink">
       <a
         href="#main-content"
-        className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded-lg focus:bg-ink focus:px-4 focus:py-2 focus:text-caption focus:text-white"
+        className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded-lg focus:bg-ink focus:px-4 focus:py-2 focus:text-caption focus:text-canvas"
       >
         Skip to content
       </a>
@@ -590,7 +590,7 @@ export const HomePage: React.FC = () => {
                         href={selectedProject.reddit_url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1.5 rounded-lg bg-ink px-3.5 py-2 text-caption font-medium text-white transition-colors hover:bg-ink/90"
+                        className="inline-flex items-center gap-1.5 rounded-lg bg-ink px-3.5 py-2 text-caption font-medium text-canvas transition-colors hover:bg-ink/90"
                       >
                         Source discussion
                         <ExternalLink className="h-3.5 w-3.5" />
@@ -722,7 +722,7 @@ export const HomePage: React.FC = () => {
                   className={
                     "rounded-full px-3.5 py-1.5 text-caption font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink/20 " +
                     (activeFilter === filter.key
-                      ? "bg-ink text-white"
+                      ? "bg-ink text-canvas"
                       : "bg-sunken text-ink-medium hover:bg-hairline hover:text-ink")
                   }
                 >
@@ -1043,7 +1043,7 @@ export const HomePage: React.FC = () => {
                             <button
                               type="button"
                               onClick={() => selectProject(project)}
-                              className="rounded-lg bg-ink px-3.5 py-2 text-caption font-medium text-white transition-colors hover:bg-ink/90"
+                              className="rounded-lg bg-ink px-3.5 py-2 text-caption font-medium text-canvas transition-colors hover:bg-ink/90"
                             >
                               Show on the console
                             </button>
@@ -1128,7 +1128,7 @@ export const HomePage: React.FC = () => {
           className="mt-24 bg-deep"
         >
           <div className="mx-auto max-w-5xl px-6 py-16">
-            <p className="text-micro font-medium uppercase tracking-[0.22em] text-white/45">Method</p>
+            <p className="text-micro font-medium uppercase tracking-[0.22em] text-ink-medium">Method</p>
             <h2 id="methodology-heading" className="mt-3 text-title font-semibold text-white">
               How entries get listed
             </h2>
@@ -1156,7 +1156,7 @@ export const HomePage: React.FC = () => {
                       <Icon className="h-4.5 w-4.5" />
                     </span>
                     <h3 className="mt-4 text-subtitle font-medium text-white">{title}</h3>
-                    <p className="mt-2 text-body text-white/65">{body}</p>
+                    <p className="mt-2 text-body text-ink-medium">{body}</p>
                   </div>
                 )
               )}

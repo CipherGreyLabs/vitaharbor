@@ -29,6 +29,27 @@
     --vh-accent-rgb: 0 112 209;
   }
 
+  /*
+   * Dark theme. Because every colour in the interface resolves through these
+   * tokens, flipping them re-skins the whole archive at once. The dark bands
+   * become elevated surfaces rather than darker holes, which keeps the white
+   * text on them legible.
+   */
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --vh-canvas-rgb: 12 14 18;
+      --vh-surface-rgb: 21 24 30;
+      --vh-sunken-rgb: 17 20 25;
+      --vh-hairline-rgb: 42 47 57;
+      --vh-hairline-strong-rgb: 66 74 88;
+      --vh-ink-rgb: 237 240 245;
+      --vh-ink-medium-rgb: 170 180 196;
+      --vh-ink-muted-rgb: 143 153 170;
+      --vh-deep-rgb: 27 32 41;
+      --vh-accent-rgb: 84 164 255;
+    }
+  }
+
   html {
     scroll-behavior: smooth;
   }
