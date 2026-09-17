@@ -5,7 +5,7 @@ import { chromium } from "playwright";
 const origin = (process.argv[2] || "https://vitaharbor.vercel.app").replace(/\/$/, "");
 
 const routes = [
-  ["/", "PS Vita Port Development Tracker", 600],
+  ["/", "PlayStation Vita Port", 600],
   ["/projects", "Port ledger", 600],
   ["/developers", "Reverse engineers", 600],
   ["/updates", "Signal stream", 600],

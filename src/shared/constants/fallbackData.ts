@@ -114,6 +114,7 @@ export const FALLBACK_PROJECTS: any[] = [
     id: 5,
     game_id: 5,
     slug: "portal-vita",
+    reddit_url: "https://www.reddit.com/r/vitahacks/comments/16l8h0m/portal_vita_status/",
     display_name: "Portal Vita Port",
     current_stage: "in_game",
     lifecycle: "active",

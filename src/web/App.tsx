@@ -18,14 +18,14 @@ export default function App() {
   const isFullBleed = pathname === "/";
 
   return (
-    <div className="min-h-screen bg-[#08090a] text-[#f4f6f8] flex flex-col selection:bg-[#3ad2ff]/30 selection:text-[#f4f6f8]">
+    <div className="min-h-screen bg-[#FAFAFA] text-slate-900 flex flex-col selection:bg-[#3ad2ff]/30 selection:text-[#f4f6f8]">
       <a
         href="#main-content"
         className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-50 focus:px-4 focus:py-2 focus:bg-[#3ad2ff] focus:text-white focus:rounded focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-white"
       >
         Skip to content
       </a>
-      <Navbar />
+      {!isFullBleed && <Navbar />}
       <main
         id="main-content"
         className={
@@ -46,7 +46,9 @@ export default function App() {
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </main>
-      <Footer />
+      {!isFullBleed && <Footer />}
     </div>
   );
 }
+
+

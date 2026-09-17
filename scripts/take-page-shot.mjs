@@ -12,7 +12,7 @@ const page = await browser.newPage({ viewport: { width: 1440, height: 960 }, dev
 page.on("console", (m) => {
   if (m.type() === "error" || m.type() === "warning") console.log("[" + m.type() + "]", m.text().slice(0, 400));
 });
-page.on("pageerror", (e) => console.log("[pageerror]", String(e).slice(0, 600)));
+page.on("pageerror", (e) => console.log("[pageerror]", e.stack || String(e)));
 const resp = await page.goto(base + path, { waitUntil: "networkidle" });
 console.log("status:", resp && resp.status());
 await page.waitForTimeout(3000);
