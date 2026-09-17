@@ -3,7 +3,7 @@ import React from "react";
 import { render } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 import { applyDocumentMeta } from "../../src/web/lib/useDocumentMeta";
-import App from "../../src/web/App";
+import { AboutPage } from "../../src/web/routes/AboutPage";
 
 describe("document metadata", () => {
   beforeEach(() => {
@@ -41,10 +41,10 @@ describe("document metadata", () => {
     ).toBe("Signal stream — VitaHarbor");
   });
 
-  it("applies a route-specific title when a page renders", () => {
+  it("applies a page-specific title when a page renders", () => {
     render(
       <MemoryRouter initialEntries={["/about"]}>
-        <App />
+        <AboutPage />
       </MemoryRouter>
     );
 
