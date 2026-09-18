@@ -69,6 +69,7 @@ npx vercel --prod --yes
 | Reddit public API | JSON returns 403, RSS returns 429 | Use the logged-in Chrome session via computer use |
 | PowerShell escaping | Backticks and `$` inside here-strings get eaten | Write scripts to a file, do not inline them |
 | Vercel deploy auth | Intermittent `Not authorized` | Re-run once; confirm with `npx vercel whoami` |
+| Vercel header order | The last matching rule wins, so a broad rule silently overrides a specific one | Put the catch-all first and the specific paths after it |
 
 ## Layout map
 
