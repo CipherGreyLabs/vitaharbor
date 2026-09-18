@@ -93,10 +93,7 @@
   animation: vh-rise 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
-.vh-row {
-  opacity: 1;
-  animation: vh-rise 0.55s cubic-bezier(0.16, 1, 0.3, 1) both;
-}
+.vh-row { opacity: 1; transform: none; filter: none; animation: none; }
 
 @keyframes vh-rise {
   from { opacity: 0; transform: translateY(8px); }
@@ -160,13 +157,10 @@ a, button, input, [role="button"] {
   transform: scale(0.96) translateY(24px);
 }
 
-@keyframes vh-row-entrance {
-  from { opacity: 0; transform: translateY(12px) scale(0.99); filter: blur(4px); }
+
   to { opacity: 1; transform: none; filter: blur(0px); }
 }
-.vh-row {
-  animation: vh-row-entrance 0.4s ease-out forwards;
-}
+.vh-row { opacity: 1; transform: none; filter: none; animation: none; }
 
 .filter-active-bg {
   position: absolute;
