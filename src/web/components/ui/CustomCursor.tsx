@@ -54,7 +54,7 @@ export const CustomCursor: React.FC = () => {
     <div
       className="pointer-events-none fixed top-0 left-0 z-[9999] rounded-full mix-blend-screen transition-all duration-200 ease-out"
       style={{
-        transform: 'translate3d(' + position.x + 'px, ' + position.y + 'px, 0) translate(-50%, -50%) scale(' + (isHovering ? 2.5 : 1) + ')', px, 0) translate(-50%, -50%) scale(),
+        transform: 'translate3d(' + position.x + 'px, ' + position.y + 'px, 0) translate(-50%, -50%) scale(' + (isHovering ? 2.5 : 1) + ')',
         width: isHovering ? '32px' : '12px',
         height: isHovering ? '32px' : '12px',
         backgroundColor: isHovering ? 'rgba(0, 210, 255, 0.1)' : '#00d2ff',
