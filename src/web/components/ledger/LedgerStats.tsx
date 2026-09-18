@@ -35,10 +35,10 @@ const StatFigure: React.FC<{ label: string; value: number; note: string; mode: C
 }) => {
   const shown = useCountUp(value, mode);
   return (
-    <div className="vh-glass vh-interactive flex flex-col justify-between rounded-3xl px-6 py-6 transition-transform hover:-translate-y-1">
-      <p className="text-micro font-medium uppercase text-white/45">{label}</p>
-      <p className="vh-tnum mt-4 text-display font-display font-semibold text-transparent bg-clip-text bg-gradient-to-br from-white to-ink-muted">{shown}</p>
-      <p className="mt-1 text-caption text-white/45">{note}</p>
+    <div className="flex flex-col justify-between rounded-2xl border border-hairline bg-surface px-6 py-5">
+      <p className="text-micro font-medium uppercase tracking-[0.14em] text-ink-muted">{label}</p>
+      <p className="vh-tnum mt-3 text-display font-semibold tracking-tight text-ink">{shown}</p>
+      <p className="mt-1 text-caption text-ink-muted">{note}</p>
     </div>
   );
 };
@@ -77,9 +77,9 @@ export const LedgerStats: React.FC<{ items: Array<[string, number, string]> }> =
   }, []);
 
   return (
-    <section aria-label="Archive at a glance" className="mt-20 bg-deep">
-      <div ref={ref} className="mx-auto max-w-5xl px-6 py-10">
-        <div className="grid grid-cols-2 gap-px overflow-hidden rounded-2xl bg-white/10 sm:grid-cols-4">
+    <section aria-label="Archive at a glance" className="mt-16">
+      <div ref={ref} className="mx-auto max-w-5xl px-6">
+        <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
           {items.map(([label, value, note]) => (
             <StatFigure key={label} label={label} value={value} note={note} mode={mode} />
           ))}

@@ -34,22 +34,21 @@ export const MethodologySection: React.FC<MethodologySectionProps> = ({ methodRe
     <section
       id="methodology"
       ref={methodRef}
-      data-reveal=""
       aria-labelledby="methodology-heading"
-      className="mt-24 bg-deep"
+      className="mt-24 border-t border-hairline bg-surface/30"
     >
       <div className="mx-auto max-w-5xl px-6 py-16">
         <p className="text-micro font-medium uppercase tracking-[0.22em] text-ink-medium">Method</p>
-        <h2 id="methodology-heading" className="mt-3 text-title font-semibold text-white">
+        <h2 id="methodology-heading" className="mt-3 text-title font-semibold text-ink">
           How entries get listed
         </h2>
         <div className="mt-10 grid gap-10 sm:grid-cols-3">
           {METHOD_ITEMS.map(({ Icon, title, body }) => (
-            <div key={title}>
-              <span className="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-white/10 text-white">
+            <div key={title} className="rounded-2xl border border-hairline bg-surface p-6">
+              <span className="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-hairline bg-sunken text-ink">
                 <Icon className="h-4.5 w-4.5" />
               </span>
-              <h3 className="mt-4 text-subtitle font-medium text-white">{title}</h3>
+              <h3 className="mt-4 text-subtitle font-medium text-ink">{title}</h3>
               <p className="mt-2 text-body text-ink-medium">{body}</p>
             </div>
           ))}

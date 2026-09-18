@@ -34,7 +34,7 @@ export const ProjectPanel: React.FC<ProjectPanelProps> = ({
   const repoUrl = project.repo_url || KNOWN_REPOS[project.slug];
 
   return (
-    <div id={"panel-" + project.slug} className="border-t border-hairline-strong/30 bg-sunken/50 px-5 py-6">
+    <div id={"panel-" + project.slug} className="border-t border-hairline bg-sunken/60 px-6 py-7">
       <div className="mb-6 flex items-center gap-4">
         <ProjectMark seed={project.display_name || project.game_title || "vita"} size={56} className="shrink-0 rounded-2xl" />
         <div className="min-w-0">
@@ -58,7 +58,7 @@ export const ProjectPanel: React.FC<ProjectPanelProps> = ({
       </div>
 
       {project.verification === "detected" && (
-        <p className="mb-6 max-w-3xl rounded-lg border border-hairline-strong/30 vh-glass px-4 py-3 text-caption text-ink-medium">
+        <p className="mb-6 max-w-3xl rounded-xl border border-hairline bg-surface px-4 py-3 text-caption text-ink-medium">
           <span className="font-medium text-ink">Unverified entry.</span> Promoted
           automatically from a detected thread. There is no hardware report yet, so
           playability and performance are deliberately left empty.
@@ -87,7 +87,7 @@ export const ProjectPanel: React.FC<ProjectPanelProps> = ({
                 {project.technologies.map((tech: string) => (
                   <span
                     key={tech}
-                    className="rounded-md border border-hairline-strong/30 vh-glass px-2 py-1 font-mono text-micro uppercase text-ink-muted"
+                    className="rounded-md border border-hairline bg-surface px-2 py-1 font-mono text-micro text-ink-muted"
                   >
                     {tech}
                   </span>
@@ -97,7 +97,7 @@ export const ProjectPanel: React.FC<ProjectPanelProps> = ({
           </div>
 
           {/* Practical Player Setup Guide */}
-          <div className="rounded-xl border border-hairline-strong/30 vh-glass p-4 text-xs font-mono space-y-3 shadow-lift">
+          <div className="rounded-xl border border-hairline bg-surface p-4 text-xs font-mono space-y-3">
             <div className="flex items-center gap-2 text-micro font-semibold uppercase text-ink">
               <Cpu className="h-3.5 w-3.5 text-accent" />
               <span>Hardware & Plugin Setup</span>
