@@ -69,8 +69,9 @@ written at commit time.
 | Time | Commit | Change | Why | Model | Verified |
 |---|---|---|---|---|---|
 | 00:12 | `ce05149` | Keyboard navigation (j/k, arrow keys), header status breakdown, editorial footer | Make the ledger operable without the mouse and show ecosystem state at a glance | unrecorded | typecheck clean, 42/42 tests, build 22 projects, live check |
-| 00:25 | pending | Mobile audit plus touch-target fixes, responsive console hint, badge trimming, neon glow removed from the active filter | Header links, filter pills and row actions were 20 to 32px tall, which is uncomfortable to tap on a phone | deepseek-v4-flash | typecheck clean, 42/42 tests, build 22 projects, mobile re-measure |
-| 00:40 | pending | Contrast raised, .gitattributes added, Open Graph and Twitter metadata, WebSite plus ItemList JSON-LD | Full audit found three gaps: muted text at 4.09:1 contrast (below WCAG AA), CRLF line endings silently breaking edits, and no social preview or structured data at all | deepseek-v4-flash | 35 text styles measured at 0 contrast failures, 2/2 JSON-LD blocks valid, 42/42 tests |
+| 00:21 | `798da77` | Mobile audit plus touch-target fixes, responsive console hint, badge trimming, neon glow removed from the active filter | Header links, filter pills and row actions were 20 to 32px tall, which is uncomfortable to tap on a phone | deepseek-v4-flash | typecheck clean, 42/42 tests, build 22 projects, live mobile re-measure |
+| 00:23 | `75b637e` | Muted text raised to #7d848c, .gitattributes forcing LF | Measured contrast was 4.09:1, below the 4.5:1 WCAG AA floor; CRLF line endings had already broken edits twice | deepseek-v4-flash | 35 text styles measured, 0 contrast failures, lowest 4.79 |
+| 00:26 | `316b577` | Open Graph, Twitter card, WebSite and ItemList JSON-LD, dark theme-color | The site is shared on Reddit and Discord, but had no social preview image or structured data at all | deepseek-v4-flash | live headers confirm og:image, twitter:card, 2 valid JSON-LD blocks |
 
 ### 2026-09-18
 

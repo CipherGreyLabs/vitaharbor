@@ -28,3 +28,19 @@ f_*.png
 m_*.png
 
 .vercel
+
+# Local audit and QA screenshots. Keep the three tracked assets above:
+# docs/references/vita-user-reference.png, public/og.png, public/vita-render.png
+mobile-*.jpg
+new-*.jpg
+scan-*.jpg
+updated-*.jpg
+final-*.jpg
+top-check.jpg
+verify-shot.png
+shot-*.png
+shot-*.jpg
+diag-*.png
+list-now.png
+check_home.png
+m_*.png
