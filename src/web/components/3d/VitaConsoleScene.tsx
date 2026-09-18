@@ -319,11 +319,13 @@ const recessMat = new THREE.MeshStandardMaterial({color:'#14161a',roughness:0.52
       decal(['⌃','‹','⌄','›'][i], -73.7 + dx, 13.3 + dy, 1.5, 1.5, '#92979b', 11.65);
     }
 
+    const faceButtons: THREE.Mesh[] = [];
     const glyphs = ['△','○','×','□'];
     [[0,7.5],[7.5,0],[0,-7.5],[-7.5,0]].forEach(([dx,dy], i) => {
       disc(73.5 + dx, 13.3 + dy, 3.95, 0.4, 9.85, black);
-      disc(73.5 + dx, 13.3 + dy, 3.5, 1.2, 10.6, button);
-      decal(glyphs[i], 73.5 + dx, 13.3 + dy, 3.8, 3.8, '#cfd3d6', 11.3);
+      const btn = disc(73.5 + dx, 13.3 + dy, 3.5, 1.2, 10.6, button);
+      faceButtons.push(btn);
+      decal(glyphs[i], 73.5 + dx, 13.3 + dy, 3.8, 3.8, ['#00ff66', '#ff3333', '#3399ff', '#ff3399'][i], 11.3);
     });
 
     for (const x of [-68.5, 68.5]) {

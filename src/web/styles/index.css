@@ -154,6 +154,6 @@
 }
 
 /* Hide cursor logic */
-body { cursor: none; }
-a, button, input, [role="button"] { cursor: none !important; }
+
+
 
