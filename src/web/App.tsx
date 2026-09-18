@@ -1,3 +1,4 @@
+import { CustomCursor } from './components/ui/CustomCursor';
 import React from "react";
 import { Routes, Route } from "react-router-dom";
 import { HomePage } from "./routes/HomePage";
@@ -9,7 +10,9 @@ import { HomePage } from "./routes/HomePage";
  */
 export default function App() {
   return (
-    <div className="min-h-screen bg-[#fbfbfd] text-[#1d1d1f]">
+    <div className="min-h-screen bg-canvas text-ink">
+      <div className="vh-grain"></div>
+      <CustomCursor />
       <Routes>
         <Route path="*" element={<HomePage />} />
       </Routes>

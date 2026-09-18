@@ -198,7 +198,6 @@ export const DirectoryTable: React.FC<DirectoryTableProps> = ({
               </div>
             ))}
           </div>
-        </div>
         ) : visible.length === 0 ? (
           <div className="px-6 py-16 text-center">
             <p className="text-body text-ink-medium">Nothing matches that search.</p>
