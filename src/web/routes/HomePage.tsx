@@ -280,7 +280,7 @@ export const HomePage: React.FC = () => {
         onTogglePause={() => setTickerPaused((v) => !v)}
       />
 
-      <main id="main-content">
+      <main id="main-content" className="vh-boot">
         {/* Hero Copy */}
         <section className="relative mx-auto max-w-5xl px-6 pb-2 pt-14 text-center">
           <div aria-hidden="true" className="pointer-events-none absolute left-1/2 -top-20 h-96 w-96 -translate-x-1/2 rounded-full bg-accent opacity-20 blur-[120px]" />

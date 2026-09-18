@@ -74,6 +74,15 @@ export const VitaConsoleScene: React.FC<VitaConsoleSceneProps> = ({
     renderer.toneMappingExposure = 1.08;
     el.appendChild(renderer.domElement);
 
+    const handleMouseMove = (e) => {
+      const rect = el.getBoundingClientRect();
+      const mx = ((e.clientX - rect.left) / rect.width) * 2 - 1;
+      const my = -((e.clientY - rect.top) / rect.height) * 2 + 1;
+      targetRotY = mx * 0.15;
+      targetRotX = -my * 0.15;
+    };
+    window.addEventListener("mousemove", handleMouseMove);
+
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(30, 1, 1, 2000);
     const pmrem = new THREE.PMREMGenerator(renderer);
@@ -365,6 +374,7 @@ const recessMat = new THREE.MeshStandardMaterial({color:'#14161a',roughness:0.52
     scene.add(topRimLight);
 
     let px = 0, py = 0, visible = true, raf = 0, previous = '';
+    let targetRotX = 0, targetRotY = 0;
     const reduced = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
 
     const move = (e: PointerEvent) => {
@@ -402,6 +412,11 @@ const recessMat = new THREE.MeshStandardMaterial({color:'#14161a',roughness:0.52
 
     function tick() {
       raf = requestAnimationFrame(tick);
+      scene.rotation.y += (targetRotY - scene.rotation.y) * 0.1;
+      scene.rotation.x += (targetRotX - scene.rotation.x) * 0.1;
+      // Dynamic light movement based on parallax
+      light.position.x = -80 + (targetRotY * 100);
+      rimLight.position.x = (targetRotY * 150);
       if (!visible || document.hidden) return;
       const signature = JSON.stringify(selected.current);
       if (signature !== previous) {
@@ -419,6 +434,7 @@ const recessMat = new THREE.MeshStandardMaterial({color:'#14161a',roughness:0.52
     tick();
 
     return () => {
+      window.removeEventListener("mousemove", handleMouseMove);
       cancelAnimationFrame(raf);
       ro.disconnect();
       io?.disconnect();
