@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { ProjectMark } from "../projects/ProjectMark";
 import { ProjectPanel } from "./ProjectPanel";
 import {
@@ -76,6 +76,26 @@ export const DirectoryTable: React.FC<DirectoryTableProps> = ({
   copiedSlug,
   directoryRef
 }) => {
+  const stageCounts = useMemo(() => {
+    const counts: Record<string, number> = { all: projects.length, wip: 0, playable: 0, booting: 0 };
+    for (const p of projects) {
+      const st = String(p.current_stage);
+      if (["in_game", "booting", "early_wip", "research"].includes(st)) counts.wip++;
+      if (["playable", "released", "completable"].includes(st)) counts.playable++;
+      if (["booting", "early_wip", "research"].includes(st)) counts.booting++;
+    }
+    return counts;
+  }, [projects]);
+
+  const categoryCounts = useMemo(() => {
+    const counts: Record<string, number> = { all: projects.length, wrapper: 0, decomp: 0, classic: 0 };
+    for (const p of projects) {
+      const cat = derivePlatformCategory(p);
+      if (cat && cat in counts) counts[cat]++;
+    }
+    return counts;
+  }, [projects]);
+
   return (
     <section
       id="directory"
@@ -125,7 +145,7 @@ export const DirectoryTable: React.FC<DirectoryTableProps> = ({
         <div className="flex flex-wrap items-center justify-between gap-4">
           <div className="flex flex-wrap gap-1.5">
             {STAGE_FILTERS.map((filter) => (
-              <div key={filter.key} className="relative group"><button type="button" aria-pressed={activeFilter === filter.key} onClick={() => onFilterChange(filter.key)} className={"relative z-10 rounded-full px-4 py-1.5 text-caption font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink/20 " + (activeFilter === filter.key ? "text-ink text-shadow-glow" : "text-ink-muted hover:text-ink")}>{filter.label}</button>{activeFilter === filter.key && (<div className="filter-active-bg transition-all duration-300" style={{boxShadow: "0 0 15px rgba(0, 210, 255, 0.2)"}}></div>)}</div>
+              <div key={filter.key} className="relative group"><button type="button" aria-pressed={activeFilter === filter.key} onClick={() => onFilterChange(filter.key)} className={"relative z-10 inline-flex items-center gap-1.5 rounded-full px-4 py-1.5 text-caption font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink/20 " + (activeFilter === filter.key ? "text-ink text-shadow-glow" : "text-ink-muted hover:text-ink")}><span>{filter.label}</span><span className="font-mono text-micro opacity-60">({stageCounts[filter.key] ?? 0})</span></button>{activeFilter === filter.key && (<div className="filter-active-bg transition-all duration-300" style={{boxShadow: "0 0 15px rgba(0, 210, 255, 0.2)"}}></div>)}</div>
             ))}
           </div>
 
@@ -165,7 +185,7 @@ export const DirectoryTable: React.FC<DirectoryTableProps> = ({
                     : "bg-transparent text-ink-muted hover:text-ink hover:bg-sunken")
                 }
               >
-                {cat.label}
+                {cat.label} ({categoryCounts[cat.key] ?? 0})
               </button>
             );
           })}
@@ -285,9 +305,21 @@ export const DirectoryTable: React.FC<DirectoryTableProps> = ({
                     </div>
 
                     <div className="pl-4 md:col-span-4 md:pl-0">
-                      <p className="line-clamp-2 text-body text-ink-medium md:line-clamp-1">
-                        {project.performance_notes || project.playability_notes || "Tested on native hardware."}
+                      <p className="line-clamp-1 text-body text-ink-medium">
+                        {project.performance_notes || project.playability_notes || project.summary || "Tested on native hardware."}
                       </p>
+                      {Array.isArray(project.technologies) && project.technologies.length > 0 && (
+                        <div className="mt-1.5 flex flex-wrap items-center gap-1">
+                          {project.technologies.slice(0, 3).map((tech: string) => (
+                            <span
+                              key={tech}
+                              className="rounded border border-hairline bg-surface px-1.5 py-0.5 font-mono text-micro text-ink-muted"
+                            >
+                              {tech}
+                            </span>
+                          ))}
+                        </div>
+                      )}
                     </div>
 
                     <div className="flex items-center gap-1 pl-4 md:col-span-1 md:justify-end md:pl-0">

@@ -3,7 +3,7 @@ import { type SelectedProjectView } from "../3d/VitaConsoleScene";
 import { LiveAreaWaves } from "../visual/LiveAreaWaves";
 import { ProjectMark } from "../projects/ProjectMark";
 import { splitTitle, prettyStage, SPECS } from "./types";
-import { Check, Link2, ExternalLink } from "lucide-react";
+import { Check, Link2, ExternalLink, ChevronLeft, ChevronRight } from "lucide-react";
 
 const VitaConsoleScene = lazy(() =>
   import("../3d/VitaConsoleScene").then((m) => ({ default: m.VitaConsoleScene }))
@@ -39,6 +39,18 @@ export const ConsoleStage: React.FC<ConsoleStageProps> = ({
   const preview = selectedProject
     ? splitTitle(selectedProject.game_title || selectedProject.display_name)
     : null;
+
+  const currentIndex = projects.findIndex((p) => p.id === selectedId);
+  const handlePrev = () => {
+    if (projects.length === 0) return;
+    const prevIdx = (currentIndex - 1 + projects.length) % projects.length;
+    onSelectProject(projects[prevIdx]);
+  };
+  const handleNext = () => {
+    if (projects.length === 0) return;
+    const nextIdx = (currentIndex + 1) % projects.length;
+    onSelectProject(projects[nextIdx]);
+  };
 
   return (
     <section aria-labelledby="console-heading" className="mx-auto max-w-3xl px-4 pt-0 sm:px-6">
@@ -90,6 +102,26 @@ export const ConsoleStage: React.FC<ConsoleStageProps> = ({
                 </p>
               </div>
               <div className="flex shrink-0 items-center gap-2">
+                <div className="flex items-center gap-1 border-r border-hairline pr-2 mr-1">
+                  <button
+                    type="button"
+                    onClick={handlePrev}
+                    aria-label="Previous project"
+                    title="Previous project"
+                    className="rounded-lg border border-hairline bg-surface p-2 text-ink-muted transition-colors hover:border-hairline-strong hover:text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink/20"
+                  >
+                    <ChevronLeft className="h-3.5 w-3.5" />
+                  </button>
+                  <button
+                    type="button"
+                    onClick={handleNext}
+                    aria-label="Next project"
+                    title="Next project"
+                    className="rounded-lg border border-hairline bg-surface p-2 text-ink-muted transition-colors hover:border-hairline-strong hover:text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink/20"
+                  >
+                    <ChevronRight className="h-3.5 w-3.5" />
+                  </button>
+                </div>
                 <button
                   type="button"
                   onClick={() => onCopyLink(selectedProject)}
