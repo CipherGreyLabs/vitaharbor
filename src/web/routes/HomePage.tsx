@@ -299,8 +299,8 @@ export const HomePage: React.FC = () => {
             VitaHarbor
           </a>
           <nav aria-label="Sections" className="flex items-center gap-4 text-body text-ink-medium sm:gap-5">
-            <a href="#directory" className="rounded-md transition-colors hover:text-ink">Directory</a>
-            <a href="#methodology" className="rounded-md transition-colors hover:text-ink">Methodology</a>
+            <a href="#directory" className="inline-flex min-h-[44px] items-center rounded-md px-1 transition-colors hover:text-ink">Directory</a>
+            <a href="#methodology" className="inline-flex min-h-[44px] items-center rounded-md px-1 transition-colors hover:text-ink">Methodology</a>
             <div className="hidden items-center gap-2 rounded-full border border-hairline bg-surface px-3 py-1 font-mono text-micro text-ink-muted sm:inline-flex">
               <span className="inline-flex items-center gap-1 text-stage-done font-medium">
                 <span className="h-1.5 w-1.5 rounded-full bg-stage-done" />
@@ -456,13 +456,13 @@ export const HomePage: React.FC = () => {
               <h2 className="text-micro font-semibold uppercase text-ink-muted">Archive</h2>
               <ul className="mt-3 space-y-2 text-body">
                 <li>
-                  <a href="#directory" className="text-ink-medium transition-colors hover:text-accent">Directory</a>
+                  <a href="#directory" className="inline-block py-1.5 text-ink-medium transition-colors hover:text-accent">Directory</a>
                 </li>
                 <li>
-                  <a href="#methodology" className="text-ink-medium transition-colors hover:text-accent">Methodology</a>
+                  <a href="#methodology" className="inline-block py-1.5 text-ink-medium transition-colors hover:text-accent">Methodology</a>
                 </li>
                 <li>
-                  <a href="/data/discovered.json" target="_blank" rel="noopener noreferrer" className="text-ink-medium transition-colors hover:text-accent">
+                  <a href="/data/discovered.json" target="_blank" rel="noopener noreferrer" className="inline-block py-1.5 text-ink-medium transition-colors hover:text-accent">
                     Discovery log
                   </a>
                 </li>
@@ -472,12 +472,12 @@ export const HomePage: React.FC = () => {
               <h2 className="text-micro font-semibold uppercase text-ink-muted">Feeds</h2>
               <ul className="mt-3 space-y-2 text-body">
                 <li>
-                  <a href="/api/feed.json" target="_blank" rel="noopener noreferrer" className="text-ink-medium transition-colors hover:text-accent">
+                  <a href="/api/feed.json" target="_blank" rel="noopener noreferrer" className="inline-block py-1.5 text-ink-medium transition-colors hover:text-accent">
                     JSON Feed 1.1
                   </a>
                 </li>
                 <li>
-                  <a href="/api/rss.xml" target="_blank" rel="noopener noreferrer" className="text-ink-medium transition-colors hover:text-accent">
+                  <a href="/api/rss.xml" target="_blank" rel="noopener noreferrer" className="inline-block py-1.5 text-ink-medium transition-colors hover:text-accent">
                     RSS 2.0
                   </a>
                 </li>

@@ -108,7 +108,7 @@ export const ConsoleStage: React.FC<ConsoleStageProps> = ({
                     onClick={handlePrev}
                     aria-label="Previous project"
                     title="Previous project"
-                    className="rounded-lg border border-hairline bg-surface p-2 text-ink-muted transition-colors hover:border-hairline-strong hover:text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink/20"
+                    className="inline-flex h-11 w-11 items-center justify-center rounded-lg border border-hairline bg-surface text-ink-muted transition-colors hover:border-hairline-strong hover:text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink/20 sm:h-9 sm:w-9"
                   >
                     <ChevronLeft className="h-3.5 w-3.5" />
                   </button>
@@ -117,7 +117,7 @@ export const ConsoleStage: React.FC<ConsoleStageProps> = ({
                     onClick={handleNext}
                     aria-label="Next project"
                     title="Next project"
-                    className="rounded-lg border border-hairline bg-surface p-2 text-ink-muted transition-colors hover:border-hairline-strong hover:text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink/20"
+                    className="inline-flex h-11 w-11 items-center justify-center rounded-lg border border-hairline bg-surface text-ink-muted transition-colors hover:border-hairline-strong hover:text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink/20 sm:h-9 sm:w-9"
                   >
                     <ChevronRight className="h-3.5 w-3.5" />
                   </button>
@@ -182,7 +182,10 @@ export const ConsoleStage: React.FC<ConsoleStageProps> = ({
           </div>
 
           <p className="mt-4 text-center text-micro uppercase text-ink-muted">
-            Drag to rotate · Press <span className="font-mono">/</span> to search the directory
+            <span className="hidden sm:inline">
+              Drag to rotate · Press <span className="font-mono">/</span> to search the directory
+            </span>
+            <span className="sm:hidden">Swipe to rotate · use the arrows to switch ports</span>
           </p>
         </div>
       </div>

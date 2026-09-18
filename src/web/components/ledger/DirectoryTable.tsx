@@ -132,7 +132,7 @@ export const DirectoryTable: React.FC<DirectoryTableProps> = ({
               type="button"
               onClick={() => onSearchChange("")}
               aria-label="Clear search"
-              className="absolute right-2.5 top-1/2 -translate-y-1/2 rounded-md p-1 text-ink-muted transition-colors hover:bg-sunken hover:text-ink"
+              className="absolute right-1.5 top-1/2 inline-flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-md text-ink-muted transition-colors hover:bg-sunken hover:text-ink sm:h-8 sm:w-8"
             >
               <X className="h-3.5 w-3.5" />
             </button>
@@ -145,7 +145,7 @@ export const DirectoryTable: React.FC<DirectoryTableProps> = ({
         <div className="flex flex-wrap items-center justify-between gap-4">
           <div className="flex flex-wrap gap-1.5">
             {STAGE_FILTERS.map((filter) => (
-              <div key={filter.key} className="relative group"><button type="button" aria-pressed={activeFilter === filter.key} onClick={() => onFilterChange(filter.key)} className={"relative z-10 inline-flex items-center gap-1.5 rounded-full px-4 py-1.5 text-caption font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink/20 " + (activeFilter === filter.key ? "text-ink text-shadow-glow" : "text-ink-muted hover:text-ink")}><span>{filter.label}</span><span className="font-mono text-micro opacity-60">({stageCounts[filter.key] ?? 0})</span></button>{activeFilter === filter.key && (<div className="filter-active-bg transition-all duration-300" style={{boxShadow: "0 0 15px rgba(0, 210, 255, 0.2)"}}></div>)}</div>
+              <div key={filter.key} className="relative group"><button type="button" aria-pressed={activeFilter === filter.key} onClick={() => onFilterChange(filter.key)} className={"relative z-10 inline-flex items-center gap-1.5 rounded-full px-4 py-2.5 text-caption font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink/20 sm:py-1.5 " + (activeFilter === filter.key ? "text-ink" : "text-ink-muted hover:text-ink")}><span>{filter.label}</span><span className="font-mono text-micro opacity-60">({stageCounts[filter.key] ?? 0})</span></button>{activeFilter === filter.key && (<div className="filter-active-bg transition-all duration-300"></div>)}</div>
             ))}
           </div>
 
@@ -154,7 +154,7 @@ export const DirectoryTable: React.FC<DirectoryTableProps> = ({
             <select
               value={activeSort}
               onChange={(event) => onSortChange(event.target.value)}
-              className="rounded-lg border border-hairline-strong/30 vh-glass px-2.5 py-1.5 text-caption font-medium text-ink-medium outline-none transition-shadow focus:ring-4 focus:ring-ink/5 cursor-pointer"
+              className="cursor-pointer rounded-lg border border-hairline bg-surface px-2.5 py-2.5 text-caption font-medium text-ink-medium outline-none transition-shadow focus:ring-4 focus:ring-ink/5 sm:py-1.5"
             >
               {SORTS.map((sort) => (
                 <option key={sort.key} value={sort.key}>
@@ -179,9 +179,9 @@ export const DirectoryTable: React.FC<DirectoryTableProps> = ({
                 type="button"
                 onClick={() => onCategoryChange(cat.key)}
                 className={
-                  "px-3 py-1 rounded-lg text-micro font-mono whitespace-nowrap transition-all " +
+                  "px-3 py-2 rounded-lg text-micro font-mono whitespace-nowrap transition-all sm:py-1 " +
                   (active
-                    ? "vh-glass border border-hairline-strong/30-strong text-ink font-semibold shadow-lift"
+                    ? "border border-hairline-strong/60 bg-surface text-ink font-semibold"
                     : "bg-transparent text-ink-muted hover:text-ink hover:bg-sunken")
                 }
               >
@@ -310,10 +310,13 @@ export const DirectoryTable: React.FC<DirectoryTableProps> = ({
                       </p>
                       {Array.isArray(project.technologies) && project.technologies.length > 0 && (
                         <div className="mt-1.5 flex flex-wrap items-center gap-1">
-                          {project.technologies.slice(0, 3).map((tech: string) => (
+                          {project.technologies.slice(0, 3).map((tech: string, techIndex: number) => (
                             <span
                               key={tech}
-                              className="rounded border border-hairline bg-surface px-1.5 py-0.5 font-mono text-micro text-ink-muted"
+                              className={
+                                "rounded border border-hairline bg-surface px-1.5 py-0.5 font-mono text-micro text-ink-muted" +
+                                (techIndex >= 2 ? " hidden sm:inline" : "")
+                              }
                             >
                               {tech}
                             </span>
@@ -331,7 +334,7 @@ export const DirectoryTable: React.FC<DirectoryTableProps> = ({
                         }}
                         title="Copy a direct link to this entry"
                         aria-label={"Copy a direct link to " + title.name}
-                        className="rounded-md p-1.5 text-ink-muted transition-colors hover:bg-sunken hover:text-ink"
+                        className="inline-flex h-10 w-10 items-center justify-center rounded-md text-ink-muted transition-colors hover:bg-sunken hover:text-ink sm:h-8 sm:w-8"
                       >
                         {copiedSlug === project.slug ? (
                           <Check className="h-4 w-4 text-stage-done" />
@@ -347,7 +350,7 @@ export const DirectoryTable: React.FC<DirectoryTableProps> = ({
                           onClick={(event) => event.stopPropagation()}
                           title="Open the source discussion"
                           aria-label={"Open the source discussion for " + title.name}
-                          className="rounded-md p-1.5 text-ink-muted transition-colors hover:bg-sunken hover:text-ink"
+                          className="inline-flex h-10 w-10 items-center justify-center rounded-md text-ink-muted transition-colors hover:bg-sunken hover:text-ink sm:h-8 sm:w-8"
                         >
                           <ExternalLink className="h-4 w-4" />
                         </a>
