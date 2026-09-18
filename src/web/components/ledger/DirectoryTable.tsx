@@ -173,8 +173,8 @@ export const DirectoryTable: React.FC<DirectoryTableProps> = ({
         </div>
       </div>
 
-      <div className="mt-6 overflow-hidden rounded-2xl border border-hairline-strong/30 vh-glass shadow-lift">
-        <div className="hidden grid-cols-12 gap-4 border-b border-hairline-strong/30 bg-sunken px-5 py-3 text-micro font-semibold uppercase text-ink-muted md:grid">
+      <div className="mt-7 overflow-hidden rounded-3xl vh-glass">
+        <div className="hidden grid-cols-12 gap-4 border-b border-hairline px-6 py-4 text-micro font-semibold uppercase tracking-[0.14em] text-ink-muted md:grid">
           <div className="col-span-5">Project</div>
           <div className="col-span-2">Stage</div>
           <div className="col-span-4">Hardware notes</div>
@@ -232,7 +232,7 @@ export const DirectoryTable: React.FC<DirectoryTableProps> = ({
                         onToggleEntry(project);
                       }
                     }}
-                    className="group/row relative grid cursor-pointer grid-cols-1 gap-2.5 px-5 py-4 transition-colors hover:bg-sunken/70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ink/20 md:grid-cols-12 md:items-center md:gap-4"
+                    className="group/row relative grid cursor-pointer grid-cols-1 gap-2.5 px-6 py-5 transition-colors hover:bg-sunken/70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ink/20 md:grid-cols-12 md:items-center md:gap-4"
                   >
                     <span
                       aria-hidden="true"

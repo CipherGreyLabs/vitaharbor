@@ -292,13 +292,13 @@ export const HomePage: React.FC = () => {
 
       <main id="main-content" className="vh-boot">
         {/* Hero Copy */}
-        <section className="relative mx-auto max-w-5xl px-6 pb-2 pt-14 text-center">
+        <section className="relative mx-auto max-w-6xl px-6 pb-0 pt-10 text-center">
           <div aria-hidden="true" className="pointer-events-none absolute left-1/2 -top-20 h-96 w-96 -translate-x-1/2 rounded-full bg-accent opacity-20 blur-[120px]" />
           <p className="flex items-center justify-center gap-2 text-micro font-medium uppercase tracking-[0.2em] text-ink-medium">
             <span aria-hidden="true" className="h-1.5 w-1.5 rounded-full bg-accent" />
             Independent hardware archive
           </p>
-          <h1 className="mx-auto mt-5 max-w-3xl text-display font-bold text-transparent bg-clip-text bg-gradient-to-r from-white via-ink-medium to-accent sm:text-displaylg drop-shadow-xl">
+          <h1 className="mx-auto mt-4 max-w-4xl text-display font-bold text-transparent bg-clip-text bg-gradient-to-r from-white via-ink-medium to-accent drop-shadow-xl sm:text-[64px] sm:leading-[1.02] sm:tracking-[-0.04em]">
             PlayStation Vita port archive.
           </h1>
           <p className="mx-auto mt-6 max-w-xl text-lead text-ink-medium">

@@ -41,7 +41,7 @@ export const ConsoleStage: React.FC<ConsoleStageProps> = ({
     : null;
 
   return (
-    <section aria-labelledby="console-heading" className="mx-auto max-w-4xl px-6 pt-8">
+    <section aria-labelledby="console-heading" className="mx-auto max-w-7xl px-4 pt-0 sm:px-6">
       <h2 id="console-heading" className="sr-only">
         Interactive console preview
       </h2>
@@ -52,9 +52,9 @@ export const ConsoleStage: React.FC<ConsoleStageProps> = ({
         <div aria-hidden="true" className="vh-dots pointer-events-none absolute inset-0 opacity-80" />
         
 
-        <div className="relative px-4 pt-4 sm:px-8">
-          <div ref={consoleRef} className="h-[400px] sm:h-[500px]">
-            {false ? (
+        <div className="relative px-2 pt-0 sm:px-6">
+          <div ref={consoleRef} className="h-[360px] sm:h-[620px] lg:h-[720px]">
+            {webgl === false ? (
               <figure className="flex h-full w-full items-center justify-center">
                 <img
                   src="/vita-render.png"
