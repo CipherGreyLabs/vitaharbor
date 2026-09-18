@@ -34,7 +34,7 @@ export const ProjectPanel: React.FC<ProjectPanelProps> = ({
   const repoUrl = project.repo_url || KNOWN_REPOS[project.slug];
 
   return (
-    <div id={"panel-" + project.slug} className="border-t border-hairline bg-sunken/50 px-5 py-6">
+    <div id={"panel-" + project.slug} className="border-t border-hairline-strong/30 bg-sunken/50 px-5 py-6">
       <div className="mb-6 flex items-center gap-4">
         <ProjectMark seed={project.display_name || project.game_title || "vita"} size={56} className="shrink-0 rounded-2xl" />
         <div className="min-w-0">
@@ -58,7 +58,7 @@ export const ProjectPanel: React.FC<ProjectPanelProps> = ({
       </div>
 
       {project.verification === "detected" && (
-        <p className="mb-6 max-w-3xl rounded-lg border border-hairline bg-surface px-4 py-3 text-caption text-ink-medium">
+        <p className="mb-6 max-w-3xl rounded-lg border border-hairline-strong/30 vh-glass px-4 py-3 text-caption text-ink-medium">
           <span className="font-medium text-ink">Unverified entry.</span> Promoted
           automatically from a detected thread. There is no hardware report yet, so
           playability and performance are deliberately left empty.
@@ -87,7 +87,7 @@ export const ProjectPanel: React.FC<ProjectPanelProps> = ({
                 {project.technologies.map((tech: string) => (
                   <span
                     key={tech}
-                    className="rounded-md border border-hairline bg-surface px-2 py-1 font-mono text-micro uppercase text-ink-muted"
+                    className="rounded-md border border-hairline-strong/30 vh-glass px-2 py-1 font-mono text-micro uppercase text-ink-muted"
                   >
                     {tech}
                   </span>
@@ -97,7 +97,7 @@ export const ProjectPanel: React.FC<ProjectPanelProps> = ({
           </div>
 
           {/* Practical Player Setup Guide */}
-          <div className="rounded-xl border border-hairline bg-surface p-4 text-xs font-mono space-y-3 shadow-card">
+          <div className="rounded-xl border border-hairline-strong/30 vh-glass p-4 text-xs font-mono space-y-3 shadow-lift">
             <div className="flex items-center gap-2 text-micro font-semibold uppercase text-ink">
               <Cpu className="h-3.5 w-3.5 text-accent" />
               <span>Hardware & Plugin Setup</span>
@@ -131,12 +131,12 @@ export const ProjectPanel: React.FC<ProjectPanelProps> = ({
               </div>
             </div>
 
-            <p className="text-caption text-ink-muted border-t border-hairline pt-2">
+            <p className="text-caption text-ink-muted border-t border-hairline-strong/30 pt-2">
               {setup.instructions}
             </p>
           </div>
 
-          <dl className="grid grid-cols-1 gap-x-8 gap-y-4 border-t border-hairline pt-4 sm:grid-cols-3">
+          <dl className="grid grid-cols-1 gap-x-8 gap-y-4 border-t border-hairline-strong/30 pt-4 sm:grid-cols-3">
             <div>
               <dt className="text-micro font-medium uppercase text-ink-muted">Credits</dt>
               <dd className="mt-1 text-body text-ink">
@@ -170,7 +170,7 @@ export const ProjectPanel: React.FC<ProjectPanelProps> = ({
           <h3 className="text-micro font-semibold uppercase text-ink-muted">
             Milestones
           </h3>
-          <ol className="mt-3 border-l border-hairline pl-4">
+          <ol className="mt-3 border-l border-hairline-strong/30 pl-4">
             {history.map((step: any) => (
               <li key={step.id ?? step.stage} className="relative pb-4 last:pb-0">
                 <span
@@ -196,7 +196,7 @@ export const ProjectPanel: React.FC<ProjectPanelProps> = ({
         </div>
       </div>
 
-      <div className="mt-7 flex flex-wrap items-center gap-3 border-t border-hairline pt-5">
+      <div className="mt-7 flex flex-wrap items-center gap-3 border-t border-hairline-strong/30 pt-5">
         <button
           type="button"
           onClick={() => onSelectProject(project)}
@@ -207,7 +207,7 @@ export const ProjectPanel: React.FC<ProjectPanelProps> = ({
         <button
           type="button"
           onClick={() => onCopyLink(project)}
-          className="rounded-lg border border-hairline bg-surface px-3.5 py-2 text-caption font-medium text-ink-medium transition-colors hover:border-hairline-strong hover:text-ink"
+          className="rounded-lg border border-hairline-strong/30 vh-glass px-3.5 py-2 text-caption font-medium text-ink-medium transition-colors hover:border-hairline-strong/30-strong hover:text-ink"
         >
           {isCopied ? "Link copied" : "Copy link"}
         </button>
@@ -217,7 +217,7 @@ export const ProjectPanel: React.FC<ProjectPanelProps> = ({
             href={repoUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 rounded-lg border border-hairline bg-surface px-3.5 py-2 text-caption font-medium text-ink transition-colors hover:border-hairline-strong"
+            className="inline-flex items-center gap-1.5 rounded-lg border border-hairline-strong/30 vh-glass px-3.5 py-2 text-caption font-medium text-ink transition-colors hover:border-hairline-strong/30-strong"
           >
             <GitBranch className="h-3.5 w-3.5 text-accent" />
             <span>Source repository</span>

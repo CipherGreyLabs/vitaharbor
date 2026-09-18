@@ -13,50 +13,20 @@
 
 @layer base {
   :root {
-    --vh-canvas-rgb: 232 235 240;
-    --vh-surface-rgb: 255 255 255;
-    --vh-sunken-rgb: 221 226 234;
-    --vh-hairline-rgb: 211 217 226;
-    --vh-hairline-strong-rgb: 186 194 206;
-    --vh-ink-rgb: 29 29 31;
-    --vh-ink-medium-rgb: 71 85 105;
-    --vh-ink-muted-rgb: 75 85 99;
-    --vh-done-rgb: 5 150 105;
-    --vh-progress-rgb: 37 99 235;
-    --vh-caution-rgb: 217 119 6;
-    --vh-idle-rgb: 148 163 184;
-    --vh-deep-rgb: 15 17 21;
-    --vh-accent-rgb: 0 112 209;
-  }
-
-  /*
-   * Dark theme. Because every colour in the interface resolves through these
-   * tokens, flipping them re-skins the whole archive at once. The dark bands
-   * become elevated surfaces rather than darker holes, which keeps the white
-   * text on them legible.
-   */
-  @media (prefers-color-scheme: dark) {
-    :root {
-      --vh-canvas-rgb: 12 14 18;
-      --vh-surface-rgb: 21 24 30;
-      --vh-sunken-rgb: 17 20 25;
-      --vh-hairline-rgb: 42 47 57;
-      --vh-hairline-strong-rgb: 66 74 88;
-      --vh-ink-rgb: 237 240 245;
-      --vh-ink-medium-rgb: 170 180 196;
-      --vh-ink-muted-rgb: 143 153 170;
-      --vh-deep-rgb: 27 32 41;
-      --vh-accent-rgb: 84 164 255;
     }
-  }
 
   html {
     scroll-behavior: smooth;
+    color-scheme: dark;
   }
 
   body {
-    background-color: rgb(var(--vh-canvas-rgb));
-    color: rgb(var(--vh-ink-rgb));
+    background-color: #000000;
+    background-image: 
+      radial-gradient(circle at 15% 50%, rgba(0, 85, 255, 0.08) 0%, transparent 40%),
+      radial-gradient(circle at 85% 30%, rgba(0, 210, 255, 0.05) 0%, transparent 40%);
+    background-attachment: fixed;
+    color: #ffffff;
     font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
@@ -68,7 +38,8 @@
   }
 
   ::selection {
-    background: rgba(37, 99, 235, 0.16);
+    background: rgba(0, 210, 255, 0.3);
+    color: #ffffff;
   }
 }
 
@@ -76,33 +47,6 @@
   .vh-tnum {
     font-variant-numeric: tabular-nums;
   }
-
-  /* Studio set behind the hardware: soft accent wash plus a faint dot grid. */
-  .vh-glow {
-    background: radial-gradient(55% 62% at 50% 30%, rgb(var(--vh-accent-rgb) / 0.18), transparent 72%);
-  }
-
-  .vh-dots {
-    background-image: radial-gradient(rgb(var(--vh-ink-rgb) / 0.10) 1px, transparent 1px);
-    background-size: 22px 22px;
-    background-position: 0 0;
-  }
-
-  .vh-floor {
-    background: linear-gradient(
-      to right,
-      transparent,
-      rgb(var(--vh-ink-rgb) / 0.14) 18%,
-      rgb(var(--vh-ink-rgb) / 0.14) 82%,
-      transparent
-    );
-  }
-
-  /* Soft accent halo behind the hero copy. */
-  .vh-hero-wash {
-    background: radial-gradient(60% 100% at 50% 0%, rgb(var(--vh-accent-rgb) / 0.16), transparent 72%);
-  }
-
 }
 
 @keyframes vh-ticker {
@@ -126,23 +70,9 @@
   animation: vh-veil 1.6s ease-in-out infinite alternate;
 }
 
-/* LiveArea ribbons: offset drifts so the layers never move as one block. */
-@keyframes vh-wave-drift {
-  0% { transform: translate3d(-2.2%, 0.6%, 0); }
-  100% { transform: translate3d(2.2%, -1.2%, 0); }
-}
-
-.vh-wave {
-  animation: vh-wave-drift 24s ease-in-out infinite alternate;
-  will-change: transform;
-}
-
-.vh-wave-slow { animation-duration: 32s; }
-.vh-wave-fast { animation-duration: 18s; }
-
 @keyframes vh-veil {
-  from { opacity: 0.4; }
-  to { opacity: 0.9; }
+  from { opacity: 0.3; }
+  to { opacity: 0.7; }
 }
 
 [data-reveal] {
@@ -171,6 +101,21 @@
   to { opacity: 1; transform: none; }
 }
 
+@keyframes vh-wave-drift {
+  0% { transform: translate3d(-2%, 1%, 0) rotate(-1deg) scale(1); filter: hue-rotate(0deg); }
+  100% { transform: translate3d(2%, -1%, 0) rotate(1deg) scale(1.05); filter: hue-rotate(15deg); }
+}
+
+.vh-wave {
+  animation: vh-wave-drift 20s cubic-bezier(0.4, 0, 0.2, 1) infinite alternate;
+  opacity: 0.8;
+  mix-blend-mode: screen;
+  will-change: transform;
+}
+
+.vh-wave-slow { animation-duration: 32s; }
+.vh-wave-fast { animation-duration: 18s; }
+
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .vh-ticker,
@@ -190,3 +135,11 @@
 
 .no-scrollbar::-webkit-scrollbar { display: none; }
 .no-scrollbar { scrollbar-width: none; }
+
+/* Premium Glassmorphism Utility */
+.vh-glass {
+  background: rgba(10, 14, 23, 0.55);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}

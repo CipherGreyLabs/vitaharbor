@@ -1,69 +1,32 @@
-import fs from "node:fs";
-import path from "node:path";
+import fs from 'fs';
 
-const MAP = {
-  "#040608": "#08090a",
-  "#090c11": "#0f1113",
-  "#090d13": "#0f1113",
-  "#0d131b": "#15181b",
-  "#0f141c": "#1c2024",
-  "#131a24": "#1c2024",
-  "#151b24": "#1c2024",
-  "#0f141b": "#1c2024",
-  "#1a2332": "#242830",
-  "#1b2330": "#242830",
-  "#202a38": "#2c313a",
-  "#29374e": "#343a42",
-  "#1d2d3d": "#2c313a",
-  "#0b0f16": "#15181b",
-  "#68788c": "#7c848d",
-  "#edf5ff": "#f4f6f8",
-  "#f1f5f9": "#f4f6f8",
-  "#94a3b8": "#a3acb5",
-  "#64748b": "#7c848d",
-  "#4d6377": "#767f88",
-  "#3d536a": "#6d757e",
-  "#40566c": "#6d757e",
-  "#cfdae6": "#dfe5ea",
-  "#93a9bd": "#a3acb5",
-  "#4fb3d4": "#3ad2ff",
-  "#4fb5ff": "#7fe3ff",
-  "#00b4d8": "#3ad2ff",
-  "#00f0ff": "#3ad2ff",
-  "#249cf4": "#3ad2ff",
-  "#00d5ff": "#3ad2ff"
-};
+let twConf = fs.readFileSync('tailwind.config.js', 'utf8');
+twConf = twConf
+  .replace("canvas: 'rgb(var(--vh-canvas-rgb) / <alpha-value>)'", "canvas: '#000000'")
+  .replace("surface: 'rgb(var(--vh-surface-rgb) / <alpha-value>)'", "surface: 'rgba(7, 10, 18, 0.65)'")
+  .replace("sunken: 'rgb(var(--vh-sunken-rgb) / <alpha-value>)'", "sunken: '#03050a'")
+  .replace("done: '#10b981'", "done: '#00ff9d'")
+  .replace("progress: '#38bdf8'", "progress: '#00d2ff'")
+  .replace("caution: '#f59e0b'", "caution: '#ff3366'")
+  .replace("idle: '#64748b'", "idle: '#475569'")
+  .replace("deep: '#0c0e14'", "deep: '#030509'")
+  .replace("accent: '#0070d1'", "accent: '#0055ff'")
+  .replace("card: '0 4px 20px -2px rgba(0, 0, 0, 0.5)'", "card: '0 8px 32px 0 rgba(0, 15, 40, 0.4)'")
+  .replace("lift: '0 20px 45px -15px rgba(0, 0, 0, 0.7)'", "lift: '0 20px 50px -10px rgba(0, 85, 255, 0.15), 0 0 0 1px rgba(255,255,255,0.05)'");
+fs.writeFileSync('tailwind.config.js', twConf);
 
-const files = [];
-const walk = (dir) => {
-  for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
-    if (["node_modules", "dist", ".git"].includes(entry.name)) continue;
-    const full = path.join(dir, entry.name);
-    if (entry.isDirectory()) walk(full);
-    else if (/[.](tsx|ts|css|html|js|mjs)$/.test(entry.name)) files.push(full);
-  }
-};
-walk("src");
-files.push("index.html", "tailwind.config.js");
+let indexCss = fs.readFileSync('src/web/styles/index.css', 'utf8');
+indexCss = indexCss
+  .replace(/--vh-[\w-]+-rgb:[^;]+;\r?\n\s*/g, "")
+  .replace("background-color: #08090d;", "background-color: #000000;\n    background-image: \n      radial-gradient(circle at 15% 50%, rgba(0, 85, 255, 0.08) 0%, transparent 40%),\n      radial-gradient(circle at 85% 30%, rgba(0, 210, 255, 0.05) 0%, transparent 40%);\n    background-attachment: fixed;")
+  .replace("background: rgba(0, 112, 209, 0.35);", "background: rgba(0, 210, 255, 0.3);")
+  .replace("0% { transform: translate3d(-2.2%, 0.6%, 0); }", "0% { transform: translate3d(-2%, 1%, 0) rotate(-1deg) scale(1); filter: hue-rotate(0deg); }")
+  .replace("100% { transform: translate3d(2.2%, -1.2%, 0); }", "100% { transform: translate3d(2%, -1%, 0) rotate(1deg) scale(1.05); filter: hue-rotate(15deg); }")
+  .replace("animation: vh-wave-drift 24s ease-in-out infinite alternate;", "animation: vh-wave-drift 20s cubic-bezier(0.4, 0, 0.2, 1) infinite alternate;\n  opacity: 0.8;\n  mix-blend-mode: screen;");
 
-let total = 0;
-const report = [];
-for (const file of files) {
-  let text = fs.readFileSync(file, "utf8");
-  const before = text;
-  let count = 0;
-  for (const [from, to] of Object.entries(MAP)) {
-    const re = new RegExp(from, "gi");
-    text = text.replace(re, () => {
-      count += 1;
-      return to;
-    });
-  }
-  if (text !== before) {
-    fs.writeFileSync(file, text);
-    report.push(file + " : " + count);
-    total += count;
-  }
+if (!indexCss.includes(".vh-glass")) {
+  indexCss += "\n/* Premium Glassmorphism Utility */\n.vh-glass {\n  background: rgba(10, 14, 23, 0.55);\n  backdrop-filter: blur(24px) saturate(180%);\n  -webkit-backdrop-filter: blur(24px) saturate(180%);\n  border: 1px solid rgba(255, 255, 255, 0.06);\n}\n";
 }
-console.log("replaced " + total + " occurrences across " + report.length + " files");
-console.log(report.join("\n"));
+fs.writeFileSync('src/web/styles/index.css', indexCss);
+console.log("Tailwind & CSS patched");
+

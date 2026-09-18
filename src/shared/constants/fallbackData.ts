@@ -49,23 +49,26 @@ export const FALLBACK_PROJECTS: any[] = [
     id: 2,
     game_id: 2,
     slug: "smash-melee-vita",
-    reddit_url: "https://www.reddit.com/r/vitahacks/comments/1whm4hp/smash_bros_melee_vita/",
+    reddit_url: "https://www.reddit.com/r/vitahacks/comments/1wivnp0/super_smash_melee/",
     display_name: "Super Smash Bros. Melee Vita",
-    current_stage: "booting",
+    current_stage: "in_game",
     lifecycle: "active",
-    summary: "Early native recreation and decompilation rebuild of Melee targeting the ARM Cortex-A9.",
-    playability_notes: "Boots to menu and fighter selection screens. Character geometry and animations render with minor polygon distortion.",
-    performance_notes: "Experimental build. Frequent memory faults on complex stages like Fountain of Dreams.",
+    summary: "Two independent experimental Melee ports are active: rob1n994 is moving Aurora to native SceGXM/vitaGL, while zm2283145 has an early decompilation-based build running in gameplay.",
+    playability_notes: "The zm2283145 build reaches gameplay with models and animations loaded from the original game data. The rob1n994 build is demonstrated on Vita hardware and has a public source repository.",
+    performance_notes: "Both builds remain work in progress. Rendering, textures, framebuffer effects, particles, stability, and substantial performance optimization are still required.",
     first_seen_at: new Date('2026-07-04T15:34:00.000Z'),
-    last_activity_at: new Date('2026-09-15T15:34:00.000Z'),
+    last_activity_at: new Date('2026-09-17T14:31:58.000Z'),
     released_at: null,
     is_featured: true,
     is_archived: false,
     game_title: "Super Smash Bros. Melee",
     original_platform: "GameCube / Decomp",
     original_release_year: 2001,
-    technologies: ["Decompilation", "Native C++"],
-    developers: [{ id: 2, role: "lead", display_name: "Community Decomp Team", slug: "community-decomp" }]
+    technologies: ["Aurora", "SceGXM", "vitaGL", "Decompilation", "Native C++"],
+    developers: [
+      { id: 13, role: "lead", display_name: "rob1n994", slug: "rob1n994" },
+      { id: 14, role: "lead", display_name: "zm2283145", slug: "zm2283145" }
+    ]
   },
   {
     id: 3,
@@ -456,7 +459,9 @@ export const FALLBACK_DEVELOPERS: any[] = [
   { id: 9, slug: "northfear", display_name: "Northfear", description: "Veteran homebrew developer behind native ports of Ship of Harkinian and NXEngine-evo.", is_known_developer: true, identities: [{ provider: "reddit", username: "Northfear" }], projects: [] },
   { id: 10, slug: "alexbatalov", display_name: "alexbatalov", description: "Developer of Fallout 1 & 2 Community Edition engines.", is_known_developer: true, identities: [{ provider: "reddit", username: "alexbatalov" }], projects: [] },
   { id: 11, slug: "fgsfds", display_name: "fgsfds", description: "Homebrew developer responsible for Render96 HD SM64 and numerous engine ports.", is_known_developer: true, identities: [{ provider: "reddit", username: "fgsfds" }], projects: [] },
-  { id: 12, slug: "mylegguy", display_name: "MyLegGuy", description: "Programmer who created the C-rewrite of Celeste Classic for handheld systems.", is_known_developer: true, identities: [{ provider: "reddit", username: "MyLegGuy" }], projects: [] }
+  { id: 12, slug: "mylegguy", display_name: "MyLegGuy", description: "Programmer who created the C-rewrite of Celeste Classic for handheld systems.", is_known_developer: true, identities: [{ provider: "reddit", username: "MyLegGuy" }], projects: [] },
+  { id: 13, slug: "rob1n994", display_name: "rob1n994", description: "Developer porting the Aurora-based Melee project to native SceGXM and vitaGL on PS Vita.", is_known_developer: true, identities: [{ provider: "reddit", username: "rob1n994" }, { provider: "github", username: "robin994" }], projects: [] },
+  { id: 14, slug: "zm2283145", display_name: "zm2283145", description: "Developer of an independent experimental Melee Vita port with in-game rendering.", is_known_developer: true, identities: [{ provider: "reddit", username: "zm2283145" }], projects: [] }
 ];
 
 export const FALLBACK_UPDATES: any[] = [
@@ -487,6 +492,20 @@ export const FALLBACK_UPDATES: any[] = [
     event_at: new Date('2026-09-15T15:34:00.000Z'),
     verification_level: "community_report",
     sources: [{ source_item_id: "src_melee", relationship: "primary", canonical_url: "https://www.reddit.com/r/vitahacks/comments/1whm4hp/smash_bros_melee_vita/" }]
+  },
+  {
+    id: "upd_melee_robin994",
+    port_project_id: 2,
+    project_slug: "smash-melee-vita",
+    project_display_name: "Super Smash Bros. Melee Vita",
+    developer_display_name: "rob1n994",
+    developer_slug: "rob1n994",
+    event_type: "technical_progress",
+    title: "Super Smash Melee — second Vita port moves Aurora to SceGXM and vitaGL",
+    summary: "rob1n994 publicly demonstrated an independent Melee port and opened its source while native SceGXM/vitaGL performance and fidelity work continues.",
+    event_at: new Date('2026-09-17T14:31:58.000Z'),
+    verification_level: "developer_direct",
+    sources: [{ source_item_id: "src_melee_robin994", relationship: "primary", canonical_url: "https://www.reddit.com/r/vitahacks/comments/1wivnp0/super_smash_melee/" }]
   },
   {
     id: "upd_zelda_tp",

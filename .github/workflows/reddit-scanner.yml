@@ -3,8 +3,6 @@ name: Reddit discovery scan
 # Records newly surfaced port threads as unverified candidates. Promotion into the
 # curated ledger stays a human decision, so this job never rewrites ledger content.
 on:
-  schedule:
-    - cron: "0 8,20 * * *"
   workflow_dispatch:
 
 permissions:
@@ -48,4 +46,3 @@ jobs:
             git commit -m "Scan: record newly surfaced port threads"
             git push
           fi
-

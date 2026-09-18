@@ -1,7 +1,7 @@
 # Automation
 
-The archive stays current in two steps that run without you: a scheduled scan that
-records newly surfaced threads, and a deployment that publishes them.
+Scheduled scanning is disabled. Discovery only runs manually on explicit invocation
+to prevent unwanted token or background API resource consumption.
 
 Right now only the first step exists locally. There is **no git remote** on this
 checkout and the Vercel project is **not connected to a repository** — every
@@ -47,4 +47,3 @@ metadata instead of `cli-upload` as the source.
   timestamps so the archive cannot silently look fresher than it is.
 - Every entry must carry a Reddit source URL, and every update must point at a
   project that exists.
-

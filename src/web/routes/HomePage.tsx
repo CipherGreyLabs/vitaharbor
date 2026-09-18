@@ -250,8 +250,8 @@ export const HomePage: React.FC = () => {
       {/* Header Bar */}
       <header
         className={
-          "sticky top-0 z-50 border-b bg-surface/85 backdrop-blur-xl transition-colors " +
-          (scrolled ? "border-hairline" : "border-transparent")
+          "sticky top-0 z-50 border-b vh-glass/85 backdrop-blur-xl transition-colors " +
+          (scrolled ? "border-hairline-strong/30" : "border-transparent")
         }
       >
         <div className="mx-auto flex h-14 max-w-5xl items-center justify-between px-6">
@@ -283,12 +283,12 @@ export const HomePage: React.FC = () => {
       <main id="main-content">
         {/* Hero Copy */}
         <section className="relative mx-auto max-w-5xl px-6 pb-2 pt-14 text-center">
-          <div aria-hidden="true" className="vh-hero-wash pointer-events-none absolute inset-x-0 -top-10 h-72" />
+          <div aria-hidden="true" className="pointer-events-none absolute left-1/2 -top-20 h-96 w-96 -translate-x-1/2 rounded-full bg-accent opacity-20 blur-[120px]" />
           <p className="flex items-center justify-center gap-2 text-micro font-medium uppercase tracking-[0.2em] text-ink-medium">
             <span aria-hidden="true" className="h-1.5 w-1.5 rounded-full bg-accent" />
             Independent hardware archive
           </p>
-          <h1 className="mx-auto mt-5 max-w-3xl text-display font-semibold text-ink sm:text-displaylg">
+          <h1 className="mx-auto mt-5 max-w-3xl text-display font-bold text-transparent bg-clip-text bg-gradient-to-r from-white via-ink-medium to-accent sm:text-displaylg drop-shadow-xl">
             PlayStation Vita port archive.
           </h1>
           <p className="mx-auto mt-6 max-w-xl text-lead text-ink-medium">
@@ -356,7 +356,7 @@ export const HomePage: React.FC = () => {
         {/* Unverified Detected Threads Band */}
         {discovered.length > 0 && (
           <section aria-labelledby="detected-heading" className="mx-auto mt-24 max-w-5xl px-6">
-            <div className="rounded-2xl border border-hairline bg-surface p-6 shadow-card">
+            <div className="rounded-2xl border border-hairline-strong/30 vh-glass p-6 shadow-lift">
               <div className="flex flex-wrap items-baseline justify-between gap-3">
                 <div className="max-w-2xl">
                   <h2 id="detected-heading" className="text-subtitle font-semibold text-ink">
@@ -372,7 +372,7 @@ export const HomePage: React.FC = () => {
                 )}
               </div>
 
-              <ul className="mt-5 divide-y divide-hairline border-t border-hairline">
+              <ul className="mt-5 divide-y divide-hairline border-t border-hairline-strong/30">
                 {discovered.map((item) => (
                   <li key={item.id} className="flex flex-wrap items-center justify-between gap-3 py-3.5">
                     <div className="min-w-0">
@@ -402,7 +402,7 @@ export const HomePage: React.FC = () => {
       </main>
 
       {/* Modern 3-Column Footer */}
-      <footer className="bg-surface">
+      <footer className="vh-glass">
         <div className="mx-auto max-w-5xl px-6 py-14">
           <div className="grid gap-10 sm:grid-cols-3">
             <div>
@@ -446,7 +446,7 @@ export const HomePage: React.FC = () => {
               </ul>
             </div>
           </div>
-          <p className="mt-12 border-t border-hairline pt-6 text-caption text-ink-muted">
+          <p className="mt-12 border-t border-hairline-strong/30 pt-6 text-caption text-ink-muted">
             Nothing here bypasses licensing or distributes copyrighted game data. Every entry links to its
             original public thread.
           </p>

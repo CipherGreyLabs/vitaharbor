@@ -110,9 +110,9 @@ export const VitaConsoleScene: React.FC<VitaConsoleSceneProps> = ({
     );
     contactShadow.position.set(0, -50, 0);
     scene.add(contactShadow);
-    const shell = new THREE.MeshPhysicalMaterial({ color: '#131418', roughness: 0.28, metalness: 0.14, clearcoat: 0.85 });
-    const face = new THREE.MeshPhysicalMaterial({ color: '#08090d', roughness: 0.16, metalness: 0.06, clearcoat: 1 });
-    const silver = new THREE.MeshStandardMaterial({ color: '#9aa0aa', roughness: 0.22, metalness: 0.92 });
+    const shell = new THREE.MeshPhysicalMaterial({ color: '#101217', roughness: 0.15, metalness: 0.35, clearcoat: 1.0, clearcoatRoughness: 0.1 });
+    const face = new THREE.MeshPhysicalMaterial({ color: '#030408', roughness: 0.05, metalness: 0.2, clearcoat: 1, clearcoatRoughness: 0.05, transmission: 0.2, transparent: true });
+    const silver = new THREE.MeshStandardMaterial({ color: '#c0c8d4', roughness: 0.12, metalness: 1.0 });
     const button = new THREE.MeshStandardMaterial({ color: '#23262a', roughness: 0.35, metalness: 0.12 });
     const rubber = new THREE.MeshStandardMaterial({ color: '#1d1e22', roughness: 0.88 });
     const black = new THREE.MeshBasicMaterial({ color: '#060708' });
@@ -215,7 +215,7 @@ export const VitaConsoleScene: React.FC<VitaConsoleSceneProps> = ({
 
       // Cinematic key art: deep base, one soft light source, faint screen texture.
       const base = g.createLinearGradient(0, 0, 960, 544);
-      base.addColorStop(0, '#12141d');
+      base.addColorStop(0, '#00081a');
       base.addColorStop(0.55, '#0a0c14');
       base.addColorStop(1, '#05060a');
       g.fillStyle = base;
@@ -350,17 +350,17 @@ const recessMat = new THREE.MeshStandardMaterial({color:'#14161a',roughness:0.52
     }
 
     // STUDIO LIGHTING SETUP WITH EDGE RIM ILLUMINATION
-    scene.add(new THREE.HemisphereLight('#ffffff', '#64748b', 0.85));
+    scene.add(new THREE.HemisphereLight('#ffffff', '#7c848d', 0.85));
     const light = new THREE.DirectionalLight('#ffffff', 1.8);
     light.position.set(-80, 160, 260);
     scene.add(light);
     const fill = new THREE.DirectionalLight('#c8e1ff', 1.3);
     fill.position.set(180, 0, 100);
     scene.add(fill);
-    const rimLight = new THREE.DirectionalLight('#38bdf8', 1.15);
+    const rimLight = new THREE.DirectionalLight('#00a2ff', 2.0);
     rimLight.position.set(0, -140, -180);
     scene.add(rimLight);
-    const topRimLight = new THREE.DirectionalLight('#818cf8', 0.9);
+    const topRimLight = new THREE.DirectionalLight('#4400ff', 1.4);
     topRimLight.position.set(0, 180, -120);
     scene.add(topRimLight);
 
@@ -383,8 +383,8 @@ const recessMat = new THREE.MeshStandardMaterial({color:'#14161a',roughness:0.52
       const tan = Math.tan(THREE.MathUtils.degToRad(15));
       const wide = camera.aspect > 1.45;
       const isSplit = align === "split";
-      const widthFrac = isSplit ? (wide ? 0.502 : 0.92) : (wide ? 0.70 : 0.88);
-      const distance = Math.max(182 / (2 * tan * camera.aspect * widthFrac), 116 / (2 * tan * 0.9));
+      const widthFrac = isSplit ? (wide ? 0.502 : 0.92) : (wide ? 0.90 : 0.96);
+      const distance = Math.max(182 / (2 * tan * camera.aspect * widthFrac), 100 / (2 * tan * 0.9));
       camera.position.set(0, 0, distance);
       const targetX = isSplit && wide ? (0.735 - 0.5) * 2 * tan * distance * camera.aspect : 0;
       vita.userData.targetX = targetX;

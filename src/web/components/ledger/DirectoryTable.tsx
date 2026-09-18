@@ -106,7 +106,7 @@ export const DirectoryTable: React.FC<DirectoryTableProps> = ({
             onChange={(event) => onSearchChange(event.target.value)}
             aria-label="Filter the directory"
             placeholder="Filter by game, engine or platform"
-            className="w-full rounded-xl border border-hairline bg-surface py-2.5 pl-9 pr-9 text-body text-ink placeholder:text-ink-muted outline-none transition-shadow focus:border-hairline-strong focus:ring-4 focus:ring-ink/5"
+            className="w-full rounded-xl border border-hairline-strong/30 vh-glass py-2.5 pl-9 pr-9 text-body text-ink placeholder:text-ink-muted outline-none transition-shadow focus:border-hairline-strong/30-strong focus:ring-4 focus:ring-ink/5"
           />
           {searchTerm && (
             <button
@@ -148,7 +148,7 @@ export const DirectoryTable: React.FC<DirectoryTableProps> = ({
             <select
               value={activeSort}
               onChange={(event) => onSortChange(event.target.value)}
-              className="rounded-lg border border-hairline bg-surface px-2.5 py-1.5 text-caption font-medium text-ink-medium outline-none transition-shadow focus:ring-4 focus:ring-ink/5 cursor-pointer"
+              className="rounded-lg border border-hairline-strong/30 vh-glass px-2.5 py-1.5 text-caption font-medium text-ink-medium outline-none transition-shadow focus:ring-4 focus:ring-ink/5 cursor-pointer"
             >
               {SORTS.map((sort) => (
                 <option key={sort.key} value={sort.key}>
@@ -175,7 +175,7 @@ export const DirectoryTable: React.FC<DirectoryTableProps> = ({
                 className={
                   "px-3 py-1 rounded-lg text-micro font-mono whitespace-nowrap transition-all " +
                   (active
-                    ? "bg-surface border border-hairline-strong text-ink font-semibold shadow-card"
+                    ? "vh-glass border border-hairline-strong/30-strong text-ink font-semibold shadow-lift"
                     : "bg-transparent text-ink-muted hover:text-ink hover:bg-sunken")
                 }
               >
@@ -186,8 +186,8 @@ export const DirectoryTable: React.FC<DirectoryTableProps> = ({
         </div>
       </div>
 
-      <div className="mt-6 overflow-hidden rounded-2xl border border-hairline bg-surface shadow-card">
-        <div className="hidden grid-cols-12 gap-4 border-b border-hairline bg-sunken px-5 py-3 text-micro font-semibold uppercase text-ink-muted md:grid">
+      <div className="mt-6 overflow-hidden rounded-2xl border border-hairline-strong/30 vh-glass shadow-lift">
+        <div className="hidden grid-cols-12 gap-4 border-b border-hairline-strong/30 bg-sunken px-5 py-3 text-micro font-semibold uppercase text-ink-muted md:grid">
           <div className="col-span-5">Project</div>
           <div className="col-span-2">Stage</div>
           <div className="col-span-4">Hardware notes</div>
@@ -292,7 +292,7 @@ export const DirectoryTable: React.FC<DirectoryTableProps> = ({
                         {prettyStage(project.current_stage)}
                       </span>
                       {project.verification === "detected" && (
-                        <span className="ml-1.5 inline-flex rounded-md border border-hairline px-2 py-1 text-micro font-semibold uppercase text-ink-muted">
+                        <span className="ml-1.5 inline-flex rounded-md border border-hairline-strong/30 px-2 py-1 text-micro font-semibold uppercase text-ink-muted">
                           Unverified
                         </span>
                       )}
