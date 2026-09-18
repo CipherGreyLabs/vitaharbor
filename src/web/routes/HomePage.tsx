@@ -109,23 +109,33 @@ export const HomePage: React.FC = () => {
     let cancelled = false;
 
     async function refresh() {
-      const [projectsRes, updatesRes] = await Promise.all([
-        apiGet<{ projects: any[] }>("/api/projects?limit=50", "projects").catch(() => null),
-        apiGet<{ updates: any[] }>("/api/updates?limit=8", "updates").catch(() => null)
-      ]);
-      if (cancelled) return;
-      if (projectsRes?.projects?.length) setProjects(projectsRes.projects);
-      if (updatesRes?.updates?.length) setRecentUpdates(updatesRes.updates);
+      try {
+        const [projectsRes, updatesRes] = await Promise.all([
+          apiGet('/api/projects?limit=50', 'projects').catch(() => null),
+          apiGet('/api/updates?limit=8', 'updates').catch(() => null)
+        ]);
+        if (cancelled) return;
+        if (projectsRes && projectsRes.projects && Array.isArray(projectsRes.projects) && projectsRes.projects.length > 0) {
+          setProjects(projectsRes.projects);
+        }
+        if (updatesRes && updatesRes.updates && Array.isArray(updatesRes.updates) && updatesRes.updates.length > 0) {
+          setRecentUpdates(updatesRes.updates);
+        }
+      } catch (e) {
+        console.error('API Refresh Error:', e);
+      }
 
       try {
-        const res = await fetch("/data/discovered.json", { headers: { accept: "application/json" } });
+        const res = await fetch('/data/discovered.json', { headers: { accept: 'application/json' } });
         if (!res.ok) return;
-        const body = (await res.json()) as { items?: unknown[]; generated_at?: unknown };
+        const text = await res.text();
+        if (!text.startsWith('{') && !text.startsWith('[')) return;
+        const body = JSON.parse(text);
         if (cancelled) return;
-        if (Array.isArray(body?.items)) setDiscovered(body.items);
-        if (typeof body?.generated_at === "string") setScannedAt(body.generated_at);
+        if (body && Array.isArray(body.items)) setDiscovered(body.items);
+        if (body && typeof body.generated_at === 'string') setScannedAt(body.generated_at);
       } catch {
-        // Scanner hasn't run yet
+        // Scanner has not run yet
       }
     }
 
