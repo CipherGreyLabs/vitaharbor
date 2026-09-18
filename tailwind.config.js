@@ -8,26 +8,26 @@ export default {
   theme: {
     extend: {
       colors: {
-        canvas: '#000000',
-        surface: 'rgba(7, 10, 18, 0.65)',
-        sunken: '#03050a',
+        canvas: '#0b0c0e',
+        surface: '#141619',
+        sunken: '#0e1013',
         hairline: {
-          DEFAULT: 'rgba(255, 255, 255, 0.08)',
-          strong: 'rgba(255, 255, 255, 0.16)',
+          DEFAULT: 'rgba(255, 255, 255, 0.07)',
+          strong: 'rgba(255, 255, 255, 0.14)',
         },
         ink: {
-          DEFAULT: '#ffffff',
-          medium: '#cbd5e1',
-          muted: '#a3acb5',
+          DEFAULT: '#f4f5f7',
+          medium: '#a2a8b0',
+          muted: '#6d737b',
         },
         stage: {
-          done: '#00ff9d',
-          progress: '#00d2ff',
-          caution: '#ff3366',
-          idle: '#7c848d',
+          done: '#3fb950',
+          progress: '#5b8def',
+          caution: '#d29922',
+          idle: '#5c636b',
         },
-        deep: '#030509',
-        accent: '#0055ff',
+        deep: '#0e1013',
+        accent: '#4d7cfe',
       },
       fontSize: {
         micro: ['11px', { lineHeight: '16px', letterSpacing: '0.04em' }],
@@ -40,8 +40,8 @@ export default {
         displaylg: ['56px', { lineHeight: '58px', letterSpacing: '-0.035em' }],
       },
       boxShadow: {
-        card: '0 8px 32px 0 rgba(0, 15, 40, 0.4)',
-        lift: '0 20px 50px -10px rgba(0, 85, 255, 0.15), 0 0 0 1px rgba(255,255,255,0.05)',
+        card: '0 1px 0 0 rgba(255,255,255,0.03), 0 10px 26px -18px rgba(0,0,0,0.8)',
+        lift: '0 20px 44px -28px rgba(0,0,0,0.9), 0 0 0 1px rgba(255,255,255,0.05)',
       },
       fontFamily: {
         sans: ['Inter', 'system-ui', '-apple-system', 'Segoe UI', 'Roboto', 'sans-serif'],

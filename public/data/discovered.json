@@ -1,8 +1,17 @@
 {
-  "generated_at": "2026-09-17T15:34:38.137Z",
+  "generated_at": "2026-09-18T15:05:09.129Z",
   "source": "r/vitahacks + r/VitaPiracy RSS",
   "note": "Unverified candidates. Not part of the curated ledger until reviewed.",
   "items": [
+    {
+      "id": "r-vitahacks-comments-1wjn8zg-rc-cars-port-progress",
+      "title": "RC Cars port progress",
+      "url": "https://www.reddit.com/r/vitahacks/comments/1wjn8zg/rc_cars_port_progress/",
+      "subreddit": "vitahacks",
+      "author": "u/antoxa2584x",
+      "published_at": "2026-09-18T11:09:43+00:00",
+      "detected_at": "2026-09-18T15:05:09.129Z"
+    },
     {
       "id": "r-vitahacks-comments-1wi5b10-building-an-app-for-all-things-vita",
       "title": "Building an app for all things vita",

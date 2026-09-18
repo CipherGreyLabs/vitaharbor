@@ -20,6 +20,7 @@ export const FALLBACK_GAMES: Game[] = [
   { id: 17, slug: "celeste-classic", title: "Celeste Classic Vita", normalized_title: "celeste classic vita", original_release_year: 2016, original_platform: "PICO-8 / C", created_at: new Date('2026-09-17T15:34:00.000Z'), updated_at: new Date('2026-09-17T15:34:00.000Z') },
   { id: 18, slug: "cave-story-nxengine", title: "Cave Story (NXEngine-evo)", normalized_title: "cave story (nxengine-evo)", original_release_year: 2004, original_platform: "PC", created_at: new Date('2026-09-17T15:34:00.000Z'), updated_at: new Date('2026-09-17T15:34:00.000Z') },
   { id: 19, slug: "renegade-vita-demo-release", title: "Renegade Vita - Demo Release", normalized_title: "renegade vita - demo release", original_release_year: null, original_platform: "Unknown", created_at: new Date('2026-09-15T03:40:12.000Z'), updated_at: new Date('2026-09-17T15:34:20.988Z') }
+  ,{ id: 20, slug: "rc-cars", title: "RC Cars", normalized_title: "rc cars", original_release_year: null, original_platform: "Unknown", created_at: new Date('2026-09-18T11:09:43.000Z'), updated_at: new Date('2026-09-18T11:09:43.000Z') }
 ];
 
 export const FALLBACK_PROJECTS: any[] = [
@@ -445,6 +446,29 @@ export const FALLBACK_PROJECTS: any[] = [
     technologies: [],
     developers: []
   }
+  ,{
+    id: 20,
+    game_id: 20,
+    slug: "rc-cars-vita",
+    reddit_url: "https://www.reddit.com/r/vitahacks/comments/1wjn8zg/rc_cars_port_progress/",
+    display_name: "RC Cars",
+    current_stage: "early_wip",
+    lifecycle: "active",
+    summary: "Surfaced by the scanner on r/vitahacks as a progress thread posted on 18 September 2026. The thread body could not be read, so no technical detail is claimed here and the entry stays unverified.",
+    playability_notes: null,
+    performance_notes: null,
+    first_seen_at: new Date('2026-09-18T11:09:43.000Z'),
+    last_activity_at: new Date('2026-09-18T11:09:43.000Z'),
+    released_at: null,
+    is_featured: false,
+    is_archived: false,
+    verification: "detected",
+    game_title: "RC Cars",
+    original_platform: "Unknown",
+    original_release_year: null,
+    technologies: [],
+    developers: []
+  }
 ];
 
 export const FALLBACK_DEVELOPERS: any[] = [
@@ -590,6 +614,20 @@ export const FALLBACK_UPDATES: any[] = [
     event_at: new Date('2026-09-10T15:34:00.000Z'),
     verification_level: "developer_direct",
     sources: [{ source_item_id: "src_nfs", relationship: "primary", canonical_url: "https://www.reddit.com/r/vitahacks/comments/18zdtep/new_port_psvita_hot_pursuit/" }]
+  }
+  ,{
+    id: "upd_rc_cars",
+    port_project_id: 20,
+    project_slug: "rc-cars-vita",
+    project_display_name: "RC Cars",
+    developer_display_name: "antoxa2584x",
+    developer_slug: "antoxa2584x",
+    event_type: "technical_progress",
+    title: "RC Cars port progress",
+    summary: "A progress thread for an RC Cars port appeared on r/vitahacks. The post body is not readable from the scanner, so this stays an unverified community signal.",
+    event_at: new Date('2026-09-18T11:09:43.000Z'),
+    verification_level: "unverified",
+    sources: [{ source_item_id: "src_rc_cars", relationship: "primary", canonical_url: "https://www.reddit.com/r/vitahacks/comments/1wjn8zg/rc_cars_port_progress/" }]
   }
 ];
 
