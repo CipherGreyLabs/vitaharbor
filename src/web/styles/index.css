@@ -94,6 +94,7 @@
 }
 
 .vh-row {
+  opacity: 1;
   animation: vh-rise 0.55s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
@@ -164,7 +165,7 @@ a, button, input, [role="button"] {
   to { opacity: 1; transform: none; filter: blur(0px); }
 }
 .vh-row {
-  animation: vh-row-entrance 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation: vh-row-entrance 0.4s ease-out forwards;
 }
 
 .filter-active-bg {
