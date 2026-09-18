@@ -126,14 +126,7 @@ export const DirectoryTable: React.FC<DirectoryTableProps> = ({
         <div className="flex flex-wrap items-center justify-between gap-4">
           <div className="flex flex-wrap gap-1.5">
             {STAGE_FILTERS.map((filter) => (
-              <button
-                key={filter.key}
-                type="button"
-                aria-pressed={activeFilter === filter.key}
-                onClick={() => onFilterChange(filter.key)}
-                >
-                {filter.label}
-              </button>
+              <div key={filter.key} className="relative group"><button type="button" aria-pressed={activeFilter === filter.key} onClick={() => onFilterChange(filter.key)} className={"relative z-10 rounded-full px-4 py-1.5 text-caption font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink/20 " + (activeFilter === filter.key ? "text-ink text-shadow-glow" : "text-ink-muted hover:text-ink")}>{filter.label}</button>{activeFilter === filter.key && (<div className="filter-active-bg transition-all duration-300" style={{boxShadow: "0 0 15px rgba(0, 210, 255, 0.2)"}}></div>)}</div>
             ))}
           </div>
 
