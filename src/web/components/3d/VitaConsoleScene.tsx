@@ -74,7 +74,7 @@ export const VitaConsoleScene: React.FC<VitaConsoleSceneProps> = ({
     renderer.toneMappingExposure = 1.08;
     el.appendChild(renderer.domElement);
 
-    const handleMouseMove = (e) => {
+    const handleMouseMove = (e: MouseEvent) => {
       const rect = el.getBoundingClientRect();
       const mx = ((e.clientX - rect.left) / rect.width) * 2 - 1;
       const my = -((e.clientY - rect.top) / rect.height) * 2 + 1;
@@ -134,6 +134,14 @@ export const VitaConsoleScene: React.FC<VitaConsoleSceneProps> = ({
       return mesh;
     }
 
+    // Every physical control registers here so a raycast press can move it.
+    const pressables: THREE.Mesh[] = [];
+    function registerPress(mesh: THREE.Mesh, travel: number) {
+      mesh.userData.pressTravel = travel;
+      mesh.userData.pressBaseZ = mesh.position.z;
+      pressables.push(mesh);
+    }
+
     const shellShape = referenceShape(BODY_TRACE);
     traced(shellShape, 14, -7.5, shell, 0.7);
     traced(shellShape, 0.7, 6.6, silver, 0.3);
@@ -145,6 +153,7 @@ export const VitaConsoleScene: React.FC<VitaConsoleSceneProps> = ({
     for (const sign of [1, -1]) {
       const top = traced(shoulder, 2.2, 5.7, silver, 0.25);
       top.scale.x = sign;
+      registerPress(top, 0.45);
       const bottom = traced(corner, 0.5, 8.4, silver, 0.15);
       bottom.scale.x = sign;
       const inset = traced(corner, 0.2, 9, black, 0.1);
@@ -315,16 +324,16 @@ const recessMat = new THREE.MeshStandardMaterial({color:'#14161a',roughness:0.52
       key.rotation.z = i * Math.PI / 2;
       key.position.x = -73.7;
       key.position.y = 13.3;
+      registerPress(key, 0.4);
       const dx = -Math.sin(i * Math.PI / 2) * 6.9, dy = Math.cos(i * Math.PI / 2) * 6.9;
       decal(['⌃','‹','⌄','›'][i], -73.7 + dx, 13.3 + dy, 1.5, 1.5, '#92979b', 11.65);
     }
 
-    const faceButtons: THREE.Mesh[] = [];
     const glyphs = ['△','○','×','□'];
     [[0,7.5],[7.5,0],[0,-7.5],[-7.5,0]].forEach(([dx,dy], i) => {
       disc(73.5 + dx, 13.3 + dy, 3.95, 0.4, 9.85, black);
       const btn = disc(73.5 + dx, 13.3 + dy, 3.5, 1.2, 10.6, button);
-      faceButtons.push(btn);
+      registerPress(btn, 0.55);
       decal(glyphs[i], 73.5 + dx, 13.3 + dy, 3.8, 3.8, ['#00ff66', '#ff3333', '#3399ff', '#ff3399'][i], 11.3);
     });
 
@@ -337,6 +346,7 @@ const recessMat = new THREE.MeshStandardMaterial({color:'#14161a',roughness:0.52
       cap.scale.z = 0.32;
       cap.position.set(x, -9, 13.1);
       vita.add(cap);
+      registerPress(cap, 0.5);
       const ring = new THREE.Mesh(new THREE.TorusGeometry(6.5, 0.35, 12, 64), silver);
       ring.position.set(x, -9, 11);
       vita.add(ring);
@@ -344,11 +354,13 @@ const recessMat = new THREE.MeshStandardMaterial({color:'#14161a',roughness:0.52
 
     const home = disc(-71, -24.3, 5.8, 1, 9.6, button);
     home.scale.z = 0.52;
+    registerPress(home, 0.3);
     decal('PS', -71, -24.3, 4, 2.8, '#d3d5d8', 10.3);
 
     for (const [x, label] of [[65.8,'SELECT'],[76,'START']] as const) {
       const pill = disc(x, -24.3, 3.6, 0.7, 9.7, button);
       pill.scale.z = 0.48;
+      registerPress(pill, 0.25);
       decal(label, x, -24.3, 5.7, 1.3, '#b1b5ba', 10.2);
     }
 
@@ -442,11 +454,12 @@ const recessMat = new THREE.MeshStandardMaterial({color:'#14161a',roughness:0.52
       pointerNdc.x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
       pointerNdc.y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
       raycaster.setFromCamera(pointerNdc, camera);
-      const hits = raycaster.intersectObjects(faceButtons, false);
+      const hits = raycaster.intersectObjects(pressables, false);
       if (hits.length > 0) {
         pressedButton = hits[0].object as THREE.Mesh;
-        pressedBaseZ = pressedButton.position.z;
-        pressedButton.position.z = pressedBaseZ - 0.55;
+        pressedBaseZ = Number(pressedButton.userData.pressBaseZ ?? pressedButton.position.z);
+        const travel = Number(pressedButton.userData.pressTravel ?? 0.5);
+        pressedButton.position.z = pressedBaseZ - travel;
       }
     };
     const releaseButton = () => {

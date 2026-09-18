@@ -111,8 +111,8 @@ export const HomePage: React.FC = () => {
     async function refresh() {
       try {
         const [projectsRes, updatesRes] = await Promise.all([
-          apiGet('/api/projects?limit=50', 'projects').catch(() => null),
-          apiGet('/api/updates?limit=8', 'updates').catch(() => null)
+          apiGet<{ projects: any[] }>('/api/projects?limit=50', 'projects').catch(() => null),
+          apiGet<{ updates: any[] }>('/api/updates?limit=8', 'updates').catch(() => null)
         ]);
         if (cancelled) return;
         if (projectsRes && projectsRes.projects && Array.isArray(projectsRes.projects) && projectsRes.projects.length > 0) {
