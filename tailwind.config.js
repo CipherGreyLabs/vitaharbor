@@ -18,7 +18,7 @@ export default {
         ink: {
           DEFAULT: '#f4f5f7',
           medium: '#a2a8b0',
-          muted: '#6d737b',
+          muted: '#7d848c',
         },
         stage: {
           done: '#3fb950',

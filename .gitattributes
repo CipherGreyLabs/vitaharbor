@@ -1,0 +1,11 @@
+# Force LF in the working tree. Mixing CRLF and LF here previously caused silent
+# no-op string replacements that shipped broken code (see docs/WORKLOG.md).
+* text=auto eol=lf
+
+# Binary assets must never be normalised.
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.woff2 binary
+*.ico binary
+*.zip binary
