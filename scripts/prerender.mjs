@@ -50,6 +50,28 @@ const projectItemsHtml = FALLBACK_PROJECTS.map((p, idx) => {
           </li>`;
 }).join('\n');
 
+// ItemList structured data, escaped so a project title can never close the script tag.
+const itemListJsonLd = JSON.stringify(
+  {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    name: 'PlayStation Vita port projects tracked by VitaHarbor',
+    numberOfItems: FALLBACK_PROJECTS.length,
+    itemListElement: FALLBACK_PROJECTS.map((p, idx) => ({
+      '@type': 'ListItem',
+      position: idx + 1,
+      name: p.display_name || p.game_title || 'Untitled port',
+      url: 'https://vitaharbor.vercel.app/#p=' + p.slug,
+      description: p.summary || ''
+    }))
+  },
+  null,
+  2
+).replace(/</g, '\u003c');
+
+const itemListScript =
+  '\n    <script type="application/ld+json">\n' + itemListJsonLd + '\n    </script>\n';
+
 const prerenderedBody = `<div id="top" class="min-h-screen bg-[#fbfbfd] text-[#1d1d1f]">
     <header class="border-b border-gray-200 bg-white/90 sticky top-0 z-50">
       <div class="mx-auto flex h-14 max-w-5xl items-center justify-between px-6">
@@ -109,5 +131,6 @@ ${projectItemsHtml}
   </div>`;
 
 html = html.replace('<div id="root"></div>', '<div id="root">' + prerenderedBody + '</div>');
+html = html.replace('</head>', itemListScript + '</head>');
 fs.writeFileSync(htmlPath, html, 'utf8');
 console.log('Successfully prerendered ' + FALLBACK_PROJECTS.length + ' projects into dist/web/index.html (' + html.length + ' bytes)');

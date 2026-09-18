@@ -70,6 +70,7 @@ written at commit time.
 |---|---|---|---|---|---|
 | 00:12 | `ce05149` | Keyboard navigation (j/k, arrow keys), header status breakdown, editorial footer | Make the ledger operable without the mouse and show ecosystem state at a glance | unrecorded | typecheck clean, 42/42 tests, build 22 projects, live check |
 | 00:25 | pending | Mobile audit plus touch-target fixes, responsive console hint, badge trimming, neon glow removed from the active filter | Header links, filter pills and row actions were 20 to 32px tall, which is uncomfortable to tap on a phone | deepseek-v4-flash | typecheck clean, 42/42 tests, build 22 projects, mobile re-measure |
+| 00:40 | pending | Contrast raised, .gitattributes added, Open Graph and Twitter metadata, WebSite plus ItemList JSON-LD | Full audit found three gaps: muted text at 4.09:1 contrast (below WCAG AA), CRLF line endings silently breaking edits, and no social preview or structured data at all | deepseek-v4-flash | 35 text styles measured at 0 contrast failures, 2/2 JSON-LD blocks valid, 42/42 tests |
 
 ### 2026-09-18
 
