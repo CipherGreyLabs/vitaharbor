@@ -46,14 +46,11 @@ export const ConsoleStage: React.FC<ConsoleStageProps> = ({
         Interactive console preview
       </h2>
 
-      <div className="relative overflow-hidden rounded-3xl border border-hairline-strong bg-gradient-to-b from-surface via-surface to-sunken shadow-lift">
-        <LiveAreaWaves className="pointer-events-none absolute inset-x-0 bottom-0 h-[78%] w-full" />
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-surface/85 to-transparent"
-        />
+      <div className="relative w-full py-6">
+        <LiveAreaWaves className="pointer-events-none absolute inset-x-0 inset-y-0 h-full w-full opacity-60" />
+        
         <div aria-hidden="true" className="vh-dots pointer-events-none absolute inset-0 opacity-80" />
-        <div aria-hidden="true" className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-sunken to-transparent" />
+        
 
         <div className="relative px-4 pt-4 sm:px-8">
           <div ref={consoleRef} className="h-[400px] sm:h-[500px]">
