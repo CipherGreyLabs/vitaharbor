@@ -131,13 +131,7 @@ export const DirectoryTable: React.FC<DirectoryTableProps> = ({
                 type="button"
                 aria-pressed={activeFilter === filter.key}
                 onClick={() => onFilterChange(filter.key)}
-                className={
-                  "rounded-full px-3.5 py-1.5 text-caption font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink/20 " +
-                  (activeFilter === filter.key
-                    ? "bg-ink text-canvas"
-                    : "bg-sunken text-ink-medium hover:bg-hairline hover:text-ink")
-                }
-              >
+                >
                 {filter.label}
               </button>
             ))}
@@ -204,6 +198,7 @@ export const DirectoryTable: React.FC<DirectoryTableProps> = ({
               </div>
             ))}
           </div>
+        </div>
         ) : visible.length === 0 ? (
           <div className="px-6 py-16 text-center">
             <p className="text-body text-ink-medium">Nothing matches that search.</p>
