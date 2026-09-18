@@ -80,7 +80,6 @@ export const DirectoryTable: React.FC<DirectoryTableProps> = ({
     <section
       id="directory"
       ref={directoryRef}
-      data-reveal=""
       aria-labelledby="directory-heading"
       className="mx-auto mt-28 max-w-5xl px-6"
     >
