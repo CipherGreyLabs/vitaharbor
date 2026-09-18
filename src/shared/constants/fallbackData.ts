@@ -20,7 +20,9 @@ export const FALLBACK_GAMES: Game[] = [
   { id: 17, slug: "celeste-classic", title: "Celeste Classic Vita", normalized_title: "celeste classic vita", original_release_year: 2016, original_platform: "PICO-8 / C", created_at: new Date('2026-09-17T15:34:00.000Z'), updated_at: new Date('2026-09-17T15:34:00.000Z') },
   { id: 18, slug: "cave-story-nxengine", title: "Cave Story (NXEngine-evo)", normalized_title: "cave story (nxengine-evo)", original_release_year: 2004, original_platform: "PC", created_at: new Date('2026-09-17T15:34:00.000Z'), updated_at: new Date('2026-09-17T15:34:00.000Z') },
   { id: 19, slug: "renegade-vita-demo-release", title: "Renegade Vita - Demo Release", normalized_title: "renegade vita - demo release", original_release_year: null, original_platform: "Unknown", created_at: new Date('2026-09-15T03:40:12.000Z'), updated_at: new Date('2026-09-17T15:34:20.988Z') }
-  ,{ id: 20, slug: "rc-cars", title: "RC Cars", normalized_title: "rc cars", original_release_year: null, original_platform: "Unknown", created_at: new Date('2026-09-18T11:09:43.000Z'), updated_at: new Date('2026-09-18T11:09:43.000Z') }
+  ,{ id: 20, slug: "rc-cars", title: "RC Cars", normalized_title: "rc cars", original_release_year: null, original_platform: "PC", created_at: new Date('2026-09-18T11:09:43.000Z'), updated_at: new Date('2026-09-18T15:20:00.000Z') }
+  ,{ id: 21, slug: "diablo-ii-lord-of-destruction", title: "Diablo II: Lord of Destruction", normalized_title: "diablo ii: lord of destruction", original_release_year: 2001, original_platform: "PC", created_at: new Date('2026-09-17T22:27:31.000Z'), updated_at: new Date('2026-09-17T22:27:31.000Z') }
+  ,{ id: 22, slug: "call-of-duty-zombies", title: "Call of Duty: Zombies", normalized_title: "call of duty: zombies", original_release_year: 2009, original_platform: "iOS", created_at: new Date('2026-09-18T07:54:45.000Z'), updated_at: new Date('2026-09-18T07:54:45.000Z') }
 ];
 
 export const FALLBACK_PROJECTS: any[] = [
@@ -452,21 +454,67 @@ export const FALLBACK_PROJECTS: any[] = [
     slug: "rc-cars-vita",
     reddit_url: "https://www.reddit.com/r/vitahacks/comments/1wjn8zg/rc_cars_port_progress/",
     display_name: "RC Cars",
-    current_stage: "early_wip",
+    current_stage: "playable",
     lifecycle: "active",
-    summary: "Surfaced by the scanner on r/vitahacks as a progress thread posted on 18 September 2026. The thread body could not be read, so no technical detail is claimed here and the entry stays unverified.",
-    playability_notes: null,
+    summary: "Native RC Cars port by antoxa2584x, published with source at github.com/antoxa2584x/rc_cars_vita. The progress post reports PC save file support, an implemented progression system, local multiplayer and an in-game interface.",
+    playability_notes: "Developer reports progression, local multiplayer and the in-game interface as implemented, with PC save files compatible.",
     performance_notes: null,
     first_seen_at: new Date('2026-09-18T11:09:43.000Z'),
     last_activity_at: new Date('2026-09-18T11:09:43.000Z'),
     released_at: null,
     is_featured: false,
     is_archived: false,
-    verification: "detected",
+    verification: "developer_direct",
     game_title: "RC Cars",
-    original_platform: "Unknown",
+    original_platform: "PC",
     original_release_year: null,
     technologies: [],
+    developers: []
+  }
+  ,{
+    id: 21,
+    game_id: 21,
+    slug: "d2vita",
+    reddit_url: "https://www.reddit.com/r/VitaPiracy/comments/1wj8dvz/d2vita_is_here_diablo_ii_lord_of_destruction/",
+    display_name: "D2Vita (Diablo II: Lord of Destruction)",
+    current_stage: "released",
+    lifecycle: "active",
+    summary: "Public release that runs the original Diablo II: Lord of Destruction 1.14d Windows build on PS Vita. The x86 game code executes through winx86, a compatibility layer with an x86 to ARMv7 dynamic recompiler, while the Windows APIs are replaced by native Vita implementations.",
+    playability_notes: "Runs the original 1.14d build rather than a rewritten engine. Performance varies between 10 and 25 FPS while the cache is being built, then settles around 20 to 25 FPS.",
+    performance_notes: "Diablo II itself is capped at 25 FPS, so the settled 20 to 25 FPS range is close to the original ceiling.",
+    first_seen_at: new Date('2026-09-17T22:27:31.000Z'),
+    last_activity_at: new Date('2026-09-17T22:27:31.000Z'),
+    released_at: new Date('2026-09-17T22:27:31.000Z'),
+    is_featured: false,
+    is_archived: false,
+    verification: "developer_direct",
+    game_title: "Diablo II: Lord of Destruction",
+    original_platform: "PC",
+    original_release_year: 2001,
+    technologies: ["winx86", "x86 to ARMv7 recompiler", "Native Windows API layer"],
+    developers: []
+  }
+  ,{
+    id: 22,
+    game_id: 22,
+    slug: "cod-zombies-ios-loader",
+    reddit_url: "https://www.reddit.com/r/vitahacks/comments/1wjjx7w/a_bounty_that_deserves_more_visibility/",
+    display_name: "Call of Duty: Zombies (iOS)",
+    current_stage: "announced",
+    lifecycle: "active",
+    summary: "A community bounty is funding an effort to bring the iOS release of Call of Duty: Zombies to Vita, tied to the iOS loader devnoname120 is developing. The thread names Metal Gear Solid Touch as another iOS title the same loader could open up. No build exists yet.",
+    playability_notes: null,
+    performance_notes: null,
+    first_seen_at: new Date('2026-09-18T07:54:45.000Z'),
+    last_activity_at: new Date('2026-09-18T07:54:45.000Z'),
+    released_at: null,
+    is_featured: false,
+    is_archived: false,
+    verification: "community_report",
+    game_title: "Call of Duty: Zombies",
+    original_platform: "iOS",
+    original_release_year: 2009,
+    technologies: ["iOS loader"],
     developers: []
   }
 ];
@@ -624,10 +672,38 @@ export const FALLBACK_UPDATES: any[] = [
     developer_slug: "antoxa2584x",
     event_type: "technical_progress",
     title: "RC Cars port progress",
-    summary: "A progress thread for an RC Cars port appeared on r/vitahacks. The post body is not readable from the scanner, so this stays an unverified community signal.",
+    summary: "Developer reports PC save file support, implemented progression, local multiplayer and an in-game interface, with source published on GitHub.",
     event_at: new Date('2026-09-18T11:09:43.000Z'),
-    verification_level: "unverified",
+    verification_level: "developer_direct",
     sources: [{ source_item_id: "src_rc_cars", relationship: "primary", canonical_url: "https://www.reddit.com/r/vitahacks/comments/1wjn8zg/rc_cars_port_progress/" }]
+  }
+  ,{
+    id: "upd_d2vita",
+    port_project_id: 21,
+    project_slug: "d2vita",
+    project_display_name: "D2Vita (Diablo II: Lord of Destruction)",
+    developer_display_name: "Realistic-Pitch-3467",
+    developer_slug: "realistic-pitch-3467",
+    event_type: "release",
+    title: "D2Vita is here — Diablo II: Lord of Destruction running on PS Vita",
+    summary: "Public release running the original 1.14d Windows build through winx86, an x86 to ARMv7 dynamic recompiler with native Vita API replacements. Settles around 20 to 25 FPS once its cache is built.",
+    event_at: new Date('2026-09-17T22:27:31.000Z'),
+    verification_level: "developer_direct",
+    sources: [{ source_item_id: "src_d2vita", relationship: "primary", canonical_url: "https://www.reddit.com/r/VitaPiracy/comments/1wj8dvz/d2vita_is_here_diablo_ii_lord_of_destruction/" }]
+  }
+  ,{
+    id: "upd_cod_zombies",
+    port_project_id: 22,
+    project_slug: "cod-zombies-ios-loader",
+    project_display_name: "Call of Duty: Zombies (iOS)",
+    developer_display_name: "MajorTom_87",
+    developer_slug: "majortom-87",
+    event_type: "project_announced",
+    title: "Bounty opened for Call of Duty: Zombies on Vita",
+    summary: "Community bounty funding work to bring the iOS build of Call of Duty: Zombies to Vita through the iOS loader devnoname120 is developing. Metal Gear Solid Touch is named as another candidate for the same loader.",
+    event_at: new Date('2026-09-18T07:54:45.000Z'),
+    verification_level: "community_report",
+    sources: [{ source_item_id: "src_cod_zombies", relationship: "primary", canonical_url: "https://www.reddit.com/r/vitahacks/comments/1wjjx7w/a_bounty_that_deserves_more_visibility/" }]
   }
 ];
 
