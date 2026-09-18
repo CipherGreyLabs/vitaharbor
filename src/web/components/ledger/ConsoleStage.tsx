@@ -54,7 +54,7 @@ export const ConsoleStage: React.FC<ConsoleStageProps> = ({
 
         <div className="relative px-4 pt-4 sm:px-8">
           <div ref={consoleRef} className="h-[400px] sm:h-[500px]">
-            {webgl === false ? (
+            {false ? (
               <figure className="flex h-full w-full items-center justify-center">
                 <img
                   src="/vita-render.png"
