@@ -4,7 +4,7 @@ name: Reddit discovery scan
 # curated ledger stays a human decision, so this job never rewrites ledger content.
 on:
   schedule:
-    - cron: "0 8,20 * * *"
+    - cron: "0 0,8,16 * * *"
   workflow_dispatch:
 
 permissions:
