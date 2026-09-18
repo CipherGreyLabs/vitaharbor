@@ -432,11 +432,41 @@ const recessMat = new THREE.MeshStandardMaterial({color:'#14161a',roughness:0.52
       renderer.render(scene, camera);
     }
 
+    // Interactive face buttons: real physical press feedback on click.
+    const raycaster = new THREE.Raycaster();
+    const pointerNdc = new THREE.Vector2();
+    let pressedButton: THREE.Mesh | null = null;
+    let pressedBaseZ = 0;
+    const pressDown = (event: PointerEvent) => {
+      const rect = el.getBoundingClientRect();
+      pointerNdc.x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
+      pointerNdc.y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
+      raycaster.setFromCamera(pointerNdc, camera);
+      const hits = raycaster.intersectObjects(faceButtons, false);
+      if (hits.length > 0) {
+        pressedButton = hits[0].object as THREE.Mesh;
+        pressedBaseZ = pressedButton.position.z;
+        pressedButton.position.z = pressedBaseZ - 0.55;
+      }
+    };
+    const releaseButton = () => {
+      if (pressedButton) {
+        pressedButton.position.z = pressedBaseZ;
+        pressedButton = null;
+      }
+    };
+    el.addEventListener("pointerdown", pressDown);
+    window.addEventListener("pointerup", releaseButton);
+    window.addEventListener("pointercancel", releaseButton);
+
     paint();
     tick();
 
     return () => {
       window.removeEventListener("mousemove", handleMouseMove);
+      el.removeEventListener("pointerdown", pressDown);
+      window.removeEventListener("pointerup", releaseButton);
+      window.removeEventListener("pointercancel", releaseButton);
       cancelAnimationFrame(raf);
       ro.disconnect();
       io?.disconnect();
