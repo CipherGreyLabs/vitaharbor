@@ -156,9 +156,25 @@ export const HomePage: React.FC = () => {
     const onKeyDown = (event: KeyboardEvent) => {
       const target = event.target as HTMLElement | null;
       const typing = target instanceof HTMLInputElement || target instanceof HTMLTextAreaElement;
-      if (event.key === "/" && !typing) {
+     if (event.key === "/" && !typing) {
+       event.preventDefault();
+       searchRef.current?.focus();
+     }
+      if (!typing && (event.key === "ArrowLeft" || event.key === "k" || event.key === "K")) {
         event.preventDefault();
-        searchRef.current?.focus();
+        const idx = projects.findIndex((p) => p.id === selectedId);
+        if (idx !== -1 && projects.length > 0) {
+          const prev = projects[(idx - 1 + projects.length) % projects.length];
+          setSelectedId(prev.id);
+        }
+      }
+      if (!typing && (event.key === "ArrowRight" || event.key === "j" || event.key === "J")) {
+        event.preventDefault();
+        const idx = projects.findIndex((p) => p.id === selectedId);
+        if (idx !== -1 && projects.length > 0) {
+          const next = projects[(idx + 1) % projects.length];
+          setSelectedId(next.id);
+        }
       }
       if (event.key === "Escape") {
         setSearchTerm("");
@@ -173,6 +189,17 @@ export const HomePage: React.FC = () => {
     () => projects.find((item) => item.id === selectedId) || null,
     [projects, selectedId]
   );
+
+  const headerCounts = useMemo(() => {
+    let playable = 0;
+    let dev = 0;
+    for (const p of projects) {
+      const s = String(p.current_stage);
+      if (["playable", "released", "completable"].includes(s)) playable++;
+      else if (["in_game", "booting", "early_wip", "research"].includes(s)) dev++;
+    }
+    return { playable, dev };
+  }, [projects]);
 
   const visible = useMemo(() => {
     let list = [...projects];
@@ -274,11 +301,14 @@ export const HomePage: React.FC = () => {
           <nav aria-label="Sections" className="flex items-center gap-4 text-body text-ink-medium sm:gap-5">
             <a href="#directory" className="rounded-md transition-colors hover:text-ink">Directory</a>
             <a href="#methodology" className="rounded-md transition-colors hover:text-ink">Methodology</a>
-            <span className="hidden items-center gap-1.5 rounded-full bg-sunken px-2.5 py-1 text-micro font-medium uppercase text-ink-medium sm:inline-flex">
-              <span className="h-1.5 w-1.5 rounded-full bg-ink-muted" />
-              <span className="vh-tnum">{loading ? "—" : projects.length}</span>
-              <span>indexed</span>
-            </span>
+            <div className="hidden items-center gap-2 rounded-full border border-hairline bg-surface px-3 py-1 font-mono text-micro text-ink-muted sm:inline-flex">
+              <span className="inline-flex items-center gap-1 text-stage-done font-medium">
+                <span className="h-1.5 w-1.5 rounded-full bg-stage-done" />
+                <span>{headerCounts.playable} playable</span>
+              </span>
+              <span className="text-hairline-strong">·</span>
+              <span>{headerCounts.dev} in dev</span>
+            </div>
           </nav>
         </div>
       </header>
@@ -410,7 +440,7 @@ export const HomePage: React.FC = () => {
       </main>
 
       {/* Modern 3-Column Footer */}
-      <footer className="vh-glass">
+      <footer className="border-t border-hairline bg-surface/40">
         <div className="mx-auto max-w-5xl px-6 py-14">
           <div className="grid gap-10 sm:grid-cols-3">
             <div>
