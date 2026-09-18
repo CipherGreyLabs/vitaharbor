@@ -217,8 +217,8 @@ export const DirectoryTable: React.FC<DirectoryTableProps> = ({
                 <li
                   key={project.id}
                   id={"entry-" + project.slug}
-                  style={{ animationDelay: Math.min(index, 14) * 22 + "ms" }}
-                  className={"vh-row " + (selected ? "bg-sunken/60" : "")}
+                  
+                  className={"transition-all duration-300 " + (selected ? "bg-sunken/60" : "")}
                 >
                   <div
                     role="button"
