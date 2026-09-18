@@ -1,7 +1,7 @@
 # Automation
 
-Scheduled scanning is disabled. Discovery only runs manually on explicit invocation
-to prevent unwanted token or background API resource consumption.
+Scheduled scanning runs completely free via **GitHub Actions**. It triggers twice a day,
+fetches Reddit, and commits candidates back to the repo without using Codex tokens.
 
 Right now only the first step exists locally. There is **no git remote** on this
 checkout and the Vercel project is **not connected to a repository** — every
