@@ -72,6 +72,33 @@ const itemListJsonLd = JSON.stringify(
 const itemListScript =
   '\n    <script type="application/ld+json">\n' + itemListJsonLd + '\n    </script>\n';
 
+
+// Per-project deep links. Reddit, Discord and X do not run JavaScript, so each project
+// needs its own HTML with its own metadata to produce a real preview card.
+const deepLinkPages = FALLBACK_PROJECTS.map((p) => {
+  const title = (p.display_name || p.game_title || p.slug) + " - VitaHarbor";
+  const description = p.summary || "PlayStation Vita port tracked by VitaHarbor.";
+  const url = "https://vitaharbor.vercel.app/projects/" + p.slug + "/";
+  return { slug: p.slug, title, description, url, project: p };
+});
+
+function applyMeta(html, meta) {
+  // Groups are (prefix)(old value)(suffix). The suffix must be re-emitted or the old
+  // value is never actually removed.
+  const swap = (source, pattern, value) =>
+    source.replace(pattern, (_match, prefix, _old, suffix) => prefix + escapeXml(value) + suffix);
+  let out = html;
+  out = swap(out, /(<title>)([^<]*)(<\/title>)/, meta.title);
+  out = swap(out, /(<meta name="description" content=")([^"]*)(")/, meta.description);
+  out = swap(out, /(<link rel="canonical" href=")([^"]*)(")/, meta.url);
+  out = swap(out, /(<meta property="og:title" content=")([^"]*)(")/, meta.title);
+  out = swap(out, /(<meta property="og:description" content=")([^"]*)(")/, meta.description);
+  out = swap(out, /(<meta property="og:url" content=")([^"]*)(")/, meta.url);
+  out = swap(out, /(<meta name="twitter:title" content=")([^"]*)(")/, meta.title);
+  out = swap(out, /(<meta name="twitter:description" content=")([^"]*)(")/, meta.description);
+  return out;
+}
+
 const prerenderedBody = `<div id="top" class="min-h-screen bg-[#fbfbfd] text-[#1d1d1f]">
     <header class="border-b border-gray-200 bg-white/90 sticky top-0 z-50">
       <div class="mx-auto flex h-14 max-w-5xl items-center justify-between px-6">
@@ -133,4 +160,13 @@ ${projectItemsHtml}
 html = html.replace('<div id="root"></div>', '<div id="root">' + prerenderedBody + '</div>');
 html = html.replace('</head>', itemListScript + '</head>');
 fs.writeFileSync(htmlPath, html, 'utf8');
+// Write one HTML file per project so /projects/<slug>/ has its own metadata.
+const projectsDir = path.resolve(process.cwd(), "dist/web/projects");
+for (const page of deepLinkPages) {
+  const dir = path.join(projectsDir, page.slug);
+  fs.mkdirSync(dir, { recursive: true });
+  fs.writeFileSync(path.join(dir, "index.html"), applyMeta(html, page), "utf8");
+}
+console.log('Wrote ' + deepLinkPages.length + ' project pages into dist/web/projects');
+
 console.log('Successfully prerendered ' + FALLBACK_PROJECTS.length + ' projects into dist/web/index.html (' + html.length + ' bytes)');

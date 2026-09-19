@@ -201,6 +201,22 @@ export const HomePage: React.FC = () => {
     return { playable, dev };
   }, [projects]);
 
+  // Scanner output is a candidate list. Once a thread is curated into the ledger it must
+  // stop appearing as "pending review", otherwise the same port shows up twice.
+  const normaliseUrl = (value: unknown) =>
+    String(value || "").trim().replace(/\/+$/, "").toLowerCase();
+
+  const pendingDiscovered = useMemo(() => {
+    const ledgerUrls = new Set(
+      projects.map((p) => normaliseUrl((p as any).reddit_url)).filter(Boolean)
+    );
+    return discovered.filter((item) => {
+      const url = normaliseUrl(item?.url);
+      if (!url) return false;
+      return !ledgerUrls.has(url);
+    });
+  }, [discovered, projects]);
+
   const visible = useMemo(() => {
     let list = [...projects];
 
@@ -259,7 +275,8 @@ export const HomePage: React.FC = () => {
   };
 
   const copyEntryLink = async (project: LedgerProject) => {
-    const url = window.location.origin + "/#p=" + project.slug;
+    // Prefer the static deep link so the shared URL has its own preview card.
+    const url = window.location.origin + "/projects/" + project.slug + "/";
     try {
       await navigator.clipboard.writeText(url);
       setCopiedSlug(project.slug);
@@ -392,7 +409,7 @@ export const HomePage: React.FC = () => {
         />
 
         {/* Unverified Detected Threads Band */}
-        {discovered.length > 0 && (
+        {pendingDiscovered.length > 0 && (
           <section aria-labelledby="detected-heading" className="mx-auto mt-24 max-w-5xl px-6">
             <div className="rounded-2xl border border-hairline-strong/30 vh-glass p-6 shadow-lift">
               <div className="flex flex-wrap items-baseline justify-between gap-3">
@@ -411,7 +428,7 @@ export const HomePage: React.FC = () => {
               </div>
 
               <ul className="mt-5 divide-y divide-hairline border-t border-hairline-strong/30">
-                {discovered.map((item) => (
+                {pendingDiscovered.map((item) => (
                   <li key={item.id} className="flex flex-wrap items-center justify-between gap-3 py-3.5">
                     <div className="min-w-0">
                       <p className="truncate text-body font-medium text-ink">{item.title}</p>
