@@ -74,6 +74,7 @@ written at commit time.
 | 00:26 | `316b577` | Open Graph, Twitter card, WebSite and ItemList JSON-LD, dark theme-color | The site is shared on Reddit and Discord, but had no social preview image or structured data at all | deepseek-v4-flash | live headers confirm og:image, twitter:card, 2 valid JSON-LD blocks |
 | 00:29 | `3a55026` | Year-long caching for fonts and assets, HTML moved to edge caching with stale-while-revalidate, AGENTS.md added, npm run verify gate | Fonts sat outside the asset cache rule so they were refetched on every visit, and every new agent had to rediscover the repo and its traps from scratch | deepseek-v4-flash | npm run verify green |
 | 00:31 | `8e60b0e` | Header rule order corrected so the catch-all no longer overrides per-path caching | Vercel lets the last matching rule win, so the broad `/(.*)` rule was overwriting the asset and font rules | deepseek-v4-flash | live: fonts and all /assets js+css return max-age=31536000, immutable; HTML returns s-maxage=300 with stale-while-revalidate |
+| 02:17 | `19994b0` | Static per-project pages at `/projects/<slug>/` with their own title, description, canonical and OG tags; sitemap now lists all 23 urls; curated threads filtered out of the pending-review list | Reddit, Discord and X do not run JavaScript, so a shared project link showed the site-wide preview. The pending list also showed RC Cars and Class of '09 after they had already been curated, so the same port appeared twice | deepseek-v4-flash | live: `/projects/d2vita/` and `/projects/d2vita` both return the project title and canonical; app selects `entry-d2vita` on load; pending count dropped 3 to 2; sitemap 23 urls; 42/42 tests |
 
 ### 2026-09-18
 
@@ -108,6 +109,8 @@ scanner. They predate this log. Run `git log --oneline` for the full list.
 | Reddit thread bodies via the public API | Blocked | Reddit returns 403 on JSON and 429 on RSS; the logged-in Chrome session works |
 | r/VitaPiracy scan | Partial | Returned 429 during the RSS attempt; read successfully via the browser session |
 | Mobile layout | Audited and fixed 2026-09-19 | See the mobile audit section below |
+| Scheduled Reddit scan | Cannot run | There is **no git remote** on this checkout, so the GitHub Action in `.github/workflows/reddit-scanner.yml` never fires. Scans are manual, or driven through the logged-in browser session. |
+| Per-project social image | Open | All project pages share the single `og.png`. Generating a per-project card would need the imagegen pipeline wired into the build. |
 
 ## Mobile audit (2026-09-19)
 

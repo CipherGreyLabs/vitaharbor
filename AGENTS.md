@@ -31,6 +31,8 @@ wrappers, sourced from r/vitahacks and r/VitaPiracy. React + Vite, deployed to V
 | `scripts/_oneoff/contrast-audit.mjs` | WCAG contrast ratio for every text style on the live site |
 | `scripts/_oneoff/audit-headers.mjs` | Security headers, SEO tags, crawler files |
 | `scripts/_oneoff/validate-jsonld.mjs` | Parses the structured data out of `dist/web/index.html` |
+| `scripts/_oneoff/test-deeplinks-live.mjs` | Checks that `/projects/<slug>/` serves its own title and canonical |
+| `scripts/make-sitemap.ts` | Writes `dist/web/sitemap.xml` from the ledger |
 | `scripts/cron-reddit-scan.mjs` | Reddit discovery via RSS (writes `public/data/discovered.json`) |
 | `scripts/prerender.mjs` | Injects the static ledger and ItemList schema into the built HTML |
 
