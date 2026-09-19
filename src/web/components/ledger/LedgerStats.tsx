@@ -77,7 +77,7 @@ export const LedgerStats: React.FC<{ items: Array<[string, number, string]> }> =
   }, []);
 
   return (
-    <section aria-label="Archive at a glance" className="mt-16">
+    <section aria-label="Archive at a glance" className="mt-20 border-t border-hairline pt-12">
       <div ref={ref} className="mx-auto max-w-5xl px-6">
         <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
           {items.map(([label, value, note]) => (

@@ -31,9 +31,9 @@ export default {
       },
       fontSize: {
         micro: ['11px', { lineHeight: '16px', letterSpacing: '0.04em' }],
-        caption: ['12px', { lineHeight: '18px' }],
-        body: ['13px', { lineHeight: '20px' }],
-        subtitle: ['15px', { lineHeight: '24px' }],
+        caption: ['13px', { lineHeight: '19px' }],
+        body: ['14px', { lineHeight: '21px' }],
+        subtitle: ['16px', { lineHeight: '24px' }],
         lead: ['17px', { lineHeight: '28px' }],
         title: ['26px', { lineHeight: '32px', letterSpacing: '-0.02em' }],
         display: ['40px', { lineHeight: '44px', letterSpacing: '-0.035em' }],

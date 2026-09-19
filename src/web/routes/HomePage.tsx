@@ -339,14 +339,14 @@ export const HomePage: React.FC = () => {
 
       <main id="main-content" className="vh-boot">
         {/* Hero Copy */}
-        <section className="relative mx-auto max-w-6xl px-6 pb-0 pt-10 text-center">
+        <section className="relative mx-auto max-w-6xl px-6 pb-0 pt-7 text-center">
           <p className="flex items-center justify-center gap-2 text-micro font-medium uppercase tracking-[0.18em] text-ink-muted">
             Independent hardware archive
           </p>
-          <h1 className="mx-auto mt-5 max-w-4xl text-display font-semibold text-ink sm:text-[60px] sm:leading-[1.03] sm:tracking-[-0.04em]">
+          <h1 className="mx-auto mt-4 max-w-4xl text-display font-semibold text-ink sm:text-[52px] sm:leading-[1.04] sm:tracking-[-0.04em]">
             PlayStation Vita port archive.
           </h1>
-          <p className="mx-auto mt-6 max-w-xl text-lead text-ink-medium">
+          <p className="mx-auto mt-5 max-w-xl text-lead text-ink-medium">
             Engine decompilations, ARM wrappers and homebrew builds documented at the moment
             they surface on community engineering boards.
           </p>
@@ -362,27 +362,6 @@ export const HomePage: React.FC = () => {
           onCopyLink={copyEntryLink}
           copiedSlug={copiedSlug}
           consoleRef={consoleRef}
-        />
-
-        {/* Stats Band */}
-        <LedgerStats
-          items={[
-            ["Indexed ports", projects.length, "Across both boards"],
-            [
-              "In development",
-              projects.filter((p) =>
-                ["in_game", "booting", "early_wip", "research"].includes(String(p.current_stage))
-              ).length,
-              "Active work"
-            ],
-            [
-              "Playable",
-              projects.filter((p) => ["playable", "released", "completable"].includes(String(p.current_stage)))
-                .length,
-              "Verified end to end"
-            ],
-            ["Sources", 2, "r/vitahacks · r/VitaPiracy"]
-          ]}
         />
 
         {/* Port Directory Table with Category & Stage Filters */}
@@ -451,6 +430,32 @@ export const HomePage: React.FC = () => {
             </div>
           </section>
         )}
+
+        {/* Stats Band: the summary reads better once the data has been seen. */}
+        <LedgerStats
+          items={[
+            ["Indexed ports", projects.length, "Across both subreddits"],
+            [
+              "Playable or better",
+              projects.filter((p) =>
+                ["playable", "released", "completable"].includes(String(p.current_stage))
+              ).length,
+              "Verified on hardware"
+            ],
+            [
+              "In development",
+              projects.filter((p) =>
+                ["in_game", "booting", "early_wip", "research"].includes(String(p.current_stage))
+              ).length,
+              "Active work"
+            ],
+            [
+              "Released",
+              projects.filter((p) => String(p.current_stage) === "released").length,
+              "Public build out"
+            ]
+          ]}
+        />
 
         {/* Methodology Section */}
         <MethodologySection methodRef={methodReveal} />

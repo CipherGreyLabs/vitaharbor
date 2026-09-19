@@ -58,14 +58,14 @@ export const ConsoleStage: React.FC<ConsoleStageProps> = ({
         Interactive console preview
       </h2>
 
-      <div className="relative w-full py-6">
+      <div className="relative w-full py-2">
         <LiveAreaWaves className="pointer-events-none absolute inset-x-0 inset-y-0 h-full w-full opacity-60" />
         
         <div aria-hidden="true" className="vh-dots pointer-events-none absolute inset-0 opacity-80" />
         
 
         <div className="relative px-2 pt-0 sm:px-6">
-          <div ref={consoleRef} className="h-[230px] sm:h-[330px] lg:h-[400px]">
+          <div ref={consoleRef} className="h-[200px] sm:h-[260px] lg:h-[310px]">
             {webgl === false ? (
               <figure className="flex h-full w-full items-center justify-center">
                 <img
@@ -85,12 +85,12 @@ export const ConsoleStage: React.FC<ConsoleStageProps> = ({
           <div aria-hidden="true" className="vh-floor mx-auto h-px w-[84%]" />
         </div>
 
-        <div className="relative px-4 pb-7 pt-6 sm:px-8">
+        <div className="relative px-4 pb-4 pt-4 sm:px-8">
           {preview && (
-            <div className="flex flex-col gap-4 rounded-2xl border border-hairline bg-canvas px-5 py-4 sm:flex-row sm:items-center sm:justify-between">
+            <div className="flex flex-col gap-3 rounded-2xl border border-hairline bg-surface px-4 py-3 sm:flex-row sm:items-center sm:justify-between">
               <ProjectMark
                 seed={selectedProject?.display_name || selectedProject?.game_title || "vita"}
-                size={46}
+                size={38}
                 className="hidden shrink-0 rounded-xl sm:block"
               />
               <div className="min-w-0 flex-1">
@@ -154,7 +154,7 @@ export const ConsoleStage: React.FC<ConsoleStageProps> = ({
             </div>
           )}
 
-          <div className="mt-5 flex justify-center">
+          <div className="mt-4 flex justify-center">
             <div
               aria-label="Choose a project to preview"
               className="no-scrollbar flex max-w-full gap-1 overflow-x-auto rounded-full border border-hairline bg-sunken p-1"
@@ -181,7 +181,7 @@ export const ConsoleStage: React.FC<ConsoleStageProps> = ({
             </div>
           </div>
 
-          <p className="mt-4 text-center text-micro uppercase text-ink-muted">
+          <p className="mt-3 text-center text-micro uppercase text-ink-muted">
             <span className="hidden sm:inline">
               Drag to rotate · Press <span className="font-mono">/</span> to search the directory
             </span>

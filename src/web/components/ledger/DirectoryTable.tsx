@@ -103,20 +103,22 @@ export const DirectoryTable: React.FC<DirectoryTableProps> = ({
       aria-labelledby="directory-heading"
       className="mx-auto mt-28 max-w-5xl px-6"
     >
-      <div className="flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
-        <div>
-          <h2 id="directory-heading" className="text-title font-semibold text-ink">
-            Directory
-          </h2>
-          <p className="mt-1.5 text-body text-ink-medium">
-            {loading
-              ? "Loading indexed projects…"
-              : visible.length === projects.length
-                ? projects.length + " projects indexed"
-                : "Showing " + visible.length + " of " + projects.length}
-          </p>
-        </div>
-        <div className="relative w-full sm:w-72">
+      <div>
+        <h2 id="directory-heading" className="text-title font-semibold text-ink">
+          Directory
+        </h2>
+        <p className="mt-1.5 text-body text-ink-medium">
+          {loading
+            ? "Loading indexed projects…"
+            : visible.length === projects.length
+              ? projects.length + " projects indexed"
+              : "Showing " + visible.length + " of " + projects.length}
+        </p>
+      </div>
+
+      {/* Controls stay pinned while the list scrolls, so search is always in reach. */}
+      <div className="sticky top-14 z-30 -mx-6 mt-5 border-b border-hairline bg-canvas/95 px-6 py-3 backdrop-blur">
+        <div className="relative w-full">
           <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-ink-muted" />
           <input
             ref={searchRef}
@@ -125,7 +127,7 @@ export const DirectoryTable: React.FC<DirectoryTableProps> = ({
             onChange={(event) => onSearchChange(event.target.value)}
             aria-label="Filter the directory"
             placeholder="Filter by game, engine or platform"
-            className="w-full rounded-xl border border-hairline-strong/30 vh-glass py-2.5 pl-9 pr-9 text-body text-ink placeholder:text-ink-muted outline-none transition-shadow focus:border-hairline-strong/30-strong focus:ring-4 focus:ring-ink/5"
+            className="w-full rounded-xl border border-hairline bg-surface py-2.5 pl-9 pr-9 text-body text-ink placeholder:text-ink-muted outline-none transition-shadow focus:border-hairline-strong focus:ring-4 focus:ring-ink/5"
           />
           {searchTerm && (
             <button
@@ -138,11 +140,8 @@ export const DirectoryTable: React.FC<DirectoryTableProps> = ({
             </button>
           )}
         </div>
-      </div>
 
-      {/* Filter Controls: Stage, Category & Sort */}
-      <div className="mt-6 space-y-3">
-        <div className="flex flex-wrap items-center justify-between gap-4">
+        <div className="mt-3 flex flex-wrap items-center justify-between gap-4">
           <div className="flex flex-wrap gap-1.5">
             {STAGE_FILTERS.map((filter) => (
               <div key={filter.key} className="relative group"><button type="button" aria-pressed={activeFilter === filter.key} onClick={() => onFilterChange(filter.key)} className={"relative z-10 inline-flex items-center gap-1.5 rounded-full px-4 py-2.5 text-caption font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink/20 sm:py-1.5 " + (activeFilter === filter.key ? "text-ink" : "text-ink-muted hover:text-ink")}><span>{filter.label}</span><span className="font-mono text-micro opacity-60">({stageCounts[filter.key] ?? 0})</span></button>{activeFilter === filter.key && (<div className="filter-active-bg transition-all duration-300"></div>)}</div>
@@ -165,12 +164,9 @@ export const DirectoryTable: React.FC<DirectoryTableProps> = ({
           </label>
         </div>
 
-        {/* Smart Category Filter Pills */}
-        <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar pt-1 text-caption">
-          <span className="text-ink-muted text-micro uppercase tracking-wider shrink-0 flex items-center gap-1 mr-1">
-            <Filter className="h-3 w-3 text-accent" />
-            <span>Type:</span>
-          </span>
+        {/* Type is the secondary axis, so it reads quieter than the stage filters. */}
+        <div className="mt-2.5 flex items-center gap-1 overflow-x-auto no-scrollbar">
+          <span className="mr-1 shrink-0 text-micro uppercase tracking-wider text-ink-muted">Type</span>
           {CATEGORY_FILTERS.map((cat) => {
             const active = activeCategory === cat.key;
             return (
@@ -179,10 +175,8 @@ export const DirectoryTable: React.FC<DirectoryTableProps> = ({
                 type="button"
                 onClick={() => onCategoryChange(cat.key)}
                 className={
-                  "px-3 py-2 rounded-lg text-micro font-mono whitespace-nowrap transition-all sm:py-1 " +
-                  (active
-                    ? "border border-hairline-strong/60 bg-surface text-ink font-semibold"
-                    : "bg-transparent text-ink-muted hover:text-ink hover:bg-sunken")
+                  "shrink-0 whitespace-nowrap rounded-md px-2.5 py-1 text-micro transition-colors " +
+                  (active ? "bg-ink/10 text-ink" : "text-ink-muted hover:text-ink")
                 }
               >
                 {cat.label} ({categoryCounts[cat.key] ?? 0})
@@ -231,6 +225,8 @@ export const DirectoryTable: React.FC<DirectoryTableProps> = ({
               const title = splitTitle(project.game_title || project.display_name);
               const expanded = expandedId === project.id;
               const selected = selectedId === project.id;
+              const seenAt = project.first_seen_at ? new Date(project.first_seen_at).getTime() : 0;
+              const isNew = seenAt > 0 && Date.now() - seenAt < 7 * 24 * 60 * 60 * 1000;
 
               return (
                 <li
@@ -265,8 +261,15 @@ export const DirectoryTable: React.FC<DirectoryTableProps> = ({
                           className="shrink-0 rounded-[9px] transition-transform duration-200 group-hover/row:scale-105"
                         />
                         <span className="min-w-0">
-                          <span className="block truncate text-subtitle font-medium text-ink transition-colors group-hover/row:text-accent">
-                            {title.name}
+                          <span className="flex items-center gap-2">
+                            <span className="truncate text-subtitle font-medium text-ink transition-colors group-hover/row:text-accent">
+                              {title.name}
+                            </span>
+                            {isNew && (
+                              <span className="shrink-0 rounded bg-accent/15 px-1.5 py-0.5 text-micro font-semibold uppercase tracking-wide text-accent">
+                                New
+                              </span>
+                            )}
                           </span>
                           <span className="mt-0.5 block font-mono text-micro uppercase text-ink-muted">
                             {title.engine || project.original_platform || "Port"}
