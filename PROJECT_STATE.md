@@ -176,7 +176,8 @@ test/build/deployment output.
   idempotent one-off script, report and append-only audit events are committed
   with the worker result.
 - Deployment was intentionally not performed. GitHub Actions verification and
-  the final local/remote tree proof remain part of the release gate after push.
+  the final local/remote tree proof are recorded below as part of the release
+  gate after push.
 - GitHub Actions run `35526699613` succeeded on `17ada1a`; its scanner data
   commit `ef469277` was inspected and fast-forwarded locally. It kept schema v2,
   left curated `fallbackData.ts` unchanged and removed only the now-curated RC
