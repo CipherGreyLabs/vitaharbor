@@ -166,15 +166,21 @@ test/build/deployment output.
   22-item feed was not treated as a source of truth. The local v2 quarantine and
   curated feed generation won the conflicts.
 - Seven remote candidate URLs were reconciled: five matched existing quarantine
-  records and two were added as `reddit-1wjn8zg` (RC Cars) and `reddit-1wllsbo`
-  (Super Smash Bros Melee update), both `QUARANTINED` with content hashes and
-  explicit missing-body/scanner-payload evidence gaps.
-- Current counts are 28 curated projects, 10 internal quarantine records and 7
-  sanitized public review-queue items. No candidate was promoted and Reddit was
-  not mutated. The reconciliation fixture, idempotent one-off script, report and
-  append-only audit events are committed with the worker result.
+  records, RC Cars matched the already-curated canonical lead and was removed by
+  the hardened scanner, and Super Smash Bros Melee update remains
+  `reddit-1wllsbo` in `QUARANTINED` with a content hash and explicit missing-body
+  evidence gap.
+- Current post-scan counts are 28 curated projects, 9 internal quarantine
+  records and 6 sanitized public review-queue items. No candidate was promoted
+  by this reconciliation and Reddit was not mutated. The reconciliation fixture,
+  idempotent one-off script, report and append-only audit events are committed
+  with the worker result.
 - Deployment was intentionally not performed. GitHub Actions verification and
   the final local/remote tree proof remain part of the release gate after push.
+- GitHub Actions run `35526699613` succeeded on `17ada1a`; its scanner data
+  commit `ef469277` was inspected and fast-forwarded locally. It kept schema v2,
+  left curated `fallbackData.ts` unchanged and removed only the now-curated RC
+  Cars quarantine duplicate.
 
 ## VH-POISON-008 and VH-INCIDENT-010 security state
 

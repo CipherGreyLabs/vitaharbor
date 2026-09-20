@@ -8,12 +8,14 @@ import {
   PROVENANCE_SCHEMA_VERSION,
   upgradeProvenanceRecord
 } from "../reddit-provenance.mjs";
+import { keyOf } from "../reddit-classifier.mjs";
 
 const root = process.cwd();
 const inputPath = path.resolve(root, "data/remote-scanner-reconciliation-2026-09-20.json");
 const quarantinePath = path.resolve(root, "data/quarantine.json");
 const publicPath = path.resolve(root, "public/data/discovered.json");
 const auditPath = path.resolve(root, "data/provenance-audit.jsonl");
+const ledgerPath = path.resolve(root, "src/shared/constants/fallbackData.ts");
 const input = JSON.parse(fs.readFileSync(inputPath, "utf8"));
 const quarantine = JSON.parse(fs.readFileSync(quarantinePath, "utf8"));
 if (quarantine.schema_version !== PROVENANCE_SCHEMA_VERSION || !Array.isArray(quarantine.items)) {
@@ -21,6 +23,8 @@ if (quarantine.schema_version !== PROVENANCE_SCHEMA_VERSION || !Array.isArray(qu
 }
 
 const existingUrls = new Set(quarantine.items.map((item) => item.source?.canonical_url).filter(Boolean));
+const ledgerSource = fs.readFileSync(ledgerPath, "utf8");
+const knownLeadKeys = new Set((ledgerSource.match(/https:\/\/(?:www\.)?reddit\.com\/[^"']+/g) || []).map(keyOf));
 const auditLines = fs.existsSync(auditPath)
   ? fs.readFileSync(auditPath, "utf8").split(/\r?\n/).filter(Boolean)
   : [];
@@ -32,6 +36,7 @@ const added = [];
 const auditEvents = [];
 
 for (const observation of input.observations) {
+  if (knownLeadKeys.has(keyOf(observation.url))) continue;
   if (existingUrls.has(observation.url)) continue;
 
   const contentHash = createHash("sha256").update(JSON.stringify({

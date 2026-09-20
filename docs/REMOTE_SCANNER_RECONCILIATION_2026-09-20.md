@@ -34,26 +34,28 @@ URL, not on the legacy ID string.
 | `1wkvzon` — 8BitDo Ultimate 2 | legacy candidate | `reddit-1wkvzon`, `QUARANTINED` | Deduplicated; current v2 record retained |
 | `1wko6vu` — Ratchet & Clank controls | legacy candidate | `reddit-1wko6vu`, `QUARANTINED` | Deduplicated; current v2 record retained |
 | `1wjte26` — TFoUAD update | legacy candidate | `reddit-1wjte26`, `QUARANTINED` | Deduplicated; current v2 record retained |
-| `1wjn8zg` — RC Cars port progress | legacy candidate | `reddit-1wjn8zg`, `QUARANTINED` | Added to v2 quarantine with content hash and evidence gaps |
+| `1wjn8zg` — RC Cars port progress | legacy candidate | curated `RC Cars` source already exists | Reconciled as a known lead; the hardened scanner removed the duplicate quarantine record |
 | `1wi5b10` — Building an app for all things Vita | legacy candidate | `reddit-1wi5b10`, `QUARANTINED` | Deduplicated; current v2 record retained |
 | `1wh0klj` — Class of '09 Vita Port | legacy candidate | `reddit-1wh0klj`, `QUARANTINED` | Deduplicated; current v2 record retained |
 | `1wllsbo` — Super Smash Bros Melee update | legacy candidate | `reddit-1wllsbo`, `QUARANTINED` | Added to v2 quarantine with content hash and evidence gaps |
 
-The two new records explicitly record that the raw post body and scanner payload
-were unavailable in the remote public projection. They are therefore leads for
-fresh review, not proof of a working port or an endorsement. Their URLs do not
-match the incident-contained IDs `1wlj9gd`, `1wlkdva` or `1wlkixu`; the absence of
-the original bodies means that this is an identity check, not a full incident
-re-assessment.
+The newly preserved `Super Smash Bros Melee` record explicitly records that the
+raw post body and scanner payload were unavailable in the remote public
+projection. It is therefore a lead for fresh review, not proof of a working port
+or an endorsement. `RC Cars` was already source-backed in the curated ledger;
+the scanner's removal of its quarantine duplicate is expected. The remote URLs
+do not match the incident-contained IDs `1wlj9gd`, `1wlkdva` or `1wlkixu`; the
+absence of the original bodies means that this is an identity check, not a full
+incident re-assessment.
 
 ## Resulting tree state
 
 - Normal merge commit: `7c1b17b` (`Merge remote scanner commits before provenance reconciliation`).
 - Curated ledger: 28 projects; unchanged.
-- Internal quarantine: 10 records; 7 public-safe `QUARANTINED` review-queue items, 2 `BLOCKED_UNVERIFIED` incident records and 1 `REJECTED` incident record.
-- Public discovery: schema v2, 7 sanitized review-queue items; no author, body, risk, campaign or scanner-reason fields.
+- Internal quarantine: 9 records; 6 public-safe `QUARANTINED` review-queue items, 2 `BLOCKED_UNVERIFIED` incident records and 1 `REJECTED` incident record.
+- Public discovery: schema v2, 6 sanitized review-queue items; no author, body, risk, campaign or scanner-reason fields.
 - JSON and RSS feeds: regenerated from the curated ledger, 28 items; the remote legacy 22-item feed was discarded.
-- Audit: two append-only `remote_scanner_reconciliation` events identify both source commits and their evidence gaps.
+- Audit: append-only `remote_scanner_reconciliation` events identify both source commits and the evidence gap for the preserved remote-only lead; the curated RC Cars duplicate is intentionally not retained in quarantine.
 - Deployment: none in this assignment; the existing production deployment remains unchanged.
 
 The durable observation fixture is
