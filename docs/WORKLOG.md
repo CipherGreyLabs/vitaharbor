@@ -460,3 +460,11 @@ The five remaining candidates were checked against their source threads. None wa
 |---|---|---|---|---|---|
 | 19:21 | `e89adff` | Committed the reviewed 80-path VitaHarbor integration selection on `main` | Establish a local, reviewable project baseline without pushing or changing production | unrecorded | `Integrate VitaHarbor ledger and incident controls`; commit created on `main`; machine-local restart handoff remained excluded |
 | 19:22 | local bookkeeping | Recorded the post-commit project state, evidence, integration checkpoint and hash-protected handoff | Make the final local integration state self-describing and verifiable before handoff | unrecorded | Handoff verification remained `GO`; only the explicitly excluded restart handoff remains outside Git; production unchanged |
+
+### VH-RECONCILE-012 remote scanner reconciliation (2026-09-20)
+
+| Time | Commit | Change | Why | Model | Verified |
+|---|---|---|---|---|---|
+| 19:30 | `7c1b17b` | Merged remote scanner commits `37fabb5` and `4ba193f` normally and resolved generated-file conflicts in favor of the current schema-v2 provenance boundary | Reconcile remote scanner history without allowing a legacy public projection or stale 22-item feed to overwrite the hardened local state | unrecorded | Merge parents are the local integration tip and `4ba193f`; no rebase, force push, reset, clean or stash |
+| 19:37 | working tree | Preserved the two remote-only observations (`RC Cars` and `Super Smash Bros Melee [Update]`) as v2 `QUARANTINED` records with content hashes, missing-body evidence gaps and append-only audit events; five matching URLs were deduplicated | Keep scanner discoveries available for review without promotion or unsupported claims | unrecorded | `data/quarantine.json` has 10 records, `public/data/discovered.json` has 7 sanitized items, curated ledger remains 28, and rerunning the reconciliation is an idempotent no-op |
+| 19:37 | working tree | Regenerated JSON/RSS feeds from the curated ledger and added the reconciliation fixture, script and evidence report | Keep public feeds separate from unverified scanner queue data and make the decision reproducible | unrecorded | `npm run data:feeds` completed; feed count is 28; report: `docs/REMOTE_SCANNER_RECONCILIATION_2026-09-20.md` |

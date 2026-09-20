@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-09-20T16:59:25.697Z",
+  "generated_at": "2026-09-20T17:37:08.209Z",
   "source": "r/vitahacks + r/VitaPiracy + r/PSVitaHomebrew RSS",
   "note": "Detected sources are quarantined and are not part of the curated ledger. No public item is a promotion or endorsement.",
   "items": [
@@ -56,6 +56,28 @@
       "subreddit": "vitahacks",
       "published_at": "2026-09-15T13:34:13.000Z",
       "detected_at": "2026-09-17T15:34:20.988Z",
+      "candidate_type": "port",
+      "public_visibility": "review_queue"
+    },
+    {
+      "id": "reddit-1wjn8zg",
+      "state": "QUARANTINED",
+      "title": "RC Cars port progress",
+      "url": "https://www.reddit.com/r/vitahacks/comments/1wjn8zg/rc_cars_port_progress/",
+      "subreddit": "vitahacks",
+      "published_at": "2026-09-18T13:09:43.000Z",
+      "detected_at": "2026-09-18T15:05:09.129Z",
+      "candidate_type": "port",
+      "public_visibility": "review_queue"
+    },
+    {
+      "id": "reddit-1wllsbo",
+      "state": "QUARANTINED",
+      "title": "Super Smash bros Melee [Update]",
+      "url": "https://www.reddit.com/r/vitahacks/comments/1wllsbo/super_smash_bros_melee_update/",
+      "subreddit": "vitahacks",
+      "published_at": "2026-09-20T16:36:10.000Z",
+      "detected_at": "2026-09-20T16:41:37.670Z",
       "candidate_type": "port",
       "public_visibility": "review_queue"
     }

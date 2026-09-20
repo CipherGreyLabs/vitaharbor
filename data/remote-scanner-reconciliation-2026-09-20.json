@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "purpose": "Evidence fixture for reconciling legacy public scanner commits into the v2 quarantine boundary.",
+  "remote_commits": [
+    "37fabb556832b06c4fc570ecc56278fe21dfff06",
+    "4ba193f56c1f9ef873deb721162348bee89f38b9"
+  ],
+  "source_public_schema": 1,
+  "observations": [
+    {
+      "title": "RC Cars port progress",
+      "url": "https://www.reddit.com/r/vitahacks/comments/1wjn8zg/rc_cars_port_progress/",
+      "subreddit": "vitahacks",
+      "author": "antoxa2584x",
+      "published": "2026-09-18T13:09:43Z",
+      "detected_at": "2026-09-18T15:05:09.129Z",
+      "confidence": "low",
+      "classification_reason": "Legacy public scanner record; current source review required",
+      "candidate_type": "port"
+    },
+    {
+      "title": "Super Smash bros Melee [Update]",
+      "url": "https://www.reddit.com/r/vitahacks/comments/1wllsbo/super_smash_bros_melee_update/",
+      "subreddit": "vitahacks",
+      "author": "zm2283145",
+      "published": "2026-09-20T16:36:10Z",
+      "detected_at": "2026-09-20T16:41:37.670Z",
+      "confidence": "high",
+      "classification_reason": "5 dev signals: \\brelease\\b, \\bupdate\\b, \\bv\\d+\\.\\d+\\b",
+      "candidate_type": "port"
+    }
+  ]
+}

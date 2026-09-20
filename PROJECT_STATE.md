@@ -157,6 +157,25 @@ Every assignment ends with a status of `GO`, `NO_GO`, `UNKNOWN` or
 `NOT_APPLICABLE`, supported by an entry in `EVIDENCE.jsonl` and the relevant
 test/build/deployment output.
 
+## VH-RECONCILE-012 remote scanner reconciliation state
+
+- `origin/main` had two scanner-only commits beyond the local hardened v2
+  integration point: `37fabb5` and `4ba193f`. A normal merge produced local
+  merge commit `7c1b17b`; no rebase, force push, reset, clean or stash was used.
+- Both remote discovery files were legacy public schema v1 projections. Their
+  22-item feed was not treated as a source of truth. The local v2 quarantine and
+  curated feed generation won the conflicts.
+- Seven remote candidate URLs were reconciled: five matched existing quarantine
+  records and two were added as `reddit-1wjn8zg` (RC Cars) and `reddit-1wllsbo`
+  (Super Smash Bros Melee update), both `QUARANTINED` with content hashes and
+  explicit missing-body/scanner-payload evidence gaps.
+- Current counts are 28 curated projects, 10 internal quarantine records and 7
+  sanitized public review-queue items. No candidate was promoted and Reddit was
+  not mutated. The reconciliation fixture, idempotent one-off script, report and
+  append-only audit events are committed with the worker result.
+- Deployment was intentionally not performed. GitHub Actions verification and
+  the final local/remote tree proof remain part of the release gate after push.
+
 ## VH-POISON-008 and VH-INCIDENT-010 security state
 
 - Exact threat post was reviewed read-only in a separate authenticated Chrome session and is recorded in `docs/REDDIT_POISONING_REVIEW_2026-09-20.md`: `r/VitaPiracy`, post `1wlj9gd`, published `2026-09-20T14:58:36.001Z`, explicit fake/troll intent. Reddit mutations: NONE.
