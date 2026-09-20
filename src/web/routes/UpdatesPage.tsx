@@ -24,7 +24,7 @@ export const UpdatesPage: React.FC = () => {
   useDocumentMeta({
     title: "Signal stream",
     description:
-      "Every milestone observation from r/vitahacks and r/VitaPiracy, filtered by event type and verification status."
+      "Every milestone observation from r/vitahacks, r/VitaPiracy and r/PSVitaHomebrew, filtered by event type and verification status."
   });
 
   const [updates, setUpdates] = useState<UpdateCardData[]>([]);

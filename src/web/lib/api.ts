@@ -21,6 +21,7 @@ async function fetchLive<T>(path: string): Promise<T | null> {
   try {
     const res = await fetch(path, {
       headers: { accept: "application/json" },
+      cache: "no-store",
       signal: controller ? controller.signal : undefined
     });
     if (!res.ok) return null;

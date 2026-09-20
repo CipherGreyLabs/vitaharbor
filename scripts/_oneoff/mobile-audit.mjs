@@ -29,6 +29,7 @@ for (const vp of viewports) {
     for (const el of document.querySelectorAll('body *')) {
       const s = getComputedStyle(el);
       if (s.display === 'none' || s.visibility === 'hidden' || s.position === 'fixed') continue;
+      if (el.matches('.sr-only, [aria-hidden="true"]')) continue;
       const r = el.getBoundingClientRect();
       if (r.width === 0 || r.height === 0) continue;
 
@@ -72,4 +73,3 @@ for (const vp of viewports) {
 }
 
 await browser.close();
-

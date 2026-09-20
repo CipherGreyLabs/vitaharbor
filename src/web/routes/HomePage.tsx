@@ -10,12 +10,52 @@ import { MethodologySection } from "../components/ledger/MethodologySection";
 import {
   type LedgerProject,
   splitTitle,
-  derivePlatformCategory,
+  deriveProjectType,
   STAGE_RANK,
   formatDay,
-  relativeTime
+  formatUtcDateTime,
+  verificationMeta
 } from "../components/ledger/types";
-import { ExternalLink } from "lucide-react";
+import { ArrowUp, ExternalLink } from "lucide-react";
+
+interface DirectoryFilters {
+  search: string;
+  stage: string;
+  type: string;
+  sort: string;
+}
+
+function readDirectoryFilters(): DirectoryFilters {
+  if (typeof window === "undefined") return { search: "", stage: "all", type: "all", sort: "recent" };
+  const params = new URLSearchParams(window.location.search);
+  return {
+    search: params.get("q") || "",
+    stage: params.get("stage") || "all",
+    type: params.get("type") || "all",
+    sort: params.get("sort") || "recent"
+  };
+}
+
+function normaliseSearchValue(value: unknown) {
+  return String(value || "")
+    .replace(/&amp;/gi, "&")
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, " ")
+    .replace(/\b(vita|port|ps)\b/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+function relatedProjectForCandidate(item: any, projects: LedgerProject[]) {
+  const candidate = normaliseSearchValue(item?.title);
+  if (!candidate || candidate.length < 6) return null;
+  return projects.find((project) => {
+    const names = [project.game_title, project.display_name, project.slug]
+      .map(normaliseSearchValue)
+      .filter((name) => name.length >= 6);
+    return names.some((name) => candidate.includes(name) || name.includes(candidate));
+  }) || null;
+}
 
 function slugFromLocation(pathname: string, hash: string) {
   const fromHash = hash.match(/p=([a-z0-9-]+)/i);
@@ -53,24 +93,31 @@ function useReveal<T extends HTMLElement>() {
 }
 
 export const HomePage: React.FC = () => {
+  const metaSlug = typeof window !== "undefined"
+    ? slugFromLocation(window.location.pathname, window.location.hash)
+    : "";
+  const metaOrigin = typeof window !== "undefined" ? window.location.origin : "https://vitaharbor.vercel.app";
   useDocumentMeta({
-    title: "VitaHarbor — PlayStation Vita Port Archive",
+    title: "VitaHarbor — Latest PlayStation Vita port updates",
     description:
-      "An independent archive of PlayStation Vita engine decompilations, ARM wrappers and homebrew builds, sourced from community engineering boards."
+      "A small, source-linked tracker for new PlayStation Vita ports, decompilations and ARM wrapper updates found in the community.",
+    image: metaOrigin + (metaSlug ? "/og/projects/" + metaSlug + ".png" : "/og.png"),
+    imageAlt: metaSlug ? "VitaHarbor project record" : "VitaHarbor PlayStation Vita update tracker"
   });
 
   const [projects, setProjects] = useState<LedgerProject[]>(() => FALLBACK_PROJECTS as any[]);
   const [recentUpdates, setRecentUpdates] = useState<any[]>(() => FALLBACK_UPDATES as any[]);
   const [selectedId, setSelectedId] = useState<number | null>(null);
   const [expandedId, setExpandedId] = useState<number | null>(null);
-  const [searchTerm, setSearchTerm] = useState("");
-  const [activeFilter, setActiveFilter] = useState("all");
-  const [activeCategory, setActiveCategory] = useState("all");
-  const [activeSort, setActiveSort] = useState("recent");
-  const [loading, setLoading] = useState(false);
+  const [searchTerm, setSearchTerm] = useState(() => readDirectoryFilters().search);
+  const [activeFilter, setActiveFilter] = useState(() => readDirectoryFilters().stage);
+  const [activeCategory, setActiveCategory] = useState(() => readDirectoryFilters().type);
+  const [activeSort, setActiveSort] = useState(() => readDirectoryFilters().sort);
+  const [loading] = useState(false);
   const [copiedSlug, setCopiedSlug] = useState("");
   const [announcement, setAnnouncement] = useState("");
   const [scrolled, setScrolled] = useState(false);
+  const [showScrollTop, setShowScrollTop] = useState(false);
   const [webgl, setWebgl] = useState<boolean | null>(null);
   const [tickerPaused, setTickerPaused] = useState(false);
   const [discovered, setDiscovered] = useState<any[]>([]);
@@ -92,6 +139,21 @@ export const HomePage: React.FC = () => {
       setWebgl(false);
     }
   }, []);
+
+  useEffect(() => {
+    const url = new URL(window.location.href);
+    const values: Array<[string, string, string]> = [
+      ["q", searchTerm.trim(), ""],
+      ["stage", activeFilter, "all"],
+      ["type", activeCategory, "all"],
+      ["sort", activeSort, "recent"]
+    ];
+    for (const [key, value, defaultValue] of values) {
+      if (!value || value === defaultValue) url.searchParams.delete(key);
+      else url.searchParams.set(key, value);
+    }
+    window.history.replaceState(null, "", url.pathname + (url.search ? url.search : "") + url.hash);
+  }, [searchTerm, activeFilter, activeCategory, activeSort]);
 
   useEffect(() => {
     const bundled = FALLBACK_PROJECTS as any[];
@@ -146,7 +208,10 @@ export const HomePage: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 6);
+    const onScroll = () => {
+      setScrolled(window.scrollY > 6);
+      setShowScrollTop(window.scrollY > 520);
+    };
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
@@ -211,9 +276,10 @@ export const HomePage: React.FC = () => {
       projects.map((p) => normaliseUrl((p as any).reddit_url)).filter(Boolean)
     );
     return discovered.filter((item) => {
+      const state = String(item?.state || "QUARANTINED");
+      if (!["QUARANTINED", "VERIFIED_FOR_REVIEW"].includes(state)) return false;
       const url = normaliseUrl(item?.url);
-      if (!url) return false;
-      return !ledgerUrls.has(url);
+      return !url || !ledgerUrls.has(url);
     });
   }, [discovered, projects]);
 
@@ -229,14 +295,23 @@ export const HomePage: React.FC = () => {
     }
 
     if (activeCategory !== "all") {
-      list = list.filter((p) => derivePlatformCategory(p) === activeCategory);
+      list = list.filter((p) => deriveProjectType(p) === activeCategory);
     }
 
     const term = searchTerm.trim().toLowerCase();
     if (term) {
       list = list.filter(
         (p) =>
-          [p.game_title, p.display_name, p.summary, p.original_platform, p.slug]
+          [
+            p.game_title,
+            p.display_name,
+            p.summary,
+            p.original_platform,
+            p.slug,
+            p.repo_url,
+            ...(p.aliases || []),
+            ...((p.developers || []).map((developer: any) => developer.display_name))
+          ]
             .filter(Boolean)
             .some((field) => Boolean(field) && String(field).toLowerCase().includes(term)) ||
           (p.technologies || []).some((tech: string) => String(tech).toLowerCase().includes(term))
@@ -260,18 +335,27 @@ export const HomePage: React.FC = () => {
 
   const selectProject = (project: LedgerProject, scroll = true) => {
     setSelectedId(project.id);
-    if (scroll) consoleRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+    if (scroll && consoleRef.current) {
+      const el = consoleRef.current;
+      const top = el.getBoundingClientRect().top + window.scrollY - 64;
+      window.scrollTo({ top: Math.max(0, top), behavior: 'smooth' });
+    }
   };
 
   const toggleEntry = (project: LedgerProject) => {
     const next = expandedId === project.id ? null : project.id;
     setExpandedId(next);
     setSelectedId(project.id);
-    if (next) {
-      history.replaceState(null, "", "#p=" + project.slug);
-    } else if (window.location.hash.startsWith("#p=")) {
-      history.replaceState(null, "", window.location.pathname);
-    }
+    const url = new URL(window.location.href);
+    url.hash = next ? "p=" + project.slug : "";
+    history.replaceState(null, "", url.pathname + url.search + url.hash);
+  };
+
+  const resetFilters = () => {
+    setSearchTerm("");
+    setActiveFilter("all");
+    setActiveCategory("all");
+    setActiveSort("recent");
   };
 
   const copyEntryLink = async (project: LedgerProject) => {
@@ -286,6 +370,11 @@ export const HomePage: React.FC = () => {
       setCopiedSlug("");
       setAnnouncement("Copying link failed.");
     }
+  };
+
+  const scrollToTop = () => {
+    const reducedMotion = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
+    window.scrollTo({ top: 0, behavior: reducedMotion ? "auto" : "smooth" });
   };
 
   return (
@@ -311,11 +400,12 @@ export const HomePage: React.FC = () => {
         <div className="mx-auto flex h-14 max-w-5xl items-center justify-between px-6">
           <a
             href="#top"
-            className="rounded-md text-lead font-semibold tracking-tight text-ink outline-none focus-visible:ring-2 focus-visible:ring-ink/20"
+            className="inline-flex min-h-[44px] items-center rounded-md px-1 text-lead font-semibold tracking-tight text-ink outline-none focus-visible:ring-2 focus-visible:ring-ink/20"
           >
             VitaHarbor
           </a>
           <nav aria-label="Sections" className="flex items-center gap-4 text-body text-ink-medium sm:gap-5">
+            <a href="#latest-updates" className="inline-flex min-h-[44px] items-center rounded-md px-1 transition-colors hover:text-ink">Latest</a>
             <a href="#directory" className="inline-flex min-h-[44px] items-center rounded-md px-1 transition-colors hover:text-ink">Directory</a>
             <a href="#methodology" className="inline-flex min-h-[44px] items-center rounded-md px-1 transition-colors hover:text-ink">Methodology</a>
             <div className="hidden items-center gap-2 rounded-full border border-hairline bg-surface px-3 py-1 font-mono text-micro text-ink-muted sm:inline-flex">
@@ -341,15 +431,35 @@ export const HomePage: React.FC = () => {
         {/* Hero Copy */}
         <section className="relative mx-auto max-w-6xl px-6 pb-0 pt-7 text-center">
           <p className="flex items-center justify-center gap-2 text-micro font-medium uppercase tracking-[0.18em] text-ink-muted">
-            Independent hardware archive
+            Community port updates
           </p>
           <h1 className="mx-auto mt-4 max-w-4xl text-display font-semibold text-ink sm:text-[52px] sm:leading-[1.04] sm:tracking-[-0.04em]">
-            PlayStation Vita port archive.
+            The Vita port update tracker.
           </h1>
           <p className="mx-auto mt-5 max-w-xl text-lead text-ink-medium">
-            Engine decompilations, ARM wrappers and homebrew builds documented at the moment
-            they surface on community engineering boards.
+            New ports, decompilations and wrappers, collected from the places where the scene
+            actually posts them.
           </p>
+        </section>
+
+        <section aria-label="Tracker status" className="mx-auto mt-8 max-w-5xl px-6">
+          <div className="grid gap-px overflow-hidden rounded-2xl border border-hairline-strong/30 bg-hairline-strong/20 sm:grid-cols-3">
+            <div className="bg-surface p-4 sm:p-5">
+              <p className="text-micro font-semibold uppercase tracking-[0.14em] text-ink-muted">Source scan</p>
+              <p className="mt-2 text-subtitle font-semibold text-ink">3× daily</p>
+              <p className="mt-1 text-caption text-ink-muted">r/vitahacks + r/VitaPiracy + r/PSVitaHomebrew</p>
+            </div>
+            <div className="bg-surface p-4 sm:p-5">
+              <p className="text-micro font-semibold uppercase tracking-[0.14em] text-ink-muted">Last scan</p>
+              <p className="mt-2 text-subtitle font-semibold text-ink">{scannedAt ? formatUtcDateTime(scannedAt) : "Not recorded"}</p>
+              <p className="mt-1 text-caption text-ink-muted">Detected threads stay outside the ledger until reviewed.</p>
+            </div>
+            <div className="bg-surface p-4 sm:p-5">
+              <p className="text-micro font-semibold uppercase tracking-[0.14em] text-ink-muted">Review queue</p>
+              <p className="mt-2 text-subtitle font-semibold text-ink">{pendingDiscovered.length === 1 ? "1 candidate" : pendingDiscovered.length + " candidates"}</p>
+              <p className="mt-1 text-caption text-ink-muted">Open the source before treating it as verified.</p>
+            </div>
+          </div>
         </section>
 
         {/* 3D Console Showcase Stage */}
@@ -364,6 +474,46 @@ export const HomePage: React.FC = () => {
           consoleRef={consoleRef}
         />
 
+        <section id="latest-updates" aria-labelledby="latest-updates-heading" className="mx-auto mt-20 max-w-6xl px-6">
+          <div className="flex flex-wrap items-end justify-between gap-4 border-b border-hairline-strong/30 pb-4">
+            <div>
+              <p className="text-micro font-semibold uppercase tracking-[0.16em] text-ink-muted">What changed</p>
+              <h2 id="latest-updates-heading" className="mt-2 text-title font-semibold tracking-tight text-ink">Latest updates</h2>
+            </div>
+            <p className="max-w-sm text-right text-caption text-ink-muted">Exact source dates are shown below; relative “days ago” labels stay out of the tracker.</p>
+          </div>
+          <div className="mt-5 grid gap-3 md:grid-cols-2">
+            {recentUpdates.slice(0, 4).map((update) => {
+              const sourceUrl = update.sources?.[0]?.canonical_url;
+              const projectLabel = update.project_display_name || "Unassigned project";
+              const verification = verificationMeta(update.verification_level);
+              const projectLink = update.project_slug ? (
+                <a href={"#p=" + update.project_slug} className="inline-flex min-h-[44px] items-center rounded-md pr-2 text-accent hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink/20">{projectLabel}</a>
+              ) : (
+                <span className="inline-flex min-h-[44px] items-center pr-2 text-ink-muted" title="No project route is recorded">{projectLabel}</span>
+              );
+              return (
+                <article key={update.id} className="rounded-2xl border border-hairline bg-surface p-5 transition-colors hover:border-hairline-strong/60">
+                  <div className="flex flex-wrap items-center justify-between gap-2 text-micro font-medium uppercase tracking-[0.12em] text-ink-muted">
+                    {projectLink}
+                    <time dateTime={new Date(update.event_at).toISOString()} title={"Exact source date: " + formatUtcDateTime(update.event_at)}>{formatUtcDateTime(update.event_at)}</time>
+                  </div>
+                  <h3 className="mt-3 text-subtitle font-semibold leading-snug text-ink">{update.title}</h3>
+                  <p className="mt-2 line-clamp-3 text-body leading-relaxed text-ink-medium">{update.summary}</p>
+                  <div className="mt-4 flex flex-wrap items-center justify-between gap-3 border-t border-hairline pt-3 text-caption text-ink-muted">
+                    <span title={verification.description}>{verification.label}</span>
+                    {sourceUrl ? (
+                      <a href={sourceUrl} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-[44px] items-center gap-1 rounded-md px-2 font-medium text-ink transition-colors hover:text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink/20">
+                        Source thread <ExternalLink className="h-3.5 w-3.5" aria-hidden="true" />
+                      </a>
+                    ) : null}
+                  </div>
+                </article>
+              );
+            })}
+          </div>
+        </section>
+
         {/* Port Directory Table with Category & Stage Filters */}
         <DirectoryTable
           projects={projects}
@@ -377,6 +527,7 @@ export const HomePage: React.FC = () => {
           onSortChange={setActiveSort}
           searchTerm={searchTerm}
           onSearchChange={setSearchTerm}
+          onResetFilters={resetFilters}
           searchRef={searchRef}
           selectedId={selectedId}
           expandedId={expandedId}
@@ -384,6 +535,7 @@ export const HomePage: React.FC = () => {
           onSelectProject={selectProject}
           onCopyLink={copyEntryLink}
           copiedSlug={copiedSlug}
+          scannedAt={scannedAt}
           directoryRef={directoryReveal}
         />
 
@@ -410,20 +562,44 @@ export const HomePage: React.FC = () => {
                 {pendingDiscovered.map((item) => (
                   <li key={item.id} className="flex flex-wrap items-center justify-between gap-3 py-3.5">
                     <div className="min-w-0">
-                      <p className="truncate text-body font-medium text-ink">{item.title}</p>
+                      <div className="flex flex-wrap items-center gap-2">
+                        <p className="truncate text-body font-medium text-ink">{item.title}</p>
+                        <span className="rounded-full border border-hairline bg-surface px-2 py-0.5 text-micro font-semibold uppercase text-ink-muted">
+                          {item.state === "VERIFIED_FOR_REVIEW" ? "Verified for review" : "Quarantined source"}
+                        </span>
+                      </div>
                       <p className="mt-0.5 text-caption text-ink-muted">
-                        r/{item.subreddit} · {item.author} · {relativeTime(item.published_at || item.detected_at)}
+                        {item.subreddit ? "r/" + item.subreddit + " · " : "Detected source · "}
+                        Published {formatUtcDateTime(item.published_at || item.detected_at)}
                       </p>
+                      {(() => {
+                        const related = relatedProjectForCandidate(item, projects);
+                        return related ? (
+                          <p className="mt-1 text-caption text-accent">
+                            Possible update to {splitTitle(related.game_title || related.display_name).name}; review before merging.
+                          </p>
+                        ) : item.public_visibility === "withheld" ? (
+                          <p className="mt-1 line-clamp-1 text-caption text-ink-muted">
+                            The source details are withheld until manual provenance review.
+                          </p>
+                        ) : null;
+                      })()}
                     </div>
-                    <a
-                      href={item.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex shrink-0 items-center gap-1.5 text-caption font-medium text-ink-medium transition-colors hover:text-accent"
-                    >
-                      Open thread
-                      <ExternalLink className="h-3.5 w-3.5" />
-                    </a>
+                    {item.url ? (
+                      <a
+                        href={item.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex min-h-[44px] shrink-0 items-center gap-1.5 rounded-md px-2 text-caption font-medium text-ink-medium transition-colors hover:text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink/20"
+                      >
+                        Open thread
+                        <ExternalLink className="h-3.5 w-3.5" />
+                      </a>
+                    ) : (
+                      <span className="inline-flex min-h-[44px] shrink-0 items-center rounded-md px-2 text-caption text-ink-muted">
+                        Source withheld
+                      </span>
+                    )}
                   </li>
                 ))}
               </ul>
@@ -434,13 +610,13 @@ export const HomePage: React.FC = () => {
         {/* Stats Band: the summary reads better once the data has been seen. */}
         <LedgerStats
           items={[
-            ["Indexed ports", projects.length, "Across both subreddits"],
+            ["Indexed ports", projects.length, "Across three subreddits"],
             [
-              "Playable or better",
+              "Playable stage",
               projects.filter((p) =>
                 ["playable", "released", "completable"].includes(String(p.current_stage))
               ).length,
-              "Verified on hardware"
+              "Reported in source"
             ],
             [
               "In development",
@@ -450,9 +626,9 @@ export const HomePage: React.FC = () => {
               "Active work"
             ],
             [
-              "Released",
+              "Released stage",
               projects.filter((p) => String(p.current_stage) === "released").length,
-              "Public build out"
+              "Release noted in source"
             ]
           ]}
         />
@@ -471,7 +647,7 @@ export const HomePage: React.FC = () => {
                 VitaHarbor
               </p>
               <p className="mt-3 max-w-xs text-body text-ink-medium">
-                An independent archive of PlayStation Vita ports, assembled from public engineering threads.
+                A small tracker for PlayStation Vita ports, decompilations and wrappers, assembled from public engineering threads.
               </p>
             </div>
             <div>
@@ -507,11 +683,23 @@ export const HomePage: React.FC = () => {
             </div>
           </div>
           <p className="mt-12 border-t border-hairline-strong/30 pt-6 text-caption text-ink-muted">
-            Nothing here bypasses licensing or distributes copyrighted game data. Every entry links to its
-            original public thread.
+              Nothing here bypasses licensing or distributes copyrighted game data. Entries link to an original
+              public thread when a project-specific source has been verified.
           </p>
         </div>
       </footer>
+      {showScrollTop && (
+        <button
+          type="button"
+          onClick={scrollToTop}
+          aria-label="Scroll to top"
+          title="Scroll to top"
+          className="fixed bottom-5 right-5 z-50 inline-flex h-11 w-11 items-center justify-center rounded-full border border-hairline-strong/40 bg-surface/95 text-ink shadow-lift backdrop-blur transition-all hover:-translate-y-0.5 hover:bg-sunken focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink/30"
+        >
+          <ArrowUp className="h-4 w-4" aria-hidden="true" />
+          <span className="sr-only">Back to top</span>
+        </button>
+      )}
     </div>
   );
 };

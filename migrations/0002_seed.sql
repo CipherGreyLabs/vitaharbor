@@ -1,4 +1,4 @@
--- 0002_seed.sql - Comprehensive Catalog of Real PS Vita Ports from r/vitahacks and r/VitaPiracy
+-- 0002_seed.sql - Comprehensive Catalog of Real PS Vita Ports from the configured Vita Reddit communities
 
 -- 1. Insert Games
 INSERT OR IGNORE INTO games (id, slug, title, normalized_title, original_release_year, original_platform, created_at, updated_at) VALUES

@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { StatusBadge } from "../ui/StatusBadge";
-import { formatRelativeTime } from "@/shared/utils";
 import type { ProjectCardData } from "./ProjectCard";
 import { ChevronDown, ChevronUp, ExternalLink, Cpu, Gamepad2, ArrowRight } from "lucide-react";
 
@@ -180,4 +179,3 @@ export const PortMatrixTable: React.FC<PortMatrixTableProps> = ({
     </div>
   );
 };
-

@@ -26,6 +26,7 @@ resp*.html
 resp*.json
 f_*.png
 m_*.png
+public/og/projects/
 
 .vercel
 

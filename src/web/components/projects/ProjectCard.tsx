@@ -1,7 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { StatusBadge } from "../ui/StatusBadge";
-import { formatRelativeTime, deriveActivityLevel } from "@/shared/utils";
 import type { DevelopmentStage, ProjectLifecycle } from "@/shared/types";
 import { ExternalLink } from "lucide-react";
 
@@ -23,8 +22,6 @@ export interface ProjectCardData {
 }
 
 export const ProjectCard: React.FC<{ project: ProjectCardData }> = ({ project }) => {
-  const dateObj = typeof project.last_activity_at === "string" ? new Date(project.last_activity_at) : project.last_activity_at;
-  const activityLevel = deriveActivityLevel(dateObj);
   const isDistinctPortName = project.display_name && project.game_title && project.display_name !== project.game_title;
 
   return (
@@ -107,4 +104,3 @@ export const ProjectCard: React.FC<{ project: ProjectCardData }> = ({ project })
     </div>
   );
 };
-

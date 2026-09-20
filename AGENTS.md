@@ -6,7 +6,7 @@ most repo exploration. Do not scan the whole tree to orient yourself.
 ## What this is
 
 VitaHarbor: an independent, static ledger of PlayStation Vita ports, decompilations and ARM
-wrappers, sourced from r/vitahacks and r/VitaPiracy. React + Vite, deployed to Vercel.
+wrappers, sourced from r/vitahacks, r/VitaPiracy and r/PSVitaHomebrew. React + Vite, deployed to Vercel.
 
 - Live: https://vitaharbor.vercel.app
 - Source of truth for *what changed and why*: `docs/WORKLOG.md`
@@ -39,7 +39,7 @@ wrappers, sourced from r/vitahacks and r/VitaPiracy. React + Vite, deployed to V
 ## Commands
 
 ```
-npm run verify       # typecheck + 42 unit tests + build. The single gate before shipping.
+npm run verify       # typecheck + unit tests + build. The single gate before shipping.
 npm run audit:mobile # touch targets and overflow on the live site
 npx vercel --prod --yes
 ```

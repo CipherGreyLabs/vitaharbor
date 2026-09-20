@@ -74,6 +74,7 @@ Initially monitor:
 ```text
 r/VitaPiracy
 r/vitahacks
+r/PSVitaHomebrew
 ```
 
 The list must be configurable.
@@ -1218,6 +1219,7 @@ Public update page/card should allow:
 ```text
 Source
 Reddit · r/VitaPiracy
+Reddit · r/PSVitaHomebrew
 View original ↗
 ```
 
@@ -1436,6 +1438,7 @@ Examples:
 ```text
 reddit:subreddit:VitaPiracy
 reddit:subreddit:vitahacks
+reddit:subreddit:PSVitaHomebrew
 reddit:thread:t3_abc123
 reddit:developer:u_somebody
 ```

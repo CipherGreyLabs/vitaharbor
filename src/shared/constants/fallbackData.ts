@@ -23,6 +23,12 @@ export const FALLBACK_GAMES: Game[] = [
   ,{ id: 20, slug: "rc-cars", title: "RC Cars", normalized_title: "rc cars", original_release_year: null, original_platform: "PC", created_at: new Date('2026-09-18T11:09:43.000Z'), updated_at: new Date('2026-09-18T15:20:00.000Z') }
   ,{ id: 21, slug: "diablo-ii-lord-of-destruction", title: "Diablo II: Lord of Destruction", normalized_title: "diablo ii: lord of destruction", original_release_year: 2001, original_platform: "PC", created_at: new Date('2026-09-17T22:27:31.000Z'), updated_at: new Date('2026-09-17T22:27:31.000Z') }
   ,{ id: 22, slug: "call-of-duty-zombies", title: "Call of Duty: Zombies", normalized_title: "call of duty: zombies", original_release_year: 2009, original_platform: "iOS", created_at: new Date('2026-09-18T07:54:45.000Z'), updated_at: new Date('2026-09-18T07:54:45.000Z') }
+  ,{ id: 23, slug: "illusia", title: "Illusia", normalized_title: "illusia", original_release_year: null, original_platform: "Android ARMv6", created_at: new Date('2026-09-02T00:00:00.000Z'), updated_at: new Date('2026-09-02T00:00:00.000Z') }
+  ,{ id: 24, slug: "star-wars-jedi-academy", title: "Star Wars Jedi Knight: Jedi Academy", normalized_title: "star wars jedi knight jedi academy", original_release_year: 2003, original_platform: "PC / OpenJK", created_at: new Date('2026-08-22T00:00:00.000Z'), updated_at: new Date('2026-09-02T00:00:00.000Z') }
+  ,{ id: 25, slug: "star-wars-jedi-outcast", title: "Star Wars Jedi Knight II: Jedi Outcast", normalized_title: "star wars jedi knight ii jedi outcast", original_release_year: 2002, original_platform: "PC / OpenJK", created_at: new Date('2026-08-24T00:00:00.000Z'), updated_at: new Date('2026-09-08T00:00:00.000Z') }
+  ,{ id: 26, slug: "barony", title: "Barony", normalized_title: "barony", original_release_year: 2015, original_platform: "PC", created_at: new Date('2026-07-28T00:00:00.000Z'), updated_at: new Date('2026-09-05T00:00:00.000Z') }
+  ,{ id: 27, slug: "call-of-duty-4-modern-warfare", title: "Call of Duty 4: Modern Warfare", normalized_title: "call of duty 4 modern warfare", original_release_year: 2007, original_platform: "PS3", created_at: new Date('2026-09-12T00:00:00.000Z'), updated_at: new Date('2026-09-12T00:00:00.000Z') }
+  ,{ id: 28, slug: "c-dogs-sdl-vita", title: "C-Dogs SDL Vita", normalized_title: "c-dogs sdl vita", original_release_year: null, original_platform: "DOS / SDL", created_at: new Date('2026-09-19T20:01:51.653Z'), updated_at: new Date('2026-09-19T20:01:51.653Z') }
 ];
 
 export const FALLBACK_PROJECTS: any[] = [
@@ -121,7 +127,6 @@ export const FALLBACK_PROJECTS: any[] = [
     id: 5,
     game_id: 5,
     slug: "portal-vita",
-    reddit_url: "https://www.reddit.com/r/vitahacks/comments/16l8h0m/portal_vita_status/",
     display_name: "Portal Vita Port",
     current_stage: "in_game",
     lifecycle: "active",
@@ -143,7 +148,6 @@ export const FALLBACK_PROJECTS: any[] = [
     id: 6,
     game_id: 6,
     slug: "spider-man-total-mayhem-vita",
-    reddit_url: "https://www.reddit.com/r/VitaPiracy/comments/1ij1vzf/how_to_port_android_games/",
     display_name: "Spider-Man: Total Mayhem Vita",
     current_stage: "in_game",
     lifecycle: "active",
@@ -165,7 +169,6 @@ export const FALLBACK_PROJECTS: any[] = [
     id: 7,
     game_id: 7,
     slug: "simpsons-hit-and-run-vita",
-    reddit_url: "https://www.reddit.com/r/vitahacks/comments/126a9bf/release_ship_of_harkinian_vita_port/",
     display_name: "The Simpsons: Hit & Run Vita",
     current_stage: "in_game",
     lifecycle: "active",
@@ -187,7 +190,6 @@ export const FALLBACK_PROJECTS: any[] = [
     id: 8,
     game_id: 8,
     slug: "kotor-vita",
-    reddit_url: "https://www.reddit.com/r/VitaPiracy/comments/1iuoe4u/rinnegatamante_is_going_all_out/",
     display_name: "Star Wars: KOTOR Vita",
     current_stage: "early_wip",
     lifecycle: "active",
@@ -209,7 +211,6 @@ export const FALLBACK_PROJECTS: any[] = [
     id: 9,
     game_id: 9,
     slug: "baldurs-gate-dark-alliance-vita",
-    reddit_url: "https://www.reddit.com/r/VitaPiracy/comments/1inclw4/any_listcollection_of_homebrew_fanmade_ports_of/",
     display_name: "Baldur's Gate: Dark Alliance Vita",
     current_stage: "research",
     lifecycle: "active",
@@ -231,7 +232,6 @@ export const FALLBACK_PROJECTS: any[] = [
     id: 10,
     game_id: 10,
     slug: "nfs-hot-pursuit-vita",
-    reddit_url: "https://www.reddit.com/r/vitahacks/comments/18zdtep/new_port_psvita_hot_pursuit/",
     display_name: "Need for Speed: Hot Pursuit Vita",
     current_stage: "playable",
     lifecycle: "active",
@@ -253,16 +253,17 @@ export const FALLBACK_PROJECTS: any[] = [
     id: 11,
     game_id: 11,
     slug: "class-of-09-vita",
-    reddit_url: "https://www.reddit.com/r/vitahacks/comments/192k7s9/the_class_of_09_vita_port_is_finally_released/",
+    reddit_url: "https://www.reddit.com/r/VitaPiracy/comments/1whqvmz/class_of_09_vita_port_is_finally_released/",
+    repo_url: "https://github.com/TheSpasticGamer/Class-Of-09-Vita-Port",
     display_name: "Class of '09 Vita Port",
     current_stage: "released",
     lifecycle: "active",
-    summary: "Native port of the viral dark comedy visual novel powered by the updated Ren'Py Vita engine.",
-    playability_notes: "100% completable. All routes, voice acting, cutscenes, and graduation endings verified.",
-    performance_notes: "Instant route transitions, flawless audio and touch/button dialogue progression.",
+    summary: "Feature-full Vita port of the dark comedy visual novel. The September release post says playtesting and polish are still continuing, so this record does not claim every route or edge case is verified.",
+    playability_notes: "The release post describes the build as playable and feature-complete, with further route testing and bug fixing still underway.",
+    performance_notes: null,
     first_seen_at: new Date('2026-03-11T15:34:00.000Z'),
-    last_activity_at: new Date('2026-09-15T15:34:00.000Z'),
-    released_at: new Date('2026-05-20T15:34:00.000Z'),
+    last_activity_at: new Date('2026-09-16T00:00:00.000Z'),
+    released_at: new Date('2026-09-15T00:00:00.000Z'),
     is_featured: false,
     is_archived: false,
     game_title: "Class of '09",
@@ -276,6 +277,7 @@ export const FALLBACK_PROJECTS: any[] = [
     game_id: 12,
     slug: "renpy-8-runtime-engine",
     reddit_url: "https://www.reddit.com/r/vitahacks/comments/1h4yhyi/release_renpy_vita_8_port/",
+    repo_url: "https://github.com/Grimiku/RenPy-Vita-8",
     display_name: "Ren'Py 8 Vita Engine Runtime",
     current_stage: "released",
     lifecycle: "active",
@@ -297,7 +299,7 @@ export const FALLBACK_PROJECTS: any[] = [
     id: 13,
     game_id: 13,
     slug: "zelda-ship-of-harkinian-vita",
-    reddit_url: "https://www.reddit.com/r/vitahacks/comments/126a9bf/release_ship_of_harkinian_vita_port/",
+    reddit_url: "https://www.reddit.com/r/VitaPiracy/comments/1leugn2/ocarina_of_time_ship_of_harkinian_is_out_now_baby/",
     display_name: "Zelda: Ship of Harkinian (OOT)",
     current_stage: "playable",
     lifecycle: "active",
@@ -319,7 +321,6 @@ export const FALLBACK_PROJECTS: any[] = [
     id: 14,
     game_id: 14,
     slug: "slingshot-racing-vita",
-    reddit_url: "https://www.reddit.com/r/VitaPiracy/comments/1iuoe4u/rinnegatamante_is_going_all_out/",
     display_name: "Slingshot Racing Vita",
     current_stage: "released",
     lifecycle: "active",
@@ -341,7 +342,6 @@ export const FALLBACK_PROJECTS: any[] = [
     id: 15,
     game_id: 15,
     slug: "fallout-2-ce-vita",
-    reddit_url: "https://www.reddit.com/r/vitahacks/comments/q1910a/release_fallout_2_ce_ps_vita_port/",
     display_name: "Fallout 2 Community Edition",
     current_stage: "playable",
     lifecycle: "active",
@@ -363,7 +363,6 @@ export const FALLBACK_PROJECTS: any[] = [
     id: 16,
     game_id: 16,
     slug: "render96-sm64-hd-vita",
-    reddit_url: "https://www.reddit.com/r/vitahacks/comments/1whm4hp/smash_bros_melee_vita/",
     display_name: "Render96 HD SM64 Vita",
     current_stage: "released",
     lifecycle: "active",
@@ -385,7 +384,6 @@ export const FALLBACK_PROJECTS: any[] = [
     id: 17,
     game_id: 17,
     slug: "celeste-classic-vita",
-    reddit_url: "https://www.reddit.com/r/VitaPiracy/comments/1inclw4/any_listcollection_of_homebrew_fanmade_ports_of/",
     display_name: "Celeste Classic Vita",
     current_stage: "released",
     lifecycle: "active",
@@ -407,7 +405,9 @@ export const FALLBACK_PROJECTS: any[] = [
     id: 18,
     game_id: 18,
     slug: "cave-story-evo-vita",
-    reddit_url: "https://www.reddit.com/r/VitaPiracy/comments/1inclw4/any_listcollection_of_homebrew_fanmade_ports_of/",
+    screenshot_url: "/screenshots/cave-story-evo-vita.png",
+    screenshot_source_url: "https://github.com/nxengine/nxengine-evo/blob/master/screenshot.png",
+    screenshot_alt: "Cave Story title screen rendered by NXEngine-evo",
     display_name: "Cave Story (NXEngine-evo)",
     current_stage: "released",
     lifecycle: "active",
@@ -453,6 +453,9 @@ export const FALLBACK_PROJECTS: any[] = [
     game_id: 20,
     slug: "rc-cars-vita",
     reddit_url: "https://www.reddit.com/r/vitahacks/comments/1wjn8zg/rc_cars_port_progress/",
+    screenshot_url: "/screenshots/rc-cars.webp",
+    screenshot_source_url: "https://www.reddit.com/r/vitahacks/comments/1wjn8zg/rc_cars_port_progress/",
+    screenshot_alt: "RC Cars gameplay photographed on two PS Vita consoles",
     display_name: "RC Cars",
     current_stage: "playable",
     lifecycle: "active",
@@ -476,6 +479,9 @@ export const FALLBACK_PROJECTS: any[] = [
     game_id: 21,
     slug: "d2vita",
     reddit_url: "https://www.reddit.com/r/VitaPiracy/comments/1wj8dvz/d2vita_is_here_diablo_ii_lord_of_destruction/",
+    screenshot_url: "/screenshots/d2vita.webp",
+    screenshot_source_url: "https://www.reddit.com/r/VitaPiracy/comments/1wj8dvz/d2vita_is_here_diablo_ii_lord_of_destruction/",
+    screenshot_alt: "Diablo II: Lord of Destruction title screen from the D2Vita Vita port",
     display_name: "D2Vita (Diablo II: Lord of Destruction)",
     current_stage: "released",
     lifecycle: "active",
@@ -517,6 +523,191 @@ export const FALLBACK_PROJECTS: any[] = [
     technologies: ["iOS loader"],
     developers: []
   }
+  ,{
+    id: 23,
+    game_id: 23,
+    slug: "illusia-vita",
+    reddit_url: "https://www.reddit.com/r/vitahacks/comments/1w4y5tz/release_illusia_vita_a_port_of_illusia_to_the/",
+    repo_url: "https://github.com/withLogic/illusia-vita",
+    screenshot_url: "/screenshots/illusia-vita.jpg",
+    screenshot_source_url: "https://github.com/withLogic/illusia-vita/blob/master/extras/screenshots/screenshot1.jpg",
+    screenshot_alt: "Illusia title screen running on the Vita port",
+    display_name: "Illusia Vita",
+    current_stage: "released",
+    lifecycle: "active",
+    summary: "Release of Illusia for PlayStation Vita by withLogic. The source repository describes an Android ARMv6 wrapper that resolves imports to native Vita functions and patches the original executable to run on Vita.",
+    playability_notes: null,
+    performance_notes: null,
+    first_seen_at: new Date('2026-09-02T00:00:00.000Z'),
+    last_activity_at: new Date('2026-09-02T00:00:00.000Z'),
+    released_at: new Date('2026-09-02T00:00:00.000Z'),
+    last_verified_at: new Date('2026-09-20T00:00:00.000Z'),
+    is_featured: false,
+    is_archived: false,
+    verification: "developer_direct",
+    game_title: "Illusia",
+    original_platform: "Android ARMv6",
+    original_release_year: null,
+    technologies: ["Android ARMv6 wrapper", "FalsoNDK / FalsoJNI"],
+    setup_evidence: {
+      categoryLabel: "Android wrapper",
+      plugins: ["kubridge", "FdFix", "libshacccg.suprx"],
+      overclock: "Optional PSVshell 500 MHz setting is documented by the repository.",
+      assetPath: "ux0:data/illusia",
+      instructions: "Install the VPK, then provide the legally owned Illusia v1.0.2 Android assets and libgameDSO.so in ux0:data/illusia.",
+      sourceUrl: "https://github.com/withLogic/illusia-vita",
+      verifiedOnHardware: false
+    },
+    developers: [{ id: 15, role: "lead", display_name: "withLogic", slug: "withlogic" }]
+  }
+  ,{
+    id: 24,
+    game_id: 24,
+    slug: "jedi-academy-vita",
+    reddit_url: "https://www.reddit.com/r/VitaPiracy/comments/1vvp4j6/star_wars_jedi_knight_jedi_academy_files/",
+    repo_url: "https://github.com/NDRWhun/JAVITA",
+    screenshot_url: "/screenshots/jedi-academy.jpg",
+    screenshot_source_url: "https://www.reddit.com/r/VitaPiracy/comments/1vvp4j6/star_wars_jedi_knight_jedi_academy_files/",
+    screenshot_alt: "Jedi Academy Vita title screen photographed on a PS Vita",
+    display_name: "Star Wars Jedi Knight: Jedi Academy Vita",
+    current_stage: "released",
+    lifecycle: "active",
+    summary: "First v1.0 release of the single-player Jedi Academy Vita port. The project repository identifies OpenJK as its base and documents a native sceGxm rendering backend.",
+    playability_notes: "The release thread documents a v1.0 build; the repository contains setup, controls and known-issue notes. No independent hardware verification is recorded in this ledger.",
+    performance_notes: null,
+    first_seen_at: new Date('2026-08-22T00:00:00.000Z'),
+    last_activity_at: new Date('2026-09-02T00:00:00.000Z'),
+    released_at: new Date('2026-08-22T00:00:00.000Z'),
+    last_verified_at: new Date('2026-09-20T00:00:00.000Z'),
+    is_featured: false,
+    is_archived: false,
+    verification: "developer_direct",
+    game_title: "Star Wars Jedi Knight: Jedi Academy",
+    original_platform: "PC / OpenJK",
+    original_release_year: 2003,
+    technologies: ["OpenJK", "sceGxm"],
+    setup_evidence: {
+      categoryLabel: "OpenJK native port",
+      assetPath: "ux0:data/JAVITA/base",
+      instructions: "Install JAVITA.vpk and provide the legally owned PC Jedi Academy base PK3 files in ux0:data/JAVITA/base.",
+      sourceUrl: "https://github.com/NDRWhun/JAVITA",
+      verifiedOnHardware: false
+    },
+    developers: [{ id: 16, role: "lead", display_name: "NDRW", slug: "ndrwhun" }]
+  }
+  ,{
+    id: 25,
+    game_id: 25,
+    slug: "jedi-outcast-vita",
+    reddit_url: "https://www.reddit.com/r/VitaPiracy/comments/1vws22e/star_wars_jedi_knight_ii_jedi_outcast_data_files/",
+    repo_url: "https://github.com/NDRWhun/JK2VITA",
+    display_name: "Star Wars Jedi Knight II: Jedi Outcast Vita",
+    current_stage: "released",
+    lifecycle: "active",
+    summary: "First v1.0 release of the single-player Jedi Outcast Vita port. The project repository identifies OpenJK as its base and documents a native sceGxm rendering backend.",
+    playability_notes: "The release thread documents a v1.0 build; the repository contains setup, controls and known-issue notes. No independent hardware verification is recorded in this ledger.",
+    performance_notes: null,
+    first_seen_at: new Date('2026-08-24T00:00:00.000Z'),
+    last_activity_at: new Date('2026-09-08T00:00:00.000Z'),
+    released_at: new Date('2026-08-24T00:00:00.000Z'),
+    last_verified_at: new Date('2026-09-20T00:00:00.000Z'),
+    is_featured: false,
+    is_archived: false,
+    verification: "developer_direct",
+    game_title: "Star Wars Jedi Knight II: Jedi Outcast",
+    original_platform: "PC / OpenJK",
+    original_release_year: 2002,
+    technologies: ["OpenJK", "sceGxm"],
+    setup_evidence: {
+      categoryLabel: "OpenJK native port",
+      assetPath: "ux0:data/JK2VITA/base",
+      instructions: "Install JK2VITA.vpk and provide the legally owned PC Jedi Outcast 1.04 base PK3 files in ux0:data/JK2VITA/base.",
+      sourceUrl: "https://github.com/NDRWhun/JK2VITA",
+      verifiedOnHardware: false
+    },
+    developers: [{ id: 16, role: "lead", display_name: "NDRW", slug: "ndrwhun" }]
+  }
+  ,{
+    id: 26,
+    game_id: 26,
+    slug: "barony-vita",
+    reddit_url: "https://www.reddit.com/r/vitahacks/comments/1v8zqrw/barony_vita/",
+    repo_url: "https://github.com/Brendonm17/Barony-Vita",
+    display_name: "Barony Vita",
+    current_stage: "released",
+    lifecycle: "active",
+    summary: "Developer release of Barony for Vita. The original release described single-player support; a September update reports online, LAN and ad-hoc multiplayer plus an online leaderboard.",
+    playability_notes: null,
+    performance_notes: null,
+    first_seen_at: new Date('2026-07-28T00:00:00.000Z'),
+    last_activity_at: new Date('2026-09-05T00:00:00.000Z'),
+    released_at: new Date('2026-07-28T00:00:00.000Z'),
+    last_verified_at: new Date('2026-09-20T00:00:00.000Z'),
+    is_featured: false,
+    is_archived: false,
+    verification: "developer_direct",
+    game_title: "Barony",
+    original_platform: "PC",
+    original_release_year: 2015,
+    technologies: [],
+    setup_evidence: {
+      categoryLabel: "Native port",
+      assetPath: "ux0:data/Barony",
+      instructions: "Build the data files from a legally owned Steam copy, then place the generated data in ux0:data/Barony.",
+      sourceUrl: "https://github.com/Brendonm17/Barony-Vita",
+      verifiedOnHardware: false
+    },
+    developers: [{ id: 17, role: "lead", display_name: "Brendonm17", slug: "brendonm17" }]
+  }
+  ,{
+    id: 27,
+    game_id: 27,
+    slug: "call-of-duty-4-vita",
+    screenshot_url: "/screenshots/call-of-duty-4.jpeg",
+    screenshot_alt: "Call of Duty 4 gameplay photographed on a PS Vita",
+    display_name: "Call of Duty 4: Modern Warfare Vita",
+    current_stage: "in_game",
+    lifecycle: "active",
+    summary: "A September development thread reports Call of Duty 4 running in-game on Vita, with campaign and multiplayer work progressing separately. The edited update reports roughly 5–10 FPS, so this remains an early work-in-progress record.",
+    playability_notes: "Community-reported in-game progress only; no public release or independent hardware verification is recorded here.",
+    performance_notes: "The source thread reports approximately 5–10 FPS during the update.",
+    first_seen_at: new Date('2026-09-12T00:00:00.000Z'),
+    last_activity_at: new Date('2026-09-12T00:00:00.000Z'),
+    released_at: null,
+    last_verified_at: new Date('2026-09-20T00:00:00.000Z'),
+    is_featured: false,
+    is_archived: false,
+    verification: "community_report",
+    game_title: "Call of Duty 4: Modern Warfare",
+    original_platform: "PS3",
+    original_release_year: 2007,
+    technologies: [],
+    developers: []
+  }
+  ,{
+    id: 28,
+    game_id: 28,
+    slug: "c-dogs-sdl-vita",
+    reddit_url: "https://www.reddit.com/r/vitahacks/comments/1wkw14c/prerelease_cdogs_sdl_port_for_ps_vita_pstv/",
+    repo_url: "https://github.com/abduct/cdogs-sdl",
+    display_name: "C-Dogs SDL Vita",
+    current_stage: "early_wip",
+    lifecycle: "active",
+    summary: "Public C-Dogs SDL Vita/PSTV pre-release posted by abby_6112. The source thread reports a native build tested on Vita/PSTV hardware and links a GitHub preview release; LAN multiplayer work is still in progress.",
+    playability_notes: "The author reports a native Vita/PSTV build and requests real-hardware testing; no independent hardware report is recorded in this ledger.",
+    performance_notes: null,
+    first_seen_at: new Date('2026-09-19T20:01:51.653Z'),
+    last_activity_at: new Date('2026-09-19T20:01:51.653Z'),
+    released_at: null,
+    is_featured: false,
+    is_archived: false,
+    verification: "developer_direct",
+    game_title: "C-Dogs SDL",
+    original_platform: "DOS / SDL",
+    original_release_year: null,
+    technologies: ["Native Vita build", "SDL"],
+    developers: []
+  }
 ];
 
 export const FALLBACK_DEVELOPERS: any[] = [
@@ -533,7 +724,11 @@ export const FALLBACK_DEVELOPERS: any[] = [
   { id: 11, slug: "fgsfds", display_name: "fgsfds", description: "Homebrew developer responsible for Render96 HD SM64 and numerous engine ports.", is_known_developer: true, identities: [{ provider: "reddit", username: "fgsfds" }], projects: [] },
   { id: 12, slug: "mylegguy", display_name: "MyLegGuy", description: "Programmer who created the C-rewrite of Celeste Classic for handheld systems.", is_known_developer: true, identities: [{ provider: "reddit", username: "MyLegGuy" }], projects: [] },
   { id: 13, slug: "rob1n994", display_name: "rob1n994", description: "Developer porting the Aurora-based Melee project to native SceGXM and vitaGL on PS Vita.", is_known_developer: true, identities: [{ provider: "reddit", username: "rob1n994" }, { provider: "github", username: "robin994" }], projects: [] },
-  { id: 14, slug: "zm2283145", display_name: "zm2283145", description: "Developer of an independent experimental Melee Vita port with in-game rendering.", is_known_developer: true, identities: [{ provider: "reddit", username: "zm2283145" }], projects: [] }
+  { id: 14, slug: "zm2283145", display_name: "zm2283145", description: "Developer of an independent experimental Melee Vita port with in-game rendering.", is_known_developer: true, identities: [{ provider: "reddit", username: "zm2283145" }], projects: [] },
+  { id: 15, slug: "withlogic", display_name: "withLogic", description: "Developer of the Illusia Vita Android wrapper.", is_known_developer: true, identities: [{ provider: "reddit", username: "withlogic" }, { provider: "github", username: "withLogic" }], projects: [] },
+  { id: 16, slug: "ndrwhun", display_name: "NDRW", description: "Developer of the JAVITA and JK2VITA OpenJK-based Vita ports.", is_known_developer: true, identities: [{ provider: "reddit", username: "NDRW" }, { provider: "github", username: "NDRWhun" }], projects: [] },
+  { id: 17, slug: "brendonm17", display_name: "Brendonm17", description: "Developer of the Barony Vita port.", is_known_developer: true, identities: [{ provider: "reddit", username: "Brendonm17" }, { provider: "github", username: "Brendonm17" }], projects: [] },
+  { id: 18, slug: "thespasticgamer", display_name: "TheSpasticGamer", description: "Developer associated with the September 2026 Class of '09 Vita release.", is_known_developer: true, identities: [{ provider: "github", username: "TheSpasticGamer" }], projects: [] }
 ];
 
 export const FALLBACK_UPDATES: any[] = [
@@ -605,7 +800,7 @@ export const FALLBACK_UPDATES: any[] = [
     summary: "Gameloft ARMv7 wrapper milestone reached with full Manhattan brawler combat and dual analog camera controls active.",
     event_at: new Date('2026-09-14T15:34:00.000Z'),
     verification_level: "developer_direct",
-    sources: [{ source_item_id: "src_spiderman", relationship: "primary", canonical_url: "https://www.reddit.com/r/VitaPiracy/comments/1ij1vzf/how_to_port_android_games/" }]
+    sources: []
   },
   {
     id: "upd_portal",
@@ -619,7 +814,7 @@ export const FALLBACK_UPDATES: any[] = [
     summary: "Dual portal rendering, momentum calculation, and weighted companion cube mechanics functioning smoothly at 30 FPS.",
     event_at: new Date('2026-09-13T15:34:00.000Z'),
     verification_level: "developer_direct",
-    sources: [{ source_item_id: "src_portal", relationship: "primary", canonical_url: "https://www.reddit.com/r/vitahacks/search/?q=Portal&restrict_sr=1" }]
+    sources: []
   },
   {
     id: "upd_class09",
@@ -633,7 +828,7 @@ export const FALLBACK_UPDATES: any[] = [
     summary: "Full commercial VN ported natively with complete voice acting, gallery unlocks, and touchscreen/button controls.",
     event_at: new Date('2026-09-12T15:34:00.000Z'),
     verification_level: "developer_direct",
-    sources: [{ source_item_id: "src_class09", relationship: "primary", canonical_url: "https://www.reddit.com/r/vitahacks/comments/192k7s9/the_class_of_09_vita_port_is_finally_released/" }]
+    sources: [{ source_item_id: "src_class09", relationship: "primary", canonical_url: "https://www.reddit.com/r/VitaPiracy/comments/1whqvmz/class_of_09_vita_port_is_finally_released/" }]
   },
   {
     id: "upd_renpy8",
@@ -661,7 +856,7 @@ export const FALLBACK_UPDATES: any[] = [
     summary: "Full ARM wrapper release with smooth career progression, cop pursuit missions, and custom graphical pipeline.",
     event_at: new Date('2026-09-10T15:34:00.000Z'),
     verification_level: "developer_direct",
-    sources: [{ source_item_id: "src_nfs", relationship: "primary", canonical_url: "https://www.reddit.com/r/vitahacks/comments/18zdtep/new_port_psvita_hot_pursuit/" }]
+    sources: []
   }
   ,{
     id: "upd_rc_cars",
@@ -704,6 +899,107 @@ export const FALLBACK_UPDATES: any[] = [
     event_at: new Date('2026-09-18T07:54:45.000Z'),
     verification_level: "community_report",
     sources: [{ source_item_id: "src_cod_zombies", relationship: "primary", canonical_url: "https://www.reddit.com/r/vitahacks/comments/1wjjx7w/a_bounty_that_deserves_more_visibility/" }]
+  }
+  ,{
+    id: "upd_class09_sep",
+    port_project_id: 11,
+    project_slug: "class-of-09-vita",
+    project_display_name: "Class of '09 Vita Port",
+    developer_display_name: "TheSpasticGamer",
+    developer_slug: "thespasticgamer",
+    event_type: "release",
+    title: "Class of '09 Vita port reaches feature-complete public release",
+    summary: "The September release post describes a feature-full playable version, with route testing and polish continuing after release.",
+    event_at: new Date('2026-09-16T00:00:00.000Z'),
+    verification_level: "developer_direct",
+    sources: [{ source_item_id: "src_class09_sep", relationship: "primary", canonical_url: "https://www.reddit.com/r/VitaPiracy/comments/1whqvmz/class_of_09_vita_port_is_finally_released/" }]
+  }
+  ,{
+    id: "upd_illusia",
+    port_project_id: 23,
+    project_slug: "illusia-vita",
+    project_display_name: "Illusia Vita",
+    developer_display_name: "withLogic",
+    developer_slug: "withlogic",
+    event_type: "release",
+    title: "Illusia Vita released",
+    summary: "The release thread announces the Android game Illusia port for PlayStation Vita and links the withLogic source repository.",
+    event_at: new Date('2026-09-02T00:00:00.000Z'),
+    verification_level: "developer_direct",
+    sources: [{ source_item_id: "src_illusia", relationship: "primary", canonical_url: "https://www.reddit.com/r/vitahacks/comments/1w4y5tz/release_illusia_vita_a_port_of_illusia_to_the/" }]
+  }
+  ,{
+    id: "upd_jedi_academy",
+    port_project_id: 24,
+    project_slug: "jedi-academy-vita",
+    project_display_name: "Star Wars Jedi Knight: Jedi Academy Vita",
+    developer_display_name: "NDRW",
+    developer_slug: "ndrwhun",
+    event_type: "release",
+    title: "Jedi Academy Vita v1.0 released",
+    summary: "The release thread documents the first v1.0 release of the OpenJK-based single-player Vita port.",
+    event_at: new Date('2026-08-22T00:00:00.000Z'),
+    verification_level: "developer_direct",
+    sources: [{ source_item_id: "src_jedi_academy", relationship: "primary", canonical_url: "https://www.reddit.com/r/VitaPiracy/comments/1vvp4j6/star_wars_jedi_knight_jedi_academy_files/" }]
+  }
+  ,{
+    id: "upd_jedi_outcast",
+    port_project_id: 25,
+    project_slug: "jedi-outcast-vita",
+    project_display_name: "Star Wars Jedi Knight II: Jedi Outcast Vita",
+    developer_display_name: "NDRW",
+    developer_slug: "ndrwhun",
+    event_type: "release",
+    title: "Jedi Outcast Vita v1.0 released",
+    summary: "The release thread documents the first v1.0 release of the OpenJK-based single-player Vita port.",
+    event_at: new Date('2026-08-24T00:00:00.000Z'),
+    verification_level: "developer_direct",
+    sources: [{ source_item_id: "src_jedi_outcast", relationship: "primary", canonical_url: "https://www.reddit.com/r/VitaPiracy/comments/1vws22e/star_wars_jedi_knight_ii_jedi_outcast_data_files/" }]
+  }
+  ,{
+    id: "upd_barony",
+    port_project_id: 26,
+    project_slug: "barony-vita",
+    project_display_name: "Barony Vita",
+    developer_display_name: "Brendonm17",
+    developer_slug: "brendonm17",
+    event_type: "technical_progress",
+    title: "Barony Vita adds online, LAN and ad-hoc multiplayer",
+    summary: "The September update reports multiplayer modes, an online leaderboard and additional bug fixes for the Vita port.",
+    event_at: new Date('2026-09-05T00:00:00.000Z'),
+    verification_level: "developer_direct",
+    sources: [{ source_item_id: "src_barony_sep", relationship: "primary", canonical_url: "https://www.reddit.com/r/vitahacks/comments/1w8b9pp/barony_online_update_v002/" }]
+  }
+  ,{
+    id: "upd_cod4",
+    port_project_id: 27,
+    project_slug: "call-of-duty-4-vita",
+    project_display_name: "Call of Duty 4: Modern Warfare Vita",
+    developer_display_name: "Community port developer",
+    developer_slug: "community-port-developer",
+    event_type: "technical_progress",
+    title: "Call of Duty 4 Vita reaches early in-game development",
+    summary: "The September development thread reports campaign and multiplayer work in progress, with an edited update around 5–10 FPS.",
+    event_at: new Date('2026-09-12T00:00:00.000Z'),
+    verification_level: "community_report",
+    sources: []
+  }
+  ,{
+    id: "upd_cdogs_vita",
+    port_project_id: 28,
+    project_slug: "c-dogs-sdl-vita",
+    project_display_name: "C-Dogs SDL Vita",
+    developer_display_name: "abby_6112",
+    developer_slug: "abby-6112",
+    event_type: "project_announced",
+    title: "C-Dogs SDL Vita/PSTV pre-release posted",
+    summary: "The pre-release thread reports a native Vita/PSTV build and links the Vita preview release on GitHub. LAN multiplayer support remains in development.",
+    event_at: new Date('2026-09-19T20:01:51.653Z'),
+    verification_level: "developer_direct",
+    sources: [
+      { source_item_id: "src_cdogs_vita_reddit", relationship: "primary", canonical_url: "https://www.reddit.com/r/vitahacks/comments/1wkw14c/prerelease_cdogs_sdl_port_for_ps_vita_pstv/" },
+      { source_item_id: "src_cdogs_vita_github", relationship: "release", canonical_url: "https://github.com/abduct/cdogs-sdl/releases/tag/vita-preview-1" }
+    ]
   }
 ];
 

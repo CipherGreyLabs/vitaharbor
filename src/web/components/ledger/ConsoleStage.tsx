@@ -1,4 +1,4 @@
-import React, { Suspense, lazy } from "react";
+import React, { Suspense, lazy, useEffect, useState } from "react";
 import { type SelectedProjectView } from "../3d/VitaConsoleScene";
 import { LiveAreaWaves } from "../visual/LiveAreaWaves";
 import { ProjectMark } from "../projects/ProjectMark";
@@ -14,6 +14,53 @@ const ConsoleSkeleton = () => (
     <div className="vh-skeleton h-[62%] w-[78%] max-w-[620px] rounded-[30px] bg-sunken" />
   </div>
 );
+
+const StaticConsolePreview: React.FC<{ selectedProject: SelectedProjectView | null }> = ({ selectedProject }) => {
+  const preview = selectedProject
+    ? splitTitle(selectedProject.game_title || selectedProject.display_name)
+    : null;
+
+  return (
+    <figure className="flex h-full w-full items-center justify-center">
+      <div className="relative aspect-[605/288] w-full max-w-[605px]">
+        <img
+          src="/vita-render.png"
+          alt="PlayStation Vita PCH-1000"
+          className="absolute inset-0 h-full w-full object-contain"
+          loading="eager"
+        />
+        <div
+          data-testid="static-vita-screen"
+          aria-label={preview ? "Vita screen showing " + preview.name : "Vita screen waiting for a project"}
+          className="absolute left-[18.5%] top-[16%] h-[62%] w-[63%] overflow-hidden bg-[#05060a]"
+        >
+          {selectedProject?.screenshot_url ? (
+            <img
+              src={selectedProject.screenshot_url}
+              alt={selectedProject.screenshot_alt || "Source screenshot for " + preview?.name}
+              className="h-full w-full object-cover"
+            />
+          ) : (
+            <div className="flex h-full flex-col justify-center gap-2 bg-[linear-gradient(135deg,#030817,#111827)] px-[8%] text-white">
+              <span className="line-clamp-2 text-xs font-semibold leading-tight sm:text-sm lg:text-base">
+                {preview?.name || "Select a port"}
+              </span>
+              {selectedProject && (
+                <span className="text-[9px] uppercase tracking-[0.12em] text-white/60 sm:text-[10px]">
+                  {prettyStage(selectedProject.current_stage)}
+                  {selectedProject.original_platform ? " · " + selectedProject.original_platform : ""}
+                </span>
+              )}
+            </div>
+          )}
+        </div>
+      </div>
+      <figcaption className="sr-only">
+        Static console preview enabled because reduced motion, data saving or unavailable WebGL is active.
+      </figcaption>
+    </figure>
+  );
+};
 
 interface ConsoleStageProps {
   selectedProject: SelectedProjectView | null;
@@ -36,6 +83,17 @@ export const ConsoleStage: React.FC<ConsoleStageProps> = ({
   copiedSlug,
   consoleRef
 }) => {
+  const [liteMode, setLiteMode] = useState(false);
+
+  useEffect(() => {
+    const media = window.matchMedia?.("(prefers-reduced-motion: reduce)");
+    const connection = (navigator as Navigator & { connection?: { saveData?: boolean } }).connection;
+    const update = () => setLiteMode(Boolean(media?.matches || connection?.saveData));
+    update();
+    media?.addEventListener?.("change", update);
+    return () => media?.removeEventListener?.("change", update);
+  }, []);
+
   const preview = selectedProject
     ? splitTitle(selectedProject.game_title || selectedProject.display_name)
     : null;
@@ -66,14 +124,8 @@ export const ConsoleStage: React.FC<ConsoleStageProps> = ({
 
         <div className="relative px-2 pt-0 sm:px-6">
           <div ref={consoleRef} className="h-[200px] sm:h-[260px] lg:h-[310px]">
-            {webgl === false ? (
-              <figure className="flex h-full w-full items-center justify-center">
-                <img
-                  src="/vita-render.png"
-                  alt="PlayStation Vita PCH-1000"
-                  className="max-h-full w-auto object-contain"
-                />
-              </figure>
+            {webgl === false || liteMode ? (
+              <StaticConsolePreview selectedProject={selectedProject} />
             ) : (
               <Suspense fallback={<ConsoleSkeleton />}>
                 <div className="vh-rise h-full w-full">
@@ -94,7 +146,9 @@ export const ConsoleStage: React.FC<ConsoleStageProps> = ({
                 className="hidden shrink-0 rounded-xl sm:block"
               />
               <div className="min-w-0 flex-1">
-                <p className="text-micro font-medium uppercase text-ink-muted">On the display</p>
+                <p className="text-micro font-medium uppercase text-ink-muted">
+                  {selectedProject?.screenshot_url ? "Source screenshot on display" : "Record card on display"}
+                </p>
                 <p className="mt-1 truncate text-subtitle font-medium text-ink">{preview.name}</p>
                 <p className="mt-0.5 text-caption text-ink-muted">
                   {prettyStage(selectedProject?.current_stage)}
@@ -159,7 +213,7 @@ export const ConsoleStage: React.FC<ConsoleStageProps> = ({
               aria-label="Choose a project to preview"
               className="no-scrollbar flex max-w-full gap-1 overflow-x-auto rounded-full border border-hairline bg-sunken p-1"
             >
-              {projects.slice(0, 6).map((project) => {
+              {projects.map((project) => {
                 const active = selectedId === project.id;
                 return (
                   <button
@@ -183,7 +237,7 @@ export const ConsoleStage: React.FC<ConsoleStageProps> = ({
 
           <p className="mt-3 text-center text-micro uppercase text-ink-muted">
             <span className="hidden sm:inline">
-              Drag to rotate · Press <span className="font-mono">/</span> to search the directory
+              {liteMode ? "Static preview · " : "Drag to rotate · "}Press <span className="font-mono">/</span> to search the directory
             </span>
             <span className="sm:hidden">Swipe to rotate · use the arrows to switch ports</span>
           </p>

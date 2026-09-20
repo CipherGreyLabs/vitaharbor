@@ -1,19 +1,40 @@
 import { test, expect } from "playwright/test";
+import { FALLBACK_PROJECTS } from "../../src/shared/constants/fallbackData";
 
 test.describe("archive", () => {
   test.beforeEach(async ({ page }) => {
     await page.goto("/", { waitUntil: "domcontentloaded" });
   });
 
-  test("lists every entry with a source link", async ({ page }) => {
+  test("lists entries with only the source links that are actually verified", async ({ page }) => {
     const rows = page.locator("li[id^='entry-']");
     await expect(rows.first()).toBeVisible();
     const count = await rows.count();
     expect(count).toBeGreaterThan(10);
 
-    // every listed entry must link back to a public thread
-    const sources = page.locator("li[id^='entry-'] a[href*='reddit.com']");
-    expect(await sources.count()).toBe(count);
+    const sourceCounts = await rows.evaluateAll((elements) =>
+      elements.map((element) => element.querySelectorAll("a[href*='reddit.com']").length)
+    );
+    expect(sourceCounts.every((sourceCount) => sourceCount <= 1)).toBe(true);
+    expect(sourceCounts.some((sourceCount) => sourceCount === 0)).toBe(true);
+    expect(sourceCounts.filter((sourceCount) => sourceCount > 0).length).toBeGreaterThan(10);
+  });
+
+  test("rendered outbound anchors contain no dead targets or placeholders", async ({ page }) => {
+    const hrefs = await page.locator("a[href]").evaluateAll((elements) =>
+      elements.map((element) => element.getAttribute("href") || "")
+    );
+    const external = hrefs.filter((href) => /^https?:\/\//i.test(href) && !href.startsWith("https://vitaharbor.vercel.app/"));
+    const forbidden = [
+      "126a9bf", "16l8h0m", "q1910a", "1ij1vzf", "1iuoe4u", "1inclw4", "192k7s9", "18zdtep", "1wdxtxu",
+      "openmohaa/openmohaa", "doldecomp/melee", "patnosDD/Hollow-Knight-Vita", "SonicMastr/renpy-vita",
+      "HarbourMasters/Shipwright", "alexbatalov/fallout2-ce"
+    ];
+
+    expect(external.some((href) => !href || /^javascript:/i.test(href))).toBe(false);
+    expect(external.some((href) => forbidden.some((value) => href === value || href.includes(value)))).toBe(false);
+    expect(external).not.toContain("https://github.com/nxengine/nxengine-evo");
+    expect(await page.locator("[role='region'][aria-label='Latest community signals'] a[href='#directory']").count()).toBe(0);
   });
 
   test("a deep link opens and expands that entry", async ({ page }) => {
@@ -28,7 +49,6 @@ test.describe("archive", () => {
     await expect(rows.first()).toBeVisible();
     const before = await rows.count();
 
-    await page.locator("main").click({ position: { x: 5, y: 5 } });
     await page.keyboard.press("/");
     const search = page.getByLabel("Filter the directory");
     await expect(search).toBeFocused();
@@ -41,6 +61,16 @@ test.describe("archive", () => {
     await expect.poll(async () => rows.count()).toBe(before);
   });
 
+  test("directory filters survive as a shareable URL", async ({ page }) => {
+    await page.goto("/?q=zelda&stage=wip&type=decomp&sort=name", { waitUntil: "domcontentloaded" });
+    await expect(page.getByLabel("Filter the directory")).toHaveValue("zelda");
+    await expect(page.locator("select")).toHaveValue("name");
+    await expect(page.getByText("Decompilation", { exact: false }).first()).toBeVisible();
+
+    await page.getByRole("button", { name: /clear all/i }).click();
+    await expect.poll(() => new URL(page.url()).search).toBe("");
+  });
+
   test("the moving ticker can be paused", async ({ page }) => {
     // Scoped to the ticker region: the button's label changes with its state.
     const toggle = page.locator("[role='region'][aria-label='Latest community signals'] button");
@@ -50,5 +80,61 @@ test.describe("archive", () => {
     await expect(toggle).toHaveAttribute("aria-pressed", "true");
     await toggle.click();
     await expect(toggle).toHaveAttribute("aria-pressed", "false");
+  });
+
+  test("a source-backed screenshot appears on the console when its row is selected", async ({ page }) => {
+    await page.locator("#entry-illusia-vita").click();
+    await expect(page.getByText("Source screenshot on display", { exact: true })).toBeVisible();
+    await expect(page.getByAltText("Illusia title screen running on the Vita port")).toBeVisible();
+  });
+
+  test("new source-backed Vita screenshots load from their matching projects", async ({ page }) => {
+    const screenshots = [
+      ["rc-cars-vita", "RC Cars gameplay photographed on two PS Vita consoles"],
+      ["d2vita", "Diablo II: Lord of Destruction title screen from the D2Vita Vita port"],
+      ["jedi-academy-vita", "Jedi Academy Vita title screen photographed on a PS Vita"],
+      ["call-of-duty-4-vita", "Call of Duty 4 gameplay photographed on a PS Vita"]
+    ] as const;
+
+    for (const [slug, alt] of screenshots) {
+      await page.locator(`#entry-${slug}`).click();
+      await expect(page.getByAltText(alt)).toBeVisible();
+    }
+  });
+
+  test("the console selector exposes every ledger project", async ({ page }) => {
+    const selector = page.locator("[aria-label='Choose a project to preview']");
+    await expect(selector).toBeVisible();
+    await expect(selector.locator("button")).toHaveCount(FALLBACK_PROJECTS.length);
+  });
+
+  test("Show on Vita updates the reduced-motion Vita preview", async ({ page }) => {
+    await page.emulateMedia({ reducedMotion: "reduce" });
+    await page.reload({ waitUntil: "domcontentloaded" });
+    await page.locator("#entry-illusia-vita").click();
+    await expect(page.getByRole("button", { name: "Show on Vita" })).toBeVisible();
+
+    await page.getByRole("button", { name: "Medal of Honor: Allied Assault", exact: true }).click();
+    await page.getByRole("button", { name: "Show on Vita" }).click();
+
+    await expect(page.getByText("Source screenshot on display", { exact: true })).toBeVisible();
+    await expect(page.getByTestId("static-vita-screen")).toHaveAttribute(
+      "aria-label",
+      "Vita screen showing Illusia"
+    );
+    await expect(page.getByTestId("static-vita-screen").getByAltText("Illusia title screen running on the Vita port")).toBeVisible();
+  });
+
+  test("directory uses a compact grid and provides a back-to-top control", async ({ page }) => {
+    const grid = page.locator("#directory ul");
+    await expect(grid).toBeVisible();
+    const columns = await grid.evaluate((element) => getComputedStyle(element).gridTemplateColumns.trim().split(/\s+/).length);
+    expect(columns).toBe(4);
+
+    await page.evaluate(() => window.scrollTo(0, 700));
+    const backToTop = page.getByRole("button", { name: "Scroll to top" });
+    await expect(backToTop).toBeVisible();
+    await backToTop.click();
+    await expect.poll(() => page.evaluate(() => window.scrollY)).toBeLessThan(20);
   });
 });

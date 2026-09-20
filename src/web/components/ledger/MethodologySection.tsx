@@ -15,12 +15,12 @@ const METHOD_ITEMS: MethodItem[] = [
   {
     Icon: Link2,
     title: "Sourced",
-    body: "Every entry links to the original engineering thread on r/vitahacks or r/VitaPiracy."
+    body: "Entries link to an original engineering thread when a project-specific source has been verified. Unverified candidates stay in the detection log."
   },
   {
     Icon: ShieldCheck,
     title: "Verified",
-    body: "Stage and performance notes come from the people running the build on real hardware."
+    body: "Evidence levels stay visible. Detected threads remain unverified until a source-backed record is reviewed."
   },
   {
     Icon: Scale,

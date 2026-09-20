@@ -2,8 +2,8 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { StatusBadge } from "../ui/StatusBadge";
 import { ProvenanceTag } from "../ui/ProvenanceTag";
-import { formatDate } from "@/shared/utils";
 import type { ObservationType, VerificationLevel } from "@/shared/types";
+import { formatUtcDateTime } from "../ledger/types";
 
 export interface UpdateCardData {
   id: string;
@@ -43,7 +43,9 @@ export const UpdateCard: React.FC<{ update: UpdateCardData }> = ({ update }) => 
           <span className="text-[#343a42]">|</span>
           <StatusBadge type="verification" value={update.verification_level} />
         </div>
-        <span className="text-[#7c848d]">{formatDate(update.event_at)}</span>
+        <span className="text-[#7c848d]" title="Exact source timestamp">
+          {formatUtcDateTime(update.event_at)}
+        </span>
       </div>
 
       {/* Title & Summary */}

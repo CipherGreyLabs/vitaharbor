@@ -38,11 +38,29 @@ describe("ledger data integrity", () => {
     }
   });
 
-  it("points every project at a reddit thread", () => {
+  it("does not expose unverified Reddit targets as valid project links", () => {
+    const intentionallyUnlinked = new Set([
+      "portal-vita",
+      "spider-man-total-mayhem-vita",
+      "simpsons-hit-and-run-vita",
+      "kotor-vita",
+      "baldurs-gate-dark-alliance-vita",
+      "slingshot-racing-vita",
+      "fallout-2-ce-vita",
+      "render96-sm64-hd-vita",
+      "celeste-classic-vita",
+      "cave-story-evo-vita",
+      "nfs-hot-pursuit-vita",
+      "call-of-duty-4-vita"
+    ]);
     for (const project of FALLBACK_PROJECTS) {
-      expect(project.reddit_url, project.slug + " reddit_url").toMatch(
-        /^https:\/\/(www\.)?reddit\.com\/r\/[A-Za-z0-9_]+\//
-      );
+      if (intentionallyUnlinked.has(project.slug)) {
+        expect(project.reddit_url, project.slug + " reddit_url").toBeUndefined();
+      } else {
+        expect(project.reddit_url, project.slug + " reddit_url").toMatch(
+          /^https:\/\/(www\.)?reddit\.com\/r\/[A-Za-z0-9_]+\//
+        );
+      }
     }
   });
 
@@ -70,10 +88,15 @@ describe("ledger data integrity", () => {
 
   it("links every update to a project that exists", () => {
     const slugs = new Set(FALLBACK_PROJECTS.map((p) => p.slug));
+    const intentionallyUnlinked = new Set(["upd_spiderman", "upd_portal", "upd_nfs", "upd_cod4"]);
     for (const update of FALLBACK_UPDATES) {
       expect(slugs, update.id + " project_slug").toContain(update.project_slug);
-      expect(update.sources?.length, update.id + " sources").toBeGreaterThan(0);
-      expect(update.sources[0].canonical_url).toMatch(/reddit\.com/);
+      if (intentionallyUnlinked.has(update.id)) {
+        expect(update.sources, update.id + " sources").toEqual([]);
+      } else {
+        expect(update.sources?.length, update.id + " sources").toBeGreaterThan(0);
+        expect(update.sources[0].canonical_url).toMatch(/reddit\.com/);
+      }
     }
   });
 
@@ -84,4 +107,3 @@ describe("ledger data integrity", () => {
     expect(new Set(developerSlugs).size).toBe(developerSlugs.length);
   });
 });
-

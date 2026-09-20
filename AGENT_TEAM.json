@@ -1,0 +1,61 @@
+{
+  "schemaVersion": 3,
+  "project": "VitaHarbor",
+  "projectId": "61e8d378-d2c9-409f-96b1-0e6d16827c94",
+  "repository": "https://github.com/CipherGreyLabs/vitaharbor",
+  "orchestration": {
+    "masterMayImplement": false,
+    "primaryWorkerMayCreateWorkers": false,
+    "nativeSubagents": false,
+    "integrationBranch": "main",
+    "dirtyWorkPreservation": true,
+    "evidenceLedger": "EVIDENCE.jsonl"
+  },
+  "agents": [
+    {
+      "agentId": "vitaharbor-master",
+      "role": "master",
+      "title": "VitaHarbor Master — Architect & Delegator",
+      "model": "gpt-5.6-sol",
+      "reasoningEffort": "medium",
+      "status": "active-idle",
+      "taskId": "01a0bed8-0aae-73d2-bff1-bb0b6e7dfd00",
+      "threadId": "01a0bed8-0aae-73d2-bff1-bb0b6e7dfd00",
+      "workspace": "C:\\Users\\suloW\\.codex\\worktrees\\5e46\\VitaPort",
+      "worktree": "C:\\Users\\suloW\\.codex\\worktrees\\5e46\\VitaPort",
+      "branch": "detached HEAD (no branch)",
+      "head": "b5d6536d948ae3ec678f3e5e60366fe0d7d5181f",
+      "allowedScope": "project inspection, architecture, bounded assignments and release decisions",
+      "prohibitedScope": "implementation, tests, deployment, native/hidden subagents and direct product edits",
+      "handoffPath": "HANDOFF.md",
+      "assignmentOutput": "bounded assignment to the primary worker or optional Luna worker"
+    },
+    {
+      "agentId": "vitaharbor-primary-worker",
+      "role": "primary-worker",
+      "title": "VitaHarbor Worker — Implement, Test & Deploy",
+      "model": "current-task-model",
+      "reasoningEffort": "current-task-setting",
+      "modelStatus": "not recorded by the current task runtime",
+      "status": "active",
+      "taskId": "01a0bc84-7462-7f92-a672-5856bed2ae0f",
+      "threadId": "01a0bc84-7462-7f92-a672-5856bed2ae0f",
+      "workspace": "C:\\Users\\suloW\\Documents\\ChatGPT\\VitaPort",
+      "worktree": "C:\\Users\\suloW\\Documents\\ChatGPT\\VitaPort",
+      "branch": "main",
+      "head": "b5d6536d948ae3ec678f3e5e60366fe0d7d5181f",
+      "allowedScope": "files explicitly included by the current master assignment, required tests, project evidence and approved deployment",
+      "prohibitedScope": "architecture ownership, unrequested redesign, worker creation, hidden subagents and unrelated dirty-file changes",
+      "handoffPath": "HANDOFF.md"
+    }
+  ],
+  "optionalWorkerTemplate": {
+    "role": "specialist-worker",
+    "model": "gpt-5.6-luna",
+    "reasoningEffort": "xhigh",
+    "branchPattern": "codex/worker/<assignmentId>",
+    "worktreeRequired": true,
+    "mayCreateWorkers": false,
+    "mustReturn": ["changed files", "tests", "evidence", "status", "handoff"]
+  }
+}

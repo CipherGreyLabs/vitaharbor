@@ -126,7 +126,7 @@ export const ProjectsPage: React.FC = () => {
             PS VITA PORT REGISTRY
           </h1>
           <p className="text-[11px] font-mono text-[#7c848d]">
-            Showing {filteredProjects.length} port projects from r/VitaPiracy and r/vitahacks
+            Showing {filteredProjects.length} port projects from r/VitaPiracy, r/vitahacks and r/PSVitaHomebrew
           </p>
         </div>
       </div>

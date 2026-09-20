@@ -1,12 +1,37 @@
 // Renders the 1200x630 social card from the live design tokens so link previews
 // on Reddit carry the same art direction as the site itself.
 // usage: node scripts/make-og.mjs
-import { chromium } from "playwright";
+import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { FALLBACK_PROJECTS } from "../src/shared/constants/fallbackData.ts";
+import { REDDIT_SOURCE_LABEL } from "./reddit-sources.mjs";
+
+let chromium = null;
+try {
+  ({ chromium } = await import("playwright"));
+} catch {
+  // Vercel can install the Playwright package without downloading its browser.
+  // The checked-in home card remains a safe build-time fallback in that case.
+}
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 const out = path.resolve(here, "../public/og.png");
+const projectOut = path.resolve(here, "../public/og/projects");
+
+function prettyStage(stage) {
+  return String(stage || "wip").replace(/_/g, " ").replace(/^./, (value) => value.toUpperCase());
+}
+
+function escapeHtml(value) {
+  return String(value || "").replace(/[&<>\"']/g, (char) => ({
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': "&quot;",
+    "'": "&#39;"
+  })[char]);
+}
 
 const stages = [
   "ANNOUNCED",
@@ -20,10 +45,10 @@ const stages = [
 ];
 
 const stats = [
-  ["24", "PORTS TRACKED"],
-  ["21", "PLAYABLE +"],
-  ["11", "RELEASED"],
-  ["7", "ENGINEERS"]
+  [String(FALLBACK_PROJECTS.length), "PROJECTS TRACKED"],
+  [String(FALLBACK_PROJECTS.filter((p) => ["playable", "released", "completable"].includes(String(p.current_stage))).length), "PLAYABLE STAGE"],
+  [String(FALLBACK_PROJECTS.filter((p) => String(p.current_stage) === "released").length), "RELEASED STAGE"],
+  [String(new Set(FALLBACK_PROJECTS.flatMap((p) => (p.developers || []).map((d) => d.display_name))).size), "ENGINEERS"]
 ];
 
 const html = `<!DOCTYPE html>
@@ -97,13 +122,13 @@ const html = `<!DOCTYPE html>
     <div class="frame">
       <div class="top">
         <div class="brand"><span class="dot"></span><span class="wordmark mono">VITAHARBOR</span></div>
-        <div class="feeds mono">R/VITAHACKS &nbsp;·&nbsp; R/VITAPIRACY &nbsp;·&nbsp; ZERO ROMS HOSTED</div>
+        <div class="feeds mono">${REDDIT_SOURCE_LABEL.toUpperCase().replaceAll(" + ", " &nbsp;·&nbsp; ")} &nbsp;·&nbsp; ZERO ROMS HOSTED</div>
       </div>
 
       <div class="mid">
         <div class="eyebrow mono">ONE HUB FOR EVERY PORT</div>
-        <h1>Every Vita port.<span class="dim">One verified ledger.</span></h1>
-        <p class="lede">Stage, hardware notes, performance and the engineer behind every PlayStation Vita port — pulled out of scattered threads and kept in one place.</p>
+        <h1>Every Vita port.<span class="dim">One evidence ledger.</span></h1>
+        <p class="lede">Stage, hardware notes, performance and source provenance for PlayStation Vita projects — pulled out of scattered threads and kept in one place.</p>
         <div class="rail mono">
           ${stages.map((s) => `<span class="step${s === "RELEASED" ? " on" : ""}">${s}</span>`).join("")}
         </div>
@@ -124,11 +149,48 @@ const html = `<!DOCTYPE html>
   </body>
 </html>`;
 
-const browser = await chromium.launch();
+let browser = null;
+try {
+  browser = chromium ? await chromium.launch() : null;
+} catch {
+  // The social cards are enhancement assets; do not fail the production build
+  // just because a CI image has no Playwright browser binary.
+}
+
+if (!browser) {
+  if (!fs.existsSync(out)) {
+    throw new Error(`OG fallback is missing: ${out}`);
+  }
+  fs.mkdirSync(projectOut, { recursive: true });
+  for (const project of FALLBACK_PROJECTS) {
+    fs.copyFileSync(out, path.join(projectOut, project.slug + ".png"));
+  }
+  console.log("Playwright browser unavailable; reused the checked-in home OG card for", FALLBACK_PROJECTS.length, "project cards");
+  process.exit(0);
+}
+
 const page = await browser.newPage({ viewport: { width: 1200, height: 630 }, deviceScaleFactor: 1 });
 await page.setContent(html, { waitUntil: "load" });
 await page.evaluate(() => document.fonts.ready);
 await page.waitForTimeout(600);
 await page.screenshot({ path: out });
+
+fs.mkdirSync(projectOut, { recursive: true });
+for (const project of FALLBACK_PROJECTS) {
+  const title = escapeHtml(project.display_name || project.game_title || "Untitled project");
+  const summary = escapeHtml(project.summary || "PlayStation Vita project tracked by VitaHarbor.");
+  const stage = escapeHtml(prettyStage(project.current_stage));
+  const titleSize = title.length > 70 ? 46 : title.length > 46 ? 56 : 68;
+  const projectHtml = html
+    .replace("ONE HUB FOR EVERY PORT", "PROJECT RECORD")
+    .replace("Every Vita port.<span class=\"dim\">One evidence ledger.</span>", `${title}<span class="dim">${stage} · VitaHarbor</span>`)
+    .replace("Stage, hardware notes, performance and source provenance for PlayStation Vita projects — pulled out of scattered threads and kept in one place.", summary)
+    .replace("<h1>", `<h1 style="font-size:${titleSize}px">`)
+    .replace("<span class=\"step on\">RELEASED</span>", `<span class="step on">${stage.toUpperCase()}</span>`);
+  await page.setContent(projectHtml, { waitUntil: "load" });
+  await page.evaluate(() => document.fonts.ready);
+  await page.screenshot({ path: path.join(projectOut, project.slug + ".png") });
+}
+
 await browser.close();
-console.log("wrote", out);
+console.log("wrote", out, "and", FALLBACK_PROJECTS.length, "project cards");

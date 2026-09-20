@@ -30,7 +30,7 @@ export const ACTIVITY_THRESHOLDS = {
   stale: 180
 } as const;
 
-export const DEFAULT_SUBREDDITS = ["VitaPiracy", "vitahacks"];
+export const DEFAULT_SUBREDDITS = ["VitaPiracy", "vitahacks", "PSVitaHomebrew"];
 
 export const REDIS_KEYS = {
   rateLimitRemaining: "reddit:rate-limit:remaining",

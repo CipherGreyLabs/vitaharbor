@@ -11,6 +11,8 @@ export interface SelectedProjectView {
   playability_notes?: string | null;
   technologies?: string[];
   original_platform?: string | null;
+  screenshot_url?: string;
+  screenshot_alt?: string;
 }
 
 export interface VitaConsoleSceneProps {
@@ -207,8 +209,31 @@ export const VitaConsoleScene: React.FC<VitaConsoleSceneProps> = ({
     vita.add(screen);
 
     const g = screenCanvas.getContext('2d');
+    let sourceImage: HTMLImageElement | null = null;
+    let sourceImageUrl = '';
 
-            function paint() {
+    function syncSourceImage(current: SelectedProjectView | null) {
+      const url = String(current?.screenshot_url || '');
+      if (url === sourceImageUrl) return;
+      sourceImageUrl = url;
+      sourceImage = null;
+      if (!url) return;
+
+      const image = new Image();
+      image.onload = () => {
+        if (sourceImageUrl !== url) return;
+        sourceImage = image;
+        paint();
+      };
+      image.onerror = () => {
+        if (sourceImageUrl !== url) return;
+        sourceImage = null;
+        paint();
+      };
+      image.src = url;
+    }
+
+    function paint() {
       if (!g) return;
       const current = selected.current;
 
@@ -222,6 +247,28 @@ export const VitaConsoleScene: React.FC<VitaConsoleSceneProps> = ({
         g.font = '500 17px -apple-system, Helvetica, Arial, sans-serif';
         g.textAlign = 'center';
         g.fillText('SELECT A PORT', 480, 272);
+        screenTexture.needsUpdate = true;
+        return;
+      }
+
+      syncSourceImage(current);
+      if (sourceImage) {
+        const scale = Math.max(960 / sourceImage.naturalWidth, 544 / sourceImage.naturalHeight);
+        const width = sourceImage.naturalWidth * scale;
+        const height = sourceImage.naturalHeight * scale;
+        g.fillStyle = '#05060a';
+        g.fillRect(0, 0, 960, 544);
+        g.drawImage(sourceImage, (960 - width) / 2, (544 - height) / 2, width, height);
+        const shade = g.createLinearGradient(0, 0, 0, 544);
+        shade.addColorStop(0, 'rgba(0,0,0,0.12)');
+        shade.addColorStop(0.78, 'rgba(0,0,0,0.02)');
+        shade.addColorStop(1, 'rgba(0,0,0,0.38)');
+        g.fillStyle = shade;
+        g.fillRect(0, 0, 960, 544);
+        g.fillStyle = 'rgba(255,255,255,0.62)';
+        g.font = '500 15px -apple-system, Helvetica, Arial, sans-serif';
+        g.textAlign = 'left';
+        g.fillText('VITAHARBOR · SOURCE FRAME', 34, 42);
         screenTexture.needsUpdate = true;
         return;
       }

@@ -4,6 +4,9 @@ export interface LedgerProject {
   slug: string;
   reddit_url?: string;
   repo_url?: string;
+  screenshot_url?: string;
+  screenshot_source_url?: string;
+  screenshot_alt?: string;
   display_name: string;
   current_stage: string;
   lifecycle?: string;
@@ -16,26 +19,68 @@ export interface LedgerProject {
   is_featured?: boolean;
   is_archived?: boolean;
   verification?: string;
+  aliases?: string[];
+  last_verified_at?: string | Date | null;
+  setup_evidence?: SetupEvidence | null;
   game_title?: string;
   original_platform?: string | null;
   original_release_year?: number | null;
   technologies?: string[];
   developers?: Array<{ id: number; role: string; display_name: string; slug: string }>;
-  stage_history?: Array<{ id: number; stage: string; effective_at: string | Date; reason?: string | null }>;
+  stage_history?: Array<{
+    id: number;
+    stage: string;
+    effective_at: string | Date;
+    reason?: string | null;
+    source_url?: string | null;
+  }>;
 }
 
+export interface SetupEvidence {
+  categoryLabel?: string;
+  plugins?: string[];
+  overclock?: string | null;
+  assetPath?: string | null;
+  instructions?: string | null;
+  sourceUrl?: string | null;
+  verifiedOnHardware?: boolean;
+}
+
+export type ProjectTypeKey = "native" | "decomp" | "wrapper" | "engine" | "classic";
+
+export const PROJECT_TYPE_META: Record<ProjectTypeKey, { label: string; shortLabel: string }> = {
+  native: { label: "Native port", shortLabel: "Native" },
+  decomp: { label: "Decompilation", shortLabel: "Decomp" },
+  wrapper: { label: "ARM wrapper / loader", shortLabel: "Wrapper" },
+  engine: { label: "Engine / runtime", shortLabel: "Engine" },
+  classic: { label: "Classic / other", shortLabel: "Classic" }
+};
+
+export const VERIFICATION_META: Record<string, { label: string; description: string }> = {
+  developer_direct: {
+    label: "Developer source",
+    description: "The current record is grounded in a source attributed to the developer."
+  },
+  community_report: {
+    label: "Community report",
+    description: "The current record is grounded in a community report."
+  },
+  detected: {
+    label: "Detected only",
+    description: "A scanner found a matching thread; the entry still needs editorial verification."
+  }
+};
+
 export const KNOWN_REPOS: Record<string, string> = {
-  "openmohaa-vita": "https://github.com/openmohaa/openmohaa",
-  "smash-melee-vita": "https://github.com/doldecomp/melee",
-  "hollow-knight-vita": "https://github.com/patnosDD/Hollow-Knight-Vita",
-  "zelda-ship-of-harkinian-vita": "https://github.com/HarbourMasters/Shipwright",
-  "fallout-2-ce-vita": "https://github.com/alexbatalov/fallout2-ce",
-  "render96-sm64-hd-vita": "https://github.com/byllava/sm64-vita",
-  "celeste-classic-vita": "https://github.com/Jon-Davis/Celeste-Classic-Vita",
-  "cave-story-evo-vita": "https://github.com/nxengine/nxengine-evo",
-  "class-of-09-vita": "https://github.com/SonicMastr/Class-of-09-Vita",
-  "renpy-8-runtime-engine": "https://github.com/SonicMastr/renpy-vita",
-  "portal-vita": "https://github.com/DanielSant0s/portal-vita"
+  "openmohaa-vita": "https://github.com/HenryKun55/openmohaa/tree/vita-port",
+  "smash-melee-vita": "https://github.com/robin994/SmashMeleeVita",
+  "hollow-knight-vita": "https://github.com/PatnosDD/Hollow-Knight-PsVita",
+  "class-of-09-vita": "https://github.com/TheSpasticGamer/Class-Of-09-Vita-Port",
+  "renpy-8-runtime-engine": "https://github.com/Grimiku/RenPy-Vita-8",
+  "illusia-vita": "https://github.com/withLogic/illusia-vita",
+  "jedi-academy-vita": "https://github.com/NDRWhun/JAVITA",
+  "jedi-outcast-vita": "https://github.com/NDRWhun/JK2VITA",
+  "barony-vita": "https://github.com/Brendonm17/Barony-Vita"
 };
 
 export const STAGE_TONE: Record<string, string> = {
@@ -114,56 +159,81 @@ export function formatDay(value: unknown) {
   return date.toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" });
 }
 
+export function formatUtcDateTime(value: unknown) {
+  const date = new Date(String(value));
+  if (Number.isNaN(date.getTime())) return "date not recorded";
+  return date.toLocaleString("en-GB", {
+    day: "2-digit",
+    month: "short",
+    year: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: false,
+    timeZone: "UTC"
+  }) + " UTC";
+}
+
 export function formatMonth(value: unknown) {
   const date = new Date(String(value));
   if (Number.isNaN(date.getTime())) return "";
   return date.toLocaleDateString("en-GB", { month: "long", year: "numeric" });
 }
 
-export function derivePlatformCategory(project: LedgerProject): "wrapper" | "decomp" | "classic" {
+export function deriveProjectType(project: LedgerProject): ProjectTypeKey {
   const platform = (project.original_platform || "").toLowerCase();
   const techs = (project.technologies || []).map((t) => t.toLowerCase());
+  const text = [platform, project.game_title, project.display_name, ...techs]
+    .filter(Boolean)
+    .join(" ")
+    .toLowerCase();
+
+  if (text.includes("ren'py") || text.includes("runtime") || text.includes("engine")) {
+    return "engine";
+  }
 
   if (platform.includes("decomp") || techs.some((t) => t.includes("decomp") || t.includes("ultraship"))) {
     return "decomp";
   }
-  if (platform.includes("android") || techs.some((t) => t.includes("armv7") || t.includes("wrapper"))) {
+  if (
+    platform.includes("android") ||
+    platform.includes("ios") ||
+    techs.some((t) => t.includes("armv7") || t.includes("wrapper") || t.includes("loader") || t.includes("recompiler"))
+  ) {
     return "wrapper";
+  }
+  if (techs.some((t) => t.includes("native") || t.includes("vitagl") || t.includes("scegxm"))) {
+    return "native";
   }
   return "classic";
 }
 
-export function deriveSetupGuide(project: LedgerProject) {
-  const category = derivePlatformCategory(project);
-  const slug = project.slug.replace(/-vita$/i, "");
+export function derivePlatformCategory(project: LedgerProject): ProjectTypeKey {
+  return deriveProjectType(project);
+}
 
-  if (category === "wrapper") {
-    return {
-      categoryLabel: "Android ARMv7 Wrapper",
-      plugins: ["kubridge.skprx", "fd_fix.skprx", "libshacccg.suprx"],
-      overclock: "500 MHz (PSVshell recommended)",
-      assetPath: `ux0:data/${slug}/`,
-      instructions: "Requires original Android .apk file and .obb game data placed in the data folder."
-    };
-  }
+/**
+ * Setup is evidence, not a category default. Older versions inferred plugins,
+ * clock speeds and asset paths from the project type; that made generic advice
+ * look like a project-specific claim. Only an explicit record may be rendered.
+ */
+export function deriveSetupGuide(project: LedgerProject): SetupEvidence | null {
+  return project.setup_evidence || null;
+}
 
-  if (category === "decomp") {
-    return {
-      categoryLabel: "Decompilation / Source Port",
-      plugins: ["libshacccg.suprx", "rePatch (optional)"],
-      overclock: "444 MHz (Official Vita Boost)",
-      assetPath: `ux0:data/${slug}/`,
-      instructions: "Requires legitimate original game ROM or asset files to generate Vita-compatible data."
-    };
-  }
-
-  return {
-    categoryLabel: "PC & Engine Classic",
-    plugins: ["libshacccg.suprx"],
-    overclock: "444 MHz",
-    assetPath: `ux0:data/${slug}/`,
-    instructions: "Requires original PC game data files (e.g. from Steam or GOG) copied to data folder."
+export function verificationMeta(value: unknown) {
+  return VERIFICATION_META[String(value || "")] || {
+    label: "Verification not recorded",
+    description: "No verification level has been recorded for this entry."
   };
+}
+
+export function freshness(value: unknown, staleAfterDays = 90) {
+  const time = new Date(String(value)).getTime();
+  if (Number.isNaN(time)) return { state: "unknown" as const, label: "Date not recorded" };
+  const age = Math.max(0, Date.now() - time) / 86400000;
+  if (age > staleAfterDays) return { state: "stale" as const, label: "Needs refresh" };
+  if (age > 30) return { state: "aging" as const, label: "Aging record" };
+  return { state: "fresh" as const, label: "Recently observed" };
 }
 
 export const SPECS: Array<[string, string]> = [

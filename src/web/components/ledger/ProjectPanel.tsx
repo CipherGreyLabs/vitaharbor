@@ -8,11 +8,15 @@ import {
   formatMonth,
   relativeTime,
   deriveSetupGuide,
+  deriveProjectType,
+  PROJECT_TYPE_META,
+  verificationMeta,
+  freshness,
   KNOWN_REPOS,
   STAGE_CHIP,
   STAGE_TONE
 } from "./types";
-import { ExternalLink, Cpu, HardDrive, CheckCircle2, GitBranch } from "lucide-react";
+import { ExternalLink, Cpu, HardDrive, CheckCircle2, GitBranch, ShieldCheck, CircleAlert, MonitorPlay } from "lucide-react";
 
 interface ProjectPanelProps {
   project: LedgerProject;
@@ -31,6 +35,9 @@ export const ProjectPanel: React.FC<ProjectPanelProps> = ({
   const history = Array.isArray(project.stage_history) ? project.stage_history : [];
   const developers = Array.isArray(project.developers) ? project.developers : [];
   const setup = deriveSetupGuide(project);
+  const projectType = PROJECT_TYPE_META[deriveProjectType(project)];
+  const verification = verificationMeta(project.verification);
+  const activityFreshness = freshness(project.last_activity_at);
   const repoUrl = project.repo_url || KNOWN_REPOS[project.slug];
 
   return (
@@ -52,7 +59,7 @@ export const ProjectPanel: React.FC<ProjectPanelProps> = ({
             </span>
             <span>{title.engine || project.original_platform || "Port"}</span>
             <span className="text-hairline-strong">·</span>
-            <span className="font-mono text-micro text-ink-muted">{setup.categoryLabel}</span>
+            <span className="font-mono text-micro text-ink-muted">{projectType.label}</span>
           </p>
         </div>
       </div>
@@ -64,6 +71,32 @@ export const ProjectPanel: React.FC<ProjectPanelProps> = ({
           playability and performance are deliberately left empty.
         </p>
       )}
+
+      <dl className="mb-6 grid gap-3 sm:grid-cols-3">
+        <div className="rounded-xl border border-hairline bg-surface px-3.5 py-3">
+          <dt className="flex items-center gap-1.5 text-micro font-semibold uppercase text-ink-muted">
+            <ShieldCheck className="h-3.5 w-3.5 text-accent" />
+            Evidence level
+          </dt>
+          <dd className="mt-1 text-caption font-medium text-ink">{verification.label}</dd>
+        </div>
+        <div className="rounded-xl border border-hairline bg-surface px-3.5 py-3">
+          <dt className="flex items-center gap-1.5 text-micro font-semibold uppercase text-ink-muted">
+            <CircleAlert className="h-3.5 w-3.5 text-ink-muted" />
+            Record freshness
+          </dt>
+          <dd className="mt-1 text-caption font-medium text-ink">
+            {activityFreshness.label}
+            <span className="ml-1 font-normal text-ink-muted">· {formatDay(project.last_activity_at) || "—"}</span>
+          </dd>
+        </div>
+        <div className="rounded-xl border border-hairline bg-surface px-3.5 py-3">
+          <dt className="text-micro font-semibold uppercase text-ink-muted">Last verified</dt>
+          <dd className="mt-1 text-caption font-medium text-ink">
+            {formatDay(project.last_verified_at) || "Not recorded"}
+          </dd>
+        </div>
+      </dl>
 
       <div className="grid gap-8 lg:grid-cols-3">
         <div className="lg:col-span-2 space-y-6">
@@ -96,44 +129,87 @@ export const ProjectPanel: React.FC<ProjectPanelProps> = ({
             )}
           </div>
 
-          {/* Practical Player Setup Guide */}
+          {project.screenshot_url && (
+            <figure className="overflow-hidden rounded-xl border border-hairline bg-surface">
+              <img
+                src={project.screenshot_url}
+                alt={project.screenshot_alt || "Source screenshot for " + (project.display_name || project.game_title)}
+                loading="lazy"
+                className="aspect-video w-full object-cover"
+              />
+              <figcaption className="flex flex-wrap items-center justify-between gap-2 border-t border-hairline px-3.5 py-2.5 text-micro text-ink-muted">
+                <span>Source screenshot · also shown on the Vita display</span>
+                {project.screenshot_source_url && (
+                  <a
+                    href={project.screenshot_source_url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="font-medium text-ink-medium hover:text-accent"
+                  >
+                    Open original
+                  </a>
+                )}
+              </figcaption>
+            </figure>
+          )}
+
+          {/* Setup is shown only when it has a project-specific source record. */}
           <div className="rounded-xl border border-hairline bg-surface p-4 text-xs font-mono space-y-3">
             <div className="flex items-center gap-2 text-micro font-semibold uppercase text-ink">
               <Cpu className="h-3.5 w-3.5 text-accent" />
               <span>Hardware & Plugin Setup</span>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-ink-medium">
-              <div className="space-y-1">
-                <span className="text-micro uppercase text-ink-muted block">Required Plugins:</span>
-                <div className="space-y-1">
-                  {setup.plugins.map((plugin) => (
-                    <div key={plugin} className="flex items-center gap-1.5 text-ink">
-                      <CheckCircle2 className="h-3 w-3 text-stage-done shrink-0" />
-                      <span>{plugin}</span>
+            {setup ? (
+              <>
+                <div className="grid grid-cols-1 gap-3 text-ink-medium sm:grid-cols-2">
+                  {setup.plugins && setup.plugins.length > 0 && (
+                    <div className="space-y-1">
+                      <span className="block text-micro uppercase text-ink-muted">Recorded plugins:</span>
+                      <div className="space-y-1">
+                        {setup.plugins.map((plugin) => (
+                          <div key={plugin} className="flex items-center gap-1.5 text-ink">
+                            <CheckCircle2 className="h-3 w-3 shrink-0 text-stage-done" />
+                            <span>{plugin}</span>
+                          </div>
+                        ))}
+                      </div>
                     </div>
-                  ))}
-                </div>
-              </div>
+                  )}
 
-              <div className="space-y-1.5">
-                <div>
-                  <span className="text-micro uppercase text-ink-muted block">Overclock Target:</span>
-                  <span className="text-ink font-semibold">{setup.overclock}</span>
+                  <div className="space-y-1.5">
+                    {setup.overclock && (
+                      <div>
+                        <span className="block text-micro uppercase text-ink-muted">Recorded clock target:</span>
+                        <span className="font-semibold text-ink">{setup.overclock}</span>
+                      </div>
+                    )}
+                    {setup.assetPath && (
+                      <div>
+                        <span className="flex items-center gap-1 text-micro uppercase text-ink-muted">
+                          <HardDrive className="h-3 w-3 text-ink-muted" />
+                          <span>Recorded data path:</span>
+                        </span>
+                        <code className="rounded bg-sunken px-1.5 py-0.5 text-[11px] text-ink">{setup.assetPath}</code>
+                      </div>
+                    )}
+                  </div>
                 </div>
-                <div>
-                  <span className="text-micro uppercase text-ink-muted block flex items-center gap-1">
-                    <HardDrive className="h-3 w-3 text-ink-muted" />
-                    <span>Data Path:</span>
-                  </span>
-                  <code className="text-[11px] bg-sunken px-1.5 py-0.5 rounded text-ink font-mono">{setup.assetPath}</code>
-                </div>
-              </div>
-            </div>
-
-            <p className="text-caption text-ink-muted border-t border-hairline-strong/30 pt-2">
-              {setup.instructions}
-            </p>
+                {setup.instructions && (
+                  <p className="border-t border-hairline-strong/30 pt-2 text-caption text-ink-muted">{setup.instructions}</p>
+                )}
+                {setup.sourceUrl && (
+                  <a href={setup.sourceUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-caption font-medium text-ink-medium hover:text-accent">
+                    Open setup evidence <ExternalLink className="h-3 w-3" />
+                  </a>
+                )}
+              </>
+            ) : (
+              <p className="text-caption leading-relaxed text-ink-muted">
+                No project-specific setup record is stored. VitaHarbor does not infer plugins,
+                clock speeds or asset paths from the project type.
+              </p>
+            )}
           </div>
 
           <dl className="grid grid-cols-1 gap-x-8 gap-y-4 border-t border-hairline-strong/30 pt-4 sm:grid-cols-3">
@@ -141,7 +217,7 @@ export const ProjectPanel: React.FC<ProjectPanelProps> = ({
               <dt className="text-micro font-medium uppercase text-ink-muted">Credits</dt>
               <dd className="mt-1 text-body text-ink">
                 {developers.length === 0
-                  ? "Community effort"
+                  ? "Not recorded"
                   : developers
                       .map(
                         (dev: any) =>
@@ -187,6 +263,16 @@ export const ProjectPanel: React.FC<ProjectPanelProps> = ({
                 {step.reason && (
                   <p className="mt-1 text-caption text-ink-medium">{step.reason}</p>
                 )}
+                {step.source_url && (
+                  <a
+                    href={step.source_url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mt-1 inline-flex items-center gap-1 text-caption font-medium text-ink-muted hover:text-accent"
+                  >
+                    Source <ExternalLink className="h-3 w-3" />
+                  </a>
+                )}
               </li>
             ))}
             {history.length === 0 && (
@@ -200,9 +286,10 @@ export const ProjectPanel: React.FC<ProjectPanelProps> = ({
         <button
           type="button"
           onClick={() => onSelectProject(project)}
-          className="rounded-lg bg-ink px-3.5 py-2 text-caption font-medium text-canvas transition-colors hover:bg-ink/90"
+          className="inline-flex min-h-[44px] items-center gap-2 rounded-lg bg-ink px-3.5 py-2 text-caption font-medium text-canvas transition-colors hover:bg-ink/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink/30"
         >
-          Show on the console
+          <MonitorPlay className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />
+          Show on Vita
         </button>
         <button
           type="button"
@@ -235,6 +322,12 @@ export const ProjectPanel: React.FC<ProjectPanelProps> = ({
             Source discussion
             <ExternalLink className="h-3.5 w-3.5" />
           </a>
+        )}
+
+        {!repoUrl && !project.reddit_url && !project.screenshot_source_url && (
+          <span className="text-caption text-ink-muted" title="No project-specific external source has been verified">
+            No verified external source
+          </span>
         )}
       </div>
     </div>

@@ -1,0 +1,695 @@
+{
+  "schema_version": 2,
+  "generated_at": "2026-09-20T16:59:25.697Z",
+  "source": "r/vitahacks + r/VitaPiracy + r/PSVitaHomebrew RSS",
+  "items": [
+    {
+      "schema_version": 2,
+      "id": "reddit-1wlkixu",
+      "external_id": "1wlkixu",
+      "state": "BLOCKED_UNVERIFIED",
+      "state_history": [
+        {
+          "state": "DETECTED",
+          "at": "2026-09-20T16:59:25.697Z",
+          "actor": "reddit-scanner",
+          "reason": "Canonical Reddit RSS entry accepted at the ingestion boundary"
+        },
+        {
+          "state": "QUARANTINED",
+          "at": "2026-09-20T16:59:25.697Z",
+          "actor": "reddit-scanner",
+          "reason": "Scanner result is unverified and cannot enter the curated ledger"
+        },
+        {
+          "state": "BLOCKED_UNVERIFIED",
+          "at": "2026-09-20T16:59:25.697Z",
+          "actor": "incident-response",
+          "reason": "Linked to a confirmed campaign signal but no project evidence was available; held without amplification"
+        }
+      ],
+      "source": {
+        "platform": "reddit",
+        "subreddit": "vitahacks",
+        "canonical_url": "https://www.reddit.com/r/vitahacks/comments/1wlkixu/keeperrl_vita_announcement/",
+        "author": "LefterisDaGamer",
+        "title": "KeeperRL Vita announcement!",
+        "body": "so .... i forced claude to port KeeperRL ( a niche open source roque like) to the PS VITA! currently , the port DOES start but the log says KeeperRL for PS Vita starting (heap 192 MB) FATAL main.cpp:165 Uncaught exception: Enable multithreading to use std::thread: Not owner now based off some researching , it is that multithreading is disabled also, paid assets likely wont work (do to ram limitations ) so limited to ASCII only anyways Coming Soon! Also, i will post a github link in the comments when i get it to run",
+        "published_at": "2026-09-20T15:47:59.851Z"
+      },
+      "classification": {
+        "confidence": "medium",
+        "reason": "Incident review: near-duplicate cross-community claim without repository or release evidence",
+        "candidate_type": "port"
+      },
+      "provenance": {
+        "repository_url": null,
+        "release_url": null,
+        "evidence_urls": [],
+        "evidence_bundle_id": null,
+        "repository_identity": null,
+        "repository_created_at": null,
+        "repository_last_activity_at": null,
+        "release_facts": [],
+        "vita_evidence": [],
+        "author_linkage": null,
+        "corroboration": [],
+        "duplicate_relation": {
+          "content_hash": "73c6bb7ea054dec033a6c64e7fabe137da101c07be87b4d4183659b19d60b3e2",
+          "related_candidate_ids": []
+        }
+      },
+      "campaign": {
+        "cluster_id": "campaign-8bdf6011",
+        "linkage_confidence": "high",
+        "signals": [
+          "left_direct_poison_intent",
+          "same_author_burst",
+          "near_duplicate_wording",
+          "explicit_campaign_reference"
+        ],
+        "related_candidate_ids": [
+          "reddit-1wlj9gd",
+          "reddit-1wlkdva"
+        ],
+        "text_fingerprint": "0c337c64",
+        "media_fingerprints": [],
+        "outbound_fingerprints": [],
+        "direct_intent": false,
+        "explicit_campaign_reference": false,
+        "incident_id": "VH-INCIDENT-010"
+      },
+      "risk_signals": [
+        "no_project_evidence_in_post"
+      ],
+      "evidence_gaps": [
+        "exact project repository",
+        "repository identity and activity facts",
+        "release or build evidence",
+        "Vita-specific hardware evidence",
+        "author/developer linkage and independent corroboration"
+      ],
+      "content_hash": "73c6bb7ea054dec033a6c64e7fabe137da101c07be87b4d4183659b19d60b3e2",
+      "review": {
+        "reviewer": "incident-response",
+        "reviewed_at": "2026-09-20T16:59:25.697Z",
+        "reason": "Linked to a confirmed campaign signal but no project evidence was available; held without amplification",
+        "evidence_bundle": null
+      },
+      "incident": {
+        "incident_id": "VH-INCIDENT-010",
+        "classification": "UNVERIFIED_CLAIM",
+        "confirmed_at": "2026-09-20T16:59:25.697Z",
+        "rationale": "Linked to a confirmed campaign signal but no project evidence was available; held without amplification",
+        "public_containment": "removed"
+      }
+    },
+    {
+      "schema_version": 2,
+      "id": "reddit-1wlkdva",
+      "external_id": "1wlkdva",
+      "state": "BLOCKED_UNVERIFIED",
+      "state_history": [
+        {
+          "state": "DETECTED",
+          "at": "2026-09-20T16:59:25.697Z",
+          "actor": "reddit-scanner",
+          "reason": "Canonical Reddit RSS entry accepted at the ingestion boundary"
+        },
+        {
+          "state": "QUARANTINED",
+          "at": "2026-09-20T16:59:25.697Z",
+          "actor": "reddit-scanner",
+          "reason": "Explicit fake/troll language; held without public amplification"
+        },
+        {
+          "state": "BLOCKED_UNVERIFIED",
+          "at": "2026-09-20T16:59:25.697Z",
+          "actor": "incident-response",
+          "reason": "Linked to a confirmed campaign signal but no project evidence was available; held without amplification"
+        }
+      ],
+      "source": {
+        "platform": "reddit",
+        "subreddit": "VitaPiracy",
+        "canonical_url": "https://www.reddit.com/r/VitaPiracy/comments/1wlkdva/keeperrl_vita_announcement/",
+        "author": "LefterisDaGamer",
+        "title": "KeeperRL Vita announcement!",
+        "body": "so , this is unrelated to my previous post about trolling VitaHarbor (actually this time btw) , and i forced claude to port KeeperRL ( a niche open source roque like) to the PS VITA! currently , the port DOES start but the log says KeeperRL for PS Vita starting (heap 192 MB) FATAL main.cpp:165 Uncaught exception: Enable multithreading to use std::thread: Not owner now based off some researching , it is that multithreading is disabled also , paid assets likely wont work (do to ram limitations ) so limited to ASCII only anyways Coming Soon! Edit : i will post a github link when i get it to run",
+        "published_at": "2026-09-20T15:42:26.424Z"
+      },
+      "classification": {
+        "confidence": "medium",
+        "reason": "Incident review: linked follow-up claim without repository or release evidence",
+        "candidate_type": "port"
+      },
+      "provenance": {
+        "repository_url": null,
+        "release_url": null,
+        "evidence_urls": [],
+        "evidence_bundle_id": null,
+        "repository_identity": null,
+        "repository_created_at": null,
+        "repository_last_activity_at": null,
+        "release_facts": [],
+        "vita_evidence": [],
+        "author_linkage": null,
+        "corroboration": [],
+        "duplicate_relation": {
+          "content_hash": "16fa59e5fb2d70ff0489c1763e075f9235b7aeb6cd737475933a11f659162a3c",
+          "related_candidate_ids": []
+        }
+      },
+      "campaign": {
+        "cluster_id": "campaign-8bdf6011",
+        "linkage_confidence": "high",
+        "signals": [
+          "left_direct_poison_intent",
+          "right_direct_poison_intent",
+          "same_author_burst",
+          "explicit_campaign_reference",
+          "near_duplicate_wording"
+        ],
+        "related_candidate_ids": [
+          "reddit-1wlj9gd",
+          "reddit-1wlkixu"
+        ],
+        "text_fingerprint": "67ab259c",
+        "media_fingerprints": [],
+        "outbound_fingerprints": [],
+        "direct_intent": true,
+        "explicit_campaign_reference": true,
+        "incident_id": "VH-INCIDENT-010"
+      },
+      "risk_signals": [
+        "explicit_fake_or_troll",
+        "no_project_evidence_in_post"
+      ],
+      "evidence_gaps": [
+        "exact project repository",
+        "repository identity and activity facts",
+        "release or build evidence",
+        "Vita-specific hardware evidence",
+        "author/developer linkage and independent corroboration"
+      ],
+      "content_hash": "16fa59e5fb2d70ff0489c1763e075f9235b7aeb6cd737475933a11f659162a3c",
+      "review": {
+        "reviewer": "incident-response",
+        "reviewed_at": "2026-09-20T16:59:25.697Z",
+        "reason": "Linked to a confirmed campaign signal but no project evidence was available; held without amplification",
+        "evidence_bundle": null
+      },
+      "incident": {
+        "incident_id": "VH-INCIDENT-010",
+        "classification": "UNVERIFIED_CLAIM",
+        "confirmed_at": "2026-09-20T16:59:25.697Z",
+        "rationale": "Linked to a confirmed campaign signal but no project evidence was available; held without amplification",
+        "public_containment": "removed"
+      }
+    },
+    {
+      "schema_version": 2,
+      "id": "reddit-1wlj9gd",
+      "external_id": "1wlj9gd",
+      "state": "REJECTED",
+      "state_history": [
+        {
+          "state": "DETECTED",
+          "at": "2026-09-20T16:59:25.697Z",
+          "actor": "reddit-scanner",
+          "reason": "Canonical Reddit RSS entry accepted at the ingestion boundary"
+        },
+        {
+          "state": "QUARANTINED",
+          "at": "2026-09-20T16:59:25.697Z",
+          "actor": "reddit-scanner",
+          "reason": "Explicit fake/troll language; held without public amplification"
+        },
+        {
+          "state": "REJECTED",
+          "at": "2026-09-20T16:59:25.697Z",
+          "actor": "incident-response",
+          "reason": "Confirmed malicious fake-port campaign intent; withheld from every public projection"
+        }
+      ],
+      "source": {
+        "platform": "reddit",
+        "subreddit": "VitaPiracy",
+        "canonical_url": "https://www.reddit.com/r/VitaPiracy/comments/1wlj9gd/hey_guys_we_should_start_making_posts_about_fake/",
+        "author": "LefterisDaGamer",
+        "title": "hey guys we should start making posts about fake ports to troll VitaHarbor ( a site telling people about new ports)",
+        "body": "would be very funny",
+        "published_at": "2026-09-20T14:58:36.001Z"
+      },
+      "classification": {
+        "confidence": "high",
+        "reason": "Incident evidence: explicit fake-port campaign intent",
+        "candidate_type": "port"
+      },
+      "provenance": {
+        "repository_url": null,
+        "release_url": null,
+        "evidence_urls": [],
+        "evidence_bundle_id": null,
+        "repository_identity": null,
+        "repository_created_at": null,
+        "repository_last_activity_at": null,
+        "release_facts": [],
+        "vita_evidence": [],
+        "author_linkage": null,
+        "corroboration": [],
+        "duplicate_relation": {
+          "content_hash": "95f5922d4094f7a374aa76bb30bca17bf7b3d7c90ebf71d799612336e0de369b",
+          "related_candidate_ids": []
+        }
+      },
+      "campaign": {
+        "cluster_id": "campaign-8bdf6011",
+        "linkage_confidence": "high",
+        "signals": [
+          "left_direct_poison_intent",
+          "right_direct_poison_intent",
+          "same_author_burst",
+          "explicit_campaign_reference"
+        ],
+        "related_candidate_ids": [
+          "reddit-1wlkdva",
+          "reddit-1wlkixu"
+        ],
+        "text_fingerprint": "432931e7",
+        "media_fingerprints": [],
+        "outbound_fingerprints": [],
+        "direct_intent": true,
+        "explicit_campaign_reference": false,
+        "incident_id": "VH-INCIDENT-010"
+      },
+      "risk_signals": [
+        "explicit_fake_or_troll",
+        "no_project_evidence_in_post"
+      ],
+      "evidence_gaps": [
+        "exact project repository",
+        "repository identity and activity facts",
+        "release or build evidence",
+        "Vita-specific hardware evidence",
+        "author/developer linkage and independent corroboration"
+      ],
+      "content_hash": "95f5922d4094f7a374aa76bb30bca17bf7b3d7c90ebf71d799612336e0de369b",
+      "review": {
+        "reviewer": "incident-response",
+        "reviewed_at": "2026-09-20T16:59:25.697Z",
+        "reason": "Confirmed malicious fake-port campaign intent; withheld from every public projection",
+        "evidence_bundle": null
+      },
+      "incident": {
+        "incident_id": "VH-INCIDENT-010",
+        "classification": "CONFIRMED_CAMPAIGN_FAKE",
+        "confirmed_at": "2026-09-20T16:59:25.697Z",
+        "rationale": "Confirmed malicious fake-port campaign intent; withheld from every public projection",
+        "public_containment": "removed"
+      }
+    },
+    {
+      "schema_version": 2,
+      "id": "reddit-1wkvzon",
+      "external_id": "1wkvzon",
+      "state": "QUARANTINED",
+      "state_history": [
+        {
+          "state": "DETECTED",
+          "at": "2026-09-20T01:07:26.274Z",
+          "actor": "reddit-scanner",
+          "reason": "Canonical Reddit RSS entry accepted at the ingestion boundary"
+        },
+        {
+          "state": "QUARANTINED",
+          "at": "2026-09-20T01:07:26.274Z",
+          "actor": "reddit-scanner",
+          "reason": "Migrated from legacy discovery queue; requires fresh source review"
+        }
+      ],
+      "source": {
+        "platform": "reddit",
+        "subreddit": "vitahacks",
+        "canonical_url": "https://www.reddit.com/r/vitahacks/comments/1wkvzon/prerelease_8bitdo_ultimate_2_controller_support/",
+        "author": "abby_6112",
+        "title": "[Pre-Release] 8BitDo Ultimate 2 controller support for PS Vita / PSTV",
+        "body": "",
+        "published_at": "2026-09-19T20:00:32.000Z"
+      },
+      "classification": {
+        "confidence": "medium",
+        "reason": "2 dev signal(s), 2 passive term(s), no question markers",
+        "candidate_type": "plugin"
+      },
+      "provenance": {
+        "repository_url": null,
+        "release_url": null,
+        "evidence_urls": [],
+        "evidence_bundle_id": null,
+        "repository_identity": null,
+        "repository_created_at": null,
+        "repository_last_activity_at": null,
+        "release_facts": [],
+        "vita_evidence": [],
+        "author_linkage": null,
+        "corroboration": [],
+        "duplicate_relation": {
+          "content_hash": "",
+          "related_candidate_ids": []
+        }
+      },
+      "risk_signals": [
+        "question_or_request"
+      ],
+      "evidence_gaps": [
+        "exact project repository",
+        "Vita-specific hardware evidence",
+        "raw post body was not stored in legacy queue",
+        "repository identity and activity facts",
+        "author/developer linkage and independent corroboration"
+      ],
+      "content_hash": "",
+      "review": null,
+      "campaign": {
+        "cluster_id": null,
+        "linkage_confidence": "none",
+        "signals": [],
+        "related_candidate_ids": [],
+        "text_fingerprint": "96695c6e",
+        "media_fingerprints": [],
+        "outbound_fingerprints": [],
+        "direct_intent": false,
+        "explicit_campaign_reference": false,
+        "incident_id": null
+      },
+      "incident": null
+    },
+    {
+      "schema_version": 2,
+      "id": "reddit-1wko6vu",
+      "external_id": "1wko6vu",
+      "state": "QUARANTINED",
+      "state_history": [
+        {
+          "state": "DETECTED",
+          "at": "2026-09-20T01:07:26.274Z",
+          "actor": "reddit-scanner",
+          "reason": "Canonical Reddit RSS entry accepted at the ingestion boundary"
+        },
+        {
+          "state": "QUARANTINED",
+          "at": "2026-09-20T01:07:26.274Z",
+          "actor": "reddit-scanner",
+          "reason": "Migrated from legacy discovery queue; requires fresh source review"
+        }
+      ],
+      "source": {
+        "platform": "reddit",
+        "subreddit": "vitahacks",
+        "canonical_url": "https://www.reddit.com/r/vitahacks/comments/1wko6vu/release_ratchet_clank_size_matters_remastered/",
+        "author": "Illustrious_Being642",
+        "title": "[Release] Ratchet & Clank: Size Matters — Remastered Controls for PS Vita / Adrenaline",
+        "body": "",
+        "published_at": "2026-09-19T14:49:20.000Z"
+      },
+      "classification": {
+        "confidence": "high",
+        "reason": "3 dev signals: \\[release\\], \\brelease\\b, \\bplugin\\b",
+        "candidate_type": "plugin"
+      },
+      "provenance": {
+        "repository_url": null,
+        "release_url": null,
+        "evidence_urls": [],
+        "evidence_bundle_id": null,
+        "repository_identity": null,
+        "repository_created_at": null,
+        "repository_last_activity_at": null,
+        "release_facts": [],
+        "vita_evidence": [],
+        "author_linkage": null,
+        "corroboration": [],
+        "duplicate_relation": {
+          "content_hash": "",
+          "related_candidate_ids": []
+        }
+      },
+      "risk_signals": [],
+      "evidence_gaps": [
+        "exact project repository",
+        "Vita-specific hardware evidence",
+        "raw post body was not stored in legacy queue",
+        "repository identity and activity facts",
+        "author/developer linkage and independent corroboration"
+      ],
+      "content_hash": "",
+      "review": null,
+      "campaign": {
+        "cluster_id": null,
+        "linkage_confidence": "none",
+        "signals": [],
+        "related_candidate_ids": [],
+        "text_fingerprint": "4f430944",
+        "media_fingerprints": [],
+        "outbound_fingerprints": [],
+        "direct_intent": false,
+        "explicit_campaign_reference": false,
+        "incident_id": null
+      },
+      "incident": null
+    },
+    {
+      "schema_version": 2,
+      "id": "reddit-1wjte26",
+      "external_id": "1wjte26",
+      "state": "QUARANTINED",
+      "state_history": [
+        {
+          "state": "DETECTED",
+          "at": "2026-09-20T01:07:26.274Z",
+          "actor": "reddit-scanner",
+          "reason": "Canonical Reddit RSS entry accepted at the ingestion boundary"
+        },
+        {
+          "state": "QUARANTINED",
+          "at": "2026-09-20T01:07:26.274Z",
+          "actor": "reddit-scanner",
+          "reason": "Migrated from legacy discovery queue; requires fresh source review"
+        }
+      ],
+      "source": {
+        "platform": "reddit",
+        "subreddit": "vitahacks",
+        "canonical_url": "https://www.reddit.com/r/vitahacks/comments/1wjte26/tfouad_development_update_where_ive_been_whats/",
+        "author": "noradninja",
+        "title": "TFoUAD Development Update — Where I’ve Been, What’s Changed, and How We’re Pushing the Vita Further",
+        "body": "",
+        "published_at": "2026-09-18T15:30:31.000Z"
+      },
+      "classification": {
+        "confidence": "medium",
+        "reason": "2 dev signal(s), 2 passive term(s), no question markers",
+        "candidate_type": "port"
+      },
+      "provenance": {
+        "repository_url": null,
+        "release_url": null,
+        "evidence_urls": [],
+        "evidence_bundle_id": null,
+        "repository_identity": null,
+        "repository_created_at": null,
+        "repository_last_activity_at": null,
+        "release_facts": [],
+        "vita_evidence": [],
+        "author_linkage": null,
+        "corroboration": [],
+        "duplicate_relation": {
+          "content_hash": "",
+          "related_candidate_ids": []
+        }
+      },
+      "risk_signals": [
+        "question_or_request",
+        "no_project_evidence_in_post"
+      ],
+      "evidence_gaps": [
+        "exact project repository",
+        "release or build evidence",
+        "Vita-specific hardware evidence",
+        "raw post body was not stored in legacy queue",
+        "repository identity and activity facts",
+        "author/developer linkage and independent corroboration"
+      ],
+      "content_hash": "",
+      "review": null,
+      "campaign": {
+        "cluster_id": null,
+        "linkage_confidence": "none",
+        "signals": [],
+        "related_candidate_ids": [],
+        "text_fingerprint": "116b6e3b",
+        "media_fingerprints": [],
+        "outbound_fingerprints": [],
+        "direct_intent": false,
+        "explicit_campaign_reference": false,
+        "incident_id": null
+      },
+      "incident": null
+    },
+    {
+      "schema_version": 2,
+      "id": "reddit-1wi5b10",
+      "external_id": "1wi5b10",
+      "state": "QUARANTINED",
+      "state_history": [
+        {
+          "state": "DETECTED",
+          "at": "2026-09-17T15:34:20.988Z",
+          "actor": "reddit-scanner",
+          "reason": "Canonical Reddit RSS entry accepted at the ingestion boundary"
+        },
+        {
+          "state": "QUARANTINED",
+          "at": "2026-09-17T15:34:20.988Z",
+          "actor": "reddit-scanner",
+          "reason": "Migrated from legacy discovery queue; requires fresh source review"
+        }
+      ],
+      "source": {
+        "platform": "reddit",
+        "subreddit": "vitahacks",
+        "canonical_url": "https://www.reddit.com/r/vitahacks/comments/1wi5b10/building_an_app_for_all_things_vita/",
+        "author": "Racksonrackssipping",
+        "title": "Building an app for all things vita",
+        "body": "",
+        "published_at": "2026-09-16T18:21:41.000Z"
+      },
+      "classification": {
+        "confidence": "low",
+        "reason": "Migrated from legacy discovery queue",
+        "candidate_type": "tool"
+      },
+      "provenance": {
+        "repository_url": null,
+        "release_url": null,
+        "evidence_urls": [],
+        "evidence_bundle_id": null,
+        "repository_identity": null,
+        "repository_created_at": null,
+        "repository_last_activity_at": null,
+        "release_facts": [],
+        "vita_evidence": [],
+        "author_linkage": null,
+        "corroboration": [],
+        "duplicate_relation": {
+          "content_hash": "",
+          "related_candidate_ids": []
+        }
+      },
+      "risk_signals": [
+        "no_project_evidence_in_post"
+      ],
+      "evidence_gaps": [
+        "exact project repository",
+        "release or build evidence",
+        "Vita-specific hardware evidence",
+        "raw post body was not stored in legacy queue",
+        "repository identity and activity facts",
+        "author/developer linkage and independent corroboration"
+      ],
+      "content_hash": "",
+      "review": null,
+      "campaign": {
+        "cluster_id": null,
+        "linkage_confidence": "none",
+        "signals": [],
+        "related_candidate_ids": [],
+        "text_fingerprint": "717a6744",
+        "media_fingerprints": [],
+        "outbound_fingerprints": [],
+        "direct_intent": false,
+        "explicit_campaign_reference": false,
+        "incident_id": null
+      },
+      "incident": null
+    },
+    {
+      "schema_version": 2,
+      "id": "reddit-1wh0klj",
+      "external_id": "1wh0klj",
+      "state": "QUARANTINED",
+      "state_history": [
+        {
+          "state": "DETECTED",
+          "at": "2026-09-17T15:34:20.988Z",
+          "actor": "reddit-scanner",
+          "reason": "Canonical Reddit RSS entry accepted at the ingestion boundary"
+        },
+        {
+          "state": "QUARANTINED",
+          "at": "2026-09-17T15:34:20.988Z",
+          "actor": "reddit-scanner",
+          "reason": "Migrated from legacy discovery queue; requires fresh source review"
+        }
+      ],
+      "source": {
+        "platform": "reddit",
+        "subreddit": "vitahacks",
+        "canonical_url": "https://www.reddit.com/r/vitahacks/comments/1wh0klj/class_of_09_vita_port_has_arrived/",
+        "author": "IllustratorNo2089",
+        "title": "Class of 09 Vita Port HAS ARRIVED!",
+        "body": "",
+        "published_at": "2026-09-15T13:34:13.000Z"
+      },
+      "classification": {
+        "confidence": "low",
+        "reason": "Migrated from legacy discovery queue",
+        "candidate_type": "port"
+      },
+      "provenance": {
+        "repository_url": null,
+        "release_url": null,
+        "evidence_urls": [],
+        "evidence_bundle_id": null,
+        "repository_identity": null,
+        "repository_created_at": null,
+        "repository_last_activity_at": null,
+        "release_facts": [],
+        "vita_evidence": [],
+        "author_linkage": null,
+        "corroboration": [],
+        "duplicate_relation": {
+          "content_hash": "",
+          "related_candidate_ids": []
+        }
+      },
+      "risk_signals": [
+        "no_project_evidence_in_post"
+      ],
+      "evidence_gaps": [
+        "exact project repository",
+        "release or build evidence",
+        "Vita-specific hardware evidence",
+        "raw post body was not stored in legacy queue",
+        "repository identity and activity facts",
+        "author/developer linkage and independent corroboration"
+      ],
+      "content_hash": "",
+      "review": null,
+      "campaign": {
+        "cluster_id": null,
+        "linkage_confidence": "none",
+        "signals": [],
+        "related_candidate_ids": [],
+        "text_fingerprint": "0d531f21",
+        "media_fingerprints": [],
+        "outbound_fingerprints": [],
+        "direct_intent": false,
+        "explicit_campaign_reference": false,
+        "incident_id": null
+      },
+      "incident": null
+    }
+  ]
+}

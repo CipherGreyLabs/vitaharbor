@@ -32,7 +32,9 @@ const projectItemsHtml = FALLBACK_PROJECTS.map((p, idx) => {
   const stage = escapeXml(prettyStage(p.current_stage));
   const notes = escapeXml(p.performance_notes || p.playability_notes || p.summary || '');
   const platform = escapeXml(p.original_platform || 'PlayStation Vita');
-  const redditUrl = escapeXml(p.reddit_url || '#');
+  const redditLink = p.reddit_url
+    ? `<a href="${escapeXml(p.reddit_url)}" target="_blank" rel="noopener noreferrer" class="text-xs text-blue-600 hover:underline">Reddit Thread</a>`
+    : '';
 
   return `          <li id="entry-${p.slug}" class="py-4 border-b border-gray-200">
             <div class="flex flex-col sm:flex-row sm:items-baseline justify-between gap-2">
@@ -42,13 +44,53 @@ const projectItemsHtml = FALLBACK_PROJECTS.map((p, idx) => {
               </div>
               <div class="flex items-center gap-3">
                 <span class="inline-flex rounded bg-gray-100 px-2 py-0.5 text-xs font-semibold uppercase text-gray-700">${stage}</span>
-                <a href="${redditUrl}" target="_blank" rel="noopener noreferrer" class="text-xs text-blue-600 hover:underline">Reddit Thread</a>
+                ${redditLink}
               </div>
             </div>
             <p class="mt-1.5 text-sm text-gray-600">${escapeXml(p.summary || '')}</p>
             ${notes ? `<p class="mt-1 text-xs text-gray-500 font-mono">Status: ${notes}</p>` : ''}
           </li>`;
 }).join('\n');
+
+function formatUtcDateTime(value) {
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) return 'date not recorded';
+  return date.toLocaleString('en-GB', {
+    day: '2-digit',
+    month: 'short',
+    year: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit',
+    hour12: false,
+    timeZone: 'UTC'
+  }) + ' UTC';
+}
+
+const latestUpdatesHtml = [...FALLBACK_UPDATES]
+  .sort((a, b) => new Date(b.event_at).getTime() - new Date(a.event_at).getTime())
+  .slice(0, 4)
+  .map((update) => {
+    const title = escapeXml(update.title || 'Untitled update');
+    const summary = escapeXml(update.summary || '');
+    const project = escapeXml(update.project_display_name || 'Unassigned project');
+    const date = escapeXml(formatUtcDateTime(update.event_at));
+    const projectLink = update.project_slug
+      ? `<a href="#p=${escapeXml(update.project_slug)}" class="text-blue-600 hover:underline">${project}</a>`
+      : `<span class="text-gray-500" title="No project route is recorded">${project}</span>`;
+    const source = update.sources?.[0]?.canonical_url
+      ? `<a href="${escapeXml(update.sources[0].canonical_url)}" target="_blank" rel="noopener noreferrer" class="mt-4 inline-block text-sm font-medium text-gray-900 hover:underline">Source thread</a>`
+      : '';
+    return `          <article class="rounded-2xl border border-gray-200 bg-white p-5">
+            <div class="flex flex-wrap items-center justify-between gap-2 text-xs font-medium uppercase tracking-wide text-gray-500">
+              ${projectLink}
+              <time datetime="${new Date(update.event_at).toISOString()}">${date}</time>
+            </div>
+            <h3 class="mt-3 text-base font-semibold leading-snug text-gray-900">${title}</h3>
+            <p class="mt-2 text-sm leading-relaxed text-gray-600">${summary}</p>
+            ${source}
+          </article>`;
+  })
+  .join('\n');
 
 // ItemList structured data, escaped so a project title can never close the script tag.
 const itemListJsonLd = JSON.stringify(
@@ -79,7 +121,8 @@ const deepLinkPages = FALLBACK_PROJECTS.map((p) => {
   const title = (p.display_name || p.game_title || p.slug) + " - VitaHarbor";
   const description = p.summary || "PlayStation Vita port tracked by VitaHarbor.";
   const url = "https://vitaharbor.vercel.app/projects/" + p.slug + "/";
-  return { slug: p.slug, title, description, url, project: p };
+  const image = "https://vitaharbor.vercel.app/og/projects/" + p.slug + ".png";
+  return { slug: p.slug, title, description, url, image, project: p };
 });
 
 function applyMeta(html, meta) {
@@ -94,8 +137,11 @@ function applyMeta(html, meta) {
   out = swap(out, /(<meta property="og:title" content=")([^"]*)(")/, meta.title);
   out = swap(out, /(<meta property="og:description" content=")([^"]*)(")/, meta.description);
   out = swap(out, /(<meta property="og:url" content=")([^"]*)(")/, meta.url);
+  out = swap(out, /(<meta property="og:image" content=")([^"]*)(")/, meta.image);
   out = swap(out, /(<meta name="twitter:title" content=")([^"]*)(")/, meta.title);
   out = swap(out, /(<meta name="twitter:description" content=")([^"]*)(")/, meta.description);
+  out = swap(out, /(<meta name="twitter:image" content=")([^"]*)(")/, meta.image);
+  out = swap(out, /(<meta property="og:image:alt" content=")([^"]*)(")/, meta.title);
   return out;
 }
 
@@ -104,6 +150,7 @@ const prerenderedBody = `<div id="top" class="min-h-screen bg-[#fbfbfd] text-[#1
       <div class="mx-auto flex h-14 max-w-5xl items-center justify-between px-6">
         <a href="#top" class="text-lg font-semibold tracking-tight text-gray-900">VitaHarbor</a>
         <nav class="flex items-center gap-5 text-sm text-gray-600">
+          <a href="#latest-updates" class="hover:text-gray-900">Latest</a>
           <a href="#directory" class="hover:text-gray-900">Directory</a>
           <a href="#methodology" class="hover:text-gray-900">Methodology</a>
           <span class="inline-flex items-center gap-1.5 rounded-full bg-gray-100 px-2.5 py-1 text-xs font-medium text-gray-600">
@@ -116,17 +163,27 @@ const prerenderedBody = `<div id="top" class="min-h-screen bg-[#fbfbfd] text-[#1
 
     <main id="main-content" class="mx-auto max-w-5xl px-6 py-16">
       <section class="text-center mb-16">
-        <p class="text-xs font-medium uppercase tracking-widest text-gray-500">Independent hardware archive</p>
-        <h1 class="mt-4 text-4xl sm:text-5xl font-extrabold tracking-tight text-gray-900">PlayStation Vita port archive.</h1>
+        <p class="text-xs font-medium uppercase tracking-widest text-gray-500">Community port updates</p>
+        <h1 class="mt-4 text-4xl sm:text-5xl font-extrabold tracking-tight text-gray-900">The Vita port update tracker.</h1>
         <p class="mx-auto mt-4 max-w-xl text-base text-gray-600">
-          Engine decompilations, ARM wrappers and homebrew builds documented at the moment they surface on community engineering boards.
+          New ports, decompilations and wrappers, collected from the places where the scene actually posts them.
         </p>
+      </section>
+
+      <section id="latest-updates" class="mt-12">
+        <div class="flex flex-wrap items-baseline justify-between gap-3 border-b border-gray-200 pb-4 mb-6">
+          <h2 class="text-2xl font-bold text-gray-900">Latest updates</h2>
+          <span class="text-sm text-gray-500">Exact source dates</span>
+        </div>
+        <div class="grid gap-3 sm:grid-cols-2">
+${latestUpdatesHtml}
+        </div>
       </section>
 
       <section id="directory" class="mt-12">
         <div class="flex items-baseline justify-between border-b border-gray-200 pb-4 mb-6">
           <h2 class="text-2xl font-bold text-gray-900">Directory</h2>
-          <span class="text-sm text-gray-500 font-mono">${FALLBACK_PROJECTS.length} verified projects</span>
+          <span class="text-sm text-gray-500 font-mono">${FALLBACK_PROJECTS.length} projects indexed</span>
         </div>
         <ul class="divide-y divide-gray-100">
 ${projectItemsHtml}
@@ -138,11 +195,11 @@ ${projectItemsHtml}
         <div class="grid gap-6 sm:grid-cols-3 text-sm text-gray-600">
           <div>
             <h3 class="font-semibold text-gray-900 mb-1">Sourced</h3>
-            <p>Every entry links to the original engineering thread on r/vitahacks or r/VitaPiracy.</p>
+            <p>Entries link to an original engineering thread when a project-specific source has been verified. Unverified candidates stay in the detection log.</p>
           </div>
           <div>
             <h3 class="font-semibold text-gray-900 mb-1">Verified</h3>
-            <p>Stage and performance notes come from the people running the build on real hardware.</p>
+            <p>Evidence levels stay visible. Detected threads remain unverified until a source-backed record is reviewed.</p>
           </div>
           <div>
             <h3 class="font-semibold text-gray-900 mb-1">Non-infringing</h3>

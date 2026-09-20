@@ -1,45 +1,39 @@
 # Automation
 
-Scheduled scanning runs completely free via **GitHub Actions**. It triggers twice a day,
-fetches Reddit, and commits candidates back to the repo without using Codex tokens.
+Scheduled scanning runs completely free via **GitHub Actions**. It triggers three times a day
+at 07:00, 13:00 and 19:00 UTC, fetches r/vitahacks, r/VitaPiracy and r/PSVitaHomebrew,
+and commits quarantined candidates back to the repo
+without using Codex tokens.
 
-Right now only the first step exists locally. There is **no git remote** on this
-checkout and the Vercel project is **not connected to a repository** — every
-deployment so far was a manual CLI upload. Until both links are closed, the chain
-runs by hand.
+The repository remote is configured and the workflow is present in
+`.github/workflows/reddit-scanner.yml`. GitHub Actions is the current scheduled scan engine;
+the Vercel `/api/cron-scan` route remains a fallback for dashboard-visible runs. This document
+does not claim a current Vercel Git-integration state without dashboard evidence.
 
 ## 1. The scan (already working)
 
 ```
-npm run data:scan      # writes public/data/discovered.json
-npm run data:list      # shows the candidates
-npm run data:promote -- --index 1
+ npm run data:migrate   # one-time migration of the old queue
+ npm run data:scan      # writes data/quarantine.json and a safe public projection
+ npm run data:list      # shows candidates awaiting review
+ npm run data:verify -- --id reddit-<post-id> --reviewer "name" --reason "..." --evidence-file review.json
+ npm run data:promote -- --id reddit-<post-id> --reviewer "name" --reason "..." --evidence-file review.json --name "Exact name" --repo-url https://github.com/org/repo
 npm test               # the data invariants must pass
 npm run data:feeds     # refreshes the JSON and RSS feeds
 ```
 
-The scanner records candidates only. It never invents a stage, framerate or credit,
-because a thread title cannot prove those things. Promotion is a deliberate step and
-the resulting entry is tagged `verification: "detected"` so the interface can label it
-as unverified until someone supplies a hardware report.
+The scanner records candidates from all three configured communities only. It never invents a stage, framerate or credit,
+because a thread title cannot prove those things. Every accepted result first enters
+`data/quarantine.json` as `QUARANTINED`; the public file is a sanitized projection and
+never includes author names or internal risk details. Promotion is a separate operator
+action after `VERIFIED_FOR_REVIEW`, with an evidence bundle and an append-only audit
+line in `data/provenance-audit.jsonl`. The workflow never writes `fallbackData.ts`.
 
-## 2. Close the chain (needs your accounts)
+## 2. Current workflow
 
-Create an empty repository, then:
-
-```
-git remote add origin <repository-url>
-git push -u origin main
-```
-
-Then connect the Vercel project to that repository so a push deploys on its own.
-In the Vercel dashboard: Project -> Settings -> Git -> Connect Git Repository. After
-that the scheduled workflow in `.github/workflows/reddit-scanner.yml` can run at
-08:00 and 20:00 UTC: it installs, runs the tests, scans, rebuilds the feeds and
-commits only when something actually changed.
-
-Verify the connection took effect: the deployment list should start showing commit
-metadata instead of `cli-upload` as the source.
+The scheduled workflow installs dependencies, runs the tests, scans, rebuilds the feeds and
+commits only when something actually changed. Its current schedule is 07:00, 13:00 and 19:00
+UTC. A manual run is available through GitHub Actions' `workflow_dispatch` trigger.
 
 ## Checks worth keeping
 

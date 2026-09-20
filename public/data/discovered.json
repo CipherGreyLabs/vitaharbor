@@ -1,67 +1,63 @@
 {
-  "generated_at": "2026-09-20T01:07:26.274Z",
-  "source": "r/vitahacks + r/VitaPiracy RSS",
-  "note": "Unverified candidates. Not part of the curated ledger until reviewed.",
+  "schema_version": 2,
+  "generated_at": "2026-09-20T16:59:25.697Z",
+  "source": "r/vitahacks + r/VitaPiracy + r/PSVitaHomebrew RSS",
+  "note": "Detected sources are quarantined and are not part of the curated ledger. No public item is a promotion or endorsement.",
   "items": [
     {
-      "id": "r-vitahacks-comments-1wkvzon-prerelease-8bitdo-ultimate-2-controller-support",
+      "id": "reddit-1wkvzon",
+      "state": "QUARANTINED",
       "title": "[Pre-Release] 8BitDo Ultimate 2 controller support for PS Vita / PSTV",
       "url": "https://www.reddit.com/r/vitahacks/comments/1wkvzon/prerelease_8bitdo_ultimate_2_controller_support/",
       "subreddit": "vitahacks",
-      "author": "u/abby_6112",
-      "published_at": "2026-09-19T20:00:32+00:00",
+      "published_at": "2026-09-19T20:00:32.000Z",
       "detected_at": "2026-09-20T01:07:26.274Z",
-      "confidence": "medium",
-      "classification_reason": "2 dev signal(s), 2 passive term(s), no question markers"
+      "candidate_type": "plugin",
+      "public_visibility": "review_queue"
     },
     {
-      "id": "r-vitahacks-comments-1wko6vu-release-ratchet-clank-size-matters-remastered",
-      "title": "[Release] Ratchet &amp; Clank: Size Matters — Remastered Controls for PS Vita / Adrenaline",
+      "id": "reddit-1wko6vu",
+      "state": "QUARANTINED",
+      "title": "[Release] Ratchet & Clank: Size Matters — Remastered Controls for PS Vita / Adrenaline",
       "url": "https://www.reddit.com/r/vitahacks/comments/1wko6vu/release_ratchet_clank_size_matters_remastered/",
       "subreddit": "vitahacks",
-      "author": "u/Illustrious_Being642",
-      "published_at": "2026-09-19T14:49:20+00:00",
+      "published_at": "2026-09-19T14:49:20.000Z",
       "detected_at": "2026-09-20T01:07:26.274Z",
-      "confidence": "high",
-      "classification_reason": "3 dev signals: \\[release\\], \\brelease\\b, \\bplugin\\b"
+      "candidate_type": "plugin",
+      "public_visibility": "review_queue"
     },
     {
-      "id": "r-vitahacks-comments-1wjte26-tfouad-development-update-where-ive-been-whats",
+      "id": "reddit-1wjte26",
+      "state": "QUARANTINED",
       "title": "TFoUAD Development Update — Where I’ve Been, What’s Changed, and How We’re Pushing the Vita Further",
       "url": "https://www.reddit.com/r/vitahacks/comments/1wjte26/tfouad_development_update_where_ive_been_whats/",
       "subreddit": "vitahacks",
-      "author": "u/noradninja",
-      "published_at": "2026-09-18T15:30:31+00:00",
+      "published_at": "2026-09-18T15:30:31.000Z",
       "detected_at": "2026-09-20T01:07:26.274Z",
-      "confidence": "medium",
-      "classification_reason": "2 dev signal(s), 2 passive term(s), no question markers"
+      "candidate_type": "port",
+      "public_visibility": "review_queue"
     },
     {
-      "id": "r-vitahacks-comments-1wjn8zg-rc-cars-port-progress",
-      "title": "RC Cars port progress",
-      "url": "https://www.reddit.com/r/vitahacks/comments/1wjn8zg/rc_cars_port_progress/",
-      "subreddit": "vitahacks",
-      "author": "u/antoxa2584x",
-      "published_at": "2026-09-18T11:09:43+00:00",
-      "detected_at": "2026-09-18T15:05:09.129Z"
-    },
-    {
-      "id": "r-vitahacks-comments-1wi5b10-building-an-app-for-all-things-vita",
+      "id": "reddit-1wi5b10",
+      "state": "QUARANTINED",
       "title": "Building an app for all things vita",
       "url": "https://www.reddit.com/r/vitahacks/comments/1wi5b10/building_an_app_for_all_things_vita/",
       "subreddit": "vitahacks",
-      "author": "u/Racksonrackssipping",
-      "published_at": "2026-09-16T18:21:41+00:00",
-      "detected_at": "2026-09-17T15:34:20.988Z"
+      "published_at": "2026-09-16T18:21:41.000Z",
+      "detected_at": "2026-09-17T15:34:20.988Z",
+      "candidate_type": "tool",
+      "public_visibility": "review_queue"
     },
     {
-      "id": "r-vitahacks-comments-1wh0klj-class-of-09-vita-port-has-arrived",
+      "id": "reddit-1wh0klj",
+      "state": "QUARANTINED",
       "title": "Class of 09 Vita Port HAS ARRIVED!",
       "url": "https://www.reddit.com/r/vitahacks/comments/1wh0klj/class_of_09_vita_port_has_arrived/",
       "subreddit": "vitahacks",
-      "author": "u/IllustratorNo2089",
-      "published_at": "2026-09-15T13:34:13+00:00",
-      "detected_at": "2026-09-17T15:34:20.988Z"
+      "published_at": "2026-09-15T13:34:13.000Z",
+      "detected_at": "2026-09-17T15:34:20.988Z",
+      "candidate_type": "port",
+      "public_visibility": "review_queue"
     }
   ]
 }
