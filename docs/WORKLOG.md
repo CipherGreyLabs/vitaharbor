@@ -168,3 +168,26 @@ intentionally wider than the viewport. It does not create page scroll.
 |---|---|
 | 3D face buttons on a touch screen | The controls are physically small at phone width. The prev/next zapper is the intended touch path. Tapping the 3D buttons still works but requires precision. |
 | Header status pill | Hidden below `sm` to keep the mobile header uncluttered. The directory filters carry the same numbers. |
+
+## 2026-09-20 -- Smart Reddit classifier + automation
+
+**Model:** claude-sonnet-4-6
+**Commit:** 83e0f0e
+
+### Wat gedaan
+
+- Scanner classifier herschreven in scripts/cron-reddit-scan.mjs
+  - Oud: naieve PORT_TERMS keyword-count (hits >= 2)
+  - Nieuw: drie-assige classifier:
+    - DEVELOPMENT_SIGNALS (30+ patronen): WIP-tags, releases, GitHub-links, FPS, port progress, has arrived
+    - QUESTION_SIGNALS (16 patronen): vraagzinnen zoals "anyone working on", "can someone port", "when will"
+    - PASSIVE_PORT_TERMS: neutrale termen alleen geldig zonder vraag-context
+  - Vraag-titel met <3 dev-signalen: reject. 3+ dev-signalen: high. 1+ dev + geen vragen: medium
+  - Elk item krijgt nu confidence en classification_reason veld
+- Regex bugfix in parseEntries: [\s\S] was weggevallen, forward slashes in tags niet geescaped
+- Scan getest: 25 posts, correcte accept/skip (bv vraagpost "Super Smash Melee" correct geskipt)
+- Heartbeat automation: 3x per dag (08:00, 14:00, 20:00), deploy bij nieuwe kandidaten
+
+### Verificatie
+- Scanner: 6 kandidaten uit 25 posts, geen errors
+- Vercel: Ready, live op https://vitaharbor.vercel.app
