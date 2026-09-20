@@ -3,6 +3,15 @@ name: Reddit discovery scan
 # Records newly surfaced port threads as unverified candidates. Promotion into the
 # curated ledger stays a human decision, so this job never rewrites ledger content.
 on:
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/workflows/reddit-scanner.yml"
+      - "package.json"
+      - "package-lock.json"
+      - "scripts/cron-reddit-scan.mjs"
+      - "scripts/make-feeds.ts"
   schedule:
     - cron: "0 7,13,19 * * *"
   workflow_dispatch:
@@ -28,8 +37,8 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Verify ledger integrity
-        run: npm test
+      - name: Verify unit and integration tests
+        run: npm run test:unit && npm run test:integration
 
       - name: Scan Reddit for new port threads
         run: node scripts/cron-reddit-scan.mjs
