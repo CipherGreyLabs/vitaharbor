@@ -1,8 +1,41 @@
 {
-  "generated_at": "2026-09-18T15:05:09.129Z",
+  "generated_at": "2026-09-20T01:07:26.274Z",
   "source": "r/vitahacks + r/VitaPiracy RSS",
   "note": "Unverified candidates. Not part of the curated ledger until reviewed.",
   "items": [
+    {
+      "id": "r-vitahacks-comments-1wkvzon-prerelease-8bitdo-ultimate-2-controller-support",
+      "title": "[Pre-Release] 8BitDo Ultimate 2 controller support for PS Vita / PSTV",
+      "url": "https://www.reddit.com/r/vitahacks/comments/1wkvzon/prerelease_8bitdo_ultimate_2_controller_support/",
+      "subreddit": "vitahacks",
+      "author": "u/abby_6112",
+      "published_at": "2026-09-19T20:00:32+00:00",
+      "detected_at": "2026-09-20T01:07:26.274Z",
+      "confidence": "medium",
+      "classification_reason": "2 dev signal(s), 2 passive term(s), no question markers"
+    },
+    {
+      "id": "r-vitahacks-comments-1wko6vu-release-ratchet-clank-size-matters-remastered",
+      "title": "[Release] Ratchet &amp; Clank: Size Matters — Remastered Controls for PS Vita / Adrenaline",
+      "url": "https://www.reddit.com/r/vitahacks/comments/1wko6vu/release_ratchet_clank_size_matters_remastered/",
+      "subreddit": "vitahacks",
+      "author": "u/Illustrious_Being642",
+      "published_at": "2026-09-19T14:49:20+00:00",
+      "detected_at": "2026-09-20T01:07:26.274Z",
+      "confidence": "high",
+      "classification_reason": "3 dev signals: \\[release\\], \\brelease\\b, \\bplugin\\b"
+    },
+    {
+      "id": "r-vitahacks-comments-1wjte26-tfouad-development-update-where-ive-been-whats",
+      "title": "TFoUAD Development Update — Where I’ve Been, What’s Changed, and How We’re Pushing the Vita Further",
+      "url": "https://www.reddit.com/r/vitahacks/comments/1wjte26/tfouad_development_update_where_ive_been_whats/",
+      "subreddit": "vitahacks",
+      "author": "u/noradninja",
+      "published_at": "2026-09-18T15:30:31+00:00",
+      "detected_at": "2026-09-20T01:07:26.274Z",
+      "confidence": "medium",
+      "classification_reason": "2 dev signal(s), 2 passive term(s), no question markers"
+    },
     {
       "id": "r-vitahacks-comments-1wjn8zg-rc-cars-port-progress",
       "title": "RC Cars port progress",
