@@ -69,7 +69,7 @@
   "crons": [
     {
       "path": "/api/cron-scan",
-      "schedule": "0 7,13,19 * * *"
+      "schedule": "0 6 * * *"
     }
   ]
 }
