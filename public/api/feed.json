@@ -21,13 +21,16 @@
     },
     {
       "id": "smash-melee-vita",
-      "url": "https://www.reddit.com/r/vitahacks/comments/1whm4hp/smash_bros_melee_vita/",
+      "url": "https://www.reddit.com/r/vitahacks/comments/1wivnp0/super_smash_melee/",
       "title": "Super Smash Bros. Melee Vita",
-      "content_text": "Stage: booting | Platform: GameCube / Decomp | Summary: Early native recreation and decompilation rebuild of Melee targeting the ARM Cortex-A9. | Hardware: Experimental build. Frequent memory faults on complex stages like Fountain of Dreams.",
-      "date_modified": "2026-09-15T15:34:00.000Z",
+      "content_text": "Stage: in_game | Platform: GameCube / Decomp | Summary: Two independent experimental Melee ports are active: rob1n994 is moving Aurora to native SceGXM/vitaGL, while zm2283145 has an early decompilation-based build running in gameplay. | Hardware: Both builds remain work in progress. Rendering, textures, framebuffer effects, particles, stability, and substantial performance optimization are still required.",
+      "date_modified": "2026-09-17T14:31:58.000Z",
       "tags": [
-        "booting",
+        "in_game",
         "GameCube / Decomp",
+        "Aurora",
+        "SceGXM",
+        "vitaGL",
         "Decompilation",
         "Native C++"
       ]
@@ -237,6 +240,54 @@
         "PC",
         "Native C++",
         "SDL2"
+      ]
+    },
+    {
+      "id": "renegade-vita-demo-release",
+      "url": "https://www.reddit.com/r/vitahacks/comments/1wgp613/renegade_vita_demo_release/",
+      "title": "Renegade Vita - Demo Release",
+      "content_text": "Stage: announced | Platform: Unknown | Summary: Detected by the scanner on r/vitahacks. Awaiting independent verification on hardware. | Hardware: Tested on real hardware.",
+      "date_modified": "2026-09-17T15:34:20.988Z",
+      "tags": [
+        "announced",
+        "Unknown"
+      ]
+    },
+    {
+      "id": "rc-cars-vita",
+      "url": "https://www.reddit.com/r/vitahacks/comments/1wjn8zg/rc_cars_port_progress/",
+      "title": "RC Cars",
+      "content_text": "Stage: playable | Platform: PC | Summary: Native RC Cars port by antoxa2584x, published with source at github.com/antoxa2584x/rc_cars_vita. The progress post reports PC save file support, an implemented progression system, local multiplayer and an in-game interface. | Hardware: Developer reports progression, local multiplayer and the in-game interface as implemented, with PC save files compatible.",
+      "date_modified": "2026-09-18T11:09:43.000Z",
+      "tags": [
+        "playable",
+        "PC"
+      ]
+    },
+    {
+      "id": "d2vita",
+      "url": "https://www.reddit.com/r/VitaPiracy/comments/1wj8dvz/d2vita_is_here_diablo_ii_lord_of_destruction/",
+      "title": "D2Vita (Diablo II: Lord of Destruction)",
+      "content_text": "Stage: released | Platform: PC | Summary: Public release that runs the original Diablo II: Lord of Destruction 1.14d Windows build on PS Vita. The x86 game code executes through winx86, a compatibility layer with an x86 to ARMv7 dynamic recompiler, while the Windows APIs are replaced by native Vita implementations. | Hardware: Diablo II itself is capped at 25 FPS, so the settled 20 to 25 FPS range is close to the original ceiling.",
+      "date_modified": "2026-09-17T22:27:31.000Z",
+      "tags": [
+        "released",
+        "PC",
+        "winx86",
+        "x86 to ARMv7 recompiler",
+        "Native Windows API layer"
+      ]
+    },
+    {
+      "id": "cod-zombies-ios-loader",
+      "url": "https://www.reddit.com/r/vitahacks/comments/1wjjx7w/a_bounty_that_deserves_more_visibility/",
+      "title": "Call of Duty: Zombies (iOS)",
+      "content_text": "Stage: announced | Platform: iOS | Summary: A community bounty is funding an effort to bring the iOS release of Call of Duty: Zombies to Vita, tied to the iOS loader devnoname120 is developing. The thread names Metal Gear Solid Touch as another iOS title the same loader could open up. No build exists yet. | Hardware: Tested on real hardware.",
+      "date_modified": "2026-09-18T07:54:45.000Z",
+      "tags": [
+        "announced",
+        "iOS",
+        "iOS loader"
       ]
     }
   ]

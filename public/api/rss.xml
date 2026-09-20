@@ -5,7 +5,7 @@
     <link>https://vitaharbor.vercel.app/</link>
     <description>Community PlayStation Vita ports tracked from r/vitahacks and r/VitaPiracy</description>
     <language>en-us</language>
-    <lastBuildDate>Thu, 17 Sep 2026 15:34:57 GMT</lastBuildDate>
+    <lastBuildDate>Sun, 20 Sep 2026 12:37:28 GMT</lastBuildDate>
     <item>
       <title><![CDATA[Medal of Honor: Allied Assault (OpenMoHAA) - IN_GAME]]></title>
       <link>https://www.reddit.com/r/vitahacks/comments/1tapf2b/wip_openmohaa_on_ps_vita_medal_of_honor_allied/</link>
@@ -14,11 +14,11 @@
       <description><![CDATA[Native PlayStation Vita port of OpenMoHAA. Geometry, sound engine, mission scripts, and player controls functioning. Hardware Status: 5–15 FPS in heavy outdoor combat scenes. Memory allocation optimization and shader pipeline tuning in progress.]]></description>
     </item>
     <item>
-      <title><![CDATA[Super Smash Bros. Melee Vita - BOOTING]]></title>
-      <link>https://www.reddit.com/r/vitahacks/comments/1whm4hp/smash_bros_melee_vita/</link>
+      <title><![CDATA[Super Smash Bros. Melee Vita - IN_GAME]]></title>
+      <link>https://www.reddit.com/r/vitahacks/comments/1wivnp0/super_smash_melee/</link>
       <guid isPermaLink="false">smash-melee-vita</guid>
-      <pubDate>Tue, 15 Sep 2026 15:34:00 GMT</pubDate>
-      <description><![CDATA[Early native recreation and decompilation rebuild of Melee targeting the ARM Cortex-A9. Hardware Status: Experimental build. Frequent memory faults on complex stages like Fountain of Dreams.]]></description>
+      <pubDate>Thu, 17 Sep 2026 14:31:58 GMT</pubDate>
+      <description><![CDATA[Two independent experimental Melee ports are active: rob1n994 is moving Aurora to native SceGXM/vitaGL, while zm2283145 has an early decompilation-based build running in gameplay. Hardware Status: Both builds remain work in progress. Rendering, textures, framebuffer effects, particles, stability, and substantial performance optimization are still required.]]></description>
     </item>
     <item>
       <title><![CDATA[Hollow Knight Vita Port - BOOTING]]></title>
@@ -131,6 +131,34 @@
       <guid isPermaLink="false">cave-story-evo-vita</guid>
       <pubDate>Fri, 28 Aug 2026 15:34:00 GMT</pubDate>
       <description><![CDATA[Complete open-source NXEngine-evo upgrade supporting remastered music and wide aspect ratio. Hardware Status: Rock solid 60 FPS.]]></description>
+    </item>
+    <item>
+      <title><![CDATA[Renegade Vita - Demo Release - ANNOUNCED]]></title>
+      <link>https://www.reddit.com/r/vitahacks/comments/1wgp613/renegade_vita_demo_release/</link>
+      <guid isPermaLink="false">renegade-vita-demo-release</guid>
+      <pubDate>Thu, 17 Sep 2026 15:34:20 GMT</pubDate>
+      <description><![CDATA[Detected by the scanner on r/vitahacks. Awaiting independent verification on hardware. Hardware Status: ARMv7 execution.]]></description>
+    </item>
+    <item>
+      <title><![CDATA[RC Cars - PLAYABLE]]></title>
+      <link>https://www.reddit.com/r/vitahacks/comments/1wjn8zg/rc_cars_port_progress/</link>
+      <guid isPermaLink="false">rc-cars-vita</guid>
+      <pubDate>Fri, 18 Sep 2026 11:09:43 GMT</pubDate>
+      <description><![CDATA[Native RC Cars port by antoxa2584x, published with source at github.com/antoxa2584x/rc_cars_vita. The progress post reports PC save file support, an implemented progression system, local multiplayer and an in-game interface. Hardware Status: Developer reports progression, local multiplayer and the in-game interface as implemented, with PC save files compatible.]]></description>
+    </item>
+    <item>
+      <title><![CDATA[D2Vita (Diablo II: Lord of Destruction) - RELEASED]]></title>
+      <link>https://www.reddit.com/r/VitaPiracy/comments/1wj8dvz/d2vita_is_here_diablo_ii_lord_of_destruction/</link>
+      <guid isPermaLink="false">d2vita</guid>
+      <pubDate>Thu, 17 Sep 2026 22:27:31 GMT</pubDate>
+      <description><![CDATA[Public release that runs the original Diablo II: Lord of Destruction 1.14d Windows build on PS Vita. The x86 game code executes through winx86, a compatibility layer with an x86 to ARMv7 dynamic recompiler, while the Windows APIs are replaced by native Vita implementations. Hardware Status: Diablo II itself is capped at 25 FPS, so the settled 20 to 25 FPS range is close to the original ceiling.]]></description>
+    </item>
+    <item>
+      <title><![CDATA[Call of Duty: Zombies (iOS) - ANNOUNCED]]></title>
+      <link>https://www.reddit.com/r/vitahacks/comments/1wjjx7w/a_bounty_that_deserves_more_visibility/</link>
+      <guid isPermaLink="false">cod-zombies-ios-loader</guid>
+      <pubDate>Fri, 18 Sep 2026 07:54:45 GMT</pubDate>
+      <description><![CDATA[A community bounty is funding an effort to bring the iOS release of Call of Duty: Zombies to Vita, tied to the iOS loader devnoname120 is developing. The thread names Metal Gear Solid Touch as another iOS title the same loader could open up. No build exists yet. Hardware Status: ARMv7 execution.]]></description>
     </item>
   </channel>
 </rss>
