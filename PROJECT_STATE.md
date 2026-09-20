@@ -183,6 +183,33 @@ test/build/deployment output.
   left curated `fallbackData.ts` unchanged and removed only the now-curated RC
   Cars quarantine duplicate.
 
+## VH-DEPLOY-013 current production state
+
+- Exact deployed source state: `95ee8b2f5892470f8b6f0d40366567376d279e72`,
+  equal to `origin/main` before deployment. Vercel deployment
+  `dpl_8uzDLxvodhXRBmTL1ftxsFBfWDvi` reached `READY` and is aliased to
+  `https://vitaharbor.vercel.app`; deployment URL is
+  `https://vitaharbor-cbn639a17-anonymusv1605-8308.vercel.app`.
+- Pre-deploy gates passed on the exact state: verify (65 unit tests and 28
+  prerendered pages), lint, integration 7/7, production E2E 11/11, JSON/JSONL
+  validation, schema/count checks, public sanitization, incident containment,
+  no-auto-promotion invariant, diff-check and npm audit with 0 vulnerabilities.
+- Live counts and containment: `/api/projects?limit=100` returns 28; public
+  discovery is schema v2 with 6 items and only approved sanitized fields;
+  internal `data/quarantine.json` is not JSON-downloadable; JSON/RSS feeds each
+  contain 28 curated items; the quarantined Melee item is absent from feeds and
+  sitemap; incident IDs, titles, authors, bodies and campaign values are absent
+  from root, all 29 sitemap routes, APIs, feeds and sitemap.
+- Live acceptance passed: headers/SEO/crawler files, deeplinks, mobile audit
+  (4 viewports, no document overflow or small targets), contrast 35/35,
+  production E2E 11/11, browser console/runtime check with 0 errors, and
+  rendered link crawl with 2,673 links across 29 routes and 0 runtime errors.
+- Live bundle identity: `index-B6whtbJK.js`, `react-BN8AQLYF.js`,
+  `icons-85dDDL3V.js`, `index-DQwSCEyv.css`. Key API responses are `no-store`;
+  root and public discovery retain the documented Vercel cache policy.
+- Reddit mutations: `NONE`. No GitHub workflow was manually triggered. The
+  post-deploy documentation commit is intentionally not redeployed.
+
 ## VH-POISON-008 and VH-INCIDENT-010 security state
 
 - Exact threat post was reviewed read-only in a separate authenticated Chrome session and is recorded in `docs/REDDIT_POISONING_REVIEW_2026-09-20.md`: `r/VitaPiracy`, post `1wlj9gd`, published `2026-09-20T14:58:36.001Z`, explicit fake/troll intent. Reddit mutations: NONE.
