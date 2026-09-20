@@ -1,8 +1,85 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-09-20T17:37:08.209Z",
+  "generated_at": "2026-09-20T17:42:33.297Z",
   "source": "r/vitahacks + r/VitaPiracy + r/PSVitaHomebrew RSS",
   "items": [
+    {
+      "schema_version": 2,
+      "id": "reddit-1wllsbo",
+      "external_id": "1wllsbo",
+      "state": "QUARANTINED",
+      "state_history": [
+        {
+          "state": "DETECTED",
+          "at": "2026-09-20T16:41:37.670Z",
+          "actor": "reddit-scanner",
+          "reason": "Canonical Reddit RSS entry accepted at the ingestion boundary"
+        },
+        {
+          "state": "QUARANTINED",
+          "at": "2026-09-20T16:41:37.670Z",
+          "actor": "reconciliation",
+          "reason": "Reconciled from a legacy remote scanner projection; requires fresh source review"
+        }
+      ],
+      "source": {
+        "platform": "reddit",
+        "subreddit": "vitahacks",
+        "canonical_url": "https://www.reddit.com/r/vitahacks/comments/1wllsbo/super_smash_bros_melee_update/",
+        "author": "zm2283145",
+        "title": "Super Smash bros Melee [Update]",
+        "body": "",
+        "published_at": "2026-09-20T16:36:10.000Z"
+      },
+      "classification": {
+        "confidence": "high",
+        "reason": "5 dev signals: \\brelease\\b, \\bupdate\\b, \\bv\\d+\\.\\d+\\b",
+        "candidate_type": "port"
+      },
+      "provenance": {
+        "repository_url": null,
+        "release_url": null,
+        "evidence_urls": [],
+        "evidence_bundle_id": null,
+        "repository_identity": null,
+        "repository_created_at": null,
+        "repository_last_activity_at": null,
+        "release_facts": [],
+        "vita_evidence": [],
+        "author_linkage": null,
+        "corroboration": [],
+        "duplicate_relation": {
+          "content_hash": "23a7aa89a0aee7e525fb647434b0bee5b6739a7e77fcc58b44a215c1edc70870",
+          "related_candidate_ids": []
+        }
+      },
+      "campaign": {
+        "cluster_id": null,
+        "linkage_confidence": "none",
+        "signals": [],
+        "related_candidate_ids": [],
+        "text_fingerprint": "442f25a1",
+        "media_fingerprints": [],
+        "outbound_fingerprints": [],
+        "direct_intent": false,
+        "explicit_campaign_reference": false,
+        "incident_id": null
+      },
+      "risk_signals": [
+        "no_project_evidence_in_post"
+      ],
+      "evidence_gaps": [
+        "exact project repository",
+        "repository identity and activity facts",
+        "release or build evidence",
+        "Vita-specific hardware evidence",
+        "author/developer linkage and independent corroboration",
+        "raw post body and scanner payload were unavailable in the remote public projection"
+      ],
+      "content_hash": "23a7aa89a0aee7e525fb647434b0bee5b6739a7e77fcc58b44a215c1edc70870",
+      "review": null,
+      "incident": null
+    },
     {
       "schema_version": 2,
       "id": "reddit-1wlkixu",
@@ -689,160 +766,6 @@
         "explicit_campaign_reference": false,
         "incident_id": null
       },
-      "incident": null
-    },
-    {
-      "schema_version": 2,
-      "id": "reddit-1wjn8zg",
-      "external_id": "1wjn8zg",
-      "state": "QUARANTINED",
-      "state_history": [
-        {
-          "state": "DETECTED",
-          "at": "2026-09-18T15:05:09.129Z",
-          "actor": "reddit-scanner",
-          "reason": "Canonical Reddit RSS entry accepted at the ingestion boundary"
-        },
-        {
-          "state": "QUARANTINED",
-          "at": "2026-09-18T15:05:09.129Z",
-          "actor": "reconciliation",
-          "reason": "Reconciled from a legacy remote scanner projection; requires fresh source review"
-        }
-      ],
-      "source": {
-        "platform": "reddit",
-        "subreddit": "vitahacks",
-        "canonical_url": "https://www.reddit.com/r/vitahacks/comments/1wjn8zg/rc_cars_port_progress/",
-        "author": "antoxa2584x",
-        "title": "RC Cars port progress",
-        "body": "",
-        "published_at": "2026-09-18T13:09:43.000Z"
-      },
-      "classification": {
-        "confidence": "low",
-        "reason": "Legacy public scanner record; current source review required",
-        "candidate_type": "port"
-      },
-      "provenance": {
-        "repository_url": null,
-        "release_url": null,
-        "evidence_urls": [],
-        "evidence_bundle_id": null,
-        "repository_identity": null,
-        "repository_created_at": null,
-        "repository_last_activity_at": null,
-        "release_facts": [],
-        "vita_evidence": [],
-        "author_linkage": null,
-        "corroboration": [],
-        "duplicate_relation": {
-          "content_hash": "e89942334fe443f29fd6ed1b2ba9eb1532c2513cfaefe30b3ab11c98e5da7438",
-          "related_candidate_ids": []
-        }
-      },
-      "campaign": {
-        "cluster_id": null,
-        "linkage_confidence": "none",
-        "signals": [],
-        "related_candidate_ids": [],
-        "text_fingerprint": "969e0e48",
-        "media_fingerprints": [],
-        "outbound_fingerprints": [],
-        "direct_intent": false,
-        "explicit_campaign_reference": false,
-        "incident_id": null
-      },
-      "risk_signals": [
-        "no_project_evidence_in_post"
-      ],
-      "evidence_gaps": [
-        "exact project repository",
-        "repository identity and activity facts",
-        "release or build evidence",
-        "Vita-specific hardware evidence",
-        "author/developer linkage and independent corroboration",
-        "raw post body and scanner payload were unavailable in the remote public projection"
-      ],
-      "content_hash": "e89942334fe443f29fd6ed1b2ba9eb1532c2513cfaefe30b3ab11c98e5da7438",
-      "review": null,
-      "incident": null
-    },
-    {
-      "schema_version": 2,
-      "id": "reddit-1wllsbo",
-      "external_id": "1wllsbo",
-      "state": "QUARANTINED",
-      "state_history": [
-        {
-          "state": "DETECTED",
-          "at": "2026-09-20T16:41:37.670Z",
-          "actor": "reddit-scanner",
-          "reason": "Canonical Reddit RSS entry accepted at the ingestion boundary"
-        },
-        {
-          "state": "QUARANTINED",
-          "at": "2026-09-20T16:41:37.670Z",
-          "actor": "reconciliation",
-          "reason": "Reconciled from a legacy remote scanner projection; requires fresh source review"
-        }
-      ],
-      "source": {
-        "platform": "reddit",
-        "subreddit": "vitahacks",
-        "canonical_url": "https://www.reddit.com/r/vitahacks/comments/1wllsbo/super_smash_bros_melee_update/",
-        "author": "zm2283145",
-        "title": "Super Smash bros Melee [Update]",
-        "body": "",
-        "published_at": "2026-09-20T16:36:10.000Z"
-      },
-      "classification": {
-        "confidence": "high",
-        "reason": "5 dev signals: \\brelease\\b, \\bupdate\\b, \\bv\\d+\\.\\d+\\b",
-        "candidate_type": "port"
-      },
-      "provenance": {
-        "repository_url": null,
-        "release_url": null,
-        "evidence_urls": [],
-        "evidence_bundle_id": null,
-        "repository_identity": null,
-        "repository_created_at": null,
-        "repository_last_activity_at": null,
-        "release_facts": [],
-        "vita_evidence": [],
-        "author_linkage": null,
-        "corroboration": [],
-        "duplicate_relation": {
-          "content_hash": "23a7aa89a0aee7e525fb647434b0bee5b6739a7e77fcc58b44a215c1edc70870",
-          "related_candidate_ids": []
-        }
-      },
-      "campaign": {
-        "cluster_id": null,
-        "linkage_confidence": "none",
-        "signals": [],
-        "related_candidate_ids": [],
-        "text_fingerprint": "442f25a1",
-        "media_fingerprints": [],
-        "outbound_fingerprints": [],
-        "direct_intent": false,
-        "explicit_campaign_reference": false,
-        "incident_id": null
-      },
-      "risk_signals": [
-        "no_project_evidence_in_post"
-      ],
-      "evidence_gaps": [
-        "exact project repository",
-        "repository identity and activity facts",
-        "release or build evidence",
-        "Vita-specific hardware evidence",
-        "author/developer linkage and independent corroboration",
-        "raw post body and scanner payload were unavailable in the remote public projection"
-      ],
-      "content_hash": "23a7aa89a0aee7e525fb647434b0bee5b6739a7e77fcc58b44a215c1edc70870",
-      "review": null,
       "incident": null
     }
   ]
