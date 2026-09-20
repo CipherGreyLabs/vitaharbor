@@ -459,3 +459,4 @@ The five remaining candidates were checked against their source threads. None wa
 | Time | Commit | Change | Why | Model | Verified |
 |---|---|---|---|---|---|
 | 19:21 | `e89adff` | Committed the reviewed 80-path VitaHarbor integration selection on `main` | Establish a local, reviewable project baseline without pushing or changing production | unrecorded | `Integrate VitaHarbor ledger and incident controls`; commit created on `main`; machine-local restart handoff remained excluded |
+| 19:22 | local bookkeeping | Recorded the post-commit project state, evidence, integration checkpoint and hash-protected handoff | Make the final local integration state self-describing and verifiable before handoff | unrecorded | Handoff verification remained `GO`; only the explicitly excluded restart handoff remains outside Git; production unchanged |

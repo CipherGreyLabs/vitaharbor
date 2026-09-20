@@ -21,8 +21,8 @@ Updated: 2026-09-20
 - The commit contains the accumulated site, data, audit, screenshot, scanner,
   incident and test work plus durable project-control files. The machine-local
   restart handoff and ignored runtime/browser artifacts were excluded.
-- A final bookkeeping commit will record this hash, the post-commit handoff and
-  the clean-tree result. No push, merge, reset, clean or stash occurred.
+- Post-commit bookkeeping, handoff verification and the clean-tree result are
+  complete. No push, merge, reset, clean or stash occurred.
 
 ## Completed evidence
 
@@ -146,10 +146,10 @@ Updated: 2026-09-20
 ## Current integration checkpoint
 
 `VH-INTEGRATE-009` has committed the reviewed site, scanner, quarantine,
-campaign-control, test, evidence and project-control files as `e89adff`. A final
-bookkeeping commit will refresh the handoff hashes and record the clean-tree
-acceptance. Machine-local session history and all secret, cookie, temporary or
-ambiguous artifacts remain excluded.
+campaign-control, test, evidence and project-control files locally. The final
+handoff hashes the post-commit state and the working tree contains only the
+explicitly excluded machine-local restart handoff. All secret, cookie, temporary
+or ambiguous artifacts remain excluded.
 
 ## Release gate
 

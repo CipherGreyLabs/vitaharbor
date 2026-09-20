@@ -1,6 +1,6 @@
-# Handoff - VitaHarbor VH-INTEGRATE-009 post-commit handoff
+# Handoff - VitaHarbor VH-INTEGRATE-009 final handoff
 
-- Gegenereerd: 2026-09-20T17:22:17Z
+- Gegenereerd: 2026-09-20T17:23:22Z
 - Actor: codex
 - Model: unrecorded
 - ProjectRoot: C:\Users\suloW\Documents\ChatGPT\VitaPort
@@ -11,13 +11,13 @@
 | Bestand | Bytes | SHA-256 |
 |---|---|---|
 | AGENTS.md | 5079 | A0D5CF14C7EC2AB6FB79F26A254DE2C19F5400488D9EA55ABB4539A8C7A6FF55 |
-| PROJECT_STATE.md | 11613 | D8F579BA82EBF00C0DF77749D45EDE819CA0BAB88662B6826381B12EB675AD73 |
+| PROJECT_STATE.md | 11599 | AA556ECDA0208DDFB148B360E42DD6C3ADFFEDB89C43650C2B724EB7B42276FB |
 | docs\FAKE_PORT_INCIDENT_2026-09-20.md | 5752 | 31309C600618C6B8400BE92C078F9EF859F6DED51FAE4647FA75DA83560F1833 |
-| docs\INTEGRATION_CHECKPOINT_2026-09-20.md | 3479 | 9AE397B792B4B15E8866CEC9EFBE76D0034133A3F38E6636438D9DEFF854DE28 |
+| docs\INTEGRATION_CHECKPOINT_2026-09-20.md | 3541 | 6365E4CAA4B079CD42217FA4B14F0B326CF44158C60A2D8E0B1EDACFC9B91A94 |
 | docs\THREAT_MODEL_DATA_POISONING.md | 3886 | 7EFD89CDD05F3122C7078B38AD443DC5D42E9C7689ACBBCED7E6AB1B97AAB8B1 |
 | docs\MODERATION_AND_PROMOTION.md | 2922 | B0E3BC7DF4FAB03053156E616C17B15C2B263EFE8238F11430527BD7EC3F9434 |
-| docs\WORKLOG.md | 58162 | 17DDE7B23AE3415FD4249C48CE77E5247A548EC91611FC26C3D4AAA1C7C61E62 |
-| EVIDENCE.jsonl | 27715 | A8936C4C7B12114CCAF707B886C12C119ABC43DB52D76B198F6D03F20D74C5E1 |
+| docs\WORKLOG.md | 58519 | 338056EE57D4B31028CA1161CAF688FF55555D736209491371369BD660596A13 |
+| EVIDENCE.jsonl | 28193 | B3FFA3C7F9597457D76097FA3847D10763D766B77E42C7F5C24174EDE4EA2701 |
 | data\quarantine.json | 24973 | 8A8D5447B3950D48DC66DF50AB71F07D50049AE1C7D886155D9CA9CC96214861 |
 | data\provenance-audit.jsonl | 1426 | AA8B0CFE46C011C3CD70A88F4F4377403B0B681DC6B9A3AEF8273EE0791FF0FB |
 | public\data\discovered.json | 2664 | 4C5AAAE8E860BE8B34EAC95475C44D325D6A10A5D102370564475DFADAF51EB5 |
@@ -44,7 +44,7 @@
 
 ## Samenvatting
 
-VH-INTEGRATE-009 local integration commit e89adff (Integrate VitaHarbor ledger and incident controls) contains the reviewed 80-path final state through VH-INCIDENT-010: 28 curated projects, five sanitized public candidates, one REJECTED confirmed campaign fake and two BLOCKED_UNVERIFIED linked claims. Pre-commit gates are GO: verify with 65 unit tests/build, lint, integration 7/7, E2E 11/11, npm audit production 0, staged secret scan 0, JSON/JSONL valid, diff-check pass and auto-promotion invariant pass. Machine-local restart handoff and ignored artifacts remain excluded. Final bookkeeping commit is pending only to record clean-tree acceptance. Production remains dpl_31SM83iB5WYTmjJTAZNPF3AVbkhv; no push, merge, tag, workflow trigger or deployment.
+VH-INTEGRATE-009 is complete locally. The reviewed product, ledger, scanner, provenance, incident, test, evidence and project-control state is integrated on main; VH-INCIDENT-010 remains production-verified with 28 curated projects, five sanitized public candidates, one REJECTED confirmed fake and two BLOCKED_UNVERIFIED linked claims. Pre-commit gates were GO: verify with 65 unit tests/build, lint, integration 7/7, E2E 11/11, npm audit production 0, staged secret scan 0, JSON/JSONL valid, diff-check pass and auto-promotion invariant pass. Machine-local restart handoff and ignored artifacts are excluded. Production remains dpl_31SM83iB5WYTmjJTAZNPF3AVbkhv; no push, merge, tag, workflow trigger or deployment was performed.
 
 ## Verificatie
 

@@ -55,8 +55,9 @@ projects and five-item sanitized public queue are all included in that selection
 ## Commit and safety state
 
 The 80-path reviewed selection was committed locally as `e89adff` with message
-`Integrate VitaHarbor ledger and incident controls`. The final bookkeeping commit will
-refresh the handoff and record the clean-tree acceptance; neither commit is pushed.
+`Integrate VitaHarbor ledger and incident controls`; the evidence and handoff
+bookkeeping was then committed locally. The final tree check is clean apart from the
+explicitly excluded restart handoff; neither local commit was pushed.
 
 - Reddit mutations: `NONE`.
 - No push, merge, tag, GitHub workflow trigger or Vercel deployment is permitted.
