@@ -453,3 +453,9 @@ The five remaining candidates were checked against their source threads. None wa
 |---|---|---|---|---|---|
 | 19:20 | working tree (staged) | Refreshed the path-level inventory and selected the reviewed 80-path project state; excluded the machine-local restart handoff and ignored local runtime/browser artifacts | Integrate the accumulated site, ledger, scanner, provenance, incident, evidence, test and project-control work without committing session data or ambiguous artifacts | unrecorded | `docs/INTEGRATION_CHECKPOINT_2026-09-20.md`; staged manifest contains 80 paths; restart handoff is not staged; no cookies, profiles, secrets or `.env` files selected |
 | 19:20 | working tree (staged) | Ran the complete local safety and release gates against the exact staged checkout | Establish a commit-ready state before creating the local integration commit | unrecorded | `npm run verify` passed typecheck, 65 unit tests and build/prerender; lint passed; integration 7/7; full E2E 11/11; `npm audit --omit=dev` reported 0 vulnerabilities; staged secret-pattern scan reported 0 hits; 9 JSON/JSONL artifacts validated; `git diff --cached --check` and `git diff --check` passed; ledger/public/incident counts are 28/5/1+2; auto-promotion invariant passed |
+
+### VH-INTEGRATE-009 local commit (2026-09-20)
+
+| Time | Commit | Change | Why | Model | Verified |
+|---|---|---|---|---|---|
+| 19:21 | `e89adff` | Committed the reviewed 80-path VitaHarbor integration selection on `main` | Establish a local, reviewable project baseline without pushing or changing production | unrecorded | `Integrate VitaHarbor ledger and incident controls`; commit created on `main`; machine-local restart handoff remained excluded |

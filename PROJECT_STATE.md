@@ -4,7 +4,7 @@ Updated: 2026-09-20
 
 ## Confirmed current facts
 
-- Primary checkout: `main` at CI repair commit `b5d6536`.
+- Primary checkout: `main` at integration commit `e89adff` (full hash recorded in Git).
 - Primary worker task: `01a0bc84-7462-7f92-a672-5856bed2ae0f`.
 - Master task: `01a0bed8-0aae-73d2-bff1-bb0b6e7dfd00`, running in the Codex-managed
   worktree `C:\Users\suloW\.codex\worktrees\5e46\VitaPort`.
@@ -14,17 +14,15 @@ Updated: 2026-09-20
   READY and aliased to `https://vitaharbor.vercel.app` after `VH-INCIDENT-010`
   containment.
 
-## Dirty and uncommitted work
+## Integration commit state
 
-- The primary checkout contains substantial pre-existing site, data, audit,
-  screenshot and test changes. They are user/project work and remain untouched.
-- The verified production-aligned work is not all represented in `HEAD`; `HEAD`
-  remains `b5d6536` while those changes remain uncommitted.
-- `VH-LINKS-003` and the superseding `VH-LINKS-005` changes only the bounded
-  link/data/render/test surfaces and audit documentation. No dependency,
-  GitHub or workflow state was changed. The current dirty checkout was
-  deployed as explicitly authorized; no commit, push, merge, reset, clean or
-  stash occurred.
+- The reviewed 80-path selection was committed locally on `main` as
+  `e89adff` (`Integrate VitaHarbor ledger and incident controls`).
+- The commit contains the accumulated site, data, audit, screenshot, scanner,
+  incident and test work plus durable project-control files. The machine-local
+  restart handoff and ignored runtime/browser artifacts were excluded.
+- A final bookkeeping commit will record this hash, the post-commit handoff and
+  the clean-tree result. No push, merge, reset, clean or stash occurred.
 
 ## Completed evidence
 
@@ -147,11 +145,11 @@ Updated: 2026-09-20
 
 ## Current integration checkpoint
 
-`VH-INTEGRATE-009` resumes after the verified incident response. The integration
-selection must include the reviewed site, scanner, quarantine, campaign-control,
-test, evidence and project-control files, while excluding machine-local session
-history and any secret, cookie, temporary or ambiguous artifact. The checkpoint
-and final commit hashes are recorded below after the gates pass.
+`VH-INTEGRATE-009` has committed the reviewed site, scanner, quarantine,
+campaign-control, test, evidence and project-control files as `e89adff`. A final
+bookkeeping commit will refresh the handoff hashes and record the clean-tree
+acceptance. Machine-local session history and all secret, cookie, temporary or
+ambiguous artifacts remain excluded.
 
 ## Release gate
 

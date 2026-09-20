@@ -52,7 +52,11 @@ projects and five-item sanitized public queue are all included in that selection
   remain outside Git. No cookies, browser profiles, session exports, secrets or `.env`
   files were selected.
 
-## Safety and release state
+## Commit and safety state
+
+The 80-path reviewed selection was committed locally as `e89adff` with message
+`Integrate VitaHarbor ledger and incident controls`. The final bookkeeping commit will
+refresh the handoff and record the clean-tree acceptance; neither commit is pushed.
 
 - Reddit mutations: `NONE`.
 - No push, merge, tag, GitHub workflow trigger or Vercel deployment is permitted.
