@@ -1,90 +1,8 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-09-21T18:32:56.666Z",
+  "generated_at": "2026-09-21T19:03:23.766Z",
   "source": "r/vitahacks + r/VitaPiracy + r/PSVitaHomebrew RSS",
   "items": [
-    {
-      "schema_version": 2,
-      "id": "reddit-1wmbh4v",
-      "external_id": "1wmbh4v",
-      "state": "QUARANTINED",
-      "state_history": [
-        {
-          "state": "DETECTED",
-          "at": "2026-09-21T18:32:56.666Z",
-          "actor": "reddit-scanner",
-          "reason": "Canonical Reddit RSS entry accepted at the ingestion boundary"
-        },
-        {
-          "state": "QUARANTINED",
-          "at": "2026-09-21T18:32:56.666Z",
-          "actor": "reddit-scanner",
-          "reason": "Scanner result is unverified and cannot enter the curated ledger"
-        }
-      ],
-      "source": {
-        "platform": "reddit",
-        "subreddit": "PSVitaHomebrew",
-        "canonical_url": "https://www.reddit.com/r/PSVitaHomebrew/comments/1wmbh4v/demande_de_patch_fr/",
-        "author": "Lolokovich",
-        "title": "Demande de patch FR",
-        "body": "<!-- SC_OFF --><div class=\"md\"><p>...</p> </div><!-- SC_ON --> &#32; submitted by &#32; <a href=\"https://www.reddit.com/user/Lolokovich\"> /u/Lolokovich </a> <br/> <span><a href=\"/r/VitaPiracy/comments/1wmbgp5/demande_de_patch_fr/\">[link]</a></span> &#32; <span><a href=\"https://www.reddit.com/r/PSVitaHomebrew/comments/1wmbh4v/demande_de_patch_fr/\">[comments]</a></span>",
-        "published_at": "2026-09-21T12:32:21.000Z"
-      },
-      "classification": {
-        "confidence": "medium",
-        "reason": "1 dev signal(s), 1 passive term(s), no question markers",
-        "candidate_type": "port"
-      },
-      "provenance": {
-        "repository_url": null,
-        "release_url": null,
-        "evidence_urls": [],
-        "evidence_bundle_id": null,
-        "repository_identity": null,
-        "repository_created_at": null,
-        "repository_last_activity_at": null,
-        "release_facts": [],
-        "vita_evidence": [],
-        "author_linkage": null,
-        "corroboration": [],
-        "duplicate_relation": {
-          "content_hash": "f3b910cbc1f5b2c6d67f02a87b3c6f1f7d389e8a26b64987e0b35d7a723986b4",
-          "related_candidate_ids": []
-        }
-      },
-      "campaign": {
-        "cluster_id": null,
-        "linkage_confidence": "none",
-        "signals": [],
-        "related_candidate_ids": [],
-        "text_fingerprint": "f5f15696",
-        "media_fingerprints": [],
-        "outbound_fingerprints": [
-          "www.reddit.com/user/lolokovich",
-          "www.reddit.com/r/psvitahomebrew/comments/1wmbh4v/demande_de_patch_fr",
-          "www.reddit.com/user/lolokovich&quot;&gt",
-          "www.reddit.com/r/psvitahomebrew/comments/1wmbh4v/demande_de_patch_fr/&quot;&gt;[comments]&lt;/a&gt;&lt;/span&gt"
-        ],
-        "direct_intent": false,
-        "explicit_campaign_reference": false,
-        "incident_id": null
-      },
-      "risk_signals": [
-        "question_or_request",
-        "no_project_evidence_in_post"
-      ],
-      "evidence_gaps": [
-        "exact project repository",
-        "repository identity and activity facts",
-        "release or build evidence",
-        "Vita-specific hardware evidence",
-        "author/developer linkage and independent corroboration"
-      ],
-      "content_hash": "f3b910cbc1f5b2c6d67f02a87b3c6f1f7d389e8a26b64987e0b35d7a723986b4",
-      "review": null,
-      "incident": null
-    },
     {
       "schema_version": 2,
       "id": "reddit-1wmax82",
@@ -122,7 +40,9 @@
       "classification": {
         "confidence": "medium",
         "reason": "manual browser review: linked video is titled Resident Evil 4 - PSVita Port: First optimizations batch",
-        "candidate_type": "port"
+        "candidate_type": "port",
+        "question": false,
+        "spam": false
       },
       "provenance": {
         "repository_url": null,
@@ -241,7 +161,9 @@
       "classification": {
         "confidence": "medium",
         "reason": "2 dev signal(s), 1 passive term(s), no question markers",
-        "candidate_type": "port"
+        "candidate_type": "port",
+        "question": false,
+        "spam": false
       },
       "provenance": {
         "repository_url": null,
@@ -273,7 +195,6 @@
         "incident_id": null
       },
       "risk_signals": [
-        "question_or_request",
         "no_project_evidence_in_post"
       ],
       "evidence_gaps": [
@@ -353,7 +274,9 @@
       "classification": {
         "confidence": "medium",
         "reason": "1 dev signal(s), 2 passive term(s), no question markers",
-        "candidate_type": "port"
+        "candidate_type": "port",
+        "question": false,
+        "spam": false
       },
       "provenance": {
         "repository_url": null,
@@ -369,7 +292,9 @@
         "corroboration": [],
         "duplicate_relation": {
           "content_hash": "06f46fbfabed3be0debd6d87a56b08724f9238e4d2218d9c8fb79762056fe828",
-          "related_candidate_ids": []
+          "related_candidate_ids": [
+            "reddit-1wlrv6x"
+          ]
         }
       },
       "campaign": {
@@ -392,8 +317,8 @@
         "incident_id": null
       },
       "risk_signals": [
-        "question_or_request",
-        "no_project_evidence_in_post"
+        "no_project_evidence_in_post",
+        "crosspost_duplicate"
       ],
       "evidence_gaps": [
         "exact project repository",
@@ -443,7 +368,9 @@
       "classification": {
         "confidence": "medium",
         "reason": "1 dev signal(s), 1 passive term(s), no question markers",
-        "candidate_type": "port"
+        "candidate_type": "port",
+        "question": false,
+        "spam": false
       },
       "provenance": {
         "repository_url": null,
@@ -475,7 +402,6 @@
         "incident_id": null
       },
       "risk_signals": [
-        "question_or_request",
         "no_project_evidence_in_post"
       ],
       "evidence_gaps": [
@@ -526,36 +452,50 @@
     },
     {
       "schema_version": 2,
-      "id": "reddit-1wllsbo",
-      "external_id": "1wllsbo",
-      "state": "QUARANTINED",
+      "id": "reddit-1wlqxq4",
+      "external_id": "1wlqxq4",
+      "state": "PROMOTED",
       "state_history": [
         {
           "state": "DETECTED",
-          "at": "2026-09-20T16:41:37.670Z",
-          "actor": "reddit-scanner",
-          "reason": "Canonical Reddit RSS entry accepted at the ingestion boundary"
+          "at": "2026-09-21T13:22:50.149Z",
+          "actor": "codex",
+          "reason": "Observed in the authenticated manual Reddit scan"
         },
         {
           "state": "QUARANTINED",
-          "at": "2026-09-20T16:41:37.670Z",
-          "actor": "reconciliation",
-          "reason": "Reconciled from a legacy remote scanner projection; requires fresh source review"
+          "at": "2026-09-21T13:22:50.149Z",
+          "actor": "codex",
+          "reason": "Manual browser observation passed the provenance ingestion boundary"
+        },
+        {
+          "state": "VERIFIED_FOR_REVIEW",
+          "at": "2026-09-21T13:25:26.195Z",
+          "actor": "codex",
+          "reason": "Verified Reddit release post and repository evidence for Test Drive Vita"
+        },
+        {
+          "state": "PROMOTED",
+          "at": "2026-09-21T13:25:50.438Z",
+          "actor": "codex",
+          "reason": "Promote source-backed Test Drive native Vita v0.1 release"
         }
       ],
       "source": {
         "platform": "reddit",
         "subreddit": "vitahacks",
-        "canonical_url": "https://www.reddit.com/r/vitahacks/comments/1wllsbo/super_smash_bros_melee_update/",
-        "author": "zm2283145",
-        "title": "Super Smash bros Melee [Update]",
-        "body": "",
-        "published_at": "2026-09-20T16:36:10.000Z"
+        "canonical_url": "https://www.reddit.com/r/vitahacks/comments/1wlqxq4/test_drive_1987_native_vita_port/",
+        "author": "gainusha",
+        "title": "Test Drive (1987) native Vita port",
+        "body": "Thanks to the work of kylofon who created the Test Drive recompilation for windows I present to you the Vita native version of the original Test Drive. It's the initial release, it runs OK, i have not found any bugs so far. Open source, available here: https://github.com/smart-pickle/TestDrive-Vita. It requires the original files of the game; they are not bundled with the vpk.",
+        "published_at": "2026-09-20T19:50:09.288Z"
       },
       "classification": {
         "confidence": "high",
-        "reason": "5 dev signals: \\brelease\\b, \\bupdate\\b, \\bv\\d+\\.\\d+\\b",
-        "candidate_type": "port"
+        "reason": "3 dev signals: \\brelease\\b, github\\.com\\b, \\bnative\\b",
+        "candidate_type": "port",
+        "question": false,
+        "spam": false
       },
       "provenance": {
         "repository_url": null,
@@ -570,7 +510,7 @@
         "author_linkage": null,
         "corroboration": [],
         "duplicate_relation": {
-          "content_hash": "23a7aa89a0aee7e525fb647434b0bee5b6739a7e77fcc58b44a215c1edc70870",
+          "content_hash": "628a8f7756c4c371ffe0144b6536ffd6b1661de3b5c26f22e869ce1beb656d63",
           "related_candidate_ids": []
         }
       },
@@ -579,25 +519,182 @@
         "linkage_confidence": "none",
         "signals": [],
         "related_candidate_ids": [],
-        "text_fingerprint": "442f25a1",
+        "text_fingerprint": "ca5e3ff3",
         "media_fingerprints": [],
-        "outbound_fingerprints": [],
+        "outbound_fingerprints": [
+          "github.com/smart-pickle/testdrive-vita.",
+          "github.com/smart-pickle/testdrive-vita"
+        ],
         "direct_intent": false,
         "explicit_campaign_reference": false,
         "incident_id": null
       },
-      "risk_signals": [
-        "no_project_evidence_in_post"
-      ],
+      "risk_signals": [],
       "evidence_gaps": [
-        "exact project repository",
         "repository identity and activity facts",
-        "release or build evidence",
         "Vita-specific hardware evidence",
-        "author/developer linkage and independent corroboration",
-        "raw post body and scanner payload were unavailable in the remote public projection"
+        "author/developer linkage and independent corroboration"
       ],
-      "content_hash": "23a7aa89a0aee7e525fb647434b0bee5b6739a7e77fcc58b44a215c1edc70870",
+      "content_hash": "628a8f7756c4c371ffe0144b6536ffd6b1661de3b5c26f22e869ce1beb656d63",
+      "review": {
+        "reviewer": "codex",
+        "reviewed_at": "2026-09-21T13:25:50.438Z",
+        "reason": "Promote source-backed Test Drive native Vita v0.1 release",
+        "evidence_bundle": {
+          "file": "data/references/test-drive-2026-09-21.json",
+          "sha256": "0178cc4a5ce56bf25e19184e8562adba9d68658a032ad1f82eb6bf53eed594b1",
+          "schema_version": 1,
+          "reviewer": "codex",
+          "reviewed_at": "2026-09-21T13:23:12.000Z",
+          "sources": [
+            {
+              "type": "reddit",
+              "url": "https://www.reddit.com/r/vitahacks/comments/1wlqxq4/test_drive_1987_native_vita_port/",
+              "observed_at": "2026-09-21T13:23:12.000Z",
+              "note": "Authenticated Reddit thread states this is the initial native Vita release and directly links the source repository."
+            },
+            {
+              "type": "repository",
+              "url": "https://github.com/smart-pickle/TestDrive-Vita",
+              "observed_at": "2026-09-21T13:23:12.000Z",
+              "note": "Repository README describes a native hardware-accelerated PS Vita/PSTV port based on kylofon's static recompilation."
+            },
+            {
+              "type": "release",
+              "url": "https://github.com/smart-pickle/TestDrive-Vita/releases/tag/v0.1",
+              "observed_at": "2026-09-21T13:23:12.000Z",
+              "note": "GitHub release v0.1 publishes TestDriveVita.vpk."
+            },
+            {
+              "type": "upstream",
+              "url": "https://github.com/kylofon/testdrive-enhanced",
+              "observed_at": "2026-09-21T13:23:12.000Z",
+              "note": "Independent upstream static recompilation identified by the Vita repository README."
+            }
+          ],
+          "findings": "The Reddit author announced an initial native Vita release. The linked GitHub repository contains VitaSDK/VitaGL build material and a v0.1 release with TestDriveVita.vpk. Proprietary game data is not bundled and must come from the user's own original game files.",
+          "repository_url": "https://github.com/smart-pickle/TestDrive-Vita",
+          "repository_identity": "smart-pickle/TestDrive-Vita; README identifies a native PS Vita/PSTV port of Test Drive (1987) built from kylofon's static recompilation.",
+          "repository_created_at": "2026-09-17T11:31:11.000Z",
+          "repository_last_activity_at": "2026-09-20T19:48:08.000Z",
+          "release_facts": [
+            {
+              "tag": "v0.1",
+              "published_at": "2026-09-20T19:39:46Z",
+              "asset": "TestDriveVita.vpk"
+            }
+          ],
+          "release_url": "https://github.com/smart-pickle/TestDrive-Vita/releases/tag/v0.1",
+          "vita_hardware_result": "Developer reports the initial release runs on Vita; the repository describes native Vita/PSTV hardware acceleration. VitaHarbor did not independently benchmark the binary.",
+          "vita_evidence": [
+            "VitaSDK/VitaGL build instructions in the repository",
+            "Vita-specific VPK release asset TestDriveVita.vpk",
+            "Reddit release post reports the Vita native version running"
+          ],
+          "author_linkage": "The Reddit post by gainusha directly links smart-pickle/TestDrive-Vita; the repository README build section also references gainusha/TestDriveVita as its clone target.",
+          "corroboration": [
+            {
+              "type": "release_artifact",
+              "detail": "GitHub v0.1 contains the Vita-specific TestDriveVita.vpk asset."
+            },
+            {
+              "type": "upstream_lineage",
+              "detail": "Repository credits kylofon/testdrive-enhanced as the upstream static recompilation."
+            }
+          ],
+          "duplicate_relation": {
+            "related_candidate_ids": []
+          },
+          "content_hash": "628a8f7756c4c371ffe0144b6536ffd6b1661de3b5c26f22e869ce1beb656d63",
+          "risk_disposition": "No risk signals were recorded for this candidate."
+        }
+      },
+      "incident": null
+    },
+    {
+      "schema_version": 2,
+      "id": "reddit-1wllsbo",
+      "external_id": "1wllsbo",
+      "state": "QUARANTINED",
+      "state_history": [
+        {
+          "state": "DETECTED",
+          "at": "2026-09-21T18:40:07.572Z",
+          "actor": "reddit-scanner",
+          "reason": "Canonical Reddit RSS entry accepted at the ingestion boundary"
+        },
+        {
+          "state": "QUARANTINED",
+          "at": "2026-09-21T18:40:07.572Z",
+          "actor": "reddit-scanner",
+          "reason": "Scanner result is unverified and cannot enter the curated ledger"
+        }
+      ],
+      "source": {
+        "platform": "reddit",
+        "subreddit": "vitahacks",
+        "canonical_url": "https://www.reddit.com/r/vitahacks/comments/1wllsbo/super_smash_bros_melee_update/",
+        "author": "zm2283145",
+        "title": "Super Smash bros Melee [Update]",
+        "body": "<!-- SC_OFF --><div class=\"md\"><p>Please grab the latest release from here:</p> <p><a href=\"https://github.com/zm2283145/melee-Vita/releases/tag/vita-v0.7.1-build.25.1\">https://github.com/zm2283145/melee-Vita/releases/tag/vita-v0.7.1-build.25.1</a></p> <p>I've made lots of improvements from now on these builds will include as many pre captured shaders. This should help improve the stutter but there will still be stutter for I would like to ask people to play through the game doing as much as possible, attacks ite",
+        "published_at": "2026-09-20T16:36:10.000Z"
+      },
+      "classification": {
+        "confidence": "high",
+        "reason": "5 dev signals: \\brelease\\b, \\bupdate\\b, \\bv\\d+\\.\\d+\\b",
+        "candidate_type": "port",
+        "question": false,
+        "spam": false
+      },
+      "provenance": {
+        "repository_url": null,
+        "release_url": null,
+        "evidence_urls": [],
+        "evidence_bundle_id": null,
+        "repository_identity": null,
+        "repository_created_at": null,
+        "repository_last_activity_at": null,
+        "release_facts": [],
+        "vita_evidence": [],
+        "author_linkage": null,
+        "corroboration": [],
+        "duplicate_relation": {
+          "content_hash": "d6d6a2115689db4489ba3aa347d8fcd9fe0adc89a193f448d67052ef87957a3e",
+          "related_candidate_ids": []
+        }
+      },
+      "campaign": {
+        "cluster_id": "campaign-fefd46f9",
+        "linkage_confidence": "medium",
+        "signals": [
+          "same_author_burst",
+          "shared_outbound_fingerprint"
+        ],
+        "related_candidate_ids": [
+          "reddit-1wjzosl"
+        ],
+        "text_fingerprint": "3439b9dd",
+        "media_fingerprints": [],
+        "outbound_fingerprints": [
+          "github.com/zm2283145/melee-vita/releases/tag/vita-v0.7.1-build.25.1",
+          "www.reddit.com/user/zm2283145",
+          "github.com/zm2283145/melee-vita/releases/tag/vita-v0.7.1-build.25.1&quot;&gt;https://github.com/zm2283145/melee-vita/releases/tag/vita-v0.7.1-build.25.1&lt;/a&gt;&lt;/p&gt",
+          "www.reddit.com/user/zm2283145&quot;&gt",
+          "www.reddit.com/r/vitahacks/comments/1wllsbo/super_smash_bros_melee_update/&quot;&gt;[link]&lt;/a&gt;&lt;/span&gt",
+          "www.reddit.com/r/vitahacks/comments/1wllsbo/super_smash_bros_melee_update/&quot;&gt;[comments]&lt;/a&gt;&lt;/span&gt",
+          "www.reddit.com/r/vitahacks/comments/1wllsbo/super_smash_bros_melee_update"
+        ],
+        "direct_intent": false,
+        "explicit_campaign_reference": false,
+        "incident_id": null
+      },
+      "risk_signals": [],
+      "evidence_gaps": [
+        "repository identity and activity facts",
+        "Vita-specific hardware evidence",
+        "author/developer linkage and independent corroboration"
+      ],
+      "content_hash": "d6d6a2115689db4489ba3aa347d8fcd9fe0adc89a193f448d67052ef87957a3e",
       "review": null,
       "incident": null
     },
@@ -638,7 +735,9 @@
       "classification": {
         "confidence": "medium",
         "reason": "Incident review: near-duplicate cross-community claim without repository or release evidence",
-        "candidate_type": "port"
+        "candidate_type": "port",
+        "question": false,
+        "spam": false
       },
       "provenance": {
         "repository_url": null,
@@ -739,7 +838,9 @@
       "classification": {
         "confidence": "medium",
         "reason": "Incident review: linked follow-up claim without repository or release evidence",
-        "candidate_type": "port"
+        "candidate_type": "port",
+        "question": false,
+        "spam": false
       },
       "provenance": {
         "repository_url": null,
@@ -842,7 +943,9 @@
       "classification": {
         "confidence": "high",
         "reason": "Incident evidence: explicit fake-port campaign intent",
-        "candidate_type": "port"
+        "candidate_type": "port",
+        "question": false,
+        "spam": false
       },
       "provenance": {
         "repository_url": null,
@@ -909,36 +1012,38 @@
     },
     {
       "schema_version": 2,
-      "id": "reddit-1wl0ae9",
-      "external_id": "1wl0ae9",
+      "id": "reddit-1wkrhnp",
+      "external_id": "1wkrhnp",
       "state": "QUARANTINED",
       "state_history": [
         {
           "state": "DETECTED",
-          "at": "2026-09-21T18:32:56.666Z",
+          "at": "2026-09-21T18:42:23.382Z",
           "actor": "reddit-scanner",
           "reason": "Canonical Reddit RSS entry accepted at the ingestion boundary"
         },
         {
           "state": "QUARANTINED",
-          "at": "2026-09-21T18:32:56.666Z",
+          "at": "2026-09-21T18:42:23.382Z",
           "actor": "reddit-scanner",
           "reason": "Scanner result is unverified and cannot enter the curated ledger"
         }
       ],
       "source": {
         "platform": "reddit",
-        "subreddit": "PSVitaHomebrew",
-        "canonical_url": "https://www.reddit.com/r/PSVitaHomebrew/comments/1wl0ae9/release_ratchet_clank_size_matters_remastered/",
-        "author": "Illustrious_Being642",
-        "title": "[Release] Ratchet & Clank: Size Matters — Remastered Controls for PS Vita / Adrenaline",
-        "body": "<!-- SC_OFF --><div class=\"md\"><p>Hi everyone!</p> <p>I've been working on a plugin for <strong>Ratchet &amp; Clank: Size Matters</strong> that gives the game a much more modern control scheme when played through Adrenaline on PS Vita.</p> <p>The main feature is <strong>true right analog stick camera control</strong>, instead of having to use the original PSP camera controls.</p> <p>After reverse engineering and a lot of testing directly on the Vita, I've reached a version stable enough",
-        "published_at": "2026-09-19T23:00:00.000Z"
+        "subreddit": "vitahacks",
+        "canonical_url": "https://www.reddit.com/r/vitahacks/comments/1wkrhnp/gameplay_world_at_war_zombies_ported_to_the_ps/",
+        "author": "devnoname120",
+        "title": "Gameplay: World at War Zombies ported to the PS Vita",
+        "body": "https://x.com/devnoname120/status/2101354766500601981 &#32; submitted by &#32; /u/devnoname120 [link] &#32; [comments]",
+        "published_at": "2026-09-19T17:02:55.000Z"
       },
       "classification": {
-        "confidence": "high",
-        "reason": "3 dev signals: \\[release\\], \\brelease\\b, \\bplugin\\b",
-        "candidate_type": "plugin"
+        "confidence": "medium",
+        "reason": "1 dev signal(s), 1 passive term(s), no question markers",
+        "candidate_type": "port",
+        "question": false,
+        "spam": false
       },
       "provenance": {
         "repository_url": null,
@@ -953,7 +1058,7 @@
         "author_linkage": null,
         "corroboration": [],
         "duplicate_relation": {
-          "content_hash": "b5634ce080033fcbf03e7a5ff864d6cc57b544e330ad7f8971206a3a92fc79b8",
+          "content_hash": "2eb5d0520f9fe2589e43211ba74ae557b558d077bcfd51d50c037b00e347e85b",
           "related_candidate_ids": []
         }
       },
@@ -962,15 +1067,191 @@
         "linkage_confidence": "none",
         "signals": [],
         "related_candidate_ids": [],
-        "text_fingerprint": "b835fb4d",
-        "media_fingerprints": [],
+        "text_fingerprint": "1bcf5943",
+        "media_fingerprints": [
+          "preview.redd.it/h4r25gnddiqh1.png",
+          "i.redd.it/h4r25gnddiqh1.png"
+        ],
         "outbound_fingerprints": [
-          "www.reddit.com/user/illustrious_being642",
-          "github.com/rafitalocotron/ratchetsizematters-remasteredcontrols&quot;&gt;https://github.com/rafitalocotron/ratchetsizematters-remasteredcontrols&lt;/a&gt;&lt;/p&gt",
-          "www.reddit.com/user/illustrious_being642&quot;&gt",
-          "www.reddit.com/r/psvitahomebrew/comments/1wl0ae9/release_ratchet_clank_size_matters_remastered/&quot;&gt;[link]&lt;/a&gt;&lt;/span&gt",
-          "www.reddit.com/r/psvitahomebrew/comments/1wl0ae9/release_ratchet_clank_size_matters_remastered/&quot;&gt;[comments]&lt;/a&gt;&lt;/span&gt",
-          "www.reddit.com/r/psvitahomebrew/comments/1wl0ae9/release_ratchet_clank_size_matters_remastered"
+          "x.com/devnoname120/status/2101354766500601981",
+          "www.reddit.com/r/vitahacks/comments/1wkrhnp/gameplay_world_at_war_zombies_ported_to_the_ps",
+          "preview.redd.it/h4r25gnddiqh1.png",
+          "www.reddit.com/user/devnoname120",
+          "i.redd.it/h4r25gnddiqh1.png"
+        ],
+        "direct_intent": false,
+        "explicit_campaign_reference": false,
+        "incident_id": null
+      },
+      "risk_signals": [
+        "no_project_evidence_in_post"
+      ],
+      "evidence_gaps": [
+        "exact project repository",
+        "repository identity and activity facts",
+        "release or build evidence",
+        "Vita-specific hardware evidence",
+        "author/developer linkage and independent corroboration"
+      ],
+      "content_hash": "2eb5d0520f9fe2589e43211ba74ae557b558d077bcfd51d50c037b00e347e85b",
+      "review": null,
+      "incident": null
+    },
+    {
+      "schema_version": 2,
+      "id": "reddit-1wkf9m5",
+      "external_id": "1wkf9m5",
+      "state": "QUARANTINED",
+      "state_history": [
+        {
+          "state": "DETECTED",
+          "at": "2026-09-21T18:42:23.382Z",
+          "actor": "reddit-scanner",
+          "reason": "Canonical Reddit RSS entry accepted at the ingestion boundary"
+        },
+        {
+          "state": "QUARANTINED",
+          "at": "2026-09-21T18:42:23.382Z",
+          "actor": "reddit-scanner",
+          "reason": "Scanner result is unverified and cannot enter the curated ledger"
+        }
+      ],
+      "source": {
+        "platform": "reddit",
+        "subreddit": "vitahacks",
+        "canonical_url": "https://www.reddit.com/r/vitahacks/comments/1wkf9m5/supertuxkart_wip_port_for_playstation_vita_with/",
+        "author": "nyabsi",
+        "title": "SuperTuxKart W.I.P port for PlayStation Vita with Vulkan",
+        "body": "Here is something special I have been working on for quite a while. What you are seeing is the first Vulkan game running on the PlayStation Vita through an actual Vulkan 1.1 driver, rather than a translation layer. The port and the driver are not ready for release yet, as there is still quite a bit of work to do on the performance side. At the moment, I am getting around 60 FPS on roughly half of the maps, while the rest fluctuate between 20 and 60 FPS. The driver has now reached a point where it can run actual modern games with their Vulkan renderers directly. This is a recent version of Supe",
+        "published_at": "2026-09-19T07:09:39.000Z"
+      },
+      "classification": {
+        "confidence": "high",
+        "reason": "3 dev signals: \\bw\\.?i\\.?p\\.?\\b, \\brelease\\b, \\bfps\\b",
+        "candidate_type": "port",
+        "question": true,
+        "spam": false
+      },
+      "provenance": {
+        "repository_url": null,
+        "release_url": null,
+        "evidence_urls": [],
+        "evidence_bundle_id": null,
+        "repository_identity": null,
+        "repository_created_at": null,
+        "repository_last_activity_at": null,
+        "release_facts": [],
+        "vita_evidence": [],
+        "author_linkage": null,
+        "corroboration": [],
+        "duplicate_relation": {
+          "content_hash": "60055093b7dbcd96434e1001480f67e4bf9f3bacdaa3fc0082973bdd7b368417",
+          "related_candidate_ids": []
+        }
+      },
+      "campaign": {
+        "cluster_id": null,
+        "linkage_confidence": "none",
+        "signals": [],
+        "related_candidate_ids": [],
+        "text_fingerprint": "0a2b2a1f",
+        "media_fingerprints": [
+          "external-preview.redd.it/bjkxmg0xzwlmznfomqades0epnadyjby_ooadknbp7qiqcrklpc2irh2cjut.png"
+        ],
+        "outbound_fingerprints": [
+          "www.reddit.com/r/vitahacks/comments/1wkf9m5/supertuxkart_wip_port_for_playstation_vita_with",
+          "external-preview.redd.it/bjkxmg0xzwlmznfomqades0epnadyjby_ooadknbp7qiqcrklpc2irh2cjut.png",
+          "www.reddit.com/user/nyabsi",
+          "v.redd.it/y7odet9iffqh1"
+        ],
+        "direct_intent": false,
+        "explicit_campaign_reference": false,
+        "incident_id": null
+      },
+      "risk_signals": [
+        "question_or_request"
+      ],
+      "evidence_gaps": [
+        "exact project repository",
+        "repository identity and activity facts",
+        "Vita-specific hardware evidence",
+        "author/developer linkage and independent corroboration"
+      ],
+      "content_hash": "60055093b7dbcd96434e1001480f67e4bf9f3bacdaa3fc0082973bdd7b368417",
+      "review": null,
+      "incident": null
+    },
+    {
+      "schema_version": 2,
+      "id": "reddit-1wjzosl",
+      "external_id": "1wjzosl",
+      "state": "QUARANTINED",
+      "state_history": [
+        {
+          "state": "DETECTED",
+          "at": "2026-09-21T18:42:23.382Z",
+          "actor": "reddit-scanner",
+          "reason": "Canonical Reddit RSS entry accepted at the ingestion boundary"
+        },
+        {
+          "state": "QUARANTINED",
+          "at": "2026-09-21T18:42:23.382Z",
+          "actor": "reddit-scanner",
+          "reason": "Scanner result is unverified and cannot enter the curated ledger"
+        }
+      ],
+      "source": {
+        "platform": "reddit",
+        "subreddit": "vitahacks",
+        "canonical_url": "https://www.reddit.com/r/vitahacks/comments/1wjzosl/diddy_kong_racing_golden_balloon_update/",
+        "author": "zm2283145",
+        "title": "Diddy Kong Racing (Golden Balloon) Update",
+        "body": "I've made various improvements to Golden Balloon it's pretty optimized it should be able to run 60FPS. I've managed to fix the remastered settings crash there is a lot of features it does that is turned off since the vita GPU just doesn't support it at all. I wanted to let everyone know the current build on my GitHub has: 60 FPS Mod pack support (using the DKR-R pack) this is very heavy and experimental use with caution Trophy Support I would also like to present the next feature in working on: Multiplayer it will support Ad-Hoc, Lan, Online play via relay server to handle the",
+        "published_at": "2026-09-18T19:21:11.000Z"
+      },
+      "classification": {
+        "confidence": "high",
+        "reason": "3 dev signals: \\bfps\\b, \\bupdate\\b, \\bbuild\\b",
+        "candidate_type": "port",
+        "question": false,
+        "spam": false
+      },
+      "provenance": {
+        "repository_url": null,
+        "release_url": null,
+        "evidence_urls": [],
+        "evidence_bundle_id": null,
+        "repository_identity": null,
+        "repository_created_at": null,
+        "repository_last_activity_at": null,
+        "release_facts": [],
+        "vita_evidence": [],
+        "author_linkage": null,
+        "corroboration": [],
+        "duplicate_relation": {
+          "content_hash": "a1204fd8a31fc8692bd18bd0b0829d530768999e8a3e943c1a0e75c175cb6587",
+          "related_candidate_ids": []
+        }
+      },
+      "campaign": {
+        "cluster_id": "campaign-fefd46f9",
+        "linkage_confidence": "medium",
+        "signals": [
+          "same_author_burst",
+          "shared_outbound_fingerprint"
+        ],
+        "related_candidate_ids": [
+          "reddit-1wllsbo"
+        ],
+        "text_fingerprint": "4189032b",
+        "media_fingerprints": [
+          "external-preview.redd.it/c2jvzmtkbjv4ynfomcibs4knds6h9nrzrsh6xkj98v0arjimf_hrdmppam-r.jpeg"
+        ],
+        "outbound_fingerprints": [
+          "www.reddit.com/r/vitahacks/comments/1wjzosl/diddy_kong_racing_golden_balloon_update",
+          "external-preview.redd.it/c2jvzmtkbjv4ynfomcibs4knds6h9nrzrsh6xkj98v0arjimf_hrdmppam-r.jpeg",
+          "www.reddit.com/user/zm2283145",
+          "v.redd.it/xz0zu0p5xbqh1"
         ],
         "direct_intent": false,
         "explicit_campaign_reference": false,
@@ -983,158 +1264,8 @@
         "Vita-specific hardware evidence",
         "author/developer linkage and independent corroboration"
       ],
-      "content_hash": "b5634ce080033fcbf03e7a5ff864d6cc57b544e330ad7f8971206a3a92fc79b8",
+      "content_hash": "a1204fd8a31fc8692bd18bd0b0829d530768999e8a3e943c1a0e75c175cb6587",
       "review": null,
-      "incident": null
-    },
-    {
-      "schema_version": 2,
-      "id": "reddit-1wkvzon",
-      "external_id": "1wkvzon",
-      "state": "QUARANTINED",
-      "state_history": [
-        {
-          "state": "DETECTED",
-          "at": "2026-09-20T01:07:26.274Z",
-          "actor": "reddit-scanner",
-          "reason": "Canonical Reddit RSS entry accepted at the ingestion boundary"
-        },
-        {
-          "state": "QUARANTINED",
-          "at": "2026-09-20T01:07:26.274Z",
-          "actor": "reddit-scanner",
-          "reason": "Migrated from legacy discovery queue; requires fresh source review"
-        }
-      ],
-      "source": {
-        "platform": "reddit",
-        "subreddit": "vitahacks",
-        "canonical_url": "https://www.reddit.com/r/vitahacks/comments/1wkvzon/prerelease_8bitdo_ultimate_2_controller_support/",
-        "author": "abby_6112",
-        "title": "[Pre-Release] 8BitDo Ultimate 2 controller support for PS Vita / PSTV",
-        "body": "",
-        "published_at": "2026-09-19T20:00:32.000Z"
-      },
-      "classification": {
-        "confidence": "medium",
-        "reason": "2 dev signal(s), 2 passive term(s), no question markers",
-        "candidate_type": "plugin"
-      },
-      "provenance": {
-        "repository_url": null,
-        "release_url": null,
-        "evidence_urls": [],
-        "evidence_bundle_id": null,
-        "repository_identity": null,
-        "repository_created_at": null,
-        "repository_last_activity_at": null,
-        "release_facts": [],
-        "vita_evidence": [],
-        "author_linkage": null,
-        "corroboration": [],
-        "duplicate_relation": {
-          "content_hash": "",
-          "related_candidate_ids": []
-        }
-      },
-      "risk_signals": [
-        "question_or_request"
-      ],
-      "evidence_gaps": [
-        "exact project repository",
-        "Vita-specific hardware evidence",
-        "raw post body was not stored in legacy queue",
-        "repository identity and activity facts",
-        "author/developer linkage and independent corroboration"
-      ],
-      "content_hash": "",
-      "review": null,
-      "campaign": {
-        "cluster_id": null,
-        "linkage_confidence": "none",
-        "signals": [],
-        "related_candidate_ids": [],
-        "text_fingerprint": "96695c6e",
-        "media_fingerprints": [],
-        "outbound_fingerprints": [],
-        "direct_intent": false,
-        "explicit_campaign_reference": false,
-        "incident_id": null
-      },
-      "incident": null
-    },
-    {
-      "schema_version": 2,
-      "id": "reddit-1wko6vu",
-      "external_id": "1wko6vu",
-      "state": "QUARANTINED",
-      "state_history": [
-        {
-          "state": "DETECTED",
-          "at": "2026-09-20T01:07:26.274Z",
-          "actor": "reddit-scanner",
-          "reason": "Canonical Reddit RSS entry accepted at the ingestion boundary"
-        },
-        {
-          "state": "QUARANTINED",
-          "at": "2026-09-20T01:07:26.274Z",
-          "actor": "reddit-scanner",
-          "reason": "Migrated from legacy discovery queue; requires fresh source review"
-        }
-      ],
-      "source": {
-        "platform": "reddit",
-        "subreddit": "vitahacks",
-        "canonical_url": "https://www.reddit.com/r/vitahacks/comments/1wko6vu/release_ratchet_clank_size_matters_remastered/",
-        "author": "Illustrious_Being642",
-        "title": "[Release] Ratchet & Clank: Size Matters — Remastered Controls for PS Vita / Adrenaline",
-        "body": "",
-        "published_at": "2026-09-19T14:49:20.000Z"
-      },
-      "classification": {
-        "confidence": "high",
-        "reason": "3 dev signals: \\[release\\], \\brelease\\b, \\bplugin\\b",
-        "candidate_type": "plugin"
-      },
-      "provenance": {
-        "repository_url": null,
-        "release_url": null,
-        "evidence_urls": [],
-        "evidence_bundle_id": null,
-        "repository_identity": null,
-        "repository_created_at": null,
-        "repository_last_activity_at": null,
-        "release_facts": [],
-        "vita_evidence": [],
-        "author_linkage": null,
-        "corroboration": [],
-        "duplicate_relation": {
-          "content_hash": "",
-          "related_candidate_ids": []
-        }
-      },
-      "risk_signals": [],
-      "evidence_gaps": [
-        "exact project repository",
-        "Vita-specific hardware evidence",
-        "raw post body was not stored in legacy queue",
-        "repository identity and activity facts",
-        "author/developer linkage and independent corroboration"
-      ],
-      "content_hash": "",
-      "review": null,
-      "campaign": {
-        "cluster_id": null,
-        "linkage_confidence": "none",
-        "signals": [],
-        "related_candidate_ids": [],
-        "text_fingerprint": "4f430944",
-        "media_fingerprints": [],
-        "outbound_fingerprints": [],
-        "direct_intent": false,
-        "explicit_campaign_reference": false,
-        "incident_id": null
-      },
       "incident": null
     },
     {
@@ -1145,15 +1276,15 @@
       "state_history": [
         {
           "state": "DETECTED",
-          "at": "2026-09-20T01:07:26.274Z",
+          "at": "2026-09-21T18:40:07.572Z",
           "actor": "reddit-scanner",
           "reason": "Canonical Reddit RSS entry accepted at the ingestion boundary"
         },
         {
           "state": "QUARANTINED",
-          "at": "2026-09-20T01:07:26.274Z",
+          "at": "2026-09-21T18:40:07.572Z",
           "actor": "reddit-scanner",
-          "reason": "Migrated from legacy discovery queue; requires fresh source review"
+          "reason": "Scanner result is unverified and cannot enter the curated ledger"
         }
       ],
       "source": {
@@ -1162,13 +1293,15 @@
         "canonical_url": "https://www.reddit.com/r/vitahacks/comments/1wjte26/tfouad_development_update_where_ive_been_whats/",
         "author": "noradninja",
         "title": "TFoUAD Development Update — Where I’ve Been, What’s Changed, and How We’re Pushing the Vita Further",
-        "body": "",
+        "body": "<!-- SC_OFF --><div class=\"md\"><p>I figure I owe the Vita community an update on TFoUAD, because it has been a while since the last public release and, from the outside, I realize it probably looks like development has slowed down or stopped.</p> <p>It hasn’t.</p> <p>The less interesting explanation is that my body has been trying very hard to kill my productivity.</p> <p>I’ve spent roughly the last year dealing with increasingly serious kidney problems: recurrent stones, obstruction, hydronephrosis, persistent infections, hospita",
         "published_at": "2026-09-18T15:30:31.000Z"
       },
       "classification": {
         "confidence": "medium",
         "reason": "2 dev signal(s), 2 passive term(s), no question markers",
-        "candidate_type": "port"
+        "candidate_type": "port",
+        "question": false,
+        "spam": false
       },
       "provenance": {
         "repository_url": null,
@@ -1183,113 +1316,37 @@
         "author_linkage": null,
         "corroboration": [],
         "duplicate_relation": {
-          "content_hash": "",
+          "content_hash": "56a06926e9e27f759e1b7a747ead93f3bfea0431e79c64bc4d60565fbfdfc9f2",
           "related_candidate_ids": []
         }
       },
-      "risk_signals": [
-        "question_or_request",
-        "no_project_evidence_in_post"
-      ],
-      "evidence_gaps": [
-        "exact project repository",
-        "release or build evidence",
-        "Vita-specific hardware evidence",
-        "raw post body was not stored in legacy queue",
-        "repository identity and activity facts",
-        "author/developer linkage and independent corroboration"
-      ],
-      "content_hash": "",
-      "review": null,
       "campaign": {
         "cluster_id": null,
         "linkage_confidence": "none",
         "signals": [],
         "related_candidate_ids": [],
-        "text_fingerprint": "116b6e3b",
+        "text_fingerprint": "061bf95b",
         "media_fingerprints": [],
-        "outbound_fingerprints": [],
+        "outbound_fingerprints": [
+          "www.reddit.com/user/noradninja",
+          "www.reddit.com/user/noradninja&quot;&gt",
+          "www.reddit.com/r/vitahacks/comments/1wjte26/tfouad_development_update_where_ive_been_whats/&quot;&gt;[link]&lt;/a&gt;&lt;/span&gt",
+          "www.reddit.com/r/vitahacks/comments/1wjte26/tfouad_development_update_where_ive_been_whats/&quot;&gt;[comments]&lt;/a&gt;&lt;/span&gt",
+          "www.reddit.com/r/vitahacks/comments/1wjte26/tfouad_development_update_where_ive_been_whats"
+        ],
         "direct_intent": false,
         "explicit_campaign_reference": false,
         "incident_id": null
       },
-      "incident": null
-    },
-    {
-      "schema_version": 2,
-      "id": "reddit-1wi5b10",
-      "external_id": "1wi5b10",
-      "state": "QUARANTINED",
-      "state_history": [
-        {
-          "state": "DETECTED",
-          "at": "2026-09-17T15:34:20.988Z",
-          "actor": "reddit-scanner",
-          "reason": "Canonical Reddit RSS entry accepted at the ingestion boundary"
-        },
-        {
-          "state": "QUARANTINED",
-          "at": "2026-09-17T15:34:20.988Z",
-          "actor": "reddit-scanner",
-          "reason": "Migrated from legacy discovery queue; requires fresh source review"
-        }
-      ],
-      "source": {
-        "platform": "reddit",
-        "subreddit": "vitahacks",
-        "canonical_url": "https://www.reddit.com/r/vitahacks/comments/1wi5b10/building_an_app_for_all_things_vita/",
-        "author": "Racksonrackssipping",
-        "title": "Building an app for all things vita",
-        "body": "",
-        "published_at": "2026-09-16T18:21:41.000Z"
-      },
-      "classification": {
-        "confidence": "low",
-        "reason": "Migrated from legacy discovery queue",
-        "candidate_type": "tool"
-      },
-      "provenance": {
-        "repository_url": null,
-        "release_url": null,
-        "evidence_urls": [],
-        "evidence_bundle_id": null,
-        "repository_identity": null,
-        "repository_created_at": null,
-        "repository_last_activity_at": null,
-        "release_facts": [],
-        "vita_evidence": [],
-        "author_linkage": null,
-        "corroboration": [],
-        "duplicate_relation": {
-          "content_hash": "",
-          "related_candidate_ids": []
-        }
-      },
-      "risk_signals": [
-        "no_project_evidence_in_post"
-      ],
+      "risk_signals": [],
       "evidence_gaps": [
         "exact project repository",
-        "release or build evidence",
-        "Vita-specific hardware evidence",
-        "raw post body was not stored in legacy queue",
         "repository identity and activity facts",
+        "Vita-specific hardware evidence",
         "author/developer linkage and independent corroboration"
       ],
-      "content_hash": "",
+      "content_hash": "56a06926e9e27f759e1b7a747ead93f3bfea0431e79c64bc4d60565fbfdfc9f2",
       "review": null,
-      "campaign": {
-        "cluster_id": null,
-        "linkage_confidence": "none",
-        "signals": [],
-        "related_candidate_ids": [],
-        "text_fingerprint": "717a6744",
-        "media_fingerprints": [],
-        "outbound_fingerprints": [],
-        "direct_intent": false,
-        "explicit_campaign_reference": false,
-        "incident_id": null
-      },
       "incident": null
     },
     {
@@ -1323,7 +1380,9 @@
       "classification": {
         "confidence": "low",
         "reason": "Migrated from legacy discovery queue",
-        "candidate_type": "port"
+        "candidate_type": "port",
+        "question": false,
+        "spam": false
       },
       "provenance": {
         "repository_url": null,
@@ -1366,6 +1425,122 @@
         "direct_intent": false,
         "explicit_campaign_reference": false,
         "incident_id": null
+      },
+      "incident": null
+    },
+    {
+      "schema_version": 2,
+      "id": "reddit-1wadsa7",
+      "external_id": "1wadsa7",
+      "state": "VERIFIED_FOR_REVIEW",
+      "state_history": [
+        {
+          "state": "DETECTED",
+          "at": "2026-09-21T19:01:02.092Z",
+          "actor": "codex",
+          "reason": "Observed in the authenticated manual Reddit scan"
+        },
+        {
+          "state": "QUARANTINED",
+          "at": "2026-09-21T19:01:02.092Z",
+          "actor": "codex",
+          "reason": "Manual browser observation passed the provenance ingestion boundary"
+        },
+        {
+          "state": "VERIFIED_FOR_REVIEW",
+          "at": "2026-09-21T19:03:23.766Z",
+          "actor": "codex",
+          "reason": "Verified genuine Halo CE Vita development; no public repo or release verified"
+        }
+      ],
+      "source": {
+        "platform": "reddit",
+        "subreddit": "VitaPiracy",
+        "canonical_url": "https://www.reddit.com/r/VitaPiracy/comments/1wadsa7/halo_ce_recompiled_for_the_ps_vita/",
+        "author": null,
+        "title": "Halo CE Recompiled for the PS Vita",
+        "body": "Early Vita build: rendering works, campaign mode works, and the author reports 8 - 14 fps on hardware.",
+        "published_at": null
+      },
+      "classification": {
+        "confidence": "high",
+        "reason": "4 dev signals: \\brecompil(?:e|ed|er|ation)\\b, \\brender(?:s|ed|ing)?\\b, \\bfps\\b",
+        "candidate_type": "port",
+        "question": false,
+        "spam": false
+      },
+      "provenance": {
+        "repository_url": null,
+        "release_url": null,
+        "evidence_urls": [],
+        "evidence_bundle_id": null,
+        "repository_identity": null,
+        "repository_created_at": null,
+        "repository_last_activity_at": null,
+        "release_facts": [],
+        "vita_evidence": [],
+        "author_linkage": null,
+        "corroboration": [],
+        "duplicate_relation": {
+          "content_hash": "604e1e27cada7519b68b52703ffd8c3f7d531a048296710810f6a0c1986c88a5",
+          "related_candidate_ids": []
+        }
+      },
+      "campaign": {
+        "cluster_id": null,
+        "linkage_confidence": "none",
+        "signals": [],
+        "related_candidate_ids": [],
+        "text_fingerprint": "3344ce16",
+        "media_fingerprints": [],
+        "outbound_fingerprints": [],
+        "direct_intent": false,
+        "explicit_campaign_reference": false,
+        "incident_id": null
+      },
+      "risk_signals": [],
+      "evidence_gaps": [
+        "exact project repository",
+        "repository identity and activity facts",
+        "Vita-specific hardware evidence",
+        "author/developer linkage and independent corroboration"
+      ],
+      "content_hash": "604e1e27cada7519b68b52703ffd8c3f7d531a048296710810f6a0c1986c88a5",
+      "review": {
+        "reviewer": "codex",
+        "reviewed_at": "2026-09-21T19:03:23.766Z",
+        "reason": "Verified genuine Halo CE Vita development; no public repo or release verified",
+        "evidence_bundle": {
+          "file": "data/references/halo-ce-xita-2026-09-21.json",
+          "sha256": "d781f4644889faa18779d655d30884bb93de7336f1ac5d8e60b5e609b61f3dd8",
+          "schema_version": 1,
+          "reviewer": "codex",
+          "reviewed_at": "2026-09-21T19:03:00.000Z",
+          "sources": [
+            {
+              "type": "reddit",
+              "url": "https://www.reddit.com/r/VitaPiracy/comments/1wadsa7/halo_ce_recompiled_for_the_ps_vita/",
+              "observed_at": "2026-09-21T19:03:00.000Z",
+              "note": "Early Vita build with rendering progress, hardware testing, 8-14 fps on Blood Gulch, and working but unoptimized campaign mode."
+            }
+          ],
+          "findings": "Active Halo CE/Xita Vita development is confirmed; no verified public repository or public release artifact was established.",
+          "repository_url": null,
+          "repository_identity": "",
+          "repository_created_at": null,
+          "repository_last_activity_at": null,
+          "release_facts": [],
+          "release_url": null,
+          "vita_hardware_result": "",
+          "vita_evidence": [],
+          "author_linkage": "",
+          "corroboration": [],
+          "duplicate_relation": {
+            "related_candidate_ids": []
+          },
+          "content_hash": "604e1e27cada7519b68b52703ffd8c3f7d531a048296710810f6a0c1986c88a5",
+          "risk_disposition": ""
+        }
       },
       "incident": null
     }

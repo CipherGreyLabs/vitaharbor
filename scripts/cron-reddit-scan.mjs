@@ -9,13 +9,15 @@ import fs from "node:fs";
 import path from "node:path";
 import { createHash } from "node:crypto";
 import { REDDIT_SOURCE_LABEL, REDDIT_SUBREDDITS, redditRssUrl } from "./reddit-sources.mjs";
-import { classify, classifyCandidateType, keyOf, parseEntries } from "./reddit-classifier.mjs";
+import { classify, classifyCandidateType, isTrackableCandidateType, keyOf, parseEntries } from "./reddit-classifier.mjs";
 import {
   assessCandidate,
   correlateCampaigns,
+  markCrosspostDuplicates,
   migrateLegacyCandidate,
   publicDocument,
   PROVENANCE_SCHEMA_VERSION,
+  TERMINAL_STATES,
   upgradeProvenanceRecord
 } from "./reddit-provenance.mjs";
 const USER_AGENT = "web:vitaharbor.app:v1.0.0 (by /u/VitaHarborLedger)";
@@ -81,11 +83,20 @@ async function fetchFeed(subreddit) {
 const known = knownLeadUrls();
 const previousItems = previous();
 // A candidate can become curated between scans. Remove those stale entries from
-// the persisted review queue instead of carrying them forward forever.
+// the persisted review queue instead of carrying them forward forever. Terminal
+// decisions remain internal provenance even after their source becomes curated.
 const seen = new Map(
   previousItems
     .map((item) => [keyOf(item.source?.canonical_url || item.url), item])
-    .filter(([key]) => key && !known.has(key))
+    .filter(([key, item]) => {
+      if (!key) return false;
+      if (TERMINAL_STATES.includes(item.state)) return true;
+      if (known.has(key)) return false;
+      if (item.state !== "QUARANTINED") return true;
+      const classification = classify(item.source || {});
+      const candidateType = classifyCandidateType(item.source || {});
+      return classification.accept && isTrackableCandidateType(candidateType);
+    })
 );
 const detectedAt = new Date().toISOString();
 
@@ -97,11 +108,16 @@ for (const subreddit of REDDIT_SUBREDDITS) {
 
   for (const entry of entries) {
     const cls = classify(entry);
+    const candidateType = classifyCandidateType(entry);
+    if (!isTrackableCandidateType(candidateType)) {
+      console.log("  skip [out-of-scope " + candidateType + "] " + entry.title);
+      continue;
+    }
     const assessment = assessCandidate(entry, {
       subreddit,
       detectedAt,
       classification: cls,
-      candidateType: classifyCandidateType(entry),
+      candidateType,
       contentHash: hashEntry(entry)
     });
     const key = keyOf(assessment.record?.source?.canonical_url || entry.url);
@@ -119,9 +135,12 @@ for (const subreddit of REDDIT_SUBREDDITS) {
 }
 
 const correlated = correlateCampaigns([...seen.values()]);
-const items = correlated
-  .sort((a, b) => new Date(b.source?.published_at || b.state_history?.[0]?.at) - new Date(a.source?.published_at || a.state_history?.[0]?.at))
-  .slice(0, MAX_ITEMS);
+const ordered = markCrosspostDuplicates(correlated)
+  .sort((a, b) => new Date(b.source?.published_at || b.state_history?.[0]?.at) - new Date(a.source?.published_at || a.state_history?.[0]?.at));
+const activeItems = ordered.filter((item) => !TERMINAL_STATES.includes(item.state)).slice(0, MAX_ITEMS);
+const terminalItems = ordered.filter((item) => TERMINAL_STATES.includes(item.state));
+const items = [...activeItems, ...terminalItems]
+  .sort((a, b) => new Date(b.source?.published_at || b.state_history?.[0]?.at) - new Date(a.source?.published_at || a.state_history?.[0]?.at));
 
 fs.mkdirSync(path.dirname(INTERNAL_OUT), { recursive: true });
 fs.mkdirSync(path.dirname(PUBLIC_OUT), { recursive: true });
@@ -148,5 +167,6 @@ fs.writeFileSync(
 
 console.log(
   "wrote " + path.relative(process.cwd(), INTERNAL_OUT) + " and sanitized " + path.relative(process.cwd(), PUBLIC_OUT) +
-  " with " + items.length + " quarantined candidates (" + fetched + " entries scanned)"
+  " with " + items.length + " provenance records (" + activeItems.length + " active review candidates, " + terminalItems.length +
+  " terminal decisions; " + fetched + " entries scanned)"
 );

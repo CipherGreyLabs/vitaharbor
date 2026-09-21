@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "reviewer": "codex",
+  "reviewed_at": "2026-09-21T19:03:00Z",
+  "sources": [
+    {
+      "type": "reddit",
+      "url": "https://www.reddit.com/r/VitaPiracy/comments/1wadsa7/halo_ce_recompiled_for_the_ps_vita/",
+      "observed_at": "2026-09-21T19:03:00Z",
+      "note": "Early Vita build with rendering progress, hardware testing, 8-14 fps on Blood Gulch, and working but unoptimized campaign mode."
+    }
+  ],
+  "findings": "Active Halo CE/Xita Vita development is confirmed; no verified public repository or public release artifact was established.",
+  "content_hash": "604e1e27cada7519b68b52703ffd8c3f7d531a048296710810f6a0c1986c88a5"
+}

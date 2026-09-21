@@ -13,3 +13,14 @@ export const REDDIT_SOURCE_LABEL = REDDIT_SOURCES.map(({ displayName }) => displ
 export function redditRssUrl(subreddit) {
   return "https://www.reddit.com/r/" + subreddit + "/new.rss";
 }
+
+export function redditSearchRssUrl(subreddit, query, timeRange = "month") {
+  const params = new URLSearchParams({
+    q: query,
+    restrict_sr: "on",
+    sort: "new",
+    t: timeRange,
+    limit: "100"
+  });
+  return "https://www.reddit.com/r/" + subreddit + "/search.rss?" + params.toString();
+}

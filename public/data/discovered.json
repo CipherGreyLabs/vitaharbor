@@ -1,20 +1,9 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-09-21T18:32:56.666Z",
+  "generated_at": "2026-09-21T19:03:23.766Z",
   "source": "r/vitahacks + r/VitaPiracy + r/PSVitaHomebrew RSS",
   "note": "Detected sources are quarantined and are not part of the curated ledger. No public item is a promotion or endorsement.",
   "items": [
-    {
-      "id": "reddit-1wmbh4v",
-      "state": "QUARANTINED",
-      "title": "Demande de patch FR",
-      "url": "https://www.reddit.com/r/PSVitaHomebrew/comments/1wmbh4v/demande_de_patch_fr/",
-      "subreddit": "PSVitaHomebrew",
-      "published_at": "2026-09-21T12:32:21.000Z",
-      "detected_at": "2026-09-21T18:32:56.666Z",
-      "candidate_type": "port",
-      "public_visibility": "review_queue"
-    },
     {
       "id": "reddit-1wmax82",
       "state": "VERIFIED_FOR_REVIEW",
@@ -38,17 +27,6 @@
       "public_visibility": "review_queue"
     },
     {
-      "id": "reddit-1wltjdq",
-      "state": "QUARANTINED",
-      "title": "TheForceEngine-VITA - Successfully booting into the menu",
-      "url": "https://www.reddit.com/r/PSVitaHomebrew/comments/1wltjdq/theforceenginevita_successfully_booting_into_the/",
-      "subreddit": "PSVitaHomebrew",
-      "published_at": "2026-09-20T21:29:57.000Z",
-      "detected_at": "2026-09-21T18:32:56.666Z",
-      "candidate_type": "port",
-      "public_visibility": "review_queue"
-    },
-    {
       "id": "reddit-1wlrv6x",
       "state": "VERIFIED_FOR_REVIEW",
       "title": "TheForceEngine-VITA - Successfully booting into the menu",
@@ -66,41 +44,41 @@
       "url": "https://www.reddit.com/r/vitahacks/comments/1wllsbo/super_smash_bros_melee_update/",
       "subreddit": "vitahacks",
       "published_at": "2026-09-20T16:36:10.000Z",
-      "detected_at": "2026-09-20T16:41:37.670Z",
+      "detected_at": "2026-09-21T18:40:07.572Z",
       "candidate_type": "port",
       "public_visibility": "review_queue"
     },
     {
-      "id": "reddit-1wl0ae9",
+      "id": "reddit-1wkrhnp",
       "state": "QUARANTINED",
-      "title": "[Release] Ratchet & Clank: Size Matters — Remastered Controls for PS Vita / Adrenaline",
-      "url": "https://www.reddit.com/r/PSVitaHomebrew/comments/1wl0ae9/release_ratchet_clank_size_matters_remastered/",
-      "subreddit": "PSVitaHomebrew",
-      "published_at": "2026-09-19T23:00:00.000Z",
-      "detected_at": "2026-09-21T18:32:56.666Z",
-      "candidate_type": "plugin",
+      "title": "Gameplay: World at War Zombies ported to the PS Vita",
+      "url": "https://www.reddit.com/r/vitahacks/comments/1wkrhnp/gameplay_world_at_war_zombies_ported_to_the_ps/",
+      "subreddit": "vitahacks",
+      "published_at": "2026-09-19T17:02:55.000Z",
+      "detected_at": "2026-09-21T18:42:23.382Z",
+      "candidate_type": "port",
       "public_visibility": "review_queue"
     },
     {
-      "id": "reddit-1wkvzon",
+      "id": "reddit-1wkf9m5",
       "state": "QUARANTINED",
-      "title": "[Pre-Release] 8BitDo Ultimate 2 controller support for PS Vita / PSTV",
-      "url": "https://www.reddit.com/r/vitahacks/comments/1wkvzon/prerelease_8bitdo_ultimate_2_controller_support/",
+      "title": "SuperTuxKart W.I.P port for PlayStation Vita with Vulkan",
+      "url": "https://www.reddit.com/r/vitahacks/comments/1wkf9m5/supertuxkart_wip_port_for_playstation_vita_with/",
       "subreddit": "vitahacks",
-      "published_at": "2026-09-19T20:00:32.000Z",
-      "detected_at": "2026-09-20T01:07:26.274Z",
-      "candidate_type": "plugin",
+      "published_at": "2026-09-19T07:09:39.000Z",
+      "detected_at": "2026-09-21T18:42:23.382Z",
+      "candidate_type": "port",
       "public_visibility": "review_queue"
     },
     {
-      "id": "reddit-1wko6vu",
+      "id": "reddit-1wjzosl",
       "state": "QUARANTINED",
-      "title": "[Release] Ratchet & Clank: Size Matters — Remastered Controls for PS Vita / Adrenaline",
-      "url": "https://www.reddit.com/r/vitahacks/comments/1wko6vu/release_ratchet_clank_size_matters_remastered/",
+      "title": "Diddy Kong Racing (Golden Balloon) Update",
+      "url": "https://www.reddit.com/r/vitahacks/comments/1wjzosl/diddy_kong_racing_golden_balloon_update/",
       "subreddit": "vitahacks",
-      "published_at": "2026-09-19T14:49:20.000Z",
-      "detected_at": "2026-09-20T01:07:26.274Z",
-      "candidate_type": "plugin",
+      "published_at": "2026-09-18T19:21:11.000Z",
+      "detected_at": "2026-09-21T18:42:23.382Z",
+      "candidate_type": "port",
       "public_visibility": "review_queue"
     },
     {
@@ -110,19 +88,8 @@
       "url": "https://www.reddit.com/r/vitahacks/comments/1wjte26/tfouad_development_update_where_ive_been_whats/",
       "subreddit": "vitahacks",
       "published_at": "2026-09-18T15:30:31.000Z",
-      "detected_at": "2026-09-20T01:07:26.274Z",
+      "detected_at": "2026-09-21T18:40:07.572Z",
       "candidate_type": "port",
-      "public_visibility": "review_queue"
-    },
-    {
-      "id": "reddit-1wi5b10",
-      "state": "QUARANTINED",
-      "title": "Building an app for all things vita",
-      "url": "https://www.reddit.com/r/vitahacks/comments/1wi5b10/building_an_app_for_all_things_vita/",
-      "subreddit": "vitahacks",
-      "published_at": "2026-09-16T18:21:41.000Z",
-      "detected_at": "2026-09-17T15:34:20.988Z",
-      "candidate_type": "tool",
       "public_visibility": "review_queue"
     },
     {
@@ -133,6 +100,17 @@
       "subreddit": "vitahacks",
       "published_at": "2026-09-15T13:34:13.000Z",
       "detected_at": "2026-09-17T15:34:20.988Z",
+      "candidate_type": "port",
+      "public_visibility": "review_queue"
+    },
+    {
+      "id": "reddit-1wadsa7",
+      "state": "VERIFIED_FOR_REVIEW",
+      "title": "Halo CE Recompiled for the PS Vita",
+      "url": "https://www.reddit.com/r/VitaPiracy/comments/1wadsa7/halo_ce_recompiled_for_the_ps_vita/",
+      "subreddit": "VitaPiracy",
+      "published_at": null,
+      "detected_at": "2026-09-21T19:01:02.092Z",
       "candidate_type": "port",
       "public_visibility": "review_queue"
     }

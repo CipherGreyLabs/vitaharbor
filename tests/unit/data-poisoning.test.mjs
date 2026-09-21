@@ -10,10 +10,12 @@ import {
   campaignSignalsBetween,
   containIncidentRecords,
   correlateCampaigns,
+  markCrosspostDuplicates,
   migrateLegacyCandidate,
   publicCandidate,
   publicDocument,
-  transitionState
+  transitionState,
+  upgradeProvenanceRecord
 } from "../../scripts/reddit-provenance.mjs";
 
 const base = {
@@ -44,6 +46,24 @@ function assessManual(entry, subreddit, contentHash) {
     contentHash
   });
 }
+
+it("does not create a question risk from the phrase 'no question markers'", () => {
+  const result = assess({
+    ...base,
+    title: "TheForceEngine-VITA - Successfully booting into the menu",
+    body: "Port progress update: main menu is working on Vita."
+  });
+  expect(result.record.classification.question).toBe(false);
+  expect(result.record.risk_signals).not.toContain("question_or_request");
+
+  const upgraded = upgradeProvenanceRecord({
+    ...result.record,
+    classification: { ...result.record.classification, question: undefined, reason: "1 dev signal(s), 1 passive term(s), no question markers" },
+    risk_signals: [...result.record.risk_signals, "question_or_request"]
+  });
+  expect(upgraded.classification.question).toBe(false);
+  expect(upgraded.risk_signals).not.toContain("question_or_request");
+});
 
 describe("provenance boundary", () => {
   it("accepts a legitimate-looking source only into QUARANTINED", () => {
@@ -199,6 +219,38 @@ describe("provenance boundary", () => {
     const records = correlateCampaigns([first.record, legitimate.record]);
     expect(records[1].campaign.cluster_id).toBeNull();
     expect(records[1].state).toBe("QUARANTINED");
+  });
+
+  it("keeps exact cross-post provenance internally but suppresses the lower-trust duplicate publicly", () => {
+    const first = assessManual({
+      ...base,
+      author: "same-developer",
+      title: "TheForceEngine-VITA - Successfully booting into the menu",
+      body: "Main menu is working on Vita.",
+      url: "https://www.reddit.com/r/vitahacks/comments/cross01/theforceengine_vita/",
+      published: "2026-09-20T20:24:59.000Z"
+    }, "vitahacks", "cross-one");
+    const verified = transitionState(first.record, "VERIFIED_FOR_REVIEW", {
+      actor: "reviewer",
+      at: "2026-09-20T21:00:00.000Z",
+      reason: "Verified source for crosspost fixture"
+    });
+    const second = assessManual({
+      ...base,
+      author: "same-developer",
+      title: "TheForceEngine-VITA - Successfully booting into the menu",
+      body: "Still much work to do but the main menu works.",
+      url: "https://www.reddit.com/r/PSVitaHomebrew/comments/cross02/theforceengine_vita/",
+      published: "2026-09-20T21:29:57.000Z"
+    }, "PSVitaHomebrew", "cross-two");
+
+    const records = markCrosspostDuplicates([second.record, verified]);
+    const duplicate = records.find((record) => record.id === second.record.id);
+    const primary = records.find((record) => record.id === verified.id);
+    expect(duplicate.risk_signals).toContain("crosspost_duplicate");
+    expect(duplicate.provenance.duplicate_relation.related_candidate_ids).toContain(primary.id);
+    expect(publicCandidate(duplicate)).toBeNull();
+    expect(publicCandidate(primary)).not.toBeNull();
   });
 
   it("removes only incident-linked records from public projections", () => {

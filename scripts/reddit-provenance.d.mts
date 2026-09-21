@@ -31,6 +31,7 @@ export function normalizeCampaignText(value: unknown): string;
 export function fingerprintText(value: unknown): string;
 export function campaignSignalsBetween(left: ProvenanceRecord, right: ProvenanceRecord, options?: Record<string, unknown>): Record<string, unknown>;
 export function correlateCampaigns(records: ProvenanceRecord[], options?: Record<string, unknown>): ProvenanceRecord[];
+export function markCrosspostDuplicates(records: ProvenanceRecord[]): ProvenanceRecord[];
 export function containIncidentRecords(records: ProvenanceRecord[], options?: Record<string, unknown>): ProvenanceRecord[];
 export function publicCandidate(record: ProvenanceRecord): Record<string, unknown> | null;
 export function publicDocument(records: ProvenanceRecord[], generatedAt: string, sourceLabel: string): Record<string, unknown>;

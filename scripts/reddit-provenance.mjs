@@ -389,7 +389,7 @@ function riskSignals(entry, classification, urlInfo) {
   const text = title + " " + body;
   const risks = [];
   if (isExplicitPoisonAttempt(entry)) risks.push("explicit_fake_or_troll");
-  if (classification?.reason?.includes("question")) risks.push("question_or_request");
+  if (classification?.question === true) risks.push("question_or_request");
   if (!urlInfo) risks.push("invalid_or_redirected_source_url");
   if (!EVIDENCE_TERMS.some((signal) => signal.test(text))) risks.push("no_project_evidence_in_post");
   if (/screenshot|image|photo/i.test(text) && !/github\.com|gitlab\.com|codeberg\.org/i.test(text)) {
@@ -481,7 +481,9 @@ export function assessCandidate(entry, options = {}) {
     classification: {
       confidence: String(classification.confidence || "low"),
       reason: cleanText(classification.reason || ""),
-      candidate_type: String(options.candidateType || "port")
+      candidate_type: String(options.candidateType || "port"),
+      question: classification.question === true,
+      spam: classification.spam === true
     },
     provenance: {
       repository_url: null,
@@ -552,8 +554,21 @@ export function migrateLegacyCandidate(item, options = {}) {
 export function upgradeProvenanceRecord(record) {
   const provenance = record?.provenance || {};
   const duplicate = provenance.duplicate_relation || {};
+  const classificationReason = String(record?.classification?.reason || "");
+  const question = record?.classification?.question === true ||
+    /question title|qHits=[1-9]/i.test(classificationReason);
+  const riskSignals = uniqueStrings([
+    ...(Array.isArray(record?.risk_signals) ? record.risk_signals.filter((signal) => signal !== "question_or_request") : []),
+    ...(question ? ["question_or_request"] : [])
+  ]);
   return {
     ...record,
+    classification: {
+      ...(record?.classification || {}),
+      question,
+      spam: record?.classification?.spam === true
+    },
+    risk_signals: riskSignals,
     provenance: {
       repository_url: provenance.repository_url || null,
       release_url: provenance.release_url || null,
@@ -633,6 +648,7 @@ export function publicCandidate(record) {
   const state = String(record?.state || "");
   if (!["QUARANTINED", "VERIFIED_FOR_REVIEW"].includes(state)) return null;
   if (record?.incident?.public_containment === "removed") return null;
+  if (Array.isArray(record?.risk_signals) && record.risk_signals.includes("crosspost_duplicate")) return null;
   const withheld = Array.isArray(record.risk_signals) && record.risk_signals.includes("explicit_fake_or_troll");
   return {
     id: record.id,
@@ -645,6 +661,70 @@ export function publicCandidate(record) {
     candidate_type: withheld ? "unclassified" : record.classification?.candidate_type || "port",
     public_visibility: withheld ? "withheld" : "review_queue"
   };
+}
+
+function normalizedCrosspostTitle(record) {
+  return cleanText(record?.source?.title || "")
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, " ")
+    .trim();
+}
+
+function crosspostPriority(record) {
+  const state = String(record?.state || "");
+  if (state === "PROMOTED") return 4;
+  if (state === "VERIFIED_FOR_REVIEW") return 3;
+  if (state === "QUARANTINED") return 2;
+  return 1;
+}
+
+export function markCrosspostDuplicates(records, options = {}) {
+  const input = Array.isArray(records) ? records : [];
+  const windowMs = Number(options.windowMs || 48 * 60 * 60 * 1000);
+  const output = input.map((record) => ({
+    ...record,
+    provenance: {
+      ...(record?.provenance || {}),
+      duplicate_relation: {
+        ...(record?.provenance?.duplicate_relation || {}),
+        related_candidate_ids: [...(record?.provenance?.duplicate_relation?.related_candidate_ids || [])]
+      }
+    },
+    risk_signals: [...(Array.isArray(record?.risk_signals) ? record.risk_signals : [])]
+  }));
+
+  const groups = new Map();
+  output.forEach((record, index) => {
+    const title = normalizedCrosspostTitle(record);
+    const author = cleanText(record?.source?.author || "").toLowerCase();
+    if (!title || !author) return;
+    const key = author + "|" + title;
+    if (!groups.has(key)) groups.set(key, []);
+    groups.get(key).push(index);
+  });
+
+  for (const indexes of groups.values()) {
+    if (indexes.length < 2) continue;
+    indexes.sort((left, right) => {
+      const priority = crosspostPriority(output[right]) - crosspostPriority(output[left]);
+      if (priority !== 0) return priority;
+      return new Date(output[left].source?.published_at || 0) - new Date(output[right].source?.published_at || 0);
+    });
+    const primary = output[indexes[0]];
+    const primaryTime = new Date(primary.source?.published_at || 0).getTime();
+    for (const index of indexes.slice(1)) {
+      const candidate = output[index];
+      if (["PROMOTED", "REJECTED", "BLOCKED_UNVERIFIED"].includes(candidate.state)) continue;
+      const candidateTime = new Date(candidate.source?.published_at || 0).getTime();
+      if (!Number.isFinite(primaryTime) || !Number.isFinite(candidateTime) || Math.abs(candidateTime - primaryTime) > windowMs) continue;
+      candidate.provenance.duplicate_relation.related_candidate_ids = uniqueStrings([
+        ...candidate.provenance.duplicate_relation.related_candidate_ids,
+        primary.id
+      ]);
+      candidate.risk_signals = uniqueStrings([...candidate.risk_signals, "crosspost_duplicate"]);
+    }
+  }
+  return output;
 }
 
 export function publicDocument(records, generatedAt, sourceLabel) {

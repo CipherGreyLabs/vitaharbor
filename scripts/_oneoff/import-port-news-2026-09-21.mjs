@@ -21,6 +21,13 @@ if (quarantine.schema_version !== PROVENANCE_SCHEMA_VERSION || !Array.isArray(qu
 
 const observations = [
   {
+    subreddit: "VitaPiracy",
+    title: "Halo CE Recompiled for the PS Vita",
+    body: "Early Vita build: rendering works, campaign mode works, and the author reports 8 - 14 fps on hardware.",
+    author: "",
+    url: "https://www.reddit.com/r/VitaPiracy/comments/1wadsa7/halo_ce_recompiled_for_the_ps_vita/"
+  },
+  {
     subreddit: "vitahacks",
     title: "Test Drive (1987) native Vita port",
     body: "Thanks to the work of kylofon who created the Test Drive recompilation for windows I present to you the Vita native version of the original Test Drive. It's the initial release, it runs OK, i have not found any bugs so far. Open source, available here: https://github.com/smart-pickle/TestDrive-Vita. It requires the original files of the game; they are not bundled with the vpk.",

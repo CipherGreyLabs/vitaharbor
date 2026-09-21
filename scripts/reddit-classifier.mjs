@@ -4,8 +4,9 @@
 
 // Strong evidence that the author is doing active port work or announcing a result.
 const DEVELOPMENT_SIGNALS = [
-  /\[wip\]/i, /\[release\]/i, /\[port\]/i, /\bwip\b/i, /\brelease\b/i,
+  /\[wip\]/i, /\[release\]/i, /\[port\]/i, /\bw\.?i\.?p\.?\b/i, /\brelease\b/i,
   /\bin.?game\b/i, /\bplayable\b/i, /\bboot(?:s|ed|ing)?\b/i, /\bcompiled\b/i,
+  /\brecompil(?:e|ed|er|ation)\b/i, /\brender(?:s|ed|ing)?\b/i,
   /\bported\b/i, /\bdecomp(ilation)?\b/i, /\barm.?wrapper\b/i, /\bvitagl\b/i,
   /\barmv7\b/i, /\bhomebrew\b/i, /\bfps\b/i, /\bframerate\b/i,
   /\bprogress\b/i, /\bupdate\b/i, /\bdemo\b/i, /\bbeta\b/i, /\bv\d+\.\d+\b/i,
@@ -28,6 +29,9 @@ const SPAM_SIGNALS = [
 // Phrases that strongly indicate the post is a question or request, not development.
 const QUESTION_SIGNALS = [
   /\?/,
+  /^\s*(?:\[?\s*request\s*\]?|request(?:ing)?|port request|patch request)\b/i,
+  /^\s*demande(?:\s+de)?\b/i,
+  /^\s*(?:solicitud|petici[oó]n|pedido)(?:\s+de)?\b/i,
   /\bany(one|body)\b.*\b(port|know|working|made|tried)\b/i,
   /\bcan (someone|anyone|we|you|i)\b/i,
   /\bwould (be|love|like)\b.*\bport\b/i,
@@ -66,29 +70,46 @@ export function classify(entry) {
   const titleIsQuestion = QUESTION_SIGNALS.some((re) => re.test(titleRaw));
 
   if (spamHits.length > 0 && devHits.length < 4) {
-    return { accept: false, confidence: "low", reason: "promotional/spam language detected (" + spamHits.length + ")" };
+    return { accept: false, confidence: "low", question: qHits.length > 0 || titleIsQuestion, spam: true, reason: "promotional/spam language detected (" + spamHits.length + ")" };
   }
   if (titleIsQuestion && devHits.length < 3) {
-    return { accept: false, confidence: "low", reason: "question title with insufficient dev signals (" + devHits.length + ")" };
+    return { accept: false, confidence: "low", question: true, spam: false, reason: "question title with insufficient dev signals (" + devHits.length + ")" };
   }
   if (devHits.length >= 3) {
     const sample = devHits.slice(0, 3).map((re) => re.source).join(", ");
-    return { accept: true, confidence: "high", reason: devHits.length + " dev signals: " + sample };
+    return { accept: true, confidence: "high", question: qHits.length > 0 || titleIsQuestion, spam: false, reason: devHits.length + " dev signals: " + sample };
   }
   if (devHits.length >= 1 && qHits.length === 0 && passiveHits.length >= 1) {
-    return { accept: true, confidence: "medium", reason: devHits.length + " dev signal(s), " + passiveHits.length + " passive term(s), no question markers" };
+    return { accept: true, confidence: "medium", question: false, spam: false, reason: devHits.length + " dev signal(s), " + passiveHits.length + " passive term(s), no question markers" };
   }
-  return { accept: false, confidence: "low", reason: "devHits=" + devHits.length + ", qHits=" + qHits.length + ", passive=" + passiveHits.length };
+  return { accept: false, confidence: "low", question: qHits.length > 0 || titleIsQuestion, spam: false, reason: "devHits=" + devHits.length + ", qHits=" + qHits.length + ", passive=" + passiveHits.length };
+}
+
+const TRACKABLE_CANDIDATE_TYPES = new Set(["port", "decompilation", "wrapper", "engine"]);
+
+export function isTrackableCandidateType(value) {
+  return TRACKABLE_CANDIDATE_TYPES.has(String(value || ""));
 }
 
 export function classifyCandidateType(entry) {
   const text = ((entry.title || "") + " " + (entry.body || "")).toLowerCase();
   if (/\b(plugin|controller|adrenaline|input support)\b/.test(text)) return "plugin";
-  if (/\b(app|application|database|tracker|tool)\b/.test(text)) return "tool";
+  if (/\b(app|application|database|tracker|tool|launcher|mod|mods|modding)\b/.test(text)) return "tool";
   if (/\b(wrapper|loader|armv7|recompiler)\b/.test(text)) return "wrapper";
   if (/\b(decompilation|decomp|source port)\b/.test(text)) return "decompilation";
   if (/\b(runtime|engine)\b/.test(text)) return "engine";
   return "port";
+}
+
+function decodeHtmlEntities(value) {
+  return String(value || "")
+    .replace(/&#x([0-9a-f]+);/gi, (_, hex) => String.fromCodePoint(Number.parseInt(hex, 16)))
+    .replace(/&#(\d+);/g, (_, decimal) => String.fromCodePoint(Number.parseInt(decimal, 10)))
+    .replace(/&quot;/gi, '"')
+    .replace(/&apos;|&#39;/gi, "'")
+    .replace(/&lt;/gi, "<")
+    .replace(/&gt;/gi, ">")
+    .replace(/&amp;/gi, "&");
 }
 
 export function parseEntries(xml) {
@@ -99,9 +120,10 @@ export function parseEntries(xml) {
     const url = pick(/<link href="([^"]+)"/);
     const author = pick(/<name>([^<]+)<\/name>/).replace("/u/", "");
     const published = pick(/<updated>([^<]+)<\/updated>/);
-    const body = pick(/<content[^>]*>([\s\S]*?)<\/content>/).replace(/<[^>]+>/g, " ").slice(0, 600);
-    const outbound_urls = [...new Set((chunk.match(/https?:\/\/[^\s<>"']+/gi) || []).map((value) => value.replace(/[),.;]+$/, "")))].slice(0, 20);
-    const media_urls = [...new Set((chunk.match(/(?:https?:\/\/[^\s<>"']+\.(?:png|jpe?g|webp|gif|mp4)(?:\?[^\s<>"']*)?)/gi) || []).map((value) => value.replace(/[),.;]+$/, "")))].slice(0, 20);
+    const content = decodeHtmlEntities(pick(/<content[^>]*>([\s\S]*?)<\/content>/));
+    const body = content.replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim().slice(0, 600);
+    const outbound_urls = [...new Set((content.match(/https?:\/\/[^\s<>"']+/gi) || []).map((value) => value.replace(/[),.;]+$/, "")))].slice(0, 20);
+    const media_urls = [...new Set((content.match(/(?:https?:\/\/[^\s<>"']+\.(?:png|jpe?g|webp|gif|mp4)(?:\?[^\s<>"']*)?)/gi) || []).map((value) => value.replace(/[),.;]+$/, "")))].slice(0, 20);
     if (title && url) entries.push({ title, url, author, published, body, outbound_urls, media_urls });
   }
   return entries;
