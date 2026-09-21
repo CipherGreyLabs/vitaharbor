@@ -5,7 +5,7 @@
 // Strong evidence that the author is doing active port work or announcing a result.
 const DEVELOPMENT_SIGNALS = [
   /\[wip\]/i, /\[release\]/i, /\[port\]/i, /\bwip\b/i, /\brelease\b/i,
-  /\bin.?game\b/i, /\bplayable\b/i, /\bboots\b/i, /\bcompiled\b/i,
+  /\bin.?game\b/i, /\bplayable\b/i, /\bboot(?:s|ed|ing)?\b/i, /\bcompiled\b/i,
   /\bported\b/i, /\bdecomp(ilation)?\b/i, /\barm.?wrapper\b/i, /\bvitagl\b/i,
   /\barmv7\b/i, /\bhomebrew\b/i, /\bfps\b/i, /\bframerate\b/i,
   /\bprogress\b/i, /\bupdate\b/i, /\bdemo\b/i, /\bbeta\b/i, /\bv\d+\.\d+\b/i,

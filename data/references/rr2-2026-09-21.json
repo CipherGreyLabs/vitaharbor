@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "reviewer": "codex",
+  "reviewed_at": "2026-09-21T15:23:12+02:00",
+  "sources": [
+    {
+      "type": "reddit",
+      "url": "https://www.reddit.com/r/PSVitaHomebrew/comments/1wmabvz/updates_on_rr2_port/",
+      "observed_at": "2026-09-21T15:23:12+02:00",
+      "note": "Authenticated thread from the author reports recent boot, 60 FPS menu, working touch navigation and playable races through touch input."
+    }
+  ],
+  "findings": "The author reports Real Racing 2 port progress and explicitly says the port is not public yet. Physical button mapping is incomplete. No exact public repository or release artifact was found, so the record remains verified for review only.",
+  "content_hash": "c1232c8bbe475a69e72b1566a42ff9a94140580f930c4ace93f530c58f61a6c7",
+  "risk_disposition": "The question/request heuristic is a false-positive caused by conversational wording in the captured body. Missing repository/build evidence remains unresolved, so no promotion."
+}

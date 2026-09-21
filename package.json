@@ -30,7 +30,7 @@
     "data:verify": "node scripts/promote-candidate.mjs --verify",
     "data:reject": "node scripts/promote-candidate.mjs --reject",
     "data:block": "node scripts/promote-candidate.mjs --block",
-    "data:promote": "node scripts/promote-candidate.mjs",
+    "data:promote": "node scripts/promote-candidate.mjs --promote",
     "data:feeds": "tsx scripts/make-feeds.ts",
     "db:migrate:local": "wrangler d1 migrations apply DB --local",
     "db:migrate:remote": "wrangler d1 migrations apply DB --remote",

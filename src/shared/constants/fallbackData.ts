@@ -29,6 +29,7 @@ export const FALLBACK_GAMES: Game[] = [
   ,{ id: 26, slug: "barony", title: "Barony", normalized_title: "barony", original_release_year: 2015, original_platform: "PC", created_at: new Date('2026-07-28T00:00:00.000Z'), updated_at: new Date('2026-09-05T00:00:00.000Z') }
   ,{ id: 27, slug: "call-of-duty-4-modern-warfare", title: "Call of Duty 4: Modern Warfare", normalized_title: "call of duty 4 modern warfare", original_release_year: 2007, original_platform: "PS3", created_at: new Date('2026-09-12T00:00:00.000Z'), updated_at: new Date('2026-09-12T00:00:00.000Z') }
   ,{ id: 28, slug: "c-dogs-sdl-vita", title: "C-Dogs SDL Vita", normalized_title: "c-dogs sdl vita", original_release_year: null, original_platform: "DOS / SDL", created_at: new Date('2026-09-19T20:01:51.653Z'), updated_at: new Date('2026-09-19T20:01:51.653Z') }
+  ,{ id: 29, slug: "test-drive-1987-vita", title: "Test Drive (1987)", normalized_title: "test drive (1987)", original_release_year: 1987, original_platform: "DOS / PC", created_at: new Date('2026-09-20T19:39:46.000Z'), updated_at: new Date('2026-09-20T19:50:09.288Z') }
 ];
 
 export const FALLBACK_PROJECTS: any[] = [
@@ -708,6 +709,30 @@ export const FALLBACK_PROJECTS: any[] = [
     technologies: ["Native Vita build", "SDL"],
     developers: []
   }
+  ,{
+    id: 29,
+    game_id: 29,
+    slug: "test-drive-1987-vita",
+    reddit_url: "https://www.reddit.com/r/vitahacks/comments/1wlqxq4/test_drive_1987_native_vita_port/",
+    repo_url: "https://github.com/smart-pickle/TestDrive-Vita",
+    display_name: "Test Drive (1987) Vita",
+    current_stage: "released",
+    lifecycle: "active",
+    summary: "Native PS Vita/PSTV port of Test Drive (1987) built from kylofon's static recompilation, with a public v0.1 release published on GitHub.",
+    playability_notes: "The developer reports the initial Vita release running on hardware.",
+    performance_notes: "The repository describes hardware-accelerated Vita rendering; no independent performance measurement is recorded.",
+    first_seen_at: new Date('2026-09-20T19:39:46.000Z'),
+    last_activity_at: new Date('2026-09-20T19:50:09.288Z'),
+    released_at: new Date('2026-09-20T19:39:46.000Z'),
+    is_featured: false,
+    is_archived: false,
+    verification: "developer_direct",
+    game_title: "Test Drive (1987)",
+    original_platform: "DOS / PC",
+    original_release_year: 1987,
+    technologies: ["Static recompilation", "VitaSDK", "SDL2", "VitaGL / GXM"],
+    developers: []
+  }
 ];
 
 export const FALLBACK_DEVELOPERS: any[] = [
@@ -999,6 +1024,23 @@ export const FALLBACK_UPDATES: any[] = [
     sources: [
       { source_item_id: "src_cdogs_vita_reddit", relationship: "primary", canonical_url: "https://www.reddit.com/r/vitahacks/comments/1wkw14c/prerelease_cdogs_sdl_port_for_ps_vita_pstv/" },
       { source_item_id: "src_cdogs_vita_github", relationship: "release", canonical_url: "https://github.com/abduct/cdogs-sdl/releases/tag/vita-preview-1" }
+    ]
+  }
+  ,{
+    id: "upd_test_drive_1987",
+    port_project_id: 29,
+    project_slug: "test-drive-1987-vita",
+    project_display_name: "Test Drive (1987) Vita",
+    developer_display_name: "gainusha",
+    developer_slug: "gainusha",
+    event_type: "release",
+    title: "Test Drive (1987) native Vita port v0.1 released",
+    summary: "The release post and linked repository document the first public Vita/PSTV release built with VitaSDK, SDL2 and VitaGL/GXM.",
+    event_at: new Date('2026-09-20T19:39:46.000Z'),
+    verification_level: "developer_direct",
+    sources: [
+      { source_item_id: "src_test_drive_reddit", relationship: "primary", canonical_url: "https://www.reddit.com/r/vitahacks/comments/1wlqxq4/test_drive_1987_native_vita_port/" },
+      { source_item_id: "src_test_drive_release", relationship: "release", canonical_url: "https://github.com/smart-pickle/TestDrive-Vita/releases/tag/v0.1" }
     ]
   }
 ];

@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-09-20T21:10:36.272Z",
+  "generated_at": "2026-09-21T13:22:50.149Z",
   "source": "r/vitahacks + r/VitaPiracy + r/PSVitaHomebrew RSS",
   "items": [
     {
@@ -765,6 +765,520 @@
         "direct_intent": false,
         "explicit_campaign_reference": false,
         "incident_id": null
+      },
+      "incident": null
+    },
+    {
+      "schema_version": 2,
+      "id": "reddit-1wlqxq4",
+      "external_id": "1wlqxq4",
+      "state": "PROMOTED",
+      "state_history": [
+        {
+          "state": "DETECTED",
+          "at": "2026-09-21T13:22:50.149Z",
+          "actor": "codex",
+          "reason": "Observed in the authenticated manual Reddit scan"
+        },
+        {
+          "state": "QUARANTINED",
+          "at": "2026-09-21T13:22:50.149Z",
+          "actor": "codex",
+          "reason": "Manual browser observation passed the provenance ingestion boundary"
+        },
+        {
+          "state": "VERIFIED_FOR_REVIEW",
+          "at": "2026-09-21T13:25:26.195Z",
+          "actor": "codex",
+          "reason": "Verified Reddit release post and repository evidence for Test Drive Vita"
+        },
+        {
+          "state": "PROMOTED",
+          "at": "2026-09-21T13:25:50.438Z",
+          "actor": "codex",
+          "reason": "Promote source-backed Test Drive native Vita v0.1 release"
+        }
+      ],
+      "source": {
+        "platform": "reddit",
+        "subreddit": "vitahacks",
+        "canonical_url": "https://www.reddit.com/r/vitahacks/comments/1wlqxq4/test_drive_1987_native_vita_port/",
+        "author": "gainusha",
+        "title": "Test Drive (1987) native Vita port",
+        "body": "Thanks to the work of kylofon who created the Test Drive recompilation for windows I present to you the Vita native version of the original Test Drive. It's the initial release, it runs OK, i have not found any bugs so far. Open source, available here: https://github.com/smart-pickle/TestDrive-Vita. It requires the original files of the game; they are not bundled with the vpk.",
+        "published_at": "2026-09-20T19:50:09.288Z"
+      },
+      "classification": {
+        "confidence": "high",
+        "reason": "3 dev signals: \\brelease\\b, github\\.com\\b, \\bnative\\b",
+        "candidate_type": "port"
+      },
+      "provenance": {
+        "repository_url": null,
+        "release_url": null,
+        "evidence_urls": [],
+        "evidence_bundle_id": null,
+        "repository_identity": null,
+        "repository_created_at": null,
+        "repository_last_activity_at": null,
+        "release_facts": [],
+        "vita_evidence": [],
+        "author_linkage": null,
+        "corroboration": [],
+        "duplicate_relation": {
+          "content_hash": "628a8f7756c4c371ffe0144b6536ffd6b1661de3b5c26f22e869ce1beb656d63",
+          "related_candidate_ids": []
+        }
+      },
+      "campaign": {
+        "cluster_id": null,
+        "linkage_confidence": "none",
+        "signals": [],
+        "related_candidate_ids": [],
+        "text_fingerprint": "ca5e3ff3",
+        "media_fingerprints": [],
+        "outbound_fingerprints": [
+          "github.com/smart-pickle/testdrive-vita.",
+          "github.com/smart-pickle/testdrive-vita"
+        ],
+        "direct_intent": false,
+        "explicit_campaign_reference": false,
+        "incident_id": null
+      },
+      "risk_signals": [],
+      "evidence_gaps": [
+        "repository identity and activity facts",
+        "Vita-specific hardware evidence",
+        "author/developer linkage and independent corroboration"
+      ],
+      "content_hash": "628a8f7756c4c371ffe0144b6536ffd6b1661de3b5c26f22e869ce1beb656d63",
+      "review": {
+        "reviewer": "codex",
+        "reviewed_at": "2026-09-21T13:25:50.438Z",
+        "reason": "Promote source-backed Test Drive native Vita v0.1 release",
+        "evidence_bundle": {
+          "file": "data/references/test-drive-2026-09-21.json",
+          "sha256": "0178cc4a5ce56bf25e19184e8562adba9d68658a032ad1f82eb6bf53eed594b1",
+          "schema_version": 1,
+          "reviewer": "codex",
+          "reviewed_at": "2026-09-21T13:23:12.000Z",
+          "sources": [
+            {
+              "type": "reddit",
+              "url": "https://www.reddit.com/r/vitahacks/comments/1wlqxq4/test_drive_1987_native_vita_port/",
+              "observed_at": "2026-09-21T13:23:12.000Z",
+              "note": "Authenticated Reddit thread states this is the initial native Vita release and directly links the source repository."
+            },
+            {
+              "type": "repository",
+              "url": "https://github.com/smart-pickle/TestDrive-Vita",
+              "observed_at": "2026-09-21T13:23:12.000Z",
+              "note": "Repository README describes a native hardware-accelerated PS Vita/PSTV port based on kylofon's static recompilation."
+            },
+            {
+              "type": "release",
+              "url": "https://github.com/smart-pickle/TestDrive-Vita/releases/tag/v0.1",
+              "observed_at": "2026-09-21T13:23:12.000Z",
+              "note": "GitHub release v0.1 publishes TestDriveVita.vpk."
+            },
+            {
+              "type": "upstream",
+              "url": "https://github.com/kylofon/testdrive-enhanced",
+              "observed_at": "2026-09-21T13:23:12.000Z",
+              "note": "Independent upstream static recompilation identified by the Vita repository README."
+            }
+          ],
+          "findings": "The Reddit author announced an initial native Vita release. The linked GitHub repository contains VitaSDK/VitaGL build material and a v0.1 release with TestDriveVita.vpk. Proprietary game data is not bundled and must come from the user's own original game files.",
+          "repository_url": "https://github.com/smart-pickle/TestDrive-Vita",
+          "repository_identity": "smart-pickle/TestDrive-Vita; README identifies a native PS Vita/PSTV port of Test Drive (1987) built from kylofon's static recompilation.",
+          "repository_created_at": "2026-09-17T11:31:11.000Z",
+          "repository_last_activity_at": "2026-09-20T19:48:08.000Z",
+          "release_facts": [
+            {
+              "tag": "v0.1",
+              "published_at": "2026-09-20T19:39:46Z",
+              "asset": "TestDriveVita.vpk"
+            }
+          ],
+          "release_url": "https://github.com/smart-pickle/TestDrive-Vita/releases/tag/v0.1",
+          "vita_hardware_result": "Developer reports the initial release runs on Vita; the repository describes native Vita/PSTV hardware acceleration. VitaHarbor did not independently benchmark the binary.",
+          "vita_evidence": [
+            "VitaSDK/VitaGL build instructions in the repository",
+            "Vita-specific VPK release asset TestDriveVita.vpk",
+            "Reddit release post reports the Vita native version running"
+          ],
+          "author_linkage": "The Reddit post by gainusha directly links smart-pickle/TestDrive-Vita; the repository README build section also references gainusha/TestDriveVita as its clone target.",
+          "corroboration": [
+            {
+              "type": "release_artifact",
+              "detail": "GitHub v0.1 contains the Vita-specific TestDriveVita.vpk asset."
+            },
+            {
+              "type": "upstream_lineage",
+              "detail": "Repository credits kylofon/testdrive-enhanced as the upstream static recompilation."
+            }
+          ],
+          "duplicate_relation": {
+            "related_candidate_ids": []
+          },
+          "content_hash": "628a8f7756c4c371ffe0144b6536ffd6b1661de3b5c26f22e869ce1beb656d63",
+          "risk_disposition": "No risk signals were recorded for this candidate."
+        }
+      },
+      "incident": null
+    },
+    {
+      "schema_version": 2,
+      "id": "reddit-1wlrv6x",
+      "external_id": "1wlrv6x",
+      "state": "VERIFIED_FOR_REVIEW",
+      "state_history": [
+        {
+          "state": "DETECTED",
+          "at": "2026-09-21T13:22:50.149Z",
+          "actor": "codex",
+          "reason": "Observed in the authenticated manual Reddit scan"
+        },
+        {
+          "state": "QUARANTINED",
+          "at": "2026-09-21T13:22:50.149Z",
+          "actor": "codex",
+          "reason": "Manual browser observation passed the provenance ingestion boundary"
+        },
+        {
+          "state": "VERIFIED_FOR_REVIEW",
+          "at": "2026-09-21T13:25:26.723Z",
+          "actor": "codex",
+          "reason": "Verified genuine TheForceEngine Vita progress but repository evidence is incomplete"
+        }
+      ],
+      "source": {
+        "platform": "reddit",
+        "subreddit": "vitahacks",
+        "canonical_url": "https://www.reddit.com/r/vitahacks/comments/1wlrv6x/theforceenginevita_successfully_booting_into_the/",
+        "author": "SnooLobsters311",
+        "title": "TheForceEngine-VITA - Successfully booting into the menu",
+        "body": "Still have much work to do but i got the main menu working",
+        "published_at": "2026-09-20T20:24:59.820Z"
+      },
+      "classification": {
+        "confidence": "medium",
+        "reason": "1 dev signal(s), 1 passive term(s), no question markers",
+        "candidate_type": "port"
+      },
+      "provenance": {
+        "repository_url": null,
+        "release_url": null,
+        "evidence_urls": [],
+        "evidence_bundle_id": null,
+        "repository_identity": null,
+        "repository_created_at": null,
+        "repository_last_activity_at": null,
+        "release_facts": [],
+        "vita_evidence": [],
+        "author_linkage": null,
+        "corroboration": [],
+        "duplicate_relation": {
+          "content_hash": "1e1afbafe359a60d328be655b00ccaf382613bfad2c31971bffd98af6924e594",
+          "related_candidate_ids": []
+        }
+      },
+      "campaign": {
+        "cluster_id": null,
+        "linkage_confidence": "none",
+        "signals": [],
+        "related_candidate_ids": [],
+        "text_fingerprint": "fe74febf",
+        "media_fingerprints": [],
+        "outbound_fingerprints": [],
+        "direct_intent": false,
+        "explicit_campaign_reference": false,
+        "incident_id": null
+      },
+      "risk_signals": [
+        "question_or_request",
+        "no_project_evidence_in_post"
+      ],
+      "evidence_gaps": [
+        "exact project repository",
+        "repository identity and activity facts",
+        "release or build evidence",
+        "Vita-specific hardware evidence",
+        "author/developer linkage and independent corroboration"
+      ],
+      "content_hash": "1e1afbafe359a60d328be655b00ccaf382613bfad2c31971bffd98af6924e594",
+      "review": {
+        "reviewer": "codex",
+        "reviewed_at": "2026-09-21T13:25:26.723Z",
+        "reason": "Verified genuine TheForceEngine Vita progress but repository evidence is incomplete",
+        "evidence_bundle": {
+          "file": "data/references/theforceengine-2026-09-21.json",
+          "sha256": "ba4ad8c9046e53d951687772a3102630f88fbed6d7961d50602cbc357a0ca06a",
+          "schema_version": 1,
+          "reviewer": "codex",
+          "reviewed_at": "2026-09-21T13:23:12.000Z",
+          "sources": [
+            {
+              "type": "reddit",
+              "url": "https://www.reddit.com/r/vitahacks/comments/1wlrv6x/theforceenginevita_successfully_booting_into_the/",
+              "observed_at": "2026-09-21T13:23:12.000Z",
+              "note": "Authenticated thread shows TheForceEngine-VITA reaching its menu; OP says substantial work remains."
+            }
+          ],
+          "findings": "The post is a credible development signal: TheForceEngine-VITA reaches the main menu. No exact public Vita repository, release/build artifact, independent corroboration or verified hardware result was found in this review, so it remains review-only.",
+          "repository_url": null,
+          "repository_identity": "",
+          "repository_created_at": null,
+          "repository_last_activity_at": null,
+          "release_facts": [],
+          "release_url": null,
+          "vita_hardware_result": "",
+          "vita_evidence": [],
+          "author_linkage": "",
+          "corroboration": [],
+          "duplicate_relation": {
+            "related_candidate_ids": []
+          },
+          "content_hash": "1e1afbafe359a60d328be655b00ccaf382613bfad2c31971bffd98af6924e594",
+          "risk_disposition": "The generic question/request heuristic fired on thread wording, but the observed post itself is a development progress report. Missing project evidence is unresolved, so no promotion."
+        }
+      },
+      "incident": null
+    },
+    {
+      "schema_version": 2,
+      "id": "reddit-1wmabvz",
+      "external_id": "1wmabvz",
+      "state": "VERIFIED_FOR_REVIEW",
+      "state_history": [
+        {
+          "state": "DETECTED",
+          "at": "2026-09-21T13:22:50.149Z",
+          "actor": "codex",
+          "reason": "Observed in the authenticated manual Reddit scan"
+        },
+        {
+          "state": "QUARANTINED",
+          "at": "2026-09-21T13:22:50.149Z",
+          "actor": "codex",
+          "reason": "Manual browser observation passed the provenance ingestion boundary"
+        },
+        {
+          "state": "VERIFIED_FOR_REVIEW",
+          "at": "2026-09-21T13:25:27.225Z",
+          "actor": "codex",
+          "reason": "Verified Real Racing 2 development progress while the port remains non-public"
+        }
+      ],
+      "source": {
+        "platform": "reddit",
+        "subreddit": "PSVitaHomebrew",
+        "canonical_url": "https://www.reddit.com/r/PSVitaHomebrew/comments/1wmabvz/updates_on_rr2_port/",
+        "author": "chutA7X",
+        "title": "Updates on RR2 Port",
+        "body": "The port is progressing on stability and features. It first booted four days ago, the menu is running at 60 fps, touch screen navigation now works and races can be played with touch controls. The author states the port is not public yet and physical button mapping is still incomplete.",
+        "published_at": "2026-09-21T11:39:44.312Z"
+      },
+      "classification": {
+        "confidence": "medium",
+        "reason": "2 dev signal(s), 1 passive term(s), no question markers",
+        "candidate_type": "port"
+      },
+      "provenance": {
+        "repository_url": null,
+        "release_url": null,
+        "evidence_urls": [],
+        "evidence_bundle_id": null,
+        "repository_identity": null,
+        "repository_created_at": null,
+        "repository_last_activity_at": null,
+        "release_facts": [],
+        "vita_evidence": [],
+        "author_linkage": null,
+        "corroboration": [],
+        "duplicate_relation": {
+          "content_hash": "c1232c8bbe475a69e72b1566a42ff9a94140580f930c4ace93f530c58f61a6c7",
+          "related_candidate_ids": []
+        }
+      },
+      "campaign": {
+        "cluster_id": null,
+        "linkage_confidence": "none",
+        "signals": [],
+        "related_candidate_ids": [],
+        "text_fingerprint": "2fcc9893",
+        "media_fingerprints": [],
+        "outbound_fingerprints": [],
+        "direct_intent": false,
+        "explicit_campaign_reference": false,
+        "incident_id": null
+      },
+      "risk_signals": [
+        "question_or_request",
+        "no_project_evidence_in_post"
+      ],
+      "evidence_gaps": [
+        "exact project repository",
+        "repository identity and activity facts",
+        "release or build evidence",
+        "Vita-specific hardware evidence",
+        "author/developer linkage and independent corroboration"
+      ],
+      "content_hash": "c1232c8bbe475a69e72b1566a42ff9a94140580f930c4ace93f530c58f61a6c7",
+      "review": {
+        "reviewer": "codex",
+        "reviewed_at": "2026-09-21T13:25:27.225Z",
+        "reason": "Verified Real Racing 2 development progress while the port remains non-public",
+        "evidence_bundle": {
+          "file": "data/references/rr2-2026-09-21.json",
+          "sha256": "99bca1252f7fc919091554dd2dbc7ae0e120bce401e1a0b274ae671d09ca5cbd",
+          "schema_version": 1,
+          "reviewer": "codex",
+          "reviewed_at": "2026-09-21T13:23:12.000Z",
+          "sources": [
+            {
+              "type": "reddit",
+              "url": "https://www.reddit.com/r/PSVitaHomebrew/comments/1wmabvz/updates_on_rr2_port/",
+              "observed_at": "2026-09-21T13:23:12.000Z",
+              "note": "Authenticated thread from the author reports recent boot, 60 FPS menu, working touch navigation and playable races through touch input."
+            }
+          ],
+          "findings": "The author reports Real Racing 2 port progress and explicitly says the port is not public yet. Physical button mapping is incomplete. No exact public repository or release artifact was found, so the record remains verified for review only.",
+          "repository_url": null,
+          "repository_identity": "",
+          "repository_created_at": null,
+          "repository_last_activity_at": null,
+          "release_facts": [],
+          "release_url": null,
+          "vita_hardware_result": "",
+          "vita_evidence": [],
+          "author_linkage": "",
+          "corroboration": [],
+          "duplicate_relation": {
+            "related_candidate_ids": []
+          },
+          "content_hash": "c1232c8bbe475a69e72b1566a42ff9a94140580f930c4ace93f530c58f61a6c7",
+          "risk_disposition": "The question/request heuristic is a false-positive caused by conversational wording in the captured body. Missing repository/build evidence remains unresolved, so no promotion."
+        }
+      },
+      "incident": null
+    },
+    {
+      "schema_version": 2,
+      "id": "reddit-1wmax82",
+      "external_id": "1wmax82",
+      "state": "VERIFIED_FOR_REVIEW",
+      "state_history": [
+        {
+          "state": "DETECTED",
+          "at": "2026-09-21T13:22:50.149Z",
+          "actor": "codex",
+          "reason": "Observed in the authenticated manual Reddit scan"
+        },
+        {
+          "state": "QUARANTINED",
+          "at": "2026-09-21T13:22:50.149Z",
+          "actor": "codex",
+          "reason": "Manual browser observation passed the provenance ingestion boundary"
+        },
+        {
+          "state": "VERIFIED_FOR_REVIEW",
+          "at": "2026-09-21T13:25:27.694Z",
+          "actor": "codex",
+          "reason": "Verified linked Resident Evil 4 Vita optimization demo but no public repository"
+        }
+      ],
+      "source": {
+        "platform": "reddit",
+        "subreddit": "VitaPiracy",
+        "canonical_url": "https://www.reddit.com/r/VitaPiracy/comments/1wmax82/guess_it_is_happening/",
+        "author": "TrueHeat69",
+        "title": "Guess It Is Happening",
+        "body": "",
+        "published_at": "2026-09-21T12:07:41.673Z"
+      },
+      "classification": {
+        "confidence": "medium",
+        "reason": "manual browser review: linked video is titled Resident Evil 4 - PSVita Port: First optimizations batch",
+        "candidate_type": "port"
+      },
+      "provenance": {
+        "repository_url": null,
+        "release_url": null,
+        "evidence_urls": [],
+        "evidence_bundle_id": null,
+        "repository_identity": null,
+        "repository_created_at": null,
+        "repository_last_activity_at": null,
+        "release_facts": [],
+        "vita_evidence": [],
+        "author_linkage": null,
+        "corroboration": [],
+        "duplicate_relation": {
+          "content_hash": "a540265f0ecdc7627b200598cdbdb452bb024dfe22e34c0967f77cb857c0d74e",
+          "related_candidate_ids": []
+        }
+      },
+      "campaign": {
+        "cluster_id": null,
+        "linkage_confidence": "none",
+        "signals": [],
+        "related_candidate_ids": [],
+        "text_fingerprint": "4fd14152",
+        "media_fingerprints": [],
+        "outbound_fingerprints": [
+          "youtu.be/tec0mkz0mja"
+        ],
+        "direct_intent": false,
+        "explicit_campaign_reference": false,
+        "incident_id": null
+      },
+      "risk_signals": [
+        "no_project_evidence_in_post"
+      ],
+      "evidence_gaps": [
+        "exact project repository",
+        "repository identity and activity facts",
+        "release or build evidence",
+        "Vita-specific hardware evidence",
+        "author/developer linkage and independent corroboration"
+      ],
+      "content_hash": "a540265f0ecdc7627b200598cdbdb452bb024dfe22e34c0967f77cb857c0d74e",
+      "review": {
+        "reviewer": "codex",
+        "reviewed_at": "2026-09-21T13:25:27.694Z",
+        "reason": "Verified linked Resident Evil 4 Vita optimization demo but no public repository",
+        "evidence_bundle": {
+          "file": "data/references/re4-2026-09-21.json",
+          "sha256": "4df974cfcb3722b7eb140462bff76bd96f6f8f6bb79f95e4e9e1fdb9c710b48c",
+          "schema_version": 1,
+          "reviewer": "codex",
+          "reviewed_at": "2026-09-21T13:23:12.000Z",
+          "sources": [
+            {
+              "type": "reddit",
+              "url": "https://www.reddit.com/r/VitaPiracy/comments/1wmax82/guess_it_is_happening/",
+              "observed_at": "2026-09-21T13:23:12.000Z",
+              "note": "Authenticated Reddit link post points to the new Resident Evil 4 Vita optimization demo."
+            }
+          ],
+          "findings": "The linked YouTube item was identified as 'Resident Evil 4 - PSVita Port: First optimizations batch' by Rinne4Fun. YouTube is not an allowlisted provenance host for promotion and no public project repository/release was established, so this is retained only as a verified review signal.",
+          "repository_url": null,
+          "repository_identity": "",
+          "repository_created_at": null,
+          "repository_last_activity_at": null,
+          "release_facts": [],
+          "release_url": null,
+          "vita_hardware_result": "",
+          "vita_evidence": [],
+          "author_linkage": "",
+          "corroboration": [],
+          "duplicate_relation": {
+            "related_candidate_ids": []
+          },
+          "content_hash": "a540265f0ecdc7627b200598cdbdb452bb024dfe22e34c0967f77cb857c0d74e",
+          "risk_disposition": "The Reddit post itself contains no project evidence beyond the outbound demo link. Promotion is withheld until repository/release evidence exists."
+        }
       },
       "incident": null
     }

@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "reviewer": "codex",
+  "reviewed_at": "2026-09-21T15:23:12+02:00",
+  "sources": [
+    {
+      "type": "reddit",
+      "url": "https://www.reddit.com/r/VitaPiracy/comments/1wmax82/guess_it_is_happening/",
+      "observed_at": "2026-09-21T15:23:12+02:00",
+      "note": "Authenticated Reddit link post points to the new Resident Evil 4 Vita optimization demo."
+    }
+  ],
+  "findings": "The linked YouTube item was identified as 'Resident Evil 4 - PSVita Port: First optimizations batch' by Rinne4Fun. YouTube is not an allowlisted provenance host for promotion and no public project repository/release was established, so this is retained only as a verified review signal.",
+  "content_hash": "a540265f0ecdc7627b200598cdbdb452bb024dfe22e34c0967f77cb857c0d74e",
+  "risk_disposition": "The Reddit post itself contains no project evidence beyond the outbound demo link. Promotion is withheld until repository/release evidence exists."
+}

@@ -1,7 +1,7 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-09-20T21:10:36.272Z",
-  "source": "r/vitahacks + r/VitaPiracy + r/PSVitaHomebrew RSS",
+  "generated_at": "2026-09-21T13:38:42.951Z",
+  "source": "r/vitahacks + r/VitaPiracy + r/PSVitaHomebrew RSS RSS",
   "note": "Detected sources are quarantined and are not part of the curated ledger. No public item is a promotion or endorsement.",
   "items": [
     {
@@ -67,6 +67,39 @@
       "subreddit": "vitahacks",
       "published_at": "2026-09-15T13:34:13.000Z",
       "detected_at": "2026-09-17T15:34:20.988Z",
+      "candidate_type": "port",
+      "public_visibility": "review_queue"
+    },
+    {
+      "id": "reddit-1wlrv6x",
+      "state": "VERIFIED_FOR_REVIEW",
+      "title": "TheForceEngine-VITA - Successfully booting into the menu",
+      "url": "https://www.reddit.com/r/vitahacks/comments/1wlrv6x/theforceenginevita_successfully_booting_into_the/",
+      "subreddit": "vitahacks",
+      "published_at": "2026-09-20T20:24:59.820Z",
+      "detected_at": "2026-09-21T13:22:50.149Z",
+      "candidate_type": "port",
+      "public_visibility": "review_queue"
+    },
+    {
+      "id": "reddit-1wmabvz",
+      "state": "VERIFIED_FOR_REVIEW",
+      "title": "Updates on RR2 Port",
+      "url": "https://www.reddit.com/r/PSVitaHomebrew/comments/1wmabvz/updates_on_rr2_port/",
+      "subreddit": "PSVitaHomebrew",
+      "published_at": "2026-09-21T11:39:44.312Z",
+      "detected_at": "2026-09-21T13:22:50.149Z",
+      "candidate_type": "port",
+      "public_visibility": "review_queue"
+    },
+    {
+      "id": "reddit-1wmax82",
+      "state": "VERIFIED_FOR_REVIEW",
+      "title": "Guess It Is Happening",
+      "url": "https://www.reddit.com/r/VitaPiracy/comments/1wmax82/guess_it_is_happening/",
+      "subreddit": "VitaPiracy",
+      "published_at": "2026-09-21T12:07:41.673Z",
+      "detected_at": "2026-09-21T13:22:50.149Z",
       "candidate_type": "port",
       "public_visibility": "review_queue"
     }

@@ -15,6 +15,7 @@ import { createHash } from "node:crypto";
 import {
   canonicalizeEvidenceUrl,
   publicCandidate,
+  publicDocument,
   transitionState
 } from "./reddit-provenance.mjs";
 
@@ -22,6 +23,7 @@ const ROOT = process.cwd();
 const LEDGER = path.resolve(ROOT, "src/shared/constants/fallbackData.ts");
 const QUARANTINE = path.resolve(ROOT, "data/quarantine.json");
 const AUDIT = path.resolve(ROOT, "data/provenance-audit.jsonl");
+const PUBLIC_OUT = path.resolve(ROOT, "public/data/discovered.json");
 
 const args = process.argv.slice(2);
 const readFlag = (name) => {
@@ -45,6 +47,17 @@ function loadDocument() {
 
 function writeDocument(doc) {
   fs.writeFileSync(QUARANTINE, JSON.stringify(doc, null, 2) + "\n", "utf8");
+}
+
+function writePublicProjection(doc, generatedAt) {
+  const sourceLabel = String(doc.source || "r/vitahacks + r/VitaPiracy + r/PSVitaHomebrew RSS")
+    .replace(/\s+RSS$/, "");
+  fs.mkdirSync(path.dirname(PUBLIC_OUT), { recursive: true });
+  fs.writeFileSync(
+    PUBLIC_OUT,
+    JSON.stringify(publicDocument(doc.items, generatedAt, sourceLabel), null, 2) + "\n",
+    "utf8"
+  );
 }
 
 function candidateId() {
@@ -159,7 +172,8 @@ function inspectCandidate(doc) {
   console.log(JSON.stringify(item, null, 2));
 }
 
-function updateReviewState(doc, nextState) {
+function updateReviewState(doc, nextState, options = {}) {
+  const persist = options.persist !== false;
   const { item, index } = getCandidate(doc);
   if (!["QUARANTINED", "VERIFIED_FOR_REVIEW"].includes(item.state)) {
     fail("candidate is not reviewable from state " + item.state);
@@ -185,8 +199,7 @@ function updateReviewState(doc, nextState) {
   let updated = transitionState(item, nextState, { actor: reviewer, at: now, reason });
   updated = { ...updated, review: reviewed };
   doc.items[index] = updated;
-  writeDocument(doc);
-  appendAudit({
+  const auditEvent = {
     schema_version: 1,
     at: now,
     actor: reviewer,
@@ -196,8 +209,13 @@ function updateReviewState(doc, nextState) {
     to_state: nextState,
     reason,
     evidence_bundle_sha256: reviewed.evidence_bundle?.sha256 || null
-  });
-  return { item, updated };
+  };
+  if (persist) {
+    writeDocument(doc);
+    writePublicProjection(doc, now);
+    appendAudit(auditEvent);
+  }
+  return { item, updated, now, auditEvent };
 }
 
 function insertBeforeArrayEnd(source, arrayHeader, entry) {
@@ -206,7 +224,10 @@ function insertBeforeArrayEnd(source, arrayHeader, entry) {
   const match = /\r?\n\];/.exec(source.slice(arrayStart));
   if (!match) fail("could not find the end of " + arrayHeader);
   const close = arrayStart + match.index;
-  return source.slice(0, close) + entry + source.slice(close);
+  const bodyStart = arrayStart + arrayHeader.length;
+  const hasEntries = source.slice(bodyStart, close).trim().length > 0;
+  const separator = hasEntries ? "," : "";
+  return source.slice(0, close) + separator + entry + source.slice(close);
 }
 
 function slugify(value) {
@@ -217,7 +238,7 @@ function slugify(value) {
     .slice(0, 48) || "untitled-port";
 }
 
-function promoteLedger(candidate, displayName, repoUrl) {
+function buildLedgerPromotion(candidate, displayName, repoUrl) {
   let source = fs.readFileSync(LEDGER, "utf8");
   const line = source.includes("\r\n") ? "\r\n" : "\n";
   const gameIds = [...source.matchAll(/\{ id: (\d+), slug: /g)].map((match) => Number(match[1]));
@@ -263,8 +284,27 @@ function promoteLedger(candidate, displayName, repoUrl) {
     "  }";
   source = insertBeforeArrayEnd(source, "export const FALLBACK_GAMES: Game[] = [", gameEntry);
   source = insertBeforeArrayEnd(source, "export const FALLBACK_PROJECTS: any[] = [", projectEntry);
-  fs.writeFileSync(LEDGER, source, "utf8");
-  return { id, slug };
+  return { id, slug, source };
+}
+
+function commitPromotion(doc, promoted, generatedAt, auditEvent) {
+  const snapshots = [LEDGER, QUARANTINE, PUBLIC_OUT].map((file) => ({
+    file,
+    existed: fs.existsSync(file),
+    content: fs.existsSync(file) ? fs.readFileSync(file) : null
+  }));
+  try {
+    fs.writeFileSync(LEDGER, promoted.source, "utf8");
+    writeDocument(doc);
+    writePublicProjection(doc, generatedAt);
+    appendAudit(auditEvent);
+  } catch (error) {
+    for (const snapshot of snapshots) {
+      if (snapshot.existed) fs.writeFileSync(snapshot.file, snapshot.content);
+      else if (fs.existsSync(snapshot.file)) fs.unlinkSync(snapshot.file);
+    }
+    throw error;
+  }
 }
 
 const document = loadDocument();
@@ -283,10 +323,16 @@ else if (action === "--verify") {
   const displayName = requireText("--name", 2);
   const repoUrl = canonicalizeEvidenceUrl(readFlag("--repo-url"));
   if (!repoUrl) fail("--repo-url must be an allowed HTTPS repository URL.");
-  const result = updateReviewState(document, "PROMOTED");
+  const result = updateReviewState(document, "PROMOTED", { persist: false });
   const evidence = result.updated.review?.evidence_bundle;
   if (!evidence?.repository_url) fail("promotion evidence must include repository_url.");
-  const promoted = promoteLedger(result.item, displayName, repoUrl);
+  if (evidence.repository_url !== repoUrl) fail("--repo-url must exactly match the reviewed evidence repository_url.");
+  const promoted = buildLedgerPromotion(result.item, displayName, repoUrl);
+  try {
+    commitPromotion(document, promoted, result.now, result.auditEvent);
+  } catch (error) {
+    fail("promotion transaction failed and was rolled back: " + error.message);
+  }
   console.log("Promoted only after explicit reviewer action and evidence bundle: " + result.item.id);
   console.log("  ledger slug: " + promoted.slug + " (id " + promoted.id + ")");
   console.log("  curated ledger was not touched by the scanner; this command performed the manual write.");

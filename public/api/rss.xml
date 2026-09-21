@@ -5,7 +5,7 @@
     <link>https://vitaharbor.vercel.app/</link>
     <description>Community PlayStation Vita ports tracked from r/vitahacks + r/VitaPiracy + r/PSVitaHomebrew</description>
     <language>en-us</language>
-    <lastBuildDate>Sun, 20 Sep 2026 21:10:46 GMT</lastBuildDate>
+    <lastBuildDate>Mon, 21 Sep 2026 13:41:44 GMT</lastBuildDate>
     <item>
       <title><![CDATA[Medal of Honor: Allied Assault (OpenMoHAA) - IN_GAME]]></title>
       <link>https://www.reddit.com/r/vitahacks/comments/1tapf2b/wip_openmohaa_on_ps_vita_medal_of_honor_allied/</link>
@@ -201,6 +201,13 @@
       <guid isPermaLink="false">c-dogs-sdl-vita</guid>
       <pubDate>Sat, 19 Sep 2026 20:01:51 GMT</pubDate>
       <description><![CDATA[Public C-Dogs SDL Vita/PSTV pre-release posted by abby_6112. The source thread reports a native build tested on Vita/PSTV hardware and links a GitHub preview release; LAN multiplayer work is still in progress. Hardware Status: The author reports a native Vita/PSTV build and requests real-hardware testing; no independent hardware report is recorded in this ledger.]]></description>
+    </item>
+    <item>
+      <title><![CDATA[Test Drive (1987) Vita - RELEASED]]></title>
+      <link>https://www.reddit.com/r/vitahacks/comments/1wlqxq4/test_drive_1987_native_vita_port/</link>
+      <guid isPermaLink="false">test-drive-1987-vita</guid>
+      <pubDate>Sun, 20 Sep 2026 19:50:09 GMT</pubDate>
+      <description><![CDATA[Native PS Vita/PSTV port of Test Drive (1987) built from kylofon's static recompilation, with a public v0.1 release published on GitHub. Hardware Status: The repository describes hardware-accelerated Vita rendering; no independent performance measurement is recorded.]]></description>
     </item>
   </channel>
 </rss>

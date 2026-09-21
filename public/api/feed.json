@@ -363,6 +363,21 @@
         "Native Vita build",
         "SDL"
       ]
+    },
+    {
+      "id": "test-drive-1987-vita",
+      "url": "https://www.reddit.com/r/vitahacks/comments/1wlqxq4/test_drive_1987_native_vita_port/",
+      "title": "Test Drive (1987) Vita",
+      "content_text": "Stage: released | Platform: DOS / PC | Summary: Native PS Vita/PSTV port of Test Drive (1987) built from kylofon's static recompilation, with a public v0.1 release published on GitHub. | Hardware: The repository describes hardware-accelerated Vita rendering; no independent performance measurement is recorded.",
+      "date_modified": "2026-09-20T19:50:09.288Z",
+      "tags": [
+        "released",
+        "DOS / PC",
+        "Static recompilation",
+        "VitaSDK",
+        "SDL2",
+        "VitaGL / GXM"
+      ]
     }
   ]
 }

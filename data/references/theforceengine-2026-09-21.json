@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "reviewer": "codex",
+  "reviewed_at": "2026-09-21T15:23:12+02:00",
+  "sources": [
+    {
+      "type": "reddit",
+      "url": "https://www.reddit.com/r/vitahacks/comments/1wlrv6x/theforceenginevita_successfully_booting_into_the/",
+      "observed_at": "2026-09-21T15:23:12+02:00",
+      "note": "Authenticated thread shows TheForceEngine-VITA reaching its menu; OP says substantial work remains."
+    }
+  ],
+  "findings": "The post is a credible development signal: TheForceEngine-VITA reaches the main menu. No exact public Vita repository, release/build artifact, independent corroboration or verified hardware result was found in this review, so it remains review-only.",
+  "content_hash": "1e1afbafe359a60d328be655b00ccaf382613bfad2c31971bffd98af6924e594",
+  "risk_disposition": "The generic question/request heuristic fired on thread wording, but the observed post itself is a development progress report. Missing project evidence is unresolved, so no promotion."
+}

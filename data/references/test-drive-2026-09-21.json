@@ -1,0 +1,66 @@
+{
+  "schema_version": 1,
+  "reviewer": "codex",
+  "reviewed_at": "2026-09-21T15:23:12+02:00",
+  "sources": [
+    {
+      "type": "reddit",
+      "url": "https://www.reddit.com/r/vitahacks/comments/1wlqxq4/test_drive_1987_native_vita_port/",
+      "observed_at": "2026-09-21T15:23:12+02:00",
+      "note": "Authenticated Reddit thread states this is the initial native Vita release and directly links the source repository."
+    },
+    {
+      "type": "repository",
+      "url": "https://github.com/smart-pickle/TestDrive-Vita",
+      "observed_at": "2026-09-21T15:23:12+02:00",
+      "note": "Repository README describes a native hardware-accelerated PS Vita/PSTV port based on kylofon's static recompilation."
+    },
+    {
+      "type": "release",
+      "url": "https://github.com/smart-pickle/TestDrive-Vita/releases/tag/v0.1",
+      "observed_at": "2026-09-21T15:23:12+02:00",
+      "note": "GitHub release v0.1 publishes TestDriveVita.vpk."
+    },
+    {
+      "type": "upstream",
+      "url": "https://github.com/kylofon/testdrive-enhanced",
+      "observed_at": "2026-09-21T15:23:12+02:00",
+      "note": "Independent upstream static recompilation identified by the Vita repository README."
+    }
+  ],
+  "findings": "The Reddit author announced an initial native Vita release. The linked GitHub repository contains VitaSDK/VitaGL build material and a v0.1 release with TestDriveVita.vpk. Proprietary game data is not bundled and must come from the user's own original game files.",
+  "repository_url": "https://github.com/smart-pickle/TestDrive-Vita",
+  "repository_identity": "smart-pickle/TestDrive-Vita; README identifies a native PS Vita/PSTV port of Test Drive (1987) built from kylofon's static recompilation.",
+  "repository_created_at": "2026-09-17T11:31:11Z",
+  "repository_last_activity_at": "2026-09-20T19:48:08Z",
+  "release_facts": [
+    {
+      "tag": "v0.1",
+      "published_at": "2026-09-20T19:39:46Z",
+      "asset": "TestDriveVita.vpk"
+    }
+  ],
+  "release_url": "https://github.com/smart-pickle/TestDrive-Vita/releases/tag/v0.1",
+  "vita_hardware_result": "Developer reports the initial release runs on Vita; the repository describes native Vita/PSTV hardware acceleration. VitaHarbor did not independently benchmark the binary.",
+  "vita_evidence": [
+    "VitaSDK/VitaGL build instructions in the repository",
+    "Vita-specific VPK release asset TestDriveVita.vpk",
+    "Reddit release post reports the Vita native version running"
+  ],
+  "author_linkage": "The Reddit post by gainusha directly links smart-pickle/TestDrive-Vita; the repository README build section also references gainusha/TestDriveVita as its clone target.",
+  "corroboration": [
+    {
+      "type": "release_artifact",
+      "detail": "GitHub v0.1 contains the Vita-specific TestDriveVita.vpk asset."
+    },
+    {
+      "type": "upstream_lineage",
+      "detail": "Repository credits kylofon/testdrive-enhanced as the upstream static recompilation."
+    }
+  ],
+  "duplicate_relation": {
+    "related_candidate_ids": []
+  },
+  "content_hash": "628a8f7756c4c371ffe0144b6536ffd6b1661de3b5c26f22e869ce1beb656d63",
+  "risk_disposition": "No risk signals were recorded for this candidate."
+}

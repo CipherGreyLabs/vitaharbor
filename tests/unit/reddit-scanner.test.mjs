@@ -26,6 +26,25 @@ describe("Reddit candidate classifier", () => {
     expect(classifyCandidateType({ title: "C-Dogs SDL port", body: "native build" })).toBe("port");
   });
 
+  it("accepts concrete boot and progress posts seen in the three-community scan", () => {
+    const forceEngine = classify({
+      title: "TheForceEngine-VITA - Successfully booting into the menu",
+      body: "Still have much work to do but i got the main menu working"
+    });
+    const testDrive = classify({
+      title: "Test Drive (1987) native Vita port",
+      body: "Initial release of the native port"
+    });
+    const rr2 = classify({
+      title: "Updates on RR2 Port",
+      body: "Port progress: menu is running and touch controls now work"
+    });
+
+    expect(forceEngine.accept).toBe(true);
+    expect(testDrive.accept).toBe(true);
+    expect(rr2.accept).toBe(true);
+  });
+
   it("keeps question posts out of the candidate queue", () => {
     const result = classify({
       title: "Is it possible to port this game to PS Vita?",
