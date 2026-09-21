@@ -1,9 +1,64 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-09-21T13:38:06.100Z",
+  "generated_at": "2026-09-21T18:32:56.666Z",
   "source": "r/vitahacks + r/VitaPiracy + r/PSVitaHomebrew RSS",
   "note": "Detected sources are quarantined and are not part of the curated ledger. No public item is a promotion or endorsement.",
   "items": [
+    {
+      "id": "reddit-1wmbh4v",
+      "state": "QUARANTINED",
+      "title": "Demande de patch FR",
+      "url": "https://www.reddit.com/r/PSVitaHomebrew/comments/1wmbh4v/demande_de_patch_fr/",
+      "subreddit": "PSVitaHomebrew",
+      "published_at": "2026-09-21T12:32:21.000Z",
+      "detected_at": "2026-09-21T18:32:56.666Z",
+      "candidate_type": "port",
+      "public_visibility": "review_queue"
+    },
+    {
+      "id": "reddit-1wmax82",
+      "state": "VERIFIED_FOR_REVIEW",
+      "title": "Guess It Is Happening",
+      "url": "https://www.reddit.com/r/VitaPiracy/comments/1wmax82/guess_it_is_happening/",
+      "subreddit": "VitaPiracy",
+      "published_at": "2026-09-21T12:07:41.673Z",
+      "detected_at": "2026-09-21T13:22:50.149Z",
+      "candidate_type": "port",
+      "public_visibility": "review_queue"
+    },
+    {
+      "id": "reddit-1wmabvz",
+      "state": "VERIFIED_FOR_REVIEW",
+      "title": "Updates on RR2 Port",
+      "url": "https://www.reddit.com/r/PSVitaHomebrew/comments/1wmabvz/updates_on_rr2_port/",
+      "subreddit": "PSVitaHomebrew",
+      "published_at": "2026-09-21T11:39:44.312Z",
+      "detected_at": "2026-09-21T13:22:50.149Z",
+      "candidate_type": "port",
+      "public_visibility": "review_queue"
+    },
+    {
+      "id": "reddit-1wltjdq",
+      "state": "QUARANTINED",
+      "title": "TheForceEngine-VITA - Successfully booting into the menu",
+      "url": "https://www.reddit.com/r/PSVitaHomebrew/comments/1wltjdq/theforceenginevita_successfully_booting_into_the/",
+      "subreddit": "PSVitaHomebrew",
+      "published_at": "2026-09-20T21:29:57.000Z",
+      "detected_at": "2026-09-21T18:32:56.666Z",
+      "candidate_type": "port",
+      "public_visibility": "review_queue"
+    },
+    {
+      "id": "reddit-1wlrv6x",
+      "state": "VERIFIED_FOR_REVIEW",
+      "title": "TheForceEngine-VITA - Successfully booting into the menu",
+      "url": "https://www.reddit.com/r/vitahacks/comments/1wlrv6x/theforceenginevita_successfully_booting_into_the/",
+      "subreddit": "vitahacks",
+      "published_at": "2026-09-20T20:24:59.820Z",
+      "detected_at": "2026-09-21T13:22:50.149Z",
+      "candidate_type": "port",
+      "public_visibility": "review_queue"
+    },
     {
       "id": "reddit-1wllsbo",
       "state": "QUARANTINED",
@@ -13,6 +68,17 @@
       "published_at": "2026-09-20T16:36:10.000Z",
       "detected_at": "2026-09-20T16:41:37.670Z",
       "candidate_type": "port",
+      "public_visibility": "review_queue"
+    },
+    {
+      "id": "reddit-1wl0ae9",
+      "state": "QUARANTINED",
+      "title": "[Release] Ratchet & Clank: Size Matters — Remastered Controls for PS Vita / Adrenaline",
+      "url": "https://www.reddit.com/r/PSVitaHomebrew/comments/1wl0ae9/release_ratchet_clank_size_matters_remastered/",
+      "subreddit": "PSVitaHomebrew",
+      "published_at": "2026-09-19T23:00:00.000Z",
+      "detected_at": "2026-09-21T18:32:56.666Z",
+      "candidate_type": "plugin",
       "public_visibility": "review_queue"
     },
     {
@@ -67,39 +133,6 @@
       "subreddit": "vitahacks",
       "published_at": "2026-09-15T13:34:13.000Z",
       "detected_at": "2026-09-17T15:34:20.988Z",
-      "candidate_type": "port",
-      "public_visibility": "review_queue"
-    },
-    {
-      "id": "reddit-1wlrv6x",
-      "state": "VERIFIED_FOR_REVIEW",
-      "title": "TheForceEngine-VITA - Successfully booting into the menu",
-      "url": "https://www.reddit.com/r/vitahacks/comments/1wlrv6x/theforceenginevita_successfully_booting_into_the/",
-      "subreddit": "vitahacks",
-      "published_at": "2026-09-20T20:24:59.820Z",
-      "detected_at": "2026-09-21T13:22:50.149Z",
-      "candidate_type": "port",
-      "public_visibility": "review_queue"
-    },
-    {
-      "id": "reddit-1wmabvz",
-      "state": "VERIFIED_FOR_REVIEW",
-      "title": "Updates on RR2 Port",
-      "url": "https://www.reddit.com/r/PSVitaHomebrew/comments/1wmabvz/updates_on_rr2_port/",
-      "subreddit": "PSVitaHomebrew",
-      "published_at": "2026-09-21T11:39:44.312Z",
-      "detected_at": "2026-09-21T13:22:50.149Z",
-      "candidate_type": "port",
-      "public_visibility": "review_queue"
-    },
-    {
-      "id": "reddit-1wmax82",
-      "state": "VERIFIED_FOR_REVIEW",
-      "title": "Guess It Is Happening",
-      "url": "https://www.reddit.com/r/VitaPiracy/comments/1wmax82/guess_it_is_happening/",
-      "subreddit": "VitaPiracy",
-      "published_at": "2026-09-21T12:07:41.673Z",
-      "detected_at": "2026-09-21T13:22:50.149Z",
       "candidate_type": "port",
       "public_visibility": "review_queue"
     }
