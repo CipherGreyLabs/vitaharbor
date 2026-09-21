@@ -44,6 +44,11 @@ Create a local JSON evidence bundle. It must contain `reviewer`, `findings`, and
 non-empty `sources` array. Sources may be the canonical Reddit post or an HTTPS GitHub,
 GitLab or Codeberg URL. The command moves only to `VERIFIED_FOR_REVIEW`:
 
+The bundle `reviewer` must exactly match the `--reviewer` operator. Invalid or
+unallowlisted source URLs are rejected instead of being silently replaced with the
+candidate Reddit URL. Review-state writes, the sanitized public projection and the
+append-only audit event are committed as one rollback-protected operation.
+
 ```text
 npm run data:verify -- --id reddit-<post-id> --reviewer "name" --reason "At least twelve characters explaining the review" --evidence-file review.json
 ```
@@ -53,9 +58,17 @@ This state still cannot appear in the curated ledger.
 ## Promote
 
 Promotion is a separate explicit action. The evidence bundle must also contain
-`repository_url`, `vita_hardware_result`, and a `risk_disposition` whenever signals
-were recorded. A fake/troll signal requires the additional `--allow-risk` acknowledgement;
-the operator must explain why the evidence resolves it.
+`repository_url`, `repository_identity`, repository timestamps, substantive
+`release_facts`, `vita_hardware_result`, non-empty `vita_evidence`, `author_linkage`
+and substantive `corroboration`. The reviewed repository must also be present in the
+bundle `sources`, and `--repo-url` must exactly match that reviewed repository. A
+`risk_disposition` is required whenever signals were recorded. A fake/troll signal
+requires the additional `--allow-risk` acknowledgement; the operator must explain why
+the evidence resolves it.
+
+Promotion is transactional across the curated ledger, quarantine state, sanitized
+public projection and provenance audit log. If a write fails, those files are restored
+to their pre-promotion state.
 
 ```text
 npm run data:promote -- --id reddit-<post-id> --reviewer "name" --reason "..." --evidence-file review.json --name "Exact project name" --repo-url https://github.com/org/repo

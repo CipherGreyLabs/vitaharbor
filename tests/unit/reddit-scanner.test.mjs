@@ -1,4 +1,6 @@
 import { describe, expect, it } from "vitest";
+import { readFileSync } from "node:fs";
+import path from "node:path";
 import { REDDIT_SOURCE_LABEL, REDDIT_SOURCES, REDDIT_SUBREDDITS, redditRssUrl } from "../../scripts/reddit-sources.mjs";
 import { classify, classifyCandidateType } from "../../scripts/reddit-classifier.mjs";
 
@@ -12,6 +14,13 @@ describe("Reddit discovery scope", () => {
     ]);
     expect(REDDIT_SOURCE_LABEL).toBe("r/vitahacks + r/VitaPiracy + r/PSVitaHomebrew");
     expect(redditRssUrl("PSVitaHomebrew")).toBe("https://www.reddit.com/r/PSVitaHomebrew/new.rss");
+  });
+
+  it("runs scanner CI when source configuration or classifier logic changes", () => {
+    const workflow = readFileSync(path.resolve(import.meta.dirname, "../../.github/workflows/reddit-scanner.yml"), "utf8");
+    expect(workflow).toContain('"scripts/reddit-sources.mjs"');
+    expect(workflow).toContain('"scripts/reddit-classifier.mjs"');
+    expect(workflow).toContain('"scripts/reddit-provenance.mjs"');
   });
 });
 

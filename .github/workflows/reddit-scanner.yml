@@ -11,6 +11,8 @@ on:
       - "package.json"
       - "package-lock.json"
       - "scripts/cron-reddit-scan.mjs"
+      - "scripts/reddit-sources.mjs"
+      - "scripts/reddit-classifier.mjs"
       - "scripts/reddit-provenance.mjs"
       - "scripts/migrate-quarantine.mjs"
       - "scripts/make-feeds.ts"

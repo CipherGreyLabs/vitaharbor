@@ -14,6 +14,7 @@ import path from "node:path";
 import { createHash } from "node:crypto";
 import {
   canonicalizeEvidenceUrl,
+  canonicalizeRedditUrl,
   publicCandidate,
   publicDocument,
   transitionState
@@ -84,6 +85,55 @@ function parseObservedAt(value) {
   return date.toISOString();
 }
 
+function normalizeReleaseFacts(value) {
+  if (!Array.isArray(value)) return [];
+  return value.slice(0, 20).map((fact, index) => {
+    if (!fact || typeof fact !== "object" || Array.isArray(fact)) {
+      fail("release_facts item " + (index + 1) + " must be an object.");
+    }
+    const tag = String(fact.tag || fact.version || fact.label || "").trim().slice(0, 200);
+    if (!tag) fail("release_facts item " + (index + 1) + " requires tag, version or label.");
+    const publishedAt = fact.published_at || fact.observed_at;
+    if (!publishedAt) fail("release_facts item " + (index + 1) + " requires published_at or observed_at.");
+    return {
+      ...fact,
+      tag,
+      published_at: parseObservedAt(publishedAt)
+    };
+  });
+}
+
+function normalizeTextEvidence(value, label) {
+  if (!Array.isArray(value)) return [];
+  return value.slice(0, 20).map((item, index) => {
+    if (typeof item !== "string") fail(label + " item " + (index + 1) + " must be text.");
+    const normalized = item.trim().slice(0, 1000);
+    if (!normalized) fail(label + " item " + (index + 1) + " cannot be empty.");
+    return normalized;
+  });
+}
+
+function normalizeCorroboration(value) {
+  if (!Array.isArray(value)) return [];
+  return value.slice(0, 20).map((item, index) => {
+    if (typeof item === "string") {
+      const detail = item.trim().slice(0, 1000);
+      if (!detail) fail("corroboration item " + (index + 1) + " cannot be empty.");
+      return { type: "note", detail };
+    }
+    if (!item || typeof item !== "object" || Array.isArray(item)) {
+      fail("corroboration item " + (index + 1) + " must be text or an object.");
+    }
+    const detail = String(item.detail || "").trim().slice(0, 1000);
+    if (!detail) fail("corroboration item " + (index + 1) + " requires detail.");
+    return {
+      ...item,
+      type: String(item.type || "corroboration").trim().slice(0, 100),
+      detail
+    };
+  });
+}
+
 function loadEvidence(candidate, requirePromotion) {
   const file = readFlag("--evidence-file");
   if (!file) fail("--evidence-file is required; promotion cannot rely on a free-text claim.");
@@ -99,7 +149,9 @@ function loadEvidence(candidate, requirePromotion) {
     fail("evidence bundle requires a non-empty sources array.");
   }
   const sources = bundle.sources.map((source, index) => {
-    const url = canonicalizeEvidenceUrl(source?.url) || (index === 0 ? candidate.source?.canonical_url : null);
+    const suppliedUrl = String(source?.url || "").trim();
+    const redditUrl = canonicalizeRedditUrl(suppliedUrl)?.url || null;
+    const url = canonicalizeEvidenceUrl(suppliedUrl) || redditUrl || (!suppliedUrl && index === 0 ? candidate.source?.canonical_url : null);
     if (!url) fail("evidence source " + (index + 1) + " has no allowed HTTPS source URL.");
     return {
       type: String(source?.type || "source").slice(0, 40),
@@ -118,12 +170,12 @@ function loadEvidence(candidate, requirePromotion) {
     repository_identity: String(bundle.repository_identity || "").trim().slice(0, 500),
     repository_created_at: bundle.repository_created_at ? parseObservedAt(bundle.repository_created_at) : null,
     repository_last_activity_at: bundle.repository_last_activity_at ? parseObservedAt(bundle.repository_last_activity_at) : null,
-    release_facts: Array.isArray(bundle.release_facts) ? bundle.release_facts.slice(0, 20) : [],
+    release_facts: normalizeReleaseFacts(bundle.release_facts),
     release_url: canonicalizeEvidenceUrl(bundle.release_url) || null,
     vita_hardware_result: String(bundle.vita_hardware_result || "").trim().slice(0, 2000),
-    vita_evidence: Array.isArray(bundle.vita_evidence) ? bundle.vita_evidence.slice(0, 20) : [],
+    vita_evidence: normalizeTextEvidence(bundle.vita_evidence, "vita_evidence"),
     author_linkage: String(bundle.author_linkage || "").trim().slice(0, 1000),
-    corroboration: Array.isArray(bundle.corroboration) ? bundle.corroboration.slice(0, 20) : [],
+    corroboration: normalizeCorroboration(bundle.corroboration),
     duplicate_relation: bundle.duplicate_relation && typeof bundle.duplicate_relation === "object" ? bundle.duplicate_relation : { related_candidate_ids: [] },
     content_hash: String(bundle.content_hash || "").trim().slice(0, 128),
     risk_disposition: String(bundle.risk_disposition || "").trim().slice(0, 1000)
@@ -132,6 +184,9 @@ function loadEvidence(candidate, requirePromotion) {
   if (!normalized.findings) fail("evidence bundle requires findings.");
   if (requirePromotion) {
     if (!normalized.repository_url) fail("promotion evidence requires repository_url on an allowed source host.");
+    if (!normalized.sources.some((source) => source.url === normalized.repository_url || source.url.startsWith(normalized.repository_url.replace(/\/$/, "") + "/"))) {
+      fail("promotion evidence sources must include repository_url.");
+    }
     if (!normalized.repository_identity) fail("promotion evidence requires repository_identity.");
     if (!normalized.repository_created_at || !normalized.repository_last_activity_at) fail("promotion evidence requires repository creation and last-activity timestamps.");
     if (normalized.release_facts.length === 0) fail("promotion evidence requires release_facts, even when the record is a development build.");
@@ -150,6 +205,37 @@ function loadEvidence(candidate, requirePromotion) {
 function appendAudit(event) {
   fs.mkdirSync(path.dirname(AUDIT), { recursive: true });
   fs.appendFileSync(AUDIT, JSON.stringify(event) + "\n", "utf8");
+}
+
+function snapshotFiles(files) {
+  return files.map((file) => ({
+    file,
+    existed: fs.existsSync(file),
+    content: fs.existsSync(file) ? fs.readFileSync(file) : null
+  }));
+}
+
+function restoreFiles(snapshots) {
+  for (const snapshot of snapshots) {
+    if (snapshot.existed) {
+      fs.mkdirSync(path.dirname(snapshot.file), { recursive: true });
+      fs.writeFileSync(snapshot.file, snapshot.content);
+    } else if (fs.existsSync(snapshot.file)) {
+      fs.unlinkSync(snapshot.file);
+    }
+  }
+}
+
+function commitReviewState(doc, generatedAt, auditEvent) {
+  const snapshots = snapshotFiles([QUARANTINE, PUBLIC_OUT, AUDIT]);
+  try {
+    writeDocument(doc);
+    writePublicProjection(doc, generatedAt);
+    appendAudit(auditEvent);
+  } catch (error) {
+    restoreFiles(snapshots);
+    throw error;
+  }
 }
 
 function listCandidates(doc) {
@@ -182,6 +268,9 @@ function updateReviewState(doc, nextState, options = {}) {
   const reviewer = requireText("--reviewer", 2);
   const needsEvidence = nextState === "VERIFIED_FOR_REVIEW" || nextState === "PROMOTED";
   const evidence = needsEvidence ? loadEvidence(item, nextState === "PROMOTED") : null;
+  if (evidence && evidence.bundle.reviewer !== reviewer) {
+    fail("evidence reviewer must exactly match --reviewer.");
+  }
   if (item.risk_signals?.includes("explicit_fake_or_troll") && nextState === "PROMOTED" && !has("--allow-risk")) {
     fail("explicit fake/troll signals require --allow-risk plus a written risk_disposition.");
   }
@@ -211,9 +300,11 @@ function updateReviewState(doc, nextState, options = {}) {
     evidence_bundle_sha256: reviewed.evidence_bundle?.sha256 || null
   };
   if (persist) {
-    writeDocument(doc);
-    writePublicProjection(doc, now);
-    appendAudit(auditEvent);
+    try {
+      commitReviewState(doc, now, auditEvent);
+    } catch (error) {
+      fail("review-state transaction failed and was rolled back: " + error.message);
+    }
   }
   return { item, updated, now, auditEvent };
 }
@@ -288,21 +379,14 @@ function buildLedgerPromotion(candidate, displayName, repoUrl) {
 }
 
 function commitPromotion(doc, promoted, generatedAt, auditEvent) {
-  const snapshots = [LEDGER, QUARANTINE, PUBLIC_OUT].map((file) => ({
-    file,
-    existed: fs.existsSync(file),
-    content: fs.existsSync(file) ? fs.readFileSync(file) : null
-  }));
+  const snapshots = snapshotFiles([LEDGER, QUARANTINE, PUBLIC_OUT, AUDIT]);
   try {
     fs.writeFileSync(LEDGER, promoted.source, "utf8");
     writeDocument(doc);
     writePublicProjection(doc, generatedAt);
     appendAudit(auditEvent);
   } catch (error) {
-    for (const snapshot of snapshots) {
-      if (snapshot.existed) fs.writeFileSync(snapshot.file, snapshot.content);
-      else if (fs.existsSync(snapshot.file)) fs.unlinkSync(snapshot.file);
-    }
+    restoreFiles(snapshots);
     throw error;
   }
 }
