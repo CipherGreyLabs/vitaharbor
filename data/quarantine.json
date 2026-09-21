@@ -1,8 +1,124 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-09-21T19:03:23.766Z",
+  "generated_at": "2026-09-21T19:15:16.447Z",
   "source": "r/vitahacks + r/VitaPiracy + r/PSVitaHomebrew RSS",
   "items": [
+    {
+      "schema_version": 2,
+      "id": "reddit-1wadsa7",
+      "external_id": "1wadsa7",
+      "state": "VERIFIED_FOR_REVIEW",
+      "state_history": [
+        {
+          "state": "DETECTED",
+          "at": "2026-09-21T19:01:02.092Z",
+          "actor": "codex",
+          "reason": "Observed in the authenticated manual Reddit scan"
+        },
+        {
+          "state": "QUARANTINED",
+          "at": "2026-09-21T19:01:02.092Z",
+          "actor": "codex",
+          "reason": "Manual browser observation passed the provenance ingestion boundary"
+        },
+        {
+          "state": "VERIFIED_FOR_REVIEW",
+          "at": "2026-09-21T19:03:23.766Z",
+          "actor": "codex",
+          "reason": "Verified genuine Halo CE Vita development; no public repo or release verified"
+        }
+      ],
+      "source": {
+        "platform": "reddit",
+        "subreddit": "VitaPiracy",
+        "canonical_url": "https://www.reddit.com/r/VitaPiracy/comments/1wadsa7/halo_ce_recompiled_for_the_ps_vita/",
+        "author": null,
+        "title": "Halo CE Recompiled for the PS Vita",
+        "body": "Early Vita build: rendering works, campaign mode works, and the author reports 8 - 14 fps on hardware.",
+        "published_at": null
+      },
+      "classification": {
+        "confidence": "high",
+        "reason": "4 dev signals: \\brecompil(?:e|ed|er|ation)\\b, \\brender(?:s|ed|ing)?\\b, \\bfps\\b",
+        "candidate_type": "port",
+        "question": false,
+        "spam": false
+      },
+      "provenance": {
+        "repository_url": null,
+        "release_url": null,
+        "evidence_urls": [],
+        "evidence_bundle_id": null,
+        "repository_identity": null,
+        "repository_created_at": null,
+        "repository_last_activity_at": null,
+        "release_facts": [],
+        "vita_evidence": [],
+        "author_linkage": null,
+        "corroboration": [],
+        "duplicate_relation": {
+          "content_hash": "604e1e27cada7519b68b52703ffd8c3f7d531a048296710810f6a0c1986c88a5",
+          "related_candidate_ids": []
+        }
+      },
+      "campaign": {
+        "cluster_id": null,
+        "linkage_confidence": "none",
+        "signals": [],
+        "related_candidate_ids": [],
+        "text_fingerprint": "3344ce16",
+        "media_fingerprints": [],
+        "outbound_fingerprints": [],
+        "direct_intent": false,
+        "explicit_campaign_reference": false,
+        "incident_id": null
+      },
+      "risk_signals": [],
+      "evidence_gaps": [
+        "exact project repository",
+        "repository identity and activity facts",
+        "Vita-specific hardware evidence",
+        "author/developer linkage and independent corroboration"
+      ],
+      "content_hash": "604e1e27cada7519b68b52703ffd8c3f7d531a048296710810f6a0c1986c88a5",
+      "review": {
+        "reviewer": "codex",
+        "reviewed_at": "2026-09-21T19:03:23.766Z",
+        "reason": "Verified genuine Halo CE Vita development; no public repo or release verified",
+        "evidence_bundle": {
+          "file": "data/references/halo-ce-xita-2026-09-21.json",
+          "sha256": "d781f4644889faa18779d655d30884bb93de7336f1ac5d8e60b5e609b61f3dd8",
+          "schema_version": 1,
+          "reviewer": "codex",
+          "reviewed_at": "2026-09-21T19:03:00.000Z",
+          "sources": [
+            {
+              "type": "reddit",
+              "url": "https://www.reddit.com/r/VitaPiracy/comments/1wadsa7/halo_ce_recompiled_for_the_ps_vita/",
+              "observed_at": "2026-09-21T19:03:00.000Z",
+              "note": "Early Vita build with rendering progress, hardware testing, 8-14 fps on Blood Gulch, and working but unoptimized campaign mode."
+            }
+          ],
+          "findings": "Active Halo CE/Xita Vita development is confirmed; no verified public repository or public release artifact was established.",
+          "repository_url": null,
+          "repository_identity": "",
+          "repository_created_at": null,
+          "repository_last_activity_at": null,
+          "release_facts": [],
+          "release_url": null,
+          "vita_hardware_result": "",
+          "vita_evidence": [],
+          "author_linkage": "",
+          "corroboration": [],
+          "duplicate_relation": {
+            "related_candidate_ids": []
+          },
+          "content_hash": "604e1e27cada7519b68b52703ffd8c3f7d531a048296710810f6a0c1986c88a5",
+          "risk_disposition": ""
+        }
+      },
+      "incident": null
+    },
     {
       "schema_version": 2,
       "id": "reddit-1wmax82",
@@ -664,15 +780,10 @@
         }
       },
       "campaign": {
-        "cluster_id": "campaign-fefd46f9",
-        "linkage_confidence": "medium",
-        "signals": [
-          "same_author_burst",
-          "shared_outbound_fingerprint"
-        ],
-        "related_candidate_ids": [
-          "reddit-1wjzosl"
-        ],
+        "cluster_id": null,
+        "linkage_confidence": "none",
+        "signals": [],
+        "related_candidate_ids": [],
         "text_fingerprint": "3439b9dd",
         "media_fingerprints": [],
         "outbound_fingerprints": [
@@ -1183,93 +1294,6 @@
     },
     {
       "schema_version": 2,
-      "id": "reddit-1wjzosl",
-      "external_id": "1wjzosl",
-      "state": "QUARANTINED",
-      "state_history": [
-        {
-          "state": "DETECTED",
-          "at": "2026-09-21T18:42:23.382Z",
-          "actor": "reddit-scanner",
-          "reason": "Canonical Reddit RSS entry accepted at the ingestion boundary"
-        },
-        {
-          "state": "QUARANTINED",
-          "at": "2026-09-21T18:42:23.382Z",
-          "actor": "reddit-scanner",
-          "reason": "Scanner result is unverified and cannot enter the curated ledger"
-        }
-      ],
-      "source": {
-        "platform": "reddit",
-        "subreddit": "vitahacks",
-        "canonical_url": "https://www.reddit.com/r/vitahacks/comments/1wjzosl/diddy_kong_racing_golden_balloon_update/",
-        "author": "zm2283145",
-        "title": "Diddy Kong Racing (Golden Balloon) Update",
-        "body": "I've made various improvements to Golden Balloon it's pretty optimized it should be able to run 60FPS. I've managed to fix the remastered settings crash there is a lot of features it does that is turned off since the vita GPU just doesn't support it at all. I wanted to let everyone know the current build on my GitHub has: 60 FPS Mod pack support (using the DKR-R pack) this is very heavy and experimental use with caution Trophy Support I would also like to present the next feature in working on: Multiplayer it will support Ad-Hoc, Lan, Online play via relay server to handle the",
-        "published_at": "2026-09-18T19:21:11.000Z"
-      },
-      "classification": {
-        "confidence": "high",
-        "reason": "3 dev signals: \\bfps\\b, \\bupdate\\b, \\bbuild\\b",
-        "candidate_type": "port",
-        "question": false,
-        "spam": false
-      },
-      "provenance": {
-        "repository_url": null,
-        "release_url": null,
-        "evidence_urls": [],
-        "evidence_bundle_id": null,
-        "repository_identity": null,
-        "repository_created_at": null,
-        "repository_last_activity_at": null,
-        "release_facts": [],
-        "vita_evidence": [],
-        "author_linkage": null,
-        "corroboration": [],
-        "duplicate_relation": {
-          "content_hash": "a1204fd8a31fc8692bd18bd0b0829d530768999e8a3e943c1a0e75c175cb6587",
-          "related_candidate_ids": []
-        }
-      },
-      "campaign": {
-        "cluster_id": "campaign-fefd46f9",
-        "linkage_confidence": "medium",
-        "signals": [
-          "same_author_burst",
-          "shared_outbound_fingerprint"
-        ],
-        "related_candidate_ids": [
-          "reddit-1wllsbo"
-        ],
-        "text_fingerprint": "4189032b",
-        "media_fingerprints": [
-          "external-preview.redd.it/c2jvzmtkbjv4ynfomcibs4knds6h9nrzrsh6xkj98v0arjimf_hrdmppam-r.jpeg"
-        ],
-        "outbound_fingerprints": [
-          "www.reddit.com/r/vitahacks/comments/1wjzosl/diddy_kong_racing_golden_balloon_update",
-          "external-preview.redd.it/c2jvzmtkbjv4ynfomcibs4knds6h9nrzrsh6xkj98v0arjimf_hrdmppam-r.jpeg",
-          "www.reddit.com/user/zm2283145",
-          "v.redd.it/xz0zu0p5xbqh1"
-        ],
-        "direct_intent": false,
-        "explicit_campaign_reference": false,
-        "incident_id": null
-      },
-      "risk_signals": [],
-      "evidence_gaps": [
-        "exact project repository",
-        "repository identity and activity facts",
-        "Vita-specific hardware evidence",
-        "author/developer linkage and independent corroboration"
-      ],
-      "content_hash": "a1204fd8a31fc8692bd18bd0b0829d530768999e8a3e943c1a0e75c175cb6587",
-      "review": null,
-      "incident": null
-    },
-    {
-      "schema_version": 2,
       "id": "reddit-1wjte26",
       "external_id": "1wjte26",
       "state": "QUARANTINED",
@@ -1425,122 +1449,6 @@
         "direct_intent": false,
         "explicit_campaign_reference": false,
         "incident_id": null
-      },
-      "incident": null
-    },
-    {
-      "schema_version": 2,
-      "id": "reddit-1wadsa7",
-      "external_id": "1wadsa7",
-      "state": "VERIFIED_FOR_REVIEW",
-      "state_history": [
-        {
-          "state": "DETECTED",
-          "at": "2026-09-21T19:01:02.092Z",
-          "actor": "codex",
-          "reason": "Observed in the authenticated manual Reddit scan"
-        },
-        {
-          "state": "QUARANTINED",
-          "at": "2026-09-21T19:01:02.092Z",
-          "actor": "codex",
-          "reason": "Manual browser observation passed the provenance ingestion boundary"
-        },
-        {
-          "state": "VERIFIED_FOR_REVIEW",
-          "at": "2026-09-21T19:03:23.766Z",
-          "actor": "codex",
-          "reason": "Verified genuine Halo CE Vita development; no public repo or release verified"
-        }
-      ],
-      "source": {
-        "platform": "reddit",
-        "subreddit": "VitaPiracy",
-        "canonical_url": "https://www.reddit.com/r/VitaPiracy/comments/1wadsa7/halo_ce_recompiled_for_the_ps_vita/",
-        "author": null,
-        "title": "Halo CE Recompiled for the PS Vita",
-        "body": "Early Vita build: rendering works, campaign mode works, and the author reports 8 - 14 fps on hardware.",
-        "published_at": null
-      },
-      "classification": {
-        "confidence": "high",
-        "reason": "4 dev signals: \\brecompil(?:e|ed|er|ation)\\b, \\brender(?:s|ed|ing)?\\b, \\bfps\\b",
-        "candidate_type": "port",
-        "question": false,
-        "spam": false
-      },
-      "provenance": {
-        "repository_url": null,
-        "release_url": null,
-        "evidence_urls": [],
-        "evidence_bundle_id": null,
-        "repository_identity": null,
-        "repository_created_at": null,
-        "repository_last_activity_at": null,
-        "release_facts": [],
-        "vita_evidence": [],
-        "author_linkage": null,
-        "corroboration": [],
-        "duplicate_relation": {
-          "content_hash": "604e1e27cada7519b68b52703ffd8c3f7d531a048296710810f6a0c1986c88a5",
-          "related_candidate_ids": []
-        }
-      },
-      "campaign": {
-        "cluster_id": null,
-        "linkage_confidence": "none",
-        "signals": [],
-        "related_candidate_ids": [],
-        "text_fingerprint": "3344ce16",
-        "media_fingerprints": [],
-        "outbound_fingerprints": [],
-        "direct_intent": false,
-        "explicit_campaign_reference": false,
-        "incident_id": null
-      },
-      "risk_signals": [],
-      "evidence_gaps": [
-        "exact project repository",
-        "repository identity and activity facts",
-        "Vita-specific hardware evidence",
-        "author/developer linkage and independent corroboration"
-      ],
-      "content_hash": "604e1e27cada7519b68b52703ffd8c3f7d531a048296710810f6a0c1986c88a5",
-      "review": {
-        "reviewer": "codex",
-        "reviewed_at": "2026-09-21T19:03:23.766Z",
-        "reason": "Verified genuine Halo CE Vita development; no public repo or release verified",
-        "evidence_bundle": {
-          "file": "data/references/halo-ce-xita-2026-09-21.json",
-          "sha256": "d781f4644889faa18779d655d30884bb93de7336f1ac5d8e60b5e609b61f3dd8",
-          "schema_version": 1,
-          "reviewer": "codex",
-          "reviewed_at": "2026-09-21T19:03:00.000Z",
-          "sources": [
-            {
-              "type": "reddit",
-              "url": "https://www.reddit.com/r/VitaPiracy/comments/1wadsa7/halo_ce_recompiled_for_the_ps_vita/",
-              "observed_at": "2026-09-21T19:03:00.000Z",
-              "note": "Early Vita build with rendering progress, hardware testing, 8-14 fps on Blood Gulch, and working but unoptimized campaign mode."
-            }
-          ],
-          "findings": "Active Halo CE/Xita Vita development is confirmed; no verified public repository or public release artifact was established.",
-          "repository_url": null,
-          "repository_identity": "",
-          "repository_created_at": null,
-          "repository_last_activity_at": null,
-          "release_facts": [],
-          "release_url": null,
-          "vita_hardware_result": "",
-          "vita_evidence": [],
-          "author_linkage": "",
-          "corroboration": [],
-          "duplicate_relation": {
-            "related_candidate_ids": []
-          },
-          "content_hash": "604e1e27cada7519b68b52703ffd8c3f7d531a048296710810f6a0c1986c88a5",
-          "risk_disposition": ""
-        }
       },
       "incident": null
     }
