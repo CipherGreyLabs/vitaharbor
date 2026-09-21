@@ -154,6 +154,8 @@ describe("manual promotion workflow", () => {
       const quarantine = JSON.parse(readFileSync(path.join(fixture, "data/quarantine.json"), "utf8"));
       const publicQueue = JSON.parse(readFileSync(path.join(fixture, "public/data/discovered.json"), "utf8"));
       expect(quarantine.items[0].state).toBe("PROMOTED");
+      expect(quarantine.generated_at).toBe(quarantine.items[0].state_history.at(-1).at);
+      expect(publicQueue.generated_at).toBe(quarantine.generated_at);
       expect(publicQueue.items).toEqual([]);
 
       const ledger = readFileSync(path.join(fixture, "src/shared/constants/fallbackData.ts"), "utf8");

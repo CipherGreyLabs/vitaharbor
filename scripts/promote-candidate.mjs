@@ -288,6 +288,7 @@ function updateReviewState(doc, nextState, options = {}) {
   let updated = transitionState(item, nextState, { actor: reviewer, at: now, reason });
   updated = { ...updated, review: reviewed };
   doc.items[index] = updated;
+  doc.generated_at = now;
   const auditEvent = {
     schema_version: 1,
     at: now,
