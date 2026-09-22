@@ -1,9 +1,31 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-09-22T12:16:16.397Z",
+  "generated_at": "2026-09-22T17:32:15.796Z",
   "source": "r/vitahacks + r/VitaPiracy + r/PSVitaHomebrew RSS",
   "note": "Detected sources are quarantined and are not part of the curated ledger. No public item is a promotion or endorsement.",
   "items": [
+    {
+      "id": "reddit-1wnekpf",
+      "state": "QUARANTINED",
+      "title": "Linux on Vita",
+      "url": "https://www.reddit.com/r/vitahacks/comments/1wnekpf/linux_on_vita/",
+      "subreddit": "vitahacks",
+      "published_at": "2026-09-22T16:39:19.000Z",
+      "detected_at": "2026-09-22T17:32:15.796Z",
+      "candidate_type": "wrapper",
+      "public_visibility": "review_queue"
+    },
+    {
+      "id": "reddit-1wndxal",
+      "state": "QUARANTINED",
+      "title": "We need to talk",
+      "url": "https://www.reddit.com/r/vitahacks/comments/1wndxal/we_need_to_talk/",
+      "subreddit": "vitahacks",
+      "published_at": "2026-09-22T16:15:30.000Z",
+      "detected_at": "2026-09-22T17:32:15.796Z",
+      "candidate_type": "port",
+      "public_visibility": "review_queue"
+    },
     {
       "id": "reddit-1wn46c9",
       "state": "QUARANTINED",

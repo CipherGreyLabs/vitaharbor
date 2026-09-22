@@ -1,8 +1,171 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-09-22T12:16:16.397Z",
+  "generated_at": "2026-09-22T17:32:15.796Z",
   "source": "r/vitahacks + r/VitaPiracy + r/PSVitaHomebrew RSS",
   "items": [
+    {
+      "schema_version": 2,
+      "id": "reddit-1wnekpf",
+      "external_id": "1wnekpf",
+      "state": "QUARANTINED",
+      "state_history": [
+        {
+          "state": "DETECTED",
+          "at": "2026-09-22T17:32:15.796Z",
+          "actor": "reddit-scanner",
+          "reason": "Canonical Reddit RSS entry accepted at the ingestion boundary"
+        },
+        {
+          "state": "QUARANTINED",
+          "at": "2026-09-22T17:32:15.796Z",
+          "actor": "reddit-scanner",
+          "reason": "Scanner result is unverified and cannot enter the curated ledger"
+        }
+      ],
+      "source": {
+        "platform": "reddit",
+        "subreddit": "vitahacks",
+        "canonical_url": "https://www.reddit.com/r/vitahacks/comments/1wnekpf/linux_on_vita/",
+        "author": "DevWithZachary",
+        "title": "Linux on Vita",
+        "body": "Something I've been putting together over the past couple of days that people might find interesting/useful! https://github.com/devwithzachary/vita-linux/tree/main Very much building on the work of https://github.com/xerpi/vita-linux-loader and https://github.com/incognitojam/vita-linux-port i've made improvements to the experience of running Linux on the Vita including a onscreen keyboard, proper mapping of the buttons to useful functions, an alpine linux environment so you can install packages... plus a doom port because of course. Along with a docker build environment to make it eas",
+        "published_at": "2026-09-22T16:39:19.000Z"
+      },
+      "classification": {
+        "confidence": "medium",
+        "reason": "2 dev signal(s), 1 passive term(s), no question markers",
+        "candidate_type": "wrapper",
+        "question": false,
+        "spam": false
+      },
+      "provenance": {
+        "repository_url": null,
+        "release_url": null,
+        "evidence_urls": [],
+        "evidence_bundle_id": null,
+        "repository_identity": null,
+        "repository_created_at": null,
+        "repository_last_activity_at": null,
+        "release_facts": [],
+        "vita_evidence": [],
+        "author_linkage": null,
+        "corroboration": [],
+        "duplicate_relation": {
+          "content_hash": "16577e25a92a94bf942360a5c4a20de196d131184866010b59486b5a950fcdcb",
+          "related_candidate_ids": []
+        }
+      },
+      "campaign": {
+        "cluster_id": null,
+        "linkage_confidence": "none",
+        "signals": [],
+        "related_candidate_ids": [],
+        "text_fingerprint": "2656ea1d",
+        "media_fingerprints": [
+          "preview.redd.it/eifbg88wn3rh1.jpeg",
+          "i.redd.it/eifbg88wn3rh1.jpeg"
+        ],
+        "outbound_fingerprints": [
+          "github.com/devwithzachary/vita-linux/tree/main",
+          "github.com/xerpi/vita-linux-loader",
+          "github.com/incognitojam/vita-linux-port",
+          "www.reddit.com/r/vitahacks/comments/1wnekpf/linux_on_vita",
+          "preview.redd.it/eifbg88wn3rh1.jpeg",
+          "www.reddit.com/user/devwithzachary",
+          "i.redd.it/eifbg88wn3rh1.jpeg"
+        ],
+        "direct_intent": false,
+        "explicit_campaign_reference": false,
+        "incident_id": null
+      },
+      "risk_signals": [],
+      "evidence_gaps": [
+        "repository identity and activity facts",
+        "Vita-specific hardware evidence",
+        "author/developer linkage and independent corroboration"
+      ],
+      "content_hash": "16577e25a92a94bf942360a5c4a20de196d131184866010b59486b5a950fcdcb",
+      "review": null,
+      "incident": null
+    },
+    {
+      "schema_version": 2,
+      "id": "reddit-1wndxal",
+      "external_id": "1wndxal",
+      "state": "QUARANTINED",
+      "state_history": [
+        {
+          "state": "DETECTED",
+          "at": "2026-09-22T17:32:15.796Z",
+          "actor": "reddit-scanner",
+          "reason": "Canonical Reddit RSS entry accepted at the ingestion boundary"
+        },
+        {
+          "state": "QUARANTINED",
+          "at": "2026-09-22T17:32:15.796Z",
+          "actor": "reddit-scanner",
+          "reason": "Scanner result is unverified and cannot enter the curated ledger"
+        }
+      ],
+      "source": {
+        "platform": "reddit",
+        "subreddit": "vitahacks",
+        "canonical_url": "https://www.reddit.com/r/vitahacks/comments/1wndxal/we_need_to_talk/",
+        "author": "Not-Safe-6573",
+        "title": "We need to talk",
+        "body": "There has to be a way to eliminate vibecoders that release slop ports. The big 3 that come to mind at this time is the native Smash 64, Dusklight and Smash Melee. These ports should have never been released in the state that they were in. Furthermore, a real developer most likely WILL NOT make a better version someone vibecoded. A version we as a community deserve. I'm not against A.I. assisted games, I'm against accepting slop and saying thank you for it. Zenonia 1 + 2 are really good examples, they were vibeslop ports released for both these games while someone was working by hand on",
+        "published_at": "2026-09-22T16:15:30.000Z"
+      },
+      "classification": {
+        "confidence": "medium",
+        "reason": "2 dev signal(s), 4 passive term(s), no question markers",
+        "candidate_type": "port",
+        "question": false,
+        "spam": false
+      },
+      "provenance": {
+        "repository_url": null,
+        "release_url": null,
+        "evidence_urls": [],
+        "evidence_bundle_id": null,
+        "repository_identity": null,
+        "repository_created_at": null,
+        "repository_last_activity_at": null,
+        "release_facts": [],
+        "vita_evidence": [],
+        "author_linkage": null,
+        "corroboration": [],
+        "duplicate_relation": {
+          "content_hash": "3cfe2aa6256f4703232336c692b7ebc931b893a490112ad4035e63bb1f378103",
+          "related_candidate_ids": []
+        }
+      },
+      "campaign": {
+        "cluster_id": null,
+        "linkage_confidence": "none",
+        "signals": [],
+        "related_candidate_ids": [],
+        "text_fingerprint": "2d0f88be",
+        "media_fingerprints": [],
+        "outbound_fingerprints": [
+          "www.reddit.com/user/not-safe-6573",
+          "www.reddit.com/r/vitahacks/comments/1wndxal/we_need_to_talk"
+        ],
+        "direct_intent": false,
+        "explicit_campaign_reference": false,
+        "incident_id": null
+      },
+      "risk_signals": [],
+      "evidence_gaps": [
+        "exact project repository",
+        "repository identity and activity facts",
+        "Vita-specific hardware evidence",
+        "author/developer linkage and independent corroboration"
+      ],
+      "content_hash": "3cfe2aa6256f4703232336c692b7ebc931b893a490112ad4035e63bb1f378103",
+      "review": null,
+      "incident": null
+    },
     {
       "schema_version": 2,
       "id": "reddit-1wn46c9",
@@ -76,8 +239,8 @@
         "incident_id": null
       },
       "risk_signals": [
-        "question_or_request",
-        "no_project_evidence_in_post"
+        "no_project_evidence_in_post",
+        "question_or_request"
       ],
       "evidence_gaps": [
         "exact project repository",
