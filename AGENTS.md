@@ -60,6 +60,17 @@ npx vercel --prod --yes
    entry `detection: detected`. Do not fill in performance numbers that were not stated.
 6. **No piracy.** Never link ROMs, ISOs or game data. Only discussion threads and source repos.
 
+## Project traceability contract
+
+Every harness, agent or LLM that changes VitaHarbor must leave enough project-local evidence for the next harness to continue from Git alone.
+
+1. Record every project mutation, reconciliation, release action and material finding in `docs/WORKLOG.md` with the exact date/time, commit or working-tree state, what changed, why it changed, the actor/model, and concrete verification evidence.
+2. For LLM work, the model field must name the actual model used. Do not inherit or guess a model from an earlier row. For non-LLM automation, record the automation actor explicitly and use `no LLM` for the model.
+3. Update `PROJECT_STATE.md` after every meaningful decision, milestone, deployment or external limitation so it describes the current source-of-truth state rather than only historical releases.
+4. A production deployment record must include the exact deployed commit, Vercel deployment ID/URL when available, production alias, reason, actor/model and live acceptance evidence.
+5. Refresh the hash-protected `HANDOFF.md` after the final repository state for a task and verify it with `NEW-HANDOFF.ps1 -Verify`. A post-deploy documentation-only traceability commit does not require another production deployment, but it must name the exact deployed runtime commit so the distinction is explicit.
+6. Keep traceability append-only where possible. Correct earlier records with a later superseding entry instead of silently rewriting history.
+
 ## Known traps (each one cost real time)
 
 | Trap | What happens | Guard |

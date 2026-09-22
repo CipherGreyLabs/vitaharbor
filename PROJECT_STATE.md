@@ -219,3 +219,12 @@ test/build/deployment output.
 - Local release gates: typecheck, lint, verify with 65 unit tests/build, integration 7/7, diff-check, generated poison-output scan, live E2E 11/11, mobile 4/4, contrast 35/35, headers/SEO/crawler pass.
 - Final production deployment `dpl_31SM83iB5WYTmjJTAZNPF3AVbkhv` is READY at the production alias. Live link crawl recorded 2,657 links across 29 routes with 0 runtime errors; final smoke and E2E were rerun after the clean hosted build. Incident-linked IDs, titles, body, author, campaign and rationale values are absent from public outputs.
 - Security verdict: `GO` for the implemented poisoning controls. External RSS still returned mixed 429/available responses during the live read-only cron check; this affects freshness, not the no-auto-promotion invariant.
+
+## VH-PORTNEWS-015 / VH-TRACE-016 current state (2026-09-22)
+
+- Halo CE (`reddit-1wadsa7`) is preserved as `VERIFIED_FOR_REVIEW` in the provenance ledger and appears once in the sanitized public discovery projection. It is not curated/promoted because no verified public Xita repository or public release artifact has been established.
+- Test Drive (1987) remains `PROMOTED`; TheForceEngine-VITA, Real Racing 2 and Resident Evil 4 remain `VERIFIED_FOR_REVIEW`. The two KeeperRL records remain `BLOCKED_UNVERIFIED` and the confirmed fake-port campaign record remains `REJECTED`.
+- `origin/main` advanced after the Halo repair through automatic scanner commit `3dbfd11` (`Scan: record newly surfaced port threads`). The isolated release worktree was fast-forwarded to that exact commit; the automation changed only `data/quarantine.json`, `public/data/discovered.json` and `public/api/rss.xml`.
+- Full local release verification on `3dbfd11` passed: typecheck, 76/76 unit tests, production build with 29 prerendered project pages and 30 sitemap URLs, lint, integration 7/7 and E2E 11/11.
+- Historical Reddit recovery remains bounded and incomplete where Reddit rate-limits requests. HTTP 429 is an external coverage limitation and must never be interpreted as proof that no historical post exists.
+- Project traceability is now an explicit repository contract in `AGENTS.md`: every harness must record when, what, why, actor/model and verification in `docs/WORKLOG.md`, keep `PROJECT_STATE.md` current, and refresh/verify the hash-protected handoff after the final repository state.
