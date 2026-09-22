@@ -1,8 +1,177 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-09-21T19:15:16.447Z",
+  "generated_at": "2026-09-22T12:16:16.397Z",
   "source": "r/vitahacks + r/VitaPiracy + r/PSVitaHomebrew RSS",
   "items": [
+    {
+      "schema_version": 2,
+      "id": "reddit-1wn46c9",
+      "external_id": "1wn46c9",
+      "state": "QUARANTINED",
+      "state_history": [
+        {
+          "state": "DETECTED",
+          "at": "2026-09-22T12:16:16.397Z",
+          "actor": "reddit-scanner",
+          "reason": "Canonical Reddit RSS entry accepted at the ingestion boundary"
+        },
+        {
+          "state": "QUARANTINED",
+          "at": "2026-09-22T12:16:16.397Z",
+          "actor": "reddit-scanner",
+          "reason": "Scanner result is unverified and cannot enter the curated ledger"
+        }
+      ],
+      "source": {
+        "platform": "reddit",
+        "subreddit": "vitahacks",
+        "canonical_url": "https://www.reddit.com/r/vitahacks/comments/1wn46c9/wip_buckshotrouletteportable_a_c_rewrite_of/",
+        "author": "JustAverage456",
+        "title": "[WIP] BuckshotRoulettePortable - A C++ rewrite of Buckshot Roulette for the PSVITA Targeting 60fps",
+        "body": "Hello guys, I'm not sure where to post this so any ideas would be nice. I got a vita a while back and buckshot roulette has been one of my favorite timekill games. i considered backporting it to Godot 3 but I can't stand bad performance ports so, I am going with a c++ rewrite with a custom engine. The target is 60 fps on the console itself. Using VitaGL and trying to minimize the finicky Godot coroutines my Mr Klubnika was pretty hard but fun. All assets and music are copyright of Mike Klubnika and his game, and you'll need to port them when playing this. but it is very fun working",
+        "published_at": "2026-09-22T08:58:38.000Z"
+      },
+      "classification": {
+        "confidence": "high",
+        "reason": "4 dev signals: \\[wip\\], \\bw\\.?i\\.?p\\.?\\b, \\bvitagl\\b",
+        "candidate_type": "engine",
+        "question": true,
+        "spam": false
+      },
+      "provenance": {
+        "repository_url": null,
+        "release_url": null,
+        "evidence_urls": [],
+        "evidence_bundle_id": null,
+        "repository_identity": null,
+        "repository_created_at": null,
+        "repository_last_activity_at": null,
+        "release_facts": [],
+        "vita_evidence": [],
+        "author_linkage": null,
+        "corroboration": [],
+        "duplicate_relation": {
+          "content_hash": "c47d173ae587b5fbb25fa06b960ae28ef45f1f162a1360225504c57e93ec7813",
+          "related_candidate_ids": []
+        }
+      },
+      "campaign": {
+        "cluster_id": null,
+        "linkage_confidence": "none",
+        "signals": [],
+        "related_candidate_ids": [],
+        "text_fingerprint": "7e9cf2e0",
+        "media_fingerprints": [
+          "preview.redd.it/lmrvs6yrd1rh1.jpeg",
+          "i.redd.it/lmrvs6yrd1rh1.jpeg"
+        ],
+        "outbound_fingerprints": [
+          "www.reddit.com/r/vitahacks/comments/1wn46c9/wip_buckshotrouletteportable_a_c_rewrite_of",
+          "preview.redd.it/lmrvs6yrd1rh1.jpeg",
+          "www.reddit.com/user/justaverage456",
+          "i.redd.it/lmrvs6yrd1rh1.jpeg"
+        ],
+        "direct_intent": false,
+        "explicit_campaign_reference": false,
+        "incident_id": null
+      },
+      "risk_signals": [
+        "question_or_request",
+        "no_project_evidence_in_post"
+      ],
+      "evidence_gaps": [
+        "exact project repository",
+        "repository identity and activity facts",
+        "release or build evidence",
+        "Vita-specific hardware evidence",
+        "author/developer linkage and independent corroboration"
+      ],
+      "content_hash": "c47d173ae587b5fbb25fa06b960ae28ef45f1f162a1360225504c57e93ec7813",
+      "review": null,
+      "incident": null
+    },
+    {
+      "schema_version": 2,
+      "id": "reddit-1wmxc2y",
+      "external_id": "1wmxc2y",
+      "state": "QUARANTINED",
+      "state_history": [
+        {
+          "state": "DETECTED",
+          "at": "2026-09-22T12:16:16.397Z",
+          "actor": "reddit-scanner",
+          "reason": "Canonical Reddit RSS entry accepted at the ingestion boundary"
+        },
+        {
+          "state": "QUARANTINED",
+          "at": "2026-09-22T12:16:16.397Z",
+          "actor": "reddit-scanner",
+          "reason": "Scanner result is unverified and cannot enter the curated ledger"
+        }
+      ],
+      "source": {
+        "platform": "reddit",
+        "subreddit": "vitahacks",
+        "canonical_url": "https://www.reddit.com/r/vitahacks/comments/1wmxc2y/smash_melee_update/",
+        "author": "zm2283145",
+        "title": "Smash melee update",
+        "body": "I've work on a few bugs and there's still more to go. But I just released a newer update with the fixes I've made today/last night I've also built in a in game updater so if I release new versions as long as your vita is online and can reach GitHub the game will prompt you to update on boot Get the latest version here: https://github.com/zm2283145/melee-Vita/releases/tag/v0.8.4 &#32; submitted by &#32; /u/zm2283145 [link] &#32; [comments]",
+        "published_at": "2026-09-22T02:41:17.000Z"
+      },
+      "classification": {
+        "confidence": "high",
+        "reason": "7 dev signals: \\brelease\\b, \\bin.?game\\b, \\bboot(?:s|ed|ing)?\\b",
+        "candidate_type": "port",
+        "question": false,
+        "spam": false
+      },
+      "provenance": {
+        "repository_url": null,
+        "release_url": null,
+        "evidence_urls": [],
+        "evidence_bundle_id": null,
+        "repository_identity": null,
+        "repository_created_at": null,
+        "repository_last_activity_at": null,
+        "release_facts": [],
+        "vita_evidence": [],
+        "author_linkage": null,
+        "corroboration": [],
+        "duplicate_relation": {
+          "content_hash": "882d51c40b411f628b4269a29f835d5bc414f09884fe31ab4df7d75c47177a22",
+          "related_candidate_ids": []
+        }
+      },
+      "campaign": {
+        "cluster_id": "campaign-59e196c0",
+        "linkage_confidence": "medium",
+        "signals": [
+          "same_author_burst",
+          "shared_outbound_fingerprint"
+        ],
+        "related_candidate_ids": [
+          "reddit-1wllsbo"
+        ],
+        "text_fingerprint": "7a252a3c",
+        "media_fingerprints": [],
+        "outbound_fingerprints": [
+          "github.com/zm2283145/melee-vita/releases/tag/v0.8.4",
+          "www.reddit.com/user/zm2283145",
+          "www.reddit.com/r/vitahacks/comments/1wmxc2y/smash_melee_update"
+        ],
+        "direct_intent": false,
+        "explicit_campaign_reference": false,
+        "incident_id": null
+      },
+      "risk_signals": [],
+      "evidence_gaps": [
+        "repository identity and activity facts",
+        "author/developer linkage and independent corroboration"
+      ],
+      "content_hash": "882d51c40b411f628b4269a29f835d5bc414f09884fe31ab4df7d75c47177a22",
+      "review": null,
+      "incident": null
+    },
     {
       "schema_version": 2,
       "id": "reddit-1wadsa7",
@@ -780,10 +949,15 @@
         }
       },
       "campaign": {
-        "cluster_id": null,
-        "linkage_confidence": "none",
-        "signals": [],
-        "related_candidate_ids": [],
+        "cluster_id": "campaign-59e196c0",
+        "linkage_confidence": "medium",
+        "signals": [
+          "same_author_burst",
+          "shared_outbound_fingerprint"
+        ],
+        "related_candidate_ids": [
+          "reddit-1wmxc2y"
+        ],
         "text_fingerprint": "3439b9dd",
         "media_fingerprints": [],
         "outbound_fingerprints": [
