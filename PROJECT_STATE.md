@@ -1,8 +1,40 @@
 # VitaHarbor project state
 
-Updated: 2026-09-20
+Updated: 2026-09-23
 
-## Confirmed current facts
+## Active assignment: VH-INTEGRATE-015
+
+- Worker implementation is isolated on branch `codex/vitaharbor-integration-015` at
+  `C:\Users\suloW\.codex\worktrees\vitaharbor-integration-015\VitaPort`, based on
+  `origin/main` `2e8cc90ced003671a3b42064fe82a4350ce32f67`. Local implementation and
+  acceptance gates are complete; release evidence and deployment remain pending.
+- The primary checkout `C:\Users\suloW\Documents\ChatGPT\VitaPort` is on a separate
+  dirty `main` worktree at `96f1ffe60245dc697af908a0d88a11619a691ed2`. The UX contributor
+  checkout is `codex/vitaharbor-ux9` at `2e8cc90ced003671a3b42064fe82a4350ce32f67`; the
+  master checkout is detached at `b5d6536d948ae3ec678f3e5e60366fe0d7d5181f`. All three
+  contain independent pre-existing dirty work and are preserved without edits or cleanup.
+- Implementation commit: `8ba6e436c5a068ed2d6760fd20708f3ee3ad1b67` on the isolated
+  feature branch. Project-control documentation is being committed separately; the
+  28-source handoff hash check passed. No production change is claimed yet.
+- Master task `01a0bed8-0aae-73d2-bff1-bb0b6e7dfd00` remains the architecture/delegation
+  owner; worker task `01a0bc84-7462-7f92-a672-5856bed2ae0f` implements, tests and reports.
+  No native subagents or additional workers were used.
+- Local gates on this branch: typecheck passed; unit tests 92/92; integration tests 7/7;
+  build prerendered 29 projects and 32 sitemap URLs; lint passed; Playwright 17/17;
+  mobile audit passed 4/4 with no horizontal overflow or small targets; contrast passed
+  35/35; `git diff --check` passed.
+- Production baseline was read-only inspected on 2026-09-23: deployment
+  `dpl_8QeqpCERNv3rSAF7JDf59FQnjzrW`, READY and aliased to
+  `https://vitaharbor.vercel.app`. This is the pre-integration deployment, not evidence
+  that VH-INTEGRATE-015 is deployed.
+- `gh` (GitHub CLI) is unavailable in this environment. Git remote access is available;
+  release decisions must still follow the assignment and must not alter any contributor
+  worktree or unreviewed remote scanner changes.
+
+The sections below retain historical state and evidence; where they conflict with this
+active assignment, this dated VH-INTEGRATE-015 block is the current state.
+
+## Historical facts (2026-09-20; superseded by the active assignment block above)
 
 - Primary checkout: `main` at integration commit `e89adff` (full hash recorded in Git).
 - Primary worker task: `01a0bc84-7462-7f92-a672-5856bed2ae0f`.
@@ -14,7 +46,7 @@ Updated: 2026-09-20
   READY and aliased to `https://vitaharbor.vercel.app` after `VH-INCIDENT-010`
   containment.
 
-## Integration commit state
+## Prior integration commit state (2026-09-20)
 
 - The reviewed 80-path selection was committed locally on `main` as
   `e89adff` (`Integrate VitaHarbor ledger and incident controls`).
@@ -24,7 +56,7 @@ Updated: 2026-09-20
 - Post-commit bookkeeping, handoff verification and the clean-tree result are
   complete. No push, merge, reset, clean or stash occurred.
 
-## Completed evidence
+## Historical completed evidence
 
 - `VH-LINKS-003` evidence records its historical local audit. The earlier
   live-completeness conclusion is superseded as `NO_GO` by `VH-LINKS-005`.
@@ -51,8 +83,8 @@ Updated: 2026-09-20
 
 ## Open work
 
-- `VH-INTEGRATE-009` is the active assignment. The exact final checkout is
-  undergoing inventory, safety gates and local integration on `main`.
+- `VH-INTEGRATE-009` is historical. `VH-INTEGRATE-015` is the active assignment and
+  its implementation is isolated on the feature worktree listed above.
 - `VH-INCIDENT-010` is complete and production-verified; its implementation,
   evidence and handoff are part of the reviewed integration selection.
 - No push, merge, tag, GitHub workflow trigger or Vercel deployment is allowed
