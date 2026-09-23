@@ -14,13 +14,16 @@ Updated: 2026-09-23
   master checkout is detached at `b5d6536d948ae3ec678f3e5e60366fe0d7d5181f`. All three
   contain independent pre-existing dirty work and are preserved without edits or cleanup.
 - Implementation commit: `8ba6e436c5a068ed2d6760fd20708f3ee3ad1b67` on the isolated
-  feature branch. Project-control documentation is being committed separately; the
-  28-source handoff hash check passed. No production change is claimed yet.
+  feature branch; scanner-status regression-test follow-up is `6d716fbc1c54c68785462be8e0dbf2ab09b7999d`.
+  The branch includes automatic scanner commit `0c776a9a2481a1b434e8657e8ce270d8a3ada26c`;
+  project-control documentation is being committed separately. No production change is
+  claimed yet.
 - Master task `01a0bed8-0aae-73d2-bff1-bb0b6e7dfd00` remains the architecture/delegation
   owner; worker task `01a0bc84-7462-7f92-a672-5856bed2ae0f` implements, tests and reports.
   No native subagents or additional workers were used.
-- Local gates on this branch: typecheck passed; unit tests 92/92; integration tests 7/7;
-  build prerendered 29 projects and 32 sitemap URLs; lint passed; Playwright 17/17;
+- Local gates on this branch after scanner reconciliation: typecheck passed; unit tests 92/92;
+  integration tests 7/7; build prerendered 29 projects and 32 sitemap URLs; lint passed;
+  Playwright 18/18;
   mobile audit passed 4/4 with no horizontal overflow or small targets; contrast passed
   35/35; `git diff --check` passed.
 - Production baseline was read-only inspected on 2026-09-23: deployment
@@ -28,8 +31,9 @@ Updated: 2026-09-23
   `https://vitaharbor.vercel.app`. This is the pre-integration deployment, not evidence
   that VH-INTEGRATE-015 is deployed.
 - `gh` (GitHub CLI) is unavailable in this environment. Git remote access is available;
-  release decisions must still follow the assignment and must not alter any contributor
-  worktree or unreviewed remote scanner changes.
+  `origin/main` is at `0c776a9a2481a1b434e8657e8ce270d8a3ada26c`, one commit behind
+  the local tested release branch. The scanner's automatic change has been reviewed; no
+  other remote or contributor worktree changes are included.
 
 The sections below retain historical state and evidence; where they conflict with this
 active assignment, this dated VH-INTEGRATE-015 block is the current state.
