@@ -11,6 +11,7 @@ on:
       - "package.json"
       - "package-lock.json"
       - "scripts/cron-reddit-scan.mjs"
+      - "scripts/reddit-scan-health.mjs"
       - "scripts/reddit-backfill.ts"
       - "scripts/reddit-sources.mjs"
       - "scripts/reddit-classifier.mjs"

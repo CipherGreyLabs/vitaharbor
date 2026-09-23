@@ -1,119 +1,52 @@
-import React, { useState, useEffect, useMemo } from "react";
-import { UpdateCard, type UpdateCardData } from "../components/updates/UpdateCard";
-import { apiGet } from "../lib/api";
+import React from "react";
+import { Link } from "react-router-dom";
+import { FALLBACK_UPDATES } from "@/shared/constants/fallbackData";
 import { useDocumentMeta } from "../lib/useDocumentMeta";
-
-const EVENT_TYPE_FILTERS = [
-  { value: "", label: "TYPE: ALL" },
-  { value: "release", label: "RELEASE" },
-  { value: "playability_progress", label: "PLAYABILITY" },
-  { value: "first_boot", label: "FIRST BOOT" },
-  { value: "first_in_game", label: "IN-GAME" },
-  { value: "technical_progress", label: "TECH PROGRESS" },
-  { value: "project_announced", label: "ANNOUNCEMENT" }
-];
-
-const VERIFICATION_FILTERS = [
-  { value: "", label: "VERIFICATION: ALL" },
-  { value: "developer_direct", label: "DEV DIRECT" },
-  { value: "maintainer_confirmed", label: "VERIFIED" },
-  { value: "community_report", label: "COMMUNITY REPORT" }
-];
+import { formatUtcDateTime, verificationMeta } from "../components/ledger/types";
 
 export const UpdatesPage: React.FC = () => {
   useDocumentMeta({
-    title: "Signal stream",
-    description:
-      "Every milestone observation from r/vitahacks, r/VitaPiracy and r/PSVitaHomebrew, filtered by event type and verification status."
+    title: "Vita port updates — VitaHarbor",
+    description: "Chronological, source-linked PlayStation Vita port development updates tracked by VitaHarbor."
   });
-
-  const [updates, setUpdates] = useState<UpdateCardData[]>([]);
-  const [eventTypeFilter, setEventTypeFilter] = useState("");
-  const [verificationFilter, setVerificationFilter] = useState("");
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    async function loadUpdates() {
-      try {
-        const data = await apiGet<{ updates: UpdateCardData[] }>("/api/updates?limit=100", "updates");
-        setUpdates(data.updates || []);
-      } catch (e) {
-        console.error("Failed to load updates feed", e);
-      } finally {
-        setLoading(false);
-      }
-    }
-    loadUpdates();
-  }, []);
-
-  const filteredUpdates = useMemo(() => {
-    return updates.filter((u) => {
-      if (eventTypeFilter && u.event_type !== eventTypeFilter) return false;
-      if (verificationFilter && u.verification_level !== verificationFilter) return false;
-      return true;
-    });
-  }, [updates, eventTypeFilter, verificationFilter]);
+  const updates = [...FALLBACK_UPDATES].sort(
+    (a, b) => new Date(b.event_at).getTime() - new Date(a.event_at).getTime()
+  );
 
   return (
-    <div className="max-w-4xl mx-auto space-y-6">
-      <div className="border-b border-[#242830] pb-2">
-        <h1 className="font-mono text-sm font-bold uppercase tracking-wider text-[#f4f6f8]">
-          DEVELOPMENT MILESTONE STREAM
-        </h1>
-        <p className="text-[11px] font-mono text-[#7c848d]">
-          Chronological evidence feed linking to verified Reddit releases and progress logs.
-        </p>
-      </div>
-
-      {/* Filter Bar */}
-      <div className="terminal-panel p-2.5 flex flex-wrap items-center gap-2 text-[10px] font-mono">
-        <select
-          value={eventTypeFilter}
-          onChange={(e) => setEventTypeFilter(e.target.value)}
-          className="bg-[#08090a] border border-[#242830] text-[#a3acb5] rounded-[2px] px-2.5 py-1 focus:outline-none focus:border-[#3ad2ff]"
-        >
-          {EVENT_TYPE_FILTERS.map((f) => (
-            <option key={f.value} value={f.value}>
-              {f.label}
-            </option>
-          ))}
-        </select>
-
-        <select
-          value={verificationFilter}
-          onChange={(e) => setVerificationFilter(e.target.value)}
-          className="bg-[#08090a] border border-[#242830] text-[#a3acb5] rounded-[2px] px-2.5 py-1 focus:outline-none focus:border-[#3ad2ff]"
-        >
-          {VERIFICATION_FILTERS.map((f) => (
-            <option key={f.value} value={f.value}>
-              {f.label}
-            </option>
-          ))}
-        </select>
-
-        <span className="ml-auto text-[10px] text-[#7c848d]">
-          {filteredUpdates.length} of {updates.length} events
-        </span>
-      </div>
-
-      {/* Stream */}
-      {loading ? (
-        <div className="space-y-2.5">
-          {[1, 2, 3].map((i) => (
-            <div key={i} className="terminal-card p-4 h-24 animate-pulse bg-[#15181b]" />
-          ))}
+    <main className="mx-auto min-h-screen max-w-5xl px-6 py-10 sm:py-14">
+      <nav className="flex flex-wrap items-center justify-between gap-4 text-body">
+        <Link to="/" className="font-semibold text-ink hover:text-accent">VitaHarbor</Link>
+        <div className="flex gap-4 text-ink-muted">
+          <Link to="/discovery" className="hover:text-ink">Discovery</Link>
+          <Link to="/#directory" className="hover:text-ink">Directory</Link>
         </div>
-      ) : filteredUpdates.length > 0 ? (
-        <div className="space-y-2.5">
-          {filteredUpdates.map((u) => (
-            <UpdateCard key={u.id} update={u} />
-          ))}
-        </div>
-      ) : (
-        <div className="terminal-panel p-12 text-center font-mono text-xs text-[#7c848d]">
-          NO EVENTS MATCH SELECTED FILTERS
-        </div>
-      )}
-    </div>
+      </nav>
+      <header className="mt-14 border-b border-hairline-strong/30 pb-6">
+        <p className="text-micro font-semibold uppercase tracking-[0.16em] text-ink-muted">Chronological ledger</p>
+        <h1 className="mt-3 text-display font-semibold tracking-tight text-ink">All updates</h1>
+        <p className="mt-4 max-w-2xl text-lead text-ink-medium">Verified and source-linked project events, newest first.</p>
+      </header>
+      <ol className="mt-8 space-y-4">
+        {updates.map((update) => {
+          const sourceUrl = update.sources?.[0]?.canonical_url;
+          const verification = verificationMeta(update.verification_level);
+          return (
+            <li key={update.id} className="rounded-2xl border border-hairline bg-surface p-5 sm:p-6">
+              <div className="flex flex-wrap items-center justify-between gap-3 text-caption text-ink-muted">
+                {update.project_slug ? <Link to={`/projects/${update.project_slug}/`} className="font-medium text-accent hover:underline">{update.project_display_name || update.project_slug}</Link> : <span>{update.project_display_name || "Unassigned project"}</span>}
+                <time dateTime={new Date(update.event_at).toISOString()}>{formatUtcDateTime(update.event_at)}</time>
+              </div>
+              <h2 className="mt-3 text-subtitle font-semibold text-ink">{update.title}</h2>
+              <p className="mt-2 text-body leading-relaxed text-ink-medium">{update.summary}</p>
+              <div className="mt-4 flex flex-wrap items-center justify-between gap-3 border-t border-hairline pt-3 text-caption text-ink-muted">
+                <span title={verification.description}>{verification.label}</span>
+                {sourceUrl && <a href={sourceUrl} target="_blank" rel="noopener noreferrer" className="font-medium text-accent hover:underline">Open source</a>}
+              </div>
+            </li>
+          );
+        })}
+      </ol>
+    </main>
   );
 };

@@ -19,6 +19,8 @@ interface Entry {
 
 const entries: Entry[] = [
   { loc: origin + "/", priority: "1.0" },
+  { loc: origin + "/updates/", priority: "0.8" },
+  { loc: origin + "/discovery/", priority: "0.6" },
   ...FALLBACK_PROJECTS.map((p: { slug: string; last_activity_at?: unknown }) => ({
     loc: origin + "/projects/" + p.slug + "/",
     priority: "0.7",
@@ -47,4 +49,3 @@ lines.push("");
 const out = path.resolve(process.cwd(), "dist/web/sitemap.xml");
 writeFileSync(out, lines.join("\n"), "utf8");
 console.log("Wrote sitemap with " + entries.length + " urls to " + out);
-

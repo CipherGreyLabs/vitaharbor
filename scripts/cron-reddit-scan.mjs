@@ -9,6 +9,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { createHash } from "node:crypto";
 import { REDDIT_SOURCE_LABEL, REDDIT_SUBREDDITS, redditRssUrl } from "./reddit-sources.mjs";
+import { buildScannerHealth } from "./reddit-scan-health.mjs";
 import { classify, classifyCandidateType, isTrackableCandidateType, keyOf, parseEntries } from "./reddit-classifier.mjs";
 import {
   assessCandidate,
@@ -23,6 +24,7 @@ import {
 const USER_AGENT = "web:vitaharbor.app:v1.0.0 (by /u/VitaHarborLedger)";
 const INTERNAL_OUT = path.resolve(process.cwd(), "data/quarantine.json");
 const PUBLIC_OUT = path.resolve(process.cwd(), "public/data/discovered.json");
+const HEALTH_OUT = path.resolve(process.cwd(), "public/data/scanner-health.json");
 const LEDGER = path.resolve(process.cwd(), "src/shared/constants/fallbackData.ts");
 const MAX_ITEMS = 100;
 
@@ -67,17 +69,19 @@ function previous() {
 
 async function fetchFeed(subreddit) {
   const url = redditRssUrl(subreddit);
+  let failureStatus = "unavailable";
   for (let attempt = 1; attempt <= 2; attempt++) {
     try {
       const res = await fetch(url, { headers: { "User-Agent": USER_AGENT } });
-      if (res.ok) return parseEntries(await res.text());
+      if (res.ok) return { entries: parseEntries(await res.text()), status: "available" };
+      if (res.status === 429) failureStatus = "rate_limited";
       console.warn("r/" + subreddit + " returned HTTP " + res.status + (attempt === 1 ? ", retrying" : ""));
     } catch (error) {
       console.warn("r/" + subreddit + " fetch failed:", error.message);
     }
     await new Promise((resolve) => setTimeout(resolve, attempt * 1500));
   }
-  return [];
+  return { entries: [], status: failureStatus };
 }
 
 const known = knownLeadUrls();
@@ -101,8 +105,11 @@ const seen = new Map(
 const detectedAt = new Date().toISOString();
 
 let fetched = 0;
+const feedResults = [];
 for (const subreddit of REDDIT_SUBREDDITS) {
-  const entries = await fetchFeed(subreddit);
+  const result = await fetchFeed(subreddit);
+  feedResults.push({ subreddit, status: result.status });
+  const entries = result.entries;
   fetched += entries.length;
   console.log("r/" + subreddit + ": " + entries.length + " entries parsed");
 
@@ -162,6 +169,12 @@ fs.writeFileSync(
 fs.writeFileSync(
   PUBLIC_OUT,
   JSON.stringify(publicDocument(items, detectedAt, REDDIT_SOURCE_LABEL), null, 2) + "\n",
+  "utf8"
+);
+
+fs.writeFileSync(
+  HEALTH_OUT,
+  JSON.stringify(buildScannerHealth(REDDIT_SUBREDDITS, feedResults, detectedAt), null, 2) + "\n",
   "utf8"
 );
 

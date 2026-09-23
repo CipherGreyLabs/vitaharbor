@@ -3,11 +3,14 @@ import { useParams, Link } from "react-router-dom";
 import { StatusBadge } from "../components/ui/StatusBadge";
 import { StageHistoryVisualizer, type StageHistoryRecord } from "../components/projects/StageHistoryVisualizer";
 import { UpdateCard, type UpdateCardData } from "../components/updates/UpdateCard";
-import { formatRelativeTime, formatDate, deriveActivityLevel } from "@/shared/utils";
+import { formatDate, deriveActivityLevel } from "@/shared/utils";
 import { apiGet } from "../lib/api";
 import { useDocumentMeta } from "../lib/useDocumentMeta";
+import { readWatchlist, writeWatchlist } from "../lib/visitorState";
 import type { DevelopmentStage, ProjectLifecycle } from "@/shared/types";
-import { ChevronLeft } from "lucide-react";
+import { FALLBACK_PROJECTS } from "@/shared/constants/fallbackData";
+import { Bookmark, ChevronLeft } from "lucide-react";
+import { formatUtcDateTime } from "../components/ledger/types";
 
 interface ProjectDetailData {
   id: number;
@@ -34,6 +37,11 @@ export const ProjectDetailPage: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
   const [project, setProject] = useState<ProjectDetailData | null>(null);
   const [loading, setLoading] = useState(true);
+  const [watched, setWatched] = useState(false);
+
+  useEffect(() => {
+    setWatched(Boolean(slug && readWatchlist().includes(slug)));
+  }, [slug]);
 
   useEffect(() => {
     async function loadProject() {
@@ -50,8 +58,9 @@ export const ProjectDetailPage: React.FC = () => {
             // graceful fallback
           }
         }
-      } catch (e) {
-        console.error("Failed to load project detail", e);
+      } catch {
+        const fallback = FALLBACK_PROJECTS.find((item) => item.slug === slug);
+        setProject(fallback ? fallback as unknown as ProjectDetailData : null);
       } finally {
         setLoading(false);
       }
@@ -81,7 +90,7 @@ export const ProjectDetailPage: React.FC = () => {
       <div className="terminal-panel p-12 text-center space-y-4">
         <h2 className="font-mono text-sm font-bold text-[#f4f6f8]">PROJECT RECORD NOT FOUND</h2>
         <p className="text-xs text-[#a3acb5]">The requested project identifier does not exist in the catalog.</p>
-        <Link to="/projects" className="btn-terminal-secondary text-xs">
+        <Link to="/" className="btn-terminal-secondary text-xs">
           Return to directory
         </Link>
       </div>
@@ -95,7 +104,7 @@ export const ProjectDetailPage: React.FC = () => {
     <div className="max-w-4xl mx-auto space-y-6">
       {/* Back button */}
       <Link
-        to="/projects"
+        to="/"
         className="inline-flex items-center gap-1 font-mono text-[11px] text-[#a3acb5] hover:text-[#3ad2ff] transition-colors"
       >
         <ChevronLeft className="w-3.5 h-3.5" />
@@ -124,6 +133,19 @@ export const ProjectDetailPage: React.FC = () => {
             <StatusBadge type="stage" value={project.current_stage} />
             <StatusBadge type="lifecycle" value={project.lifecycle} />
             <StatusBadge type="activity" value={activityLevel} />
+            <button
+              type="button"
+              aria-pressed={watched}
+              onClick={() => {
+                if (!slug) return;
+                const next = watched ? readWatchlist().filter((item) => item !== slug) : [...readWatchlist(), slug];
+                if (writeWatchlist(next)) setWatched(!watched);
+              }}
+              className="inline-flex min-h-[36px] items-center gap-1.5 rounded-full border border-[#242830] px-3 font-mono text-[10px] text-[#a3acb5] transition-colors hover:border-[#3ad2ff] hover:text-[#3ad2ff]"
+            >
+              <Bookmark className="h-3.5 w-3.5" />
+              {watched ? "WATCHING" : "WATCH"}
+            </button>
           </div>
         </div>
 
@@ -143,7 +165,7 @@ export const ProjectDetailPage: React.FC = () => {
             </span>
           </div>
           <div>FIRST SEEN: <span className="text-[#a3acb5]">{formatDate(project.first_seen_at)}</span></div>
-          <div>LAST UPDATED: <span className="text-[#3ad2ff]">{formatRelativeTime(project.last_activity_at)}</span></div>
+          <div>LAST SOURCE DATE: <span className="text-[#3ad2ff]">{formatUtcDateTime(project.last_activity_at)}</span></div>
         </div>
       </div>
 

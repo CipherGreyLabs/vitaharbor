@@ -1,5 +1,5 @@
-import React, { Suspense, lazy, useEffect, useState } from "react";
-import { type SelectedProjectView } from "../3d/VitaConsoleScene";
+import React, { Suspense, lazy, useCallback, useEffect, useState } from "react";
+import { type RendererErrorReason, type SelectedProjectView } from "../3d/VitaConsoleScene";
 import { LiveAreaWaves } from "../visual/LiveAreaWaves";
 import { ProjectMark } from "../projects/ProjectMark";
 import { splitTitle, prettyStage, SPECS } from "./types";
@@ -9,13 +9,48 @@ const VitaConsoleScene = lazy(() =>
   import("../3d/VitaConsoleScene").then((m) => ({ default: m.VitaConsoleScene }))
 );
 
+export const CONSOLE_3D_PREFERENCE_KEY = "vitaharbor.console-3d-preference";
+export type Console3DPreference = "3d" | "static";
+export type ConsoleFallbackReason = "save-data" | "user-static" | "webgl-unavailable" | "renderer-error";
+
+function readConsolePreference(): Console3DPreference | null {
+  if (typeof window === "undefined") return null;
+  try {
+    const value = window.localStorage.getItem(CONSOLE_3D_PREFERENCE_KEY);
+    return value === "3d" || value === "static" ? value : null;
+  } catch {
+    return null;
+  }
+}
+
+function readSaveData(): boolean {
+  if (typeof navigator === "undefined") return false;
+  return Boolean((navigator as Navigator & { connection?: { saveData?: boolean } }).connection?.saveData);
+}
+
+function readReducedMotion(): boolean {
+  if (typeof window === "undefined") return false;
+  return Boolean(window.matchMedia?.("(prefers-reduced-motion: reduce)").matches);
+}
+
+function writeConsolePreference(value: Console3DPreference) {
+  try {
+    window.localStorage.setItem(CONSOLE_3D_PREFERENCE_KEY, value);
+  } catch {
+    // A blocked storage area should not break the preview.
+  }
+}
+
 const ConsoleSkeleton = () => (
   <div className="flex h-full w-full items-end justify-center pb-10">
     <div className="vh-skeleton h-[62%] w-[78%] max-w-[620px] rounded-[30px] bg-sunken" />
   </div>
 );
 
-const StaticConsolePreview: React.FC<{ selectedProject: SelectedProjectView | null }> = ({ selectedProject }) => {
+const StaticConsolePreview: React.FC<{
+  selectedProject: SelectedProjectView | null;
+  reason: ConsoleFallbackReason;
+}> = ({ selectedProject, reason }) => {
   const preview = selectedProject
     ? splitTitle(selectedProject.game_title || selectedProject.display_name)
     : null;
@@ -56,7 +91,13 @@ const StaticConsolePreview: React.FC<{ selectedProject: SelectedProjectView | nu
         </div>
       </div>
       <figcaption className="sr-only">
-        Static console preview enabled because reduced motion, data saving or unavailable WebGL is active.
+        {reason === "save-data"
+          ? "Static console preview enabled to save data."
+          : reason === "user-static"
+            ? "Static console preview enabled by your preference."
+            : reason === "renderer-error"
+              ? "The 3D preview could not start, so the static preview is shown."
+              : "3D is unavailable in this browser, so the static preview is shown."}
       </figcaption>
     </figure>
   );
@@ -68,6 +109,7 @@ interface ConsoleStageProps {
   selectedId: number | null;
   onSelectProject: (project: any) => void;
   webgl: boolean | null;
+  onRetryWebgl: () => void;
   onCopyLink: (project: any) => void;
   copiedSlug: string;
   consoleRef: React.RefObject<HTMLDivElement | null>;
@@ -79,20 +121,107 @@ export const ConsoleStage: React.FC<ConsoleStageProps> = ({
   selectedId,
   onSelectProject,
   webgl,
+  onRetryWebgl,
   onCopyLink,
   copiedSlug,
   consoleRef
 }) => {
-  const [liteMode, setLiteMode] = useState(false);
+  const [saveData, setSaveData] = useState(readSaveData);
+  const [reducedMotion, setReducedMotion] = useState(readReducedMotion);
+  const [preference, setPreference] = useState<Console3DPreference | null>(readConsolePreference);
+  const [rendererFailure, setRendererFailure] = useState<RendererErrorReason | null>(null);
+  const [sceneReady, setSceneReady] = useState(false);
+  const [sceneStatus, setSceneStatus] = useState<"deferred" | "loading" | "ready">("deferred");
 
   useEffect(() => {
     const media = window.matchMedia?.("(prefers-reduced-motion: reduce)");
-    const connection = (navigator as Navigator & { connection?: { saveData?: boolean } }).connection;
-    const update = () => setLiteMode(Boolean(media?.matches || connection?.saveData));
+    const connection = (navigator as Navigator & {
+      connection?: {
+        saveData?: boolean;
+        addEventListener?: (type: string, listener: () => void) => void;
+        removeEventListener?: (type: string, listener: () => void) => void;
+      };
+    }).connection;
+    const update = () => {
+      setReducedMotion(Boolean(media?.matches));
+      setSaveData(Boolean(connection?.saveData));
+    };
     update();
     media?.addEventListener?.("change", update);
-    return () => media?.removeEventListener?.("change", update);
+    connection?.addEventListener?.("change", update);
+    return () => {
+      media?.removeEventListener?.("change", update);
+      connection?.removeEventListener?.("change", update);
+    };
   }, []);
+
+  const handleRendererError = useCallback((reason: RendererErrorReason) => {
+    setRendererFailure(reason);
+  }, []);
+  const handleRendererReady = useCallback(() => {
+    setSceneStatus("ready");
+  }, []);
+
+  const explicitStatic = preference === "static";
+  const saveDataStatic = saveData && preference !== "3d";
+  const staticMode = webgl === false || Boolean(rendererFailure) || explicitStatic || saveDataStatic;
+  const fallbackReason: ConsoleFallbackReason | null = webgl === false
+    ? "webgl-unavailable"
+    : rendererFailure
+      ? "renderer-error"
+      : explicitStatic
+        ? "user-static"
+        : saveDataStatic
+          ? "save-data"
+          : null;
+  const fallbackLabel = fallbackReason === "save-data"
+    ? "3D paused to save data"
+    : fallbackReason === "user-static"
+      ? "Static preview enabled"
+      : fallbackReason === "renderer-error"
+        ? "3D preview unavailable"
+        : "WebGL unavailable";
+  const canLoad3d = webgl !== false && !rendererFailure;
+  const showPreviewControls = staticMode || (saveData && preference === "3d");
+
+  useEffect(() => {
+    if (staticMode || sceneReady) return;
+    const node = consoleRef.current;
+    if (!node) return;
+    if (typeof IntersectionObserver === "undefined") {
+      setSceneReady(true);
+      return;
+    }
+    const observer = new IntersectionObserver((entries) => {
+      if (entries.some((entry) => entry.isIntersecting)) {
+        setSceneStatus("loading");
+        setSceneReady(true);
+      }
+    }, { rootMargin: "420px 0px", threshold: 0.01 });
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, [consoleRef, sceneReady, staticMode]);
+
+  useEffect(() => {
+    if (!staticMode && sceneReady) setSceneStatus("loading");
+  }, [sceneReady, staticMode]);
+
+  const persistPreference = (value: Console3DPreference) => {
+    writeConsolePreference(value);
+    setPreference(value);
+    setRendererFailure(null);
+    if (value === "3d") {
+      setSceneStatus("loading");
+      setSceneReady(true);
+    }
+  };
+
+  const retry3d = () => {
+    setRendererFailure(null);
+    setSceneStatus("loading");
+    setSceneReady(true);
+    onRetryWebgl();
+  };
 
   const preview = selectedProject
     ? splitTitle(selectedProject.game_title || selectedProject.display_name)
@@ -123,17 +252,65 @@ export const ConsoleStage: React.FC<ConsoleStageProps> = ({
         
 
         <div className="relative px-2 pt-0 sm:px-6">
-          <div ref={consoleRef} className="h-[200px] sm:h-[260px] lg:h-[310px]">
-            {webgl === false || liteMode ? (
-              <StaticConsolePreview selectedProject={selectedProject} />
+          <div
+            ref={consoleRef}
+            className="h-[200px] sm:h-[260px] lg:h-[310px]"
+            data-testid="console-stage"
+            data-vita-mode={staticMode ? "static" : "3d"}
+            data-vita-fallback-reason={fallbackReason || "none"}
+            data-vita-scene-state={staticMode ? "fallback" : sceneStatus}
+            data-reduced-motion={reducedMotion ? "true" : "false"}
+            data-save-data={saveData ? "true" : "false"}
+          >
+            {staticMode ? (
+              <StaticConsolePreview selectedProject={selectedProject} reason={fallbackReason || "user-static"} />
+            ) : !sceneReady ? (
+              <ConsoleSkeleton />
             ) : (
               <Suspense fallback={<ConsoleSkeleton />}>
-                <div className="vh-rise h-full w-full">
-                  <VitaConsoleScene selectedProject={selectedProject} />
+                <div className="vh-rise h-full w-full" data-vita-scene="3d">
+                  <VitaConsoleScene
+                    selectedProject={selectedProject}
+                    reducedMotion={reducedMotion}
+                    onRendererError={handleRendererError}
+                    onRendererReady={handleRendererReady}
+                  />
                 </div>
               </Suspense>
             )}
           </div>
+          {showPreviewControls && (
+            <div className="mt-2 flex flex-wrap items-center justify-center gap-2" role="group" aria-label="3D Vita preview controls">
+              <span className="text-micro uppercase tracking-[0.12em] text-ink-muted">{fallbackLabel}</span>
+              {staticMode && canLoad3d && (
+                <button
+                  type="button"
+                  onClick={() => persistPreference("3d")}
+                  className="inline-flex min-h-[44px] items-center rounded-lg border border-hairline bg-surface px-3 py-1.5 text-caption font-medium text-ink transition-colors hover:border-hairline-strong focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink/20"
+                >
+                  Load 3D Vita
+                </button>
+              )}
+              {staticMode && !canLoad3d && (
+                <button
+                  type="button"
+                  onClick={retry3d}
+                  className="inline-flex min-h-[44px] items-center rounded-lg border border-hairline bg-surface px-3 py-1.5 text-caption font-medium text-ink transition-colors hover:border-hairline-strong focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink/20"
+                >
+                  Retry 3D Vita
+                </button>
+              )}
+              {!staticMode && saveData && preference === "3d" && (
+                <button
+                  type="button"
+                  onClick={() => persistPreference("static")}
+                  className="inline-flex min-h-[44px] items-center rounded-lg border border-hairline bg-surface px-3 py-1.5 text-caption font-medium text-ink transition-colors hover:border-hairline-strong focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink/20"
+                >
+                  Use static preview
+                </button>
+              )}
+            </div>
+          )}
           <div aria-hidden="true" className="vh-floor mx-auto h-px w-[84%]" />
         </div>
 
@@ -237,7 +414,7 @@ export const ConsoleStage: React.FC<ConsoleStageProps> = ({
 
           <p className="mt-3 text-center text-micro uppercase text-ink-muted">
             <span className="hidden sm:inline">
-              {liteMode ? "Static preview · " : "Drag to rotate · "}Press <span className="font-mono">/</span> to search the directory
+              {staticMode ? "Static preview · " : reducedMotion ? "Reduced motion · " : "Drag to rotate · "}Press <span className="font-mono">/</span> to search the directory
             </span>
             <span className="sm:hidden">Swipe to rotate · use the arrows to switch ports</span>
           </p>

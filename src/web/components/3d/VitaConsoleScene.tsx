@@ -19,7 +19,12 @@ export interface VitaConsoleSceneProps {
   selectedProject?: SelectedProjectView | null;
   align?: "center" | "split";
   onConsoleClick?: () => void;
+  reducedMotion?: boolean;
+  onRendererError?: (reason: RendererErrorReason) => void;
+  onRendererReady?: () => void;
 }
+
+export type RendererErrorReason = "renderer-initialization" | "webgl-context-lost";
 
 // PCH-1000 dimensions in millimetres. Screen: 5-inch, 960:544 aspect.
 export const VITA_DIMENSIONS = { width: 182, height: 83.5, depth: 18.6, screenWidth: 110.6, screenHeight: 62.7 };
@@ -50,7 +55,10 @@ const BODY_TRACE: Array<[string, ...number[]]> = [
 export const VitaConsoleScene: React.FC<VitaConsoleSceneProps> = ({
   selectedProject,
   align = "center",
-  onConsoleClick
+  onConsoleClick,
+  reducedMotion = false,
+  onRendererError,
+  onRendererReady
 }) => {
   const host = useRef<HTMLDivElement>(null);
   const selected = useRef(selectedProject);
@@ -64,17 +72,46 @@ export const VitaConsoleScene: React.FC<VitaConsoleSceneProps> = ({
     // Phones get a lighter render: no multisampling and a lower pixel ratio.
     const lightDevice = window.innerWidth < 760;
     let renderer: THREE.WebGLRenderer;
+    let reportedError = false;
+    const reportRendererError = (reason: RendererErrorReason) => {
+      if (reportedError) return;
+      reportedError = true;
+      setUnavailable(true);
+      onRendererError?.(reason);
+    };
     try {
       renderer = new THREE.WebGLRenderer({ antialias: !lightDevice, alpha: true });
     } catch {
-      setUnavailable(true);
+      reportRendererError("renderer-initialization");
       return;
     }
 
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, lightDevice ? 1.25 : 1.75));
-    renderer.toneMapping = THREE.ACESFilmicToneMapping;
-    renderer.toneMappingExposure = 1.08;
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(30, 1, 1, 2000);
+    let pmrem: THREE.PMREMGenerator | null = null;
+    let env: THREE.WebGLRenderTarget;
+    try {
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, lightDevice ? 1.25 : 1.75));
+      renderer.toneMapping = THREE.ACESFilmicToneMapping;
+      renderer.toneMappingExposure = 1.08;
+      pmrem = new THREE.PMREMGenerator(renderer);
+      const room = new RoomEnvironment();
+      env = pmrem.fromScene(room, 0.04);
+      room.dispose();
+    } catch {
+      reportRendererError("renderer-initialization");
+      pmrem?.dispose();
+      renderer.dispose();
+      renderer.domElement.remove();
+      return;
+    }
+    renderer.domElement.setAttribute("data-testid", "vita-3d-canvas");
     el.appendChild(renderer.domElement);
+    const handleContextLost = (event: Event) => {
+      event.preventDefault();
+      reportRendererError("webgl-context-lost");
+    };
+    renderer.domElement.addEventListener("webglcontextlost", handleContextLost, false);
 
     const handleMouseMove = (e: MouseEvent) => {
       const rect = el.getBoundingClientRect();
@@ -85,14 +122,8 @@ export const VitaConsoleScene: React.FC<VitaConsoleSceneProps> = ({
     };
     window.addEventListener("mousemove", handleMouseMove);
 
-    const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(30, 1, 1, 2000);
-    const pmrem = new THREE.PMREMGenerator(renderer);
-    const room = new RoomEnvironment();
-    const env = pmrem.fromScene(room, 0.04);
     scene.environment = env.texture;
     scene.environmentIntensity = 0.65;
-    room.dispose();
 
     const vita = new THREE.Group();
     scene.add(vita);
@@ -434,11 +465,12 @@ const recessMat = new THREE.MeshStandardMaterial({color:'#14161a',roughness:0.52
     topRimLight.position.set(0, 180, -120);
     scene.add(topRimLight);
 
-    let px = 0, py = 0, visible = true, raf = 0, previous = '';
+    let px = 0, py = 0, visible = true, raf = 0, previous = '', readyReported = false;
     let targetRotX = 0, targetRotY = 0;
-    const reduced = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+    const reduced = reducedMotion || Boolean(window.matchMedia?.('(prefers-reduced-motion: reduce)').matches);
 
     const move = (e: PointerEvent) => {
+      if (reduced) return;
       const r = el.getBoundingClientRect();
       px = (e.clientX - r.left) / r.width - 0.5;
       py = (e.clientY - r.top) / r.height - 0.5;
@@ -473,11 +505,17 @@ const recessMat = new THREE.MeshStandardMaterial({color:'#14161a',roughness:0.52
 
     function tick() {
       raf = requestAnimationFrame(tick);
-      scene.rotation.y += (targetRotY - scene.rotation.y) * 0.1;
-      scene.rotation.x += (targetRotX - scene.rotation.x) * 0.1;
-      // Dynamic light movement based on parallax
-      light.position.x = -80 + (targetRotY * 100);
-      rimLight.position.x = (targetRotY * 150);
+      if (reduced) {
+        scene.rotation.set(0, 0, 0);
+        light.position.x = -80;
+        rimLight.position.x = 0;
+      } else {
+        scene.rotation.y += (targetRotY - scene.rotation.y) * 0.1;
+        scene.rotation.x += (targetRotX - scene.rotation.x) * 0.1;
+        // Dynamic light movement based on parallax
+        light.position.x = -80 + (targetRotY * 100);
+        rimLight.position.x = (targetRotY * 150);
+      }
       if (!visible || document.hidden) return;
       const signature = JSON.stringify(selected.current);
       if (signature !== previous) {
@@ -488,7 +526,16 @@ const recessMat = new THREE.MeshStandardMaterial({color:'#14161a',roughness:0.52
       vita.rotation.x += ((reduced ? 0 : py * 0.15) - vita.rotation.x) * 0.08;
       vita.rotation.z = -0.02;
       vita.position.x += ((vita.userData.targetX ?? 0) - vita.position.x) * 0.1;
-      renderer.render(scene, camera);
+      try {
+        renderer.render(scene, camera);
+        if (!reportedError && !readyReported) {
+          readyReported = true;
+          onRendererReady?.();
+        }
+      } catch {
+        reportRendererError("renderer-initialization");
+        return;
+      }
     }
 
     // Interactive face buttons: real physical press feedback on click.
@@ -532,6 +579,7 @@ const recessMat = new THREE.MeshStandardMaterial({color:'#14161a',roughness:0.52
       io?.disconnect();
       el.removeEventListener('pointermove', move);
       el.removeEventListener('pointerleave', leave);
+      renderer.domElement.removeEventListener("webglcontextlost", handleContextLost);
       scene.traverse(obj => {
         const m = obj as THREE.Mesh;
         m.geometry?.dispose();
@@ -541,11 +589,11 @@ const recessMat = new THREE.MeshStandardMaterial({color:'#14161a',roughness:0.52
       });
       textures.forEach(t => t.dispose());
       env.dispose();
-      pmrem.dispose();
+      pmrem?.dispose();
       renderer.dispose();
       renderer.domElement.remove();
     };
-  }, [align]);
+  }, [align, onRendererError, onRendererReady, reducedMotion]);
 
   return (
     <div
@@ -555,6 +603,8 @@ const recessMat = new THREE.MeshStandardMaterial({color:'#14161a',roughness:0.52
       style={{ minHeight: 320, touchAction: "pan-y" }}
       role="img"
       aria-label="Interactive 3D model of the PS Vita PCH-1000"
+      data-vita-scene-status={unavailable ? "unavailable" : "ready"}
+      data-vita-motion={reducedMotion ? "reduced" : "full"}
     >
       {unavailable && (
         <div className="absolute inset-0 flex items-center justify-center p-6 text-center text-slate-400 text-xs font-mono">

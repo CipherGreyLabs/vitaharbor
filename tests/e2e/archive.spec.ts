@@ -71,6 +71,34 @@ test.describe("archive", () => {
     await expect.poll(() => new URL(page.url()).search).toBe("");
   });
 
+  test("released and recently updated filters can be selected", async ({ page }) => {
+    const released = page.getByRole("button", { name: /Released \(/ });
+    await released.click();
+    await expect(released).toHaveAttribute("aria-pressed", "true");
+    await expect(page.locator("li[id^='entry-']").first()).toBeVisible();
+
+    const recent = page.getByRole("button", { name: /Recently updated \(/ });
+    await recent.click();
+    await expect(recent).toHaveAttribute("aria-pressed", "true");
+    await expect(page.locator("li[id^='entry-']").first()).toBeVisible();
+  });
+
+  test("a project can be saved and removed from the browser watchlist", async ({ page }) => {
+    const project = FALLBACK_PROJECTS[0];
+    await page.goto(`/projects/${project.slug}/`, { waitUntil: "domcontentloaded" });
+    const watchButton = page.getByRole("button", { name: "WATCH", exact: true });
+    await expect(watchButton).toBeVisible();
+    await watchButton.click();
+    await expect(page.getByRole("button", { name: "WATCHING", exact: true })).toHaveAttribute("aria-pressed", "true");
+
+    await page.goto("/", { waitUntil: "domcontentloaded" });
+    const watchlist = page.getByRole("region", { name: "Your watchlist" });
+    await expect(page.getByRole("heading", { name: "Your watchlist" })).toBeVisible();
+    await expect(watchlist.getByRole("link", { name: project.display_name || project.game_title })).toBeVisible();
+    await watchlist.getByRole("button", { name: "Remove" }).click();
+    await expect(page.getByRole("heading", { name: "Your watchlist" })).toHaveCount(0);
+  });
+
   test("the moving ticker can be paused", async ({ page }) => {
     // Scoped to the ticker region: the button's label changes with its state.
     const toggle = page.locator("[role='region'][aria-label='Latest community signals'] button");
@@ -108,7 +136,28 @@ test.describe("archive", () => {
     await expect(selector.locator("button")).toHaveCount(FALLBACK_PROJECTS.length);
   });
 
-  test("Show on Vita updates the reduced-motion Vita preview", async ({ page }) => {
+  test("desktop WebGL renders the 3D Vita by default", async ({ page }) => {
+    const stage = page.locator("[data-testid='console-stage']");
+    await expect(stage).toHaveAttribute("data-vita-mode", "3d");
+    await stage.scrollIntoViewIfNeeded();
+    await expect(page.getByTestId("vita-3d-canvas")).toBeVisible();
+    await expect(stage).toHaveAttribute("data-vita-scene-state", "ready");
+    await expect(page.getByTestId("static-vita-screen")).not.toBeVisible();
+  });
+
+  test("reduced motion keeps the 3D Vita but disables scene motion", async ({ page }) => {
+    await page.emulateMedia({ reducedMotion: "reduce" });
+    await page.reload({ waitUntil: "domcontentloaded" });
+    const stage = page.locator("[data-testid='console-stage']");
+    await expect(stage).toHaveAttribute("data-vita-mode", "3d");
+    await expect(stage).toHaveAttribute("data-reduced-motion", "true");
+    await stage.scrollIntoViewIfNeeded();
+    await expect(page.getByTestId("vita-3d-canvas")).toBeVisible();
+    await expect(page.locator("[data-vita-scene='3d'] [data-vita-motion='reduced']")).toBeVisible();
+    await expect(page.getByTestId("static-vita-screen")).not.toBeVisible();
+  });
+
+  test("Show on Vita updates the reduced-motion 3D preview", async ({ page }) => {
     await page.emulateMedia({ reducedMotion: "reduce" });
     await page.reload({ waitUntil: "domcontentloaded" });
     await page.locator("#entry-illusia-vita").click();
@@ -118,11 +167,45 @@ test.describe("archive", () => {
     await page.getByRole("button", { name: "Show on Vita" }).click();
 
     await expect(page.getByText("Source screenshot on display", { exact: true })).toBeVisible();
-    await expect(page.getByTestId("static-vita-screen")).toHaveAttribute(
-      "aria-label",
-      "Vita screen showing Illusia"
-    );
-    await expect(page.getByTestId("static-vita-screen").getByAltText("Illusia title screen running on the Vita port")).toBeVisible();
+    await expect(page.getByTestId("vita-3d-canvas")).toBeVisible();
+  });
+
+  test("save-data starts static, persists the 3D override, and switches back", async ({ page }) => {
+    await page.addInitScript(() => {
+      Object.defineProperty(navigator, "connection", {
+        configurable: true,
+        value: { saveData: true }
+      });
+    });
+    await page.reload({ waitUntil: "domcontentloaded" });
+
+    await expect(page.locator("[data-testid='console-stage']")).toHaveAttribute("data-vita-mode", "static");
+    await expect(page.getByRole("button", { name: "Load 3D Vita" })).toBeVisible();
+    await page.getByRole("button", { name: "Load 3D Vita" }).click();
+    await expect(page.locator("[data-testid='console-stage']")).toHaveAttribute("data-vita-mode", "3d");
+    await expect(page.getByTestId("vita-3d-canvas")).toBeVisible();
+    await expect(page.getByRole("button", { name: "Use static preview" })).toBeVisible();
+    await expect.poll(() => page.evaluate((key) => localStorage.getItem(key), "vitaharbor.console-3d-preference")).toBe("3d");
+
+    await page.getByRole("button", { name: "Use static preview" }).click();
+    await expect(page.locator("[data-testid='console-stage']")).toHaveAttribute("data-vita-mode", "static");
+    await expect(page.getByTestId("static-vita-screen")).toBeVisible();
+  });
+
+  test("WebGL failure keeps a static preview with an honest retry state", async ({ page }) => {
+    await page.addInitScript(() => {
+      const original = HTMLCanvasElement.prototype.getContext;
+      (HTMLCanvasElement.prototype as any).getContext = function (type: string, ...args: any[]) {
+        if (type === "webgl" || type === "experimental-webgl") return null;
+        return original.call(this, type, ...args);
+      };
+    });
+    await page.reload({ waitUntil: "domcontentloaded" });
+
+    await expect(page.locator("[data-testid='console-stage']")).toHaveAttribute("data-vita-mode", "static");
+    await expect(page.locator("[data-testid='console-stage']")).toHaveAttribute("data-vita-fallback-reason", "webgl-unavailable");
+    await expect(page.getByTestId("static-vita-screen")).toBeVisible();
+    await expect(page.getByRole("button", { name: "Retry 3D Vita" })).toBeVisible();
   });
 
   test("directory uses a compact grid and provides a back-to-top control", async ({ page }) => {

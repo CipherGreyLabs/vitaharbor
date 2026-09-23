@@ -18,7 +18,9 @@ const STAGE_FILTERS = [
   { key: "all", label: "All ports" },
   { key: "wip", label: "In development" },
   { key: "playable", label: "Playable" },
-  { key: "booting", label: "Early boot" }
+  { key: "booting", label: "Early boot" },
+  { key: "released", label: "Released" },
+  { key: "recent", label: "Recently updated" }
 ];
 
 const CATEGORY_FILTERS = [
@@ -80,12 +82,15 @@ export const DirectoryTable: React.FC<DirectoryTableProps> = ({
   directoryRef
 }) => {
   const stageCounts = useMemo(() => {
-    const counts: Record<string, number> = { all: projects.length, wip: 0, playable: 0, booting: 0 };
+    const counts: Record<string, number> = { all: projects.length, wip: 0, playable: 0, booting: 0, released: 0, recent: 0 };
     for (const p of projects) {
       const st = String(p.current_stage);
       if (["in_game", "booting", "early_wip", "research"].includes(st)) counts.wip++;
       if (["playable", "released", "completable"].includes(st)) counts.playable++;
       if (["booting", "early_wip", "research"].includes(st)) counts.booting++;
+      if (st === "released") counts.released++;
+      const activity = new Date(p.last_activity_at || 0).getTime();
+      if (Number.isFinite(activity) && Date.now() - activity >= 0 && Date.now() - activity <= 30 * 24 * 60 * 60 * 1000) counts.recent++;
     }
     return counts;
   }, [projects]);
