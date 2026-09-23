@@ -38,7 +38,13 @@ function consecutiveDegradedRuns(runs) {
   return count;
 }
 
-export function buildScannerHealth(subreddits, feedResults, attemptedAt = new Date().toISOString(), previous = null) {
+export function buildScannerHealth(
+  subreddits,
+  feedResults,
+  attemptedAt = new Date().toISOString(),
+  previous = null,
+  githubActionEnv = process.env
+) {
   const bySubreddit = new Map(feedResults.map((result) => [String(result.subreddit).toLowerCase(), result]));
   const sources = subreddits.map((subreddit) => {
     const result = bySubreddit.get(String(subreddit).toLowerCase());
@@ -66,11 +72,11 @@ export function buildScannerHealth(subreddits, feedResults, attemptedAt = new Da
     // generated file cannot observe the final push, so completion stays
     // UNKNOWN when publication is not observable from the JSON itself.
     github_action: {
-      provider: process.env.GITHUB_ACTIONS === "true" ? "github-actions" : "local",
+      provider: githubActionEnv.GITHUB_ACTIONS === "true" ? "github-actions" : "local",
       status: "unknown",
-      run_id: process.env.GITHUB_RUN_ID || null,
-      event: process.env.GITHUB_EVENT_NAME || null,
-      sha: process.env.GITHUB_SHA || null
+      run_id: githubActionEnv.GITHUB_RUN_ID || null,
+      event: githubActionEnv.GITHUB_EVENT_NAME || null,
+      sha: githubActionEnv.GITHUB_SHA || null
     },
     consecutive_degraded_runs: consecutiveDegradedRuns(recentRuns),
     recent_runs: recentRuns,

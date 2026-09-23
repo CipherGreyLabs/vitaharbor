@@ -2,6 +2,24 @@
 
 Updated: 2026-09-23
 
+## Current follow-up: VH-SCAN-HEALTH-020
+
+- Bounded master assignment: make the scanner-health constructor/test deterministic under
+  local and GitHub Actions environments, prove real `GITHUB_*` context is retained, and keep
+  `github_action.status` honestly `unknown` until publication is observable. No scanner/data,
+  queue, curated ledger, link-audit, UI, manual-dispatch or Vercel-deploy changes are in scope.
+- Reconciled base is `origin/main` `ed19710f972356688b4d6e49075a13eacc5ef02f`; remote
+  `ls-remote` matched and it is an ancestor of the clean worker branch. The prior NO_GO
+  trace remains in local commit `1f1d6ddb27025c83e0c1f527408d05f1ef94ed87`.
+- `buildScannerHealth` now accepts an injectable GitHub Actions environment while defaulting
+  production calls to `process.env`. The deterministic local fixture supplies `{}`; regression
+  tests inject a push context and independently compare the actual runtime `GITHUB_*` values.
+  Both GitHub-context cases assert completion remains `unknown`.
+- Focused scanner-health tests pass 6/6 in both the ordinary local environment and a scoped
+  GitHub-like process environment. Full exact-candidate release gates and commit are pending.
+  The product UI is unchanged; the prior exact local E2E result remains 18/18. No Reddit scan
+  was manually dispatched and no deployment was made.
+
 ## Active assignment: VH-SCAN-FRESH-017
 
 - The user reported that the site showed its latest scan as two days old despite the stated

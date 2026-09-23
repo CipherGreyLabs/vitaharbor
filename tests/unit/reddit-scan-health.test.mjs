@@ -5,7 +5,13 @@ describe("scanner health summary", () => {
   const sources = ["vitahacks", "VitaPiracy", "PSVitaHomebrew"];
 
   it("reports complete only when every configured community responded", () => {
-    expect(buildScannerHealth(sources, sources.map((subreddit) => ({ subreddit, status: "available" })), "2026-09-23T00:00:00.000Z")).toEqual({
+    expect(buildScannerHealth(
+      sources,
+      sources.map((subreddit) => ({ subreddit, status: "available" })),
+      "2026-09-23T00:00:00.000Z",
+      null,
+      {}
+    )).toEqual({
       schema_version: 2,
       attempted_at: "2026-09-23T00:00:00.000Z",
       state: "complete",
@@ -59,26 +65,32 @@ describe("scanner health summary", () => {
     expect(current.sources[0].consecutive_failures).toBe(1);
   });
 
-  it("keeps GitHub Action completion unknown until publication is observable", () => {
-    const previous = {
-      GITHUB_ACTIONS: process.env.GITHUB_ACTIONS,
-      GITHUB_RUN_ID: process.env.GITHUB_RUN_ID,
-      GITHUB_EVENT_NAME: process.env.GITHUB_EVENT_NAME,
-      GITHUB_SHA: process.env.GITHUB_SHA
+  it("keeps GitHub Action completion unknown while preserving injected run metadata", () => {
+    const githubActionEnv = {
+      GITHUB_ACTIONS: "true",
+      GITHUB_RUN_ID: "35886994823",
+      GITHUB_EVENT_NAME: "push",
+      GITHUB_SHA: "ed19710f972356688b4d6e49075a13eacc5ef02f"
     };
-    process.env.GITHUB_ACTIONS = "true";
-    process.env.GITHUB_RUN_ID = "123";
-    process.env.GITHUB_EVENT_NAME = "schedule";
-    process.env.GITHUB_SHA = "abc";
-    try {
-      const health = buildScannerHealth(sources, [], "2026-09-23T00:00:00.000Z");
-      expect(health.state).toBe("failed");
-      expect(health.github_action).toEqual({ provider: "github-actions", status: "unknown", run_id: "123", event: "schedule", sha: "abc" });
-    } finally {
-      for (const [key, value] of Object.entries(previous)) {
-        if (value === undefined) delete process.env[key];
-        else process.env[key] = value;
-      }
-    }
+    const health = buildScannerHealth(sources, [], "2026-09-23T00:00:00.000Z", null, githubActionEnv);
+    expect(health.state).toBe("failed");
+    expect(health.github_action).toEqual({
+      provider: "github-actions",
+      status: "unknown",
+      run_id: githubActionEnv.GITHUB_RUN_ID,
+      event: githubActionEnv.GITHUB_EVENT_NAME,
+      sha: githubActionEnv.GITHUB_SHA
+    });
+  });
+
+  it("reflects the actual runner GITHUB_* context without claiming publication succeeded", () => {
+    const health = buildScannerHealth(sources, [], "2026-09-23T00:00:00.000Z");
+    expect(health.github_action).toEqual({
+      provider: process.env.GITHUB_ACTIONS === "true" ? "github-actions" : "local",
+      status: "unknown",
+      run_id: process.env.GITHUB_RUN_ID || null,
+      event: process.env.GITHUB_EVENT_NAME || null,
+      sha: process.env.GITHUB_SHA || null
+    });
   });
 });
