@@ -5,6 +5,11 @@ at 07:00, 13:00 and 19:00 UTC, fetches r/vitahacks, r/VitaPiracy and r/PSVitaHom
 and commits quarantined candidates back to the repo
 without using Codex tokens.
 
+The Vercel site reads `scanner-health.json` and `discovered.json` from the public `main`
+branch when visitors load the page, with a 15-minute refresh while it remains open. This is
+necessary because scanner commits do not themselves rebuild the static Vercel deployment.
+The deployed JSON files are a clearly labelled fallback snapshot, not the live source.
+
 The repository remote is configured and the workflow is present in
 `.github/workflows/reddit-scanner.yml`. GitHub Actions is the current scheduled scan engine;
 the Vercel `/api/cron-scan` route remains a fallback for dashboard-visible runs. This document
@@ -32,8 +37,10 @@ line in `data/provenance-audit.jsonl`. The workflow never writes `fallbackData.t
 ## 2. Current workflow
 
 The scheduled workflow installs dependencies, runs the tests, scans, rebuilds the feeds and
-commits only when something actually changed. Its current schedule is 07:00, 13:00 and 19:00
-UTC. A manual run is available through GitHub Actions' `workflow_dispatch` trigger.
+commits the refreshed scan timestamp and queue to `main`. Its current schedule is 07:00,
+13:00 and 19:00 UTC. A manual run is available through GitHub Actions' `workflow_dispatch`
+trigger. The site reports per-community errors honestly; a successful Actions job does not
+mean Reddit accepted the requests.
 
 ## Checks worth keeping
 

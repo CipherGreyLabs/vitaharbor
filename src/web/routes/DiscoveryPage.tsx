@@ -3,22 +3,14 @@ import { Link } from "react-router-dom";
 import { useDocumentMeta } from "../lib/useDocumentMeta";
 import { formatUtcDateTime } from "../components/ledger/types";
 import { scannerFreshness, type ScannerHealthRecord } from "../lib/visitorState";
-
-interface DiscoveryItem {
-  id: string;
-  state: string;
-  title: string;
-  url: string;
-  subreddit?: string;
-  published_at?: string;
-  candidate_type?: string;
-}
+import { fetchScannerAsset, type ScannerAssetSource, type ScannerQueueDocument, type ScannerQueueItem } from "../lib/scannerAssets";
 
 export const DiscoveryPage: React.FC = () => {
-  const [items, setItems] = useState<DiscoveryItem[]>([]);
+  const [items, setItems] = useState<ScannerQueueItem[]>([]);
   const [generatedAt, setGeneratedAt] = useState("");
   const [source, setSource] = useState("");
   const [health, setHealth] = useState<ScannerHealthRecord | null>(null);
+  const [assetSource, setAssetSource] = useState<ScannerAssetSource>("unavailable");
   const [loading, setLoading] = useState(true);
 
   useDocumentMeta({
@@ -28,19 +20,31 @@ export const DiscoveryPage: React.FC = () => {
 
   useEffect(() => {
     let cancelled = false;
-    Promise.all([
-      fetch("/data/discovered.json", { cache: "no-store", headers: { accept: "application/json" } }).then((response) => response.ok ? response.json() : null).catch(() => null),
-      fetch("/data/scanner-health.json", { cache: "no-store", headers: { accept: "application/json" } }).then((response) => response.ok ? response.json() : null).catch(() => null)
-    ]).then(([queueResult, scanResult]) => {
+    const refreshScannerAssets = async () => {
+      const [queueResult, scanResult] = await Promise.all([
+        fetchScannerAsset<ScannerQueueDocument>("discovered.json"),
+        fetchScannerAsset<ScannerHealthRecord>("scanner-health.json")
+      ]);
       if (cancelled) return;
-      const body = queueResult as { items?: unknown; generated_at?: unknown; source?: unknown } | null;
-      const scan = scanResult as ScannerHealthRecord | null;
+      const body = queueResult.data;
+      const scan = scanResult.data;
       setItems(Array.isArray(body?.items) ? body.items : []);
       setGeneratedAt(typeof body?.generated_at === "string" ? body.generated_at : "");
       setSource(typeof body?.source === "string" ? body.source : "");
       if (scan?.schema_version === 1) setHealth(scan);
-    }).finally(() => { if (!cancelled) setLoading(false); });
-    return () => { cancelled = true; };
+      setAssetSource(queueResult.source === "live" && scanResult.source === "live"
+        ? "live"
+        : queueResult.source === "unavailable" || scanResult.source === "unavailable"
+          ? "unavailable"
+          : "snapshot");
+      setLoading(false);
+    };
+    void refreshScannerAssets();
+    const interval = window.setInterval(() => void refreshScannerAssets(), 15 * 60 * 1000);
+    return () => {
+      cancelled = true;
+      window.clearInterval(interval);
+    };
   }, []);
 
   const freshness = useMemo(() => scannerFreshness(health), [health]);
@@ -61,6 +65,9 @@ export const DiscoveryPage: React.FC = () => {
         <div className="mt-5 flex flex-wrap gap-2 text-caption text-ink-muted">
           <span className="rounded-full border border-hairline bg-surface px-3 py-1.5">{freshness.label}</span>
           {health?.attempted_at && <span className="rounded-full border border-hairline bg-surface px-3 py-1.5">Last attempt {formatUtcDateTime(health.attempted_at)}</span>}
+          <span className="rounded-full border border-hairline bg-surface px-3 py-1.5">
+            {assetSource === "live" ? "Live scan data" : assetSource === "snapshot" ? "Last deployed snapshot" : "Scan data unavailable"}
+          </span>
           {health?.sources.filter((item) => item.status !== "available").map((item) => (
             <span key={item.subreddit} className="rounded-full border border-hairline bg-surface px-3 py-1.5">
               r/{item.subreddit}: {item.status === "rate_limited" ? "rate limited" : "unavailable"}
@@ -84,7 +91,9 @@ export const DiscoveryPage: React.FC = () => {
               <h2 className="mt-2 text-subtitle font-semibold text-ink">{item.title}</h2>
               <div className="mt-3 flex flex-wrap items-center justify-between gap-3 text-caption text-ink-muted">
                 <span>{item.published_at ? `Published ${formatUtcDateTime(item.published_at)}` : "Publication time not recorded"}</span>
-                <a href={item.url} target="_blank" rel="noopener noreferrer" className="font-medium text-accent hover:underline">Open Reddit source</a>
+                {item.url
+                  ? <a href={item.url} target="_blank" rel="noopener noreferrer" className="font-medium text-accent hover:underline">Open Reddit source</a>
+                  : <span className="text-ink-muted">{item.public_visibility === "withheld" ? "Source withheld pending review" : "Source link unavailable"}</span>}
               </div>
             </li>
           ))}

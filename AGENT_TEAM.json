@@ -55,7 +55,7 @@
       "model": "current-task-model",
       "reasoningEffort": "current-task-setting",
       "modelStatus": "not recorded by the current task runtime",
-      "status": "deployed; production acceptance and evidence handoff complete; dev-toolchain advisories remain",
+      "status": "VH-SCAN-FRESH-017 release authorized; local gates GO; production deployment pending",
       "taskId": "01a0bc84-7462-7f92-a672-5856bed2ae0f",
       "threadId": "01a0bc84-7462-7f92-a672-5856bed2ae0f",
       "workspace": "C:\\Users\\suloW\\.codex\\worktrees\\vitaharbor-integration-015\\VitaPort",
@@ -67,7 +67,7 @@
       "deploymentId": "dpl_FATqcqE9dHac5assD26HoVUiYCf9",
       "productionAlias": "https://vitaharbor.vercel.app",
       "integrationBase": "2e8cc90ced003671a3b42064fe82a4350ce32f67",
-      "workingTreeState": "production release and documentation committed; other worktrees preserved",
+      "workingTreeState": "scanner-freshness release candidate and handoff are uncommitted; other worktrees preserved",
       "allowedScope": "files explicitly included by the current master assignment, required tests, project evidence and approved deployment",
       "prohibitedScope": "architecture ownership, unrequested redesign, worker creation, hidden subagents and unrelated dirty-file changes",
       "handoffPath": "HANDOFF.md"

@@ -88,9 +88,19 @@ test.describe("archive", () => {
     const response = await page.request.get("/data/scanner-health.json");
     expect(response.ok()).toBe(true);
     const health = await response.json() as ScannerHealthRecord;
+    const queueResponse = await page.request.get("/data/discovered.json");
+    expect(queueResponse.ok()).toBe(true);
+    const queue = await queueResponse.json();
+    await page.route("https://raw.githubusercontent.com/CipherGreyLabs/vitaharbor/main/public/data/scanner-health.json*", (route) =>
+      route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify(health) }));
+    await page.route("https://raw.githubusercontent.com/CipherGreyLabs/vitaharbor/main/public/data/discovered.json*", (route) =>
+      route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify(queue) }));
 
+    await page.goto("/", { waitUntil: "domcontentloaded" });
+    await expect(page.getByText(/Last attempt .* · 3× daily · live scan data/)).toBeVisible();
     await page.goto("/discovery/", { waitUntil: "domcontentloaded" });
     await expect(page.getByText(scannerFreshness(health).label, { exact: true })).toBeVisible();
+    await expect(page.getByText("Live scan data", { exact: true })).toBeVisible();
     for (const source of health.sources.filter((item) => item.status !== "available")) {
       const status = source.status === "rate_limited" ? "rate limited" : "unavailable";
       await expect(page.getByText(`r/${source.subreddit}: ${status}`, { exact: true })).toBeVisible();

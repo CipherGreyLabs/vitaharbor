@@ -2,7 +2,42 @@
 
 Updated: 2026-09-23
 
-## Active assignment: VH-INTEGRATE-015
+## Active assignment: VH-SCAN-FRESH-017
+
+- The user reported that the site showed its latest scan as two days old despite the stated
+  three-times-daily cadence. The GitHub Actions workflow is configured for 07:00, 13:00 and
+  19:00 UTC, and recent scheduled runs are present. The latest live attempt is
+  `2026-09-23T05:09:00.830Z`; all three Reddit RSS sources returned rate limits, so the run
+  did not detect new items.
+- Root cause: the scheduled workflow commits updated scanner JSON to public `main`, but
+  Vercel's static production deployment does not rebuild on those scanner commits. The site
+  therefore kept rendering the deployed snapshot until another Vercel deployment.
+- Worker fix is in the isolated worktree on `codex/vitaharbor-integration-015`: Home and
+  Discovery now fetch current public scanner JSON from GitHub `main`, bypass short CDN/browser
+  caching, refresh every 15 minutes, and label the deployed-file fallback as a snapshot.
+  Vercel CSP permits only the required raw GitHub origin; `/data/*` responses are `no-store`.
+- The release candidate validates the raw GitHub JSON with a bounded streaming reader
+  (8 KiB health / 256 KiB queue, at most 100 candidates), strict schema/source/URL checks
+  and an explicit public-field projection. Author, body, risk and scanner-internal timestamps
+  are dropped before UI state. Invalid/unavailable live data falls back only to a separately
+  labelled deployed snapshot.
+- Verification: `npm run verify` passed typecheck, 98 unit tests and production build (29
+  project pages, 32 sitemap URLs); lint passed; integration passed 7/7; full local Playwright
+  passed 18/18 at `http://127.0.0.1:4173`; `git diff --check` passed. The exact current
+  public assets were accepted by the sanitizer (13 queue candidates; scanner attempt
+  `2026-09-23T05:09:00.830Z`, failed, 0/3 feeds due to rate limits).
+- GitHub Actions history confirms the three daily schedules at 07:00, 13:00 and 19:00 UTC;
+  its latest attempt at verification is from a push-triggered run, and the next scheduled
+  07:00 UTC run has not yet occurred at the recorded time. The older two-day display was the
+  deployed Vercel snapshot, not a current-data read.
+- The master authorized a production release. Commit/push/deployment and post-deploy
+  acceptance are in progress; do not treat production as updated until the exact commit is
+  READY and the live alias is checked. The scanner itself is confirmed failed/rate-limited,
+  not a successful content scan.
+- The prior primary, UX contributor and master worktrees remain untouched. No subagents or
+  additional workers were used.
+
+## Completed assignment: VH-INTEGRATE-015
 
 - Worker implementation is isolated on branch `codex/vitaharbor-integration-015` at
   `C:\Users\suloW\.codex\worktrees\vitaharbor-integration-015\VitaPort`, based on
@@ -43,8 +78,8 @@ Updated: 2026-09-23
   4 high, through Vitest/Wrangler dependencies); no major toolchain upgrades were included
   in this site integration.
 
-The sections below retain historical state and evidence; where they conflict with this
-active assignment, this dated VH-INTEGRATE-015 block is the current state.
+The sections below retain completed and historical state; where they conflict with the
+active assignment above, VH-SCAN-FRESH-017 is current.
 
 ## Historical facts (2026-09-20; superseded by the active assignment block above)
 

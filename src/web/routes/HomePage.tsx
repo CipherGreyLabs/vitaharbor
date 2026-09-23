@@ -19,6 +19,7 @@ import {
 } from "../components/ledger/types";
 import { ArrowUp, ExternalLink } from "lucide-react";
 import { countUpdatesSince, readLastVisit, readWatchlist, scannerFreshness, wasRecentlyUpdated, writeLastVisit, writeWatchlist, type ScannerHealthRecord } from "../lib/visitorState";
+import { fetchScannerAsset, type ScannerAssetSource, type ScannerQueueDocument, type ScannerQueueItem } from "../lib/scannerAssets";
 
 interface DirectoryFilters {
   search: string;
@@ -122,10 +123,11 @@ export const HomePage: React.FC = () => {
   const [showScrollTop, setShowScrollTop] = useState(false);
   const [webgl, setWebgl] = useState<boolean | null>(null);
   const [tickerPaused, setTickerPaused] = useState(false);
-  const [discovered, setDiscovered] = useState<any[]>([]);
+  const [discovered, setDiscovered] = useState<ScannerQueueItem[]>([]);
   const [scannedAt, setScannedAt] = useState("");
   const [previousVisit, setPreviousVisit] = useState<number | null>(null);
   const [scannerHealth, setScannerHealth] = useState<ScannerHealthRecord | null>(null);
+  const [scannerHealthSource, setScannerHealthSource] = useState<ScannerAssetSource>("unavailable");
   const [watchlistSlugs, setWatchlistSlugs] = useState<string[]>([]);
 
   const consoleRef = useRef<HTMLDivElement>(null);
@@ -157,14 +159,18 @@ export const HomePage: React.FC = () => {
 
   useEffect(() => {
     let cancelled = false;
-    fetch("/data/scanner-health.json", { cache: "no-store", headers: { accept: "application/json" } })
-      .then((response) => response.ok ? response.json() : null)
-      .then((body) => {
-        const health = body as ScannerHealthRecord | null;
-        if (!cancelled && health?.schema_version === 1) setScannerHealth(health);
-      })
-      .catch(() => undefined);
-    return () => { cancelled = true; };
+    const refreshHealth = async () => {
+      const result = await fetchScannerAsset<ScannerHealthRecord>("scanner-health.json");
+      if (cancelled) return;
+      setScannerHealthSource(result.source);
+      if (result.data?.schema_version === 1) setScannerHealth(result.data);
+    };
+    void refreshHealth();
+    const interval = window.setInterval(() => void refreshHealth(), 15 * 60 * 1000);
+    return () => {
+      cancelled = true;
+      window.clearInterval(interval);
+    };
   }, []);
 
   useEffect(() => {
@@ -214,23 +220,27 @@ export const HomePage: React.FC = () => {
         console.error('API Refresh Error:', e);
       }
 
-      try {
-        const res = await fetch('/data/discovered.json', { headers: { accept: 'application/json' } });
-        if (!res.ok) return;
-        const text = await res.text();
-        if (!text.startsWith('{') && !text.startsWith('[')) return;
-        const body = JSON.parse(text);
-        if (cancelled) return;
-        if (body && Array.isArray(body.items)) setDiscovered(body.items);
-        if (body && typeof body.generated_at === 'string') setScannedAt(body.generated_at);
-      } catch {
-        // Scanner has not run yet
-      }
     }
 
     refresh();
     return () => {
       cancelled = true;
+    };
+  }, []);
+
+  useEffect(() => {
+    let cancelled = false;
+    const refreshQueue = async () => {
+      const result = await fetchScannerAsset<ScannerQueueDocument>("discovered.json");
+      if (cancelled) return;
+      if (result.data && Array.isArray(result.data.items)) setDiscovered(result.data.items);
+      if (typeof result.data?.generated_at === "string") setScannedAt(result.data.generated_at);
+    };
+    void refreshQueue();
+    const interval = window.setInterval(() => void refreshQueue(), 15 * 60 * 1000);
+    return () => {
+      cancelled = true;
+      window.clearInterval(interval);
     };
   }, []);
 
@@ -492,7 +502,7 @@ export const HomePage: React.FC = () => {
               <p className="mt-2 text-subtitle font-semibold text-ink">{scanFreshness.label}</p>
               <p className="mt-1 text-caption text-ink-muted">
                 {scannerHealth?.attempted_at
-                  ? `Last attempt ${formatUtcDateTime(scannerHealth.attempted_at)} · 3× daily cadence`
+                  ? `Last attempt ${formatUtcDateTime(scannerHealth.attempted_at)} · 3× daily · ${scannerHealthSource === "live" ? "live scan data" : scannerHealthSource === "snapshot" ? "deployed snapshot" : "scan feed unavailable"}`
                   : "A scan time alone cannot confirm that every source responded."}
               </p>
             </div>
@@ -658,7 +668,7 @@ export const HomePage: React.FC = () => {
                       </div>
                       <p className="mt-0.5 text-caption text-ink-muted">
                         {item.subreddit ? "r/" + item.subreddit + " · " : "Detected source · "}
-                        Published {formatUtcDateTime(item.published_at || item.detected_at)}
+                        {item.published_at ? `Published ${formatUtcDateTime(item.published_at)}` : "Publication time unavailable"}
                       </p>
                       {(() => {
                         const related = relatedProjectForCandidate(item, projects);
@@ -751,7 +761,7 @@ export const HomePage: React.FC = () => {
                   <a href="#methodology" className="inline-block py-1.5 text-ink-medium transition-colors hover:text-accent">Methodology</a>
                 </li>
                 <li>
-                  <a href="/data/discovered.json" target="_blank" rel="noopener noreferrer" className="inline-block py-1.5 text-ink-medium transition-colors hover:text-accent">
+                  <a href="https://raw.githubusercontent.com/CipherGreyLabs/vitaharbor/main/public/data/discovered.json" target="_blank" rel="noopener noreferrer" className="inline-block py-1.5 text-ink-medium transition-colors hover:text-accent">
                     Discovery log
                   </a>
                 </li>

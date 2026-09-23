@@ -37,23 +37,43 @@ describe("public routes", () => {
   });
 
   it("renders only the public discovery projection fields", async () => {
-    vi.stubGlobal("fetch", vi.fn().mockResolvedValue({
-      ok: true,
-      json: async () => ({
-        generated_at: "2026-09-22T21:50:30.064Z",
-        source: "Reddit RSS",
-        items: [{
-          id: "reddit-example",
-          state: "VERIFIED_FOR_REVIEW",
-          title: "Example Vita port thread",
-          url: "https://www.reddit.com/r/vitahacks/comments/example/",
-          subreddit: "vitahacks",
-          published_at: "2026-09-22T20:00:00.000Z",
-          candidate_type: "port",
-          author: "must-not-render",
-          risk_signals: ["must-not-render"]
-        }]
-      })
+    const generatedAt = "2026-09-22T21:50:30.064Z";
+    const queue = {
+      schema_version: 2,
+      generated_at: generatedAt,
+      source: "Reddit RSS",
+      note: "Detected threads are quarantined.",
+      items: [{
+        id: "reddit-example",
+        state: "VERIFIED_FOR_REVIEW",
+        title: "Example Vita port thread",
+        url: "https://www.reddit.com/r/vitahacks/comments/example/",
+        subreddit: "vitahacks",
+        published_at: "2026-09-22T20:00:00.000Z",
+        candidate_type: "port",
+        public_visibility: "review_queue",
+        author: "must-not-render",
+        risk_signals: ["must-not-render"]
+      }]
+    };
+    const health = {
+      schema_version: 1,
+      attempted_at: generatedAt,
+      state: "complete",
+      successful_sources: 3,
+      total_sources: 3,
+      sources: [
+        { subreddit: "vitahacks", status: "available" },
+        { subreddit: "VitaPiracy", status: "available" },
+        { subreddit: "PSVitaHomebrew", status: "available" }
+      ]
+    };
+    vi.stubGlobal("fetch", vi.fn(async (input: RequestInfo | URL) => {
+      const url = String(input);
+      return new Response(JSON.stringify(url.includes("scanner-health.json") ? health : queue), {
+        status: 200,
+        headers: { "content-type": "application/json" }
+      });
     }));
 
     render(
