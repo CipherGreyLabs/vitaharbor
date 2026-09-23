@@ -122,12 +122,21 @@ test.describe("archive", () => {
     const staticHtml = await homeResponse.text();
     expect(staticHtml).not.toMatch(/scanner-health|run_id|rate_limited|consecutive_failures|github_action|3× daily|review queue|quarantined/i);
 
+    const discoveryResponse = await request.get("/discovery/");
+    expect(discoveryResponse.ok()).toBe(true);
+    const discoveryHtml = await discoveryResponse.text();
+    expect(discoveryHtml).toContain("<title>Community posts - VitaHarbor</title>");
+    expect(discoveryHtml).toContain('content="Recent Reddit posts about possible Vita ports and updates. Posts are unverified leads, not confirmed project records."');
+    expect(discoveryHtml).not.toMatch(/scanner|discovery queue|detection log|awaiting source review|review queue|quarantined/i);
+
     const context = await browser.newContext({ javaScriptEnabled: false, viewport: { width: 390, height: 844 } });
     const noJsPage = await context.newPage();
     await noJsPage.goto("/", { waitUntil: "domcontentloaded" });
     const noJsText = await noJsPage.locator("body").innerText();
     expect(noJsText).toContain("Directory");
-    expect(noJsText).not.toMatch(/scanner|run id|rate.?limit|last attempt|3× daily|github action|review queue|quarantined|pending review/i);
+    expect(noJsText).toContain("Unverified community posts are shown separately from the project directory.");
+    expect(noJsText).toContain("A community post alone does not confirm a project's status or performance.");
+    expect(noJsText).not.toMatch(/scanner|run id|rate.?limit|last attempt|3× daily|github action|detection log|detected threads|discovery queue|source review|review queue|quarantined|pending review/i);
     await context.close();
 
     await page.setViewportSize({ width: 390, height: 844 });
