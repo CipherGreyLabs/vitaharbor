@@ -1,23 +1,24 @@
 # Handoff - VitaHarbor public visitor cleanup - master review
 
-- Gegenereerd: 2026-09-23T21:05:34Z
+- Gegenereerd: 2026-09-23T21:21:52Z
 - Actor: codex
 - Model: gpt-5
 - ProjectRoot: C:\Users\suloW\.codex\worktrees\vitaharbor-public-ops-cleanup\VitaPort
-- Bronnen: 32
+- Bronnen: 33
 
 ## Bronintegriteit
 
 | Bestand | Bytes | SHA-256 |
 |---|---|---|
 | AGENTS.md | 6555 | 22C948A1AB4CC94DD04174661AC6F93A7224C1579D1B668A9EA63C9B13416351 |
-| PROJECT_STATE.md | 32666 | DEC0595F723F939F0043C465D6E00FF68C81C4A49432827E51D18D6E7591591C |
-| AGENT_TEAM.json | 4260 | E4E74C39BF2BB6806181DD38E9A781A86EC7FBB41842AF12AC70C9678F0675D3 |
-| EVIDENCE.jsonl | 52064 | F1A39861CF40CC7732D8475D395C6B775E834B6A241B34ED9F4C968F9006BA8D |
-| docs\WORKLOG.md | 97772 | E0EF7BDDEFBD99EECC4160F9AB5CC2DDF17651CFEBBF8DC40F950362268C1123 |
+| PROJECT_STATE.md | 33174 | AF0FE83E932AD148F62250927176BF38E728D524AFDE0F9157CFA4AFB3F0D53B |
+| AGENT_TEAM.json | 4223 | 72864CFC72DBAAF7A30801325002988CE0BF1B9810482E62A8F997586FB65E18 |
+| EVIDENCE.jsonl | 52926 | C367B681B8C7A24FEF609D55F0E08D31A516E82AC6839C860DC22B916ACF533A |
+| docs\WORKLOG.md | 99239 | 3902D849A0EABC1B5B75F192E0499FA560D3EADEE8E1CC1B6F40F823EC8665A8 |
 | docs\AUTOMATION.md | 2988 | 5E6BEED7AB377B7C527EF912E42E1C0BD23704A55121C20F079FB6DA931E5021 |
 | .github\workflows\reddit-scanner.yml | 2853 | 9E681D5BDA560A33B3674DA3BEE0830FB79EB24EF425FC0C888D9F7ECFD981D0 |
 | api\cron-scan.ts | 1670 | E6FC0F16FF41A29EFC05006DE1E9F2BB99B87762C59AE948B031134247C7F7D1 |
+| scripts\prerender.mjs | 12136 | 6494DA7B3E1FD843F911E7A7E96BCDCB61D8A2BFB80A623661FF58AE7CDAF26F |
 | data\scanner-health.json | 2221 | 850949B7936C56B4A3DC8731992C99884C1C0F6CC41C558CA7AB51911295C86D |
 | public\data\discovered.json | 3313 | B88B72A0A3B26C2683E5833945209188D56CBB0E73F3F6C4F9347A7C597AFE89 |
 | public\api\feed.json | 19118 | C43804EA25717BA90563445A7DB14C75138B1553581B7C9039FC789CE987C848 |
@@ -35,7 +36,7 @@
 | src\web\components\ledger\MethodologySection.tsx | 2139 | DEA8C91A665BEC9575DC6137C68316B25A90A3A3D72ACAD08468414AB3EAC210 |
 | src\web\components\ledger\ProjectPanel.tsx | 14742 | 8148035C270CA4FA576190A14DA3E18E525A4B93594CC373A9FC23684317EDE0 |
 | src\web\components\ledger\types.ts | 8455 | 4A79AF334B2E38E369299A3A4CAF117CC9356D31CC6A3998BCB1A37D08225C90 |
-| tests\e2e\archive.spec.ts | 15292 | 32C6BE1CCAD7CA07D2A59741640835E6ECF1FE4CA8AE2DE26FD0C0E92EE29CC0 |
+| tests\e2e\archive.spec.ts | 16125 | 63BCBED8502ABA9701059982C5F1824C0748FDF668B48DD41CA1E8B4F5932C4A |
 | tests\unit\scanner-assets.test.ts | 4773 | A82918BD749DE91041E5272C588C855E3E6D944E90DE0158A674337C73CC6DA2 |
 | tests\unit\data-poisoning.test.mjs | 13627 | 9ABCE98C5A80D9CC27A629691790FD154622348D63D44619DA18E7B9CBD33F73 |
 | tests\unit\promotion-workflow.test.mjs | 13129 | 7B9FC4CF061C8703FC0A67BE532CC69C2A895B55A769F6A80FEF44CF4BDA8597 |
@@ -45,7 +46,7 @@
 
 ## Samenvatting
 
-Local candidate: implementation 13502d609e3e7a6cc2e06f48b1e61c1a757f341a and project-evidence commit 268fd8e769e93253198d2d97f051b792062415ca on codex/vh-visitor-ops-cleanup-20260923, based on origin/main 3b5f1614a222d49d2bcb861a33e6ab80dabb7ff9. Public site retains useful project information and explicit unverified community-post labels while exposing no scanner health, run IDs, source failures, cadence or review-queue state. Health is internal in data/scanner-health.json; the visitor app does not fetch it. The three-times-daily schedule was not changed. npm run verify passed typecheck, 110 unit tests and production build (29 project pages, 32 sitemap URLs); lint, integration 7/7 and Playwright 19/19 (2 workers) passed. 37 HTML/JS assets had zero selected operations-diagnostic matches; mobile 390px and no-JS home checks passed. Screenshots: C:\Users\suloW\AppData\Local\Temp\vitaharbor-cleanup-67ad93fc6be641ec9977e5d1c42d0fad. Read-only freshness note only: run 35897506358 succeeded at 17:42 UTC but latest health was partial (1/3 sources; two Reddit RSS rate limits). Awaiting master review; no push, merge, manual scan, or deployment.
+Local candidate: public cleanup commit 13502d609e3e7a6cc2e06f48b1e61c1a757f341a, prerender correction 25865ab1aa2ee717fa50942fec447738f2bcfee9, and evidence commits 268fd8e769e93253198d2d97f051b792062415ca and 3dd5a394d0ae56fcac71659f8e4771c3dfebc7f9 on codex/vh-visitor-ops-cleanup-20260923, based on origin/main 3b5f1614a222d49d2bcb861a33e6ab80dabb7ff9. Public pages, no-JS methodology, standalone Discovery metadata, hydrated components and public feed expose no selected scanner/run/rate-limit/queue/review-process language. Posts remain explicitly unverified; useful dates and source links remain. Scanner health is internal in data/scanner-health.json; cadence unchanged. Exact updated candidate passed npm run verify (typecheck, 110 unit tests and production build: 29 project pages/32 sitemap URLs), lint, integration 7/7 and E2E 19/19 with two workers. Audit of 41 public HTML/JS/JSON/XML files returned zero diagnostic-pattern hits; public feed schema-v1 has only the minimal post fields. Screenshots: C:\Users\suloW\AppData\Local\Temp\vitaharbor-cleanup-67ad93fc6be641ec9977e5d1c42d0fad. Internal freshness note only: run 35897506358 succeeded at 17:42 UTC but the health snapshot was partial (1/3 sources; two Reddit RSS sources rate-limited). Awaiting master review; no push, merge, manual scan or deployment.
 
 ## Verificatie
 
