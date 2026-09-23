@@ -1,13 +1,13 @@
 {
   "schema_version": 1,
-  "attempted_at": "2026-09-23T05:09:00.830Z",
-  "state": "failed",
-  "successful_sources": 0,
+  "attempted_at": "2026-09-23T12:29:10.118Z",
+  "state": "partial",
+  "successful_sources": 1,
   "total_sources": 3,
   "sources": [
     {
       "subreddit": "vitahacks",
-      "status": "rate_limited"
+      "status": "available"
     },
     {
       "subreddit": "VitaPiracy",
