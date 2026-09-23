@@ -56,9 +56,10 @@ Updated: 2026-09-23
 ## Current worker milestone: VH-SCAN-RELEASE-019 and VH-LINKS-019
 
 - The isolated worker branch `codex/vitaharbor-integration-015` is based on `origin/main`
-  `a191c773e9bcc577d053043ad9ec5f64ee95263a`; the dirty primary checkout was not touched.
-  Local implementation commit `d2aa030` contains the current scanner, queue and link-audit
-  follow-up. No push, merge, workflow dispatch or deployment was authorized or performed.
+  `a191c773e9bcc577d053043ad9ec5f64ee95263a`; live `ls-remote` confirms that exact remote
+  tip, and it is an ancestor of the six-commit worker branch (`0 6` ahead/behind). The user
+  has now explicitly authorized the release. The dirty primary checkout was not touched;
+  final candidate gates, push, deployment and live acceptance are pending.
 - The scanner workflow no longer writes `github_action.status=success` before publication. The
   generated scanner JSON now records Action completion as `unknown`; the workflow commits and
   pushes first, then verifies the published `main` SHA in the Action log. This avoids a false
@@ -68,6 +69,11 @@ Updated: 2026-09-23
   (`vitahacks` available, `VitaPiracy` and `PSVitaHomebrew` rate-limited), Action status
   `unknown`. The public review queue has 11 sanitized items; internal provenance has 18 records
   (13 active and 5 terminal). No curated ledger promotion occurred.
+- Before publication, live `origin/main` serves the older 13-item queue, including rejected
+  discussion `reddit-1wndxal`. The release candidate's queue has 11 items, includes restored WIP
+  candidates `reddit-1wn46c9`, `reddit-1wmax82` and `reddit-1wkf9m5`, excludes that discussion,
+  and leaves the 29-project curated ledger unchanged. No game-data archive links were found in
+  the curated TypeScript ledger or generated JSON/RSS feeds.
 - Queue reconciliation found that 5 records initially disappeared from the earlier 13-to-8
   projection: three real WIP/review records were restored, `reddit-1wndxal` remains terminally
   `REJECTED` as a false-positive discussion, and legacy `reddit-1wh0klj` remains internal and
@@ -85,8 +91,8 @@ Updated: 2026-09-23
   passed 7/7; `git diff --check` passed. Local Playwright had 17/18 in the parallel run; the
   lone Save-Data/WebGL visibility timeout passed on an isolated one-worker rerun, so the complete
   E2E set is 18/18 across the controlled runs. The preview was stopped afterward.
-- Production remains the previously released deployment baseline. The new scanner/workflow,
-  queue and link-audit changes are not deployed from this worker.
+- Production remains the previously released deployment baseline until this authorized
+  release passes the final exact-candidate checks.
 
 ## Completed assignment: VH-INTEGRATE-015
 
