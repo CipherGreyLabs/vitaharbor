@@ -1,6 +1,5 @@
 import { test, expect } from "playwright/test";
 import { FALLBACK_PROJECTS } from "../../src/shared/constants/fallbackData";
-import { scannerFreshness, type ScannerHealthRecord } from "../../src/web/lib/visitorState";
 
 test.describe("archive", () => {
   test.beforeEach(async ({ page }) => {
@@ -84,27 +83,61 @@ test.describe("archive", () => {
     await expect(page.locator("li[id^='entry-']").first()).toBeVisible();
   });
 
-  test("discovery exposes scanner failures and rate limits without claiming freshness", async ({ page }) => {
-    const response = await page.request.get("/data/scanner-health.json");
-    expect(response.ok()).toBe(true);
-    const health = await response.json() as ScannerHealthRecord;
+  test("community posts show their unverified status without scanner diagnostics", async ({ page }) => {
+    const healthResponse = await page.request.get("/data/scanner-health.json");
+    expect(healthResponse.headers()["content-type"]).toContain("text/html");
+    expect(await healthResponse.text()).not.toMatch(/"attempted_at"\s*:/i);
     const queueResponse = await page.request.get("/data/discovered.json");
     expect(queueResponse.ok()).toBe(true);
     const queue = await queueResponse.json();
-    await page.route("https://raw.githubusercontent.com/CipherGreyLabs/vitaharbor/main/public/data/scanner-health.json*", (route) =>
-      route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify(health) }));
+    expect(Object.keys(queue).sort()).toEqual(["items", "schema_version"]);
+    expect(queue.schema_version).toBe(1);
+    expect(queue.items.length).toBeGreaterThan(0);
+    for (const item of queue.items) {
+      expect(Object.keys(item).sort()).toEqual(["published_at", "subreddit", "title", "url", "verification"]);
+      expect(item.verification).toBe("unverified");
+    }
+
+    const requests: string[] = [];
+    page.on("request", (request) => requests.push(request.url()));
     await page.route("https://raw.githubusercontent.com/CipherGreyLabs/vitaharbor/main/public/data/discovered.json*", (route) =>
       route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify(queue) }));
-
     await page.goto("/", { waitUntil: "domcontentloaded" });
-    await expect(page.getByText(/Last attempt .* · 3× daily · live scan data/)).toBeVisible();
+    await expect(page.getByRole("heading", { name: "Community posts to explore" })).toBeVisible();
+    await expect(page.getByText("Unverified lead", { exact: true }).first()).toBeVisible();
+    const homeText = await page.locator("body").innerText();
+    expect(homeText).not.toMatch(/scanner|run id|rate.?limit|last attempt|3× daily|github action|review queue|quarantined|pending review/i);
+
     await page.goto("/discovery/", { waitUntil: "domcontentloaded" });
-    await expect(page.getByText(scannerFreshness(health).label, { exact: true })).toBeVisible();
-    await expect(page.getByText("Live scan data", { exact: true })).toBeVisible();
-    for (const source of health.sources.filter((item) => item.status !== "available")) {
-      const status = source.status === "rate_limited" ? "rate limited" : "unavailable";
-      await expect(page.getByText(`r/${source.subreddit}: ${status}`, { exact: true })).toBeVisible();
-    }
+    await expect(page.getByRole("heading", { name: "Community posts" })).toBeVisible();
+    await expect(page.getByRole("list", { name: "Unverified community posts" }).getByText("Unverified lead").first()).toBeVisible();
+    const discoveryText = await page.locator("body").innerText();
+    expect(discoveryText).not.toMatch(/scanner|run id|rate.?limit|last attempt|3× daily|github action|review queue|quarantined|pending review/i);
+    expect(requests.some((url) => url.includes("scanner-health.json"))).toBe(false);
+  });
+
+  test("community posts remain readable on mobile and static pages omit scanner diagnostics", async ({ page, browser, request }) => {
+    const homeResponse = await request.get("/");
+    expect(homeResponse.ok()).toBe(true);
+    const staticHtml = await homeResponse.text();
+    expect(staticHtml).not.toMatch(/scanner-health|run_id|rate_limited|consecutive_failures|github_action|3× daily|review queue|quarantined/i);
+
+    const context = await browser.newContext({ javaScriptEnabled: false, viewport: { width: 390, height: 844 } });
+    const noJsPage = await context.newPage();
+    await noJsPage.goto("/", { waitUntil: "domcontentloaded" });
+    const noJsText = await noJsPage.locator("body").innerText();
+    expect(noJsText).toContain("Directory");
+    expect(noJsText).not.toMatch(/scanner|run id|rate.?limit|last attempt|3× daily|github action|review queue|quarantined|pending review/i);
+    await context.close();
+
+    await page.setViewportSize({ width: 390, height: 844 });
+    await page.goto("/discovery/", { waitUntil: "domcontentloaded" });
+    await expect(page.getByRole("heading", { name: "Community posts" })).toBeVisible();
+    const dimensions = await page.evaluate(() => ({
+      scrollWidth: document.documentElement.scrollWidth,
+      clientWidth: document.documentElement.clientWidth
+    }));
+    expect(dimensions.scrollWidth).toBeLessThanOrEqual(dimensions.clientWidth);
   });
 
   test("a project can be saved and removed from the browser watchlist", async ({ page }) => {

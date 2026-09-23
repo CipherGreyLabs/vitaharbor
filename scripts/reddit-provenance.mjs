@@ -669,6 +669,7 @@ export function publicCandidate(record) {
   if (record?.incident?.public_containment === "removed") return null;
   if (Array.isArray(record?.risk_signals) && record.risk_signals.includes("crosspost_duplicate")) return null;
   const withheld = Array.isArray(record.risk_signals) && record.risk_signals.includes("explicit_fake_or_troll");
+  if (withheld) return null;
   const storedCategory = record?.classification?.category;
   const classifiedCategory = classify(record?.source || {}).category;
   const hasManualVerification = state === "VERIFIED_FOR_REVIEW" && Boolean(
@@ -682,18 +683,17 @@ export function publicCandidate(record) {
       : hasManualVerification
         ? "project_update"
         : classifiedCategory || "out_of_scope";
-  if (!withheld && !isTrackableCandidateCategory(derivedCategory)) return null;
+  if (!isTrackableCandidateCategory(derivedCategory)) return null;
+  const title = cleanText(record?.source?.title || "");
+  const source = canonicalizeRedditUrl(record?.source?.canonical_url);
+  if (!title || !source || source.subreddit.toLowerCase() !== String(record?.source?.subreddit || "").toLowerCase()) return null;
+  const publishedAt = record?.source?.published_at;
   return {
-    id: record.id,
-    state,
-    title: withheld ? "Source candidate withheld pending manual review" : record.source?.title || "Source candidate",
-    url: withheld ? null : record.source?.canonical_url || null,
-    subreddit: withheld ? null : record.source?.subreddit || null,
-    published_at: record.source?.published_at || null,
-    detected_at: record.state_history?.[0]?.at || null,
-    candidate_type: withheld ? "unclassified" : record.classification?.candidate_type || "port",
-    category: withheld ? "out_of_scope" : derivedCategory,
-    public_visibility: withheld ? "withheld" : "review_queue"
+    title,
+    url: source.url,
+    subreddit: source.subreddit,
+    published_at: typeof publishedAt === "string" && Number.isFinite(Date.parse(publishedAt)) ? new Date(publishedAt).toISOString() : null,
+    verification: "unverified"
   };
 }
 
@@ -761,12 +761,9 @@ export function markCrosspostDuplicates(records, options = {}) {
   return output;
 }
 
-export function publicDocument(records, generatedAt, sourceLabel) {
+export function publicDocument(records) {
   return {
-    schema_version: PROVENANCE_SCHEMA_VERSION,
-    generated_at: generatedAt,
-    source: sourceLabel + " RSS",
-    note: "Detected sources are quarantined and are not part of the curated ledger. No public item is a promotion or endorsement.",
+    schema_version: 1,
     items: records.map(publicCandidate).filter(Boolean)
   };
 }

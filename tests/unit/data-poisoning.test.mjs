@@ -84,10 +84,7 @@ describe("provenance boundary", () => {
     expect(result.explicitPoison).toBe(true);
     expect(result.record.risk_signals).toContain("explicit_fake_or_troll");
     const safe = publicCandidate(result.record);
-    expect(safe.title).toBe("Source candidate withheld pending manual review");
-    expect(safe.url).toBeNull();
-    expect(safe.subreddit).toBeNull();
-    expect(JSON.stringify(safe)).not.toContain("developer");
+    expect(safe).toBeNull();
   });
 
   it("rejects malformed, redirected and oversized input at ingestion", () => {
@@ -101,11 +98,10 @@ describe("provenance boundary", () => {
     const result = assess({ ...base, title: "<script>alert(1)</script> [Release] Vita port" });
     expect(result.accepted).toBe(true);
     expect(result.record.source.title).not.toContain("<script>");
-    const safeDoc = publicDocument([result.record], "2026-09-20T12:01:00.000Z", "r/vitahacks");
+    const safeDoc = publicDocument([result.record]);
     const serialized = JSON.stringify(safeDoc);
-    expect(serialized).not.toContain("risk_signals");
-    expect(serialized).not.toContain("classification_reason");
-    expect(serialized).not.toContain("author");
+    expect(safeDoc).toMatchObject({ schema_version: 1, items: [{ verification: "unverified" }] });
+    expect(serialized).not.toMatch(/risk_signals|classification_reason|author|state|detected_at|generated_at|source/);
   });
 
   it("marks generic upstream, screenshot-only and missing-evidence claims", () => {
@@ -132,7 +128,8 @@ describe("provenance boundary", () => {
       classification: { ...result.record.classification, category: "out_of_scope" },
       review: { evidence_bundle: { findings: "Authenticated source review recorded a Vita optimization demo." } }
     };
-    expect(publicCandidate(verified)).toMatchObject({ state: "VERIFIED_FOR_REVIEW", category: "project_update" });
+    expect(publicCandidate(verified)).toMatchObject({ verification: "unverified", title: "Guess It Is Happening" });
+    expect(publicCandidate(verified)).not.toHaveProperty("state");
   });
 
   it("enforces the manual state machine", () => {
@@ -170,7 +167,9 @@ describe("provenance boundary", () => {
     const workflow = fs.readFileSync(path.join(root, ".github/workflows/reddit-scanner.yml"), "utf8");
     expect(scanner).not.toMatch(/writeFileSync\(\s*LEDGER/);
     expect(scanner).toContain("data/quarantine.json");
-    expect(workflow).toContain("git add data/quarantine.json public/data public/api");
+    expect(scanner).toContain('data/scanner-health.json');
+    expect(workflow).toContain("git add data/quarantine.json data/scanner-health.json public/data public/api");
+    expect(fs.existsSync(path.join(root, "public/data/scanner-health.json"))).toBe(false);
     expect(workflow).not.toContain("fallbackData.ts");
   });
 
@@ -281,6 +280,6 @@ describe("provenance boundary", () => {
     expect(contained[0].state).toBe("REJECTED");
     expect(contained[0].incident.public_containment).toBe("removed");
     expect(publicCandidate(contained[0])).toBeNull();
-    expect(publicDocument(contained, "2026-09-20T18:00:00.000Z", "r/test").items).toHaveLength(1);
+    expect(publicDocument(contained).items).toHaveLength(1);
   });
 });

@@ -63,7 +63,7 @@ jobs:
         run: |
           git config user.name "vitaharbor-scan"
           git config user.email "scan@users.noreply.github.com"
-          git add data/quarantine.json public/data public/api
+          git add data/quarantine.json data/scanner-health.json public/data public/api
           if git diff --cached --quiet; then
             echo "Nothing new detected this run."
             echo "published_sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"

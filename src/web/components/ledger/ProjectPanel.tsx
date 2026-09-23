@@ -66,9 +66,7 @@ export const ProjectPanel: React.FC<ProjectPanelProps> = ({
 
       {project.verification === "detected" && (
         <p className="mb-6 max-w-3xl rounded-xl border border-hairline bg-surface px-4 py-3 text-caption text-ink-medium">
-          <span className="font-medium text-ink">Unverified entry.</span> Promoted
-          automatically from a detected thread. There is no hardware report yet, so
-          playability and performance are deliberately left empty.
+          <span className="font-medium text-ink">Unverified community report.</span> VitaHarbor has not independently confirmed this entry. No hardware report is recorded, so playability and performance are left unconfirmed.
         </p>
       )}
 

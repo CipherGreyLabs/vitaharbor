@@ -1,6 +1,6 @@
 // Detects *active development* threads on the configured Vita Reddit communities and records
-// them as quarantined provenance records. The public discovery file is only a sanitized
-// review-queue projection; it is never a source for curated ledger writes.
+// them as quarantined provenance records. The public community-post file contains only
+// source details and an explicit unverified label; it is never a source for ledger writes.
 //
 // Deliberately conservative: this script never invents stage, framerate, or credit
 // data. It only records that a thread exists, with a real detection timestamp.
@@ -25,7 +25,7 @@ import {
 const USER_AGENT = "web:vitaharbor.app:v1.0.0 (by /u/VitaHarborLedger)";
 const INTERNAL_OUT = path.resolve(process.cwd(), "data/quarantine.json");
 const PUBLIC_OUT = path.resolve(process.cwd(), "public/data/discovered.json");
-const HEALTH_OUT = path.resolve(process.cwd(), "public/data/scanner-health.json");
+const HEALTH_OUT = path.resolve(process.cwd(), "data/scanner-health.json");
 const LEDGER = path.resolve(process.cwd(), "src/shared/constants/fallbackData.ts");
 const MAX_ITEMS = 100;
 
@@ -59,7 +59,8 @@ function previous() {
   }
   try {
     const legacy = JSON.parse(fs.readFileSync(PUBLIC_OUT, "utf8"));
-    return (Array.isArray(legacy.items) ? legacy.items : [])
+    if (legacy.schema_version !== 2 || !Array.isArray(legacy.items)) return [];
+    return legacy.items
       .map((item) => migrateLegacyCandidate(item, { detectedAt: legacy.generated_at }))
       .filter((result) => result.record)
       .map((result) => result.record);
@@ -157,6 +158,7 @@ const items = [...activeItems, ...terminalItems]
 
 fs.mkdirSync(path.dirname(INTERNAL_OUT), { recursive: true });
 fs.mkdirSync(path.dirname(PUBLIC_OUT), { recursive: true });
+fs.mkdirSync(path.dirname(HEALTH_OUT), { recursive: true });
 fs.writeFileSync(
   INTERNAL_OUT,
   JSON.stringify(
@@ -174,7 +176,7 @@ fs.writeFileSync(
 
 fs.writeFileSync(
   PUBLIC_OUT,
-  JSON.stringify(publicDocument(items, detectedAt, REDDIT_SOURCE_LABEL), null, 2) + "\n",
+  JSON.stringify(publicDocument(items), null, 2) + "\n",
   "utf8"
 );
 

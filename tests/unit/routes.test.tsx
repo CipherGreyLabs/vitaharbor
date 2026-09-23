@@ -37,44 +37,18 @@ describe("public routes", () => {
   });
 
   it("renders only the public discovery projection fields", async () => {
-    const generatedAt = "2026-09-22T21:50:30.064Z";
     const queue = {
-      schema_version: 2,
-      generated_at: generatedAt,
-      source: "Reddit RSS",
-      note: "Detected threads are quarantined.",
+      schema_version: 1,
       items: [{
-        id: "reddit-example",
-        state: "VERIFIED_FOR_REVIEW",
         title: "Example Vita port thread",
         url: "https://www.reddit.com/r/vitahacks/comments/example/",
         subreddit: "vitahacks",
         published_at: "2026-09-22T20:00:00.000Z",
-        candidate_type: "port",
-        category: "new_project",
-        public_visibility: "review_queue",
-        author: "must-not-render",
-        risk_signals: ["must-not-render"]
+        verification: "unverified"
       }]
     };
-    const health = {
-      schema_version: 2,
-      attempted_at: generatedAt,
-      state: "complete",
-      successful_sources: 3,
-      total_sources: 3,
-      github_action: { provider: "github-actions", status: "success", run_id: "123", event: "schedule", sha: "abc" },
-      consecutive_degraded_runs: 0,
-      recent_runs: [],
-      sources: [
-        { subreddit: "vitahacks", status: "available", last_successful_scan_at: generatedAt, consecutive_failures: 0 },
-        { subreddit: "VitaPiracy", status: "available", last_successful_scan_at: generatedAt, consecutive_failures: 0 },
-        { subreddit: "PSVitaHomebrew", status: "available", last_successful_scan_at: generatedAt, consecutive_failures: 0 }
-      ]
-    };
     vi.stubGlobal("fetch", vi.fn(async (input: RequestInfo | URL) => {
-      const url = String(input);
-      return new Response(JSON.stringify(url.includes("scanner-health.json") ? health : queue), {
+      return new Response(JSON.stringify(queue), {
         status: 200,
         headers: { "content-type": "application/json" }
       });
@@ -88,6 +62,8 @@ describe("public routes", () => {
 
     expect(await screen.findByText("Example Vita port thread")).toBeTruthy();
     expect(document.body.textContent).not.toContain("must-not-render");
-    expect(screen.getByText("Reddit RSS")).toBeTruthy();
+    expect(screen.getByText("Unverified lead")).toBeTruthy();
+    expect(screen.getByText("r/vitahacks")).toBeTruthy();
+    expect(document.body.textContent).not.toMatch(/scanner|scan health|rate.?limit|review queue/i);
   });
 });

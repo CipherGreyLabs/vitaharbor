@@ -5,10 +5,12 @@ at 07:00, 13:00 and 19:00 UTC, fetches r/vitahacks, r/VitaPiracy and r/PSVitaHom
 and commits quarantined candidates back to the repo
 without using Codex tokens.
 
-The Vercel site reads `scanner-health.json` and `discovered.json` from the public `main`
-branch when visitors load the page, with a 15-minute refresh while it remains open. This is
-necessary because scanner commits do not themselves rebuild the static Vercel deployment.
-The deployed JSON files are a clearly labelled fallback snapshot, not the live source.
+The visitor-facing site reads only the sanitized `public/data/discovered.json` community-post
+projection from the public `main` branch, with a 15-minute refresh while the page remains open.
+It contains only a post title, Reddit link, community, publication date and an explicit
+`unverified` label. It does not fetch or publish scanner-health or workflow metadata. The
+internal `data/scanner-health.json` file remains available to the scanner and tests, but is not
+copied to the static site.
 
 The repository remote is configured and the workflow is present in
 `.github/workflows/reddit-scanner.yml`. GitHub Actions is the current scheduled scan engine;

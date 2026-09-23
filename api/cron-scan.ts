@@ -1,8 +1,5 @@
-// Vercel Cron Job - Reddit port scanner (Edge runtime, read-only).
-// Fetches the configured Vita Reddit RSS feeds, applies the same quarantine boundary
-// as the local scanner, and returns only a sanitized review-queue projection.
-// Schedule: 0 7,13,19 * * * (UTC) = 09:00, 15:00, 21:00 Brussels.
-// Does NOT write to disk on Vercel - runs locally via node scripts/cron-reddit-scan.mjs.
+// Vercel Cron fallback. Operational details stay in provider logs; the HTTP response
+// does not expose source outcomes or community-post data. This route does not write to disk.
 
 export const config = { runtime: "edge" };
 
@@ -41,5 +38,5 @@ export default async function handler() {
     ...Object.fromEntries(scans.map((scan) => [scan.sub.toLowerCase(), scan]))
   };
   console.log("[cron-scan]", JSON.stringify(result));
-  return Response.json(result);
+  return new Response(null, { status: 204 });
 }

@@ -36,7 +36,7 @@ fs.writeFileSync(internalPath, JSON.stringify({
   },
   items: records
 }, null, 2) + "\n", "utf8");
-fs.writeFileSync(legacyPath, JSON.stringify(publicDocument(records, now, "quarantined migration"), null, 2) + "\n", "utf8");
+fs.writeFileSync(legacyPath, JSON.stringify(publicDocument(records), null, 2) + "\n", "utf8");
 
 console.log("Migrated " + records.length + " legacy candidates to data/quarantine.json.");
 console.log("Promotion writes: 0 (all records remain QUARANTINED).");

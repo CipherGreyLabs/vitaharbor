@@ -66,8 +66,8 @@ export const VERIFICATION_META: Record<string, { label: string; description: str
     description: "The current record is grounded in a community report."
   },
   detected: {
-    label: "Detected only",
-    description: "A scanner found a matching thread; the entry still needs editorial verification."
+    label: "Unverified community report",
+    description: "A community post mentions this project, but VitaHarbor has not independently confirmed the details."
   }
 };
 

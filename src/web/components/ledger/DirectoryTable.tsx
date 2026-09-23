@@ -54,7 +54,6 @@ interface DirectoryTableProps {
   onSelectProject: (project: LedgerProject) => void;
   onCopyLink: (project: LedgerProject) => void;
   copiedSlug: string;
-  scannedAt?: string | Date;
   directoryRef: React.RefObject<HTMLElement | null>;
 }
 
@@ -78,7 +77,6 @@ export const DirectoryTable: React.FC<DirectoryTableProps> = ({
   onSelectProject,
   onCopyLink,
   copiedSlug,
-  scannedAt,
   directoryRef
 }) => {
   const stageCounts = useMemo(() => {
@@ -124,7 +122,6 @@ export const DirectoryTable: React.FC<DirectoryTableProps> = ({
               : "Showing " + visible.length + " of " + projects.length}
           <span className="ml-2 text-caption text-ink-muted">
             · {projects.filter((pr) => pr.screenshot_url).length} source screenshots
-            <span className="ml-2 text-ink-muted/60">· Source scan {formatDay(scannedAt) || "not recorded"}</span>
           </span>
         </p>
       </div>

@@ -73,7 +73,7 @@ export const ProjectDetailPage: React.FC = () => {
       ? `${project.game_title} Vita port`
       : "Project record",
     description: project
-      ? `${project.game_title} on PlayStation Vita — stage, playability, performance and verified source history.`
+      ? `${project.game_title} on PlayStation Vita — development stage, hardware notes and source links.`
       : "Verified PlayStation Vita port record."
   });
 
