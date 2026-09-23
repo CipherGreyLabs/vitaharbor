@@ -80,6 +80,10 @@ Updated: 2026-09-23
   and a production build with 29 project pages and 32 sitemap URLs; lint passed; integration
   passed 7/7; curated-link audit completed; `git diff --check` passed. Production was not
   re-deployed, so the previously released Vercel deployment remains the release baseline.
+- A local Playwright run against the exact production preview passed 18/18, including the
+  Discovery failure/rate-limit presentation, project screenshot selection, reduced-motion and
+  WebGL fallback paths, and the compact-grid/back-to-top controls. The preview was stopped
+  after verification; no external site or account state changed.
 
 ## Completed assignment: VH-INTEGRATE-015
 
