@@ -56,15 +56,21 @@ Updated: 2026-09-23
 ## Current worker milestone: VH-SCAN-RELEASE-019 and VH-LINKS-019
 
 - The isolated worker branch `codex/vitaharbor-integration-015` is based on `origin/main`
-  `a191c773e9bcc577d053043ad9ec5f64ee95263a`; live `ls-remote` confirms that exact remote
-  tip, and it is an ancestor of the six-commit worker branch (`0 6` ahead/behind). The user
-  has now explicitly authorized the release. The dirty primary checkout was not touched;
-  final candidate gates, push, deployment and live acceptance are pending.
+  and release source `ed19710f972356688b4d6e49075a13eacc5ef02f` was fast-forwarded to
+  `origin/main` from `a191c773e9bcc577d053043ad9ec5f64ee95263a`. The dirty primary, UX
+  contributor and master worktrees were not touched. Production deployment is NO_GO pending
+  the failed GitHub Actions gate below.
 - The scanner workflow no longer writes `github_action.status=success` before publication. The
   generated scanner JSON now records Action completion as `unknown`; the workflow commits and
   pushes first, then verifies the published `main` SHA in the Action log. This avoids a false
   success marker and a self-referential commit loop when `git push` fails. The old finalizer
   script was removed.
+- Push-triggered GitHub Actions run `35886994823` (#14) failed in 43 seconds at “Verify unit
+  and integration tests”, before Reddit scan, backfill, feed rebuild or publish; those steps
+  were skipped. The failing health test expected local metadata (`provider=local`, `event/run_id/
+  sha=null`) but the GitHub runner correctly supplied `provider=github-actions`, `event=push`,
+  `run_id=35886994823` and release SHA `ed19710f972356688b4d6e49075a13eacc5ef02f`. This CI
+  failure is the explicit release stop condition; no retry, code fix or deployment was done.
 - The latest local scan attempt is `2026-09-23T15:47:43.956Z`: `partial`, 1/3 sources available
   (`vitahacks` available, `VitaPiracy` and `PSVitaHomebrew` rate-limited), Action status
   `unknown`. The public review queue has 11 sanitized items; internal provenance has 18 records
@@ -88,11 +94,19 @@ Updated: 2026-09-23
   `docs/CURATED_LINK_BROWSER_REVIEW_2026-09-23.json` and the linked audit report.
 - Local verification on the exact worker tree: `npm run verify` passed typecheck, 108 unit tests
   and a production build with 29 project pages and 32 sitemap URLs; lint passed; integration
-  passed 7/7; `git diff --check` passed. Local Playwright had 17/18 in the parallel run; the
-  lone Save-Data/WebGL visibility timeout passed on an isolated one-worker rerun, so the complete
-  E2E set is 18/18 across the controlled runs. The preview was stopped afterward.
-- Production remains the previously released deployment baseline until this authorized
-  release passes the final exact-candidate checks.
+  passed 7/7; Playwright passed 18/18 with one worker against the exact built preview at
+  `http://127.0.0.1:4174`; `git diff --check` passed. The public curated feed and prerender each
+  contain 29 projects; the candidate queue has 11 items and restores all three requested WIP
+  IDs while excluding `reddit-1wndxal`; the curated ledger and generated feeds have no game-data
+  archive links.
+- Because run #14 stopped before scanning, it produced no source observations and published no
+  scanner result. The latest public health snapshot remains `2026-09-23T15:47:43.956Z`, partial
+  1/3 (`vitahacks` available; `VitaPiracy` and `PSVitaHomebrew` rate-limited), with Action
+  metadata still `local/unknown`; this is prior scan evidence, not an outcome from run #14.
+- Vercel production was not changed. Read-only `vercel inspect` confirms the alias still points
+  to READY deployment `dpl_Cj1uUTeAnZq4DpyCfQj2t6FVJsyv` at
+  `https://vitaharbor.vercel.app`. No live DOM acceptance was run for the new candidate; its
+  production UI state remains UNKNOWN. The existing production deployment is the prior baseline.
 
 ## Completed assignment: VH-INTEGRATE-015
 

@@ -1,6 +1,6 @@
-# Handoff - VitaHarbor Worker VH-SCAN-RELEASE-019 and VH-LINKS-019
+# Handoff - VitaHarbor Worker VH-SCAN-RELEASE-019 NO-GO
 
-- Gegenereerd: 2026-09-23T15:56:18Z
+- Gegenereerd: 2026-09-23T16:19:38Z
 - Actor: codex
 - Model: unrecorded
 - ProjectRoot: C:\Users\suloW\.codex\worktrees\vitaharbor-integration-015\VitaPort
@@ -12,10 +12,10 @@
 |---|---|---|
 | AGENTS.md | 6555 | 22C948A1AB4CC94DD04174661AC6F93A7224C1579D1B668A9EA63C9B13416351 |
 | .gitignore | 649 | 528B3E3927A5E412F222589169035693AF0840FFA1B1BE5BB15195C3C730FB2C |
-| PROJECT_STATE.md | 27642 | 4197D53131A4D37BEE15FDA92D306093405B7EF023FE4B159F1D5BD32C6D7A63 |
-| AGENT_TEAM.json | 4043 | F30EFB59CFE33645337425C0FDA2B2D8A2FAFE81E6F92FB2C3F267A362CAD835 |
-| EVIDENCE.jsonl | 46829 | 60D92F45267C0D829872BD4DDE8C164FDA6F151191B7C5020C354777DA722B6C |
-| docs\WORKLOG.md | 91781 | 7B622F24EF7D30E27DBFB82B5DC4AF6599B1D83C90A85A2C4B951C9A59E1A564 |
+| PROJECT_STATE.md | 29366 | 901491E52C84594DBA0412CE29F44EBB6305AF30459E6745D567C109CFAD7E1C |
+| AGENT_TEAM.json | 4192 | D767D3619185B366BD23BEF8888AC77B69ADD7A3873947177E4F8E68B48E08D6 |
+| EVIDENCE.jsonl | 50362 | 882C7627E1BDA7E46573902956D374D14AAB5749B8C78EE1CA1E175649491AA0 |
+| docs\WORKLOG.md | 95221 | 949D284480CC792C6CE2F8B646600A50234FB599A4F95D5B95BE0CBA5731407A |
 | docs\AUTOMATION.md | 2855 | 23D5B2833987DD73A9AB02ACBCAF839CFADE0E71793D1D5CA77467DF815FE34D |
 | README.md | 3080 | B54A25C02A048BD1D94067EBE7D8697B8069CA0D05980D569D360676CC51AD8B |
 | package.json | 3194 | 003E5C41FEF5F2E89E84CA6AB320A1D8AC592D0D86E6C928DFA4E75E28A3CB4D |
@@ -59,7 +59,7 @@
 
 ## Samenvatting
 
-Local worker d2aa030: scanner publication is verified only after push, queue records are reconciled, and 19 unique Reddit URLs were browser-reviewed read-only. No push, merge or deployment.
+Release source ed19710f972356688b4d6e49075a13eacc5ef02f was fast-forwarded to origin/main. Exact local gates passed (108 unit tests, build 29 projects/32 sitemap URLs, lint, integration 7/7, local Playwright 18/18); the reviewed 11-item queue restores three WIP IDs, excludes reddit-1wndxal, and curated feeds contain no game-data archive links. Push-triggered GitHub Actions run 35886994823 failed before the scan at a unit test that expected local Action metadata but received the GitHub push context. Scan/backfill/feed publication were skipped, so this run has no Reddit-source result. Production deployment is NO_GO; alias remains on READY deployment dpl_Cj1uUTeAnZq4DpyCfQj2t6FVJsyv. No retry, fix, manual dispatch, deployment or protected-worktree edit was performed.
 
 ## Verificatie
 
