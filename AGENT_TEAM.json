@@ -67,7 +67,7 @@
       "deploymentId": "dpl_Cj1uUTeAnZq4DpyCfQj2t6FVJsyv",
       "productionAlias": "https://vitaharbor.vercel.app",
       "integrationBase": "3b5f1614a222d49d2bcb861a33e6ab80dabb7ff9",
-      "workingTreeState": "visitor-facing cleanup committed locally; project-state/evidence/handoff documentation pending; primary, contributor and master worktrees untouched; no push/deployment",
+      "workingTreeState": "visitor-facing cleanup and project evidence committed locally; hash-protected handoff generated and verified; primary, contributor and master worktrees untouched; awaiting review; no push/deployment",
       "allowedScope": "files explicitly included by the current master assignment, required tests, project evidence and approved deployment",
       "prohibitedScope": "architecture ownership, unrequested redesign, worker creation, hidden subagents and unrelated dirty-file changes",
       "handoffPath": "HANDOFF.md"
