@@ -2,6 +2,15 @@
 
 Updated: 2026-09-23
 
+## Current master-directed task: visitor-facing diagnostics cleanup (2026-09-23)
+
+- Removed scanner cadence, run IDs, source failure/rate-limit details, scan timestamps and review-queue mechanics from the public Home, Community Posts, project and methodology views. Kept useful post dates, source links, project facts, and explicit unverified labels.
+- The public discovery feed is now a minimal schema-v1 projection. Scanner health remains internal at `data/scanner-health.json`; the static site no longer fetches or serves it. The Vercel cron endpoint returns no diagnostic body. The three-times-daily schedule was not changed.
+- Exact candidate is local commit `13502d609e3e7a6cc2e06f48b1e61c1a757f341a` on `codex/vh-visitor-ops-cleanup-20260923`, based on `origin/main` `3b5f1614a222d49d2bcb861a33e6ab80dabb7ff9`. Awaiting master review; no push, merge, or deployment.
+- Verification: `npm run verify` passed typecheck, 110/110 unit tests, and production build (29 project pages, 32 sitemap URLs); lint passed; integration passed 7/7; Playwright passed 19/19 at `http://127.0.0.1:4174` with two workers. The first eight-worker run had one transient WebGL test failure; the focused rerun and complete two-worker rerun both passed. The built 37 HTML/JS assets had zero matches for the selected operational diagnostic patterns. Mobile 390px had no horizontal overflow; no-JS Home retained Directory content; browser made no health-asset request and displayed 11 community leads.
+- Candidate screenshots are in `C:\Users\suloW\AppData\Local\Temp\vitaharbor-cleanup-67ad93fc6be641ec9977e5d1c42d0fad` (`home-desktop.png`, `community-posts-desktop.png`, `community-posts-mobile.png`).
+- Internal-only freshness observation: scheduled GitHub run `35897506358` succeeded at 2026-09-23 17:42 UTC; the scan health record at 17:43 UTC was partial (r/vitahacks available; r/VitaPiracy and r/PSVitaHomebrew rate-limited). This is not a cadence/UI change ticket.
+
 ## Current follow-up: VH-SCAN-HEALTH-020
 
 - Bounded master assignment: make the scanner-health constructor/test deterministic under
