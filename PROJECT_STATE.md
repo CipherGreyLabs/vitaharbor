@@ -27,13 +27,29 @@ Updated: 2026-09-23
   public assets were accepted by the sanitizer (13 queue candidates; scanner attempt
   `2026-09-23T05:09:00.830Z`, failed, 0/3 feeds due to rate limits).
 - GitHub Actions history confirms the three daily schedules at 07:00, 13:00 and 19:00 UTC;
-  its latest attempt at verification is from a push-triggered run, and the next scheduled
-  07:00 UTC run has not yet occurred at the recorded time. The older two-day display was the
-  deployed Vercel snapshot, not a current-data read.
-- The master authorized a production release. Commit/push/deployment and post-deploy
-  acceptance are in progress; do not treat production as updated until the exact commit is
-  READY and the live alias is checked. The scanner itself is confirmed failed/rate-limited,
-  not a successful content scan.
+- Release commit `1b7c0a3f88e77d8b087bd2cb07d2aa0411de28f8` is pushed to
+  `origin/codex/vitaharbor-integration-015`; `origin/main` was unchanged at `15b311f` before
+  release. The production deployment is `dpl_Cj1uUTeAnZq4DpyCfQj2t6FVJsyv`, READY at
+  `https://vitaharbor-gqs4zha5a-anonymusv1605-8308.vercel.app`, aliased to
+  `https://vitaharbor.vercel.app`.
+- Post-deploy acceptance: production Playwright 18/18; direct browser requests for both raw
+  GitHub scanner assets returned 200 on Home and Discovery; both pages labelled the source
+  `Live scan data` and accurately displayed `Latest scan failed`; 13 queue candidates; no
+  browser page errors. With raw GitHub deliberately blocked, both pages switched to the
+  labelled deployed snapshot and continued showing the honest failed status and 13 candidates.
+- Production security/UX checks: header/SEO/crawler audit passed (including raw GitHub in CSP
+  and `no-store` on `/data/*`); deeplinks returned 200 with matching title/canonical; mobile
+  audit passed at 375/390/412/768px with no horizontal overflow or small targets; contrast
+  passed 35/35.
+- The live attempt shown is still `2026-09-23T05:09:00.830Z`, failed with all three sources
+  rate-limited (0/3). This release fixes stale presentation; it does not claim Reddit returned
+  successful content. The workflow remains configured for 07:00, 13:00 and 19:00 UTC. At
+  07:11 UTC the public Actions API still listed the 05:08 push-triggered run as latest and no
+  07:00 scheduled event; delivery of that individual schedule is `UNKNOWN` (it may be delayed).
+  No manual scan was dispatched and the cadence was not changed.
+- Master-authorized release and post-deploy acceptance are complete. The prior primary, UX
+  contributor and master worktrees remain untouched. No subagents or additional workers were
+  used.
 - The prior primary, UX contributor and master worktrees remain untouched. No subagents or
   additional workers were used.
 
