@@ -45,3 +45,6 @@ diag-*.png
 list-now.png
 check_home.png
 m_*.png
+
+.vercel
+.env*.local

@@ -1,20 +1,21 @@
-# Handoff - VitaHarbor VH-INTEGRATE-015 worker handoff
+# Handoff - VitaHarbor VH-INTEGRATE-015 production handoff
 
-- Gegenereerd: 2026-09-23T05:18:48Z
+- Gegenereerd: 2026-09-23T05:37:20Z
 - Actor: codex
 - Model: unrecorded
 - ProjectRoot: C:\Users\suloW\.codex\worktrees\vitaharbor-integration-015\VitaPort
-- Bronnen: 28
+- Bronnen: 29
 
 ## Bronintegriteit
 
 | Bestand | Bytes | SHA-256 |
 |---|---|---|
 | AGENTS.md | 6555 | 22C948A1AB4CC94DD04174661AC6F93A7224C1579D1B668A9EA63C9B13416351 |
-| PROJECT_STATE.md | 20112 | C5491EA0BA3D0B49F96DFA7D8DF5685323048573EEF45B32980551AAA705A865 |
-| AGENT_TEAM.json | 3910 | F0B4743ED130694293BFD237723DFDF0FA8B0CA752044716730177944E634420 |
-| EVIDENCE.jsonl | 38521 | 4040370B5938E45FCEDCA5E032EE0EBC8F9744A33C2728D712EADE99FF14C6A6 |
-| docs\WORKLOG.md | 77139 | 84E54E34AF2171DD2B9CE29677203F67D9B97C6E0B5AF61C59860C7D4DFDC97E |
+| .gitignore | 649 | 528B3E3927A5E412F222589169035693AF0840FFA1B1BE5BB15195C3C730FB2C |
+| PROJECT_STATE.md | 20840 | F782166E4BEE14FC74140FCFFD076C143332ABDAE3FAF0AC8EF019FB40DE81D8 |
+| AGENT_TEAM.json | 4019 | 7618AED30853377A31AE47DBB1515AA9A1B088035256E4EE7FD0CBD74214D44C |
+| EVIDENCE.jsonl | 41047 | 47F1408A28C27A44C26303E1458ECAAB818534D62D17DE6BAD2338D463A73CDD |
+| docs\WORKLOG.md | 79220 | A02359674B4D0A5CFF09A1C7C67EA95CF1441AF226B87725B6B45F2FE1A950A3 |
 | README.md | 3080 | B54A25C02A048BD1D94067EBE7D8697B8069CA0D05980D569D360676CC51AD8B |
 | package.json | 3135 | 1A8B1A462533D4A432D5F2C6CA7A4B151C090BBF6BF88EBD26B66AF9413A0B13 |
 | public\data\discovered.json | 6052 | FFAED57146BA3EA01D0CF90AF9802DA1A7530CCD495202D8F7405907C0940A18 |
@@ -41,7 +42,7 @@
 
 ## Samenvatting
 
-Local release tip 6d716fbc1c54c68785462be8e0dbf2ab09b7999d incorporates scanner commit 0c776a9a2481a1b434e8657e8ce270d8a3ada26c. All tests and audits pass (92 unit, 7 integration, 18 E2E, 4 viewport mobile, contrast 35/35). Latest scanner attempt was rate-limited by all 3 communities and is visibly reported as failed; no new project records or promotions. Deployment is pending. Primary, contributor and master dirty worktrees remain untouched.
+Runtime release SHA 9854ed75ff8a2f60cd684412f8b8f65afc3e361b is deployed as dpl_FATqcqE9dHac5assD26HoVUiYCf9, READY and aliased to https://vitaharbor.vercel.app. Live acceptance passed 18 E2E, 4 mobile viewports, 35 contrast checks, headers/SEO and deeplinks. 29 curated projects remain; latest scanner attempt was rate-limited in all 3 communities and is visibly marked failed, with no new candidate. Production dependency audit has 0 findings; 8 development toolchain advisories remain. Primary, UX contributor and master dirty worktrees were preserved.
 
 ## Verificatie
 

@@ -6,8 +6,9 @@ Updated: 2026-09-23
 
 - Worker implementation is isolated on branch `codex/vitaharbor-integration-015` at
   `C:\Users\suloW\.codex\worktrees\vitaharbor-integration-015\VitaPort`, based on
-  `origin/main` `2e8cc90ced003671a3b42064fe82a4350ce32f67`. Local implementation and
-  acceptance gates are complete; release evidence and deployment remain pending.
+  `origin/main` `2e8cc90ced003671a3b42064fe82a4350ce32f67`. Implementation, local gates,
+  production deployment and live acceptance are complete; final post-deploy documentation
+  and handoff are being committed separately.
 - The primary checkout `C:\Users\suloW\Documents\ChatGPT\VitaPort` is on a separate
   dirty `main` worktree at `96f1ffe60245dc697af908a0d88a11619a691ed2`. The UX contributor
   checkout is `codex/vitaharbor-ux9` at `2e8cc90ced003671a3b42064fe82a4350ce32f67`; the
@@ -16,8 +17,7 @@ Updated: 2026-09-23
 - Implementation commit: `8ba6e436c5a068ed2d6760fd20708f3ee3ad1b67` on the isolated
   feature branch; scanner-status regression-test follow-up is `6d716fbc1c54c68785462be8e0dbf2ab09b7999d`.
   The branch includes automatic scanner commit `0c776a9a2481a1b434e8657e8ce270d8a3ada26c`;
-  project-control documentation is being committed separately. No production change is
-  claimed yet.
+  deployed runtime source is `9854ed75ff8a2f60cd684412f8b8f65afc3e361b`.
 - Master task `01a0bed8-0aae-73d2-bff1-bb0b6e7dfd00` remains the architecture/delegation
   owner; worker task `01a0bc84-7462-7f92-a672-5856bed2ae0f` implements, tests and reports.
   No native subagents or additional workers were used.
@@ -26,14 +26,22 @@ Updated: 2026-09-23
   Playwright 18/18;
   mobile audit passed 4/4 with no horizontal overflow or small targets; contrast passed
   35/35; `git diff --check` passed.
-- Production baseline was read-only inspected on 2026-09-23: deployment
-  `dpl_8QeqpCERNv3rSAF7JDf59FQnjzrW`, READY and aliased to
-  `https://vitaharbor.vercel.app`. This is the pre-integration deployment, not evidence
-  that VH-INTEGRATE-015 is deployed.
+- Production deployment `dpl_FATqcqE9dHac5assD26HoVUiYCf9` reached READY at
+  `https://vitaharbor-fezbysjeb-anonymusv1605-8308.vercel.app`, aliased to
+  `https://vitaharbor.vercel.app`, from exact pushed runtime SHA `9854ed75ff8a2f60cd684412f8b8f65afc3e361b`.
+- Production acceptance: 18/18 E2E; header/SEO/crawler audit passed; project deeplinks
+  returned 200 with correct title/canonical; mobile 4/4 had no document overflow or small
+  targets; contrast passed 35/35. Live project feed and project sitemap each contain 29;
+  discovery contains 13 sanitized candidates. Scanner health correctly says `failed`
+  because all three Reddit sources were rate-limited; no new candidate was added.
 - `gh` (GitHub CLI) is unavailable in this environment. Git remote access is available;
-  `origin/main` is at `0c776a9a2481a1b434e8657e8ce270d8a3ada26c`, one commit behind
-  the local tested release branch. The scanner's automatic change has been reviewed; no
-  other remote or contributor worktree changes are included.
+  `origin/main` was at runtime source `9854ed75ff8a2f60cd684412f8b8f65afc3e361b` at
+  deployment. Deployment evidence and ignore-rule hardening are being recorded in a
+  documentation-only follow-up commit.
+- `npm audit --omit=dev --audit-level=moderate` found 0 production dependency
+  vulnerabilities. Full `npm audit` found 8 development-toolchain advisories (4 moderate,
+  4 high, through Vitest/Wrangler dependencies); no major toolchain upgrades were included
+  in this site integration.
 
 The sections below retain historical state and evidence; where they conflict with this
 active assignment, this dated VH-INTEGRATE-015 block is the current state.
