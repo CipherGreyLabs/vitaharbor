@@ -1,5 +1,6 @@
 import { test, expect } from "playwright/test";
 import { FALLBACK_PROJECTS } from "../../src/shared/constants/fallbackData";
+import { scannerFreshness, type ScannerHealthRecord } from "../../src/web/lib/visitorState";
 
 test.describe("archive", () => {
   test.beforeEach(async ({ page }) => {
@@ -81,6 +82,19 @@ test.describe("archive", () => {
     await recent.click();
     await expect(recent).toHaveAttribute("aria-pressed", "true");
     await expect(page.locator("li[id^='entry-']").first()).toBeVisible();
+  });
+
+  test("discovery exposes scanner failures and rate limits without claiming freshness", async ({ page }) => {
+    const response = await page.request.get("/data/scanner-health.json");
+    expect(response.ok()).toBe(true);
+    const health = await response.json() as ScannerHealthRecord;
+
+    await page.goto("/discovery/", { waitUntil: "domcontentloaded" });
+    await expect(page.getByText(scannerFreshness(health).label, { exact: true })).toBeVisible();
+    for (const source of health.sources.filter((item) => item.status !== "available")) {
+      const status = source.status === "rate_limited" ? "rate limited" : "unavailable";
+      await expect(page.getByText(`r/${source.subreddit}: ${status}`, { exact: true })).toBeVisible();
+    }
   });
 
   test("a project can be saved and removed from the browser watchlist", async ({ page }) => {
