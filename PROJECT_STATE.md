@@ -53,6 +53,34 @@ Updated: 2026-09-23
 - The prior primary, UX contributor and master worktrees remain untouched. No subagents or
   additional workers were used.
 
+## Current worker milestone: VH-SCAN-CLASS-018 and VH-LINKS-018
+
+- The isolated worker branch `codex/vitaharbor-integration-015` was reconciled read-only to
+  `origin/main` `a191c773e9bcc577d053043ad9ec5f64ee95263a`; the dirty primary checkout was not
+  touched. Runtime/data implementation commit `6659a91a120e1f7cea05d19100b15ba74f3d5c0f` is
+  local only. No push, merge or deployment was authorized or performed.
+- Scanner health is now schema v2. It separates the GitHub Action completion record from the
+  three Reddit source results, carries the last successful scan timestamp per source (null when
+  no success is evidenced), retains the last 12 run results, and exposes consecutive partial/
+  failed-run detection. The workflow finalizes `github_action.status=success` only after scan,
+  backfill and feed generation complete; source `partial` or `failed` remains independent.
+- The classifier now emits explicit categories `new_project`, `project_update`, `discussion`,
+  `question` and `out_of_scope`. Trackable candidates require a project identity and concrete
+  development evidence. The proven discussion `reddit-1wndxal` (`We need to talk`) is internally
+  `REJECTED`, absent from `public/data/discovered.json`, and recorded in the append-only
+  provenance audit. The four existing `VERIFIED_FOR_REVIEW` records remain unchanged; no
+  promotion was performed.
+- A report-only curated-link audit is available as `npm run audit:links`, with the evidence in
+  `docs/CURATED_LINK_AUDIT_2026-09-23.md` and `.json`. It inspected 52 source/repository/
+  screenshot/release references: 16 content-checked `ok`, 36 `unverifiable` because Reddit
+  returned HTTP 403, and 0 `dead`, `redirect` or `wrong-target`. No URL correction was applied;
+  wrong-target requires content identity evidence and all candidates remain unchanged until an
+  individual replacement is verified.
+- Local verification on the exact worker tree: `npm run verify` passed typecheck, 105 unit tests
+  and a production build with 29 project pages and 32 sitemap URLs; lint passed; integration
+  passed 7/7; curated-link audit completed; `git diff --check` passed. Production was not
+  re-deployed, so the previously released Vercel deployment remains the release baseline.
+
 ## Completed assignment: VH-INTEGRATE-015
 
 - Worker implementation is isolated on branch `codex/vitaharbor-integration-015` at
