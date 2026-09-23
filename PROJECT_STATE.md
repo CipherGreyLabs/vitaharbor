@@ -1,8 +1,19 @@
 # VitaHarbor project state
 
-Updated: 2026-09-23
+Updated: 2026-09-24
 
-## Current master-directed task: visitor-facing diagnostics cleanup (2026-09-23)
+## Current bounded worker assignment: VH-PROJECT-ACTIVITY-LABEL-021 (2026-09-24)
+
+- The master authorized a visitor-copy fix after a read-only production diagnosis. The fresh live Home, Community posts, and Updates views contain no “2 days ago” or scan-status text. Opening a Home project row did show `Last activity · 3d ago`; this is the project's source-backed `last_activity_at`, not a VitaHarbor scan timestamp. The live project API's newest activity record was Test Drive at `2026-09-20T19:50:09.288Z`.
+- Code commit `1192b8e1b2c7b2975d3959a79eba2c58c9b9317b` changes the detail label to `Latest project activity`, keeps the absolute source date and removes the relative-age suffix. A Home deep-link regression assertion verifies the opened Test Drive panel has `20 Sept 2026` and no `Nd ago` label.
+- Worker branch `codex/vh-visitor-ops-cleanup-20260923` is based on the latest `origin/main` data tip `e84e6aea178829f18669c37724638968701f710e`; runtime implementation commit `1192b8e1b2c7b2975d3959a79eba2c58c9b9317b` is directly atop that base. No push or deployment is authorized. Production still points to READY deployment `dpl_98bNGxsgXjCsnFMyYBty5FD5qsz6`, deployed from runtime source `25865ab1aa2ee717fa50942fec447738f2bcfee9`.
+- Verification on the exact code commit: `npm run verify` passed typecheck, 110 unit tests, and build (29 project pages, 32 sitemap URLs); lint passed; integration 7/7; Playwright 20/20 at local preview `http://127.0.0.1:4174`. Manual desktop and 390px preview showed `LATEST PROJECT ACTIVITY` / `20 Sept 2026`, no relative-age or scanner-status string, and no mobile overflow. The first focused E2E invocation used the config's production default and therefore saw the unreleased live copy; it was rerun successfully against the local preview, followed by the full 20-test suite.
+- Internal read-only scan evidence: scheduled Actions run `35926409183` completed at `2026-09-23T22:07:04Z`; scanner attempt `2026-09-23T22:06:44Z` was failed 0/3 because all three RSS sources were rate-limited. This remains internal and is not shown to visitors. Schedule remains 07:00, 13:00 and 19:00 UTC; worker made no cadence/provider changes.
+- The incoming `HANDOFF.md` failed integrity only for `tests/e2e/archive.spec.ts`; `git status` was clean, and commit `25865ab` had changed that file after the previous handoff was generated. No user-owned uncommitted edit was found. Regenerated `HANDOFF.md` with 33 source hashes; `NEW-HANDOFF.ps1 -Verify` returned `HANDOFF GO` for all 33.
+
+## Historical pre-release snapshot: visitor-facing diagnostics cleanup (2026-09-23)
+
+The following block records the state before the authorized production release. Its pre-release status lines are historical; the current live deployment and worker candidate are recorded above.
 
 - Removed scanner cadence, run IDs, source failure/rate-limit details, scan timestamps and review-queue mechanics from the public Home, Community Posts, project and methodology views. Kept useful post dates, source links, project facts, and explicit unverified labels.
 - Master review found process language left in the no-JS methodology and standalone Discovery metadata. The prerender template now describes unverified community posts and visible evidence levels in plain visitor language; `/discovery/` title and description now match the Community Posts page.
