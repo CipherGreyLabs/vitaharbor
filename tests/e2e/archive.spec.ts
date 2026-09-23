@@ -44,6 +44,15 @@ test.describe("archive", () => {
     await expect(panel).toContainText("Milestones");
   });
 
+  test("expanded project details show an absolute project-activity date, not a relative age", async ({ page }) => {
+    await page.goto("/#p=test-drive-1987-vita", { waitUntil: "domcontentloaded" });
+    const panel = page.locator("#panel-test-drive-1987-vita");
+    await expect(panel).toBeVisible();
+    await expect(panel.getByText("Latest project activity", { exact: true })).toBeVisible();
+    await expect(panel).toContainText("20 Sept 2026");
+    await expect(panel).not.toContainText(/\b\d+\s*d ago\b|\b\d+\s+days? ago\b/i);
+  });
+
   test("search narrows the list and escape clears it", async ({ page }) => {
     const rows = page.locator("li[id^='entry-']");
     await expect(rows.first()).toBeVisible();

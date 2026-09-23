@@ -6,7 +6,6 @@ import {
   prettyStage,
   formatDay,
   formatMonth,
-  relativeTime,
   deriveSetupGuide,
   deriveProjectType,
   PROJECT_TYPE_META,
@@ -231,10 +230,9 @@ export const ProjectPanel: React.FC<ProjectPanelProps> = ({
               </dd>
             </div>
             <div>
-              <dt className="text-micro font-medium uppercase text-ink-muted">Last activity</dt>
+              <dt className="text-micro font-medium uppercase text-ink-muted">Latest project activity</dt>
               <dd className="mt-1 text-body text-ink">
                 {formatDay(project.last_activity_at) || "—"}
-                <span className="text-ink-muted"> · {relativeTime(project.last_activity_at)}</span>
               </dd>
             </div>
           </dl>
