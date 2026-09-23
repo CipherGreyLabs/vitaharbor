@@ -57,8 +57,8 @@ Updated: 2026-09-23
 
 - The isolated worker branch `codex/vitaharbor-integration-015` is based on `origin/main`
   `a191c773e9bcc577d053043ad9ec5f64ee95263a`; the dirty primary checkout was not touched.
-  Current implementation is local only in this worker tree. No push, merge, workflow dispatch
-  or deployment was authorized or performed.
+  Local implementation commit `d2aa030` contains the current scanner, queue and link-audit
+  follow-up. No push, merge, workflow dispatch or deployment was authorized or performed.
 - The scanner workflow no longer writes `github_action.status=success` before publication. The
   generated scanner JSON now records Action completion as `unknown`; the workflow commits and
   pushes first, then verifies the published `main` SHA in the Action log. This avoids a false
