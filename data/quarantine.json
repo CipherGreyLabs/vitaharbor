@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-09-23T12:29:10.118Z",
+  "generated_at": "2026-09-23T15:12:42.738Z",
   "source": "r/vitahacks + r/VitaPiracy + r/PSVitaHomebrew RSS",
   "items": [
     {
@@ -92,7 +92,7 @@
       "schema_version": 2,
       "id": "reddit-1wndxal",
       "external_id": "1wndxal",
-      "state": "QUARANTINED",
+      "state": "REJECTED",
       "state_history": [
         {
           "state": "DETECTED",
@@ -105,6 +105,12 @@
           "at": "2026-09-22T17:32:15.796Z",
           "actor": "reddit-scanner",
           "reason": "Scanner result is unverified and cannot enter the curated ledger"
+        },
+        {
+          "state": "REJECTED",
+          "at": "2026-09-23T15:12:42.738Z",
+          "actor": "scanner-maintenance",
+          "reason": "Confirmed false-positive discussion; no project or development claim."
         }
       ],
       "source": {
@@ -163,7 +169,12 @@
         "author/developer linkage and independent corroboration"
       ],
       "content_hash": "3cfe2aa6256f4703232336c692b7ebc931b893a490112ad4035e63bb1f378103",
-      "review": null,
+      "review": {
+        "reviewer": "scanner-maintenance",
+        "reviewed_at": "2026-09-23T15:12:42.738Z",
+        "reason": "Confirmed false-positive discussion; no project or development claim.",
+        "evidence_bundle": null
+      },
       "incident": null
     },
     {

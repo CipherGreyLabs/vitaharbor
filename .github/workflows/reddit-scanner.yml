@@ -12,6 +12,7 @@ on:
       - "package-lock.json"
       - "scripts/cron-reddit-scan.mjs"
       - "scripts/reddit-scan-health.mjs"
+      - "scripts/finalize-scanner-health.mjs"
       - "scripts/reddit-backfill.ts"
       - "scripts/reddit-sources.mjs"
       - "scripts/reddit-classifier.mjs"
@@ -57,6 +58,9 @@ jobs:
 
       - name: Rebuild public feeds
         run: npx tsx scripts/make-feeds.ts
+
+      - name: Record successful GitHub Action completion
+        run: node scripts/finalize-scanner-health.mjs
 
       - name: Commit discovery results
         run: |

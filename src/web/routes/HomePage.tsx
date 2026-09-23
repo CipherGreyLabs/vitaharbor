@@ -163,7 +163,7 @@ export const HomePage: React.FC = () => {
       const result = await fetchScannerAsset<ScannerHealthRecord>("scanner-health.json");
       if (cancelled) return;
       setScannerHealthSource(result.source);
-      if (result.data?.schema_version === 1) setScannerHealth(result.data);
+      if (result.data?.schema_version === 1 || result.data?.schema_version === 2) setScannerHealth(result.data);
     };
     void refreshHealth();
     const interval = window.setInterval(() => void refreshHealth(), 15 * 60 * 1000);
@@ -505,6 +505,20 @@ export const HomePage: React.FC = () => {
                   ? `Last attempt ${formatUtcDateTime(scannerHealth.attempted_at)} · 3× daily · ${scannerHealthSource === "live" ? "live scan data" : scannerHealthSource === "snapshot" ? "deployed snapshot" : "scan feed unavailable"}`
                   : "A scan time alone cannot confirm that every source responded."}
               </p>
+              <p className="mt-1 text-caption text-ink-muted">
+                {scannerHealth?.github_action.status === "success"
+                  ? `GitHub Action succeeded${scannerHealth.github_action.run_id ? ` · run ${scannerHealth.github_action.run_id}` : ""}`
+                  : scannerHealth?.github_action.status === "pending" ? "GitHub Action completion pending" : "GitHub Action result unknown"}
+              </p>
+              {scannerHealth && (
+                <ul className="mt-2 space-y-0.5 text-micro text-ink-muted" aria-label="Last successful scan by source">
+                  {scannerHealth.sources.map((source) => (
+                    <li key={source.subreddit}>
+                      r/{source.subreddit}: {source.last_successful_scan_at ? formatUtcDateTime(source.last_successful_scan_at) : "last successful scan unknown"}
+                    </li>
+                  ))}
+                </ul>
+              )}
             </div>
             <div className="bg-surface p-4 sm:p-5">
               <p className="text-micro font-semibold uppercase tracking-[0.14em] text-ink-muted">Review queue</p>

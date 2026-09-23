@@ -1,6 +1,7 @@
 // Provenance and quarantine boundary for every Reddit discovery.
 // This module is intentionally free of filesystem and Node-only imports so the
 // read-only Vercel scan can use the same validation rules as the local scanner.
+import { CANDIDATE_CATEGORIES, classify, classifyCandidateCategory, classifyCandidateType, isTrackableCandidateCategory } from "./reddit-classifier.mjs";
 
 export const PROVENANCE_SCHEMA_VERSION = 2;
 
@@ -449,6 +450,7 @@ export function assessCandidate(entry, options = {}) {
 
   const safeEntry = { ...entry, title: title.value, body: body.value, author: author.value };
   const classification = options.classification || { accept: false, confidence: "low", reason: "not classified" };
+  const derivedClassification = classify(safeEntry);
   const risks = riskSignals(safeEntry, classification, urlInfo);
   const poison = risks.includes("explicit_fake_or_troll");
   const screenshotClaim = /screenshot|image|photo/i.test(title.value + " " + body.value) &&
@@ -482,6 +484,7 @@ export function assessCandidate(entry, options = {}) {
       confidence: String(classification.confidence || "low"),
       reason: cleanText(classification.reason || ""),
       candidate_type: String(options.candidateType || "port"),
+      category: CANDIDATE_CATEGORIES.includes(classification.category) ? classification.category : (derivedClassification.category || "out_of_scope"),
       question: classification.question === true,
       spam: classification.spam === true
     },
@@ -555,6 +558,11 @@ export function upgradeProvenanceRecord(record) {
   const provenance = record?.provenance || {};
   const duplicate = provenance.duplicate_relation || {};
   const classificationReason = String(record?.classification?.reason || "");
+  const derivedClassification = classify(record?.source || {});
+  const derivedCategory = classifyCandidateCategory(record?.source || {}, {
+    question: record?.classification?.question === true,
+    technicalType: classifyCandidateType(record?.source || {})
+  });
   const question = record?.classification?.question === true ||
     /question title|qHits=[1-9]/i.test(classificationReason);
   const riskSignals = uniqueStrings([
@@ -565,6 +573,9 @@ export function upgradeProvenanceRecord(record) {
     ...record,
     classification: {
       ...(record?.classification || {}),
+      category: CANDIDATE_CATEGORIES.includes(record?.classification?.category)
+        ? record.classification.category
+        : (CANDIDATE_CATEGORIES.includes(derivedClassification.category) ? derivedClassification.category : derivedCategory),
       question,
       spam: record?.classification?.spam === true
     },
@@ -650,6 +661,12 @@ export function publicCandidate(record) {
   if (record?.incident?.public_containment === "removed") return null;
   if (Array.isArray(record?.risk_signals) && record.risk_signals.includes("crosspost_duplicate")) return null;
   const withheld = Array.isArray(record.risk_signals) && record.risk_signals.includes("explicit_fake_or_troll");
+  const storedCategory = record?.classification?.category;
+  const classifiedCategory = classify(record?.source || {}).category;
+  const derivedCategory = isTrackableCandidateCategory(classifiedCategory)
+    ? classifiedCategory
+    : storedCategory || classifiedCategory || "out_of_scope";
+  if (!withheld && !isTrackableCandidateCategory(derivedCategory)) return null;
   return {
     id: record.id,
     state,
@@ -659,6 +676,7 @@ export function publicCandidate(record) {
     published_at: record.source?.published_at || null,
     detected_at: record.state_history?.[0]?.at || null,
     candidate_type: withheld ? "unclassified" : record.classification?.candidate_type || "port",
+    category: withheld ? "out_of_scope" : derivedCategory,
     public_visibility: withheld ? "withheld" : "review_queue"
   };
 }

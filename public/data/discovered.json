@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-09-23T12:29:10.118Z",
+  "generated_at": "2026-09-23T15:12:42.738Z",
   "source": "r/vitahacks + r/VitaPiracy + r/PSVitaHomebrew RSS",
   "note": "Detected sources are quarantined and are not part of the curated ledger. No public item is a promotion or endorsement.",
   "items": [
@@ -13,28 +13,7 @@
       "published_at": "2026-09-22T16:39:19.000Z",
       "detected_at": "2026-09-22T17:32:15.796Z",
       "candidate_type": "wrapper",
-      "public_visibility": "review_queue"
-    },
-    {
-      "id": "reddit-1wndxal",
-      "state": "QUARANTINED",
-      "title": "We need to talk",
-      "url": "https://www.reddit.com/r/vitahacks/comments/1wndxal/we_need_to_talk/",
-      "subreddit": "vitahacks",
-      "published_at": "2026-09-22T16:15:30.000Z",
-      "detected_at": "2026-09-22T17:32:15.796Z",
-      "candidate_type": "port",
-      "public_visibility": "review_queue"
-    },
-    {
-      "id": "reddit-1wn46c9",
-      "state": "QUARANTINED",
-      "title": "[WIP] BuckshotRoulettePortable - A C++ rewrite of Buckshot Roulette for the PSVITA Targeting 60fps",
-      "url": "https://www.reddit.com/r/vitahacks/comments/1wn46c9/wip_buckshotrouletteportable_a_c_rewrite_of/",
-      "subreddit": "vitahacks",
-      "published_at": "2026-09-22T08:58:38.000Z",
-      "detected_at": "2026-09-22T12:16:16.397Z",
-      "candidate_type": "engine",
+      "category": "new_project",
       "public_visibility": "review_queue"
     },
     {
@@ -46,6 +25,7 @@
       "published_at": "2026-09-22T02:41:17.000Z",
       "detected_at": "2026-09-22T12:16:16.397Z",
       "candidate_type": "port",
+      "category": "project_update",
       "public_visibility": "review_queue"
     },
     {
@@ -57,17 +37,7 @@
       "published_at": null,
       "detected_at": "2026-09-21T19:01:02.092Z",
       "candidate_type": "port",
-      "public_visibility": "review_queue"
-    },
-    {
-      "id": "reddit-1wmax82",
-      "state": "VERIFIED_FOR_REVIEW",
-      "title": "Guess It Is Happening",
-      "url": "https://www.reddit.com/r/VitaPiracy/comments/1wmax82/guess_it_is_happening/",
-      "subreddit": "VitaPiracy",
-      "published_at": "2026-09-21T12:07:41.673Z",
-      "detected_at": "2026-09-21T13:22:50.149Z",
-      "candidate_type": "port",
+      "category": "new_project",
       "public_visibility": "review_queue"
     },
     {
@@ -79,6 +49,7 @@
       "published_at": "2026-09-21T11:39:44.312Z",
       "detected_at": "2026-09-21T13:22:50.149Z",
       "candidate_type": "port",
+      "category": "project_update",
       "public_visibility": "review_queue"
     },
     {
@@ -90,6 +61,7 @@
       "published_at": "2026-09-20T20:24:59.820Z",
       "detected_at": "2026-09-21T13:22:50.149Z",
       "candidate_type": "port",
+      "category": "project_update",
       "public_visibility": "review_queue"
     },
     {
@@ -101,6 +73,7 @@
       "published_at": "2026-09-20T16:36:10.000Z",
       "detected_at": "2026-09-21T18:40:07.572Z",
       "candidate_type": "port",
+      "category": "project_update",
       "public_visibility": "review_queue"
     },
     {
@@ -112,17 +85,7 @@
       "published_at": "2026-09-19T17:02:55.000Z",
       "detected_at": "2026-09-21T18:42:23.382Z",
       "candidate_type": "port",
-      "public_visibility": "review_queue"
-    },
-    {
-      "id": "reddit-1wkf9m5",
-      "state": "QUARANTINED",
-      "title": "SuperTuxKart W.I.P port for PlayStation Vita with Vulkan",
-      "url": "https://www.reddit.com/r/vitahacks/comments/1wkf9m5/supertuxkart_wip_port_for_playstation_vita_with/",
-      "subreddit": "vitahacks",
-      "published_at": "2026-09-19T07:09:39.000Z",
-      "detected_at": "2026-09-21T18:42:23.382Z",
-      "candidate_type": "port",
+      "category": "new_project",
       "public_visibility": "review_queue"
     },
     {
@@ -134,17 +97,7 @@
       "published_at": "2026-09-18T15:30:31.000Z",
       "detected_at": "2026-09-21T18:40:07.572Z",
       "candidate_type": "port",
-      "public_visibility": "review_queue"
-    },
-    {
-      "id": "reddit-1wh0klj",
-      "state": "QUARANTINED",
-      "title": "Class of 09 Vita Port HAS ARRIVED!",
-      "url": "https://www.reddit.com/r/vitahacks/comments/1wh0klj/class_of_09_vita_port_has_arrived/",
-      "subreddit": "vitahacks",
-      "published_at": "2026-09-15T13:34:13.000Z",
-      "detected_at": "2026-09-17T15:34:20.988Z",
-      "candidate_type": "port",
+      "category": "project_update",
       "public_visibility": "review_queue"
     }
   ]

@@ -2,7 +2,7 @@ import { describe, expect, it } from "vitest";
 import { readFileSync } from "node:fs";
 import path from "node:path";
 import { REDDIT_SOURCE_LABEL, REDDIT_SOURCES, REDDIT_SUBREDDITS, redditRssUrl, redditSearchRssUrl } from "../../scripts/reddit-sources.mjs";
-import { classify, classifyCandidateType, isTrackableCandidateType, parseEntries } from "../../scripts/reddit-classifier.mjs";
+import { classify, classifyCandidateType, isTrackableCandidateCategory, isTrackableCandidateType, parseEntries } from "../../scripts/reddit-classifier.mjs";
 
 describe("Reddit discovery scope", () => {
   it("keeps all three communities in one canonical scan scope", () => {
@@ -27,6 +27,7 @@ describe("Reddit discovery scope", () => {
     expect(workflow).toContain('"scripts/reddit-sources.mjs"');
     expect(workflow).toContain('"scripts/reddit-classifier.mjs"');
     expect(workflow).toContain('"scripts/reddit-provenance.mjs"');
+    expect(workflow).toContain('"scripts/finalize-scanner-health.mjs"');
     expect(workflow).toContain('"scripts/reddit-backfill.ts"');
     expect(workflow).toContain("npm run reddit:backfill");
     expect(scanner).toContain("TERMINAL_STATES.includes(item.state)");
@@ -77,6 +78,9 @@ describe("Reddit candidate classifier", () => {
     });
     expect(worldAtWar.accept).toBe(true);
     expect(superTuxKart.accept).toBe(true);
+    expect(testDrive.category).toBe("new_project");
+    expect(rr2.category).toBe("project_update");
+    expect(isTrackableCandidateCategory(forceEngine.category)).toBe(true);
   });
 
   it("accepts the Halo CE recompilation wording that the original scanner missed", () => {
@@ -139,6 +143,26 @@ describe("Reddit candidate classifier", () => {
     });
     expect(result.accept).toBe(false);
     expect(result.reason).toContain("question");
+  });
+
+  it("classifies discussion and project identity separately from loose port terms", () => {
+    const discussion = classify({
+      title: "We need to talk",
+      body: "There has to be a way to eliminate vibecoders that release slop ports. These ports should have never been released."
+    });
+    const wip = classify({
+      title: "OpenMoHAA on PS Vita [WIP]",
+      body: "Native build boots in game on real hardware."
+    });
+    expect(discussion.category).toBe("discussion");
+    expect(discussion.accept).toBe(false);
+    expect(wip.category).toBe("project_update");
+    expect(wip.accept).toBe(true);
+  });
+
+  it("labels requests and unrelated utilities outside the project queue", () => {
+    expect(classify({ title: "Can someone port this?", body: "I want this game on Vita." }).category).toBe("question");
+    expect(classify({ title: "[Release] Vita controller plugin", body: "Input support for Adrenaline." }).category).toBe("out_of_scope");
   });
 
   it("rejects promotional spam even when it mentions the Vita", () => {

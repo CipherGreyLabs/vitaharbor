@@ -19,7 +19,10 @@ describe("visitor state", () => {
       state: "complete" as const,
       successful_sources: 3,
       total_sources: 3,
-      sources: ["vitahacks", "VitaPiracy", "PSVitaHomebrew"].map((subreddit) => ({ subreddit, status: "available" as const }))
+      github_action: { provider: "github-actions" as const, status: "success" as const, run_id: "1", event: "schedule", sha: "abc" },
+      consecutive_degraded_runs: 0,
+      recent_runs: [],
+      sources: ["vitahacks", "VitaPiracy", "PSVitaHomebrew"].map((subreddit) => ({ subreddit, status: "available" as const, last_successful_scan_at: attempted_at, consecutive_failures: 0 }))
     });
     expect(scannerFreshness(complete("2026-09-22T10:00:00.000Z"), NOW).state).toBe("fresh");
     expect(scannerFreshness(complete("2026-09-22T09:59:59.000Z"), NOW).state).toBe("delayed");
@@ -34,10 +37,13 @@ describe("visitor state", () => {
       state: "partial" as const,
       successful_sources: 2,
       total_sources: 3,
+      github_action: { provider: "github-actions" as const, status: "success" as const, run_id: "2", event: "schedule", sha: "abc" },
+      consecutive_degraded_runs: 2,
+      recent_runs: [],
       sources: [
-        { subreddit: "vitahacks", status: "available" as const },
-        { subreddit: "VitaPiracy", status: "rate_limited" as const },
-        { subreddit: "PSVitaHomebrew", status: "available" as const }
+        { subreddit: "vitahacks", status: "available" as const, last_successful_scan_at: "2026-09-22T23:00:00.000Z", consecutive_failures: 0 },
+        { subreddit: "VitaPiracy", status: "rate_limited" as const, last_successful_scan_at: null, consecutive_failures: 2 },
+        { subreddit: "PSVitaHomebrew", status: "available" as const, last_successful_scan_at: "2026-09-22T23:00:00.000Z", consecutive_failures: 0 }
       ]
     };
     expect(scannerFreshness(partial, NOW).state).toBe("partial");

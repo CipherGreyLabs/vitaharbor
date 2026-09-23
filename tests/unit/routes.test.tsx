@@ -51,21 +51,25 @@ describe("public routes", () => {
         subreddit: "vitahacks",
         published_at: "2026-09-22T20:00:00.000Z",
         candidate_type: "port",
+        category: "new_project",
         public_visibility: "review_queue",
         author: "must-not-render",
         risk_signals: ["must-not-render"]
       }]
     };
     const health = {
-      schema_version: 1,
+      schema_version: 2,
       attempted_at: generatedAt,
       state: "complete",
       successful_sources: 3,
       total_sources: 3,
+      github_action: { provider: "github-actions", status: "success", run_id: "123", event: "schedule", sha: "abc" },
+      consecutive_degraded_runs: 0,
+      recent_runs: [],
       sources: [
-        { subreddit: "vitahacks", status: "available" },
-        { subreddit: "VitaPiracy", status: "available" },
-        { subreddit: "PSVitaHomebrew", status: "available" }
+        { subreddit: "vitahacks", status: "available", last_successful_scan_at: generatedAt, consecutive_failures: 0 },
+        { subreddit: "VitaPiracy", status: "available", last_successful_scan_at: generatedAt, consecutive_failures: 0 },
+        { subreddit: "PSVitaHomebrew", status: "available", last_successful_scan_at: generatedAt, consecutive_failures: 0 }
       ]
     };
     vi.stubGlobal("fetch", vi.fn(async (input: RequestInfo | URL) => {

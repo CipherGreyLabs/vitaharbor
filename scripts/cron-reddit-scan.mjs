@@ -10,7 +10,7 @@ import path from "node:path";
 import { createHash } from "node:crypto";
 import { REDDIT_SOURCE_LABEL, REDDIT_SUBREDDITS, redditRssUrl } from "./reddit-sources.mjs";
 import { buildScannerHealth } from "./reddit-scan-health.mjs";
-import { classify, classifyCandidateType, isTrackableCandidateType, keyOf, parseEntries } from "./reddit-classifier.mjs";
+import { classify, classifyCandidateType, isTrackableCandidateCategory, isTrackableCandidateType, keyOf, parseEntries } from "./reddit-classifier.mjs";
 import {
   assessCandidate,
   correlateCampaigns,
@@ -67,6 +67,16 @@ function previous() {
   }
 }
 
+function previousHealth() {
+  try {
+    const parsed = JSON.parse(fs.readFileSync(HEALTH_OUT, "utf8"));
+    if (parsed && (parsed.schema_version === 1 || parsed.schema_version === 2)) return parsed;
+  } catch {
+    // Missing or invalid health history is represented as unknown, never guessed.
+  }
+  return null;
+}
+
 async function fetchFeed(subreddit) {
   const url = redditRssUrl(subreddit);
   let failureStatus = "unavailable";
@@ -99,7 +109,9 @@ const seen = new Map(
       if (item.state !== "QUARANTINED") return true;
       const classification = classify(item.source || {});
       const candidateType = classifyCandidateType(item.source || {});
-      return classification.accept && isTrackableCandidateType(candidateType);
+      return classification.accept
+        && isTrackableCandidateCategory(classification.category)
+        && isTrackableCandidateType(candidateType);
     })
 );
 const detectedAt = new Date().toISOString();
@@ -116,7 +128,7 @@ for (const subreddit of REDDIT_SUBREDDITS) {
   for (const entry of entries) {
     const cls = classify(entry);
     const candidateType = classifyCandidateType(entry);
-    if (!isTrackableCandidateType(candidateType)) {
+    if (!isTrackableCandidateCategory(cls.category) || !isTrackableCandidateType(candidateType)) {
       console.log("  skip [out-of-scope " + candidateType + "] " + entry.title);
       continue;
     }
@@ -174,7 +186,7 @@ fs.writeFileSync(
 
 fs.writeFileSync(
   HEALTH_OUT,
-  JSON.stringify(buildScannerHealth(REDDIT_SUBREDDITS, feedResults, detectedAt), null, 2) + "\n",
+  JSON.stringify(buildScannerHealth(REDDIT_SUBREDDITS, feedResults, detectedAt, previousHealth()), null, 2) + "\n",
   "utf8"
 );
 

@@ -31,7 +31,7 @@ export const DiscoveryPage: React.FC = () => {
       setItems(Array.isArray(body?.items) ? body.items : []);
       setGeneratedAt(typeof body?.generated_at === "string" ? body.generated_at : "");
       setSource(typeof body?.source === "string" ? body.source : "");
-      if (scan?.schema_version === 1) setHealth(scan);
+      if (scan?.schema_version === 1 || scan?.schema_version === 2) setHealth(scan);
       setAssetSource(queueResult.source === "live" && scanResult.source === "live"
         ? "live"
         : queueResult.source === "unavailable" || scanResult.source === "unavailable"
@@ -73,9 +73,21 @@ export const DiscoveryPage: React.FC = () => {
               r/{item.subreddit}: {item.status === "rate_limited" ? "rate limited" : "unavailable"}
             </span>
           ))}
+          {health?.github_action.status === "success" && <span className="rounded-full border border-hairline bg-surface px-3 py-1.5">GitHub Action succeeded</span>}
+          {health?.github_action.status !== "success" && <span className="rounded-full border border-hairline bg-surface px-3 py-1.5">GitHub Action result unknown</span>}
           {!health?.attempted_at && generatedAt && <span className="rounded-full border border-hairline bg-surface px-3 py-1.5">Queue snapshot {formatUtcDateTime(generatedAt)}</span>}
           {source && <span className="rounded-full border border-hairline bg-surface px-3 py-1.5">{source}</span>}
         </div>
+        {health && (
+          <ul className="mt-4 grid gap-2 text-caption text-ink-muted sm:grid-cols-3" aria-label="Latest successful scan by source">
+            {health.sources.map((item) => (
+              <li key={item.subreddit} className="rounded-xl border border-hairline bg-surface px-3 py-2">
+                <span className="font-medium text-ink">r/{item.subreddit}</span><br />
+                {item.last_successful_scan_at ? `Last successful scan ${formatUtcDateTime(item.last_successful_scan_at)}` : "Last successful scan unknown"}
+              </li>
+            ))}
+          </ul>
+        )}
       </header>
       {loading ? <p className="py-12 text-body text-ink-muted">Loading discovery queue…</p> : items.length === 0 ? (
         <p className="py-12 text-body text-ink-muted">No public detections are waiting for review.</p>
@@ -87,6 +99,7 @@ export const DiscoveryPage: React.FC = () => {
                 <span>{item.state === "VERIFIED_FOR_REVIEW" ? "Verified for review" : "Quarantined source"}</span>
                 {item.subreddit && <span>· r/{item.subreddit}</span>}
                 {item.candidate_type && <span>· {item.candidate_type}</span>}
+                {item.category && <span>· {item.category.replaceAll("_", " ")}</span>}
               </div>
               <h2 className="mt-2 text-subtitle font-semibold text-ink">{item.title}</h2>
               <div className="mt-3 flex flex-wrap items-center justify-between gap-3 text-caption text-ink-muted">

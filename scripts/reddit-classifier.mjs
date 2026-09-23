@@ -55,34 +55,131 @@ const PASSIVE_PORT_TERMS = [
   "port", "ports", "engine", "unity", "unreal", "wrapper", "release", "homebrew",
 ];
 
+export const CANDIDATE_CATEGORIES = Object.freeze([
+  "new_project",
+  "project_update",
+  "discussion",
+  "question",
+  "out_of_scope"
+]);
+
+const STRONG_DEVELOPMENT_SIGNALS = [
+  /\b(?:wip|work in progress)\b/i,
+  /\b(?:boot(?:s|ed|ing)?|running|playable|in.?game)\b/i,
+  /\b(?:compiled|recompil(?:e|ed|er|ation)|ported|render(?:s|ed|ing)?)\b/i,
+  /\b(?:fps|framerate|frame rate|vita hardware|real hardware|native build)\b/i,
+  /\bnative\b[\s\S]{0,30}\bport\b/i,
+  /\bport\b[\s\S]{0,30}\bnative\b/i,
+  /\b(?:github\.com|gitlab\.com|codeberg\.org|vitasdk|vpk)\b/i,
+  /\b(?:source code|pull.?request|release build|demo build)\b/i,
+  /\[release\]/i,
+  /\b(?:initial|public)\s+release\b/i
+];
+
+const UPDATE_SIGNALS = [
+  /\b(?:update|progress|wip|work in progress|new build|version|patch(?:es)?|fix(?:es)?)\b/i,
+  /\b(?:now|still|again)\b[\s\S]{0,40}\b(?:runs?|boots?|works?|renders?|plays?)\b/i,
+  /\b(?:runs?|boots?|works?|renders?|plays?)\b[\s\S]{0,40}\b(?:now|again|on vita)\b/i
+];
+
+const DISCUSSION_SIGNALS = [
+  /\bwe need to talk\b/i,
+  /\bvibecod(?:er|ing)\b/i,
+  /\bslop\b/i,
+  /\bshould have never\b/i,
+  /\bcommunity deserves\b/i,
+  /\bi(?:'m| am) not against\b/i,
+  /\b(?:opinion|discussion|debate|rant|thoughts?)\b/i
+];
+
+const GENERIC_IDENTITY_WORDS = new Set([
+  "a", "an", "and", "for", "from", "game", "new", "on", "port", "ports", "ps",
+  "psvita", "release", "the", "this", "update", "vita", "wip", "work", "progress"
+]);
+
+function hasProjectIdentity(entry) {
+  const title = String(entry?.title || "");
+  const body = String(entry?.body || "");
+  const outbound = Array.isArray(entry?.outbound_urls) ? entry.outbound_urls : [];
+  if (outbound.some((url) => /https?:\/\/(?:www\.)?(?:github|gitlab)\.com\//i.test(String(url)))) return true;
+  if (/\b(?:github|gitlab|codeberg)(?:\.com|\.org)?\b/i.test(body)) return true;
+  const tokens = title.match(/\b[A-Z][A-Za-z0-9][A-Za-z0-9._'-]{1,}\b/g) || [];
+  return tokens.some((token) => !GENERIC_IDENTITY_WORDS.has(token.toLowerCase()));
+}
+
+function hasVitaContext(text) {
+  return /\b(?:vita|psvita|playstation\s+vita|vitahacks|vitapiracy|homebrew)\b/i.test(text);
+}
+
+function isDiscussion(text) {
+  return DISCUSSION_SIGNALS.some((signal) => signal.test(text));
+}
+
+export function classifyCandidateCategory(entry, options = {}) {
+  const title = String(entry?.title || "");
+  const body = String(entry?.body || "");
+  const text = title + " " + body + " " + String(entry?.subreddit || "");
+  const question = options.question === true || QUESTION_SIGNALS.some((signal) => signal.test(title) || signal.test(body));
+  if (question) return "question";
+
+  const technicalType = options.technicalType || classifyCandidateType(entry);
+  if (["plugin", "tool"].includes(technicalType)) return "out_of_scope";
+
+  const identity = options.projectIdentity ?? hasProjectIdentity(entry);
+  const developmentEvidence = options.developmentEvidence ?? STRONG_DEVELOPMENT_SIGNALS.some((signal) => signal.test(text));
+  if (isDiscussion(text) && !developmentEvidence) return "discussion";
+  const vitaScopedBySourceContext = hasVitaContext(text) || (technicalType && isTrackableCandidateType(technicalType) && /\b(?:port|wrapper|decomp(?:ilation)?|engine)\b/i.test(text));
+  if (!identity || !vitaScopedBySourceContext || !developmentEvidence) {
+    return isDiscussion(text) ? "discussion" : "out_of_scope";
+  }
+  return UPDATE_SIGNALS.some((signal) => signal.test(text)) ? "project_update" : "new_project";
+}
+
+export function isTrackableCandidateCategory(value) {
+  return value === "new_project" || value === "project_update";
+}
+
 export function classify(entry) {
   const title = String(entry.title || "").toLowerCase();
   const body = String(entry.body || "").toLowerCase();
   const titleRaw = String(entry.title || "");
-  const full = title + " " + body;
+  const full = title + " " + body + " " + String(entry.subreddit || "").toLowerCase();
 
   const devHits = DEVELOPMENT_SIGNALS.filter((re) => re.test(title) || re.test(body));
   const qHits = QUESTION_SIGNALS.filter((re) => re.test(title) || re.test(body));
   const spamHits = SPAM_SIGNALS.filter((re) => re.test(title) || re.test(body));
   const passiveHits = PASSIVE_PORT_TERMS.filter((term) => full.includes(term));
+  const projectIdentity = hasProjectIdentity(entry);
+  const developmentEvidence = STRONG_DEVELOPMENT_SIGNALS.filter((re) => re.test(full));
 
   // A question pattern in the raw title dominates unless dev signals are very strong.
   const titleIsQuestion = QUESTION_SIGNALS.some((re) => re.test(titleRaw));
 
   if (spamHits.length > 0 && devHits.length < 4) {
-    return { accept: false, confidence: "low", question: qHits.length > 0 || titleIsQuestion, spam: true, reason: "promotional/spam language detected (" + spamHits.length + ")" };
+    return { accept: false, confidence: "low", question: qHits.length > 0 || titleIsQuestion, spam: true, category: "out_of_scope", project_identity: projectIdentity, reason: "promotional/spam language detected (" + spamHits.length + ")" };
   }
   if (titleIsQuestion && devHits.length < 3) {
-    return { accept: false, confidence: "low", question: true, spam: false, reason: "question title with insufficient dev signals (" + devHits.length + ")" };
+    return { accept: false, confidence: "low", question: true, spam: false, category: "question", project_identity: projectIdentity, reason: "question title with insufficient dev signals (" + devHits.length + ")" };
   }
+  const technicalType = classifyCandidateType(entry);
+  const category = classifyCandidateCategory(entry, {
+    question: qHits.length > 0 || titleIsQuestion,
+    technicalType,
+    projectIdentity,
+    developmentEvidence: developmentEvidence.length > 0
+  });
+  const genericEvidenceRecord = category === "out_of_scope"
+    && /\b(?:github(?:\.com)?|gitlab(?:\.com)?|codeberg(?:\.org)?)\b/i.test(full)
+    && /\b(?:engine|repository|update)\b/i.test(full);
+  const accepted = (isTrackableCandidateCategory(category) && developmentEvidence.length > 0) || genericEvidenceRecord;
   if (devHits.length >= 3) {
     const sample = devHits.slice(0, 3).map((re) => re.source).join(", ");
-    return { accept: true, confidence: "high", question: qHits.length > 0 || titleIsQuestion, spam: false, reason: devHits.length + " dev signals: " + sample };
+    return { accept: accepted, confidence: "high", question: qHits.length > 0 || titleIsQuestion, spam: false, category, project_identity: projectIdentity, development_evidence: developmentEvidence.length, reason: devHits.length + " dev signals: " + sample + " · category=" + category };
   }
   if (devHits.length >= 1 && qHits.length === 0 && passiveHits.length >= 1) {
-    return { accept: true, confidence: "medium", question: false, spam: false, reason: devHits.length + " dev signal(s), " + passiveHits.length + " passive term(s), no question markers" };
+    return { accept: accepted, confidence: "medium", question: false, spam: false, category, project_identity: projectIdentity, development_evidence: developmentEvidence.length, reason: devHits.length + " dev signal(s), " + passiveHits.length + " passive term(s), category=" + category };
   }
-  return { accept: false, confidence: "low", question: qHits.length > 0 || titleIsQuestion, spam: false, reason: "devHits=" + devHits.length + ", qHits=" + qHits.length + ", passive=" + passiveHits.length };
+  return { accept: false, confidence: "low", question: qHits.length > 0 || titleIsQuestion, spam: false, category, project_identity: projectIdentity, development_evidence: developmentEvidence.length, reason: "devHits=" + devHits.length + ", qHits=" + qHits.length + ", passive=" + passiveHits.length + ", category=" + category };
 }
 
 const TRACKABLE_CANDIDATE_TYPES = new Set(["port", "decompilation", "wrapper", "engine"]);

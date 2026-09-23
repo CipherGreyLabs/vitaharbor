@@ -5,15 +5,31 @@ const attemptedAt = "2026-09-23T05:09:00.000Z";
 
 function healthRecord() {
   return {
-    schema_version: 1,
+    schema_version: 2,
     attempted_at: attemptedAt,
     state: "failed",
     successful_sources: 0,
     total_sources: 3,
+    github_action: {
+      provider: "github-actions",
+      status: "success",
+      run_id: "123",
+      event: "schedule",
+      sha: "abc123"
+    },
+    consecutive_degraded_runs: 2,
+    recent_runs: [
+      {
+        attempted_at: attemptedAt,
+        state: "failed",
+        successful_sources: 0,
+        source_statuses: { vitahacks: "rate_limited", VitaPiracy: "rate_limited", PSVitaHomebrew: "rate_limited" }
+      }
+    ],
     sources: [
-      { subreddit: "vitahacks", status: "rate_limited" },
-      { subreddit: "VitaPiracy", status: "rate_limited" },
-      { subreddit: "PSVitaHomebrew", status: "rate_limited" }
+      { subreddit: "vitahacks", status: "rate_limited", last_successful_scan_at: null, consecutive_failures: 2 },
+      { subreddit: "VitaPiracy", status: "rate_limited", last_successful_scan_at: null, consecutive_failures: 2 },
+      { subreddit: "PSVitaHomebrew", status: "rate_limited", last_successful_scan_at: null, consecutive_failures: 2 }
     ]
   };
 }
@@ -34,6 +50,7 @@ function queueRecord() {
       detected_at: attemptedAt,
       candidate_type: "port",
       public_visibility: "review_queue",
+      category: "new_project",
       author: "private-author-field",
       body: "private-body-field",
       risk_signals: ["private-risk-field"]
@@ -83,7 +100,8 @@ describe("fetchScannerAsset", () => {
           subreddit: "vitahacks",
           published_at: attemptedAt,
           candidate_type: "port",
-          public_visibility: "review_queue"
+          public_visibility: "review_queue",
+          category: "new_project"
         }]
       }
     });
@@ -113,7 +131,7 @@ describe("fetchScannerAsset", () => {
   });
 
   it("rejects oversized live data before parsing and falls back to the snapshot", async () => {
-    const oversized = JSON.stringify({ ...healthRecord(), extra: "x".repeat(9000) });
+    const oversized = JSON.stringify({ ...healthRecord(), extra: "x".repeat(17000) });
     const urls: string[] = [];
     const fetcher: typeof fetch = async (input) => {
       const url = String(input);

@@ -32,6 +32,7 @@
     "data:block": "node scripts/promote-candidate.mjs --block",
     "data:promote": "node scripts/promote-candidate.mjs --promote",
     "data:feeds": "tsx scripts/make-feeds.ts",
+    "audit:links": "node scripts/audit-curated-links.mjs",
     "db:migrate:local": "wrangler d1 migrations apply DB --local",
     "db:migrate:remote": "wrangler d1 migrations apply DB --remote",
     "seed:dev": "tsx scripts/seed-dev.ts",

@@ -1,12 +1,33 @@
 export type ScannerFreshnessState = "fresh" | "delayed" | "stale" | "partial" | "failed" | "unknown";
+export type ScannerCandidateCategory = "new_project" | "project_update" | "discussion" | "question" | "out_of_scope" | "unknown";
+export type ScannerSourceStatus = "available" | "rate_limited" | "unavailable";
 
 export interface ScannerHealthRecord {
-  schema_version: 1;
+  schema_version: 1 | 2;
   attempted_at: string | null;
   state: "complete" | "partial" | "failed" | "unknown";
   successful_sources: number;
   total_sources: number;
-  sources: Array<{ subreddit: string; status: "available" | "rate_limited" | "unavailable" }>;
+  github_action: {
+    provider: "github-actions" | "local" | "unknown";
+    status: "success" | "pending" | "unknown";
+    run_id: string | null;
+    event: string | null;
+    sha: string | null;
+  };
+  consecutive_degraded_runs: number;
+  recent_runs: Array<{
+    attempted_at: string;
+    state: "complete" | "partial" | "failed";
+    successful_sources: number;
+    source_statuses: Record<string, ScannerSourceStatus>;
+  }>;
+  sources: Array<{
+    subreddit: string;
+    status: ScannerSourceStatus;
+    last_successful_scan_at: string | null;
+    consecutive_failures: number;
+  }>;
 }
 
 export interface ScannerFreshness {
@@ -31,13 +52,15 @@ export function scannerFreshness(
   if (rawAgeHours < 0) return { state: "unknown", label: "Invalid future scan time", ageHours: null };
   const ageHours = rawAgeHours;
   if (health.state === "failed") {
-    return { state: "failed", label: ageHours > 26 ? "Stale · last scan failed" : "Latest scan failed", ageHours };
+    const repeated = health.consecutive_degraded_runs >= 2 ? ` · ${health.consecutive_degraded_runs} failed/partial runs` : "";
+    return { state: "failed", label: ageHours > 26 ? `Stale · last scan failed${repeated}` : `Latest scan failed${repeated}`, ageHours };
   }
   if (health.state === "partial") {
     const freshness = ageHours > 26 ? "stale" : ageHours > 14 ? "delayed" : "recent";
+    const repeated = health.consecutive_degraded_runs >= 2 ? ` · ${health.consecutive_degraded_runs} partial/failed runs` : "";
     return {
       state: "partial",
-      label: `Partial scan · ${health.successful_sources}/${health.total_sources} sources · ${freshness}`,
+      label: `Partial scan · ${health.successful_sources}/${health.total_sources} sources · ${freshness}${repeated}`,
       ageHours
     };
   }
