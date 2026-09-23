@@ -36,8 +36,8 @@ Updated: 2026-09-23
   because all three Reddit sources were rate-limited; no new candidate was added.
 - `gh` (GitHub CLI) is unavailable in this environment. Git remote access is available;
   `origin/main` was at runtime source `9854ed75ff8a2f60cd684412f8b8f65afc3e361b` at
-  deployment. Deployment evidence and ignore-rule hardening are being recorded in a
-  documentation-only follow-up commit.
+  deployment. Deployment evidence, project status, hash-verified handoff and ignore-rule
+  hardening were pushed in documentation-only commit `5f1f853`; runtime code is unchanged.
 - `npm audit --omit=dev --audit-level=moderate` found 0 production dependency
   vulnerabilities. Full `npm audit` found 8 development-toolchain advisories (4 moderate,
   4 high, through Vitest/Wrangler dependencies); no major toolchain upgrades were included
