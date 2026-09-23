@@ -6,6 +6,7 @@ const ROOT = process.cwd();
 const LEDGER = path.resolve(ROOT, "src/shared/constants/fallbackData.ts");
 const DEFAULT_JSON = path.resolve(ROOT, "docs/CURATED_LINK_AUDIT_2026-09-23.json");
 const DEFAULT_MARKDOWN = path.resolve(ROOT, "docs/CURATED_LINK_AUDIT_2026-09-23.md");
+const BROWSER_REVIEW = path.resolve(ROOT, "docs/CURATED_LINK_BROWSER_REVIEW_2026-09-23.json");
 const LINK_FIELDS = new Map([
   ["reddit_url", "source"],
   ["repo_url", "repository"],
@@ -125,6 +126,19 @@ function responseClass(status) {
   return "unverifiable";
 }
 
+function readBrowserReview(file = BROWSER_REVIEW) {
+  try {
+    const document = JSON.parse(fs.readFileSync(file, "utf8"));
+    const results = Array.isArray(document.results) ? document.results : [];
+    return {
+      file: path.relative(ROOT, file).replaceAll("\\", "/"),
+      byUrl: new Map(results.map((result) => [result.url, result]))
+    };
+  } catch {
+    return { file: null, byUrl: new Map() };
+  }
+}
+
 async function verifyGithubContent(link, response, fetcher) {
   const repo = githubRepoUrl(link.url);
   if (!repo) return { status: "ok", evidence: "HTTP 2xx response; non-GitHub content check not applicable" };
@@ -230,21 +244,31 @@ async function auditAll(links, fetcher = fetch, concurrency = 6) {
 
 function markdownReport(document) {
   const counts = Object.entries(document.summary).map(([status, count]) => `${status}: ${count}`).join(" · ");
-  const rows = document.results.map((item) => `| ${item.status} | ${item.kind} | ${item.expected_context.replace(/\|/g, "\\|")} | ${item.url} | ${item.evidence.replace(/\|/g, "\\|")} |`).join("\n");
-  return `# Curated link integrity audit — 2026-09-23\n\nGenerated at ${document.generated_at}. This is a non-destructive report over curated source, repository, screenshot and release links in \`src/shared/constants/fallbackData.ts\`. No URL was replaced automatically.\n\nWrong-target is reported only after a content/identity check; an HTTP 200 alone is not treated as proof of correctness.\n\nSummary: ${counts}\n\n| Status | Kind | Curated context | URL | Evidence |\n|---|---|---|---|---|\n${rows}\n\n## Correction policy\n\nNo corrections were applied. A dead, redirecting or wrong-target link needs an individually verified replacement and an append-only worklog entry before any source file is changed. Unverifiable links remain unchanged.\n`;
+  const browserCount = new Set(document.results.filter((item) => item.browser_review?.status === "browser_verified").map((item) => item.url)).size;
+  const rows = document.results.map((item) => {
+    const browser = item.browser_review ? `${item.browser_review.status}: ${item.browser_review.assessment}` : "none";
+    return `| ${item.status} | ${item.kind} | ${item.expected_context.replace(/\|/g, "\\|")} | ${item.url} | ${item.evidence.replace(/\|/g, "\\|")} | ${browser.replace(/\|/g, "\\|")} |`;
+  }).join("\n");
+  return `# Curated link integrity audit — 2026-09-23\n\nGenerated at ${document.generated_at}. This is a non-destructive report over curated source, repository, screenshot and release links in \`src/shared/constants/fallbackData.ts\`. No URL was replaced automatically.\n\nWrong-target is reported only after a content/identity check; an HTTP 200 alone is not treated as proof of correctness.\n\nSummary: ${counts} · browser-verified unique Reddit URLs: ${browserCount}\n\nThe direct HTTP audit can report Reddit as UNKNOWN/UNVERIFIABLE because Reddit returns HTTP 403 to the non-browser fetcher. Where possible, the companion read-only authenticated-browser review records the page title and content assessment per URL.\n\n| Status | Kind | Curated context | URL | HTTP evidence | Browser review |\n|---|---|---|---|---|---|\n${rows}\n\n## Correction policy\n\nNo corrections were applied. A dead, redirecting or wrong-target link needs an individually verified replacement and an append-only worklog entry before any source file is changed. Unverifiable links remain unchanged. Direct game-data links observed inside Reddit posts are never adopted as curated VitaHarbor links.\n`;
 }
 
 export async function runAudit({ sourceFile = LEDGER, jsonFile = DEFAULT_JSON, markdownFile = DEFAULT_MARKDOWN, fetcher = fetch } = {}) {
   const links = extractCuratedLinks(fs.readFileSync(sourceFile, "utf8"));
   const results = await auditAll(links, fetcher);
-  const summary = Object.fromEntries(["ok", "dead", "redirect", "wrong-target", "unverifiable"].map((status) => [status, results.filter((item) => item.status === status).length]));
+  const browserReview = readBrowserReview();
+  const reviewedResults = results.map((result) => ({
+    ...result,
+    browser_review: browserReview.byUrl.get(result.url) || null
+  }));
+  const summary = Object.fromEntries(["ok", "dead", "redirect", "wrong-target", "unverifiable"].map((status) => [status, reviewedResults.filter((item) => item.status === status).length]));
   const document = {
     schema_version: 1,
     generated_at: new Date().toISOString(),
     source_file: path.relative(ROOT, sourceFile).replaceAll("\\", "/"),
     correction_policy: "report-only; no automatic URL replacement",
+    browser_review_file: browserReview.file,
     summary,
-    results
+    results: reviewedResults
   };
   fs.writeFileSync(jsonFile, JSON.stringify(document, null, 2) + "\n", "utf8");
   fs.writeFileSync(markdownFile, markdownReport(document), "utf8");

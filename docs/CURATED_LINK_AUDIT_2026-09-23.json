@@ -1,8 +1,9 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-09-23T15:19:26.206Z",
+  "generated_at": "2026-09-23T15:48:29.118Z",
   "source_file": "src/shared/constants/fallbackData.ts",
   "correction_policy": "report-only; no automatic URL replacement",
+  "browser_review_file": "docs/CURATED_LINK_BROWSER_REVIEW_2026-09-23.json",
   "summary": {
     "ok": 16,
     "dead": 0,
@@ -21,7 +22,14 @@
       "status": "unverifiable",
       "http_status": 403,
       "final_url": "https://www.reddit.com/r/vitahacks/comments/1tapf2b/wip_openmohaa_on_ps_vita_medal_of_honor_allied/",
-      "evidence": "Initial request returned HTTP 403"
+      "evidence": "Initial request returned HTTP 403",
+      "browser_review": {
+        "url": "https://www.reddit.com/r/vitahacks/comments/1tapf2b/wip_openmohaa_on_ps_vita_medal_of_honor_allied/",
+        "status": "browser_verified",
+        "title": "[WIP] OpenMoHAA on PS Vita — Medal of Honor: Allied Assault native port",
+        "evidence": "Post describes a native OpenMoHAA Vita WIP, including menu, mission and control progress plus current rendering and performance limitations.",
+        "assessment": "valid development source"
+      }
     },
     {
       "id": "link-002",
@@ -33,7 +41,14 @@
       "status": "unverifiable",
       "http_status": 403,
       "final_url": "https://www.reddit.com/r/vitahacks/comments/1wivnp0/super_smash_melee/",
-      "evidence": "Initial request returned HTTP 403"
+      "evidence": "Initial request returned HTTP 403",
+      "browser_review": {
+        "url": "https://www.reddit.com/r/vitahacks/comments/1wivnp0/super_smash_melee/",
+        "status": "browser_verified",
+        "title": "Super Smash Melee",
+        "evidence": "Post describes Melee and Strikers port work, Aurora SceGXM/vitaGL optimization and a public SmashMeleeVita repository.",
+        "assessment": "valid development source"
+      }
     },
     {
       "id": "link-003",
@@ -45,7 +60,14 @@
       "status": "unverifiable",
       "http_status": 403,
       "final_url": "https://www.reddit.com/r/vitahacks/comments/17eneu2/upcoming_hollow_knight_ps_vita_port_wip/",
-      "evidence": "Initial request returned HTTP 403"
+      "evidence": "Initial request returned HTTP 403",
+      "browser_review": {
+        "url": "https://www.reddit.com/r/vitahacks/comments/17eneu2/upcoming_hollow_knight_ps_vita_port_wip/",
+        "status": "browser_verified",
+        "title": "Upcoming Hollow knight PS Vita port ! (WIP)",
+        "evidence": "Post is reachable and identifies an upcoming Hollow Knight Vita WIP; the thread is several years old and points to a later Reddit update in comments.",
+        "assessment": "valid but stale community source; no replacement proven"
+      }
     },
     {
       "id": "link-004",
@@ -57,7 +79,14 @@
       "status": "unverifiable",
       "http_status": 403,
       "final_url": "https://www.reddit.com/r/vitahacks/comments/1w9ys9f/the_new_psvita_ports/",
-      "evidence": "Initial request returned HTTP 403"
+      "evidence": "Initial request returned HTTP 403",
+      "browser_review": {
+        "url": "https://www.reddit.com/r/vitahacks/comments/1w9ys9f/the_new_psvita_ports/",
+        "status": "browser_verified",
+        "title": "The new PSVITA Ports",
+        "evidence": "Discussion mentions Twilight Princess running on Vita at roughly 15–20 FPS, alongside unrelated community speculation.",
+        "assessment": "weak but relevant community source; no replacement proven"
+      }
     },
     {
       "id": "link-005",
@@ -69,7 +98,14 @@
       "status": "unverifiable",
       "http_status": 403,
       "final_url": "https://www.reddit.com/r/VitaPiracy/comments/1whqvmz/class_of_09_vita_port_is_finally_released/",
-      "evidence": "Initial request returned HTTP 403"
+      "evidence": "Initial request returned HTTP 403",
+      "browser_review": {
+        "url": "https://www.reddit.com/r/VitaPiracy/comments/1whqvmz/class_of_09_vita_port_is_finally_released/",
+        "status": "browser_verified",
+        "title": "class of 09 vita port is finally released!",
+        "evidence": "Post announces a playable feature-full port and links the author's GitHub release page.",
+        "assessment": "valid release source"
+      }
     },
     {
       "id": "link-006",
@@ -82,7 +118,8 @@
       "evidence": "GitHub repository identity/content checked as TheSpasticGamer/Class-Of-09-Vita-Port",
       "content_identity": "TheSpasticGamer/Class-Of-09-Vita-Port",
       "http_status": 200,
-      "final_url": "https://github.com/TheSpasticGamer/Class-Of-09-Vita-Port"
+      "final_url": "https://github.com/TheSpasticGamer/Class-Of-09-Vita-Port",
+      "browser_review": null
     },
     {
       "id": "link-007",
@@ -94,7 +131,14 @@
       "status": "unverifiable",
       "http_status": 403,
       "final_url": "https://www.reddit.com/r/vitahacks/comments/1h4yhyi/release_renpy_vita_8_port/",
-      "evidence": "Initial request returned HTTP 403"
+      "evidence": "Initial request returned HTTP 403",
+      "browser_review": {
+        "url": "https://www.reddit.com/r/vitahacks/comments/1h4yhyi/release_renpy_vita_8_port/",
+        "status": "browser_verified",
+        "title": "[RELEASE] Ren'Py Vita 8 port",
+        "evidence": "Post announces the Ren'Py Vita 8 runtime and links the public RenPy-Vita-8 repository.",
+        "assessment": "valid release source"
+      }
     },
     {
       "id": "link-008",
@@ -107,7 +151,8 @@
       "evidence": "GitHub repository identity/content checked as Grimiku/RenPy-Vita-8",
       "content_identity": "Grimiku/RenPy-Vita-8",
       "http_status": 200,
-      "final_url": "https://github.com/Grimiku/RenPy-Vita-8"
+      "final_url": "https://github.com/Grimiku/RenPy-Vita-8",
+      "browser_review": null
     },
     {
       "id": "link-009",
@@ -119,7 +164,14 @@
       "status": "unverifiable",
       "http_status": 403,
       "final_url": "https://www.reddit.com/r/VitaPiracy/comments/1leugn2/ocarina_of_time_ship_of_harkinian_is_out_now_baby/",
-      "evidence": "Initial request returned HTTP 403"
+      "evidence": "Initial request returned HTTP 403",
+      "browser_review": {
+        "url": "https://www.reddit.com/r/VitaPiracy/comments/1leugn2/ocarina_of_time_ship_of_harkinian_is_out_now_baby/",
+        "status": "browser_verified",
+        "title": "OCARINA OF TIME SHIP OF HARKINIAN IS OUT NOW BABY!!!",
+        "evidence": "Post exposes VitaDB, the Shipwright GitHub repository and a PSX-Place release discussion.",
+        "assessment": "valid release source; comments contain uncurated game-data discussion that was not followed"
+      }
     },
     {
       "id": "link-010",
@@ -132,7 +184,8 @@
       "evidence": "GitHub repository identity/content checked as nxengine/nxengine-evo",
       "content_identity": "nxengine/nxengine-evo",
       "http_status": 200,
-      "final_url": "https://github.com/nxengine/nxengine-evo/blob/master/screenshot.png"
+      "final_url": "https://github.com/nxengine/nxengine-evo/blob/master/screenshot.png",
+      "browser_review": null
     },
     {
       "id": "link-011",
@@ -144,7 +197,14 @@
       "status": "unverifiable",
       "http_status": 403,
       "final_url": "https://www.reddit.com/r/vitahacks/comments/1wgp613/renegade_vita_demo_release/",
-      "evidence": "Initial request returned HTTP 403"
+      "evidence": "Initial request returned HTTP 403",
+      "browser_review": {
+        "url": "https://www.reddit.com/r/vitahacks/comments/1wgp613/renegade_vita_demo_release/",
+        "status": "browser_verified",
+        "title": "Renegade Vita - Demo Release",
+        "evidence": "Post announces a playable tutorial demo and links both a demo repository and the full RenegadeVita source repository.",
+        "assessment": "valid development source"
+      }
     },
     {
       "id": "link-012",
@@ -156,7 +216,14 @@
       "status": "unverifiable",
       "http_status": 403,
       "final_url": "https://www.reddit.com/r/vitahacks/comments/1wjn8zg/rc_cars_port_progress/",
-      "evidence": "Initial request returned HTTP 403"
+      "evidence": "Initial request returned HTTP 403",
+      "browser_review": {
+        "url": "https://www.reddit.com/r/vitahacks/comments/1wjn8zg/rc_cars_port_progress/",
+        "status": "browser_verified",
+        "title": "RC Cars port progress",
+        "evidence": "Post reports implemented progression, local multiplayer and in-game interface, and links rc_cars_vita.",
+        "assessment": "valid development source; comments mention private prebuilt sharing but no such link was adopted"
+      }
     },
     {
       "id": "link-013",
@@ -168,7 +235,14 @@
       "status": "unverifiable",
       "http_status": 403,
       "final_url": "https://www.reddit.com/r/vitahacks/comments/1wjn8zg/rc_cars_port_progress/",
-      "evidence": "Initial request returned HTTP 403"
+      "evidence": "Initial request returned HTTP 403",
+      "browser_review": {
+        "url": "https://www.reddit.com/r/vitahacks/comments/1wjn8zg/rc_cars_port_progress/",
+        "status": "browser_verified",
+        "title": "RC Cars port progress",
+        "evidence": "Post reports implemented progression, local multiplayer and in-game interface, and links rc_cars_vita.",
+        "assessment": "valid development source; comments mention private prebuilt sharing but no such link was adopted"
+      }
     },
     {
       "id": "link-014",
@@ -180,7 +254,14 @@
       "status": "unverifiable",
       "http_status": 403,
       "final_url": "https://www.reddit.com/r/VitaPiracy/comments/1wj8dvz/d2vita_is_here_diablo_ii_lord_of_destruction/",
-      "evidence": "Initial request returned HTTP 403"
+      "evidence": "Initial request returned HTTP 403",
+      "browser_review": {
+        "url": "https://www.reddit.com/r/VitaPiracy/comments/1wj8dvz/d2vita_is_here_diablo_ii_lord_of_destruction/",
+        "status": "browser_verified",
+        "title": "D2Vita is here — Diablo II: Lord of Destruction running on PS Vita",
+        "evidence": "Post describes D2Vita running Diablo II through winx86 and explains controls, caching and performance.",
+        "assessment": "valid release source; no game-data URL was adopted"
+      }
     },
     {
       "id": "link-015",
@@ -192,7 +273,14 @@
       "status": "unverifiable",
       "http_status": 403,
       "final_url": "https://www.reddit.com/r/VitaPiracy/comments/1wj8dvz/d2vita_is_here_diablo_ii_lord_of_destruction/",
-      "evidence": "Initial request returned HTTP 403"
+      "evidence": "Initial request returned HTTP 403",
+      "browser_review": {
+        "url": "https://www.reddit.com/r/VitaPiracy/comments/1wj8dvz/d2vita_is_here_diablo_ii_lord_of_destruction/",
+        "status": "browser_verified",
+        "title": "D2Vita is here — Diablo II: Lord of Destruction running on PS Vita",
+        "evidence": "Post describes D2Vita running Diablo II through winx86 and explains controls, caching and performance.",
+        "assessment": "valid release source; no game-data URL was adopted"
+      }
     },
     {
       "id": "link-016",
@@ -204,7 +292,14 @@
       "status": "unverifiable",
       "http_status": 403,
       "final_url": "https://www.reddit.com/r/vitahacks/comments/1wjjx7w/a_bounty_that_deserves_more_visibility/",
-      "evidence": "Initial request returned HTTP 403"
+      "evidence": "Initial request returned HTTP 403",
+      "browser_review": {
+        "url": "https://www.reddit.com/r/vitahacks/comments/1wjjx7w/a_bounty_that_deserves_more_visibility/",
+        "status": "browser_verified",
+        "title": "A bounty that deserves more visibility.",
+        "evidence": "Post announces a community bounty for bringing the iOS Call of Duty: Zombies build to Vita and explicitly describes it as loader work with no existing build.",
+        "assessment": "valid announcement-only development lead; no payment or download URL adopted"
+      }
     },
     {
       "id": "link-017",
@@ -216,7 +311,14 @@
       "status": "unverifiable",
       "http_status": 403,
       "final_url": "https://www.reddit.com/r/vitahacks/comments/1w4y5tz/release_illusia_vita_a_port_of_illusia_to_the/",
-      "evidence": "Initial request returned HTTP 403"
+      "evidence": "Initial request returned HTTP 403",
+      "browser_review": {
+        "url": "https://www.reddit.com/r/vitahacks/comments/1w4y5tz/release_illusia_vita_a_port_of_illusia_to_the/",
+        "status": "browser_verified",
+        "title": "[Release] Illusia Vita - a port of Illusia to the Playstation Vita",
+        "evidence": "Post announces the Vita release, links VitaDB and the withLogic source repository, and separately offers an optional Ko-fi link.",
+        "assessment": "valid release source; donation link not adopted"
+      }
     },
     {
       "id": "link-018",
@@ -229,7 +331,8 @@
       "evidence": "GitHub repository identity/content checked as withLogic/illusia-vita",
       "content_identity": "withLogic/illusia-vita",
       "http_status": 200,
-      "final_url": "https://github.com/withLogic/illusia-vita"
+      "final_url": "https://github.com/withLogic/illusia-vita",
+      "browser_review": null
     },
     {
       "id": "link-019",
@@ -242,7 +345,8 @@
       "evidence": "GitHub repository identity/content checked as withLogic/illusia-vita",
       "content_identity": "withLogic/illusia-vita",
       "http_status": 200,
-      "final_url": "https://github.com/withLogic/illusia-vita/blob/master/extras/screenshots/screenshot1.jpg"
+      "final_url": "https://github.com/withLogic/illusia-vita/blob/master/extras/screenshots/screenshot1.jpg",
+      "browser_review": null
     },
     {
       "id": "link-020",
@@ -255,7 +359,8 @@
       "evidence": "GitHub repository identity/content checked as withLogic/illusia-vita",
       "content_identity": "withLogic/illusia-vita",
       "http_status": 200,
-      "final_url": "https://github.com/withLogic/illusia-vita"
+      "final_url": "https://github.com/withLogic/illusia-vita",
+      "browser_review": null
     },
     {
       "id": "link-021",
@@ -267,7 +372,15 @@
       "status": "unverifiable",
       "http_status": 403,
       "final_url": "https://www.reddit.com/r/VitaPiracy/comments/1vvp4j6/star_wars_jedi_knight_jedi_academy_files/",
-      "evidence": "Initial request returned HTTP 403"
+      "evidence": "Initial request returned HTTP 403",
+      "browser_review": {
+        "url": "https://www.reddit.com/r/VitaPiracy/comments/1vvp4j6/star_wars_jedi_knight_jedi_academy_files/",
+        "status": "browser_verified",
+        "title": "Star Wars Jedi Knight: Jedi Academy Files",
+        "evidence": "Post identifies an OpenJK-based Vita port by NDRW and exposes GitHub source/release links. It also contains a MediaFire game-data archive link.",
+        "assessment": "valid release source; keep only Reddit/GitHub provenance and never curate the direct game-data URL",
+        "direct_game_data_link_seen": true
+      }
     },
     {
       "id": "link-022",
@@ -280,7 +393,8 @@
       "evidence": "GitHub repository identity/content checked as NDRWhun/JAVITA",
       "content_identity": "NDRWhun/JAVITA",
       "http_status": 200,
-      "final_url": "https://github.com/NDRWhun/JAVITA"
+      "final_url": "https://github.com/NDRWhun/JAVITA",
+      "browser_review": null
     },
     {
       "id": "link-023",
@@ -292,7 +406,15 @@
       "status": "unverifiable",
       "http_status": 403,
       "final_url": "https://www.reddit.com/r/VitaPiracy/comments/1vvp4j6/star_wars_jedi_knight_jedi_academy_files/",
-      "evidence": "Initial request returned HTTP 403"
+      "evidence": "Initial request returned HTTP 403",
+      "browser_review": {
+        "url": "https://www.reddit.com/r/VitaPiracy/comments/1vvp4j6/star_wars_jedi_knight_jedi_academy_files/",
+        "status": "browser_verified",
+        "title": "Star Wars Jedi Knight: Jedi Academy Files",
+        "evidence": "Post identifies an OpenJK-based Vita port by NDRW and exposes GitHub source/release links. It also contains a MediaFire game-data archive link.",
+        "assessment": "valid release source; keep only Reddit/GitHub provenance and never curate the direct game-data URL",
+        "direct_game_data_link_seen": true
+      }
     },
     {
       "id": "link-024",
@@ -305,7 +427,8 @@
       "evidence": "GitHub repository identity/content checked as NDRWhun/JAVITA",
       "content_identity": "NDRWhun/JAVITA",
       "http_status": 200,
-      "final_url": "https://github.com/NDRWhun/JAVITA"
+      "final_url": "https://github.com/NDRWhun/JAVITA",
+      "browser_review": null
     },
     {
       "id": "link-025",
@@ -317,7 +440,15 @@
       "status": "unverifiable",
       "http_status": 403,
       "final_url": "https://www.reddit.com/r/VitaPiracy/comments/1vws22e/star_wars_jedi_knight_ii_jedi_outcast_data_files/",
-      "evidence": "Initial request returned HTTP 403"
+      "evidence": "Initial request returned HTTP 403",
+      "browser_review": {
+        "url": "https://www.reddit.com/r/VitaPiracy/comments/1vws22e/star_wars_jedi_knight_ii_jedi_outcast_data_files/",
+        "status": "browser_verified",
+        "title": "Star Wars Jedi Knight II: Jedi Outcast Data Files",
+        "evidence": "Post identifies an OpenJK-based Vita port by NDRW and exposes GitHub source/release links. It also contains a MediaFire game-data archive link.",
+        "assessment": "valid release source; keep only Reddit/GitHub provenance and never curate the direct game-data URL",
+        "direct_game_data_link_seen": true
+      }
     },
     {
       "id": "link-026",
@@ -330,7 +461,8 @@
       "evidence": "GitHub repository identity/content checked as NDRWhun/JK2VITA",
       "content_identity": "NDRWhun/JK2VITA",
       "http_status": 200,
-      "final_url": "https://github.com/NDRWhun/JK2VITA"
+      "final_url": "https://github.com/NDRWhun/JK2VITA",
+      "browser_review": null
     },
     {
       "id": "link-027",
@@ -343,7 +475,8 @@
       "evidence": "GitHub repository identity/content checked as NDRWhun/JK2VITA",
       "content_identity": "NDRWhun/JK2VITA",
       "http_status": 200,
-      "final_url": "https://github.com/NDRWhun/JK2VITA"
+      "final_url": "https://github.com/NDRWhun/JK2VITA",
+      "browser_review": null
     },
     {
       "id": "link-028",
@@ -355,7 +488,14 @@
       "status": "unverifiable",
       "http_status": 403,
       "final_url": "https://www.reddit.com/r/vitahacks/comments/1v8zqrw/barony_vita/",
-      "evidence": "Initial request returned HTTP 403"
+      "evidence": "Initial request returned HTTP 403",
+      "browser_review": {
+        "url": "https://www.reddit.com/r/vitahacks/comments/1v8zqrw/barony_vita/",
+        "status": "browser_verified",
+        "title": "Barony vita",
+        "evidence": "Developer post announces the Barony Vita release and links the GitHub release; comments confirm later VitaDB inclusion.",
+        "assessment": "valid release source"
+      }
     },
     {
       "id": "link-029",
@@ -368,7 +508,8 @@
       "evidence": "GitHub repository identity/content checked as Brendonm17/Barony-Vita",
       "content_identity": "Brendonm17/Barony-Vita",
       "http_status": 200,
-      "final_url": "https://github.com/Brendonm17/Barony-Vita"
+      "final_url": "https://github.com/Brendonm17/Barony-Vita",
+      "browser_review": null
     },
     {
       "id": "link-030",
@@ -381,7 +522,8 @@
       "evidence": "GitHub repository identity/content checked as Brendonm17/Barony-Vita",
       "content_identity": "Brendonm17/Barony-Vita",
       "http_status": 200,
-      "final_url": "https://github.com/Brendonm17/Barony-Vita"
+      "final_url": "https://github.com/Brendonm17/Barony-Vita",
+      "browser_review": null
     },
     {
       "id": "link-031",
@@ -393,7 +535,14 @@
       "status": "unverifiable",
       "http_status": 403,
       "final_url": "https://www.reddit.com/r/vitahacks/comments/1wkw14c/prerelease_cdogs_sdl_port_for_ps_vita_pstv/",
-      "evidence": "Initial request returned HTTP 403"
+      "evidence": "Initial request returned HTTP 403",
+      "browser_review": {
+        "url": "https://www.reddit.com/r/vitahacks/comments/1wkw14c/prerelease_cdogs_sdl_port_for_ps_vita_pstv/",
+        "status": "browser_verified",
+        "title": "[Pre-Release] C-Dogs SDL port for PS Vita / PSTV",
+        "evidence": "Post describes a native Vita/PSTV pre-release, real-hardware testing and GitHub source/releases.",
+        "assessment": "valid development source"
+      }
     },
     {
       "id": "link-032",
@@ -406,7 +555,8 @@
       "evidence": "GitHub repository identity/content checked as abduct/cdogs-sdl",
       "content_identity": "abduct/cdogs-sdl",
       "http_status": 200,
-      "final_url": "https://github.com/abduct/cdogs-sdl"
+      "final_url": "https://github.com/abduct/cdogs-sdl",
+      "browser_review": null
     },
     {
       "id": "link-033",
@@ -418,7 +568,14 @@
       "status": "unverifiable",
       "http_status": 403,
       "final_url": "https://www.reddit.com/r/vitahacks/comments/1wlqxq4/test_drive_1987_native_vita_port/",
-      "evidence": "Initial request returned HTTP 403"
+      "evidence": "Initial request returned HTTP 403",
+      "browser_review": {
+        "url": "https://www.reddit.com/r/vitahacks/comments/1wlqxq4/test_drive_1987_native_vita_port/",
+        "status": "browser_verified",
+        "title": "Test Drive (1987) native Vita port",
+        "evidence": "Post announces the initial native Vita version, links the open-source repository and states that original game files are required but not bundled.",
+        "assessment": "valid release source; no game-data URL adopted"
+      }
     },
     {
       "id": "link-034",
@@ -431,7 +588,8 @@
       "evidence": "GitHub repository identity/content checked as smart-pickle/TestDrive-Vita",
       "content_identity": "smart-pickle/TestDrive-Vita",
       "http_status": 200,
-      "final_url": "https://github.com/smart-pickle/TestDrive-Vita"
+      "final_url": "https://github.com/smart-pickle/TestDrive-Vita",
+      "browser_review": null
     },
     {
       "id": "link-035",
@@ -443,7 +601,14 @@
       "status": "unverifiable",
       "http_status": 403,
       "final_url": "https://www.reddit.com/r/vitahacks/comments/1tapf2b/wip_openmohaa_on_ps_vita_medal_of_honor_allied/",
-      "evidence": "Initial request returned HTTP 403"
+      "evidence": "Initial request returned HTTP 403",
+      "browser_review": {
+        "url": "https://www.reddit.com/r/vitahacks/comments/1tapf2b/wip_openmohaa_on_ps_vita_medal_of_honor_allied/",
+        "status": "browser_verified",
+        "title": "[WIP] OpenMoHAA on PS Vita — Medal of Honor: Allied Assault native port",
+        "evidence": "Post describes a native OpenMoHAA Vita WIP, including menu, mission and control progress plus current rendering and performance limitations.",
+        "assessment": "valid development source"
+      }
     },
     {
       "id": "link-036",
@@ -455,7 +620,14 @@
       "status": "unverifiable",
       "http_status": 403,
       "final_url": "https://www.reddit.com/r/vitahacks/comments/1whm4hp/smash_bros_melee_vita/",
-      "evidence": "Initial request returned HTTP 403"
+      "evidence": "Initial request returned HTTP 403",
+      "browser_review": {
+        "url": "https://www.reddit.com/r/vitahacks/comments/1whm4hp/smash_bros_melee_vita/",
+        "status": "browser_verified",
+        "title": "Smash Bros Melee Vita",
+        "evidence": "Post documents initial rendering, later gameplay progress and remaining texture, framebuffer, particle and performance work.",
+        "assessment": "valid development source"
+      }
     },
     {
       "id": "link-037",
@@ -467,7 +639,14 @@
       "status": "unverifiable",
       "http_status": 403,
       "final_url": "https://www.reddit.com/r/vitahacks/comments/1wivnp0/super_smash_melee/",
-      "evidence": "Initial request returned HTTP 403"
+      "evidence": "Initial request returned HTTP 403",
+      "browser_review": {
+        "url": "https://www.reddit.com/r/vitahacks/comments/1wivnp0/super_smash_melee/",
+        "status": "browser_verified",
+        "title": "Super Smash Melee",
+        "evidence": "Post describes Melee and Strikers port work, Aurora SceGXM/vitaGL optimization and a public SmashMeleeVita repository.",
+        "assessment": "valid development source"
+      }
     },
     {
       "id": "link-038",
@@ -479,7 +658,14 @@
       "status": "unverifiable",
       "http_status": 403,
       "final_url": "https://www.reddit.com/r/vitahacks/comments/1w9ys9f/the_new_psvita_ports/",
-      "evidence": "Initial request returned HTTP 403"
+      "evidence": "Initial request returned HTTP 403",
+      "browser_review": {
+        "url": "https://www.reddit.com/r/vitahacks/comments/1w9ys9f/the_new_psvita_ports/",
+        "status": "browser_verified",
+        "title": "The new PSVITA Ports",
+        "evidence": "Discussion mentions Twilight Princess running on Vita at roughly 15–20 FPS, alongside unrelated community speculation.",
+        "assessment": "weak but relevant community source; no replacement proven"
+      }
     },
     {
       "id": "link-039",
@@ -491,7 +677,14 @@
       "status": "unverifiable",
       "http_status": 403,
       "final_url": "https://www.reddit.com/r/VitaPiracy/comments/1whqvmz/class_of_09_vita_port_is_finally_released/",
-      "evidence": "Initial request returned HTTP 403"
+      "evidence": "Initial request returned HTTP 403",
+      "browser_review": {
+        "url": "https://www.reddit.com/r/VitaPiracy/comments/1whqvmz/class_of_09_vita_port_is_finally_released/",
+        "status": "browser_verified",
+        "title": "class of 09 vita port is finally released!",
+        "evidence": "Post announces a playable feature-full port and links the author's GitHub release page.",
+        "assessment": "valid release source"
+      }
     },
     {
       "id": "link-040",
@@ -503,7 +696,14 @@
       "status": "unverifiable",
       "http_status": 403,
       "final_url": "https://www.reddit.com/r/vitahacks/comments/1h4yhyi/release_renpy_vita_8_port/",
-      "evidence": "Initial request returned HTTP 403"
+      "evidence": "Initial request returned HTTP 403",
+      "browser_review": {
+        "url": "https://www.reddit.com/r/vitahacks/comments/1h4yhyi/release_renpy_vita_8_port/",
+        "status": "browser_verified",
+        "title": "[RELEASE] Ren'Py Vita 8 port",
+        "evidence": "Post announces the Ren'Py Vita 8 runtime and links the public RenPy-Vita-8 repository.",
+        "assessment": "valid release source"
+      }
     },
     {
       "id": "link-041",
@@ -515,7 +715,14 @@
       "status": "unverifiable",
       "http_status": 403,
       "final_url": "https://www.reddit.com/r/vitahacks/comments/1wjn8zg/rc_cars_port_progress/",
-      "evidence": "Initial request returned HTTP 403"
+      "evidence": "Initial request returned HTTP 403",
+      "browser_review": {
+        "url": "https://www.reddit.com/r/vitahacks/comments/1wjn8zg/rc_cars_port_progress/",
+        "status": "browser_verified",
+        "title": "RC Cars port progress",
+        "evidence": "Post reports implemented progression, local multiplayer and in-game interface, and links rc_cars_vita.",
+        "assessment": "valid development source; comments mention private prebuilt sharing but no such link was adopted"
+      }
     },
     {
       "id": "link-042",
@@ -527,7 +734,14 @@
       "status": "unverifiable",
       "http_status": 403,
       "final_url": "https://www.reddit.com/r/VitaPiracy/comments/1wj8dvz/d2vita_is_here_diablo_ii_lord_of_destruction/",
-      "evidence": "Initial request returned HTTP 403"
+      "evidence": "Initial request returned HTTP 403",
+      "browser_review": {
+        "url": "https://www.reddit.com/r/VitaPiracy/comments/1wj8dvz/d2vita_is_here_diablo_ii_lord_of_destruction/",
+        "status": "browser_verified",
+        "title": "D2Vita is here — Diablo II: Lord of Destruction running on PS Vita",
+        "evidence": "Post describes D2Vita running Diablo II through winx86 and explains controls, caching and performance.",
+        "assessment": "valid release source; no game-data URL was adopted"
+      }
     },
     {
       "id": "link-043",
@@ -539,7 +753,14 @@
       "status": "unverifiable",
       "http_status": 403,
       "final_url": "https://www.reddit.com/r/vitahacks/comments/1wjjx7w/a_bounty_that_deserves_more_visibility/",
-      "evidence": "Initial request returned HTTP 403"
+      "evidence": "Initial request returned HTTP 403",
+      "browser_review": {
+        "url": "https://www.reddit.com/r/vitahacks/comments/1wjjx7w/a_bounty_that_deserves_more_visibility/",
+        "status": "browser_verified",
+        "title": "A bounty that deserves more visibility.",
+        "evidence": "Post announces a community bounty for bringing the iOS Call of Duty: Zombies build to Vita and explicitly describes it as loader work with no existing build.",
+        "assessment": "valid announcement-only development lead; no payment or download URL adopted"
+      }
     },
     {
       "id": "link-044",
@@ -551,7 +772,14 @@
       "status": "unverifiable",
       "http_status": 403,
       "final_url": "https://www.reddit.com/r/VitaPiracy/comments/1whqvmz/class_of_09_vita_port_is_finally_released/",
-      "evidence": "Initial request returned HTTP 403"
+      "evidence": "Initial request returned HTTP 403",
+      "browser_review": {
+        "url": "https://www.reddit.com/r/VitaPiracy/comments/1whqvmz/class_of_09_vita_port_is_finally_released/",
+        "status": "browser_verified",
+        "title": "class of 09 vita port is finally released!",
+        "evidence": "Post announces a playable feature-full port and links the author's GitHub release page.",
+        "assessment": "valid release source"
+      }
     },
     {
       "id": "link-045",
@@ -563,7 +791,14 @@
       "status": "unverifiable",
       "http_status": 403,
       "final_url": "https://www.reddit.com/r/vitahacks/comments/1w4y5tz/release_illusia_vita_a_port_of_illusia_to_the/",
-      "evidence": "Initial request returned HTTP 403"
+      "evidence": "Initial request returned HTTP 403",
+      "browser_review": {
+        "url": "https://www.reddit.com/r/vitahacks/comments/1w4y5tz/release_illusia_vita_a_port_of_illusia_to_the/",
+        "status": "browser_verified",
+        "title": "[Release] Illusia Vita - a port of Illusia to the Playstation Vita",
+        "evidence": "Post announces the Vita release, links VitaDB and the withLogic source repository, and separately offers an optional Ko-fi link.",
+        "assessment": "valid release source; donation link not adopted"
+      }
     },
     {
       "id": "link-046",
@@ -575,7 +810,15 @@
       "status": "unverifiable",
       "http_status": 403,
       "final_url": "https://www.reddit.com/r/VitaPiracy/comments/1vvp4j6/star_wars_jedi_knight_jedi_academy_files/",
-      "evidence": "Initial request returned HTTP 403"
+      "evidence": "Initial request returned HTTP 403",
+      "browser_review": {
+        "url": "https://www.reddit.com/r/VitaPiracy/comments/1vvp4j6/star_wars_jedi_knight_jedi_academy_files/",
+        "status": "browser_verified",
+        "title": "Star Wars Jedi Knight: Jedi Academy Files",
+        "evidence": "Post identifies an OpenJK-based Vita port by NDRW and exposes GitHub source/release links. It also contains a MediaFire game-data archive link.",
+        "assessment": "valid release source; keep only Reddit/GitHub provenance and never curate the direct game-data URL",
+        "direct_game_data_link_seen": true
+      }
     },
     {
       "id": "link-047",
@@ -587,7 +830,15 @@
       "status": "unverifiable",
       "http_status": 403,
       "final_url": "https://www.reddit.com/r/VitaPiracy/comments/1vws22e/star_wars_jedi_knight_ii_jedi_outcast_data_files/",
-      "evidence": "Initial request returned HTTP 403"
+      "evidence": "Initial request returned HTTP 403",
+      "browser_review": {
+        "url": "https://www.reddit.com/r/VitaPiracy/comments/1vws22e/star_wars_jedi_knight_ii_jedi_outcast_data_files/",
+        "status": "browser_verified",
+        "title": "Star Wars Jedi Knight II: Jedi Outcast Data Files",
+        "evidence": "Post identifies an OpenJK-based Vita port by NDRW and exposes GitHub source/release links. It also contains a MediaFire game-data archive link.",
+        "assessment": "valid release source; keep only Reddit/GitHub provenance and never curate the direct game-data URL",
+        "direct_game_data_link_seen": true
+      }
     },
     {
       "id": "link-048",
@@ -599,7 +850,14 @@
       "status": "unverifiable",
       "http_status": 403,
       "final_url": "https://www.reddit.com/r/vitahacks/comments/1w8b9pp/barony_online_update_v002/",
-      "evidence": "Initial request returned HTTP 403"
+      "evidence": "Initial request returned HTTP 403",
+      "browser_review": {
+        "url": "https://www.reddit.com/r/vitahacks/comments/1w8b9pp/barony_online_update_v002/",
+        "status": "browser_verified",
+        "title": "Barony Online Update v0.0.2",
+        "evidence": "Developer post announces online, LAN and ad-hoc multiplayer plus leaderboard and bug-fix updates, linking the GitHub release.",
+        "assessment": "valid update source"
+      }
     },
     {
       "id": "link-049",
@@ -611,7 +869,14 @@
       "status": "unverifiable",
       "http_status": 403,
       "final_url": "https://www.reddit.com/r/vitahacks/comments/1wkw14c/prerelease_cdogs_sdl_port_for_ps_vita_pstv/",
-      "evidence": "Initial request returned HTTP 403"
+      "evidence": "Initial request returned HTTP 403",
+      "browser_review": {
+        "url": "https://www.reddit.com/r/vitahacks/comments/1wkw14c/prerelease_cdogs_sdl_port_for_ps_vita_pstv/",
+        "status": "browser_verified",
+        "title": "[Pre-Release] C-Dogs SDL port for PS Vita / PSTV",
+        "evidence": "Post describes a native Vita/PSTV pre-release, real-hardware testing and GitHub source/releases.",
+        "assessment": "valid development source"
+      }
     },
     {
       "id": "link-050",
@@ -624,7 +889,8 @@
       "evidence": "GitHub repository identity/content checked as abduct/cdogs-sdl",
       "content_identity": "abduct/cdogs-sdl",
       "http_status": 200,
-      "final_url": "https://github.com/abduct/cdogs-sdl/releases/tag/vita-preview-1"
+      "final_url": "https://github.com/abduct/cdogs-sdl/releases/tag/vita-preview-1",
+      "browser_review": null
     },
     {
       "id": "link-051",
@@ -636,7 +902,14 @@
       "status": "unverifiable",
       "http_status": 403,
       "final_url": "https://www.reddit.com/r/vitahacks/comments/1wlqxq4/test_drive_1987_native_vita_port/",
-      "evidence": "Initial request returned HTTP 403"
+      "evidence": "Initial request returned HTTP 403",
+      "browser_review": {
+        "url": "https://www.reddit.com/r/vitahacks/comments/1wlqxq4/test_drive_1987_native_vita_port/",
+        "status": "browser_verified",
+        "title": "Test Drive (1987) native Vita port",
+        "evidence": "Post announces the initial native Vita version, links the open-source repository and states that original game files are required but not bundled.",
+        "assessment": "valid release source; no game-data URL adopted"
+      }
     },
     {
       "id": "link-052",
@@ -649,7 +922,8 @@
       "evidence": "GitHub repository identity/content checked as smart-pickle/TestDrive-Vita",
       "content_identity": "smart-pickle/TestDrive-Vita",
       "http_status": 200,
-      "final_url": "https://github.com/smart-pickle/TestDrive-Vita/releases/tag/v0.1"
+      "final_url": "https://github.com/smart-pickle/TestDrive-Vita/releases/tag/v0.1",
+      "browser_review": null
     }
   ]
 }

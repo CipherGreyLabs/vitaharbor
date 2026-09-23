@@ -119,14 +119,16 @@ export function classifyCandidateCategory(entry, options = {}) {
   const title = String(entry?.title || "");
   const body = String(entry?.body || "");
   const text = title + " " + body + " " + String(entry?.subreddit || "");
-  const question = options.question === true || QUESTION_SIGNALS.some((signal) => signal.test(title) || signal.test(body));
-  if (question) return "question";
-
   const technicalType = options.technicalType || classifyCandidateType(entry);
-  if (["plugin", "tool"].includes(technicalType)) return "out_of_scope";
-
   const identity = options.projectIdentity ?? hasProjectIdentity(entry);
   const developmentEvidence = options.developmentEvidence ?? STRONG_DEVELOPMENT_SIGNALS.some((signal) => signal.test(text));
+  const question = options.question === true || QUESTION_SIGNALS.some((signal) => signal.test(title) || signal.test(body));
+  // A developer may ask where to post or request feedback inside a concrete
+  // WIP announcement. Keep that real project visible; request-only posts still
+  // fail this gate because they lack identity plus development evidence.
+  if (question && !(identity && developmentEvidence)) return "question";
+  if (["plugin", "tool"].includes(technicalType)) return "out_of_scope";
+
   if (isDiscussion(text) && !developmentEvidence) return "discussion";
   const vitaScopedBySourceContext = hasVitaContext(text) || (technicalType && isTrackableCandidateType(technicalType) && /\b(?:port|wrapper|decomp(?:ilation)?|engine)\b/i.test(text));
   if (!identity || !vitaScopedBySourceContext || !developmentEvidence) {
@@ -154,6 +156,7 @@ export function classify(entry) {
 
   // A question pattern in the raw title dominates unless dev signals are very strong.
   const titleIsQuestion = QUESTION_SIGNALS.some((re) => re.test(titleRaw));
+  const substantiveQuestion = (qHits.length > 0 || titleIsQuestion) && !(projectIdentity && developmentEvidence.length > 0);
 
   if (spamHits.length > 0 && devHits.length < 4) {
     return { accept: false, confidence: "low", question: qHits.length > 0 || titleIsQuestion, spam: true, category: "out_of_scope", project_identity: projectIdentity, reason: "promotional/spam language detected (" + spamHits.length + ")" };
@@ -174,7 +177,7 @@ export function classify(entry) {
   const accepted = (isTrackableCandidateCategory(category) && developmentEvidence.length > 0) || genericEvidenceRecord;
   if (devHits.length >= 3) {
     const sample = devHits.slice(0, 3).map((re) => re.source).join(", ");
-    return { accept: accepted, confidence: "high", question: qHits.length > 0 || titleIsQuestion, spam: false, category, project_identity: projectIdentity, development_evidence: developmentEvidence.length, reason: devHits.length + " dev signals: " + sample + " · category=" + category };
+    return { accept: accepted, confidence: "high", question: substantiveQuestion, spam: false, category, project_identity: projectIdentity, development_evidence: developmentEvidence.length, reason: devHits.length + " dev signals: " + sample + " · category=" + category };
   }
   if (devHits.length >= 1 && qHits.length === 0 && passiveHits.length >= 1) {
     return { accept: accepted, confidence: "medium", question: false, spam: false, category, project_identity: projectIdentity, development_evidence: developmentEvidence.length, reason: devHits.length + " dev signal(s), " + passiveHits.length + " passive term(s), category=" + category };

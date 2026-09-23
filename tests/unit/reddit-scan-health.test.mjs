@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { buildScannerHealth, finalizeGithubActionHealth } from "../../scripts/reddit-scan-health.mjs";
+import { buildScannerHealth } from "../../scripts/reddit-scan-health.mjs";
 
 describe("scanner health summary", () => {
   const sources = ["vitahacks", "VitaPiracy", "PSVitaHomebrew"];
@@ -59,10 +59,26 @@ describe("scanner health summary", () => {
     expect(current.sources[0].consecutive_failures).toBe(1);
   });
 
-  it("records GitHub Action success separately from source results", () => {
-    const health = buildScannerHealth(sources, [], "2026-09-23T00:00:00.000Z");
-    const finalized = finalizeGithubActionHealth(health, { run_id: "123", event: "schedule", sha: "abc" });
-    expect(finalized.state).toBe("failed");
-    expect(finalized.github_action).toEqual({ provider: "github-actions", status: "success", run_id: "123", event: "schedule", sha: "abc" });
+  it("keeps GitHub Action completion unknown until publication is observable", () => {
+    const previous = {
+      GITHUB_ACTIONS: process.env.GITHUB_ACTIONS,
+      GITHUB_RUN_ID: process.env.GITHUB_RUN_ID,
+      GITHUB_EVENT_NAME: process.env.GITHUB_EVENT_NAME,
+      GITHUB_SHA: process.env.GITHUB_SHA
+    };
+    process.env.GITHUB_ACTIONS = "true";
+    process.env.GITHUB_RUN_ID = "123";
+    process.env.GITHUB_EVENT_NAME = "schedule";
+    process.env.GITHUB_SHA = "abc";
+    try {
+      const health = buildScannerHealth(sources, [], "2026-09-23T00:00:00.000Z");
+      expect(health.state).toBe("failed");
+      expect(health.github_action).toEqual({ provider: "github-actions", status: "unknown", run_id: "123", event: "schedule", sha: "abc" });
+    } finally {
+      for (const [key, value] of Object.entries(previous)) {
+        if (value === undefined) delete process.env[key];
+        else process.env[key] = value;
+      }
+    }
   });
 });

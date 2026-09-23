@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-09-23T15:12:42.738Z",
+  "generated_at": "2026-09-23T15:47:43.956Z",
   "source": "r/vitahacks + r/VitaPiracy + r/PSVitaHomebrew RSS",
   "note": "Detected sources are quarantined and are not part of the curated ledger. No public item is a promotion or endorsement.",
   "items": [
@@ -14,6 +14,18 @@
       "detected_at": "2026-09-22T17:32:15.796Z",
       "candidate_type": "wrapper",
       "category": "new_project",
+      "public_visibility": "review_queue"
+    },
+    {
+      "id": "reddit-1wn46c9",
+      "state": "QUARANTINED",
+      "title": "[WIP] BuckshotRoulettePortable - A C++ rewrite of Buckshot Roulette for the PSVITA Targeting 60fps",
+      "url": "https://www.reddit.com/r/vitahacks/comments/1wn46c9/wip_buckshotrouletteportable_a_c_rewrite_of/",
+      "subreddit": "vitahacks",
+      "published_at": "2026-09-22T08:58:38.000Z",
+      "detected_at": "2026-09-22T12:16:16.397Z",
+      "candidate_type": "engine",
+      "category": "project_update",
       "public_visibility": "review_queue"
     },
     {
@@ -38,6 +50,18 @@
       "detected_at": "2026-09-21T19:01:02.092Z",
       "candidate_type": "port",
       "category": "new_project",
+      "public_visibility": "review_queue"
+    },
+    {
+      "id": "reddit-1wmax82",
+      "state": "VERIFIED_FOR_REVIEW",
+      "title": "Guess It Is Happening",
+      "url": "https://www.reddit.com/r/VitaPiracy/comments/1wmax82/guess_it_is_happening/",
+      "subreddit": "VitaPiracy",
+      "published_at": "2026-09-21T12:07:41.673Z",
+      "detected_at": "2026-09-21T13:22:50.149Z",
+      "candidate_type": "port",
+      "category": "project_update",
       "public_visibility": "review_queue"
     },
     {
@@ -86,6 +110,18 @@
       "detected_at": "2026-09-21T18:42:23.382Z",
       "candidate_type": "port",
       "category": "new_project",
+      "public_visibility": "review_queue"
+    },
+    {
+      "id": "reddit-1wkf9m5",
+      "state": "QUARANTINED",
+      "title": "SuperTuxKart W.I.P port for PlayStation Vita with Vulkan",
+      "url": "https://www.reddit.com/r/vitahacks/comments/1wkf9m5/supertuxkart_wip_port_for_playstation_vita_with/",
+      "subreddit": "vitahacks",
+      "published_at": "2026-09-19T07:09:39.000Z",
+      "detected_at": "2026-09-21T18:42:23.382Z",
+      "candidate_type": "port",
+      "category": "project_update",
       "public_visibility": "review_queue"
     },
     {

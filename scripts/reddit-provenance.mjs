@@ -1,7 +1,7 @@
 // Provenance and quarantine boundary for every Reddit discovery.
 // This module is intentionally free of filesystem and Node-only imports so the
 // read-only Vercel scan can use the same validation rules as the local scanner.
-import { CANDIDATE_CATEGORIES, classify, classifyCandidateCategory, classifyCandidateType, isTrackableCandidateCategory } from "./reddit-classifier.mjs";
+import { CANDIDATE_CATEGORIES, classify, classifyCandidateCategory, classifyCandidateType, isTrackableCandidateCategory, keyOf } from "./reddit-classifier.mjs";
 
 export const PROVENANCE_SCHEMA_VERSION = 2;
 
@@ -15,6 +15,14 @@ export const CANDIDATE_STATES = Object.freeze([
 ]);
 
 export const TERMINAL_STATES = Object.freeze(["PROMOTED", "REJECTED", "BLOCKED_UNVERIFIED"]);
+
+export function shouldRetainInternalCandidate(item, knownUrls) {
+  const key = keyOf(item?.source?.canonical_url || item?.url);
+  if (!key) return false;
+  if (TERMINAL_STATES.includes(item?.state)) return true;
+  if (knownUrls.has(key)) return false;
+  return true;
+}
 
 export const MAX_FIELD_LENGTHS = Object.freeze({
   title: 300,
@@ -663,9 +671,17 @@ export function publicCandidate(record) {
   const withheld = Array.isArray(record.risk_signals) && record.risk_signals.includes("explicit_fake_or_troll");
   const storedCategory = record?.classification?.category;
   const classifiedCategory = classify(record?.source || {}).category;
+  const hasManualVerification = state === "VERIFIED_FOR_REVIEW" && Boolean(
+    record?.review?.evidence_bundle ||
+    (Array.isArray(record?.provenance?.vita_evidence) && record.provenance.vita_evidence.length > 0)
+  );
   const derivedCategory = isTrackableCandidateCategory(classifiedCategory)
     ? classifiedCategory
-    : storedCategory || classifiedCategory || "out_of_scope";
+    : isTrackableCandidateCategory(storedCategory)
+      ? storedCategory
+      : hasManualVerification
+        ? "project_update"
+        : classifiedCategory || "out_of_scope";
   if (!withheld && !isTrackableCandidateCategory(derivedCategory)) return null;
   return {
     id: record.id,

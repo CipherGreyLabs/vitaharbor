@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-09-23T15:12:42.738Z",
+  "generated_at": "2026-09-23T15:47:43.956Z",
   "source": "r/vitahacks + r/VitaPiracy + r/PSVitaHomebrew RSS",
   "items": [
     {
@@ -36,7 +36,8 @@
         "reason": "2 dev signal(s), 1 passive term(s), no question markers",
         "candidate_type": "wrapper",
         "question": false,
-        "spam": false
+        "spam": false,
+        "category": "new_project"
       },
       "provenance": {
         "repository_url": null,
@@ -127,7 +128,8 @@
         "reason": "2 dev signal(s), 4 passive term(s), no question markers",
         "candidate_type": "port",
         "question": false,
-        "spam": false
+        "spam": false,
+        "category": "discussion"
       },
       "provenance": {
         "repository_url": null,
@@ -210,7 +212,8 @@
         "reason": "4 dev signals: \\[wip\\], \\bw\\.?i\\.?p\\.?\\b, \\bvitagl\\b",
         "candidate_type": "engine",
         "question": true,
-        "spam": false
+        "spam": false,
+        "category": "project_update"
       },
       "provenance": {
         "repository_url": null,
@@ -297,7 +300,8 @@
         "reason": "7 dev signals: \\brelease\\b, \\bin.?game\\b, \\bboot(?:s|ed|ing)?\\b",
         "candidate_type": "port",
         "question": false,
-        "spam": false
+        "spam": false,
+        "category": "project_update"
       },
       "provenance": {
         "repository_url": null,
@@ -385,7 +389,8 @@
         "reason": "4 dev signals: \\brecompil(?:e|ed|er|ation)\\b, \\brender(?:s|ed|ing)?\\b, \\bfps\\b",
         "candidate_type": "port",
         "question": false,
-        "spam": false
+        "spam": false,
+        "category": "new_project"
       },
       "provenance": {
         "repository_url": null,
@@ -501,7 +506,8 @@
         "reason": "manual browser review: linked video is titled Resident Evil 4 - PSVita Port: First optimizations batch",
         "candidate_type": "port",
         "question": false,
-        "spam": false
+        "spam": false,
+        "category": "out_of_scope"
       },
       "provenance": {
         "repository_url": null,
@@ -622,7 +628,8 @@
         "reason": "2 dev signal(s), 1 passive term(s), no question markers",
         "candidate_type": "port",
         "question": false,
-        "spam": false
+        "spam": false,
+        "category": "project_update"
       },
       "provenance": {
         "repository_url": null,
@@ -735,7 +742,8 @@
         "reason": "1 dev signal(s), 2 passive term(s), no question markers",
         "candidate_type": "port",
         "question": false,
-        "spam": false
+        "spam": false,
+        "category": "new_project"
       },
       "provenance": {
         "repository_url": null,
@@ -829,7 +837,8 @@
         "reason": "1 dev signal(s), 1 passive term(s), no question markers",
         "candidate_type": "port",
         "question": false,
-        "spam": false
+        "spam": false,
+        "category": "project_update"
       },
       "provenance": {
         "repository_url": null,
@@ -954,7 +963,8 @@
         "reason": "3 dev signals: \\brelease\\b, github\\.com\\b, \\bnative\\b",
         "candidate_type": "port",
         "question": false,
-        "spam": false
+        "spam": false,
+        "category": "project_update"
       },
       "provenance": {
         "repository_url": null,
@@ -1103,7 +1113,8 @@
         "reason": "5 dev signals: \\brelease\\b, \\bupdate\\b, \\bv\\d+\\.\\d+\\b",
         "candidate_type": "port",
         "question": false,
-        "spam": false
+        "spam": false,
+        "category": "project_update"
       },
       "provenance": {
         "repository_url": null,
@@ -1196,7 +1207,8 @@
         "reason": "Incident review: near-duplicate cross-community claim without repository or release evidence",
         "candidate_type": "port",
         "question": false,
-        "spam": false
+        "spam": false,
+        "category": "out_of_scope"
       },
       "provenance": {
         "repository_url": null,
@@ -1299,7 +1311,8 @@
         "reason": "Incident review: linked follow-up claim without repository or release evidence",
         "candidate_type": "port",
         "question": false,
-        "spam": false
+        "spam": false,
+        "category": "out_of_scope"
       },
       "provenance": {
         "repository_url": null,
@@ -1404,7 +1417,8 @@
         "reason": "Incident evidence: explicit fake-port campaign intent",
         "candidate_type": "port",
         "question": false,
-        "spam": false
+        "spam": false,
+        "category": "out_of_scope"
       },
       "provenance": {
         "repository_url": null,
@@ -1502,7 +1516,8 @@
         "reason": "1 dev signal(s), 1 passive term(s), no question markers",
         "candidate_type": "port",
         "question": false,
-        "spam": false
+        "spam": false,
+        "category": "new_project"
       },
       "provenance": {
         "repository_url": null,
@@ -1589,7 +1604,8 @@
         "reason": "3 dev signals: \\bw\\.?i\\.?p\\.?\\b, \\brelease\\b, \\bfps\\b",
         "candidate_type": "port",
         "question": true,
-        "spam": false
+        "spam": false,
+        "category": "project_update"
       },
       "provenance": {
         "repository_url": null,
@@ -1673,7 +1689,8 @@
         "reason": "2 dev signal(s), 2 passive term(s), no question markers",
         "candidate_type": "port",
         "question": false,
-        "spam": false
+        "spam": false,
+        "category": "project_update"
       },
       "provenance": {
         "repository_url": null,
@@ -1747,14 +1764,15 @@
         "author": "IllustratorNo2089",
         "title": "Class of 09 Vita Port HAS ARRIVED!",
         "body": "",
-        "published_at": "2026-09-15T13:34:13.000Z"
+        "published_at": "2026-09-15T13:34:13Z"
       },
       "classification": {
         "confidence": "low",
         "reason": "Migrated from legacy discovery queue",
         "candidate_type": "port",
         "question": false,
-        "spam": false
+        "spam": false,
+        "category": "out_of_scope"
       },
       "provenance": {
         "repository_url": null,
@@ -1778,10 +1796,10 @@
       ],
       "evidence_gaps": [
         "exact project repository",
+        "repository identity and activity facts",
         "release or build evidence",
         "Vita-specific hardware evidence",
         "raw post body was not stored in legacy queue",
-        "repository identity and activity facts",
         "author/developer linkage and independent corroboration"
       ],
       "content_hash": "",

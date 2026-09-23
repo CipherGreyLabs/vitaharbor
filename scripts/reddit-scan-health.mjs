@@ -38,7 +38,7 @@ function consecutiveDegradedRuns(runs) {
   return count;
 }
 
-export function buildScannerHealth(subreddits, feedResults, attemptedAt = new Date().toISOString(), previous = null, metadata = {}) {
+export function buildScannerHealth(subreddits, feedResults, attemptedAt = new Date().toISOString(), previous = null) {
   const bySubreddit = new Map(feedResults.map((result) => [String(result.subreddit).toLowerCase(), result]));
   const sources = subreddits.map((subreddit) => {
     const result = bySubreddit.get(String(subreddit).toLowerCase());
@@ -62,33 +62,18 @@ export function buildScannerHealth(subreddits, feedResults, attemptedAt = new Da
     state,
     successful_sources: successfulSources,
     total_sources: sources.length,
+    // This file is written before the workflow can publish its commit. A
+    // generated file cannot observe the final push, so completion stays
+    // UNKNOWN when publication is not observable from the JSON itself.
     github_action: {
       provider: process.env.GITHUB_ACTIONS === "true" ? "github-actions" : "local",
-      status: process.env.GITHUB_ACTIONS === "true" ? "pending" : "unknown",
+      status: "unknown",
       run_id: process.env.GITHUB_RUN_ID || null,
       event: process.env.GITHUB_EVENT_NAME || null,
-      sha: process.env.GITHUB_SHA || null,
-      ...(metadata.github_action || {})
+      sha: process.env.GITHUB_SHA || null
     },
     consecutive_degraded_runs: consecutiveDegradedRuns(recentRuns),
     recent_runs: recentRuns,
     sources
-  };
-}
-
-export function finalizeGithubActionHealth(health, metadata = {}) {
-  if (!health || health.schema_version !== SCANNER_HEALTH_SCHEMA_VERSION) {
-    throw new Error("Expected scanner health schema v2");
-  }
-  return {
-    ...health,
-    github_action: {
-      ...(health.github_action || {}),
-      provider: "github-actions",
-      status: "success",
-      run_id: metadata.run_id ?? health.github_action?.run_id ?? null,
-      event: metadata.event ?? health.github_action?.event ?? null,
-      sha: metadata.sha ?? health.github_action?.sha ?? null
-    }
   };
 }

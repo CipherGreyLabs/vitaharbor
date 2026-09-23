@@ -123,6 +123,18 @@ describe("provenance boundary", () => {
     expect(one.postId).toBe("abc123");
   });
 
+  it("keeps a manually verified candidate public when its legacy body is empty", () => {
+    const result = assessManual({ ...base, title: "Guess It Is Happening", body: "", url: "https://www.reddit.com/r/VitaPiracy/comments/verified01/guess_it_is_happening/" }, "VitaPiracy", "verified-hash");
+    const verified = {
+      ...result.record,
+      state: "VERIFIED_FOR_REVIEW",
+      source: { ...result.record.source, body: "" },
+      classification: { ...result.record.classification, category: "out_of_scope" },
+      review: { evidence_bundle: { findings: "Authenticated source review recorded a Vita optimization demo." } }
+    };
+    expect(publicCandidate(verified)).toMatchObject({ state: "VERIFIED_FOR_REVIEW", category: "project_update" });
+  });
+
   it("enforces the manual state machine", () => {
     const result = assess();
     const verified = transitionState(result.record, "VERIFIED_FOR_REVIEW", { actor: "reviewer", reason: "Evidence bundle checked" });

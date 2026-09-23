@@ -12,7 +12,6 @@ on:
       - "package-lock.json"
       - "scripts/cron-reddit-scan.mjs"
       - "scripts/reddit-scan-health.mjs"
-      - "scripts/finalize-scanner-health.mjs"
       - "scripts/reddit-backfill.ts"
       - "scripts/reddit-sources.mjs"
       - "scripts/reddit-classifier.mjs"
@@ -59,17 +58,30 @@ jobs:
       - name: Rebuild public feeds
         run: npx tsx scripts/make-feeds.ts
 
-      - name: Record successful GitHub Action completion
-        run: node scripts/finalize-scanner-health.mjs
-
       - name: Commit discovery results
+        id: publish
         run: |
           git config user.name "vitaharbor-scan"
           git config user.email "scan@users.noreply.github.com"
           git add data/quarantine.json public/data public/api
           if git diff --cached --quiet; then
             echo "Nothing new detected this run."
+            echo "published_sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
           else
             git commit -m "Scan: record newly surfaced port threads"
-            git push
+            git push origin HEAD:main
+            echo "published_sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
           fi
+
+      # Do not write a success marker here: that would create a self-referential
+      # commit loop and could not make the already-published JSON prove its own
+      # push. This check is intentionally observable only in the Action log.
+      - name: Verify published scanner commit
+        if: steps.publish.outcome == 'success'
+        env:
+          EXPECTED_SHA: ${{ steps.publish.outputs.published_sha }}
+        run: |
+          test -n "$EXPECTED_SHA"
+          PUBLISHED_SHA="$(git ls-remote origin refs/heads/main | cut -f1)"
+          test "$PUBLISHED_SHA" = "$EXPECTED_SHA"
+          echo "Published scanner commit verified: $PUBLISHED_SHA"

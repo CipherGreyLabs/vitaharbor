@@ -53,37 +53,40 @@ Updated: 2026-09-23
 - The prior primary, UX contributor and master worktrees remain untouched. No subagents or
   additional workers were used.
 
-## Current worker milestone: VH-SCAN-CLASS-018 and VH-LINKS-018
+## Current worker milestone: VH-SCAN-RELEASE-019 and VH-LINKS-019
 
-- The isolated worker branch `codex/vitaharbor-integration-015` was reconciled read-only to
-  `origin/main` `a191c773e9bcc577d053043ad9ec5f64ee95263a`; the dirty primary checkout was not
-  touched. Runtime/data implementation commit `6659a91a120e1f7cea05d19100b15ba74f3d5c0f` is
-  local only. No push, merge or deployment was authorized or performed.
-- Scanner health is now schema v2. It separates the GitHub Action completion record from the
-  three Reddit source results, carries the last successful scan timestamp per source (null when
-  no success is evidenced), retains the last 12 run results, and exposes consecutive partial/
-  failed-run detection. The workflow finalizes `github_action.status=success` only after scan,
-  backfill and feed generation complete; source `partial` or `failed` remains independent.
-- The classifier now emits explicit categories `new_project`, `project_update`, `discussion`,
-  `question` and `out_of_scope`. Trackable candidates require a project identity and concrete
-  development evidence. The proven discussion `reddit-1wndxal` (`We need to talk`) is internally
-  `REJECTED`, absent from `public/data/discovered.json`, and recorded in the append-only
-  provenance audit. The four existing `VERIFIED_FOR_REVIEW` records remain unchanged; no
-  promotion was performed.
-- A report-only curated-link audit is available as `npm run audit:links`, with the evidence in
-  `docs/CURATED_LINK_AUDIT_2026-09-23.md` and `.json`. It inspected 52 source/repository/
-  screenshot/release references: 16 content-checked `ok`, 36 `unverifiable` because Reddit
-  returned HTTP 403, and 0 `dead`, `redirect` or `wrong-target`. No URL correction was applied;
-  wrong-target requires content identity evidence and all candidates remain unchanged until an
-  individual replacement is verified.
-- Local verification on the exact worker tree: `npm run verify` passed typecheck, 105 unit tests
+- The isolated worker branch `codex/vitaharbor-integration-015` is based on `origin/main`
+  `a191c773e9bcc577d053043ad9ec5f64ee95263a`; the dirty primary checkout was not touched.
+  Current implementation is local only in this worker tree. No push, merge, workflow dispatch
+  or deployment was authorized or performed.
+- The scanner workflow no longer writes `github_action.status=success` before publication. The
+  generated scanner JSON now records Action completion as `unknown`; the workflow commits and
+  pushes first, then verifies the published `main` SHA in the Action log. This avoids a false
+  success marker and a self-referential commit loop when `git push` fails. The old finalizer
+  script was removed.
+- The latest local scan attempt is `2026-09-23T15:47:43.956Z`: `partial`, 1/3 sources available
+  (`vitahacks` available, `VitaPiracy` and `PSVitaHomebrew` rate-limited), Action status
+  `unknown`. The public review queue has 11 sanitized items; internal provenance has 18 records
+  (13 active and 5 terminal). No curated ledger promotion occurred.
+- Queue reconciliation found that 5 records initially disappeared from the earlier 13-to-8
+  projection: three real WIP/review records were restored, `reddit-1wndxal` remains terminally
+  `REJECTED` as a false-positive discussion, and legacy `reddit-1wh0klj` remains internal and
+  withheld because its original body/evidence was not stored. Non-terminal records are now kept
+  internally even when the public classifier withholds them. Evidence is in
+  `docs/SCANNER_QUEUE_RECONCILIATION_2026-09-23.{json,md}`.
+- The report-only curated-link audit covers 52 references: 16 HTTP/API-checked `ok`, 36 direct
+  Reddit fetches `unverifiable` because Reddit returned HTTP 403, and 0 dead/redirect/wrong-target.
+  A separate authenticated Chrome review verified all 19 unique Reddit URLs. The Jedi `files`
+  and `data_files` posts expose direct game-data archives, but only the Reddit/GitHub provenance
+  remains curated; no data-file URL was adopted. Evidence is in
+  `docs/CURATED_LINK_BROWSER_REVIEW_2026-09-23.json` and the linked audit report.
+- Local verification on the exact worker tree: `npm run verify` passed typecheck, 108 unit tests
   and a production build with 29 project pages and 32 sitemap URLs; lint passed; integration
-  passed 7/7; curated-link audit completed; `git diff --check` passed. Production was not
-  re-deployed, so the previously released Vercel deployment remains the release baseline.
-- A local Playwright run against the exact production preview passed 18/18, including the
-  Discovery failure/rate-limit presentation, project screenshot selection, reduced-motion and
-  WebGL fallback paths, and the compact-grid/back-to-top controls. The preview was stopped
-  after verification; no external site or account state changed.
+  passed 7/7; `git diff --check` passed. Local Playwright had 17/18 in the parallel run; the
+  lone Save-Data/WebGL visibility timeout passed on an isolated one-worker rerun, so the complete
+  E2E set is 18/18 across the controlled runs. The preview was stopped afterward.
+- Production remains the previously released deployment baseline. The new scanner/workflow,
+  queue and link-audit changes are not deployed from this worker.
 
 ## Completed assignment: VH-INTEGRATE-015
 

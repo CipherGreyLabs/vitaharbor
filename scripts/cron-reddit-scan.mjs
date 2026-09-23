@@ -18,6 +18,7 @@ import {
   migrateLegacyCandidate,
   publicDocument,
   PROVENANCE_SCHEMA_VERSION,
+  shouldRetainInternalCandidate,
   TERMINAL_STATES,
   upgradeProvenanceRecord
 } from "./reddit-provenance.mjs";
@@ -99,20 +100,13 @@ const previousItems = previous();
 // A candidate can become curated between scans. Remove those stale entries from
 // the persisted review queue instead of carrying them forward forever. Terminal
 // decisions remain internal provenance even after their source becomes curated.
+// Non-terminal records remain in internal provenance even when the stricter
+// public classifier withholds them; otherwise an old candidate could vanish
+// without an auditable status or fresh evidence path.
 const seen = new Map(
   previousItems
     .map((item) => [keyOf(item.source?.canonical_url || item.url), item])
-    .filter(([key, item]) => {
-      if (!key) return false;
-      if (TERMINAL_STATES.includes(item.state)) return true;
-      if (known.has(key)) return false;
-      if (item.state !== "QUARANTINED") return true;
-      const classification = classify(item.source || {});
-      const candidateType = classifyCandidateType(item.source || {});
-      return classification.accept
-        && isTrackableCandidateCategory(classification.category)
-        && isTrackableCandidateType(candidateType);
-    })
+    .filter(([, item]) => shouldRetainInternalCandidate(item, known))
 );
 const detectedAt = new Date().toISOString();
 
