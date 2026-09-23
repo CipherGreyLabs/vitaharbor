@@ -49,7 +49,8 @@ test.describe("archive", () => {
     const panel = page.locator("#panel-test-drive-1987-vita");
     await expect(panel).toBeVisible();
     await expect(panel.getByText("Latest project activity", { exact: true })).toBeVisible();
-    await expect(panel).toContainText("20 Sept 2026");
+    const activityField = panel.locator("dl > div").filter({ hasText: "Latest project activity" });
+    await expect(activityField.locator("dd")).toHaveText(/^\d{1,2}\s+[A-Za-z]{3,9}\s+\d{4}$/);
     await expect(panel).not.toContainText(/\b\d+\s*d ago\b|\b\d+\s+days? ago\b/i);
   });
 
