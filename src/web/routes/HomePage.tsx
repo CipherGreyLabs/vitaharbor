@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useRef, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { apiGet } from "../lib/api";
 import { useDocumentMeta } from "../lib/useDocumentMeta";
 import { FALLBACK_PROJECTS, FALLBACK_UPDATES } from "@/shared/constants/fallbackData";
@@ -10,6 +10,7 @@ import { MethodologySection } from "../components/ledger/MethodologySection";
 import {
   type LedgerProject,
   splitTitle,
+  prettyStage,
   deriveProjectType,
   STAGE_RANK,
   formatDay,
@@ -17,7 +18,8 @@ import {
   verificationMeta
 } from "../components/ledger/types";
 import { ArrowUp, ExternalLink } from "lucide-react";
-import { countUpdatesSince, readLastVisit, scannerFreshness, wasRecentlyUpdated, writeLastVisit } from "../lib/visitorState";
+import { countUpdatesSince, readLastVisit, readWatchlist, wasRecentlyUpdated, writeLastVisit, writeWatchlist } from "../lib/visitorState";
+import { fetchCommunityPosts, type CommunityPost } from "../lib/scannerAssets";
 
 interface DirectoryFilters {
   search: string;
@@ -47,7 +49,7 @@ function normaliseSearchValue(value: unknown) {
     .trim();
 }
 
-function relatedProjectForCandidate(item: any, projects: LedgerProject[]) {
+function relatedProjectForCommunityPost(item: CommunityPost, projects: LedgerProject[]) {
   const candidate = normaliseSearchValue(item?.title);
   if (!candidate || candidate.length < 6) return null;
   return projects.find((project) => {
@@ -121,9 +123,9 @@ export const HomePage: React.FC = () => {
   const [showScrollTop, setShowScrollTop] = useState(false);
   const [webgl, setWebgl] = useState<boolean | null>(null);
   const [tickerPaused, setTickerPaused] = useState(false);
-  const [discovered, setDiscovered] = useState<any[]>([]);
-  const [scannedAt, setScannedAt] = useState("");
+  const [communityPosts, setCommunityPosts] = useState<CommunityPost[]>([]);
   const [previousVisit, setPreviousVisit] = useState<number | null>(null);
+  const [watchlistSlugs, setWatchlistSlugs] = useState<string[]>([]);
 
   const consoleRef = useRef<HTMLDivElement>(null);
   const searchRef = useRef<HTMLInputElement>(null);
@@ -133,9 +135,10 @@ export const HomePage: React.FC = () => {
   useEffect(() => {
     setPreviousVisit(readLastVisit());
     writeLastVisit();
+    setWatchlistSlugs(readWatchlist());
   }, []);
 
-  useEffect(() => {
+  const detectWebgl = useCallback(() => {
     try {
       const canvas = document.createElement("canvas");
       const supported =
@@ -146,6 +149,10 @@ export const HomePage: React.FC = () => {
       setWebgl(false);
     }
   }, []);
+
+  useEffect(() => {
+    detectWebgl();
+  }, [detectWebgl]);
 
   useEffect(() => {
     const url = new URL(window.location.href);
@@ -181,7 +188,7 @@ export const HomePage: React.FC = () => {
       try {
         const [projectsRes, updatesRes] = await Promise.all([
           apiGet<{ projects: any[] }>('/api/projects?limit=50', 'projects').catch(() => null),
-          apiGet<{ updates: any[] }>('/api/updates?limit=8', 'updates').catch(() => null)
+          apiGet<{ updates: any[] }>('/api/updates?limit=100', 'updates').catch(() => null)
         ]);
         if (cancelled) return;
         if (projectsRes && projectsRes.projects && Array.isArray(projectsRes.projects) && projectsRes.projects.length > 0) {
@@ -194,23 +201,26 @@ export const HomePage: React.FC = () => {
         console.error('API Refresh Error:', e);
       }
 
-      try {
-        const res = await fetch('/data/discovered.json', { headers: { accept: 'application/json' } });
-        if (!res.ok) return;
-        const text = await res.text();
-        if (!text.startsWith('{') && !text.startsWith('[')) return;
-        const body = JSON.parse(text);
-        if (cancelled) return;
-        if (body && Array.isArray(body.items)) setDiscovered(body.items);
-        if (body && typeof body.generated_at === 'string') setScannedAt(body.generated_at);
-      } catch {
-        // Scanner has not run yet
-      }
     }
 
     refresh();
     return () => {
       cancelled = true;
+    };
+  }, []);
+
+  useEffect(() => {
+    let cancelled = false;
+    const refreshCommunityPosts = async () => {
+      const result = await fetchCommunityPosts();
+      if (cancelled) return;
+      setCommunityPosts(result.data?.items || []);
+    };
+    void refreshCommunityPosts();
+    const interval = window.setInterval(() => void refreshCommunityPosts(), 15 * 60 * 1000);
+    return () => {
+      cancelled = true;
+      window.clearInterval(interval);
     };
   }, []);
 
@@ -273,25 +283,25 @@ export const HomePage: React.FC = () => {
     return { playable, dev };
   }, [projects]);
 
-  // Scanner output is a candidate list. Once a thread is curated into the ledger it must
-  // stop appearing as "pending review", otherwise the same port shows up twice.
+  // Avoid repeating a community post when its exact source is already in the directory.
   const normaliseUrl = (value: unknown) =>
     String(value || "").trim().replace(/\/+$/, "").toLowerCase();
 
-  const pendingDiscovered = useMemo(() => {
+  const communityPostsToShow = useMemo(() => {
     const ledgerUrls = new Set(
       projects.map((p) => normaliseUrl((p as any).reddit_url)).filter(Boolean)
     );
-    return discovered.filter((item) => {
-      const state = String(item?.state || "QUARANTINED");
-      if (!["QUARANTINED", "VERIFIED_FOR_REVIEW"].includes(state)) return false;
-      const url = normaliseUrl(item?.url);
-      return !url || !ledgerUrls.has(url);
+    return communityPosts.filter((item) => {
+      const url = normaliseUrl(item.url);
+      return !ledgerUrls.has(url);
     });
-  }, [discovered, projects]);
+  }, [communityPosts, projects]);
 
-  const scanFreshness = useMemo(() => scannerFreshness(scannedAt), [scannedAt]);
   const unseenUpdates = useMemo(() => countUpdatesSince(recentUpdates, previousVisit), [recentUpdates, previousVisit]);
+  const watchedProjects = useMemo(
+    () => projects.filter((project) => watchlistSlugs.includes(project.slug)),
+    [projects, watchlistSlugs]
+  );
 
   const visible = useMemo(() => {
     let list = [...projects];
@@ -421,7 +431,7 @@ export const HomePage: React.FC = () => {
           <nav aria-label="Sections" className="flex items-center gap-4 text-body text-ink-medium sm:gap-5">
             <a href="/updates" className="inline-flex min-h-[44px] items-center rounded-md px-1 transition-colors hover:text-ink">Updates</a>
             <a href="#directory" className="inline-flex min-h-[44px] items-center rounded-md px-1 transition-colors hover:text-ink">Directory</a>
-            <a href="/discovery" className="inline-flex min-h-[44px] items-center rounded-md px-1 transition-colors hover:text-ink">Discovery</a>
+            <a href="/discovery" className="inline-flex min-h-[44px] items-center rounded-md px-1 transition-colors hover:text-ink">Community posts</a>
             <div className="hidden items-center gap-2 rounded-full border border-hairline bg-surface px-3 py-1 font-mono text-micro text-ink-muted sm:inline-flex">
               <span className="inline-flex items-center gap-1 text-stage-done font-medium">
                 <span className="h-1.5 w-1.5 rounded-full bg-stage-done" />
@@ -456,32 +466,54 @@ export const HomePage: React.FC = () => {
           </p>
         </section>
 
-        <section aria-label="Tracker status" className="mx-auto mt-8 max-w-5xl px-6">
-          <div className="grid gap-px overflow-hidden rounded-2xl border border-hairline-strong/30 bg-hairline-strong/20 sm:grid-cols-2 lg:grid-cols-4">
-            <div className="bg-surface p-4 sm:p-5">
-              <p className="text-micro font-semibold uppercase tracking-[0.14em] text-ink-muted">Source scan</p>
-              <p className="mt-2 text-subtitle font-semibold text-ink">3× daily</p>
-              <p className="mt-1 text-caption text-ink-muted">r/vitahacks + r/VitaPiracy + r/PSVitaHomebrew</p>
-            </div>
-            <div className="bg-surface p-4 sm:p-5">
-              <p className="text-micro font-semibold uppercase tracking-[0.14em] text-ink-muted">Scanner health</p>
-              <p className="mt-2 text-subtitle font-semibold text-ink">{scanFreshness.label}</p>
-              <p className="mt-1 text-caption text-ink-muted">
-                {scannedAt ? `Last scan ${formatUtcDateTime(scannedAt)} · 3× daily cadence` : "No scanner timestamp is currently published."}
-              </p>
-            </div>
-            <div className="bg-surface p-4 sm:p-5">
-              <p className="text-micro font-semibold uppercase tracking-[0.14em] text-ink-muted">Review queue</p>
-              <p className="mt-2 text-subtitle font-semibold text-ink">{pendingDiscovered.length === 1 ? "1 candidate" : pendingDiscovered.length + " candidates"}</p>
-              <p className="mt-1 text-caption text-ink-muted">Open the source before treating it as verified.</p>
-            </div>
+        <section aria-label="Your VitaHarbor" className="mx-auto mt-8 max-w-5xl px-6">
+          <div className="grid gap-px overflow-hidden rounded-2xl border border-hairline-strong/30 bg-hairline-strong/20 sm:grid-cols-2">
             <div className="bg-surface p-4 sm:p-5">
               <p className="text-micro font-semibold uppercase tracking-[0.14em] text-ink-muted">Since last visit</p>
               <p className="mt-2 text-subtitle font-semibold text-ink">{unseenUpdates === 0 ? "Caught up" : `${unseenUpdates} new`}</p>
-              <a href="/updates" className="mt-1 inline-block text-caption font-medium text-accent hover:underline">Open timeline</a>
+              <a href="/updates" className="mt-1 inline-flex min-h-[44px] items-center text-caption font-medium text-accent hover:underline">Open timeline</a>
+            </div>
+            <div className="bg-surface p-4 sm:p-5">
+              <p className="text-micro font-semibold uppercase tracking-[0.14em] text-ink-muted">Watchlist</p>
+              <p className="mt-2 text-subtitle font-semibold text-ink">{watchedProjects.length} saved</p>
+              <a href="#watchlist" className="mt-1 inline-flex min-h-[44px] items-center text-caption font-medium text-accent hover:underline">View saved projects</a>
             </div>
           </div>
         </section>
+
+        {watchedProjects.length > 0 && (
+          <section id="watchlist" aria-labelledby="watchlist-heading" className="mx-auto mt-8 max-w-5xl px-6">
+            <div className="rounded-2xl border border-hairline bg-surface p-5 sm:p-6">
+              <div className="flex flex-wrap items-end justify-between gap-3 border-b border-hairline pb-3">
+                <div>
+                  <p className="text-micro font-semibold uppercase tracking-[0.14em] text-ink-muted">Saved in this browser</p>
+                  <h2 id="watchlist-heading" className="mt-1 text-subtitle font-semibold text-ink">Your watchlist</h2>
+                </div>
+                <span className="text-caption text-ink-muted">{watchedProjects.length} {watchedProjects.length === 1 ? "project" : "projects"}</span>
+              </div>
+              <ul className="mt-2 divide-y divide-hairline">
+                {watchedProjects.map((project) => (
+                  <li key={project.slug} className="flex flex-wrap items-center justify-between gap-3 py-3">
+                    <div className="min-w-0">
+                      <a href={`/projects/${project.slug}/`} className="font-medium text-ink hover:text-accent">{project.display_name || project.game_title}</a>
+                      <p className="mt-0.5 text-caption text-ink-muted">{prettyStage(project.current_stage)} · Updated {formatDay(project.last_activity_at) || "date not recorded"}</p>
+                    </div>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        const next = readWatchlist().filter((slug) => slug !== project.slug);
+                        if (writeWatchlist(next)) setWatchlistSlugs(next);
+                      }}
+                      className="inline-flex min-h-[44px] items-center rounded-md px-3 text-caption font-medium text-ink-muted underline underline-offset-4 hover:text-ink"
+                    >
+                      Remove
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </section>
+        )}
 
         <section id="latest-updates" aria-labelledby="latest-updates-heading" className="mx-auto mt-20 max-w-6xl px-6">
           <div className="flex flex-wrap items-end justify-between gap-4 border-b border-hairline-strong/30 pb-4">
@@ -531,6 +563,7 @@ export const HomePage: React.FC = () => {
           selectedId={selectedId}
           onSelectProject={(p) => selectProject(p, false)}
           webgl={webgl}
+          onRetryWebgl={detectWebgl}
           onCopyLink={copyEntryLink}
           copiedSlug={copiedSlug}
           consoleRef={consoleRef}
@@ -557,52 +590,41 @@ export const HomePage: React.FC = () => {
           onSelectProject={selectProject}
           onCopyLink={copyEntryLink}
           copiedSlug={copiedSlug}
-          scannedAt={scannedAt}
           directoryRef={directoryReveal}
         />
 
-        {/* Unverified Detected Threads Band */}
-        {pendingDiscovered.length > 0 && (
-          <section aria-labelledby="detected-heading" className="mx-auto mt-24 max-w-5xl px-6">
+        {communityPostsToShow.length > 0 && (
+          <section aria-labelledby="community-posts-heading" className="mx-auto mt-24 max-w-5xl px-6">
             <div className="rounded-2xl border border-hairline-strong/30 vh-glass p-6 shadow-lift">
               <div className="flex flex-wrap items-baseline justify-between gap-3">
                 <div className="max-w-2xl">
-                  <h2 id="detected-heading" className="text-subtitle font-semibold text-ink">
-                    Detected, pending review
+                  <h2 id="community-posts-heading" className="text-subtitle font-semibold text-ink">
+                    Community posts to explore
                   </h2>
                   <p className="mt-1.5 text-body text-ink-medium">
-                    Threads the scanner picked up that are not in the curated ledger yet. They stay
-                    unverified until someone checks the build on real hardware.
+                    Recent posts about possible Vita ports and updates. These are unverified leads, not confirmed project records.
                   </p>
                 </div>
-                {scannedAt && (
-                  <p className="vh-tnum text-caption text-ink-muted">Last scan {formatDay(scannedAt)}</p>
-                )}
               </div>
 
               <ul className="mt-5 divide-y divide-hairline border-t border-hairline-strong/30">
-                {pendingDiscovered.slice(0, 3).map((item) => (
-                  <li key={item.id} className="flex flex-wrap items-center justify-between gap-3 py-3.5">
+                {communityPostsToShow.slice(0, 3).map((item) => (
+                  <li key={item.url} className="flex flex-wrap items-center justify-between gap-3 py-3.5">
                     <div className="min-w-0">
                       <div className="flex flex-wrap items-center gap-2">
                         <p className="truncate text-body font-medium text-ink">{item.title}</p>
                         <span className="rounded-full border border-hairline bg-surface px-2 py-0.5 text-micro font-semibold uppercase text-ink-muted">
-                          {item.state === "VERIFIED_FOR_REVIEW" ? "Verified for review" : "Quarantined source"}
+                          Unverified lead
                         </span>
                       </div>
                       <p className="mt-0.5 text-caption text-ink-muted">
-                        {item.subreddit ? "r/" + item.subreddit + " · " : "Detected source · "}
-                        Published {formatUtcDateTime(item.published_at || item.detected_at)}
+                        r/{item.subreddit} · {item.published_at ? `Published ${formatUtcDateTime(item.published_at)}` : "Publication date unavailable"}
                       </p>
                       {(() => {
-                        const related = relatedProjectForCandidate(item, projects);
+                        const related = relatedProjectForCommunityPost(item, projects);
                         return related ? (
                           <p className="mt-1 text-caption text-accent">
-                            Possible update to {splitTitle(related.game_title || related.display_name).name}; review before merging.
-                          </p>
-                        ) : item.public_visibility === "withheld" ? (
-                          <p className="mt-1 line-clamp-1 text-caption text-ink-muted">
-                            The source details are withheld until manual provenance review.
+                            May relate to {splitTitle(related.game_title || related.display_name).name}.
                           </p>
                         ) : null;
                       })()}
@@ -614,19 +636,15 @@ export const HomePage: React.FC = () => {
                         rel="noopener noreferrer"
                         className="inline-flex min-h-[44px] shrink-0 items-center gap-1.5 rounded-md px-2 text-caption font-medium text-ink-medium transition-colors hover:text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink/20"
                       >
-                        Open thread
+                        Open original post
                         <ExternalLink className="h-3.5 w-3.5" />
                       </a>
-                    ) : (
-                      <span className="inline-flex min-h-[44px] shrink-0 items-center rounded-md px-2 text-caption text-ink-muted">
-                        Source withheld
-                      </span>
-                    )}
+                    ) : null}
                   </li>
                 ))}
               </ul>
               <div className="mt-4 flex justify-end">
-                <a href="/discovery" className="inline-flex min-h-[44px] items-center rounded-full border border-hairline px-4 text-caption font-medium text-accent hover:bg-sunken">View all {pendingDiscovered.length} detected threads</a>
+                <a href="/discovery" className="inline-flex min-h-[44px] items-center rounded-full border border-hairline px-4 text-caption font-medium text-accent hover:bg-sunken">Browse community posts</a>
               </div>
             </div>
           </section>
@@ -685,8 +703,8 @@ export const HomePage: React.FC = () => {
                   <a href="#methodology" className="inline-block py-1.5 text-ink-medium transition-colors hover:text-accent">Methodology</a>
                 </li>
                 <li>
-                  <a href="/data/discovered.json" target="_blank" rel="noopener noreferrer" className="inline-block py-1.5 text-ink-medium transition-colors hover:text-accent">
-                    Discovery log
+                  <a href="/discovery" className="inline-block py-1.5 text-ink-medium transition-colors hover:text-accent">
+                    Community posts
                   </a>
                 </li>
               </ul>

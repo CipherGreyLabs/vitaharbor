@@ -12,12 +12,45 @@ import {
 const NOW = Date.parse("2026-09-23T00:00:00.000Z");
 
 describe("visitor state", () => {
-  it("classifies scanner freshness at the documented 14h and 26h boundaries", () => {
-    expect(scannerFreshness("2026-09-22T10:00:00.000Z", NOW).state).toBe("fresh");
-    expect(scannerFreshness("2026-09-22T09:59:59.000Z", NOW).state).toBe("delayed");
-    expect(scannerFreshness("2026-09-21T22:00:00.000Z", NOW).state).toBe("delayed");
-    expect(scannerFreshness("2026-09-21T21:59:59.000Z", NOW).state).toBe("stale");
+  it("classifies freshness only after a complete source scan", () => {
+    const complete = (attempted_at: string) => ({
+      schema_version: 1 as const,
+      attempted_at,
+      state: "complete" as const,
+      successful_sources: 3,
+      total_sources: 3,
+      github_action: { provider: "github-actions" as const, status: "success" as const, run_id: "1", event: "schedule", sha: "abc" },
+      consecutive_degraded_runs: 0,
+      recent_runs: [],
+      sources: ["vitahacks", "VitaPiracy", "PSVitaHomebrew"].map((subreddit) => ({ subreddit, status: "available" as const, last_successful_scan_at: attempted_at, consecutive_failures: 0 }))
+    });
+    expect(scannerFreshness(complete("2026-09-22T10:00:00.000Z"), NOW).state).toBe("fresh");
+    expect(scannerFreshness(complete("2026-09-22T09:59:59.000Z"), NOW).state).toBe("delayed");
+    expect(scannerFreshness(complete("2026-09-21T21:59:59.000Z"), NOW).state).toBe("stale");
     expect(scannerFreshness(null, NOW).state).toBe("unknown");
+  });
+
+  it("keeps mixed rate-limit and failed scan states distinct from freshness", () => {
+    const partial = {
+      schema_version: 1 as const,
+      attempted_at: "2026-09-22T23:00:00.000Z",
+      state: "partial" as const,
+      successful_sources: 2,
+      total_sources: 3,
+      github_action: { provider: "github-actions" as const, status: "success" as const, run_id: "2", event: "schedule", sha: "abc" },
+      consecutive_degraded_runs: 2,
+      recent_runs: [],
+      sources: [
+        { subreddit: "vitahacks", status: "available" as const, last_successful_scan_at: "2026-09-22T23:00:00.000Z", consecutive_failures: 0 },
+        { subreddit: "VitaPiracy", status: "rate_limited" as const, last_successful_scan_at: null, consecutive_failures: 2 },
+        { subreddit: "PSVitaHomebrew", status: "available" as const, last_successful_scan_at: "2026-09-22T23:00:00.000Z", consecutive_failures: 0 }
+      ]
+    };
+    expect(scannerFreshness(partial, NOW).state).toBe("partial");
+    expect(scannerFreshness(partial, NOW).label).toContain("2/3 sources");
+    expect(scannerFreshness({ ...partial, attempted_at: "2026-09-21T20:00:00.000Z" }, NOW).label).toContain("stale");
+    expect(scannerFreshness({ ...partial, state: "failed", successful_sources: 0 }, NOW).state).toBe("failed");
+    expect(scannerFreshness({ ...partial, state: "complete", successful_sources: 3, attempted_at: "2026-09-24T00:00:00.000Z" }, NOW).state).toBe("unknown");
   });
 
   it("keeps watchlist and visit storage failure-safe", () => {

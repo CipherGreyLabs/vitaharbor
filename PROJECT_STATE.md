@@ -1,8 +1,218 @@
 # VitaHarbor project state
 
-Updated: 2026-09-20
+Updated: 2026-09-24
 
-## Confirmed current facts
+## Current state: VH-SCANNER-FRESHNESS-022 production release (2026-09-24)
+
+- The reviewed implementation was fast-forwarded to `main` at `0e03addecb81258cf706be11425b23fad2cfaa50`, with no force push. GitHub Actions push run `35938345145` for that exact SHA succeeded; unit/integration verification passed and scan, backfill, feed rebuild, commit/publish, and publication-check steps were all `skipped`. No Reddit fetch or scanner data commit occurred.
+- Production deployment `dpl_EEFGNckzUDjxn83YnFtpxivX2GUf` is `READY` and aliases `https://vitaharbor.vercel.app`. It was deployed from the clean local checkout at `0e03addecb81258cf706be11425b23fad2cfaa50`, matching `origin/main` at deployment time. Vercel's deployment inspection reports `gitSource: null`; source identity is evidenced by the exact pre-deploy local/remote SHA, not provider Git metadata.
+- Live acceptance: `/api/projects?limit=1000` returned 29 projects; `/data/discovered.json` returned 11 leads, all with `verification: unverified`; `/api/cron-scan` returned HTTP 404. Browser checks of Home, Community posts and Updates showed no scanner/run/failure status. Production Playwright passed 20/20 with two workers; the isolated default WebGL test passed 1/1. An initial 8-worker production run had 19/20 because the default WebGL canvas was absent in that parallel run; all tests passed on the 2-worker rerun. Other 3D, screenshot, mobile and `Show on Vita` checks passed.
+- The configured schedule is 07:17, 13:17 and 19:17 UTC. The post-push test event intentionally did not scan. No post-change scheduled RSS attempt has yet been observed, so Reddit availability/recovery and actual schedule punctuality remain `UNKNOWN`; GitHub may still delay scheduled workflows.
+- Runtime changes are implementation commit `90a35895df1c8b4b8fcdfa6a1398f4dde34bc8ba`; traceability commit `0e03addecb81258cf706be11425b23fad2cfaa50` is documentation/handoff only. No curated records or public discovery data were edited. `npm ci` reported 8 dependency audit advisories (4 moderate, 4 high); manifests/lockfile were unchanged and no audit remediation was attempted.
+- Vercel CLI created a gitignored `.env.local` during project linking. Its contents were not read or committed; local deletion was blocked by the execution policy, so it remains in this worktree for user cleanup. The `.vercel` project link also remains ignored. Tracked release and documentation changes are committed.
+- Updated hash-protected `HANDOFF.md` contains 24 source hashes; `NEW-HANDOFF.ps1 -Verify` returned `HANDOFF GO` for all 24.
+
+## Completed bounded worker assignment: VH-SCANNER-FRESHNESS-022 (pre-release snapshot, 2026-09-24)
+
+The following records the candidate state before its authorized production release below.
+
+- The master delegated scanner reliability work after the latest read-only evidence showed scheduled Actions runs starting hours after their cron slots and the most recent scanner attempt (2026-09-23T22:06:44Z) failing 0/3 on HTTP 429 from all three RSS sources. No fresh post-change scan has been observed; source access remains unverified.
+- Implementation commit `90a35895df1c8b4b8fcdfa6a1398f4dde34bc8ba` is on isolated branch `codex/vh-scanner-reliability-022`, directly based on `origin/main` `d43070d88a33a8e2d781417c2e5ee1cefe162729`. Schedules now use 07:17, 13:17 and 19:17 UTC; push events run tests only, and scan/backfill/feed publication steps are restricted to schedule/manual dispatch. Backfill runs on the 07:17 slot or manual dispatch.
+- Shared Reddit fetch handling makes a 429 a single attempt with no immediate sleep/retry, parses numeric or HTTP-date `Retry-After`, caps the internal hint at six hours, and stores it only in internal scanner health / operator logs. Network, 408 and 5xx failures get at most one retry after 1.2 seconds; permanent 4xx responses are not retried. Existing backfill early-exit preserves stored provenance when all feeds fail.
+- Removed the unused Vercel `/api/cron-scan` route and its daily cron after confirming no application consumer; unrelated APIs remain untouched. No visitor-facing scanner fields, curated entries, or generated discovery data were changed.
+- Exact candidate verification: `npm run verify` passed typecheck, 116/116 unit tests and production build (29 project pages, 32 sitemap URLs); lint passed; integration 7/7; local-preview Playwright 20/20 at `http://127.0.0.1:4176`; workflow YAML and `vercel.json` parsed successfully. No live Reddit request/scan, workflow dispatch, push or deployment was performed. Production remains on the existing deployment until master review and release authorization.
+- `npm ci` reported 8 dependency audit advisories (4 moderate, 4 high); package manifests/lockfile were not changed and no audit remediation was attempted in this scanner-scoped assignment.
+
+## Completed bounded worker assignment: VH-PROJECT-ACTIVITY-LABEL-021 (pre-scanner-release record, 2026-09-24)
+
+- The master authorized a visitor-copy fix after a read-only production diagnosis. The fresh live Home, Community posts, and Updates views contain no “2 days ago” or scan-status text. Opening a Home project row did show `Last activity · 3d ago`; this is the project's source-backed `last_activity_at`, not a VitaHarbor scan timestamp. The live project API's newest activity record was Test Drive at `2026-09-20T19:50:09.288Z`.
+- Code commit `1192b8e1b2c7b2975d3959a79eba2c58c9b9317b` changes the detail label to `Latest project activity`, keeps the absolute source date and removes the relative-age suffix. A Home deep-link regression assertion verifies the opened Test Drive panel has `20 Sept 2026` and no `Nd ago` label.
+- Worker branch `codex/vh-visitor-ops-cleanup-20260923` is based on the latest `origin/main` data tip `e84e6aea178829f18669c37724638968701f710e`; runtime implementation commit `1192b8e1b2c7b2975d3959a79eba2c58c9b9317b` is directly atop that base. No push or deployment is authorized. Production still points to READY deployment `dpl_98bNGxsgXjCsnFMyYBty5FD5qsz6`, deployed from runtime source `25865ab1aa2ee717fa50942fec447738f2bcfee9`.
+- Verification on the exact code commit: `npm run verify` passed typecheck, 110 unit tests, and build (29 project pages, 32 sitemap URLs); lint passed; integration 7/7; Playwright 20/20 at local preview `http://127.0.0.1:4174`. Manual desktop and 390px preview showed `LATEST PROJECT ACTIVITY` / `20 Sept 2026`, no relative-age or scanner-status string, and no mobile overflow. The first focused E2E invocation used the config's production default and therefore saw the unreleased live copy; it was rerun successfully against the local preview, followed by the full 20-test suite.
+- Internal read-only scan evidence: scheduled Actions run `35926409183` completed at `2026-09-23T22:07:04Z`; scanner attempt `2026-09-23T22:06:44Z` was failed 0/3 because all three RSS sources were rate-limited. This remains internal and is not shown to visitors. Schedule remains 07:00, 13:00 and 19:00 UTC; worker made no cadence/provider changes.
+- The incoming `HANDOFF.md` failed integrity only for `tests/e2e/archive.spec.ts`; `git status` was clean, and commit `25865ab` had changed that file after the previous handoff was generated. No user-owned uncommitted edit was found. Regenerated `HANDOFF.md` with 33 source hashes; `NEW-HANDOFF.ps1 -Verify` returned `HANDOFF GO` for all 33.
+
+## Historical pre-release snapshot: visitor-facing diagnostics cleanup (2026-09-23)
+
+The following block records the state before the authorized production release. Its pre-release status lines are historical; the current live deployment and worker candidate are recorded above.
+
+- Removed scanner cadence, run IDs, source failure/rate-limit details, scan timestamps and review-queue mechanics from the public Home, Community Posts, project and methodology views. Kept useful post dates, source links, project facts, and explicit unverified labels.
+- Master review found process language left in the no-JS methodology and standalone Discovery metadata. The prerender template now describes unverified community posts and visible evidence levels in plain visitor language; `/discovery/` title and description now match the Community Posts page.
+- The public discovery feed is now a minimal schema-v1 projection. Scanner health remains internal at `data/scanner-health.json`; the static site no longer fetches or serves it. The Vercel cron endpoint returns no diagnostic body. The three-times-daily schedule was not changed.
+- Exact candidate is local commit `25865ab1aa2ee717fa50942fec447738f2bcfee9` on `codex/vh-visitor-ops-cleanup-20260923`, based on `origin/main` `3b5f1614a222d49d2bcb861a33e6ab80dabb7ff9`. Awaiting master review; no push, merge, or deployment.
+- Verification on the updated candidate: `npm run verify` passed typecheck, 110/110 unit tests, and production build (29 project pages, 32 sitemap URLs); lint passed; integration passed 7/7; Playwright passed 19/19 at `http://127.0.0.1:4180` with two workers. All 41 public HTML/JS/JSON/XML artifacts had zero matches for the selected scanner/run/rate-limit/queue/review-process patterns. Static Discovery title/description are visitor-facing; the 11-item public feed has only schema/items and title/url/community/publication-date/unverified fields. Mobile 390px had no horizontal overflow; no-JS Home retains Directory and evidence-level context; hydrated Home/Discovery display no scanner-health request or diagnostics. One initial eight-worker run had a transient WebGL failure; the complete two-worker rerun passed.
+- Candidate screenshots are in `C:\Users\suloW\AppData\Local\Temp\vitaharbor-cleanup-67ad93fc6be641ec9977e5d1c42d0fad` (`home-desktop.png`, `community-posts-desktop.png`, `community-posts-mobile.png`).
+- Internal-only freshness observation: scheduled GitHub run `35897506358` succeeded at 2026-09-23 17:42 UTC; the scan health record at 17:43 UTC was partial (r/vitahacks available; r/VitaPiracy and r/PSVitaHomebrew rate-limited). This is not a cadence/UI change ticket.
+
+## Current follow-up: VH-SCAN-HEALTH-020
+
+- Bounded master assignment: make the scanner-health constructor/test deterministic under
+  local and GitHub Actions environments, prove real `GITHUB_*` context is retained, and keep
+  `github_action.status` honestly `unknown` until publication is observable. No scanner/data,
+  queue, curated ledger, link-audit, UI, manual-dispatch or Vercel-deploy changes are in scope.
+- Reconciled base is `origin/main` `ed19710f972356688b4d6e49075a13eacc5ef02f`; remote
+  `ls-remote` matched and it is an ancestor of the clean worker branch. The prior NO_GO
+  trace remains in local commit `1f1d6ddb27025c83e0c1f527408d05f1ef94ed87`.
+- `buildScannerHealth` now accepts an injectable GitHub Actions environment while defaulting
+  production calls to `process.env`. The deterministic local fixture supplies `{}`; regression
+  tests inject a push context and independently compare the actual runtime `GITHUB_*` values.
+  Both GitHub-context cases assert completion remains `unknown`.
+- Focused scanner-health tests pass 6/6 in both the ordinary local environment and a scoped
+  GitHub-like process environment. Full exact-candidate release gates and commit are pending.
+  The product UI is unchanged; the prior exact local E2E result remains 18/18. No Reddit scan
+  was manually dispatched and no deployment was made.
+
+## Active assignment: VH-SCAN-FRESH-017
+
+- The user reported that the site showed its latest scan as two days old despite the stated
+  three-times-daily cadence. The GitHub Actions workflow is configured for 07:00, 13:00 and
+  19:00 UTC, and recent scheduled runs are present. The latest live attempt is
+  `2026-09-23T05:09:00.830Z`; all three Reddit RSS sources returned rate limits, so the run
+  did not detect new items.
+- Root cause: the scheduled workflow commits updated scanner JSON to public `main`, but
+  Vercel's static production deployment does not rebuild on those scanner commits. The site
+  therefore kept rendering the deployed snapshot until another Vercel deployment.
+- Worker fix is in the isolated worktree on `codex/vitaharbor-integration-015`: Home and
+  Discovery now fetch current public scanner JSON from GitHub `main`, bypass short CDN/browser
+  caching, refresh every 15 minutes, and label the deployed-file fallback as a snapshot.
+  Vercel CSP permits only the required raw GitHub origin; `/data/*` responses are `no-store`.
+- The release candidate validates the raw GitHub JSON with a bounded streaming reader
+  (8 KiB health / 256 KiB queue, at most 100 candidates), strict schema/source/URL checks
+  and an explicit public-field projection. Author, body, risk and scanner-internal timestamps
+  are dropped before UI state. Invalid/unavailable live data falls back only to a separately
+  labelled deployed snapshot.
+- Verification: `npm run verify` passed typecheck, 98 unit tests and production build (29
+  project pages, 32 sitemap URLs); lint passed; integration passed 7/7; full local Playwright
+  passed 18/18 at `http://127.0.0.1:4173`; `git diff --check` passed. The exact current
+  public assets were accepted by the sanitizer (13 queue candidates; scanner attempt
+  `2026-09-23T05:09:00.830Z`, failed, 0/3 feeds due to rate limits).
+- GitHub Actions history confirms the three daily schedules at 07:00, 13:00 and 19:00 UTC;
+- Release commit `1b7c0a3f88e77d8b087bd2cb07d2aa0411de28f8` is pushed to
+  `origin/codex/vitaharbor-integration-015`; `origin/main` was unchanged at `15b311f` before
+  release. The production deployment is `dpl_Cj1uUTeAnZq4DpyCfQj2t6FVJsyv`, READY at
+  `https://vitaharbor-gqs4zha5a-anonymusv1605-8308.vercel.app`, aliased to
+  `https://vitaharbor.vercel.app`.
+- Post-deploy acceptance: production Playwright 18/18; direct browser requests for both raw
+  GitHub scanner assets returned 200 on Home and Discovery; both pages labelled the source
+  `Live scan data` and accurately displayed `Latest scan failed`; 13 queue candidates; no
+  browser page errors. With raw GitHub deliberately blocked, both pages switched to the
+  labelled deployed snapshot and continued showing the honest failed status and 13 candidates.
+- Production security/UX checks: header/SEO/crawler audit passed (including raw GitHub in CSP
+  and `no-store` on `/data/*`); deeplinks returned 200 with matching title/canonical; mobile
+  audit passed at 375/390/412/768px with no horizontal overflow or small targets; contrast
+  passed 35/35.
+- The live attempt shown is still `2026-09-23T05:09:00.830Z`, failed with all three sources
+  rate-limited (0/3). This release fixes stale presentation; it does not claim Reddit returned
+  successful content. The workflow remains configured for 07:00, 13:00 and 19:00 UTC. At
+  07:11 UTC the public Actions API still listed the 05:08 push-triggered run as latest and no
+  07:00 scheduled event; delivery of that individual schedule is `UNKNOWN` (it may be delayed).
+  No manual scan was dispatched and the cadence was not changed.
+- Master-authorized release and post-deploy acceptance are complete. The prior primary, UX
+  contributor and master worktrees remain untouched. No subagents or additional workers were
+  used.
+- The prior primary, UX contributor and master worktrees remain untouched. No subagents or
+  additional workers were used.
+
+## Current worker milestone: VH-SCAN-RELEASE-019 and VH-LINKS-019
+
+- The isolated worker branch `codex/vitaharbor-integration-015` is based on `origin/main`
+  and release source `ed19710f972356688b4d6e49075a13eacc5ef02f` was fast-forwarded to
+  `origin/main` from `a191c773e9bcc577d053043ad9ec5f64ee95263a`. The dirty primary, UX
+  contributor and master worktrees were not touched. Production deployment is NO_GO pending
+  the failed GitHub Actions gate below.
+- The scanner workflow no longer writes `github_action.status=success` before publication. The
+  generated scanner JSON now records Action completion as `unknown`; the workflow commits and
+  pushes first, then verifies the published `main` SHA in the Action log. This avoids a false
+  success marker and a self-referential commit loop when `git push` fails. The old finalizer
+  script was removed.
+- Push-triggered GitHub Actions run `35886994823` (#14) failed in 43 seconds at “Verify unit
+  and integration tests”, before Reddit scan, backfill, feed rebuild or publish; those steps
+  were skipped. The failing health test expected local metadata (`provider=local`, `event/run_id/
+  sha=null`) but the GitHub runner correctly supplied `provider=github-actions`, `event=push`,
+  `run_id=35886994823` and release SHA `ed19710f972356688b4d6e49075a13eacc5ef02f`. This CI
+  failure is the explicit release stop condition; no retry, code fix or deployment was done.
+- The latest local scan attempt is `2026-09-23T15:47:43.956Z`: `partial`, 1/3 sources available
+  (`vitahacks` available, `VitaPiracy` and `PSVitaHomebrew` rate-limited), Action status
+  `unknown`. The public review queue has 11 sanitized items; internal provenance has 18 records
+  (13 active and 5 terminal). No curated ledger promotion occurred.
+- Before publication, live `origin/main` serves the older 13-item queue, including rejected
+  discussion `reddit-1wndxal`. The release candidate's queue has 11 items, includes restored WIP
+  candidates `reddit-1wn46c9`, `reddit-1wmax82` and `reddit-1wkf9m5`, excludes that discussion,
+  and leaves the 29-project curated ledger unchanged. No game-data archive links were found in
+  the curated TypeScript ledger or generated JSON/RSS feeds.
+- Queue reconciliation found that 5 records initially disappeared from the earlier 13-to-8
+  projection: three real WIP/review records were restored, `reddit-1wndxal` remains terminally
+  `REJECTED` as a false-positive discussion, and legacy `reddit-1wh0klj` remains internal and
+  withheld because its original body/evidence was not stored. Non-terminal records are now kept
+  internally even when the public classifier withholds them. Evidence is in
+  `docs/SCANNER_QUEUE_RECONCILIATION_2026-09-23.{json,md}`.
+- The report-only curated-link audit covers 52 references: 16 HTTP/API-checked `ok`, 36 direct
+  Reddit fetches `unverifiable` because Reddit returned HTTP 403, and 0 dead/redirect/wrong-target.
+  A separate authenticated Chrome review verified all 19 unique Reddit URLs. The Jedi `files`
+  and `data_files` posts expose direct game-data archives, but only the Reddit/GitHub provenance
+  remains curated; no data-file URL was adopted. Evidence is in
+  `docs/CURATED_LINK_BROWSER_REVIEW_2026-09-23.json` and the linked audit report.
+- Local verification on the exact worker tree: `npm run verify` passed typecheck, 108 unit tests
+  and a production build with 29 project pages and 32 sitemap URLs; lint passed; integration
+  passed 7/7; Playwright passed 18/18 with one worker against the exact built preview at
+  `http://127.0.0.1:4174`; `git diff --check` passed. The public curated feed and prerender each
+  contain 29 projects; the candidate queue has 11 items and restores all three requested WIP
+  IDs while excluding `reddit-1wndxal`; the curated ledger and generated feeds have no game-data
+  archive links.
+- Because run #14 stopped before scanning, it produced no source observations and published no
+  scanner result. The latest public health snapshot remains `2026-09-23T15:47:43.956Z`, partial
+  1/3 (`vitahacks` available; `VitaPiracy` and `PSVitaHomebrew` rate-limited), with Action
+  metadata still `local/unknown`; this is prior scan evidence, not an outcome from run #14.
+- Vercel production was not changed. Read-only `vercel inspect` confirms the alias still points
+  to READY deployment `dpl_Cj1uUTeAnZq4DpyCfQj2t6FVJsyv` at
+  `https://vitaharbor.vercel.app`. No live DOM acceptance was run for the new candidate; its
+  production UI state remains UNKNOWN. The existing production deployment is the prior baseline.
+
+## Completed assignment: VH-INTEGRATE-015
+
+- Worker implementation is isolated on branch `codex/vitaharbor-integration-015` at
+  `C:\Users\suloW\.codex\worktrees\vitaharbor-integration-015\VitaPort`, based on
+  `origin/main` `2e8cc90ced003671a3b42064fe82a4350ce32f67`. Implementation, local gates,
+  production deployment and live acceptance are complete; final post-deploy documentation
+  and handoff are being committed separately.
+- The primary checkout `C:\Users\suloW\Documents\ChatGPT\VitaPort` is on a separate
+  dirty `main` worktree at `96f1ffe60245dc697af908a0d88a11619a691ed2`. The UX contributor
+  checkout is `codex/vitaharbor-ux9` at `2e8cc90ced003671a3b42064fe82a4350ce32f67`; the
+  master checkout is detached at `b5d6536d948ae3ec678f3e5e60366fe0d7d5181f`. All three
+  contain independent pre-existing dirty work and are preserved without edits or cleanup.
+- Implementation commit: `8ba6e436c5a068ed2d6760fd20708f3ee3ad1b67` on the isolated
+  feature branch; scanner-status regression-test follow-up is `6d716fbc1c54c68785462be8e0dbf2ab09b7999d`.
+  The branch includes automatic scanner commit `0c776a9a2481a1b434e8657e8ce270d8a3ada26c`;
+  deployed runtime source is `9854ed75ff8a2f60cd684412f8b8f65afc3e361b`.
+- Master task `01a0bed8-0aae-73d2-bff1-bb0b6e7dfd00` remains the architecture/delegation
+  owner; worker task `01a0bc84-7462-7f92-a672-5856bed2ae0f` implements, tests and reports.
+  No native subagents or additional workers were used.
+- Local gates on this branch after scanner reconciliation: typecheck passed; unit tests 92/92;
+  integration tests 7/7; build prerendered 29 projects and 32 sitemap URLs; lint passed;
+  Playwright 18/18;
+  mobile audit passed 4/4 with no horizontal overflow or small targets; contrast passed
+  35/35; `git diff --check` passed.
+- Production deployment `dpl_FATqcqE9dHac5assD26HoVUiYCf9` reached READY at
+  `https://vitaharbor-fezbysjeb-anonymusv1605-8308.vercel.app`, aliased to
+  `https://vitaharbor.vercel.app`, from exact pushed runtime SHA `9854ed75ff8a2f60cd684412f8b8f65afc3e361b`.
+- Production acceptance: 18/18 E2E; header/SEO/crawler audit passed; project deeplinks
+  returned 200 with correct title/canonical; mobile 4/4 had no document overflow or small
+  targets; contrast passed 35/35. Live project feed and project sitemap each contain 29;
+  discovery contains 13 sanitized candidates. Scanner health correctly says `failed`
+  because all three Reddit sources were rate-limited; no new candidate was added.
+- `gh` (GitHub CLI) is unavailable in this environment. Git remote access is available;
+  `origin/main` was at runtime source `9854ed75ff8a2f60cd684412f8b8f65afc3e361b` at
+  deployment. Deployment evidence, project status, hash-verified handoff and ignore-rule
+  hardening were pushed in documentation-only commit `5f1f853`; runtime code is unchanged.
+- `npm audit --omit=dev --audit-level=moderate` found 0 production dependency
+  vulnerabilities. Full `npm audit` found 8 development-toolchain advisories (4 moderate,
+  4 high, through Vitest/Wrangler dependencies); no major toolchain upgrades were included
+  in this site integration.
+
+The sections below retain completed and historical state; where they conflict with the
+active assignment above, VH-SCAN-FRESH-017 is current.
+
+## Historical facts (2026-09-20; superseded by the active assignment block above)
 
 - Primary checkout: `main` at integration commit `e89adff` (full hash recorded in Git).
 - Primary worker task: `01a0bc84-7462-7f92-a672-5856bed2ae0f`.
@@ -14,7 +224,7 @@ Updated: 2026-09-20
   READY and aliased to `https://vitaharbor.vercel.app` after `VH-INCIDENT-010`
   containment.
 
-## Integration commit state
+## Prior integration commit state (2026-09-20)
 
 - The reviewed 80-path selection was committed locally on `main` as
   `e89adff` (`Integrate VitaHarbor ledger and incident controls`).
@@ -24,7 +234,7 @@ Updated: 2026-09-20
 - Post-commit bookkeeping, handoff verification and the clean-tree result are
   complete. No push, merge, reset, clean or stash occurred.
 
-## Completed evidence
+## Historical completed evidence
 
 - `VH-LINKS-003` evidence records its historical local audit. The earlier
   live-completeness conclusion is superseded as `NO_GO` by `VH-LINKS-005`.
@@ -51,8 +261,8 @@ Updated: 2026-09-20
 
 ## Open work
 
-- `VH-INTEGRATE-009` is the active assignment. The exact final checkout is
-  undergoing inventory, safety gates and local integration on `main`.
+- `VH-INTEGRATE-009` is historical. `VH-INTEGRATE-015` is the active assignment and
+  its implementation is isolated on the feature worktree listed above.
 - `VH-INCIDENT-010` is complete and production-verified; its implementation,
   evidence and handoff are part of the reviewed integration selection.
 - No push, merge, tag, GitHub workflow trigger or Vercel deployment is allowed

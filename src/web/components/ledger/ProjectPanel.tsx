@@ -6,7 +6,6 @@ import {
   prettyStage,
   formatDay,
   formatMonth,
-  relativeTime,
   deriveSetupGuide,
   deriveProjectType,
   PROJECT_TYPE_META,
@@ -66,9 +65,7 @@ export const ProjectPanel: React.FC<ProjectPanelProps> = ({
 
       {project.verification === "detected" && (
         <p className="mb-6 max-w-3xl rounded-xl border border-hairline bg-surface px-4 py-3 text-caption text-ink-medium">
-          <span className="font-medium text-ink">Unverified entry.</span> Promoted
-          automatically from a detected thread. There is no hardware report yet, so
-          playability and performance are deliberately left empty.
+          <span className="font-medium text-ink">Unverified community report.</span> VitaHarbor has not independently confirmed this entry. No hardware report is recorded, so playability and performance are left unconfirmed.
         </p>
       )}
 
@@ -233,10 +230,9 @@ export const ProjectPanel: React.FC<ProjectPanelProps> = ({
               </dd>
             </div>
             <div>
-              <dt className="text-micro font-medium uppercase text-ink-muted">Last activity</dt>
+              <dt className="text-micro font-medium uppercase text-ink-muted">Latest project activity</dt>
               <dd className="mt-1 text-body text-ink">
                 {formatDay(project.last_activity_at) || "—"}
-                <span className="text-ink-muted"> · {relativeTime(project.last_activity_at)}</span>
               </dd>
             </div>
           </dl>

@@ -195,11 +195,11 @@ ${projectItemsHtml}
         <div class="grid gap-6 sm:grid-cols-3 text-sm text-gray-600">
           <div>
             <h3 class="font-semibold text-gray-900 mb-1">Sourced</h3>
-            <p>Entries link to an original engineering thread when a project-specific source has been verified. Unverified candidates stay in the detection log.</p>
+            <p>Entries link to an original engineering thread when a project-specific source has been verified. Unverified community posts are shown separately from the project directory.</p>
           </div>
           <div>
             <h3 class="font-semibold text-gray-900 mb-1">Verified</h3>
-            <p>Evidence levels stay visible. Detected threads remain unverified until a source-backed record is reviewed.</p>
+            <p>Evidence levels stay visible. A community post alone does not confirm a project's status or performance.</p>
           </div>
           <div>
             <h3 class="font-semibold text-gray-900 mb-1">Non-infringing</h3>
@@ -236,8 +236,8 @@ const standalonePages = [
   },
   {
     path: "discovery",
-    title: "Vita port discovery queue - VitaHarbor",
-    description: "Public scanner detections awaiting source review before they enter the verified VitaHarbor ledger.",
+    title: "Community posts - VitaHarbor",
+    description: "Recent Reddit posts about possible Vita ports and updates. Posts are unverified leads, not confirmed project records.",
     url: "https://vitaharbor.vercel.app/discovery/",
     image: "https://vitaharbor.vercel.app/og.png"
   }

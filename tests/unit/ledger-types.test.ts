@@ -40,6 +40,6 @@ describe("ledger presentation taxonomy", () => {
 
   it("keeps unknown verification explicit", () => {
     expect(verificationMeta("not-recorded").label).toBe("Verification not recorded");
-    expect(verificationMeta("detected").label).toBe("Detected only");
+    expect(verificationMeta("detected").label).toBe("Unverified community report");
   });
 });

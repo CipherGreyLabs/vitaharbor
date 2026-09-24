@@ -120,7 +120,7 @@ document.items = contained.sort((left, right) =>
 
 fs.mkdirSync(path.dirname(QUARANTINE), { recursive: true });
 fs.writeFileSync(QUARANTINE, JSON.stringify(document, null, 2) + "\n", "utf8");
-const publicDoc = publicDocument(document.items, at, document.source?.replace(/ RSS$/, "") || "r/vitahacks + r/VitaPiracy + r/PSVitaHomebrew");
+const publicDoc = publicDocument(document.items);
 fs.mkdirSync(path.dirname(PUBLIC_OUT), { recursive: true });
 fs.writeFileSync(PUBLIC_OUT, JSON.stringify(publicDoc, null, 2) + "\n", "utf8");
 

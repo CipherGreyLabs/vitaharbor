@@ -3,12 +3,14 @@ import { useParams, Link } from "react-router-dom";
 import { StatusBadge } from "../components/ui/StatusBadge";
 import { StageHistoryVisualizer, type StageHistoryRecord } from "../components/projects/StageHistoryVisualizer";
 import { UpdateCard, type UpdateCardData } from "../components/updates/UpdateCard";
-import { formatRelativeTime, formatDate, deriveActivityLevel } from "@/shared/utils";
+import { formatDate, deriveActivityLevel } from "@/shared/utils";
 import { apiGet } from "../lib/api";
 import { useDocumentMeta } from "../lib/useDocumentMeta";
 import { readWatchlist, writeWatchlist } from "../lib/visitorState";
 import type { DevelopmentStage, ProjectLifecycle } from "@/shared/types";
+import { FALLBACK_PROJECTS } from "@/shared/constants/fallbackData";
 import { Bookmark, ChevronLeft } from "lucide-react";
+import { formatUtcDateTime } from "../components/ledger/types";
 
 interface ProjectDetailData {
   id: number;
@@ -56,8 +58,9 @@ export const ProjectDetailPage: React.FC = () => {
             // graceful fallback
           }
         }
-      } catch (e) {
-        console.error("Failed to load project detail", e);
+      } catch {
+        const fallback = FALLBACK_PROJECTS.find((item) => item.slug === slug);
+        setProject(fallback ? fallback as unknown as ProjectDetailData : null);
       } finally {
         setLoading(false);
       }
@@ -70,7 +73,7 @@ export const ProjectDetailPage: React.FC = () => {
       ? `${project.game_title} Vita port`
       : "Project record",
     description: project
-      ? `${project.game_title} on PlayStation Vita — stage, playability, performance and verified source history.`
+      ? `${project.game_title} on PlayStation Vita — development stage, hardware notes and source links.`
       : "Verified PlayStation Vita port record."
   });
 
@@ -162,7 +165,7 @@ export const ProjectDetailPage: React.FC = () => {
             </span>
           </div>
           <div>FIRST SEEN: <span className="text-[#a3acb5]">{formatDate(project.first_seen_at)}</span></div>
-          <div>LAST UPDATED: <span className="text-[#3ad2ff]">{formatRelativeTime(project.last_activity_at)}</span></div>
+          <div>LAST SOURCE DATE: <span className="text-[#3ad2ff]">{formatUtcDateTime(project.last_activity_at)}</span></div>
         </div>
       </div>
 

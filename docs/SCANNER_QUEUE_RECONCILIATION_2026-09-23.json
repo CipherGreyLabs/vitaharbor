@@ -1,0 +1,66 @@
+{
+  "schema_version": 1,
+  "compared_against_public_snapshot": "6659a91^:public/data/discovered.json",
+  "before_public_items": 13,
+  "after_public_items": 11,
+  "after_generated_at": "2026-09-23T15:47:43.956Z",
+  "summary": {
+    "initially_missing_after_classifier_change": 5,
+    "restored_after_review": 3,
+    "terminal_or_withheld": 2,
+    "active_public_items_now": 11
+  },
+  "items_initially_missing_from_the_13_item_snapshot": [
+    {
+      "id": "reddit-1wndxal",
+      "title": "We need to talk",
+      "source_url": "https://www.reddit.com/r/vitahacks/comments/1wndxal/we_need_to_talk/",
+      "previous_public_state": "QUARANTINED",
+      "current_internal_state": "REJECTED",
+      "current_public_status": "removed_by_terminal_review",
+      "reason": "Confirmed false-positive discussion with no project or development claim.",
+      "evidence": "data/quarantine.json state history records the append-only REJECTED transition by scanner-maintenance on 2026-09-23."
+    },
+    {
+      "id": "reddit-1wn46c9",
+      "title": "[WIP] BuckshotRoulettePortable - A C++ rewrite of Buckshot Roulette for the PSVITA Targeting 60fps",
+      "source_url": "https://www.reddit.com/r/vitahacks/comments/1wn46c9/wip_buckshotrouletteportable_a_c_rewrite_of/",
+      "previous_public_state": "QUARANTINED",
+      "current_internal_state": "QUARANTINED",
+      "current_public_status": "restored",
+      "reason": "The post contains concrete WIP, custom-engine and VitaGL evidence; a question about where to post was incorrectly treated as a request-only post.",
+      "evidence": "Classifier regression test now accepts it as project_update; current public projection contains the item."
+    },
+    {
+      "id": "reddit-1wmax82",
+      "title": "Guess It Is Happening",
+      "source_url": "https://www.reddit.com/r/VitaPiracy/comments/1wmax82/guess_it_is_happening/",
+      "previous_public_state": "VERIFIED_FOR_REVIEW",
+      "current_internal_state": "VERIFIED_FOR_REVIEW",
+      "current_public_status": "restored",
+      "reason": "The legacy source body is empty, so live classifier re-derivation had no project identity; a manual evidence bundle verifies the linked Resident Evil 4 Vita optimization demo.",
+      "evidence": "publicCandidate now preserves VERIFIED_FOR_REVIEW records with a manual evidence bundle; current public projection contains the item."
+    },
+    {
+      "id": "reddit-1wkf9m5",
+      "title": "SuperTuxKart W.I.P port for PlayStation Vita with Vulkan",
+      "source_url": "https://www.reddit.com/r/vitahacks/comments/1wkf9m5/supertuxkart_wip_port_for_playstation_vita_with/",
+      "previous_public_state": "QUARANTINED",
+      "current_internal_state": "QUARANTINED",
+      "current_public_status": "restored",
+      "reason": "The post contains concrete WIP, Vulkan, FPS and Vita evidence; a question marker in the body incorrectly forced the whole project into the question category.",
+      "evidence": "Classifier regression logic keeps project identity plus strong development evidence as project_update; current public projection contains the item."
+    },
+    {
+      "id": "reddit-1wh0klj",
+      "title": "Class of 09 Vita Port HAS ARRIVED!",
+      "source_url": "https://www.reddit.com/r/vitahacks/comments/1wh0klj/class_of_09_vita_port_has_arrived/",
+      "previous_public_state": "QUARANTINED",
+      "current_internal_state": "QUARANTINED",
+      "current_public_status": "withheld_pending_fresh_evidence",
+      "reason": "This migrated legacy record has no stored post body, repository or build evidence. Its title overlaps the curated Class of '09 project, but no crosspost identity was invented.",
+      "evidence": "data/quarantine.json retains the record and explicitly lists the missing raw body/evidence gaps; it is not deleted or promoted."
+    }
+  ],
+  "invariant": "No initially missing record was silently deleted. Three real development/review records were restored; one false positive is terminally rejected; one legacy record remains internal and withheld because its original evidence was not preserved."
+}

@@ -1,8 +1,9 @@
 import { describe, expect, it } from "vitest";
-import { readFileSync } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
 import path from "node:path";
 import { REDDIT_SOURCE_LABEL, REDDIT_SOURCES, REDDIT_SUBREDDITS, redditRssUrl, redditSearchRssUrl } from "../../scripts/reddit-sources.mjs";
-import { classify, classifyCandidateType, isTrackableCandidateType, parseEntries } from "../../scripts/reddit-classifier.mjs";
+import { classify, classifyCandidateType, isTrackableCandidateCategory, isTrackableCandidateType, parseEntries } from "../../scripts/reddit-classifier.mjs";
+import { shouldRetainInternalCandidate } from "../../scripts/reddit-provenance.mjs";
 
 describe("Reddit discovery scope", () => {
   it("keeps all three communities in one canonical scan scope", () => {
@@ -24,16 +25,54 @@ describe("Reddit discovery scope", () => {
   it("runs scanner CI when source configuration or classifier logic changes", () => {
     const workflow = readFileSync(path.resolve(import.meta.dirname, "../../.github/workflows/reddit-scanner.yml"), "utf8");
     const scanner = readFileSync(path.resolve(import.meta.dirname, "../../scripts/cron-reddit-scan.mjs"), "utf8");
+    const backfill = readFileSync(path.resolve(import.meta.dirname, "../../scripts/reddit-backfill.ts"), "utf8");
     expect(workflow).toContain('"scripts/reddit-sources.mjs"');
     expect(workflow).toContain('"scripts/reddit-classifier.mjs"');
     expect(workflow).toContain('"scripts/reddit-provenance.mjs"');
+    expect(workflow).not.toContain("finalize-scanner-health");
+    expect(workflow).toContain("id: publish");
+    expect(workflow).toContain("git push origin HEAD:main");
+    expect(workflow).toContain("git ls-remote origin refs/heads/main");
     expect(workflow).toContain('"scripts/reddit-backfill.ts"');
     expect(workflow).toContain("npm run reddit:backfill");
+    expect(workflow).toContain('cron: "17 7 * * *"');
+    expect(workflow).toContain('cron: "17 13 * * *"');
+    expect(workflow).toContain('cron: "17 19 * * *"');
+    expect(workflow).toContain("github.event.schedule == '17 7 * * *'");
+    for (const stepName of ["Scan Reddit for new port threads", "Rebuild public feeds", "Commit discovery results"]) {
+      const step = workflow.split(`- name: ${stepName}`)[1]?.split(/\n      - name:/)[0] || "";
+      expect(step).toContain("if: ${{ github.event_name == 'schedule' || github.event_name == 'workflow_dispatch' }}");
+    }
+    const backfillStep = workflow.split("- name: Backfill recent Reddit history")[1]?.split(/\n      - name:/)[0] || "";
+    expect(backfillStep).toContain("if: ${{ github.event_name == 'workflow_dispatch' || (github.event_name == 'schedule' && github.event.schedule == '17 7 * * *') }}");
+    const publishVerification = workflow.split("- name: Verify published scanner commit")[1]?.split(/\n      - name:/)[0] || "";
+    expect(publishVerification).toContain("if: ${{ (github.event_name == 'schedule' || github.event_name == 'workflow_dispatch') && steps.publish.outcome == 'success' }}");
+    expect(backfill).toContain("fetchRedditFeed(url, { userAgent: USER_AGENT })");
+    expect(backfill.indexOf("if (successfulFeeds === 0)")).toBeGreaterThan(-1);
+    const noFeedExit = backfill.indexOf("if (successfulFeeds === 0)");
+    expect([...backfill.matchAll(/fs\.writeFileSync/g)].every((match) => match.index > noFeedExit)).toBe(true);
     expect(scanner).toContain("TERMINAL_STATES.includes(item.state)");
     expect(scanner).toContain("isTrackableCandidateType(candidateType)");
     expect(scanner).toContain("activeItems");
     expect(scanner).toContain("terminalItems");
     expect(scanner).toContain(".slice(0, MAX_ITEMS)");
+  });
+
+  it("uses GitHub Actions as the only scheduled scanner", () => {
+    const root = path.resolve(import.meta.dirname, "../..");
+    const vercel = JSON.parse(readFileSync(path.join(root, "vercel.json"), "utf8"));
+    expect(vercel.crons).toBeUndefined();
+    expect(existsSync(path.join(root, "api/cron-scan.ts"))).toBe(false);
+    expect(existsSync(path.join(root, "tests/unit/cron-scan-route.test.ts"))).toBe(false);
+  });
+
+  it("retains non-terminal provenance internally while excluding curated leads", () => {
+    const record = { state: "QUARANTINED", source: { canonical_url: "https://www.reddit.com/r/vitahacks/comments/legacy01/legacy/" } };
+    const rejected = { state: "REJECTED", source: { canonical_url: "https://www.reddit.com/r/vitahacks/comments/rejected01/rejected/" } };
+    const known = new Set(["/r/vitahacks/comments/curated01/curated"]);
+    expect(shouldRetainInternalCandidate(record, known)).toBe(true);
+    expect(shouldRetainInternalCandidate(rejected, known)).toBe(true);
+    expect(shouldRetainInternalCandidate({ ...record, source: { canonical_url: "https://www.reddit.com/r/vitahacks/comments/curated01/curated/" } }, known)).toBe(false);
   });
 });
 
@@ -77,6 +116,19 @@ describe("Reddit candidate classifier", () => {
     });
     expect(worldAtWar.accept).toBe(true);
     expect(superTuxKart.accept).toBe(true);
+    expect(testDrive.category).toBe("new_project");
+    expect(rr2.category).toBe("project_update");
+    expect(isTrackableCandidateCategory(forceEngine.category)).toBe(true);
+  });
+
+  it("keeps concrete WIP posts when the author also asks for posting advice", () => {
+    const result = classify({
+      title: "[WIP] BuckshotRoulettePortable - A C++ rewrite of Buckshot Roulette for the PSVITA Targeting 60fps",
+      body: "I'm not sure where to post this. I am going with a C++ rewrite with a custom engine. Using VitaGL and trying to minimize the Godot coroutines."
+    });
+    expect(result.accept).toBe(true);
+    expect(result.question).toBe(false);
+    expect(result.category).toBe("project_update");
   });
 
   it("accepts the Halo CE recompilation wording that the original scanner missed", () => {
@@ -139,6 +191,26 @@ describe("Reddit candidate classifier", () => {
     });
     expect(result.accept).toBe(false);
     expect(result.reason).toContain("question");
+  });
+
+  it("classifies discussion and project identity separately from loose port terms", () => {
+    const discussion = classify({
+      title: "We need to talk",
+      body: "There has to be a way to eliminate vibecoders that release slop ports. These ports should have never been released."
+    });
+    const wip = classify({
+      title: "OpenMoHAA on PS Vita [WIP]",
+      body: "Native build boots in game on real hardware."
+    });
+    expect(discussion.category).toBe("discussion");
+    expect(discussion.accept).toBe(false);
+    expect(wip.category).toBe("project_update");
+    expect(wip.accept).toBe(true);
+  });
+
+  it("labels requests and unrelated utilities outside the project queue", () => {
+    expect(classify({ title: "Can someone port this?", body: "I want this game on Vita." }).category).toBe("question");
+    expect(classify({ title: "[Release] Vita controller plugin", body: "Input support for Adrenaline." }).category).toBe("out_of_scope");
   });
 
   it("rejects promotional spam even when it mentions the Vita", () => {

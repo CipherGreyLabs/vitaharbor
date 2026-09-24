@@ -115,11 +115,11 @@ const nextQuarantine = {
 fs.writeFileSync(quarantinePath, JSON.stringify(nextQuarantine, null, 2) + "\n", "utf8");
 fs.writeFileSync(
   publicPath,
-  JSON.stringify(publicDocument(items, reconciledAt, quarantine.source.replace(/ RSS$/, "")), null, 2) + "\n",
+  JSON.stringify(publicDocument(items), null, 2) + "\n",
   "utf8"
 );
 if (auditEvents.length > 0) {
   fs.appendFileSync(auditPath, auditEvents.map((event) => JSON.stringify(event)).join("\n") + "\n", "utf8");
 }
 
-console.log(JSON.stringify({ added: added.map((record) => record.id), audit_events: auditEvents.length, internal_items: items.length, public_items: publicDocument(items, reconciledAt, "").items.length }));
+console.log(JSON.stringify({ added: added.map((record) => record.id), audit_events: auditEvents.length, internal_items: items.length, public_items: publicDocument(items).items.length }));

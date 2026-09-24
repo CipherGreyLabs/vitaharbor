@@ -50,13 +50,11 @@ function writeDocument(doc) {
   fs.writeFileSync(QUARANTINE, JSON.stringify(doc, null, 2) + "\n", "utf8");
 }
 
-function writePublicProjection(doc, generatedAt) {
-  const sourceLabel = String(doc.source || "r/vitahacks + r/VitaPiracy + r/PSVitaHomebrew RSS")
-    .replace(/\s+RSS$/, "");
+function writePublicProjection(doc) {
   fs.mkdirSync(path.dirname(PUBLIC_OUT), { recursive: true });
   fs.writeFileSync(
     PUBLIC_OUT,
-    JSON.stringify(publicDocument(doc.items, generatedAt, sourceLabel), null, 2) + "\n",
+    JSON.stringify(publicDocument(doc.items), null, 2) + "\n",
     "utf8"
   );
 }
@@ -230,7 +228,7 @@ function commitReviewState(doc, generatedAt, auditEvent) {
   const snapshots = snapshotFiles([QUARANTINE, PUBLIC_OUT, AUDIT]);
   try {
     writeDocument(doc);
-    writePublicProjection(doc, generatedAt);
+    writePublicProjection(doc);
     appendAudit(auditEvent);
   } catch (error) {
     restoreFiles(snapshots);
@@ -384,7 +382,7 @@ function commitPromotion(doc, promoted, generatedAt, auditEvent) {
   try {
     fs.writeFileSync(LEDGER, promoted.source, "utf8");
     writeDocument(doc);
-    writePublicProjection(doc, generatedAt);
+    writePublicProjection(doc);
     appendAudit(auditEvent);
   } catch (error) {
     restoreFiles(snapshots);

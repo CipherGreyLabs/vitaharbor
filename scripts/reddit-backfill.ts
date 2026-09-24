@@ -6,6 +6,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { createHash } from "node:crypto";
 import { REDDIT_SOURCE_LABEL, REDDIT_SUBREDDITS, redditSearchRssUrl } from "./reddit-sources.mjs";
+import { fetchRedditFeed } from "./reddit-fetch.mjs";
 import { classify, classifyCandidateType, isTrackableCandidateType, keyOf, parseEntries } from "./reddit-classifier.mjs";
 import type { RedditEntry } from "./reddit-classifier.mjs";
 import {
@@ -79,15 +80,14 @@ function previous(): ProvenanceRecord[] {
 
 async function fetchSearchFeed(subreddit: string, timeRange: string): Promise<{ ok: boolean; entries: RedditEntry[] }> {
   const url = redditSearchRssUrl(subreddit, SEARCH_QUERY, timeRange);
-  for (let attempt = 1; attempt <= 2; attempt++) {
-    try {
-      const res = await fetch(url, { headers: { "User-Agent": USER_AGENT } });
-      if (res.ok) return { ok: true, entries: parseEntries(await res.text()) };
-      console.warn("r/" + subreddit + " backfill returned HTTP " + res.status + (attempt === 1 ? ", retrying" : ""));
-    } catch (error) {
-      console.warn("r/" + subreddit + " backfill fetch failed:", error instanceof Error ? error.message : String(error));
-    }
-    await new Promise((resolve) => setTimeout(resolve, attempt * 1800));
+  const result = await fetchRedditFeed(url, { userAgent: USER_AGENT });
+  if (result.status === "available") {
+    return { ok: true, entries: parseEntries(await result.response.text()) };
+  }
+  if (result.status === "rate_limited") {
+    console.warn("r/" + subreddit + " backfill received HTTP 429; bounded Retry-After hint: " + (result.retryAfterSeconds ?? "unavailable") + " seconds; no immediate retry");
+  } else {
+    console.warn("r/" + subreddit + " backfill unavailable" + (result.httpStatus ? " (HTTP " + result.httpStatus + ")" : ""));
   }
   return { ok: false, entries: [] };
 }

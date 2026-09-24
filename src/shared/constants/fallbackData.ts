@@ -434,7 +434,7 @@ export const FALLBACK_PROJECTS: any[] = [
     display_name: "Renegade Vita - Demo Release",
     current_stage: "announced",
     lifecycle: "active",
-    summary: "Detected by the scanner on r/vitahacks. Awaiting independent verification on hardware.",
+    summary: "A Reddit post announced a Renegade Vita demo. VitaHarbor has not independently tested it on hardware.",
     playability_notes: null,
     performance_notes: null,
     first_seen_at: new Date('2026-09-15T03:40:12.000Z'),

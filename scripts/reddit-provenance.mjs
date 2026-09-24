@@ -1,6 +1,7 @@
 // Provenance and quarantine boundary for every Reddit discovery.
 // This module is intentionally free of filesystem and Node-only imports so the
 // read-only Vercel scan can use the same validation rules as the local scanner.
+import { CANDIDATE_CATEGORIES, classify, classifyCandidateCategory, classifyCandidateType, isTrackableCandidateCategory, keyOf } from "./reddit-classifier.mjs";
 
 export const PROVENANCE_SCHEMA_VERSION = 2;
 
@@ -14,6 +15,14 @@ export const CANDIDATE_STATES = Object.freeze([
 ]);
 
 export const TERMINAL_STATES = Object.freeze(["PROMOTED", "REJECTED", "BLOCKED_UNVERIFIED"]);
+
+export function shouldRetainInternalCandidate(item, knownUrls) {
+  const key = keyOf(item?.source?.canonical_url || item?.url);
+  if (!key) return false;
+  if (TERMINAL_STATES.includes(item?.state)) return true;
+  if (knownUrls.has(key)) return false;
+  return true;
+}
 
 export const MAX_FIELD_LENGTHS = Object.freeze({
   title: 300,
@@ -449,6 +458,7 @@ export function assessCandidate(entry, options = {}) {
 
   const safeEntry = { ...entry, title: title.value, body: body.value, author: author.value };
   const classification = options.classification || { accept: false, confidence: "low", reason: "not classified" };
+  const derivedClassification = classify(safeEntry);
   const risks = riskSignals(safeEntry, classification, urlInfo);
   const poison = risks.includes("explicit_fake_or_troll");
   const screenshotClaim = /screenshot|image|photo/i.test(title.value + " " + body.value) &&
@@ -482,6 +492,7 @@ export function assessCandidate(entry, options = {}) {
       confidence: String(classification.confidence || "low"),
       reason: cleanText(classification.reason || ""),
       candidate_type: String(options.candidateType || "port"),
+      category: CANDIDATE_CATEGORIES.includes(classification.category) ? classification.category : (derivedClassification.category || "out_of_scope"),
       question: classification.question === true,
       spam: classification.spam === true
     },
@@ -555,6 +566,11 @@ export function upgradeProvenanceRecord(record) {
   const provenance = record?.provenance || {};
   const duplicate = provenance.duplicate_relation || {};
   const classificationReason = String(record?.classification?.reason || "");
+  const derivedClassification = classify(record?.source || {});
+  const derivedCategory = classifyCandidateCategory(record?.source || {}, {
+    question: record?.classification?.question === true,
+    technicalType: classifyCandidateType(record?.source || {})
+  });
   const question = record?.classification?.question === true ||
     /question title|qHits=[1-9]/i.test(classificationReason);
   const riskSignals = uniqueStrings([
@@ -565,6 +581,9 @@ export function upgradeProvenanceRecord(record) {
     ...record,
     classification: {
       ...(record?.classification || {}),
+      category: CANDIDATE_CATEGORIES.includes(record?.classification?.category)
+        ? record.classification.category
+        : (CANDIDATE_CATEGORIES.includes(derivedClassification.category) ? derivedClassification.category : derivedCategory),
       question,
       spam: record?.classification?.spam === true
     },
@@ -650,16 +669,31 @@ export function publicCandidate(record) {
   if (record?.incident?.public_containment === "removed") return null;
   if (Array.isArray(record?.risk_signals) && record.risk_signals.includes("crosspost_duplicate")) return null;
   const withheld = Array.isArray(record.risk_signals) && record.risk_signals.includes("explicit_fake_or_troll");
+  if (withheld) return null;
+  const storedCategory = record?.classification?.category;
+  const classifiedCategory = classify(record?.source || {}).category;
+  const hasManualVerification = state === "VERIFIED_FOR_REVIEW" && Boolean(
+    record?.review?.evidence_bundle ||
+    (Array.isArray(record?.provenance?.vita_evidence) && record.provenance.vita_evidence.length > 0)
+  );
+  const derivedCategory = isTrackableCandidateCategory(classifiedCategory)
+    ? classifiedCategory
+    : isTrackableCandidateCategory(storedCategory)
+      ? storedCategory
+      : hasManualVerification
+        ? "project_update"
+        : classifiedCategory || "out_of_scope";
+  if (!isTrackableCandidateCategory(derivedCategory)) return null;
+  const title = cleanText(record?.source?.title || "");
+  const source = canonicalizeRedditUrl(record?.source?.canonical_url);
+  if (!title || !source || source.subreddit.toLowerCase() !== String(record?.source?.subreddit || "").toLowerCase()) return null;
+  const publishedAt = record?.source?.published_at;
   return {
-    id: record.id,
-    state,
-    title: withheld ? "Source candidate withheld pending manual review" : record.source?.title || "Source candidate",
-    url: withheld ? null : record.source?.canonical_url || null,
-    subreddit: withheld ? null : record.source?.subreddit || null,
-    published_at: record.source?.published_at || null,
-    detected_at: record.state_history?.[0]?.at || null,
-    candidate_type: withheld ? "unclassified" : record.classification?.candidate_type || "port",
-    public_visibility: withheld ? "withheld" : "review_queue"
+    title,
+    url: source.url,
+    subreddit: source.subreddit,
+    published_at: typeof publishedAt === "string" && Number.isFinite(Date.parse(publishedAt)) ? new Date(publishedAt).toISOString() : null,
+    verification: "unverified"
   };
 }
 
@@ -727,12 +761,9 @@ export function markCrosspostDuplicates(records, options = {}) {
   return output;
 }
 
-export function publicDocument(records, generatedAt, sourceLabel) {
+export function publicDocument(records) {
   return {
-    schema_version: PROVENANCE_SCHEMA_VERSION,
-    generated_at: generatedAt,
-    source: sourceLabel + " RSS",
-    note: "Detected sources are quarantined and are not part of the curated ledger. No public item is a promotion or endorsement.",
+    schema_version: 1,
     items: records.map(publicCandidate).filter(Boolean)
   };
 }

@@ -15,12 +15,12 @@ const METHOD_ITEMS: MethodItem[] = [
   {
     Icon: Link2,
     title: "Sourced",
-    body: "Entries link to an original engineering thread when a project-specific source has been verified. Unverified candidates stay in the detection log."
+    body: "Entries link to an original engineering thread when a project-specific source has been verified. Unconfirmed community posts are labelled as unverified and kept separate from the directory."
   },
   {
     Icon: ShieldCheck,
     title: "Verified",
-    body: "Evidence levels stay visible. Detected threads remain unverified until a source-backed record is reviewed."
+    body: "Evidence levels stay visible. Community reports are not presented as confirmed projects unless the available sources support that claim."
   },
   {
     Icon: Scale,
