@@ -2,7 +2,19 @@
 
 Updated: 2026-09-24
 
-## Current bounded worker assignment: VH-SCANNER-FRESHNESS-022 (2026-09-24)
+## Current state: VH-SCANNER-FRESHNESS-022 production release (2026-09-24)
+
+- The reviewed implementation was fast-forwarded to `main` at `0e03addecb81258cf706be11425b23fad2cfaa50`, with no force push. GitHub Actions push run `35938345145` for that exact SHA succeeded; unit/integration verification passed and scan, backfill, feed rebuild, commit/publish, and publication-check steps were all `skipped`. No Reddit fetch or scanner data commit occurred.
+- Production deployment `dpl_EEFGNckzUDjxn83YnFtpxivX2GUf` is `READY` and aliases `https://vitaharbor.vercel.app`. It was deployed from the clean local checkout at `0e03addecb81258cf706be11425b23fad2cfaa50`, matching `origin/main` at deployment time. Vercel's deployment inspection reports `gitSource: null`; source identity is evidenced by the exact pre-deploy local/remote SHA, not provider Git metadata.
+- Live acceptance: `/api/projects?limit=1000` returned 29 projects; `/data/discovered.json` returned 11 leads, all with `verification: unverified`; `/api/cron-scan` returned HTTP 404. Browser checks of Home, Community posts and Updates showed no scanner/run/failure status. Production Playwright passed 20/20 with two workers; the isolated default WebGL test passed 1/1. An initial 8-worker production run had 19/20 because the default WebGL canvas was absent in that parallel run; all tests passed on the 2-worker rerun. Other 3D, screenshot, mobile and `Show on Vita` checks passed.
+- The configured schedule is 07:17, 13:17 and 19:17 UTC. The post-push test event intentionally did not scan. No post-change scheduled RSS attempt has yet been observed, so Reddit availability/recovery and actual schedule punctuality remain `UNKNOWN`; GitHub may still delay scheduled workflows.
+- Runtime changes are implementation commit `90a35895df1c8b4b8fcdfa6a1398f4dde34bc8ba`; traceability commit `0e03addecb81258cf706be11425b23fad2cfaa50` is documentation/handoff only. No curated records or public discovery data were edited. `npm ci` reported 8 dependency audit advisories (4 moderate, 4 high); manifests/lockfile were unchanged and no audit remediation was attempted.
+- Vercel CLI created a gitignored `.env.local` during project linking. Its contents were not read or committed; local deletion was blocked by the execution policy, so it remains in this worktree for user cleanup. The `.vercel` project link also remains ignored. Tracked release and documentation changes are committed.
+- Updated hash-protected `HANDOFF.md` contains 24 source hashes; `NEW-HANDOFF.ps1 -Verify` returned `HANDOFF GO` for all 24.
+
+## Completed bounded worker assignment: VH-SCANNER-FRESHNESS-022 (pre-release snapshot, 2026-09-24)
+
+The following records the candidate state before its authorized production release below.
 
 - The master delegated scanner reliability work after the latest read-only evidence showed scheduled Actions runs starting hours after their cron slots and the most recent scanner attempt (2026-09-23T22:06:44Z) failing 0/3 on HTTP 429 from all three RSS sources. No fresh post-change scan has been observed; source access remains unverified.
 - Implementation commit `90a35895df1c8b4b8fcdfa6a1398f4dde34bc8ba` is on isolated branch `codex/vh-scanner-reliability-022`, directly based on `origin/main` `d43070d88a33a8e2d781417c2e5ee1cefe162729`. Schedules now use 07:17, 13:17 and 19:17 UTC; push events run tests only, and scan/backfill/feed publication steps are restricted to schedule/manual dispatch. Backfill runs on the 07:17 slot or manual dispatch.
@@ -11,7 +23,7 @@ Updated: 2026-09-24
 - Exact candidate verification: `npm run verify` passed typecheck, 116/116 unit tests and production build (29 project pages, 32 sitemap URLs); lint passed; integration 7/7; local-preview Playwright 20/20 at `http://127.0.0.1:4176`; workflow YAML and `vercel.json` parsed successfully. No live Reddit request/scan, workflow dispatch, push or deployment was performed. Production remains on the existing deployment until master review and release authorization.
 - `npm ci` reported 8 dependency audit advisories (4 moderate, 4 high); package manifests/lockfile were not changed and no audit remediation was attempted in this scanner-scoped assignment.
 
-## Current bounded worker assignment: VH-PROJECT-ACTIVITY-LABEL-021 (2026-09-24)
+## Completed bounded worker assignment: VH-PROJECT-ACTIVITY-LABEL-021 (pre-scanner-release record, 2026-09-24)
 
 - The master authorized a visitor-copy fix after a read-only production diagnosis. The fresh live Home, Community posts, and Updates views contain no “2 days ago” or scan-status text. Opening a Home project row did show `Last activity · 3d ago`; this is the project's source-backed `last_activity_at`, not a VitaHarbor scan timestamp. The live project API's newest activity record was Test Drive at `2026-09-20T19:50:09.288Z`.
 - Code commit `1192b8e1b2c7b2975d3959a79eba2c58c9b9317b` changes the detail label to `Latest project activity`, keeps the absolute source date and removes the relative-age suffix. A Home deep-link regression assertion verifies the opened Test Drive panel has `20 Sept 2026` and no `Nd ago` label.

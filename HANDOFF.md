@@ -1,23 +1,25 @@
-# Handoff - VH-SCANNER-FRESHNESS-022 worker to master
+# Handoff - VH-SCANNER-FRESHNESS-022 production handoff to master
 
-- Gegenereerd: 2026-09-24T00:21:40Z
+- Gegenereerd: 2026-09-24T00:42:16Z
 - Actor: codex
 - Model: gpt-5
 - ProjectRoot: C:\Users\suloW\.codex\worktrees\vh-scanner-reliability-022\VitaPort
-- Bronnen: 22
+- Bronnen: 24
 
 ## Bronintegriteit
 
 | Bestand | Bytes | SHA-256 |
 |---|---|---|
 | AGENTS.md | 6555 | 22C948A1AB4CC94DD04174661AC6F93A7224C1579D1B668A9EA63C9B13416351 |
-| PROJECT_STATE.md | 38039 | BFCE2385EACD7CD7BB6199921790D2872E66F7FE45BBC8E83D65A164ABC75B16 |
-| AGENT_TEAM.json | 4211 | DCA03537E811DFB6C18B83B0DC13491C453F8288C9AC750CA003C866A6AB8E3C |
-| EVIDENCE.jsonl | 55012 | D6B2802C2EBC567F33AFA73BEE98B7E556BE8EB7ACC372FB9148A35E4672BCFB |
-| docs\WORKLOG.md | 103630 | F29C899394FB21DC2ECDD96282506793B6F8D288303103D529AEAA157F085AD7 |
+| PROJECT_STATE.md | 40754 | E97643039F8C0D4C611E73AEAEF1D765AAA8A095C3389927459D4AC3978906DA |
+| AGENT_TEAM.json | 4552 | 6F98BB7AC1B6308974CA43085514A66B7528ABD7A2B2A132BF0D615B6EE404F7 |
+| EVIDENCE.jsonl | 56234 | 929886FB0B4859A60B0A4FA8D114962DE8ADE237AFBA17341CA8B860CC9BE825 |
+| docs\WORKLOG.md | 106470 | 20136613C244EFE5A8EEDB41B5F86E524F5FF4EE11C80B4C1B5B47D8818B5C85 |
 | docs\AUTOMATION.md | 3524 | 96113306BDA360A43F4AB2CC9EC775AA6658CB7EF023B614D740E813695C5ABF |
 | .github\workflows\reddit-scanner.yml | 3492 | B618CF87500E7F26F152C2CE5FB058CB24F1716F05D8C5A0883FCDB365DF11C7 |
 | vercel.json | 1995 | B567FB1ECECB1D5B0B100A05BC3F134896D7794BDDA2AABF4B9E37B557E0F723 |
+| api\index.ts | 113 | CB81E9A1B3D68C8B38C89C9208660487B5D54AF095DB9740DD183E150B2E26F9 |
+| src\worker\index.ts | 3029 | D5FFBDE9AEA934C6185C200AC6CD1A334751E217629BCAE11E5DDA44B2315D59 |
 | scripts\cron-reddit-scan.mjs | 7673 | 9C64B9448AB952ECD43242CA8068BB51D6FC4F5925537D7F5EACF2D4DE0D7EA9 |
 | scripts\reddit-backfill.ts | 7709 | 865C0A5A435AA2781575E8F856A30733B3D1FDC84F2D6C8866517EFD56715E39 |
 | scripts\reddit-fetch.mjs | 2086 | EA6308D189E526621C6B7286C92307BF57A0C3559750C0679ADE0647FA53C49C |
@@ -35,7 +37,7 @@
 
 ## Samenvatting
 
-Master delegation VH-SCANNER-FRESHNESS-022 is implemented on local branch codex/vh-scanner-reliability-022 at code commit 90a35895df1c8b4b8fcdfa6a1398f4dde34bc8ba, based on origin/main d43070d88a33a8e2d781417c2e5ee1cefe162729. The GitHub scan slots are 07:17, 13:17 and 19:17 UTC; push events run tests only; only schedule/manual dispatch scans and publishes; historical backfill runs on 07:17 or manual dispatch. Shared fetch logic performs no immediate retry for 429, parses numeric/HTTP-date Retry-After with a six-hour cap, and retries network/408/5xx at most once after 1.2 seconds. Removed the unused Vercel cron route. Verify: npm run verify (typecheck, 116 unit tests, build of 29 project pages and 32 sitemap URLs), lint, integration 7/7, local preview Playwright 20/20, focused scanner tests 27/27, YAML/JSON parse. No scan, dispatch, push, or deployment occurred. Latest measured live scanner attempt remains 0/3 on 2026-09-23T22:06:44Z from HTTP 429; post-change source availability is UNKNOWN and GitHub schedule punctuality is not guaranteed. npm ci reported 8 audit advisories (4 moderate, 4 high), with no dependency edits or remediation.
+Approved implementation commit 90a35895df1c8b4b8fcdfa6a1398f4dde34bc8ba and traceability commit 0e03addecb81258cf706be11425b23fad2cfaa50 were fast-forwarded to main with no force push. Push run 35938345145 succeeded for exact 0e03addecb81258cf706be11425b23fad2cfaa50; Actions API confirms only tests ran and scanner, backfill, feed rebuild, commit/publish and publication verification were skipped. No Reddit fetch or data commit occurred. Vercel deployment dpl_EEFGNckzUDjxn83YnFtpxivX2GUf is READY at https://vitaharbor.vercel.app. It was launched from clean tracked checkout 0e03addecb81258cf706be11425b23fad2cfaa50 matching origin/main; provider gitSource metadata is null. Live acceptance: 29 project API records; 11 community leads, all unverified; removed /api/cron-scan returns 404; Home, Community posts and Updates have no operational scanner status; production Playwright passed 20/20 with two workers; isolated default WebGL passed 1/1. Initial 8-worker live run was 19/20 due one absent canvas; full 2-worker rerun passed. Schedule config is 07:17/13:17/19:17 UTC. No post-change scheduled RSS attempt exists, so source recovery and punctuality remain UNKNOWN; no manual scan/dispatch. Handoff contains 24 sources and integrity verifies GO. Vercel CLI created ignored .env.local for OIDC auth; contents not read/committed and deletion blocked by policy, so user cleanup remains. npm ci reported 8 advisories (4 moderate, 4 high); dependencies unchanged.
 
 ## Verificatie
 
