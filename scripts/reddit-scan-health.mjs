@@ -1,4 +1,5 @@
-export const SCANNER_HEALTH_SCHEMA_VERSION = 2;
+export const SCANNER_HEALTH_SCHEMA_VERSION = 3;
+const MAX_RETRY_AFTER_SECONDS = 6 * 60 * 60;
 
 const VALID_STATUSES = new Set(["available", "rate_limited", "unavailable"]);
 
@@ -54,7 +55,12 @@ export function buildScannerHealth(
       subreddit,
       status,
       last_successful_scan_at: status === "available" ? attemptedAt : old.lastSuccessful,
-      consecutive_failures: status === "available" ? 0 : old.consecutiveFailures + 1
+      consecutive_failures: status === "available" ? 0 : old.consecutiveFailures + 1,
+      retry_after_seconds: status === "rate_limited"
+        && Number.isFinite(result?.retryAfterSeconds)
+        && result.retryAfterSeconds >= 0
+        ? Math.min(MAX_RETRY_AFTER_SECONDS, Math.ceil(result.retryAfterSeconds))
+        : null
     };
   });
   const successfulSources = sources.filter((source) => source.status === "available").length;

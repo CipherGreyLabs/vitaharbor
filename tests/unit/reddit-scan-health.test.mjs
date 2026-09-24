@@ -12,7 +12,7 @@ describe("scanner health summary", () => {
       null,
       {}
     )).toEqual({
-      schema_version: 2,
+      schema_version: 3,
       attempted_at: "2026-09-23T00:00:00.000Z",
       state: "complete",
       successful_sources: 3,
@@ -25,7 +25,7 @@ describe("scanner health summary", () => {
         successful_sources: 3,
         source_statuses: { vitahacks: "available", VitaPiracy: "available", PSVitaHomebrew: "available" }
       }],
-      sources: sources.map((subreddit) => ({ subreddit, status: "available", last_successful_scan_at: "2026-09-23T00:00:00.000Z", consecutive_failures: 0 }))
+      sources: sources.map((subreddit) => ({ subreddit, status: "available", last_successful_scan_at: "2026-09-23T00:00:00.000Z", consecutive_failures: 0, retry_after_seconds: null }))
     });
   });
 
@@ -39,6 +39,16 @@ describe("scanner health summary", () => {
     expect(health.successful_sources).toBe(2);
     expect(health.sources[1].status).toBe("rate_limited");
     expect(JSON.stringify(health)).not.toContain("private transport detail");
+  });
+
+  it("records only a bounded internal Retry-After hint for rate-limited sources", () => {
+    const health = buildScannerHealth(sources, [
+      { subreddit: "VitaPiracy", status: "rate_limited", retryAfterSeconds: 999999 }
+    ]);
+
+    expect(health.sources[1].retry_after_seconds).toBe(21600);
+    expect(health.sources[0].retry_after_seconds).toBeNull();
+    expect(health.sources[2].retry_after_seconds).toBeNull();
   });
 
   it("reports a fully failed scan while retaining all source statuses", () => {

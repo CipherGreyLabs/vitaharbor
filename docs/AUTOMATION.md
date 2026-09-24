@@ -1,9 +1,12 @@
 # Automation
 
-Scheduled scanning runs completely free via **GitHub Actions**. It triggers three times a day
-at 07:00, 13:00 and 19:00 UTC, fetches r/vitahacks, r/VitaPiracy and r/PSVitaHomebrew,
-and commits quarantined candidates back to the repo
-without using Codex tokens.
+Scheduled scanning runs via **GitHub Actions** at 07:17, 13:17 and 19:17 UTC. The minute is
+offset from the top of the hour because GitHub can delay scheduled workflows during busy
+hour-boundary periods; the offset is not a punctuality guarantee. The scanner fetches
+r/vitahacks, r/VitaPiracy and r/PSVitaHomebrew and commits quarantined candidates back to the
+repo without using Codex tokens. Push-triggered workflow runs are verification-only; scans,
+backfills, feed rebuilds and data publication run only for scheduled or manually dispatched
+events.
 
 The visitor-facing site reads only the sanitized `public/data/discovered.json` community-post
 projection from the public `main` branch, with a 15-minute refresh while the page remains open.
@@ -12,10 +15,9 @@ It contains only a post title, Reddit link, community, publication date and an e
 internal `data/scanner-health.json` file remains available to the scanner and tests, but is not
 copied to the static site.
 
-The repository remote is configured and the workflow is present in
-`.github/workflows/reddit-scanner.yml`. GitHub Actions is the current scheduled scan engine;
-the Vercel `/api/cron-scan` route remains a fallback for dashboard-visible runs. This document
-does not claim a current Vercel Git-integration state without dashboard evidence.
+The repository workflow is `.github/workflows/reddit-scanner.yml`. GitHub Actions is the only
+scheduled scan engine. The old Vercel `/api/cron-scan` route and its daily cron were removed:
+they read feeds but had no publication consumer. Unrelated Vercel API routes remain unchanged.
 
 ## 1. The scan (already working)
 
@@ -38,11 +40,14 @@ line in `data/provenance-audit.jsonl`. The workflow never writes `fallbackData.t
 
 ## 2. Current workflow
 
-The scheduled workflow installs dependencies, runs the tests, scans, rebuilds the feeds and
-commits the refreshed scan timestamp and queue to `main`. Its current schedule is 07:00,
-13:00 and 19:00 UTC. A manual run is available through GitHub Actions' `workflow_dispatch`
-trigger. The site reports per-community errors honestly; a successful Actions job does not
-mean Reddit accepted the requests.
+On a scheduled or manually dispatched run, the workflow installs dependencies, runs unit and
+integration tests, scans, rebuilds the feeds and commits discovery results to `main`. Its
+schedule is 07:17, 13:17 and 19:17 UTC; only the 07:17 run performs historical backfill. A
+manual run is available through GitHub Actions' `workflow_dispatch` trigger. Pushes matching
+the workflow's scanner-related path filters run tests only and cannot scan or write data. A
+successful Actions job does not mean Reddit accepted the requests. HTTP 429 responses are
+recorded internally with a bounded `Retry-After` hint and are not retried immediately; a
+later scheduled run may still receive another rate limit.
 
 ## Checks worth keeping
 

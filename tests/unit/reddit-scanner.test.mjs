@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { readFileSync } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
 import path from "node:path";
 import { REDDIT_SOURCE_LABEL, REDDIT_SOURCES, REDDIT_SUBREDDITS, redditRssUrl, redditSearchRssUrl } from "../../scripts/reddit-sources.mjs";
 import { classify, classifyCandidateType, isTrackableCandidateCategory, isTrackableCandidateType, parseEntries } from "../../scripts/reddit-classifier.mjs";
@@ -25,6 +25,7 @@ describe("Reddit discovery scope", () => {
   it("runs scanner CI when source configuration or classifier logic changes", () => {
     const workflow = readFileSync(path.resolve(import.meta.dirname, "../../.github/workflows/reddit-scanner.yml"), "utf8");
     const scanner = readFileSync(path.resolve(import.meta.dirname, "../../scripts/cron-reddit-scan.mjs"), "utf8");
+    const backfill = readFileSync(path.resolve(import.meta.dirname, "../../scripts/reddit-backfill.ts"), "utf8");
     expect(workflow).toContain('"scripts/reddit-sources.mjs"');
     expect(workflow).toContain('"scripts/reddit-classifier.mjs"');
     expect(workflow).toContain('"scripts/reddit-provenance.mjs"');
@@ -34,11 +35,35 @@ describe("Reddit discovery scope", () => {
     expect(workflow).toContain("git ls-remote origin refs/heads/main");
     expect(workflow).toContain('"scripts/reddit-backfill.ts"');
     expect(workflow).toContain("npm run reddit:backfill");
+    expect(workflow).toContain('cron: "17 7 * * *"');
+    expect(workflow).toContain('cron: "17 13 * * *"');
+    expect(workflow).toContain('cron: "17 19 * * *"');
+    expect(workflow).toContain("github.event.schedule == '17 7 * * *'");
+    for (const stepName of ["Scan Reddit for new port threads", "Rebuild public feeds", "Commit discovery results"]) {
+      const step = workflow.split(`- name: ${stepName}`)[1]?.split(/\n      - name:/)[0] || "";
+      expect(step).toContain("if: ${{ github.event_name == 'schedule' || github.event_name == 'workflow_dispatch' }}");
+    }
+    const backfillStep = workflow.split("- name: Backfill recent Reddit history")[1]?.split(/\n      - name:/)[0] || "";
+    expect(backfillStep).toContain("if: ${{ github.event_name == 'workflow_dispatch' || (github.event_name == 'schedule' && github.event.schedule == '17 7 * * *') }}");
+    const publishVerification = workflow.split("- name: Verify published scanner commit")[1]?.split(/\n      - name:/)[0] || "";
+    expect(publishVerification).toContain("if: ${{ (github.event_name == 'schedule' || github.event_name == 'workflow_dispatch') && steps.publish.outcome == 'success' }}");
+    expect(backfill).toContain("fetchRedditFeed(url, { userAgent: USER_AGENT })");
+    expect(backfill.indexOf("if (successfulFeeds === 0)")).toBeGreaterThan(-1);
+    const noFeedExit = backfill.indexOf("if (successfulFeeds === 0)");
+    expect([...backfill.matchAll(/fs\.writeFileSync/g)].every((match) => match.index > noFeedExit)).toBe(true);
     expect(scanner).toContain("TERMINAL_STATES.includes(item.state)");
     expect(scanner).toContain("isTrackableCandidateType(candidateType)");
     expect(scanner).toContain("activeItems");
     expect(scanner).toContain("terminalItems");
     expect(scanner).toContain(".slice(0, MAX_ITEMS)");
+  });
+
+  it("uses GitHub Actions as the only scheduled scanner", () => {
+    const root = path.resolve(import.meta.dirname, "../..");
+    const vercel = JSON.parse(readFileSync(path.join(root, "vercel.json"), "utf8"));
+    expect(vercel.crons).toBeUndefined();
+    expect(existsSync(path.join(root, "api/cron-scan.ts"))).toBe(false);
+    expect(existsSync(path.join(root, "tests/unit/cron-scan-route.test.ts"))).toBe(false);
   });
 
   it("retains non-terminal provenance internally while excluding curated leads", () => {

@@ -10,6 +10,7 @@ import path from "node:path";
 import { createHash } from "node:crypto";
 import { REDDIT_SOURCE_LABEL, REDDIT_SUBREDDITS, redditRssUrl } from "./reddit-sources.mjs";
 import { buildScannerHealth } from "./reddit-scan-health.mjs";
+import { fetchRedditFeed } from "./reddit-fetch.mjs";
 import { classify, classifyCandidateType, isTrackableCandidateCategory, isTrackableCandidateType, keyOf, parseEntries } from "./reddit-classifier.mjs";
 import {
   assessCandidate,
@@ -72,7 +73,7 @@ function previous() {
 function previousHealth() {
   try {
     const parsed = JSON.parse(fs.readFileSync(HEALTH_OUT, "utf8"));
-    if (parsed && (parsed.schema_version === 1 || parsed.schema_version === 2)) return parsed;
+    if (parsed && [1, 2, 3].includes(parsed.schema_version)) return parsed;
   } catch {
     // Missing or invalid health history is represented as unknown, never guessed.
   }
@@ -81,19 +82,16 @@ function previousHealth() {
 
 async function fetchFeed(subreddit) {
   const url = redditRssUrl(subreddit);
-  let failureStatus = "unavailable";
-  for (let attempt = 1; attempt <= 2; attempt++) {
-    try {
-      const res = await fetch(url, { headers: { "User-Agent": USER_AGENT } });
-      if (res.ok) return { entries: parseEntries(await res.text()), status: "available" };
-      if (res.status === 429) failureStatus = "rate_limited";
-      console.warn("r/" + subreddit + " returned HTTP " + res.status + (attempt === 1 ? ", retrying" : ""));
-    } catch (error) {
-      console.warn("r/" + subreddit + " fetch failed:", error.message);
-    }
-    await new Promise((resolve) => setTimeout(resolve, attempt * 1500));
+  const result = await fetchRedditFeed(url, { userAgent: USER_AGENT });
+  if (result.status === "available") {
+    return { entries: parseEntries(await result.response.text()), status: result.status, retryAfterSeconds: null };
   }
-  return { entries: [], status: failureStatus };
+  if (result.status === "rate_limited") {
+    console.warn("r/" + subreddit + " returned HTTP 429; bounded Retry-After hint: " + (result.retryAfterSeconds ?? "unavailable") + " seconds; no immediate retry");
+  } else {
+    console.warn("r/" + subreddit + " fetch unavailable" + (result.httpStatus ? " (HTTP " + result.httpStatus + ")" : ""));
+  }
+  return { entries: [], status: result.status, retryAfterSeconds: result.retryAfterSeconds };
 }
 
 const known = knownLeadUrls();
@@ -115,7 +113,7 @@ let fetched = 0;
 const feedResults = [];
 for (const subreddit of REDDIT_SUBREDDITS) {
   const result = await fetchFeed(subreddit);
-  feedResults.push({ subreddit, status: result.status });
+  feedResults.push({ subreddit, status: result.status, retryAfterSeconds: result.retryAfterSeconds });
   const entries = result.entries;
   fetched += entries.length;
   console.log("r/" + subreddit + ": " + entries.length + " entries parsed");
