@@ -1,8 +1,94 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-09-23T22:06:44.398Z",
+  "generated_at": "2026-09-24T12:44:39.281Z",
   "source": "r/vitahacks + r/VitaPiracy + r/PSVitaHomebrew RSS",
   "items": [
+    {
+      "schema_version": 2,
+      "id": "reddit-1worib3",
+      "external_id": "1worib3",
+      "state": "QUARANTINED",
+      "state_history": [
+        {
+          "state": "DETECTED",
+          "at": "2026-09-24T12:44:39.281Z",
+          "actor": "reddit-scanner",
+          "reason": "Canonical Reddit RSS entry accepted at the ingestion boundary"
+        },
+        {
+          "state": "QUARANTINED",
+          "at": "2026-09-24T12:44:39.281Z",
+          "actor": "reddit-scanner",
+          "reason": "Scanner result is unverified and cannot enter the curated ledger"
+        }
+      ],
+      "source": {
+        "platform": "reddit",
+        "subreddit": "vitahacks",
+        "canonical_url": "https://www.reddit.com/r/vitahacks/comments/1worib3/someone_has_ported_plants_vs_zombies_2_to_the_vita/",
+        "author": "Blue_Snow6139",
+        "title": "Someone has ported Plants Vs. Zombies 2 to the Vita.",
+        "body": "(Disclaimer: I am not the guy who made this. I am just posting this here since I don't see it on VitaDB. Nor have I even seen mention of it on here either.) &#32; submitted by &#32; /u/Blue_Snow6139 [link] &#32; [comments]",
+        "published_at": "2026-09-24T04:02:22.000Z"
+      },
+      "classification": {
+        "confidence": "medium",
+        "reason": "2 dev signal(s), 1 passive term(s), category=new_project",
+        "candidate_type": "port",
+        "category": "new_project",
+        "question": false,
+        "spam": false
+      },
+      "provenance": {
+        "repository_url": null,
+        "release_url": null,
+        "evidence_urls": [],
+        "evidence_bundle_id": null,
+        "repository_identity": null,
+        "repository_created_at": null,
+        "repository_last_activity_at": null,
+        "release_facts": [],
+        "vita_evidence": [],
+        "author_linkage": null,
+        "corroboration": [],
+        "duplicate_relation": {
+          "content_hash": "01fc6cc03650270ea7075d60efd71aa69175637974aa8492f8a17ad2bea31150",
+          "related_candidate_ids": []
+        }
+      },
+      "campaign": {
+        "cluster_id": null,
+        "linkage_confidence": "none",
+        "signals": [],
+        "related_candidate_ids": [],
+        "text_fingerprint": "cf0168e8",
+        "media_fingerprints": [
+          "external-preview.redd.it/xnaikdeuulajki5hrew5iccce3ebl5ipfkawjrivvy8.png"
+        ],
+        "outbound_fingerprints": [
+          "www.reddit.com/r/vitahacks/comments/1worib3/someone_has_ported_plants_vs_zombies_2_to_the_vita",
+          "external-preview.redd.it/xnaikdeuulajki5hrew5iccce3ebl5ipfkawjrivvy8.png",
+          "www.reddit.com/user/blue_snow6139",
+          "github.com/lezergan/pvz2vita/releases"
+        ],
+        "direct_intent": false,
+        "explicit_campaign_reference": false,
+        "incident_id": null
+      },
+      "risk_signals": [
+        "no_project_evidence_in_post"
+      ],
+      "evidence_gaps": [
+        "exact project repository",
+        "repository identity and activity facts",
+        "release or build evidence",
+        "Vita-specific hardware evidence",
+        "author/developer linkage and independent corroboration"
+      ],
+      "content_hash": "01fc6cc03650270ea7075d60efd71aa69175637974aa8492f8a17ad2bea31150",
+      "review": null,
+      "incident": null
+    },
     {
       "schema_version": 2,
       "id": "reddit-1wnekpf",
