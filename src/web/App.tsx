@@ -1,17 +1,19 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
 import { HomePage } from "./routes/HomePage";
+import { ProjectDetailPage } from "./routes/ProjectDetailPage";
+import { UpdatesPage } from "./routes/UpdatesPage";
+import { DiscoveryPage } from "./routes/DiscoveryPage";
 
-/**
- * The archive is a single coherent surface. Every path renders the same index so
- * legacy links such as /projects/<slug> resolve to the matching entry instead of
- * landing on an empty page.
- */
+/** Public routes are real pages so deep links can carry their own metadata. */
 export default function App() {
   return (
     <div className="min-h-screen bg-canvas text-ink">
       <div className="vh-grain"></div>
       <Routes>
+        <Route path="/projects/:slug" element={<ProjectDetailPage />} />
+        <Route path="/updates" element={<UpdatesPage />} />
+        <Route path="/discovery" element={<DiscoveryPage />} />
         <Route path="*" element={<HomePage />} />
       </Routes>
     </div>

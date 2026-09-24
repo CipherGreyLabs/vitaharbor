@@ -16,7 +16,8 @@
       "agentId": "vitaharbor-master",
       "role": "master",
       "title": "VitaHarbor Master — Architect & Delegator",
-      "model": "gpt-5.6-sol",
+      "model": "gpt-6-sol",
+      "modelStatus": "expected; runtime not yet verified",
       "reasoningEffort": "medium",
       "status": "active-idle",
       "taskId": "01a0bed8-0aae-73d2-bff1-bb0b6e7dfd00",
@@ -51,7 +52,7 @@
   ],
   "optionalWorkerTemplate": {
     "role": "specialist-worker",
-    "model": "gpt-5.6-luna",
+    "model": "gpt-6-luna",
     "reasoningEffort": "xhigh",
     "branchPattern": "codex/worker/<assignmentId>",
     "worktreeRequired": true,

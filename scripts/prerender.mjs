@@ -75,7 +75,7 @@ const latestUpdatesHtml = [...FALLBACK_UPDATES]
     const project = escapeXml(update.project_display_name || 'Unassigned project');
     const date = escapeXml(formatUtcDateTime(update.event_at));
     const projectLink = update.project_slug
-      ? `<a href="#p=${escapeXml(update.project_slug)}" class="text-blue-600 hover:underline">${project}</a>`
+      ? `<a href="/projects/${escapeXml(update.project_slug)}/" class="text-blue-600 hover:underline">${project}</a>`
       : `<span class="text-gray-500" title="No project route is recorded">${project}</span>`;
     const source = update.sources?.[0]?.canonical_url
       ? `<a href="${escapeXml(update.sources[0].canonical_url)}" target="_blank" rel="noopener noreferrer" class="mt-4 inline-block text-sm font-medium text-gray-900 hover:underline">Source thread</a>`
@@ -103,7 +103,7 @@ const itemListJsonLd = JSON.stringify(
       '@type': 'ListItem',
       position: idx + 1,
       name: p.display_name || p.game_title || 'Untitled port',
-      url: 'https://vitaharbor.vercel.app/#p=' + p.slug,
+      url: 'https://vitaharbor.vercel.app/projects/' + p.slug + '/',
       description: p.summary || ''
     }))
   },
@@ -150,9 +150,9 @@ const prerenderedBody = `<div id="top" class="min-h-screen bg-[#fbfbfd] text-[#1
       <div class="mx-auto flex h-14 max-w-5xl items-center justify-between px-6">
         <a href="#top" class="text-lg font-semibold tracking-tight text-gray-900">VitaHarbor</a>
         <nav class="flex items-center gap-5 text-sm text-gray-600">
-          <a href="#latest-updates" class="hover:text-gray-900">Latest</a>
+          <a href="/updates/" class="hover:text-gray-900">Updates</a>
           <a href="#directory" class="hover:text-gray-900">Directory</a>
-          <a href="#methodology" class="hover:text-gray-900">Methodology</a>
+          <a href="/discovery/" class="hover:text-gray-900">Discovery</a>
           <span class="inline-flex items-center gap-1.5 rounded-full bg-gray-100 px-2.5 py-1 text-xs font-medium text-gray-600">
             <span class="h-1.5 w-1.5 rounded-full bg-emerald-500"></span>
             ${FALLBACK_PROJECTS.length} indexed
@@ -225,5 +225,29 @@ for (const page of deepLinkPages) {
   fs.writeFileSync(path.join(dir, "index.html"), applyMeta(html, page), "utf8");
 }
 console.log('Wrote ' + deepLinkPages.length + ' project pages into dist/web/projects');
+
+const standalonePages = [
+  {
+    path: "updates",
+    title: "PlayStation Vita port updates - VitaHarbor",
+    description: "Chronological PlayStation Vita port, decompilation and wrapper updates tracked by VitaHarbor.",
+    url: "https://vitaharbor.vercel.app/updates/",
+    image: "https://vitaharbor.vercel.app/og.png"
+  },
+  {
+    path: "discovery",
+    title: "Vita port discovery queue - VitaHarbor",
+    description: "Public scanner detections awaiting source review before they enter the verified VitaHarbor ledger.",
+    url: "https://vitaharbor.vercel.app/discovery/",
+    image: "https://vitaharbor.vercel.app/og.png"
+  }
+];
+
+for (const page of standalonePages) {
+  const dir = path.resolve(process.cwd(), "dist/web", page.path);
+  fs.mkdirSync(dir, { recursive: true });
+  fs.writeFileSync(path.join(dir, "index.html"), applyMeta(html, page), "utf8");
+}
+console.log('Wrote standalone pages: ' + standalonePages.map((page) => '/' + page.path + '/').join(', '));
 
 console.log('Successfully prerendered ' + FALLBACK_PROJECTS.length + ' projects into dist/web/index.html (' + html.length + ' bytes)');

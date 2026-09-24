@@ -17,6 +17,7 @@ import {
   verificationMeta
 } from "../components/ledger/types";
 import { ArrowUp, ExternalLink } from "lucide-react";
+import { countUpdatesSince, readLastVisit, scannerFreshness, wasRecentlyUpdated, writeLastVisit } from "../lib/visitorState";
 
 interface DirectoryFilters {
   search: string;
@@ -122,11 +123,17 @@ export const HomePage: React.FC = () => {
   const [tickerPaused, setTickerPaused] = useState(false);
   const [discovered, setDiscovered] = useState<any[]>([]);
   const [scannedAt, setScannedAt] = useState("");
+  const [previousVisit, setPreviousVisit] = useState<number | null>(null);
 
   const consoleRef = useRef<HTMLDivElement>(null);
   const searchRef = useRef<HTMLInputElement>(null);
   const directoryReveal = useReveal<HTMLElement>();
   const methodReveal = useReveal<HTMLElement>();
+
+  useEffect(() => {
+    setPreviousVisit(readLastVisit());
+    writeLastVisit();
+  }, []);
 
   useEffect(() => {
     try {
@@ -283,6 +290,9 @@ export const HomePage: React.FC = () => {
     });
   }, [discovered, projects]);
 
+  const scanFreshness = useMemo(() => scannerFreshness(scannedAt), [scannedAt]);
+  const unseenUpdates = useMemo(() => countUpdatesSince(recentUpdates, previousVisit), [recentUpdates, previousVisit]);
+
   const visible = useMemo(() => {
     let list = [...projects];
 
@@ -292,6 +302,10 @@ export const HomePage: React.FC = () => {
       list = list.filter((p) => ["playable", "released", "completable"].includes(String(p.current_stage)));
     } else if (activeFilter === "booting") {
       list = list.filter((p) => ["booting", "early_wip", "research"].includes(String(p.current_stage)));
+    } else if (activeFilter === "released") {
+      list = list.filter((p) => String(p.current_stage) === "released");
+    } else if (activeFilter === "recent") {
+      list = list.filter((p) => wasRecentlyUpdated(p.last_activity_at));
     }
 
     if (activeCategory !== "all") {
@@ -405,9 +419,9 @@ export const HomePage: React.FC = () => {
             VitaHarbor
           </a>
           <nav aria-label="Sections" className="flex items-center gap-4 text-body text-ink-medium sm:gap-5">
-            <a href="#latest-updates" className="inline-flex min-h-[44px] items-center rounded-md px-1 transition-colors hover:text-ink">Latest</a>
+            <a href="/updates" className="inline-flex min-h-[44px] items-center rounded-md px-1 transition-colors hover:text-ink">Updates</a>
             <a href="#directory" className="inline-flex min-h-[44px] items-center rounded-md px-1 transition-colors hover:text-ink">Directory</a>
-            <a href="#methodology" className="inline-flex min-h-[44px] items-center rounded-md px-1 transition-colors hover:text-ink">Methodology</a>
+            <a href="/discovery" className="inline-flex min-h-[44px] items-center rounded-md px-1 transition-colors hover:text-ink">Discovery</a>
             <div className="hidden items-center gap-2 rounded-full border border-hairline bg-surface px-3 py-1 font-mono text-micro text-ink-muted sm:inline-flex">
               <span className="inline-flex items-center gap-1 text-stage-done font-medium">
                 <span className="h-1.5 w-1.5 rounded-full bg-stage-done" />
@@ -443,36 +457,31 @@ export const HomePage: React.FC = () => {
         </section>
 
         <section aria-label="Tracker status" className="mx-auto mt-8 max-w-5xl px-6">
-          <div className="grid gap-px overflow-hidden rounded-2xl border border-hairline-strong/30 bg-hairline-strong/20 sm:grid-cols-3">
+          <div className="grid gap-px overflow-hidden rounded-2xl border border-hairline-strong/30 bg-hairline-strong/20 sm:grid-cols-2 lg:grid-cols-4">
             <div className="bg-surface p-4 sm:p-5">
               <p className="text-micro font-semibold uppercase tracking-[0.14em] text-ink-muted">Source scan</p>
               <p className="mt-2 text-subtitle font-semibold text-ink">3× daily</p>
               <p className="mt-1 text-caption text-ink-muted">r/vitahacks + r/VitaPiracy + r/PSVitaHomebrew</p>
             </div>
             <div className="bg-surface p-4 sm:p-5">
-              <p className="text-micro font-semibold uppercase tracking-[0.14em] text-ink-muted">Last scan</p>
-              <p className="mt-2 text-subtitle font-semibold text-ink">{scannedAt ? formatUtcDateTime(scannedAt) : "Not recorded"}</p>
-              <p className="mt-1 text-caption text-ink-muted">Detected threads stay outside the ledger until reviewed.</p>
+              <p className="text-micro font-semibold uppercase tracking-[0.14em] text-ink-muted">Scanner health</p>
+              <p className="mt-2 text-subtitle font-semibold text-ink">{scanFreshness.label}</p>
+              <p className="mt-1 text-caption text-ink-muted">
+                {scannedAt ? `Last scan ${formatUtcDateTime(scannedAt)} · 3× daily cadence` : "No scanner timestamp is currently published."}
+              </p>
             </div>
             <div className="bg-surface p-4 sm:p-5">
               <p className="text-micro font-semibold uppercase tracking-[0.14em] text-ink-muted">Review queue</p>
               <p className="mt-2 text-subtitle font-semibold text-ink">{pendingDiscovered.length === 1 ? "1 candidate" : pendingDiscovered.length + " candidates"}</p>
               <p className="mt-1 text-caption text-ink-muted">Open the source before treating it as verified.</p>
             </div>
+            <div className="bg-surface p-4 sm:p-5">
+              <p className="text-micro font-semibold uppercase tracking-[0.14em] text-ink-muted">Since last visit</p>
+              <p className="mt-2 text-subtitle font-semibold text-ink">{unseenUpdates === 0 ? "Caught up" : `${unseenUpdates} new`}</p>
+              <a href="/updates" className="mt-1 inline-block text-caption font-medium text-accent hover:underline">Open timeline</a>
+            </div>
           </div>
         </section>
-
-        {/* 3D Console Showcase Stage */}
-        <ConsoleStage
-          selectedProject={selectedProject as any}
-          projects={projects}
-          selectedId={selectedId}
-          onSelectProject={(p) => selectProject(p, false)}
-          webgl={webgl}
-          onCopyLink={copyEntryLink}
-          copiedSlug={copiedSlug}
-          consoleRef={consoleRef}
-        />
 
         <section id="latest-updates" aria-labelledby="latest-updates-heading" className="mx-auto mt-20 max-w-6xl px-6">
           <div className="flex flex-wrap items-end justify-between gap-4 border-b border-hairline-strong/30 pb-4">
@@ -488,7 +497,7 @@ export const HomePage: React.FC = () => {
               const projectLabel = update.project_display_name || "Unassigned project";
               const verification = verificationMeta(update.verification_level);
               const projectLink = update.project_slug ? (
-                <a href={"#p=" + update.project_slug} className="inline-flex min-h-[44px] items-center rounded-md pr-2 text-accent hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink/20">{projectLabel}</a>
+                <a href={"/projects/" + update.project_slug + "/"} className="inline-flex min-h-[44px] items-center rounded-md pr-2 text-accent hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink/20">{projectLabel}</a>
               ) : (
                 <span className="inline-flex min-h-[44px] items-center pr-2 text-ink-muted" title="No project route is recorded">{projectLabel}</span>
               );
@@ -513,6 +522,19 @@ export const HomePage: React.FC = () => {
             })}
           </div>
         </section>
+
+
+        {/* 3D Console Showcase Stage */}
+        <ConsoleStage
+          selectedProject={selectedProject as any}
+          projects={projects}
+          selectedId={selectedId}
+          onSelectProject={(p) => selectProject(p, false)}
+          webgl={webgl}
+          onCopyLink={copyEntryLink}
+          copiedSlug={copiedSlug}
+          consoleRef={consoleRef}
+        />
 
         {/* Port Directory Table with Category & Stage Filters */}
         <DirectoryTable
@@ -559,7 +581,7 @@ export const HomePage: React.FC = () => {
               </div>
 
               <ul className="mt-5 divide-y divide-hairline border-t border-hairline-strong/30">
-                {pendingDiscovered.map((item) => (
+                {pendingDiscovered.slice(0, 3).map((item) => (
                   <li key={item.id} className="flex flex-wrap items-center justify-between gap-3 py-3.5">
                     <div className="min-w-0">
                       <div className="flex flex-wrap items-center gap-2">
@@ -603,6 +625,9 @@ export const HomePage: React.FC = () => {
                   </li>
                 ))}
               </ul>
+              <div className="mt-4 flex justify-end">
+                <a href="/discovery" className="inline-flex min-h-[44px] items-center rounded-full border border-hairline px-4 text-caption font-medium text-accent hover:bg-sunken">View all {pendingDiscovered.length} detected threads</a>
+              </div>
             </div>
           </section>
         )}

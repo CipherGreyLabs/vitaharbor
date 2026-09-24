@@ -84,6 +84,7 @@ export const ConsoleStage: React.FC<ConsoleStageProps> = ({
   consoleRef
 }) => {
   const [liteMode, setLiteMode] = useState(false);
+  const [sceneReady, setSceneReady] = useState(false);
 
   useEffect(() => {
     const media = window.matchMedia?.("(prefers-reduced-motion: reduce)");
@@ -93,6 +94,25 @@ export const ConsoleStage: React.FC<ConsoleStageProps> = ({
     media?.addEventListener?.("change", update);
     return () => media?.removeEventListener?.("change", update);
   }, []);
+
+  useEffect(() => {
+    if (liteMode || webgl === false || sceneReady) return;
+    const node = consoleRef.current;
+    if (!node) return;
+    if (typeof IntersectionObserver === "undefined") {
+      const timer = window.setTimeout(() => setSceneReady(true), 2500);
+      return () => window.clearTimeout(timer);
+    }
+    const observer = new IntersectionObserver((entries) => {
+      if (entries.some((entry) => entry.isIntersecting)) setSceneReady(true);
+    }, { rootMargin: "420px 0px", threshold: 0.01 });
+    observer.observe(node);
+    const timer = window.setTimeout(() => setSceneReady(true), 2500);
+    return () => {
+      observer.disconnect();
+      window.clearTimeout(timer);
+    };
+  }, [consoleRef, liteMode, sceneReady, webgl]);
 
   const preview = selectedProject
     ? splitTitle(selectedProject.game_title || selectedProject.display_name)
@@ -126,6 +146,8 @@ export const ConsoleStage: React.FC<ConsoleStageProps> = ({
           <div ref={consoleRef} className="h-[200px] sm:h-[260px] lg:h-[310px]">
             {webgl === false || liteMode ? (
               <StaticConsolePreview selectedProject={selectedProject} />
+            ) : !sceneReady ? (
+              <ConsoleSkeleton />
             ) : (
               <Suspense fallback={<ConsoleSkeleton />}>
                 <div className="vh-rise h-full w-full">
