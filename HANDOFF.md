@@ -1,58 +1,46 @@
-# Handoff - VitaHarbor project activity label fix - worker to master
+# Handoff - VH-SCANNER-FRESHNESS-022 worker to master
 
-- Gegenereerd: 2026-09-23T22:34:01Z
+- Gegenereerd: 2026-09-24T00:21:40Z
 - Actor: codex
 - Model: gpt-5
-- Candidate: `1192b8e1b2c7b2975d3959a79eba2c58c9b9317b` on the isolated worker branch; no push or redeploy; awaiting master release decision.
-- ProjectRoot: C:\Users\suloW\.codex\worktrees\vitaharbor-public-ops-cleanup\VitaPort
-- Bronnen: 33
+- ProjectRoot: C:\Users\suloW\.codex\worktrees\vh-scanner-reliability-022\VitaPort
+- Bronnen: 22
 
 ## Bronintegriteit
 
 | Bestand | Bytes | SHA-256 |
 |---|---|---|
 | AGENTS.md | 6555 | 22C948A1AB4CC94DD04174661AC6F93A7224C1579D1B668A9EA63C9B13416351 |
-| PROJECT_STATE.md | 35894 | BFF4B272E2712F9CF6203E8D288A5F5FB077849159237E926DF218E41240A095 |
-| AGENT_TEAM.json | 4240 | 399B4B68F40A8570092D2095792244897ED4172311ED7AB20407D01CC553270D |
-| EVIDENCE.jsonl | 54122 | 5E393F312501B268359992AB8B82B06C4A3BC0D0E3A53C956538071E043783CD |
-| docs\WORKLOG.md | 102048 | B21129D3BB3472CE5CD72542ECF1F8F3456385905977C64BB8B1B7E7666C0110 |
-| docs\AUTOMATION.md | 2988 | 5E6BEED7AB377B7C527EF912E42E1C0BD23704A55121C20F079FB6DA931E5021 |
-| .github\workflows\reddit-scanner.yml | 2853 | 9E681D5BDA560A33B3674DA3BEE0830FB79EB24EF425FC0C888D9F7ECFD981D0 |
-| api\cron-scan.ts | 1670 | E6FC0F16FF41A29EFC05006DE1E9F2BB99B87762C59AE948B031134247C7F7D1 |
-| scripts\prerender.mjs | 12136 | 6494DA7B3E1FD843F911E7A7E96BCDCB61D8A2BFB80A623661FF58AE7CDAF26F |
-| data\scanner-health.json | 2761 | CC2838EDB70A8930962176C32D00FC095305756357B3A039438F83E84DD5632C |
-| public\data\discovered.json | 3313 | B88B72A0A3B26C2683E5833945209188D56CBB0E73F3F6C4F9347A7C597AFE89 |
-| public\api\feed.json | 19118 | C43804EA25717BA90563445A7DB14C75138B1553581B7C9039FC789CE987C848 |
-| public\api\rss.xml | 17268 | 5A03F29E5EE5B6E4A5191EBC82E5EDC0F206F804810026B7691D73E533B4C507 |
-| scripts\cron-reddit-scan.mjs | 7586 | 626C92B7CF80DF6F07F5A7EAA31A7C99C75B34E40CE19B0AF0056EDA2D2147E1 |
-| scripts\reddit-provenance.mjs | 30566 | 37AA3C4493CDBFDC4CF9FA75030D178BE84EC834F06A204039B93BE273F25B1A |
-| scripts\migrate-quarantine.mjs | 1768 | 93094ACA69C0B312E3C822D34BBD5F8081FF4BAD0CE3C554E7085C199AA51E05 |
-| scripts\promote-candidate.mjs | 19034 | C4BD5E6BACD674ABC215919D756C736E1AE9E8716D55F4FEA5654C57B7372893 |
-| src\shared\constants\fallbackData.ts | 63531 | 3E11DBF65449C2118194955947B0EBFBEA0154E3AA4711FC8ABA9EE4E5CF3C84 |
-| src\web\lib\scannerAssets.ts | 5265 | 34D7E09CC4DDAB4A1AA3D2F18FF8768E907625BD8C30B42E72BEC659A0F23066 |
-| src\web\routes\HomePage.tsx | 33765 | 6DF08B00C25C8BA1344BBA5D088C020B3BA562490D597937A8C22BC52F0881ED |
-| src\web\routes\DiscoveryPage.tsx | 3787 | FAC643CAD11FD84213E9DAA2449E97ADBC274443CDF384E672B4D34D4D329D68 |
-| src\web\routes\ProjectDetailPage.tsx | 10085 | 4B01ADCC3698CDDBBC60AEF84A871540D1BA86FDA9D9D1852EDAF6C909B0BA90 |
-| src\web\components\ledger\DirectoryTable.tsx | 19965 | 9A941126751EB5E5BF02CA16737F3AB8C42A11E369E898F0DFFCD7C20B9EB6BD |
-| src\web\components\ledger\MethodologySection.tsx | 2139 | DEA8C91A665BEC9575DC6137C68316B25A90A3A3D72ACAD08468414AB3EAC210 |
-| src\web\components\ledger\ProjectPanel.tsx | 14635 | C911C97585C73184C1DAFA52911320BE596C0C9C02432BAB48AC6A1F8D89D17F |
-| src\web\components\ledger\types.ts | 8455 | 4A79AF334B2E38E369299A3A4CAF117CC9356D31CC6A3998BCB1A37D08225C90 |
-| tests\e2e\archive.spec.ts | 16665 | 4C8304D1DFE1D88D751A3B0263959CCA5CB385961966880162215A6646F395A1 |
-| tests\unit\scanner-assets.test.ts | 4773 | A82918BD749DE91041E5272C588C855E3E6D944E90DE0158A674337C73CC6DA2 |
+| PROJECT_STATE.md | 38039 | BFCE2385EACD7CD7BB6199921790D2872E66F7FE45BBC8E83D65A164ABC75B16 |
+| AGENT_TEAM.json | 4211 | DCA03537E811DFB6C18B83B0DC13491C453F8288C9AC750CA003C866A6AB8E3C |
+| EVIDENCE.jsonl | 55012 | D6B2802C2EBC567F33AFA73BEE98B7E556BE8EB7ACC372FB9148A35E4672BCFB |
+| docs\WORKLOG.md | 103630 | F29C899394FB21DC2ECDD96282506793B6F8D288303103D529AEAA157F085AD7 |
+| docs\AUTOMATION.md | 3524 | 96113306BDA360A43F4AB2CC9EC775AA6658CB7EF023B614D740E813695C5ABF |
+| .github\workflows\reddit-scanner.yml | 3492 | B618CF87500E7F26F152C2CE5FB058CB24F1716F05D8C5A0883FCDB365DF11C7 |
+| vercel.json | 1995 | B567FB1ECECB1D5B0B100A05BC3F134896D7794BDDA2AABF4B9E37B557E0F723 |
+| scripts\cron-reddit-scan.mjs | 7673 | 9C64B9448AB952ECD43242CA8068BB51D6FC4F5925537D7F5EACF2D4DE0D7EA9 |
+| scripts\reddit-backfill.ts | 7709 | 865C0A5A435AA2781575E8F856A30733B3D1FDC84F2D6C8866517EFD56715E39 |
+| scripts\reddit-fetch.mjs | 2086 | EA6308D189E526621C6B7286C92307BF57A0C3559750C0679ADE0647FA53C49C |
+| scripts\reddit-fetch.d.mts | 732 | 9A30E711FEC77C41256873BCCD978381D7C5F6A9ACE88E1C68E875CAF5909149 |
+| scripts\reddit-scan-health.mjs | 3813 | D62E19237420FC160D17497534063D21178A466FAD7C20FAC507FED1D88EED1A |
+| scripts\reddit-sources.mjs | 1145 | 33BE640F752818A89D8000DBB649731E464F80FA68ED05F5E89FA30309F8493C |
+| scripts\make-feeds.ts | 2875 | 4AF567351C3DC9C5DF86593BF7E6A7C4132A0594FDF094F0CDB5DB7F6BA634AA |
+| tests\unit\reddit-fetch.test.mjs | 3229 | DF231A2E2A99093289E519DD622D7BB95A24E8D6360C56BF3711242592AE2140 |
+| tests\unit\reddit-scan-health.test.mjs | 4661 | 52191261FE667C73FAD42729E558F0C05AA1F6C915D635C04199B70DCBDA2F6C |
+| tests\unit\reddit-scanner.test.mjs | 12328 | 4C01D5B7C822DAA00D4FC5861236D639663CF954478C232DFD12B9DFA24222B7 |
 | tests\unit\data-poisoning.test.mjs | 13627 | 9ABCE98C5A80D9CC27A629691790FD154622348D63D44619DA18E7B9CBD33F73 |
-| tests\unit\promotion-workflow.test.mjs | 13129 | 7B9FC4CF061C8703FC0A67BE532CC69C2A895B55A769F6A80FEF44CF4BDA8597 |
-| tests\unit\routes.test.tsx | 2418 | FD49FB0699C7CF89498AA2567B74D479344BB70B4FD3838B4094A76A70728036 |
-| tests\unit\ledger-types.test.ts | 1710 | 483441EF61DCA487A0F7FEB8C1388CEA0480BCDB51A6C269B10B7BAA39E50EF9 |
-| tests\unit\cron-scan-route.test.ts | 714 | 00C6593EF0270D0B526119CE56963CE8D600340D8F1144BBA77B3FD1016A8E02 |
+| tests\e2e\archive.spec.ts | 16805 | FE1EE21E5D0545A208B0250018130B52063413A266B74B57E246C7F553DB345B |
+| package.json | 3194 | 003E5C41FEF5F2E89E84CA6AB320A1D8AC592D0D86E6C928DFA4E75E28A3CB4D |
+| data\scanner-health.json | 2761 | CC2838EDB70A8930962176C32D00FC095305756357B3A039438F83E84DD5632C |
 
 ## Samenvatting
 
-Master-authorized visitor-copy correction. Runtime candidate commit 1192b8e1b2c7b2975d3959a79eba2c58c9b9317b changes the Home project panel to Latest project activity with the absolute source date only. Released public-ops cleanup is live at READY deployment dpl_98bNGxsgXjCsnFMyYBty5FD5qsz6. npm run verify passed typecheck, 110 unit tests and production build (29 project pages, 32 sitemap URLs); lint and integration 7/7 passed; local-preview Playwright 20/20; mobile and static no-JS checks pass. GitHub scheduled run 35926409183 attempted 2026-09-23T22:06:44Z; all three sources were rate-limited and scanner health remains internal. No cadence/provider changes, push or redeploy. Prior HANDOFF mismatch traced to archive.spec.ts change in commit 25865ab; refreshed handoff verifies GO for all 33 sources. Awaiting master release decision.
+Master delegation VH-SCANNER-FRESHNESS-022 is implemented on local branch codex/vh-scanner-reliability-022 at code commit 90a35895df1c8b4b8fcdfa6a1398f4dde34bc8ba, based on origin/main d43070d88a33a8e2d781417c2e5ee1cefe162729. The GitHub scan slots are 07:17, 13:17 and 19:17 UTC; push events run tests only; only schedule/manual dispatch scans and publishes; historical backfill runs on 07:17 or manual dispatch. Shared fetch logic performs no immediate retry for 429, parses numeric/HTTP-date Retry-After with a six-hour cap, and retries network/408/5xx at most once after 1.2 seconds. Removed the unused Vercel cron route. Verify: npm run verify (typecheck, 116 unit tests, build of 29 project pages and 32 sitemap URLs), lint, integration 7/7, local preview Playwright 20/20, focused scanner tests 27/27, YAML/JSON parse. No scan, dispatch, push, or deployment occurred. Latest measured live scanner attempt remains 0/3 on 2026-09-23T22:06:44Z from HTTP 429; post-change source availability is UNKNOWN and GitHub schedule punctuality is not guaranteed. npm ci reported 8 audit advisories (4 moderate, 4 high), with no dependency edits or remediation.
 
 ## Verificatie
 
 Controleer de hashes voordat je deze samenvatting vertrouwt:
 
-    powershell -NoProfile -ExecutionPolicy Bypass -File %USERPROFILE%\.codex\workflow\NEW-HANDOFF.ps1 -Verify "C:\Users\suloW\.codex\worktrees\vitaharbor-public-ops-cleanup\VitaPort\HANDOFF.md"
+    powershell -NoProfile -ExecutionPolicy Bypass -File %USERPROFILE%\.codex\workflow\NEW-HANDOFF.ps1 -Verify "C:\Users\suloW\.codex\worktrees\vh-scanner-reliability-022\VitaPort\HANDOFF.md"
 
 Een handoff is context, geen bron van waarheid. Workspace en Git zijn leidend.

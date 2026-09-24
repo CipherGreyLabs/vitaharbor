@@ -2,6 +2,15 @@
 
 Updated: 2026-09-24
 
+## Current bounded worker assignment: VH-SCANNER-FRESHNESS-022 (2026-09-24)
+
+- The master delegated scanner reliability work after the latest read-only evidence showed scheduled Actions runs starting hours after their cron slots and the most recent scanner attempt (2026-09-23T22:06:44Z) failing 0/3 on HTTP 429 from all three RSS sources. No fresh post-change scan has been observed; source access remains unverified.
+- Implementation commit `90a35895df1c8b4b8fcdfa6a1398f4dde34bc8ba` is on isolated branch `codex/vh-scanner-reliability-022`, directly based on `origin/main` `d43070d88a33a8e2d781417c2e5ee1cefe162729`. Schedules now use 07:17, 13:17 and 19:17 UTC; push events run tests only, and scan/backfill/feed publication steps are restricted to schedule/manual dispatch. Backfill runs on the 07:17 slot or manual dispatch.
+- Shared Reddit fetch handling makes a 429 a single attempt with no immediate sleep/retry, parses numeric or HTTP-date `Retry-After`, caps the internal hint at six hours, and stores it only in internal scanner health / operator logs. Network, 408 and 5xx failures get at most one retry after 1.2 seconds; permanent 4xx responses are not retried. Existing backfill early-exit preserves stored provenance when all feeds fail.
+- Removed the unused Vercel `/api/cron-scan` route and its daily cron after confirming no application consumer; unrelated APIs remain untouched. No visitor-facing scanner fields, curated entries, or generated discovery data were changed.
+- Exact candidate verification: `npm run verify` passed typecheck, 116/116 unit tests and production build (29 project pages, 32 sitemap URLs); lint passed; integration 7/7; local-preview Playwright 20/20 at `http://127.0.0.1:4176`; workflow YAML and `vercel.json` parsed successfully. No live Reddit request/scan, workflow dispatch, push or deployment was performed. Production remains on the existing deployment until master review and release authorization.
+- `npm ci` reported 8 dependency audit advisories (4 moderate, 4 high); package manifests/lockfile were not changed and no audit remediation was attempted in this scanner-scoped assignment.
+
 ## Current bounded worker assignment: VH-PROJECT-ACTIVITY-LABEL-021 (2026-09-24)
 
 - The master authorized a visitor-copy fix after a read-only production diagnosis. The fresh live Home, Community posts, and Updates views contain no “2 days ago” or scan-status text. Opening a Home project row did show `Last activity · 3d ago`; this is the project's source-backed `last_activity_at`, not a VitaHarbor scan timestamp. The live project API's newest activity record was Test Drive at `2026-09-20T19:50:09.288Z`.
