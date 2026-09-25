@@ -1,8 +1,96 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-09-25T12:47:34.565Z",
+  "generated_at": "2026-09-25T17:58:49.152Z",
   "source": "r/vitahacks + r/VitaPiracy + r/PSVitaHomebrew RSS",
   "items": [
+    {
+      "schema_version": 2,
+      "id": "reddit-1wq1o7g",
+      "external_id": "1wq1o7g",
+      "state": "QUARANTINED",
+      "state_history": [
+        {
+          "state": "DETECTED",
+          "at": "2026-09-25T17:58:49.152Z",
+          "actor": "reddit-scanner",
+          "reason": "Canonical Reddit RSS entry accepted at the ingestion boundary"
+        },
+        {
+          "state": "QUARANTINED",
+          "at": "2026-09-25T17:58:49.152Z",
+          "actor": "reddit-scanner",
+          "reason": "Scanner result is unverified and cannot enter the curated ledger"
+        }
+      ],
+      "source": {
+        "platform": "reddit",
+        "subreddit": "vitahacks",
+        "canonical_url": "https://www.reddit.com/r/vitahacks/comments/1wq1o7g/devkit_gofund_me/",
+        "author": "zm2283145",
+        "title": "Devkit Gofund me",
+        "body": "As I've been working on smash and a few other games is becomes difficult to optimize with a retail homebrew vita on the GPU side since the retail vita lack access to the GPU profile ability we can profile the CPU and draw calls from the CPU side but it's difficult. I wrote an entire debugging suite of tools including a debugger and profiler that has helped me tremendously with finding bottlenecks to improve. An additional issue is running with logging and other debugging attached slows the games down making it hard to cancel out the performance hits from my tooling. I used to have a de",
+        "published_at": "2026-09-25T16:58:55.000Z"
+      },
+      "classification": {
+        "confidence": "medium",
+        "reason": "1 dev signal(s), 1 passive term(s), category=new_project",
+        "candidate_type": "port",
+        "category": "new_project",
+        "question": false,
+        "spam": false
+      },
+      "provenance": {
+        "repository_url": null,
+        "release_url": null,
+        "evidence_urls": [],
+        "evidence_bundle_id": null,
+        "repository_identity": null,
+        "repository_created_at": null,
+        "repository_last_activity_at": null,
+        "release_facts": [],
+        "vita_evidence": [],
+        "author_linkage": null,
+        "corroboration": [],
+        "duplicate_relation": {
+          "content_hash": "d12409e2d6d0e42aae80353c0a748b214a8ef1032a5793d3b1951e67ae4fd8ba",
+          "related_candidate_ids": []
+        }
+      },
+      "campaign": {
+        "cluster_id": "campaign-ae299730",
+        "linkage_confidence": "medium",
+        "signals": [
+          "shared_outbound_fingerprint"
+        ],
+        "related_candidate_ids": [
+          "reddit-1wmxc2y",
+          "reddit-1wllsbo"
+        ],
+        "text_fingerprint": "8dededc5",
+        "media_fingerprints": [],
+        "outbound_fingerprints": [
+          "gofund.me/a40754826",
+          "www.reddit.com/user/zm2283145",
+          "www.reddit.com/r/vitahacks/comments/1wq1o7g/devkit_gofund_me"
+        ],
+        "direct_intent": false,
+        "explicit_campaign_reference": false,
+        "incident_id": null
+      },
+      "risk_signals": [
+        "no_project_evidence_in_post"
+      ],
+      "evidence_gaps": [
+        "exact project repository",
+        "repository identity and activity facts",
+        "release or build evidence",
+        "Vita-specific hardware evidence",
+        "author/developer linkage and independent corroboration"
+      ],
+      "content_hash": "d12409e2d6d0e42aae80353c0a748b214a8ef1032a5793d3b1951e67ae4fd8ba",
+      "review": null,
+      "incident": null
+    },
     {
       "schema_version": 2,
       "id": "reddit-1wpsyhn",
@@ -491,14 +579,15 @@
         }
       },
       "campaign": {
-        "cluster_id": "campaign-59e196c0",
+        "cluster_id": "campaign-ae299730",
         "linkage_confidence": "medium",
         "signals": [
           "same_author_burst",
           "shared_outbound_fingerprint"
         ],
         "related_candidate_ids": [
-          "reddit-1wllsbo"
+          "reddit-1wllsbo",
+          "reddit-1wq1o7g"
         ],
         "text_fingerprint": "7a252a3c",
         "media_fingerprints": [],
@@ -1304,14 +1393,15 @@
         }
       },
       "campaign": {
-        "cluster_id": "campaign-59e196c0",
+        "cluster_id": "campaign-ae299730",
         "linkage_confidence": "medium",
         "signals": [
           "same_author_burst",
           "shared_outbound_fingerprint"
         ],
         "related_candidate_ids": [
-          "reddit-1wmxc2y"
+          "reddit-1wmxc2y",
+          "reddit-1wq1o7g"
         ],
         "text_fingerprint": "3439b9dd",
         "media_fingerprints": [],
