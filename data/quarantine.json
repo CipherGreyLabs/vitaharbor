@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-09-25T17:58:49.152Z",
+  "generated_at": "2026-09-25T22:28:29.610Z",
   "source": "r/vitahacks + r/VitaPiracy + r/PSVitaHomebrew RSS",
   "items": [
     {
@@ -582,12 +582,12 @@
         "cluster_id": "campaign-ae299730",
         "linkage_confidence": "medium",
         "signals": [
-          "same_author_burst",
-          "shared_outbound_fingerprint"
+          "shared_outbound_fingerprint",
+          "same_author_burst"
         ],
         "related_candidate_ids": [
-          "reddit-1wllsbo",
-          "reddit-1wq1o7g"
+          "reddit-1wq1o7g",
+          "reddit-1wllsbo"
         ],
         "text_fingerprint": "7a252a3c",
         "media_fingerprints": [],
@@ -1396,12 +1396,12 @@
         "cluster_id": "campaign-ae299730",
         "linkage_confidence": "medium",
         "signals": [
-          "same_author_burst",
-          "shared_outbound_fingerprint"
+          "shared_outbound_fingerprint",
+          "same_author_burst"
         ],
         "related_candidate_ids": [
-          "reddit-1wmxc2y",
-          "reddit-1wq1o7g"
+          "reddit-1wq1o7g",
+          "reddit-1wmxc2y"
         ],
         "text_fingerprint": "3439b9dd",
         "media_fingerprints": [],
