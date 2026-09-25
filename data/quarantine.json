@@ -1,8 +1,92 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-09-24T22:29:40.845Z",
+  "generated_at": "2026-09-25T12:47:34.565Z",
   "source": "r/vitahacks + r/VitaPiracy + r/PSVitaHomebrew RSS",
   "items": [
+    {
+      "schema_version": 2,
+      "id": "reddit-1wpsyhn",
+      "external_id": "1wpsyhn",
+      "state": "QUARANTINED",
+      "state_history": [
+        {
+          "state": "DETECTED",
+          "at": "2026-09-25T12:47:34.565Z",
+          "actor": "reddit-scanner",
+          "reason": "Canonical Reddit RSS entry accepted at the ingestion boundary"
+        },
+        {
+          "state": "QUARANTINED",
+          "at": "2026-09-25T12:47:34.565Z",
+          "actor": "reddit-scanner",
+          "reason": "Scanner result is unverified and cannot enter the curated ledger"
+        }
+      ],
+      "source": {
+        "platform": "reddit",
+        "subreddit": "vitahacks",
+        "canonical_url": "https://www.reddit.com/r/vitahacks/comments/1wpsyhn/ai_slop_gta_lcs_ps2_running_on_the_vita_natively/",
+        "author": "Wookie_von_Gondor",
+        "title": "(AI SLOP) GTA LCS PS2 running on the Vita natively - with native resolution. I need people with knowledge of optimizations!",
+        "body": "I managed to reach ingame with the PS2 LCS using AI . However, the framerate is pretty poor. If anyone of you would like to tinker with it, I can create a private repo on Github during this weekend and share the source code / invite you as contributors. I'll need to do some cleanup before uploading it though! I'd be glad to make it public once it's stable, but currently is has many problems. Audio is not working at all. Feel free to dm me your Github emails if you want to contribute to the development. Would be nice to get it to at least stable 30 FPS on the native resolution. This",
+        "published_at": "2026-09-25T10:39:51.000Z"
+      },
+      "classification": {
+        "confidence": "high",
+        "reason": "4 dev signals: \\bin.?game\\b, \\bfps\\b, \\bframerate\\b · category=new_project",
+        "candidate_type": "port",
+        "category": "new_project",
+        "question": false,
+        "spam": false
+      },
+      "provenance": {
+        "repository_url": null,
+        "release_url": null,
+        "evidence_urls": [],
+        "evidence_bundle_id": null,
+        "repository_identity": null,
+        "repository_created_at": null,
+        "repository_last_activity_at": null,
+        "release_facts": [],
+        "vita_evidence": [],
+        "author_linkage": null,
+        "corroboration": [],
+        "duplicate_relation": {
+          "content_hash": "9e47c990961939fbd7b7c8b5768d631ec0d4d7971f3cb76ed5d2bfd16f916eb9",
+          "related_candidate_ids": []
+        }
+      },
+      "campaign": {
+        "cluster_id": null,
+        "linkage_confidence": "none",
+        "signals": [],
+        "related_candidate_ids": [],
+        "text_fingerprint": "b4681779",
+        "media_fingerprints": [
+          "external-preview.redd.it/zwf5dnk0nhq4bnjomtzmtbsf0if1fnwpvwhrwimo9_lelwqmbqele2z8eyho.png"
+        ],
+        "outbound_fingerprints": [
+          "www.reddit.com/r/vitahacks/comments/1wpsyhn/ai_slop_gta_lcs_ps2_running_on_the_vita_natively",
+          "external-preview.redd.it/zwf5dnk0nhq4bnjomtzmtbsf0if1fnwpvwhrwimo9_lelwqmbqele2z8eyho.png",
+          "github.com/epic0522/regta-3dsport-complete",
+          "www.reddit.com/user/wookie_von_gondor",
+          "v.redd.it/v4agj93t8nrh1"
+        ],
+        "direct_intent": false,
+        "explicit_campaign_reference": false,
+        "incident_id": null
+      },
+      "risk_signals": [],
+      "evidence_gaps": [
+        "exact project repository",
+        "repository identity and activity facts",
+        "release or build evidence",
+        "author/developer linkage and independent corroboration"
+      ],
+      "content_hash": "9e47c990961939fbd7b7c8b5768d631ec0d4d7971f3cb76ed5d2bfd16f916eb9",
+      "review": null,
+      "incident": null
+    },
     {
       "schema_version": 2,
       "id": "reddit-1worib3",
