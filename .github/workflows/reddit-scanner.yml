@@ -23,6 +23,11 @@ on:
       - "tests/unit/reddit-fetch.test.mjs"
       - "tests/unit/reddit-scan-health.test.mjs"
       - "tests/unit/reddit-scanner.test.mjs"
+      - "index.html"
+      - "scripts/prerender.mjs"
+      - "src/web/**"
+      - "tailwind.config.js"
+      - "tests/e2e/**"
   schedule:
     - cron: "17 7 * * *"
     - cron: "17 13 * * *"
