@@ -30,6 +30,12 @@ export const FALLBACK_GAMES: Game[] = [
   ,{ id: 27, slug: "call-of-duty-4-modern-warfare", title: "Call of Duty 4: Modern Warfare", normalized_title: "call of duty 4 modern warfare", original_release_year: 2007, original_platform: "PS3", created_at: new Date('2026-09-12T00:00:00.000Z'), updated_at: new Date('2026-09-12T00:00:00.000Z') }
   ,{ id: 28, slug: "c-dogs-sdl-vita", title: "C-Dogs SDL Vita", normalized_title: "c-dogs sdl vita", original_release_year: null, original_platform: "DOS / SDL", created_at: new Date('2026-09-19T20:01:51.653Z'), updated_at: new Date('2026-09-19T20:01:51.653Z') }
   ,{ id: 29, slug: "test-drive-1987-vita", title: "Test Drive (1987)", normalized_title: "test drive (1987)", original_release_year: 1987, original_platform: "DOS / PC", created_at: new Date('2026-09-20T19:39:46.000Z'), updated_at: new Date('2026-09-20T19:50:09.288Z') }
+
+  ,{ id: 30, slug: "linux-on-vita", title: "Linux on Vita (Alpine Linux)", normalized_title: "linux on vita (alpine linux)", original_release_year: 2026, original_platform: "ARMv7-A / Linux", created_at: new Date('2026-09-22T16:39:19.000Z'), updated_at: new Date('2026-09-25T15:25:25.000Z') }
+  ,{ id: 31, slug: "aleph-one-vita", title: "Aleph One (Marathon Trilogy)", normalized_title: "aleph one (marathon trilogy)", original_release_year: 1994, original_platform: "Mac / PC", created_at: new Date('2026-06-03T11:49:18.000Z'), updated_at: new Date('2026-09-24T20:19:09.000Z') }
+  ,{ id: 32, slug: "apotris-psvita", title: "Apotris", normalized_title: "apotris", original_release_year: 2022, original_platform: "GBA / PC", created_at: new Date('2026-09-23T23:06:45.000Z'), updated_at: new Date('2026-09-25T08:32:53.000Z') }
+  ,{ id: 33, slug: "prince-of-persia-classic-vita", title: "Prince of Persia Classic", normalized_title: "prince of persia classic", original_release_year: 2007, original_platform: "Android ARMv7 / XBLA", created_at: new Date('2026-07-08T04:37:10.000Z'), updated_at: new Date('2026-09-26T13:26:25.000Z') }
+  ,{ id: 34, slug: "resident-evil-4-vita", title: "Resident Evil 4", normalized_title: "resident evil 4", original_release_year: 2005, original_platform: "GameCube / PS2 / Android", created_at: new Date('2026-09-21T00:00:00.000Z'), updated_at: new Date('2026-09-25T17:04:11.000Z') }
 ];
 
 export const FALLBACK_PROJECTS: any[] = [
@@ -733,6 +739,127 @@ export const FALLBACK_PROJECTS: any[] = [
     technologies: ["Static recompilation", "VitaSDK", "SDL2", "VitaGL / GXM"],
     developers: []
   }
+
+  ,{
+    id: 30,
+    game_id: 30,
+    slug: "linux-on-vita",
+    reddit_url: "https://www.reddit.com/r/vitahacks/comments/1wnekpf/linux_on_vita/",
+    repo_url: "https://github.com/devwithzachary/LinuxOnVita",
+    display_name: "Linux on Vita (Alpine Linux)",
+    current_stage: "released",
+    lifecycle: "active",
+    summary: "Complete standalone handheld Linux 6.12 distribution for PS Vita with onscreen touch typing, gamepad navigation, automated Wi-Fi, package management (apk), and native framebuffer DOOM.",
+    playability_notes: "Boots to interactive graphical userland and terminal on Vita hardware. Features on-screen virtual keyboard, touch navigation, Wi-Fi connectivity, apk package repository support, and framebuffer DOOM.",
+    performance_notes: "Kernel 6.12 boots with responsive touch UI; framebuffer DOOM runs at smooth framerates on native hardware.",
+    first_seen_at: new Date('2026-09-22T16:39:19.000Z'),
+    last_activity_at: new Date('2026-09-25T15:25:25.000Z'),
+    released_at: new Date('2026-09-22T18:00:32.000Z'),
+    is_featured: true,
+    is_archived: false,
+    verification: "developer_direct",
+    game_title: "Linux on Vita (Alpine Linux)",
+    original_platform: "ARMv7-A / Linux",
+    original_release_year: 2026,
+    technologies: ["ARMv7-A", "Linux 6.12 Kernel", "Alpine Linux", "Framebuffer DOOM", "Touch Keyboard"],
+    screenshot_url: "https://raw.githubusercontent.com/devwithzachary/LinuxOnVita/main/screenshot.png",
+    screenshot_source_url: "https://github.com/devwithzachary/LinuxOnVita",
+    screenshot_alt: "Linux on Vita running Alpine Linux with touchscreen interface",
+    developers: [{ id: 19, role: "lead", display_name: "DevWithZachary", slug: "devwithzachary" }]
+  }
+  ,{
+    id: 31,
+    game_id: 31,
+    slug: "aleph-one-vita",
+    repo_url: "https://github.com/DrDecki/Aleph-One-PsVita",
+    display_name: "Aleph One Vita (Marathon Engine)",
+    current_stage: "released",
+    lifecycle: "active",
+    summary: "Native PS Vita port of Bungie's open-source Aleph One engine, running Marathon, Marathon 2: Durandal, Marathon Infinity, and custom scenarios.",
+    playability_notes: "Fully playable across the entire Marathon trilogy and community plugins with dual analog stick aiming and hardware-accelerated rendering.",
+    performance_notes: "Solid 60 FPS performance powered by SDL2 and vitaGL.",
+    first_seen_at: new Date('2026-06-03T11:49:18.000Z'),
+    last_activity_at: new Date('2026-09-24T20:19:09.000Z'),
+    released_at: new Date('2026-09-24T19:47:55.000Z'),
+    is_featured: false,
+    is_archived: false,
+    verification: "developer_direct",
+    game_title: "Aleph One (Marathon Trilogy)",
+    original_platform: "Mac / PC",
+    original_release_year: 1994,
+    technologies: ["Native C++", "VitaSDK", "SDL2", "OpenGL / vitaGL"],
+    developers: [{ id: 20, role: "lead", display_name: "DrDecki", slug: "drdecki" }]
+  }
+  ,{
+    id: 32,
+    game_id: 32,
+    slug: "apotris-psvita",
+    repo_url: "https://github.com/Rocroverss/apotris-psvita",
+    display_name: "Apotris PS Vita",
+    current_stage: "released",
+    lifecycle: "active",
+    summary: "Native Vita port of the open-source block-stacking game Apotris with 14 unique game modes, customizable controls, and 60 FPS performance.",
+    playability_notes: "Full game content functional including Sprint, Marathon, Survival, Dig, and all 14 game modes with comprehensive statistics tracking.",
+    performance_notes: "Flawless 60 FPS gameplay using Tilengine and SoLoud audio subsystem.",
+    first_seen_at: new Date('2026-09-23T23:06:45.000Z'),
+    last_activity_at: new Date('2026-09-25T08:32:53.000Z'),
+    released_at: new Date('2026-09-23T23:06:45.000Z'),
+    is_featured: false,
+    is_archived: false,
+    verification: "developer_direct",
+    game_title: "Apotris",
+    original_platform: "GBA / PC",
+    original_release_year: 2022,
+    technologies: ["Native C", "VitaSDK", "SDL2", "vitaGL", "Tilengine", "SoLoud"],
+    developers: [{ id: 21, role: "lead", display_name: "Rocroverss", slug: "rocroverss" }]
+  }
+  ,{
+    id: 33,
+    game_id: 33,
+    slug: "prince-of-persia-classic-vita",
+    repo_url: "https://github.com/MetalSyntax/prince-of-persia-classic-psvita-port",
+    display_name: "Prince of Persia Classic Vita",
+    current_stage: "released",
+    lifecycle: "active",
+    summary: "Android ARMv7 wrapper/loader for Prince of Persia Classic, recreating the 1989 classic with modernized 3D graphics on PlayStation Vita.",
+    playability_notes: "Complete game is playable start to finish with full physical gamepad mapping, touch menus, and hardware audio.",
+    performance_notes: "Runs smoothly at full native Vita screen resolution with vitaGL shaders.",
+    first_seen_at: new Date('2026-07-08T04:37:10.000Z'),
+    last_activity_at: new Date('2026-09-26T13:26:25.000Z'),
+    released_at: new Date('2026-09-03T02:52:45.000Z'),
+    is_featured: false,
+    is_archived: false,
+    verification: "developer_direct",
+    game_title: "Prince of Persia Classic",
+    original_platform: "Android ARMv7 / XBLA",
+    original_release_year: 2007,
+    technologies: ["ARMv7 SO Loader", "Cocos2d-x", "OpenGL ES / vitaGL"],
+    developers: [{ id: 22, role: "lead", display_name: "MetalSyntax", slug: "metalsyntax" }]
+  }
+  ,{
+    id: 34,
+    game_id: 34,
+    slug: "resident-evil-4-vita",
+    reddit_url: "https://www.reddit.com/r/VitaPiracy/comments/1wmax82/guess_it_is_happening/",
+    repo_url: "https://github.com/Rinnegatamante/re4-vita",
+    display_name: "Resident Evil 4 Vita (re4-vita)",
+    current_stage: "research",
+    lifecycle: "active",
+    summary: "Official public repository established by Rinnegatamante for the upcoming PlayStation Vita port of Resident Evil 4.",
+    playability_notes: "Initial repository setup and architecture definition by Rinnegatamante following the real-time teaser and optimization demos.",
+    performance_notes: "Early stage pipeline development; target framerate and memory profiling underway.",
+    first_seen_at: new Date('2026-09-21T00:00:00.000Z'),
+    last_activity_at: new Date('2026-09-25T17:04:11.000Z'),
+    released_at: null,
+    is_featured: true,
+    is_archived: false,
+    verification: "developer_direct",
+    game_title: "Resident Evil 4",
+    original_platform: "GameCube / PS2 / Android",
+    original_release_year: 2005,
+    technologies: ["ARMv7 Wrapper / Soloader", "vitaGL"],
+    developers: [{ id: 5, role: "lead", display_name: "Rinnegatamante", slug: "rinnegatamante" }]
+  }
 ];
 
 export const FALLBACK_DEVELOPERS: any[] = [
@@ -754,6 +881,11 @@ export const FALLBACK_DEVELOPERS: any[] = [
   { id: 16, slug: "ndrwhun", display_name: "NDRW", description: "Developer of the JAVITA and JK2VITA OpenJK-based Vita ports.", is_known_developer: true, identities: [{ provider: "reddit", username: "NDRW" }, { provider: "github", username: "NDRWhun" }], projects: [] },
   { id: 17, slug: "brendonm17", display_name: "Brendonm17", description: "Developer of the Barony Vita port.", is_known_developer: true, identities: [{ provider: "reddit", username: "Brendonm17" }, { provider: "github", username: "Brendonm17" }], projects: [] },
   { id: 18, slug: "thespasticgamer", display_name: "TheSpasticGamer", description: "Developer associated with the September 2026 Class of '09 Vita release.", is_known_developer: true, identities: [{ provider: "github", username: "TheSpasticGamer" }], projects: [] }
+,
+  { id: 19, slug: "devwithzachary", display_name: "DevWithZachary", description: "Developer of Linux on Vita (Alpine Linux distribution for PS Vita).", is_known_developer: true, identities: [{ provider: "reddit", username: "DevWithZachary" }, { provider: "github", username: "devwithzachary" }], projects: [] },
+  { id: 20, slug: "drdecki", display_name: "DrDecki", description: "Developer of the Aleph One PS Vita engine port for Marathon Trilogy.", is_known_developer: true, identities: [{ provider: "github", username: "DrDecki" }], projects: [] },
+  { id: 21, slug: "rocroverss", display_name: "Rocroverss", description: "Developer of the Apotris PS Vita native port.", is_known_developer: true, identities: [{ provider: "github", username: "Rocroverss" }], projects: [] },
+  { id: 22, slug: "metalsyntax", display_name: "MetalSyntax", description: "Developer of the Prince of Persia Classic Android ARMv7 Vita wrapper/port.", is_known_developer: true, identities: [{ provider: "github", username: "MetalSyntax" }], projects: [] }
 ];
 
 export const FALLBACK_UPDATES: any[] = [
@@ -1041,6 +1173,89 @@ export const FALLBACK_UPDATES: any[] = [
     sources: [
       { source_item_id: "src_test_drive_reddit", relationship: "primary", canonical_url: "https://www.reddit.com/r/vitahacks/comments/1wlqxq4/test_drive_1987_native_vita_port/" },
       { source_item_id: "src_test_drive_release", relationship: "release", canonical_url: "https://github.com/smart-pickle/TestDrive-Vita/releases/tag/v0.1" }
+    ]
+  }
+
+  ,{
+    id: "upd_linux_on_vita",
+    port_project_id: 30,
+    project_slug: "linux-on-vita",
+    project_display_name: "Linux on Vita (Alpine Linux)",
+    developer_display_name: "DevWithZachary",
+    developer_slug: "devwithzachary",
+    event_type: "release",
+    title: "Linux on Vita v1.2.0 released with Alpine Linux and Framebuffer DOOM",
+    summary: "DevWithZachary released v1.2.0 of LinuxOnVita featuring Linux kernel 6.12, touch virtual keyboard, apk package management, and native framebuffer DOOM.",
+    event_at: new Date('2026-09-25T15:25:25.000Z'),
+    verification_level: "developer_direct",
+    sources: [
+      { source_item_id: "src_linux_on_vita_reddit", relationship: "primary", canonical_url: "https://www.reddit.com/r/vitahacks/comments/1wnekpf/linux_on_vita/" },
+      { source_item_id: "src_linux_on_vita_repo", relationship: "release", canonical_url: "https://github.com/devwithzachary/LinuxOnVita/releases/tag/v1.2.0" }
+    ]
+  }
+  ,{
+    id: "upd_aleph_one_vita",
+    port_project_id: 31,
+    project_slug: "aleph-one-vita",
+    project_display_name: "Aleph One Vita (Marathon Engine)",
+    developer_display_name: "DrDecki",
+    developer_slug: "drdecki",
+    event_type: "release",
+    title: "Aleph One PS Vita v2.0 released with Marathon Trilogy support",
+    summary: "DrDecki published the v2.0 release of the Aleph One engine port for PS Vita with hardware-accelerated vitaGL rendering and dual analog controls.",
+    event_at: new Date('2026-09-24T19:47:55.000Z'),
+    verification_level: "developer_direct",
+    sources: [
+      { source_item_id: "src_aleph_one_repo", relationship: "release", canonical_url: "https://github.com/DrDecki/Aleph-One-PsVita/releases/tag/v2.0" }
+    ]
+  }
+  ,{
+    id: "upd_apotris_psvita",
+    port_project_id: 32,
+    project_slug: "apotris-psvita",
+    project_display_name: "Apotris PS Vita",
+    developer_display_name: "Rocroverss",
+    developer_slug: "rocroverss",
+    event_type: "release",
+    title: "Apotris PS Vita v1.0 released natively with 14 game modes",
+    summary: "Rocroverss published the initial native PS Vita release of Apotris running at a locked 60 FPS with complete audio and gameplay features.",
+    event_at: new Date('2026-09-23T23:06:45.000Z'),
+    verification_level: "developer_direct",
+    sources: [
+      { source_item_id: "src_apotris_repo", relationship: "release", canonical_url: "https://github.com/Rocroverss/apotris-psvita/releases/tag/v1.0" }
+    ]
+  }
+  ,{
+    id: "upd_pop_classic_vita",
+    port_project_id: 33,
+    project_slug: "prince-of-persia-classic-vita",
+    project_display_name: "Prince of Persia Classic Vita",
+    developer_display_name: "MetalSyntax",
+    developer_slug: "metalsyntax",
+    event_type: "release",
+    title: "Prince of Persia Classic PS Vita wrapper v01.28 released",
+    summary: "MetalSyntax released an Android ARMv7 wrapper for Prince of Persia Classic with full hardware graphics, controls, and sound.",
+    event_at: new Date('2026-09-03T02:52:45.000Z'),
+    verification_level: "developer_direct",
+    sources: [
+      { source_item_id: "src_pop_classic_repo", relationship: "release", canonical_url: "https://github.com/MetalSyntax/prince-of-persia-classic-psvita-port/releases/tag/v01.28" }
+    ]
+  }
+  ,{
+    id: "upd_re4_vita",
+    port_project_id: 34,
+    project_slug: "resident-evil-4-vita",
+    project_display_name: "Resident Evil 4 Vita (re4-vita)",
+    developer_display_name: "Rinnegatamante",
+    developer_slug: "rinnegatamante",
+    event_type: "project_announced",
+    title: "Rinnegatamante opens official re4-vita repository",
+    summary: "Rinnegatamante created the public GitHub repository for the Resident Evil 4 PlayStation Vita port following optimization teasers.",
+    event_at: new Date('2026-09-25T17:04:11.000Z'),
+    verification_level: "developer_direct",
+    sources: [
+      { source_item_id: "src_re4_vita_repo", relationship: "primary", canonical_url: "https://github.com/Rinnegatamante/re4-vita" },
+      { source_item_id: "src_re4_vita_reddit", relationship: "community", canonical_url: "https://www.reddit.com/r/VitaPiracy/comments/1wmax82/guess_it_is_happening/" }
     ]
   }
 ];

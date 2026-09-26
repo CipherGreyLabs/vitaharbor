@@ -5,7 +5,7 @@
     <link>https://vitaharbor.vercel.app/</link>
     <description>Community PlayStation Vita ports tracked from r/vitahacks + r/VitaPiracy + r/PSVitaHomebrew</description>
     <language>en-us</language>
-    <lastBuildDate>Sat, 26 Sep 2026 21:59:41 GMT</lastBuildDate>
+    <lastBuildDate>Sun, 27 Sep 2026 04:17:06 GMT</lastBuildDate>
     <item>
       <title><![CDATA[Medal of Honor: Allied Assault (OpenMoHAA) - IN_GAME]]></title>
       <link>https://www.reddit.com/r/vitahacks/comments/1tapf2b/wip_openmohaa_on_ps_vita_medal_of_honor_allied/</link>
@@ -208,6 +208,41 @@
       <guid isPermaLink="false">test-drive-1987-vita</guid>
       <pubDate>Sun, 20 Sep 2026 19:50:09 GMT</pubDate>
       <description><![CDATA[Native PS Vita/PSTV port of Test Drive (1987) built from kylofon's static recompilation, with a public v0.1 release published on GitHub. Hardware Status: The repository describes hardware-accelerated Vita rendering; no independent performance measurement is recorded.]]></description>
+    </item>
+    <item>
+      <title><![CDATA[Linux on Vita (Alpine Linux) - RELEASED]]></title>
+      <link>https://www.reddit.com/r/vitahacks/comments/1wnekpf/linux_on_vita/</link>
+      <guid isPermaLink="false">linux-on-vita</guid>
+      <pubDate>Fri, 25 Sep 2026 15:25:25 GMT</pubDate>
+      <description><![CDATA[Complete standalone handheld Linux 6.12 distribution for PS Vita with onscreen touch typing, gamepad navigation, automated Wi-Fi, package management (apk), and native framebuffer DOOM. Hardware Status: Kernel 6.12 boots with responsive touch UI; framebuffer DOOM runs at smooth framerates on native hardware.]]></description>
+    </item>
+    <item>
+      <title><![CDATA[Aleph One Vita (Marathon Engine) - RELEASED]]></title>
+      <link>https://vitaharbor.vercel.app/projects/aleph-one-vita</link>
+      <guid isPermaLink="false">aleph-one-vita</guid>
+      <pubDate>Thu, 24 Sep 2026 20:19:09 GMT</pubDate>
+      <description><![CDATA[Native PS Vita port of Bungie's open-source Aleph One engine, running Marathon, Marathon 2: Durandal, Marathon Infinity, and custom scenarios. Hardware Status: Solid 60 FPS performance powered by SDL2 and vitaGL.]]></description>
+    </item>
+    <item>
+      <title><![CDATA[Apotris PS Vita - RELEASED]]></title>
+      <link>https://vitaharbor.vercel.app/projects/apotris-psvita</link>
+      <guid isPermaLink="false">apotris-psvita</guid>
+      <pubDate>Fri, 25 Sep 2026 08:32:53 GMT</pubDate>
+      <description><![CDATA[Native Vita port of the open-source block-stacking game Apotris with 14 unique game modes, customizable controls, and 60 FPS performance. Hardware Status: Flawless 60 FPS gameplay using Tilengine and SoLoud audio subsystem.]]></description>
+    </item>
+    <item>
+      <title><![CDATA[Prince of Persia Classic Vita - RELEASED]]></title>
+      <link>https://vitaharbor.vercel.app/projects/prince-of-persia-classic-vita</link>
+      <guid isPermaLink="false">prince-of-persia-classic-vita</guid>
+      <pubDate>Sat, 26 Sep 2026 13:26:25 GMT</pubDate>
+      <description><![CDATA[Android ARMv7 wrapper/loader for Prince of Persia Classic, recreating the 1989 classic with modernized 3D graphics on PlayStation Vita. Hardware Status: Runs smoothly at full native Vita screen resolution with vitaGL shaders.]]></description>
+    </item>
+    <item>
+      <title><![CDATA[Resident Evil 4 Vita (re4-vita) - RESEARCH]]></title>
+      <link>https://www.reddit.com/r/VitaPiracy/comments/1wmax82/guess_it_is_happening/</link>
+      <guid isPermaLink="false">resident-evil-4-vita</guid>
+      <pubDate>Fri, 25 Sep 2026 17:04:11 GMT</pubDate>
+      <description><![CDATA[Official public repository established by Rinnegatamante for the upcoming PlayStation Vita port of Resident Evil 4. Hardware Status: Early stage pipeline development; target framerate and memory profiling underway.]]></description>
     </item>
   </channel>
 </rss>

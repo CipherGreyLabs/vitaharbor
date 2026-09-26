@@ -446,7 +446,7 @@
       "schema_version": 2,
       "id": "reddit-1wnekpf",
       "external_id": "1wnekpf",
-      "state": "QUARANTINED",
+      "state": "PROMOTED",
       "state_history": [
         {
           "state": "DETECTED",
@@ -459,6 +459,12 @@
           "at": "2026-09-22T17:32:15.796Z",
           "actor": "reddit-scanner",
           "reason": "Scanner result is unverified and cannot enter the curated ledger"
+        },
+        {
+          "state": "PROMOTED",
+          "at": "2026-09-26T17:35:00.000Z",
+          "actor": "codex",
+          "reason": "Promote developer-direct Linux on Vita release with active GitHub repository and v1.2.0 release"
         }
       ],
       "source": {
@@ -911,7 +917,7 @@
       "schema_version": 2,
       "id": "reddit-1wmax82",
       "external_id": "1wmax82",
-      "state": "VERIFIED_FOR_REVIEW",
+      "state": "PROMOTED",
       "state_history": [
         {
           "state": "DETECTED",
@@ -930,6 +936,12 @@
           "at": "2026-09-21T13:25:27.694Z",
           "actor": "codex",
           "reason": "Verified linked Resident Evil 4 Vita optimization demo but no public repository"
+        },
+        {
+          "state": "PROMOTED",
+          "at": "2026-09-26T17:35:00.000Z",
+          "actor": "codex",
+          "reason": "Promote official Rinnegatamante re4-vita repository established for Resident Evil 4 Vita port"
         }
       ],
       "source": {

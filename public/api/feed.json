@@ -378,6 +378,81 @@
         "SDL2",
         "VitaGL / GXM"
       ]
+    },
+    {
+      "id": "linux-on-vita",
+      "url": "https://www.reddit.com/r/vitahacks/comments/1wnekpf/linux_on_vita/",
+      "title": "Linux on Vita (Alpine Linux)",
+      "content_text": "Stage: released | Platform: ARMv7-A / Linux | Summary: Complete standalone handheld Linux 6.12 distribution for PS Vita with onscreen touch typing, gamepad navigation, automated Wi-Fi, package management (apk), and native framebuffer DOOM. | Hardware: Kernel 6.12 boots with responsive touch UI; framebuffer DOOM runs at smooth framerates on native hardware.",
+      "date_modified": "2026-09-25T15:25:25.000Z",
+      "tags": [
+        "released",
+        "ARMv7-A / Linux",
+        "ARMv7-A",
+        "Linux 6.12 Kernel",
+        "Alpine Linux",
+        "Framebuffer DOOM",
+        "Touch Keyboard"
+      ]
+    },
+    {
+      "id": "aleph-one-vita",
+      "url": "https://vitaharbor.vercel.app/projects/aleph-one-vita",
+      "title": "Aleph One Vita (Marathon Engine)",
+      "content_text": "Stage: released | Platform: Mac / PC | Summary: Native PS Vita port of Bungie's open-source Aleph One engine, running Marathon, Marathon 2: Durandal, Marathon Infinity, and custom scenarios. | Hardware: Solid 60 FPS performance powered by SDL2 and vitaGL.",
+      "date_modified": "2026-09-24T20:19:09.000Z",
+      "tags": [
+        "released",
+        "Mac / PC",
+        "Native C++",
+        "VitaSDK",
+        "SDL2",
+        "OpenGL / vitaGL"
+      ]
+    },
+    {
+      "id": "apotris-psvita",
+      "url": "https://vitaharbor.vercel.app/projects/apotris-psvita",
+      "title": "Apotris PS Vita",
+      "content_text": "Stage: released | Platform: GBA / PC | Summary: Native Vita port of the open-source block-stacking game Apotris with 14 unique game modes, customizable controls, and 60 FPS performance. | Hardware: Flawless 60 FPS gameplay using Tilengine and SoLoud audio subsystem.",
+      "date_modified": "2026-09-25T08:32:53.000Z",
+      "tags": [
+        "released",
+        "GBA / PC",
+        "Native C",
+        "VitaSDK",
+        "SDL2",
+        "vitaGL",
+        "Tilengine",
+        "SoLoud"
+      ]
+    },
+    {
+      "id": "prince-of-persia-classic-vita",
+      "url": "https://vitaharbor.vercel.app/projects/prince-of-persia-classic-vita",
+      "title": "Prince of Persia Classic Vita",
+      "content_text": "Stage: released | Platform: Android ARMv7 / XBLA | Summary: Android ARMv7 wrapper/loader for Prince of Persia Classic, recreating the 1989 classic with modernized 3D graphics on PlayStation Vita. | Hardware: Runs smoothly at full native Vita screen resolution with vitaGL shaders.",
+      "date_modified": "2026-09-26T13:26:25.000Z",
+      "tags": [
+        "released",
+        "Android ARMv7 / XBLA",
+        "ARMv7 SO Loader",
+        "Cocos2d-x",
+        "OpenGL ES / vitaGL"
+      ]
+    },
+    {
+      "id": "resident-evil-4-vita",
+      "url": "https://www.reddit.com/r/VitaPiracy/comments/1wmax82/guess_it_is_happening/",
+      "title": "Resident Evil 4 Vita (re4-vita)",
+      "content_text": "Stage: research | Platform: GameCube / PS2 / Android | Summary: Official public repository established by Rinnegatamante for the upcoming PlayStation Vita port of Resident Evil 4. | Hardware: Early stage pipeline development; target framerate and memory profiling underway.",
+      "date_modified": "2026-09-25T17:04:11.000Z",
+      "tags": [
+        "research",
+        "GameCube / PS2 / Android",
+        "ARMv7 Wrapper / Soloader",
+        "vitaGL"
+      ]
     }
   ]
 }

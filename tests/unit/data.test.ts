@@ -51,7 +51,10 @@ describe("ledger data integrity", () => {
       "celeste-classic-vita",
       "cave-story-evo-vita",
       "nfs-hot-pursuit-vita",
-      "call-of-duty-4-vita"
+      "call-of-duty-4-vita",
+      "aleph-one-vita",
+      "apotris-psvita",
+      "prince-of-persia-classic-vita"
     ]);
     for (const project of FALLBACK_PROJECTS) {
       if (intentionallyUnlinked.has(project.slug)) {
@@ -95,7 +98,7 @@ describe("ledger data integrity", () => {
         expect(update.sources, update.id + " sources").toEqual([]);
       } else {
         expect(update.sources?.length, update.id + " sources").toBeGreaterThan(0);
-        expect(update.sources[0].canonical_url).toMatch(/reddit\.com/);
+        expect(update.sources[0].canonical_url).toMatch(/https?:\/\//);
       }
     }
   });

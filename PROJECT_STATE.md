@@ -1,3 +1,16 @@
+
+## Current state: VH-CURATED-025 projects 30-34 expansion (2026-09-26)
+
+- Curated project ledger expanded from 29 to 34 verified PS Vita port projects:
+  - Project 30: **Linux on Vita (Alpine Linux)** (`linux-on-vita`) - Released (v1.2.0, DevWithZachary)
+  - Project 31: **Aleph One Vita (Marathon Engine)** (`aleph-one-vita`) - Released (v2.0, DrDecki)
+  - Project 32: **Apotris PS Vita** (`apotris-psvita`) - Released (v1.0, Rocroverss)
+  - Project 33: **Prince of Persia Classic Vita** (`prince-of-persia-classic-vita`) - Released (v01.28, MetalSyntax)
+  - Project 34: **Resident Evil 4 Vita** (`resident-evil-4-vita`) - Research / Official repo (Rinnegatamante)
+- Promoted source-verified candidate items in `data/quarantine.json` (`reddit-1wnekpf` and `reddit-1wmax82`).
+- Rebuilt feeds and prerendered static assets: 34 project detail pages generated, 37 sitemap URLs.
+- Verification: `npm run verify` passed (typecheck, 116/116 unit tests, build); Playwright E2E passed 21/21 against local preview server.
+
 # VitaHarbor project state
 
 Updated: 2026-09-26
