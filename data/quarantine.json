@@ -1,8 +1,99 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-09-26T12:15:17.947Z",
+  "generated_at": "2026-09-26T17:13:39.126Z",
   "source": "r/vitahacks + r/VitaPiracy + r/PSVitaHomebrew RSS",
   "items": [
+    {
+      "schema_version": 2,
+      "id": "reddit-1wqtbfl",
+      "external_id": "1wqtbfl",
+      "state": "QUARANTINED",
+      "state_history": [
+        {
+          "state": "DETECTED",
+          "at": "2026-09-26T17:13:39.126Z",
+          "actor": "reddit-scanner",
+          "reason": "Canonical Reddit RSS entry accepted at the ingestion boundary"
+        },
+        {
+          "state": "QUARANTINED",
+          "at": "2026-09-26T17:13:39.126Z",
+          "actor": "reddit-scanner",
+          "reason": "Scanner result is unverified and cannot enter the curated ledger"
+        }
+      ],
+      "source": {
+        "platform": "reddit",
+        "subreddit": "vitahacks",
+        "canonical_url": "https://www.reddit.com/r/vitahacks/comments/1wqtbfl/update_gta_lcs_ps2_running_on_the_vita_natively/",
+        "author": "Wookie_von_Gondor",
+        "title": "UPDATE: GTA LCS PS2 running on the Vita natively - 25-60 FPS with native resolution, audio works too! (AI PORT)",
+        "body": "Me and my AI assistant are very close to get the decompiled PS2 version of GTA LCS fully working on the Vita. It already runs much better than the PSP version - not to mention it's double the resolution (960×544)! Whats working: 2D & 3D rendering Audio Controls Settings Very playable performance Needs testing: Save files Bugs Needs fixing: Collision textures are not loading properly (work in progress) Texture load times in general Planned features: PS Vita settings preset FPS limiter for 30 and 60 This is a fork of Epic0522's REGTA-3DSPort-Complete project on Github. &#32; submitte",
+        "published_at": "2026-09-26T15:26:37.000Z"
+      },
+      "classification": {
+        "confidence": "high",
+        "reason": "7 dev signals: \\bplayable\\b, \\brender(?:s|ed|ing)?\\b, \\bfps\\b · category=project_update",
+        "candidate_type": "port",
+        "category": "project_update",
+        "question": false,
+        "spam": false
+      },
+      "provenance": {
+        "repository_url": null,
+        "release_url": null,
+        "evidence_urls": [],
+        "evidence_bundle_id": null,
+        "repository_identity": null,
+        "repository_created_at": null,
+        "repository_last_activity_at": null,
+        "release_facts": [],
+        "vita_evidence": [],
+        "author_linkage": null,
+        "corroboration": [],
+        "duplicate_relation": {
+          "content_hash": "cc6c00f508c53f75bdfd8141009578087fb344dc1a860405d196dc966ab5f238",
+          "related_candidate_ids": []
+        }
+      },
+      "campaign": {
+        "cluster_id": "campaign-ac790c64",
+        "linkage_confidence": "medium",
+        "signals": [
+          "same_author_burst",
+          "shared_outbound_fingerprint"
+        ],
+        "related_candidate_ids": [
+          "reddit-1wpsyhn"
+        ],
+        "text_fingerprint": "d3c3647c",
+        "media_fingerprints": [
+          "external-preview.redd.it/dmzumjn6mjv1dnjombahx7xb621vmql3-lefxorns5gxmfkjfvb9oortoiia.png"
+        ],
+        "outbound_fingerprints": [
+          "www.reddit.com/r/vitahacks/comments/1wqtbfl/update_gta_lcs_ps2_running_on_the_vita_natively",
+          "external-preview.redd.it/dmzumjn6mjv1dnjombahx7xb621vmql3-lefxorns5gxmfkjfvb9oortoiia.png",
+          "github.com/epic0522/regta-3dsport-complete",
+          "www.reddit.com/user/wookie_von_gondor",
+          "v.redd.it/3cv5xe15uvrh1"
+        ],
+        "direct_intent": false,
+        "explicit_campaign_reference": false,
+        "incident_id": null
+      },
+      "risk_signals": [
+        "no_project_evidence_in_post"
+      ],
+      "evidence_gaps": [
+        "exact project repository",
+        "repository identity and activity facts",
+        "release or build evidence",
+        "author/developer linkage and independent corroboration"
+      ],
+      "content_hash": "cc6c00f508c53f75bdfd8141009578087fb344dc1a860405d196dc966ab5f238",
+      "review": null,
+      "incident": null
+    },
     {
       "schema_version": 2,
       "id": "reddit-1wq1o7g",
@@ -145,10 +236,15 @@
         }
       },
       "campaign": {
-        "cluster_id": null,
-        "linkage_confidence": "none",
-        "signals": [],
-        "related_candidate_ids": [],
+        "cluster_id": "campaign-ac790c64",
+        "linkage_confidence": "medium",
+        "signals": [
+          "same_author_burst",
+          "shared_outbound_fingerprint"
+        ],
+        "related_candidate_ids": [
+          "reddit-1wqtbfl"
+        ],
         "text_fingerprint": "b4681779",
         "media_fingerprints": [
           "external-preview.redd.it/zwf5dnk0nhq4bnjomtzmtbsf0if1fnwpvwhrwimo9_lelwqmbqele2z8eyho.png"
