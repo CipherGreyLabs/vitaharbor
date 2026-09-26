@@ -59,6 +59,7 @@ npx vercel --prod --yes
 5. **Never invent ledger content.** If a Reddit thread body cannot be read, say so and mark the
    entry `detection: detected`. Do not fill in performance numbers that were not stated.
 6. **No piracy.** Never link ROMs, ISOs or game data. Only discussion threads and source repos.
+7. **Worker model rule.** All worker chats in this project must strictly and exclusively use `gemini-3.7-flash` with `low` reasoning effort as a fixed rule. Never dispatch or configure workers with other models or higher thinking levels for VitaHarbor.
 
 ## Project traceability contract
 

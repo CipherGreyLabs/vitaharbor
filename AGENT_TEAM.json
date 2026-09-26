@@ -77,8 +77,8 @@
   ],
   "optionalWorkerTemplate": {
     "role": "specialist-worker",
-    "model": "gpt-5.6-luna",
-    "reasoningEffort": "xhigh",
+    "model": "gemini-3.7-flash",
+    "reasoningEffort": "low",
     "branchPattern": "codex/worker/<assignmentId>",
     "worktreeRequired": true,
     "mayCreateWorkers": false,
