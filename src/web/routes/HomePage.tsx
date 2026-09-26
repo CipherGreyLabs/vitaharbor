@@ -422,7 +422,7 @@ export const HomePage: React.FC = () => {
       {/* Header Bar */}
       <header
         className={
-          "sticky top-0 z-50 border-b vh-glass/85 backdrop-blur-xl transition-colors " +
+          "sticky top-0 z-50 border-b vh-glass backdrop-blur-xl transition-colors " +
           (scrolled ? "border-hairline-strong/30" : "border-transparent")
         }
       >
