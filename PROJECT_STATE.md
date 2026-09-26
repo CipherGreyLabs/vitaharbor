@@ -1,6 +1,16 @@
 # VitaHarbor project state
 
-Updated: 2026-09-24
+Updated: 2026-09-26
+
+## Current state: VH-PORT-ATLAS-024 Port Atlas candidate (2026-09-26)
+
+- The final implementation candidate is `02a0cacd4345861d4ff92662b1ae7cac96c82243`, following the main redesign commit `f58bd52de819eaf4c62880f2f2c5422dfc87720d` on local branch `codex/vh-port-atlas-layout`, created directly from `2e0e6d8c530257e77fa0459bac8ee9e27f45b3a9`. This is a local review candidate; no push, merge, deployment, or production acceptance check was performed.
+- The home page now leads with a compact field-guide introduction, a source-linked latest-signal row, and a three-column project atlas before the collapsed interactive Vita showcase and personal panels. Search and filters remain keyboard operable with 44px controls. Cards use source screenshots when available and typographic fallbacks otherwise; selecting “Show on Vita” opens the preview. The prerendered no-JavaScript home follows the same directory-first structure.
+- The palette and type scale use a warm light treatment with visible focus styles. Curated ledger data was not changed.
+- Exact candidate checks passed: `npm run verify` (typecheck, 116/116 unit tests, build of 29 project pages and 32 sitemap URLs), `npm run lint`, and local-preview Playwright E2E 21/21 at `http://127.0.0.1:4177`. The existing mobile audit found no page overflow or small targets at 375, 390, 412, and 768px. The candidate contrast audit checked 44 text styles with 0 failures; the lowest ratio was 4.68:1. The E2E suite also verifies keyboard search/filter use, no-JavaScript content, and the interactive 3D preview.
+- Review screenshots are `test-results/port-atlas-desktop.png` and `test-results/port-atlas-mobile-390.png` in this worktree. Production state was not rechecked and remains outside this candidate's evidence.
+- The hash-protected `HANDOFF.md` was regenerated for this candidate; its final 22 source hashes are verified with `NEW-HANDOFF.ps1 -Verify`.
+- The historical 2026-09-24 note below about an ignored Vercel `.env.local` pertains to a different scanner worker worktree. This Port Atlas worktree was checked and has no `.env.local`.
 
 ## Current state: VH-SCANNER-FRESHNESS-022 production release (2026-09-24)
 
