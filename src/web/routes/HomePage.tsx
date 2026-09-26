@@ -436,7 +436,10 @@ export const HomePage: React.FC = () => {
           <nav aria-label="Sections" className="flex items-center gap-2 text-body text-ink-medium sm:gap-5">
             <a href="/updates" className="inline-flex min-h-[44px] items-center rounded-md px-1 transition-colors hover:text-ink">Updates</a>
             <a href="#directory" className="inline-flex min-h-[44px] items-center rounded-md px-1 transition-colors hover:text-ink">Directory</a>
-            <a href="/discovery" className="inline-flex min-h-[44px] items-center rounded-md px-1 transition-colors hover:text-ink">Community posts</a>
+            <a href="/discovery" aria-label="Community posts" className="inline-flex min-h-[44px] items-center rounded-md px-1 transition-colors hover:text-ink">
+              <span className="sm:hidden">Posts</span>
+              <span className="hidden sm:inline">Community posts</span>
+            </a>
             <div className="hidden items-center gap-2 rounded-full border border-hairline bg-surface px-3 py-1 font-mono text-micro text-ink-muted sm:inline-flex">
               <span className="inline-flex items-center gap-1 text-stage-done font-medium">
                 <span className="h-1.5 w-1.5 rounded-full bg-stage-done" />

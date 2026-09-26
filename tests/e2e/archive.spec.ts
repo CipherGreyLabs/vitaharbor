@@ -34,6 +34,9 @@ test.describe("archive", () => {
       }));
       expect(mobile.scrollWidth).toBeLessThanOrEqual(mobile.clientWidth);
       expect(mobile.directoryTop).toBeLessThanOrEqual(850);
+      const communityLink = page.getByRole("navigation", { name: "Sections" }).getByRole("link", { name: "Community posts" });
+      await expect(communityLink.locator("span").first()).toBeVisible();
+      await expect(communityLink.locator("span").nth(1)).toBeHidden();
     }
     await page.setViewportSize({ width: 390, height: 844 });
     await page.screenshot({ path: "test-results/port-atlas-mobile-390.png" });
