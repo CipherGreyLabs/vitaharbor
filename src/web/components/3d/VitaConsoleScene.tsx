@@ -93,7 +93,7 @@ export const VitaConsoleScene: React.FC<VitaConsoleSceneProps> = ({
     try {
       renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, lightDevice ? 1.25 : 1.75));
       renderer.toneMapping = THREE.ACESFilmicToneMapping;
-      renderer.toneMappingExposure = 1.08;
+      renderer.toneMappingExposure = 1.02;
       pmrem = new THREE.PMREMGenerator(renderer);
       const room = new RoomEnvironment();
       env = pmrem.fromScene(room, 0.04);
@@ -451,17 +451,17 @@ const recessMat = new THREE.MeshStandardMaterial({color:'#14161a',roughness:0.52
     }
 
     // STUDIO LIGHTING SETUP WITH EDGE RIM ILLUMINATION
-    scene.add(new THREE.HemisphereLight('#ffffff', '#7c848d', 0.85));
-    const light = new THREE.DirectionalLight('#ffffff', 1.8);
+    scene.add(new THREE.HemisphereLight('#e7f1ff', '#151c26', 0.72));
+    const light = new THREE.DirectionalLight('#edf5ff', 1.55);
     light.position.set(-80, 160, 260);
     scene.add(light);
-    const fill = new THREE.DirectionalLight('#c8e1ff', 1.3);
+    const fill = new THREE.DirectionalLight('#a9ceff', 0.72);
     fill.position.set(180, 0, 100);
     scene.add(fill);
-    const rimLight = new THREE.DirectionalLight('#00a2ff', 2.0);
+    const rimLight = new THREE.DirectionalLight('#249cf4', 0.78);
     rimLight.position.set(0, -140, -180);
     scene.add(rimLight);
-    const topRimLight = new THREE.DirectionalLight('#4400ff', 1.4);
+    const topRimLight = new THREE.DirectionalLight('#8fbaff', 0.4);
     topRimLight.position.set(0, 180, -120);
     scene.add(topRimLight);
 

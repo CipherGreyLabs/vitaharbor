@@ -63,8 +63,8 @@ const html = `<!DOCTYPE html>
       body {
         width: 1200px;
         height: 630px;
-        background: #08090a;
-        color: #f4f6f8;
+        background: #090c11;
+        color: #edf5ff;
         font-family: Inter, system-ui, sans-serif;
         position: relative;
         overflow: hidden;
@@ -73,15 +73,15 @@ const html = `<!DOCTYPE html>
         position: absolute;
         inset: 0;
         background:
-          radial-gradient(760px 420px at 88% 8%, rgba(58, 210, 255, 0.20), transparent 62%),
-          radial-gradient(620px 420px at 8% 100%, rgba(58, 210, 255, 0.07), transparent 66%);
+          radial-gradient(760px 420px at 88% 8%, rgba(36, 156, 244, 0.13), transparent 62%),
+          radial-gradient(620px 420px at 8% 100%, rgba(36, 156, 244, 0.045), transparent 66%);
       }
       .grid {
         position: absolute;
         inset: 0;
         background-image:
-          linear-gradient(to right, rgba(255,255,255,0.045) 1px, transparent 1px),
-          linear-gradient(to bottom, rgba(255,255,255,0.045) 1px, transparent 1px);
+          linear-gradient(to right, rgba(255,255,255,0.025) 1px, transparent 1px),
+          linear-gradient(to bottom, rgba(255,255,255,0.025) 1px, transparent 1px);
         background-size: 60px 60px;
         mask-image: radial-gradient(circle at 50% 40%, #000 42%, transparent 88%);
       }
@@ -96,24 +96,24 @@ const html = `<!DOCTYPE html>
       .mono { font-family: "JetBrains Mono", ui-monospace, monospace; }
       .top { display: flex; align-items: center; justify-content: space-between; }
       .brand { display: flex; align-items: center; gap: 12px; }
-      .dot { width: 10px; height: 10px; border-radius: 999px; background: #3ad2ff; box-shadow: 0 0 18px rgba(58,210,255,0.85); }
+      .dot { width: 10px; height: 10px; border-radius: 999px; background: #249cf4; }
       .wordmark { font-size: 19px; font-weight: 700; letter-spacing: 0.30em; }
-      .feeds { font-size: 11.5px; letter-spacing: 0.20em; color: #7c848d; }
+      .feeds { font-size: 11.5px; letter-spacing: 0.20em; color: #9aaabd; }
       .mid { padding-top: 4px; }
-      .eyebrow { font-size: 11.5px; letter-spacing: 0.34em; color: #3ad2ff; margin-bottom: 20px; }
+      .eyebrow { font-size: 11.5px; letter-spacing: 0.34em; color: #4fb5ff; margin-bottom: 20px; }
       h1 { font-size: 68px; line-height: 1.02; letter-spacing: -0.028em; font-weight: 700; }
-      h1 .dim { display: block; color: #6f7a84; }
-      .lede { margin-top: 22px; max-width: 690px; font-size: 16px; line-height: 1.62; color: #a3acb5; }
+      h1 .dim { display: block; color: #9aaabd; }
+      .lede { margin-top: 22px; max-width: 690px; font-size: 16px; line-height: 1.62; color: #9aaabd; }
       .rail { display: flex; align-items: center; gap: 7px; margin-top: 30px; }
-      .step { font-size: 9.5px; letter-spacing: 0.12em; padding: 6px 9px; border: 1px solid #242830; color: #6b747d; border-radius: 2px; }
-      .step.on { border-color: rgba(58,210,255,0.55); color: #3ad2ff; background: rgba(58,210,255,0.09); }
-      .foot { border-top: 1px solid #242830; padding-top: 22px; display: flex; align-items: flex-end; justify-content: space-between; }
+      .step { font-size: 9.5px; letter-spacing: 0.12em; padding: 6px 9px; border: 1px solid #202a38; color: #9aaabd; border-radius: 2px; }
+      .step.on { border-color: rgba(36,156,244,0.55); color: #4fb5ff; background: rgba(36,156,244,0.12); }
+      .foot { border-top: 1px solid #202a38; padding-top: 22px; display: flex; align-items: flex-end; justify-content: space-between; }
       .stats { display: flex; gap: 54px; }
       .stat .n { font-size: 38px; font-weight: 700; letter-spacing: -0.02em; }
-      .stat .n.accent { color: #3ad2ff; }
-      .stat .l { font-size: 9.5px; letter-spacing: 0.20em; color: #7c848d; margin-top: 6px; }
-      .url { font-size: 12px; letter-spacing: 0.16em; color: #7c848d; }
-      .url b { color: #f4f6f8; font-weight: 500; }
+      .stat .n.accent { color: #249cf4; }
+      .stat .l { font-size: 9.5px; letter-spacing: 0.20em; color: #9aaabd; margin-top: 6px; }
+      .url { font-size: 12px; letter-spacing: 0.16em; color: #9aaabd; }
+      .url b { color: #edf5ff; font-weight: 500; }
     </style>
   </head>
   <body>
