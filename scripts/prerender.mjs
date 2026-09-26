@@ -30,25 +30,32 @@ function prettyStage(stage) {
 const projectItemsHtml = FALLBACK_PROJECTS.map((p, idx) => {
   const title = escapeXml(p.display_name || p.game_title || 'Untitled');
   const stage = escapeXml(prettyStage(p.current_stage));
-  const notes = escapeXml(p.performance_notes || p.playability_notes || p.summary || '');
+  const notes = escapeXml(p.performance_notes || p.playability_notes || '');
   const platform = escapeXml(p.original_platform || 'PlayStation Vita');
+  const stageTone = ['released', 'playable', 'completable'].includes(String(p.current_stage))
+    ? 'ready'
+    : String(p.current_stage) === 'in_game'
+      ? 'progress'
+      : String(p.current_stage) === 'booting'
+        ? 'caution'
+        : 'idle';
+  const initials = escapeXml((p.display_name || p.game_title || 'Vita').split(/\s+/).filter(Boolean).slice(0, 2).map((word) => word[0]).join('').toUpperCase());
+  const artwork = p.screenshot_url
+    ? `<img class="vh-static-art-image" src="${escapeXml(p.screenshot_url)}" alt="${escapeXml(p.screenshot_alt || ('Screenshot for ' + title))}" loading="lazy" decoding="async">`
+    : `<div class="vh-static-art-fallback" aria-hidden="true"><span>${initials}</span><span>${platform}</span></div>`;
   const redditLink = p.reddit_url
-    ? `<a href="${escapeXml(p.reddit_url)}" target="_blank" rel="noopener noreferrer" class="text-xs text-blue-600 hover:underline">Reddit Thread</a>`
+    ? `<a href="${escapeXml(p.reddit_url)}" target="_blank" rel="noopener noreferrer" class="vh-static-source">Open source discussion</a>`
     : '';
 
-  return `          <li id="entry-${p.slug}" class="py-4 border-b border-gray-200">
-            <div class="flex flex-col sm:flex-row sm:items-baseline justify-between gap-2">
-              <div>
-                <span class="text-xs text-gray-500 font-mono">${String(idx + 1).padStart(2, '0')} / ${platform}</span>
-                <h3 class="text-base font-semibold text-gray-900">${title}</h3>
-              </div>
-              <div class="flex items-center gap-3">
-                <span class="inline-flex rounded bg-gray-100 px-2 py-0.5 text-xs font-semibold uppercase text-gray-700">${stage}</span>
-                ${redditLink}
-              </div>
+  return `          <li id="entry-${escapeXml(p.slug)}" class="vh-static-card">
+            <div class="vh-static-art">${artwork}</div>
+            <div class="vh-static-card-body">
+              <div class="vh-static-card-meta"><span>${String(idx + 1).padStart(2, '0')} · ${platform}</span><span class="vh-static-stage vh-static-stage--${stageTone}">${stage}</span></div>
+              <h3><a href="/projects/${escapeXml(p.slug)}/">${title}</a></h3>
+              <p>${escapeXml(p.summary || '')}</p>
+              ${notes ? `<p class="vh-static-notes">Project notes: ${notes}</p>` : ''}
+              ${redditLink}
             </div>
-            <p class="mt-1.5 text-sm text-gray-600">${escapeXml(p.summary || '')}</p>
-            ${notes ? `<p class="mt-1 text-xs text-gray-500 font-mono">Status: ${notes}</p>` : ''}
           </li>`;
 }).join('\n');
 
@@ -66,31 +73,28 @@ function formatUtcDateTime(value) {
   }) + ' UTC';
 }
 
-const latestUpdatesHtml = [...FALLBACK_UPDATES]
+const latestUpdate = [...FALLBACK_UPDATES]
   .sort((a, b) => new Date(b.event_at).getTime() - new Date(a.event_at).getTime())
-  .slice(0, 4)
-  .map((update) => {
-    const title = escapeXml(update.title || 'Untitled update');
-    const summary = escapeXml(update.summary || '');
-    const project = escapeXml(update.project_display_name || 'Unassigned project');
-    const date = escapeXml(formatUtcDateTime(update.event_at));
-    const projectLink = update.project_slug
-      ? `<a href="/projects/${escapeXml(update.project_slug)}/" class="text-blue-600 hover:underline">${project}</a>`
-      : `<span class="text-gray-500" title="No project route is recorded">${project}</span>`;
-    const source = update.sources?.[0]?.canonical_url
-      ? `<a href="${escapeXml(update.sources[0].canonical_url)}" target="_blank" rel="noopener noreferrer" class="mt-4 inline-block text-sm font-medium text-gray-900 hover:underline">Source thread</a>`
-      : '';
-    return `          <article class="rounded-2xl border border-gray-200 bg-white p-5">
-            <div class="flex flex-wrap items-center justify-between gap-2 text-xs font-medium uppercase tracking-wide text-gray-500">
-              ${projectLink}
-              <time datetime="${new Date(update.event_at).toISOString()}">${date}</time>
-            </div>
-            <h3 class="mt-3 text-base font-semibold leading-snug text-gray-900">${title}</h3>
-            <p class="mt-2 text-sm leading-relaxed text-gray-600">${summary}</p>
-            ${source}
-          </article>`;
-  })
-  .join('\n');
+  [0];
+
+const latestSignalHtml = latestUpdate
+  ? (() => {
+      const date = escapeXml(formatUtcDateTime(latestUpdate.event_at));
+      const eventDate = new Date(latestUpdate.event_at);
+      const dateTime = Number.isNaN(eventDate.getTime()) ? '' : ` datetime="${eventDate.toISOString()}"`;
+      const projectName = escapeXml(latestUpdate.project_display_name || 'Community update');
+      const project = latestUpdate.project_slug
+        ? `<a href="/projects/${escapeXml(latestUpdate.project_slug)}/">${projectName}</a>`
+        : `<span>${projectName}</span>`;
+      const source = latestUpdate.sources?.[0]?.canonical_url
+        ? `<a href="${escapeXml(latestUpdate.sources[0].canonical_url)}" target="_blank" rel="noopener noreferrer">Open source discussion</a>`
+        : '';
+      return `<section class="vh-static-signal" aria-label="Latest signal">
+        <div><div class="vh-static-signal-meta"><strong>Latest signal</strong><time${dateTime}>${date}</time>${project}</div><p>${escapeXml(latestUpdate.title || 'Project update')}</p></div>
+        <div class="vh-static-signal-links">${source}<a href="/updates/">All updates</a></div>
+      </section>`;
+    })()
+  : '';
 
 // ItemList structured data, escaped so a project title can never close the script tag.
 const itemListJsonLd = JSON.stringify(
@@ -145,71 +149,52 @@ function applyMeta(html, meta) {
   return out;
 }
 
-const prerenderedBody = `<div id="top" class="min-h-screen bg-[#fbfbfd] text-[#1d1d1f]">
-    <header class="border-b border-gray-200 bg-white/90 sticky top-0 z-50">
-      <div class="mx-auto flex h-14 max-w-5xl items-center justify-between px-6">
-        <a href="#top" class="text-lg font-semibold tracking-tight text-gray-900">VitaHarbor</a>
-        <nav class="flex items-center gap-5 text-sm text-gray-600">
-          <a href="/updates/" class="hover:text-gray-900">Updates</a>
-          <a href="#directory" class="hover:text-gray-900">Directory</a>
-          <a href="/discovery/" class="hover:text-gray-900">Discovery</a>
-          <span class="inline-flex items-center gap-1.5 rounded-full bg-gray-100 px-2.5 py-1 text-xs font-medium text-gray-600">
-            <span class="h-1.5 w-1.5 rounded-full bg-emerald-500"></span>
-            ${FALLBACK_PROJECTS.length} indexed
-          </span>
+const prerenderedBody = `<div id="top" class="vh-static-page">
+    <header class="vh-static-header">
+      <div class="vh-static-header-inner">
+        <a href="#top" class="vh-static-brand">VitaHarbor</a>
+        <nav aria-label="Sections" class="vh-static-nav">
+          <a href="/updates/">Updates</a>
+          <a href="#directory">Directory</a>
+          <a href="/discovery/">Community posts</a>
         </nav>
       </div>
     </header>
 
-    <main id="main-content" class="mx-auto max-w-5xl px-6 py-16">
-      <section class="text-center mb-16">
-        <p class="text-xs font-medium uppercase tracking-widest text-gray-500">Community port updates</p>
-        <h1 class="mt-4 text-4xl sm:text-5xl font-extrabold tracking-tight text-gray-900">The Vita port update tracker.</h1>
-        <p class="mx-auto mt-4 max-w-xl text-base text-gray-600">
-          New ports, decompilations and wrappers, collected from the places where the scene actually posts them.
-        </p>
+    <main id="main-content">
+      <section class="vh-static-hero">
+        <div>
+          <p class="vh-static-eyebrow">PlayStation Vita · ports, decompilations &amp; wrappers</p>
+          <h1>A field guide to Vita ports.</h1>
+          <p>Browse source-linked projects and follow what the community is building.</p>
+        </div>
+        <div class="vh-static-count"><strong>${FALLBACK_PROJECTS.length}</strong><span>projects in the atlas</span></div>
       </section>
 
-      <section id="latest-updates" class="mt-12">
-        <div class="flex flex-wrap items-baseline justify-between gap-3 border-b border-gray-200 pb-4 mb-6">
-          <h2 class="text-2xl font-bold text-gray-900">Latest updates</h2>
-          <span class="text-sm text-gray-500">Exact source dates</span>
-        </div>
-        <div class="grid gap-3 sm:grid-cols-2">
-${latestUpdatesHtml}
-        </div>
-      </section>
-
-      <section id="directory" class="mt-12">
-        <div class="flex items-baseline justify-between border-b border-gray-200 pb-4 mb-6">
-          <h2 class="text-2xl font-bold text-gray-900">Directory</h2>
-          <span class="text-sm text-gray-500 font-mono">${FALLBACK_PROJECTS.length} projects indexed</span>
-        </div>
-        <ul class="divide-y divide-gray-100">
+      <div class="vh-static-content">
+        ${latestSignalHtml}
+        <section id="directory" aria-labelledby="directory-heading" class="vh-static-directory">
+          <div class="vh-static-directory-heading">
+            <div><p class="vh-static-eyebrow">Project index</p><h2 id="directory-heading">Directory</h2></div>
+            <span>${FALLBACK_PROJECTS.length} projects</span>
+          </div>
+          <ul class="vh-static-projects">
 ${projectItemsHtml}
-        </ul>
-      </section>
+          </ul>
+        </section>
 
-      <section id="methodology" class="mt-20 rounded-2xl border border-gray-200 bg-white p-8">
-        <h2 class="text-xl font-bold text-gray-900 mb-4">How entries get listed</h2>
-        <div class="grid gap-6 sm:grid-cols-3 text-sm text-gray-600">
+        <section id="methodology" class="vh-static-method">
+          <h2>How entries get listed</h2>
           <div>
-            <h3 class="font-semibold text-gray-900 mb-1">Sourced</h3>
-            <p>Entries link to an original engineering thread when a project-specific source has been verified. Unverified community posts are shown separately from the project directory.</p>
+            <article><h3>Sourced</h3><p>Entries link to an original engineering thread when a project-specific source has been verified. Unverified community posts are shown separately from the project directory.</p></article>
+            <article><h3>Evidence</h3><p>Evidence levels stay visible. A community post alone does not confirm a project's status or performance.</p></article>
+            <article><h3>Independent</h3><p>Only discussion and source repositories are indexed. No ROMs, ISOs or game data are hosted.</p></article>
           </div>
-          <div>
-            <h3 class="font-semibold text-gray-900 mb-1">Verified</h3>
-            <p>Evidence levels stay visible. A community post alone does not confirm a project's status or performance.</p>
-          </div>
-          <div>
-            <h3 class="font-semibold text-gray-900 mb-1">Non-infringing</h3>
-            <p>Only discussion and source repositories are indexed. No ROMs, ISOs or game data are hosted.</p>
-          </div>
-        </div>
-      </section>
+        </section>
+      </div>
     </main>
 
-    <footer class="border-t border-gray-200 mt-20 py-10 text-xs text-gray-500 text-center">
+    <footer class="vh-static-footer">
       <p>VitaHarbor is an independent research index. Nothing here bypasses licensing or distributes copyrighted game data.</p>
     </footer>
   </div>`;

@@ -1,9 +1,58 @@
-import { test, expect } from "playwright/test";
+import { test, expect, type Page } from "playwright/test";
 import { FALLBACK_PROJECTS } from "../../src/shared/constants/fallbackData";
+
+async function openConsolePreview(page: Page) {
+  const details = page.locator("section[aria-label='Vita console showcase'] details");
+  if (!(await details.evaluate((node) => node.hasAttribute("open")))) {
+    await details.locator("summary").click();
+  }
+}
+
+async function toggleProjectDetails(page: Page, slug: string) {
+  await page.locator(`#entry-${slug} button[aria-expanded]`).first().click();
+}
 
 test.describe("archive", () => {
   test.beforeEach(async ({ page }) => {
     await page.goto("/", { waitUntil: "domcontentloaded" });
+  });
+
+  test("Port Atlas puts directory controls near the top and stays usable at 390px", async ({ page }) => {
+    const directory = page.locator("#directory");
+    const search = page.getByLabel("Filter the directory");
+    const desktopTop = await directory.evaluate((element) => element.getBoundingClientRect().top + window.scrollY);
+    expect(desktopTop).toBeLessThanOrEqual(650);
+    await expect(search).toBeVisible();
+    await page.screenshot({ path: "test-results/port-atlas-desktop.png" });
+
+    for (const width of [375, 390]) {
+      await page.setViewportSize({ width, height: 844 });
+      const mobile = await page.evaluate(() => ({
+        scrollWidth: document.documentElement.scrollWidth,
+        clientWidth: document.documentElement.clientWidth,
+        directoryTop: document.querySelector("#directory")!.getBoundingClientRect().top + window.scrollY
+      }));
+      expect(mobile.scrollWidth).toBeLessThanOrEqual(mobile.clientWidth);
+      expect(mobile.directoryTop).toBeLessThanOrEqual(850);
+    }
+    await page.setViewportSize({ width: 390, height: 844 });
+    await page.screenshot({ path: "test-results/port-atlas-mobile-390.png" });
+
+    await page.keyboard.press("/");
+    await expect(search).toBeFocused();
+    await page.keyboard.press("Escape");
+    const development = page.getByRole("button", { name: /In development/ });
+    await development.focus();
+    await page.keyboard.press("Enter");
+    await expect(development).toHaveAttribute("aria-pressed", "true");
+
+    const targetSizes = await page.locator("#directory input, #directory button, #directory select").evaluateAll((elements) =>
+      elements.map((element) => {
+        const rect = element.getBoundingClientRect();
+        return { width: rect.width, height: rect.height };
+      }).filter((size) => size.width > 0 && size.height > 0)
+    );
+    expect(targetSizes.every((size) => size.width >= 44 && size.height >= 44)).toBe(true);
   });
 
   test("lists entries with only the source links that are actually verified", async ({ page }) => {
@@ -131,6 +180,7 @@ test.describe("archive", () => {
     expect(homeResponse.ok()).toBe(true);
     const staticHtml = await homeResponse.text();
     expect(staticHtml).not.toMatch(/scanner-health|run_id|rate_limited|consecutive_failures|github_action|3× daily|review queue|quarantined/i);
+    expect(staticHtml).toContain("Latest signal");
 
     const discoveryResponse = await request.get("/discovery/");
     expect(discoveryResponse.ok()).toBe(true);
@@ -144,9 +194,13 @@ test.describe("archive", () => {
     await noJsPage.goto("/", { waitUntil: "domcontentloaded" });
     const noJsText = await noJsPage.locator("body").innerText();
     expect(noJsText).toContain("Directory");
+    expect(noJsText).toMatch(/Latest signal/i);
     expect(noJsText).toContain("Unverified community posts are shown separately from the project directory.");
     expect(noJsText).toContain("A community post alone does not confirm a project's status or performance.");
     expect(noJsText).not.toMatch(/scanner|run id|rate.?limit|last attempt|3× daily|github action|detection log|detected threads|discovery queue|source review|review queue|quarantined|pending review/i);
+    const staticDirectoryTop = await noJsPage.locator("#directory").evaluate((element) => element.getBoundingClientRect().top + window.scrollY);
+    expect(staticDirectoryTop).toBeLessThanOrEqual(850);
+    expect(await noJsPage.locator("img.vh-static-art-image").count()).toBeGreaterThan(0);
     await context.close();
 
     await page.setViewportSize({ width: 390, height: 844 });
@@ -175,19 +229,15 @@ test.describe("archive", () => {
     await expect(page.getByRole("heading", { name: "Your watchlist" })).toHaveCount(0);
   });
 
-  test("the moving ticker can be paused", async ({ page }) => {
-    // Scoped to the ticker region: the button's label changes with its state.
-    const toggle = page.locator("[role='region'][aria-label='Latest community signals'] button");
-    await expect(toggle).toBeVisible();
-    await expect(toggle).toHaveAttribute("aria-pressed", "false");
-    await toggle.click();
-    await expect(toggle).toHaveAttribute("aria-pressed", "true");
-    await toggle.click();
-    await expect(toggle).toHaveAttribute("aria-pressed", "false");
+  test("the latest signal is a compact static row with an updates link", async ({ page }) => {
+    const latestSignal = page.locator("[aria-label='Latest signal']");
+    await expect(latestSignal).toBeVisible();
+    await expect(latestSignal.getByRole("link", { name: "All updates" })).toHaveAttribute("href", "/updates/");
   });
 
-  test("a source-backed screenshot appears on the console when its row is selected", async ({ page }) => {
-    await page.locator("#entry-illusia-vita").click();
+  test("Show on Vita opens the preview with the selected project's screenshot", async ({ page }) => {
+    await toggleProjectDetails(page, "illusia-vita");
+    await page.getByRole("button", { name: "Show on Vita" }).click();
     await expect(page.getByText("Source screenshot on display", { exact: true })).toBeVisible();
     await expect(page.getByAltText("Illusia title screen running on the Vita port")).toBeVisible();
   });
@@ -201,20 +251,23 @@ test.describe("archive", () => {
     ] as const;
 
     for (const [slug, alt] of screenshots) {
-      await page.locator(`#entry-${slug}`).click();
+      await toggleProjectDetails(page, slug);
       await expect(page.getByAltText(alt)).toBeVisible();
     }
   });
 
   test("the console selector exposes every ledger project", async ({ page }) => {
+    await openConsolePreview(page);
     const selector = page.locator("[aria-label='Choose a project to preview']");
     await expect(selector).toBeVisible();
     await expect(selector.locator("button")).toHaveCount(FALLBACK_PROJECTS.length);
   });
 
-  test("desktop WebGL renders the 3D Vita by default", async ({ page }) => {
+  test("opening the compact showcase loads the interactive 3D Vita", async ({ page }) => {
     const stage = page.locator("[data-testid='console-stage']");
     await expect(stage).toHaveAttribute("data-vita-mode", "3d");
+    await expect(page.locator("section[aria-label='Vita console showcase'] details")).not.toHaveAttribute("open");
+    await openConsolePreview(page);
     await stage.scrollIntoViewIfNeeded();
     await expect(page.getByTestId("vita-3d-canvas")).toBeVisible();
     await expect(stage).toHaveAttribute("data-vita-scene-state", "ready");
@@ -224,6 +277,7 @@ test.describe("archive", () => {
   test("reduced motion keeps the 3D Vita but disables scene motion", async ({ page }) => {
     await page.emulateMedia({ reducedMotion: "reduce" });
     await page.reload({ waitUntil: "domcontentloaded" });
+    await openConsolePreview(page);
     const stage = page.locator("[data-testid='console-stage']");
     await expect(stage).toHaveAttribute("data-vita-mode", "3d");
     await expect(stage).toHaveAttribute("data-reduced-motion", "true");
@@ -236,13 +290,16 @@ test.describe("archive", () => {
   test("Show on Vita updates the reduced-motion 3D preview", async ({ page }) => {
     await page.emulateMedia({ reducedMotion: "reduce" });
     await page.reload({ waitUntil: "domcontentloaded" });
-    await page.locator("#entry-illusia-vita").click();
+    await toggleProjectDetails(page, "illusia-vita");
     await expect(page.getByRole("button", { name: "Show on Vita" })).toBeVisible();
-
-    await page.getByRole("button", { name: "Medal of Honor: Allied Assault", exact: true }).click();
     await page.getByRole("button", { name: "Show on Vita" }).click();
-
     await expect(page.getByText("Source screenshot on display", { exact: true })).toBeVisible();
+    await expect(page.getByTestId("vita-3d-canvas")).toBeVisible();
+
+    const selector = page.locator("[aria-label='Choose a project to preview']");
+    const medalOfHonor = selector.getByRole("button", { name: /^Medal of Honor: Allied Assault/ });
+    await medalOfHonor.click();
+    await expect(medalOfHonor).toHaveAttribute("aria-pressed", "true");
     await expect(page.getByTestId("vita-3d-canvas")).toBeVisible();
   });
 
@@ -254,6 +311,7 @@ test.describe("archive", () => {
       });
     });
     await page.reload({ waitUntil: "domcontentloaded" });
+    await openConsolePreview(page);
 
     await expect(page.locator("[data-testid='console-stage']")).toHaveAttribute("data-vita-mode", "static");
     await expect(page.getByRole("button", { name: "Load 3D Vita" })).toBeVisible();
@@ -277,6 +335,7 @@ test.describe("archive", () => {
       };
     });
     await page.reload({ waitUntil: "domcontentloaded" });
+    await openConsolePreview(page);
 
     await expect(page.locator("[data-testid='console-stage']")).toHaveAttribute("data-vita-mode", "static");
     await expect(page.locator("[data-testid='console-stage']")).toHaveAttribute("data-vita-fallback-reason", "webgl-unavailable");
@@ -288,7 +347,7 @@ test.describe("archive", () => {
     const grid = page.locator("#directory ul");
     await expect(grid).toBeVisible();
     const columns = await grid.evaluate((element) => getComputedStyle(element).gridTemplateColumns.trim().split(/\s+/).length);
-    expect(columns).toBe(4);
+    expect(columns).toBe(3);
 
     await page.evaluate(() => window.scrollTo(0, 700));
     const backToTop = page.getByRole("button", { name: "Scroll to top" });

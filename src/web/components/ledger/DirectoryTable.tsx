@@ -1,5 +1,4 @@
-import React, { useMemo } from "react";
-import { ProjectMark } from "../projects/ProjectMark";
+import React, { useMemo, useState } from "react";
 import { ProjectPanel } from "./ProjectPanel";
 import {
   type LedgerProject,
@@ -10,7 +9,8 @@ import {
   STAGE_TONE,
   STAGE_CHIP,
   STAGE_STEP,
-  formatDay
+  formatDay,
+  formatUtcDateTime
 } from "./types";
 import { Search, ExternalLink, X, ChevronDown, Link2, Check, Filter, Camera } from "lucide-react";
 
@@ -34,6 +34,44 @@ const SORTS = [
   { key: "name", label: "A – Z" }
 ];
 
+interface LatestSignal {
+  id: string | number;
+  title: string;
+  event_at: string | Date;
+  project_display_name?: string | null;
+  project_slug?: string | null;
+  sources?: Array<{ canonical_url?: string | null }>;
+}
+
+const ProjectCardArtwork: React.FC<{ project: LedgerProject; title: string }> = ({ project, title }) => {
+  const [imageFailed, setImageFailed] = useState(false);
+  const hasScreenshot = Boolean(project.screenshot_url) && !imageFailed;
+  const initials = title.split(/\s+/).filter(Boolean).slice(0, 2).map((word) => word[0]).join("").toUpperCase();
+
+  return (
+    <div className="relative -mx-4 -mt-4 mb-0 aspect-[16/9] overflow-hidden bg-sunken sm:-mx-5 sm:-mt-5" aria-hidden="true">
+      {hasScreenshot ? (
+        <img
+          data-testid="project-artwork"
+          src={project.screenshot_url || undefined}
+          alt=""
+          loading="lazy"
+          decoding="async"
+          className="h-full w-full object-cover"
+          onError={() => setImageFailed(true)}
+        />
+      ) : (
+        <div data-testid="project-artwork-fallback" className="flex h-full items-end justify-between bg-accent/5 p-4 sm:p-5">
+          <span className="font-display text-5xl font-semibold leading-none tracking-[-0.06em] text-accent sm:text-6xl">{initials}</span>
+          <span className="max-w-[45%] text-right font-mono text-micro font-semibold uppercase tracking-[0.14em] text-ink-medium">
+            {PROJECT_TYPE_META[deriveProjectType(project)].shortLabel}
+          </span>
+        </div>
+      )}
+    </div>
+  );
+};
+
 interface DirectoryTableProps {
   projects: LedgerProject[];
   visible: LedgerProject[];
@@ -55,6 +93,7 @@ interface DirectoryTableProps {
   onCopyLink: (project: LedgerProject) => void;
   copiedSlug: string;
   directoryRef: React.RefObject<HTMLElement | null>;
+  latestSignal?: LatestSignal;
 }
 
 export const DirectoryTable: React.FC<DirectoryTableProps> = ({
@@ -77,7 +116,8 @@ export const DirectoryTable: React.FC<DirectoryTableProps> = ({
   onSelectProject,
   onCopyLink,
   copiedSlug,
-  directoryRef
+  directoryRef,
+  latestSignal
 }) => {
   const stageCounts = useMemo(() => {
     const counts: Record<string, number> = { all: projects.length, wip: 0, playable: 0, booting: 0, released: 0, recent: 0 };
@@ -108,13 +148,13 @@ export const DirectoryTable: React.FC<DirectoryTableProps> = ({
       id="directory"
       ref={directoryRef}
       aria-labelledby="directory-heading"
-      className="mx-auto mt-28 max-w-6xl px-6"
+      className="mx-auto mt-2 max-w-6xl px-4 sm:px-6"
     >
       <div>
         <h2 id="directory-heading" className="text-title font-semibold text-ink">
           Directory
         </h2>
-        <p className="mt-1.5 text-body text-ink-medium">
+        <p aria-live="polite" aria-atomic="true" className="mt-1.5 text-body text-ink-medium">
           {loading
             ? "Loading indexed projects…"
             : visible.length === projects.length
@@ -136,7 +176,7 @@ export const DirectoryTable: React.FC<DirectoryTableProps> = ({
           {activeFilter !== "all" && <span className="rounded-full bg-sunken px-2.5 py-1 text-micro text-ink-medium">{STAGE_FILTERS.find((item) => item.key === activeFilter)?.label}</span>}
           {activeCategory !== "all" && <span className="rounded-full bg-sunken px-2.5 py-1 text-micro text-ink-medium">{CATEGORY_FILTERS.find((item) => item.key === activeCategory)?.label}</span>}
           {activeSort !== "recent" && <span className="rounded-full bg-sunken px-2.5 py-1 text-micro text-ink-medium">{SORTS.find((item) => item.key === activeSort)?.label}</span>}
-          <button type="button" onClick={onResetFilters} className="inline-flex min-h-[32px] items-center gap-1 rounded-full px-2.5 py-1 text-micro font-medium text-ink-muted underline decoration-ink-muted/40 underline-offset-4 hover:text-ink">
+          <button type="button" onClick={onResetFilters} className="inline-flex min-h-[44px] items-center gap-1 rounded-full px-3 py-1 text-caption font-semibold text-accent underline underline-offset-4 hover:text-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-accent">
             Clear all
             <X className="h-3 w-3" />
           </button>
@@ -144,7 +184,7 @@ export const DirectoryTable: React.FC<DirectoryTableProps> = ({
       )}
 
       {/* Controls stay pinned while the list scrolls, so search is always in reach. */}
-      <div className="sticky top-14 z-30 -mx-6 mt-5 border-b border-hairline bg-canvas/95 px-6 py-3 backdrop-blur">
+      <div className="sticky top-14 z-30 -mx-4 mt-5 border-b border-hairline bg-canvas/95 px-4 py-3 backdrop-blur sm:-mx-6 sm:px-6">
         <div className="relative w-full">
           <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-ink-muted" />
           <input
@@ -153,15 +193,15 @@ export const DirectoryTable: React.FC<DirectoryTableProps> = ({
             value={searchTerm}
             onChange={(event) => onSearchChange(event.target.value)}
             aria-label="Filter the directory"
-            placeholder="Filter by game, engine or platform"
-            className="w-full rounded-xl border border-hairline bg-surface py-2.5 pl-9 pr-9 text-body text-ink placeholder:text-ink-muted outline-none transition-shadow focus:border-hairline-strong focus:ring-4 focus:ring-ink/5"
+            placeholder="Search games, engines, developers or platform"
+            className="min-h-[48px] w-full rounded-xl border border-hairline-strong bg-surface py-3 pl-10 pr-10 text-body text-ink placeholder:text-ink-muted outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
           />
           {searchTerm && (
             <button
               type="button"
               onClick={() => onSearchChange("")}
               aria-label="Clear search"
-              className="absolute right-1.5 top-1/2 inline-flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-md text-ink-muted transition-colors hover:bg-sunken hover:text-ink sm:h-8 sm:w-8"
+              className="absolute right-1 top-1/2 inline-flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-md text-ink-muted transition-colors hover:bg-sunken hover:text-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-accent"
             >
               <X className="h-3.5 w-3.5" />
             </button>
@@ -171,7 +211,7 @@ export const DirectoryTable: React.FC<DirectoryTableProps> = ({
         <div className="mt-3 flex flex-wrap items-center justify-between gap-4">
           <div className="flex flex-wrap gap-1.5">
             {STAGE_FILTERS.map((filter) => (
-              <div key={filter.key} className="relative group"><button type="button" aria-pressed={activeFilter === filter.key} onClick={() => onFilterChange(filter.key)} className={"relative z-10 inline-flex min-h-[44px] items-center gap-1.5 rounded-full px-4 py-2.5 text-caption font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink/20 sm:py-1.5 " + (activeFilter === filter.key ? "text-ink" : "text-ink-muted hover:text-ink")}><span>{filter.label}</span><span className="font-mono text-micro opacity-60">({stageCounts[filter.key] ?? 0})</span></button>{activeFilter === filter.key && (<div className="filter-active-bg transition-all duration-300"></div>)}</div>
+              <div key={filter.key} className="relative group"><button type="button" aria-pressed={activeFilter === filter.key} onClick={() => onFilterChange(filter.key)} className={"relative z-10 inline-flex min-h-[44px] items-center gap-1.5 rounded-full px-4 py-2 text-caption font-semibold transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent " + (activeFilter === filter.key ? "text-ink" : "text-ink-muted hover:text-ink")}><span>{filter.label}</span><span className="font-mono text-micro opacity-70">({stageCounts[filter.key] ?? 0})</span></button>{activeFilter === filter.key && (<div className="filter-active-bg transition-all duration-200"></div>)}</div>
             ))}
           </div>
 
@@ -180,7 +220,7 @@ export const DirectoryTable: React.FC<DirectoryTableProps> = ({
             <select
               value={activeSort}
               onChange={(event) => onSortChange(event.target.value)}
-              className="cursor-pointer rounded-lg border border-hairline bg-surface px-2.5 py-2.5 text-caption font-medium text-ink-medium outline-none transition-shadow focus:ring-4 focus:ring-ink/5 sm:py-1.5"
+            className="min-h-[44px] cursor-pointer rounded-lg border border-hairline-strong bg-surface px-3 py-2 text-caption font-medium text-ink outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
             >
               {SORTS.map((sort) => (
                 <option key={sort.key} value={sort.key}>
@@ -201,9 +241,10 @@ export const DirectoryTable: React.FC<DirectoryTableProps> = ({
                 key={cat.key}
                 type="button"
                 onClick={() => onCategoryChange(cat.key)}
-                  className={
-                  "inline-flex min-h-[36px] shrink-0 items-center whitespace-nowrap rounded-md px-2.5 py-1 text-micro transition-colors " +
-                  (active ? "bg-ink/10 text-ink" : "text-ink-muted hover:text-ink")
+                aria-pressed={active}
+                className={
+                  "inline-flex min-h-[44px] shrink-0 items-center whitespace-nowrap rounded-md px-3 py-2 text-caption font-medium transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent " +
+                  (active ? "bg-accent/10 text-ink" : "text-ink-muted hover:bg-sunken hover:text-ink")
                 }
               >
                 {cat.label} ({categoryCounts[cat.key] ?? 0})
@@ -213,9 +254,48 @@ export const DirectoryTable: React.FC<DirectoryTableProps> = ({
         </div>
       </div>
 
-      <div className="mt-7">
+      {latestSignal && (
+        <section aria-label="Latest signal" className="mt-4 grid gap-2 rounded-xl border border-hairline border-l-[3px] border-l-accent bg-surface px-4 py-3 sm:grid-cols-[minmax(0,1fr)_auto] sm:items-center sm:gap-5 sm:px-5">
+          <div className="min-w-0">
+            <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
+              <p className="text-micro font-bold uppercase tracking-[0.15em] text-accent">Latest signal</p>
+              <time
+                className="text-caption text-ink-muted"
+                dateTime={Number.isNaN(new Date(latestSignal.event_at).getTime()) ? undefined : new Date(latestSignal.event_at).toISOString()}
+              >
+                {formatUtcDateTime(latestSignal.event_at)}
+              </time>
+              {latestSignal.project_slug ? (
+                <a href={`/projects/${latestSignal.project_slug}/`} className="inline-flex min-h-[44px] items-center text-caption font-semibold text-accent hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-accent">
+                  {latestSignal.project_display_name || "Project record"}
+                </a>
+              ) : latestSignal.project_display_name ? (
+                <span className="text-caption font-semibold text-ink-medium">{latestSignal.project_display_name}</span>
+              ) : null}
+            </div>
+            <p className="mt-1 line-clamp-2 text-body font-medium leading-snug text-ink">{latestSignal.title}</p>
+          </div>
+          <div className="flex flex-wrap items-center gap-2 sm:justify-end">
+            {latestSignal.sources?.[0]?.canonical_url && (
+              <a
+                href={latestSignal.sources[0].canonical_url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex min-h-[44px] items-center rounded-lg px-3 text-caption font-semibold text-ink-medium hover:bg-sunken hover:text-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-accent"
+              >
+                Open source <ExternalLink className="ml-1.5 h-3.5 w-3.5" aria-hidden="true" />
+              </a>
+            )}
+            <a href="/updates/" className="inline-flex min-h-[44px] items-center rounded-lg border border-hairline px-3 text-caption font-semibold text-accent hover:bg-accent/5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-accent">
+              All updates
+            </a>
+          </div>
+        </section>
+      )}
+
+      <div className="mt-4">
         {loading ? (
-          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {[0, 1, 2, 3, 4, 5, 6, 7].map((row) => (
               <div key={row} className="rounded-2xl border border-hairline bg-surface p-5">
                 <div className="vh-skeleton h-3 w-40 rounded-full bg-sunken" />
@@ -231,13 +311,13 @@ export const DirectoryTable: React.FC<DirectoryTableProps> = ({
             <button
               type="button"
               onClick={onResetFilters}
-              className="mt-3 text-body font-medium text-ink underline underline-offset-4"
+              className="mt-3 inline-flex min-h-[44px] items-center text-body font-semibold text-accent underline underline-offset-4 focus-visible:outline focus-visible:outline-2 focus-visible:outline-accent"
             >
               Reset filters
             </button>
           </div>
         ) : (
-          <ul className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+          <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {visible.map((project) => {
               const title = splitTitle(project.game_title || project.display_name);
               const expanded = expandedId === project.id;
@@ -249,49 +329,44 @@ export const DirectoryTable: React.FC<DirectoryTableProps> = ({
                 <li
                   key={project.id}
                   id={"entry-" + project.slug}
+                  onClick={(event) => {
+                    if ((event.target as HTMLElement).closest("a, button")) return;
+                    onToggleEntry(project);
+                  }}
                   className={
                     "min-w-0 overflow-hidden rounded-2xl border border-hairline bg-surface transition-all duration-300 " +
-                    (expanded ? "sm:col-span-2 lg:col-span-3 xl:col-span-4 " : "") +
+                    (expanded ? "sm:col-span-2 lg:col-span-3 " : "") +
                     (selected ? "border-hairline-strong/60 bg-sunken/60 shadow-lift" : "")
                   }
                 >
-                  <div
-                    role="button"
-                    tabIndex={0}
-                    aria-expanded={expanded}
-                    aria-controls={"panel-" + project.slug}
-                    onClick={() => onToggleEntry(project)}
-                    onKeyDown={(event) => {
-                      if (event.key === "Enter" || event.key === " ") {
-                        event.preventDefault();
-                        onToggleEntry(project);
-                      }
-                    }}
-                    className="group/row relative grid cursor-pointer gap-4 p-4 transition-colors hover:bg-sunken/70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ink/20 sm:p-5"
-                  >
+                  <div className="group/row relative grid gap-4 p-4 transition-colors hover:bg-sunken/50 sm:p-5">
                     <span
                       aria-hidden="true"
                       className="absolute left-0 top-0 h-full w-0.5 origin-top scale-y-0 bg-accent transition-transform duration-200 group-hover/row:scale-y-100"
                     />
+                    <ProjectCardArtwork project={project} title={title.name} />
+
                     <div className="min-w-0">
                       <span className="flex items-center gap-2.5">
-                        <ProjectMark
-                          seed={project.display_name || project.game_title || "vita"}
-                          size={30}
-                          className="shrink-0 rounded-[9px] transition-transform duration-200 group-hover/row:scale-105"
-                        />
                         <span className="min-w-0">
                           <span className="flex items-center gap-2">
-                            <span className="truncate text-subtitle font-medium text-ink transition-colors group-hover/row:text-accent">
+                            <button
+                              type="button"
+                              aria-expanded={expanded}
+                              aria-controls={"panel-" + project.slug}
+                              aria-label={`${expanded ? "Hide" : "Show"} details for ${title.name}`}
+                              onClick={() => onToggleEntry(project)}
+                              className="min-h-[44px] min-w-0 truncate text-left text-subtitle font-semibold text-ink transition-colors hover:text-accent focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+                            >
                               {title.name}
-                            </span>
+                            </button>
                             {isNew && (
                               <span className="shrink-0 rounded border border-accent/20 bg-accent/15 px-1.5 py-0.5 text-micro font-semibold uppercase tracking-wide text-ink">
                                 New
                               </span>
                             )}
                             {project.screenshot_url && (
-                              <span title="Screenshot available"><Camera className="h-3 w-3 shrink-0 text-ink-muted/60" aria-hidden="true" /></span>
+                              <span title="Source screenshot available"><Camera className="h-3 w-3 shrink-0 text-ink-muted" aria-hidden="true" /></span>
                             )}
                           </span>
                       <span className="mt-0.5 block font-mono text-micro uppercase text-ink-muted">
@@ -360,13 +435,10 @@ export const DirectoryTable: React.FC<DirectoryTableProps> = ({
                     <div className="flex items-center justify-end gap-1 border-t border-hairline pt-3">
                       <button
                         type="button"
-                        onClick={(event) => {
-                          event.stopPropagation();
-                          onCopyLink(project);
-                        }}
+                        onClick={() => onCopyLink(project)}
                         title="Copy a direct link to this entry"
                         aria-label={"Copy a direct link to " + title.name}
-                        className="inline-flex h-10 w-10 items-center justify-center rounded-md text-ink-muted transition-colors hover:bg-sunken hover:text-ink sm:h-8 sm:w-8"
+                        className="inline-flex h-11 w-11 items-center justify-center rounded-md text-ink-muted transition-colors hover:bg-sunken hover:text-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-accent"
                       >
                         {copiedSlug === project.slug ? (
                           <Check className="h-4 w-4 text-stage-done" />
@@ -379,21 +451,23 @@ export const DirectoryTable: React.FC<DirectoryTableProps> = ({
                           href={project.reddit_url}
                           target="_blank"
                           rel="noopener noreferrer"
-                          onClick={(event) => event.stopPropagation()}
                           title="Open the source discussion"
                           aria-label={"Open the source discussion for " + title.name}
-                          className="inline-flex h-10 w-10 items-center justify-center rounded-md text-ink-muted transition-colors hover:bg-sunken hover:text-ink sm:h-8 sm:w-8"
+                          className="inline-flex h-11 w-11 items-center justify-center rounded-md text-ink-muted transition-colors hover:bg-sunken hover:text-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-accent"
                         >
                           <ExternalLink className="h-4 w-4" />
                         </a>
                       )}
-                      <ChevronDown
-                        aria-hidden="true"
-                        className={
-                          "h-4 w-4 text-ink-muted transition-transform duration-300 " +
-                          (expanded ? "rotate-180" : "")
-                        }
-                      />
+                      <button
+                        type="button"
+                        onClick={() => onToggleEntry(project)}
+                        aria-expanded={expanded}
+                        aria-controls={"panel-" + project.slug}
+                        aria-label={`${expanded ? "Collapse" : "Expand"} details for ${title.name}`}
+                        className="inline-flex h-11 w-11 items-center justify-center rounded-md text-ink-muted transition-colors hover:bg-sunken hover:text-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-accent"
+                      >
+                        <ChevronDown aria-hidden="true" className={"h-4 w-4 transition-transform duration-200 " + (expanded ? "rotate-180" : "")} />
+                      </button>
                     </div>
                   </div>
 

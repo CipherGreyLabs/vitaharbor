@@ -2,7 +2,6 @@ import React, { useCallback, useEffect, useMemo, useRef, useState } from "react"
 import { apiGet } from "../lib/api";
 import { useDocumentMeta } from "../lib/useDocumentMeta";
 import { FALLBACK_PROJECTS, FALLBACK_UPDATES } from "@/shared/constants/fallbackData";
-import { CommunityTicker } from "../components/ledger/CommunityTicker";
 import { ConsoleStage } from "../components/ledger/ConsoleStage";
 import { LedgerStats } from "../components/ledger/LedgerStats";
 import { DirectoryTable } from "../components/ledger/DirectoryTable";
@@ -14,8 +13,7 @@ import {
   deriveProjectType,
   STAGE_RANK,
   formatDay,
-  formatUtcDateTime,
-  verificationMeta
+  formatUtcDateTime
 } from "../components/ledger/types";
 import { ArrowUp, ExternalLink } from "lucide-react";
 import { countUpdatesSince, readLastVisit, readWatchlist, wasRecentlyUpdated, writeLastVisit, writeWatchlist } from "../lib/visitorState";
@@ -101,11 +99,11 @@ export const HomePage: React.FC = () => {
     : "";
   const metaOrigin = typeof window !== "undefined" ? window.location.origin : "https://vitaharbor.vercel.app";
   useDocumentMeta({
-    title: "VitaHarbor — Latest PlayStation Vita port updates",
+    title: "VitaHarbor — PlayStation Vita port atlas",
     description:
-      "A small, source-linked tracker for new PlayStation Vita ports, decompilations and ARM wrapper updates found in the community.",
+      "A visual, source-linked field guide to PlayStation Vita ports, decompilations and ARM wrappers.",
     image: metaOrigin + (metaSlug ? "/og/projects/" + metaSlug + ".png" : "/og.png"),
-    imageAlt: metaSlug ? "VitaHarbor project record" : "VitaHarbor PlayStation Vita update tracker"
+    imageAlt: metaSlug ? "VitaHarbor project record" : "VitaHarbor PlayStation Vita port atlas"
   });
 
   const [projects, setProjects] = useState<LedgerProject[]>(() => FALLBACK_PROJECTS as any[]);
@@ -122,12 +120,13 @@ export const HomePage: React.FC = () => {
   const [scrolled, setScrolled] = useState(false);
   const [showScrollTop, setShowScrollTop] = useState(false);
   const [webgl, setWebgl] = useState<boolean | null>(null);
-  const [tickerPaused, setTickerPaused] = useState(false);
+  const [consoleShowcaseOpen, setConsoleShowcaseOpen] = useState(false);
   const [communityPosts, setCommunityPosts] = useState<CommunityPost[]>([]);
   const [previousVisit, setPreviousVisit] = useState<number | null>(null);
   const [watchlistSlugs, setWatchlistSlugs] = useState<string[]>([]);
 
   const consoleRef = useRef<HTMLDivElement>(null);
+  const consoleDisclosureRef = useRef<HTMLDetailsElement>(null);
   const searchRef = useRef<HTMLInputElement>(null);
   const directoryReveal = useReveal<HTMLElement>();
   const methodReveal = useReveal<HTMLElement>();
@@ -359,10 +358,16 @@ export const HomePage: React.FC = () => {
 
   const selectProject = (project: LedgerProject, scroll = true) => {
     setSelectedId(project.id);
-    if (scroll && consoleRef.current) {
-      const el = consoleRef.current;
-      const top = el.getBoundingClientRect().top + window.scrollY - 64;
-      window.scrollTo({ top: Math.max(0, top), behavior: 'smooth' });
+    if (scroll) {
+      setConsoleShowcaseOpen(true);
+      if (consoleDisclosureRef.current) consoleDisclosureRef.current.open = true;
+      requestAnimationFrame(() => {
+        const el = consoleRef.current;
+        if (!el) return;
+        const top = el.getBoundingClientRect().top + window.scrollY - 72;
+        const reducedMotion = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
+        window.scrollTo({ top: Math.max(0, top), behavior: reducedMotion ? "auto" : "smooth" });
+      });
     }
   };
 
@@ -428,7 +433,7 @@ export const HomePage: React.FC = () => {
           >
             VitaHarbor
           </a>
-          <nav aria-label="Sections" className="flex items-center gap-4 text-body text-ink-medium sm:gap-5">
+          <nav aria-label="Sections" className="flex items-center gap-2 text-body text-ink-medium sm:gap-5">
             <a href="/updates" className="inline-flex min-h-[44px] items-center rounded-md px-1 transition-colors hover:text-ink">Updates</a>
             <a href="#directory" className="inline-flex min-h-[44px] items-center rounded-md px-1 transition-colors hover:text-ink">Directory</a>
             <a href="/discovery" className="inline-flex min-h-[44px] items-center rounded-md px-1 transition-colors hover:text-ink">Community posts</a>
@@ -444,46 +449,101 @@ export const HomePage: React.FC = () => {
         </div>
       </header>
 
-      {/* Community Ticker */}
-      <CommunityTicker
-        recentUpdates={recentUpdates}
-        tickerPaused={tickerPaused}
-        onTogglePause={() => setTickerPaused((v) => !v)}
-      />
-
       <main id="main-content" className="vh-boot">
         {/* Hero Copy */}
-        <section className="relative mx-auto max-w-6xl px-6 pb-0 pt-7 text-center">
-          <p className="flex items-center justify-center gap-2 text-micro font-medium uppercase tracking-[0.18em] text-ink-muted">
-            Community port updates
-          </p>
-          <h1 className="mx-auto mt-4 max-w-4xl text-display font-semibold text-ink sm:text-[52px] sm:leading-[1.04] sm:tracking-[-0.04em]">
-            The Vita port update tracker.
-          </h1>
-          <p className="mx-auto mt-5 max-w-xl text-lead text-ink-medium">
-            New ports, decompilations and wrappers, collected from the places where the scene
-            actually posts them.
-          </p>
+        <section className="relative mx-auto flex max-w-6xl flex-col justify-between gap-5 px-5 pb-4 pt-7 sm:px-6 sm:pt-9 lg:flex-row lg:items-end lg:gap-8">
+          <div className="max-w-3xl">
+            <p className="text-micro font-semibold uppercase tracking-[0.18em] text-accent">
+              PlayStation Vita · ports, decompilations &amp; wrappers
+            </p>
+            <h1 className="mt-2 font-display text-[38px] font-semibold leading-[1.05] tracking-[-0.04em] text-ink sm:text-[48px]">
+              A field guide to Vita ports.
+            </h1>
+            <p className="mt-3 max-w-2xl text-body leading-relaxed text-ink-medium sm:text-lead">
+              Browse source-linked projects and follow what the community is building.
+            </p>
+          </div>
+          <div className="flex shrink-0 items-center gap-3 border-l-2 border-accent pl-4 lg:mb-1">
+            <span className="font-display text-[32px] font-semibold leading-none tracking-tight text-ink">{projects.length}</span>
+            <span className="max-w-28 text-caption leading-snug text-ink-medium">projects in the atlas</span>
+          </div>
         </section>
 
-        <section aria-label="Your VitaHarbor" className="mx-auto mt-8 max-w-5xl px-6">
-          <div className="grid gap-px overflow-hidden rounded-2xl border border-hairline-strong/30 bg-hairline-strong/20 sm:grid-cols-2">
-            <div className="bg-surface p-4 sm:p-5">
+        {/* Port Directory Table with Category & Stage Filters */}
+        <DirectoryTable
+          projects={projects}
+          visible={visible}
+          loading={loading}
+          activeFilter={activeFilter}
+          onFilterChange={setActiveFilter}
+          activeCategory={activeCategory}
+          onCategoryChange={setActiveCategory}
+          activeSort={activeSort}
+          onSortChange={setActiveSort}
+          searchTerm={searchTerm}
+          onSearchChange={setSearchTerm}
+          onResetFilters={resetFilters}
+          searchRef={searchRef}
+          selectedId={selectedId}
+          expandedId={expandedId}
+          onToggleEntry={toggleEntry}
+          onSelectProject={selectProject}
+          onCopyLink={copyEntryLink}
+          copiedSlug={copiedSlug}
+          directoryRef={directoryReveal}
+          latestSignal={recentUpdates[0]}
+        />
+
+        <section aria-label="Vita console showcase" className="mx-auto mt-5 max-w-6xl px-4 sm:px-6">
+          <details
+            ref={consoleDisclosureRef}
+            open={consoleShowcaseOpen}
+            onToggle={(event) => setConsoleShowcaseOpen(event.currentTarget.open)}
+            className="overflow-hidden rounded-2xl border border-hairline bg-surface"
+          >
+            <summary className="flex min-h-16 cursor-pointer list-none items-center justify-between gap-4 px-4 py-3 text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-accent sm:px-5">
+              <span>
+                <span className="block text-subtitle font-semibold">Interactive Vita console</span>
+                <span className="mt-0.5 block text-caption text-ink-medium">Preview a project on the handheld</span>
+              </span>
+              <span className="inline-flex min-h-[44px] shrink-0 items-center rounded-lg border border-accent/25 bg-accent/5 px-3 text-caption font-semibold text-accent">
+                {consoleShowcaseOpen ? "Hide preview" : "Open preview"}
+              </span>
+            </summary>
+            <div className="border-t border-hairline bg-canvas/70 py-3">
+              <ConsoleStage
+                selectedProject={selectedProject as any}
+                projects={projects}
+                selectedId={selectedId}
+                onSelectProject={(project) => selectProject(project, false)}
+                webgl={webgl}
+                onRetryWebgl={detectWebgl}
+                onCopyLink={copyEntryLink}
+                copiedSlug={copiedSlug}
+                consoleRef={consoleRef}
+              />
+            </div>
+          </details>
+        </section>
+
+        <section id="watchlist" aria-label="Your VitaHarbor" className="mx-auto mt-8 max-w-5xl px-5 sm:px-6">
+          <div className="grid gap-3 sm:grid-cols-2">
+            <div className="rounded-xl border border-hairline bg-surface p-4 sm:p-5">
               <p className="text-micro font-semibold uppercase tracking-[0.14em] text-ink-muted">Since last visit</p>
               <p className="mt-2 text-subtitle font-semibold text-ink">{unseenUpdates === 0 ? "Caught up" : `${unseenUpdates} new`}</p>
-              <a href="/updates" className="mt-1 inline-flex min-h-[44px] items-center text-caption font-medium text-accent hover:underline">Open timeline</a>
+              <a href="/updates" className="mt-1 inline-flex min-h-[44px] items-center text-caption font-semibold text-accent hover:underline">Open timeline</a>
             </div>
-            <div className="bg-surface p-4 sm:p-5">
+            <div className="rounded-xl border border-hairline bg-surface p-4 sm:p-5">
               <p className="text-micro font-semibold uppercase tracking-[0.14em] text-ink-muted">Watchlist</p>
               <p className="mt-2 text-subtitle font-semibold text-ink">{watchedProjects.length} saved</p>
-              <a href="#watchlist" className="mt-1 inline-flex min-h-[44px] items-center text-caption font-medium text-accent hover:underline">View saved projects</a>
+              <a href={watchedProjects.length > 0 ? "#saved-projects" : "#watchlist"} className="mt-1 inline-flex min-h-[44px] items-center text-caption font-semibold text-accent hover:underline">View saved projects</a>
             </div>
           </div>
         </section>
 
         {watchedProjects.length > 0 && (
-          <section id="watchlist" aria-labelledby="watchlist-heading" className="mx-auto mt-8 max-w-5xl px-6">
-            <div className="rounded-2xl border border-hairline bg-surface p-5 sm:p-6">
+          <section id="saved-projects" aria-labelledby="watchlist-heading" className="mx-auto mt-5 max-w-5xl px-5 sm:px-6">
+            <div className="rounded-xl border border-hairline bg-surface p-5 sm:p-6">
               <div className="flex flex-wrap items-end justify-between gap-3 border-b border-hairline pb-3">
                 <div>
                   <p className="text-micro font-semibold uppercase tracking-[0.14em] text-ink-muted">Saved in this browser</p>
@@ -514,84 +574,6 @@ export const HomePage: React.FC = () => {
             </div>
           </section>
         )}
-
-        <section id="latest-updates" aria-labelledby="latest-updates-heading" className="mx-auto mt-20 max-w-6xl px-6">
-          <div className="flex flex-wrap items-end justify-between gap-4 border-b border-hairline-strong/30 pb-4">
-            <div>
-              <p className="text-micro font-semibold uppercase tracking-[0.16em] text-ink-muted">What changed</p>
-              <h2 id="latest-updates-heading" className="mt-2 text-title font-semibold tracking-tight text-ink">Latest updates</h2>
-            </div>
-            <p className="max-w-sm text-right text-caption text-ink-muted">Exact source dates are shown below; relative “days ago” labels stay out of the tracker.</p>
-          </div>
-          <div className="mt-5 grid gap-3 md:grid-cols-2">
-            {recentUpdates.slice(0, 4).map((update) => {
-              const sourceUrl = update.sources?.[0]?.canonical_url;
-              const projectLabel = update.project_display_name || "Unassigned project";
-              const verification = verificationMeta(update.verification_level);
-              const projectLink = update.project_slug ? (
-                <a href={"/projects/" + update.project_slug + "/"} className="inline-flex min-h-[44px] items-center rounded-md pr-2 text-accent hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink/20">{projectLabel}</a>
-              ) : (
-                <span className="inline-flex min-h-[44px] items-center pr-2 text-ink-muted" title="No project route is recorded">{projectLabel}</span>
-              );
-              return (
-                <article key={update.id} className="rounded-2xl border border-hairline bg-surface p-5 transition-colors hover:border-hairline-strong/60">
-                  <div className="flex flex-wrap items-center justify-between gap-2 text-micro font-medium uppercase tracking-[0.12em] text-ink-muted">
-                    {projectLink}
-                    <time dateTime={new Date(update.event_at).toISOString()} title={"Exact source date: " + formatUtcDateTime(update.event_at)}>{formatUtcDateTime(update.event_at)}</time>
-                  </div>
-                  <h3 className="mt-3 text-subtitle font-semibold leading-snug text-ink">{update.title}</h3>
-                  <p className="mt-2 line-clamp-3 text-body leading-relaxed text-ink-medium">{update.summary}</p>
-                  <div className="mt-4 flex flex-wrap items-center justify-between gap-3 border-t border-hairline pt-3 text-caption text-ink-muted">
-                    <span title={verification.description}>{verification.label}</span>
-                    {sourceUrl ? (
-                      <a href={sourceUrl} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-[44px] items-center gap-1 rounded-md px-2 font-medium text-ink transition-colors hover:text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink/20">
-                        Source thread <ExternalLink className="h-3.5 w-3.5" aria-hidden="true" />
-                      </a>
-                    ) : null}
-                  </div>
-                </article>
-              );
-            })}
-          </div>
-        </section>
-
-
-        {/* 3D Console Showcase Stage */}
-        <ConsoleStage
-          selectedProject={selectedProject as any}
-          projects={projects}
-          selectedId={selectedId}
-          onSelectProject={(p) => selectProject(p, false)}
-          webgl={webgl}
-          onRetryWebgl={detectWebgl}
-          onCopyLink={copyEntryLink}
-          copiedSlug={copiedSlug}
-          consoleRef={consoleRef}
-        />
-
-        {/* Port Directory Table with Category & Stage Filters */}
-        <DirectoryTable
-          projects={projects}
-          visible={visible}
-          loading={loading}
-          activeFilter={activeFilter}
-          onFilterChange={setActiveFilter}
-          activeCategory={activeCategory}
-          onCategoryChange={setActiveCategory}
-          activeSort={activeSort}
-          onSortChange={setActiveSort}
-          searchTerm={searchTerm}
-          onSearchChange={setSearchTerm}
-          onResetFilters={resetFilters}
-          searchRef={searchRef}
-          selectedId={selectedId}
-          expandedId={expandedId}
-          onToggleEntry={toggleEntry}
-          onSelectProject={selectProject}
-          onCopyLink={copyEntryLink}
-          copiedSlug={copiedSlug}
-          directoryRef={directoryReveal}
-        />
 
         {communityPostsToShow.length > 0 && (
           <section aria-labelledby="community-posts-heading" className="mx-auto mt-24 max-w-5xl px-6">
