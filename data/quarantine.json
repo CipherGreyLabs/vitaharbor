@@ -1,8 +1,93 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-09-26T17:13:39.126Z",
+  "generated_at": "2026-09-26T21:59:40.024Z",
   "source": "r/vitahacks + r/VitaPiracy + r/PSVitaHomebrew RSS",
   "items": [
+    {
+      "schema_version": 2,
+      "id": "reddit-1wqx8qz",
+      "external_id": "1wqx8qz",
+      "state": "QUARANTINED",
+      "state_history": [
+        {
+          "state": "DETECTED",
+          "at": "2026-09-26T21:59:40.024Z",
+          "actor": "reddit-scanner",
+          "reason": "Canonical Reddit RSS entry accepted at the ingestion boundary"
+        },
+        {
+          "state": "QUARANTINED",
+          "at": "2026-09-26T21:59:40.024Z",
+          "actor": "reddit-scanner",
+          "reason": "Scanner result is unverified and cannot enter the curated ledger"
+        }
+      ],
+      "source": {
+        "platform": "reddit",
+        "subreddit": "vitahacks",
+        "canonical_url": "https://www.reddit.com/r/vitahacks/comments/1wqx8qz/aleph_one_vita_20_release/",
+        "author": "RelativeCycle5287",
+        "title": "Aleph One Vita 2.0 Release",
+        "body": "Released Aleph One 2.0 with completely rewritten Renderer and sooooo much better perfs and fixed Crashes :) Changelog: - Rebuilt the renderer. The 3D view now renders on two CPU cores and the HUD on a third - Stable 30 FPS in all games (Framerate Target in the Graphics settings, set it to Unlimited for up to 50 FPS if you want) - Menus, Intro and Scenario Chooser now run at up to 60 FPS - Fixed the green background in the Scenario Chooser - Levels load up to 8x faster - Native 960x544 resolution - Existing preferences are updated automatically to the new defaults GitHub: https://github.com/DrD",
+        "published_at": "2026-09-26T18:06:03.000Z"
+      },
+      "classification": {
+        "confidence": "high",
+        "reason": "6 dev signals: \\brelease\\b, \\brender(?:s|ed|ing)?\\b, \\bfps\\b · category=project_update",
+        "candidate_type": "port",
+        "category": "project_update",
+        "question": false,
+        "spam": false
+      },
+      "provenance": {
+        "repository_url": null,
+        "release_url": null,
+        "evidence_urls": [],
+        "evidence_bundle_id": null,
+        "repository_identity": null,
+        "repository_created_at": null,
+        "repository_last_activity_at": null,
+        "release_facts": [],
+        "vita_evidence": [],
+        "author_linkage": null,
+        "corroboration": [],
+        "duplicate_relation": {
+          "content_hash": "30056ed06669d5fc365b8aae4faf3bf358c9041d298a050b0ea22da65f28a1d6",
+          "related_candidate_ids": []
+        }
+      },
+      "campaign": {
+        "cluster_id": null,
+        "linkage_confidence": "none",
+        "signals": [],
+        "related_candidate_ids": [],
+        "text_fingerprint": "f910274e",
+        "media_fingerprints": [
+          "preview.redd.it/dhpxajazmwrh1.png"
+        ],
+        "outbound_fingerprints": [
+          "github.com/drd",
+          "www.reddit.com/r/vitahacks/comments/1wqx8qz/aleph_one_vita_20_release",
+          "preview.redd.it/dhpxajazmwrh1.png",
+          "github.com/drdecki/aleph-one-psvita/releases",
+          "www.rinnegatamante.eu/vitadb",
+          "www.reddit.com/user/relativecycle5287",
+          "www.reddit.com/gallery/1wqx8qz"
+        ],
+        "direct_intent": false,
+        "explicit_campaign_reference": false,
+        "incident_id": null
+      },
+      "risk_signals": [],
+      "evidence_gaps": [
+        "repository identity and activity facts",
+        "Vita-specific hardware evidence",
+        "author/developer linkage and independent corroboration"
+      ],
+      "content_hash": "30056ed06669d5fc365b8aae4faf3bf358c9041d298a050b0ea22da65f28a1d6",
+      "review": null,
+      "incident": null
+    },
     {
       "schema_version": 2,
       "id": "reddit-1wqtbfl",
