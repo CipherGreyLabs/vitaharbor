@@ -2,7 +2,29 @@
 
 Updated: 2026-09-26
 
-## Current state: VH-PORT-ATLAS-024 Port Atlas candidate (2026-09-26)
+## Current state: VH-PORT-ATLAS-024 dark PlayStation implementation candidate (2026-09-26)
+
+- Implemented the approved dark direction on `codex/vh-port-atlas-layout`. Runtime implementation commit is `e81b1988285861c3322796997dffbad14073fd4c`; the final visual correction is `151e07b35e50f9f2846cd348a23376f8a9f791e3`. The candidate remains local: no push, merge or deployment, and no new production acceptance is claimed.
+- Applied the dark semantic tokens to the hydrated page and shared static-page stylesheet, updated the theme color and Open Graph card, aligned stage badges, and reduced the console-scene lighting. `scripts/prerender.mjs` needed no edit: its markup uses the same bundled stylesheet and root tokens. The local no-JavaScript screenshot confirms the static directory uses the dark surfaces.
+- Exact runtime commit `151e07b35e50f9f2846cd348a23376f8a9f791e3` passed `npm run verify` (typecheck, 116/116 unit tests, 29 project pages and 32 sitemap URLs), `npm run lint`, integration tests 7/7, and local-preview Playwright E2E 21/21 with two workers.
+- Local mobile audit at 375, 390, 412 and 768px reported no document overflow and no small targets. Local contrast audit checked 40 styles with 0 failures; minimum ratio was 5.91:1. Both audits were explicitly pointed to `http://127.0.0.1:4176/`; the scripts otherwise default to production.
+- Browser inspection found and fixed a transparent sticky header. The final computed background is `rgba(15, 20, 27, 0.94)`. Screenshots are `test-results/port-atlas-dark-desktop.png`, `test-results/port-atlas-dark-mobile.png`, `test-results/port-atlas-dark-console.png`, and `test-results/port-atlas-dark-nojs.png`.
+- No curated ledger, scanner records, source claims or visitor-facing scanner status changed. The refreshed `HANDOFF.md` covers 29 hashed project sources; the initial and final `NEW-HANDOFF.ps1 -Verify` runs returned `HANDOFF GO`, with the final regeneration after the integrity entry below.
+
+## Historical snapshot: VH-PORT-ATLAS-024 design direction review (2026-09-26 16:12 UTC)
+
+- At this snapshot, the dark direction was a proposal and the worktree still had only design documentation changes. The implementation and candidate verification above supersede that state.
+- The 2026-09-26 reference review covered the official PlayStation 5, Xbox Series X and Nintendo Switch 2 pages. Section 90 of `docs/MASTER_BLUEPRINT.md` already defined a dark `#090c11` base, near-black surfaces and `#249cf4` accent. The source observations and proposed mapping remain in `docs/PLAYSTATION_DARK_DESIGN_BLUEPRINT.md`.
+
+## Historical snapshot: VH-PORT-ATLAS-024 rebased warm-light candidate before dark redesign (2026-09-26)
+
+- Remote `main` advanced from the requested base `2e0e6d8c530257e77fa0459bac8ee9e27f45b3a9` to scannerbot commit `53cfa7f3ae7b40ba525c4db6afc0c1a878e4302d`. That single commit changes only `data/quarantine.json`, `data/scanner-health.json`, and `public/api/rss.xml`. The Port Atlas branch was rebased cleanly onto it; those three remote data files are preserved unchanged relative to the new base.
+- Current local release candidate tip is `5b67d51ce42185984aad14e72ffe539b2c32f33d` on `codex/vh-port-atlas-layout`; final application/runtime code commit is `41e169cd8e934902c0c57ee4788e7ddf60d96b29`. The branch is four commits ahead of `origin/main`, with no unrelated remote commits.
+- To make the approved push produce CI for these UI changes, `.github/workflows/reddit-scanner.yml` now includes the changed web, prerender, Tailwind, root HTML and E2E paths. The push job runs `npm run test:unit && npm run test:integration`; scan, backfill, feed rebuild and publish steps remain guarded for schedule/manual dispatch only. The workflow YAML parsed successfully. Push and CI result are still pending.
+- Rebased-candidate checks passed: `npm run verify` (typecheck, 116/116 unit tests, 29 project pages and 32 sitemap URLs), lint, integration 7/7, local-preview Playwright E2E 21/21, mobile audit at 375/390/412/768px with no page overflow or small targets, and contrast audit 44 styles with 0 failures (minimum 4.68:1).
+- No push, production deployment or live acceptance has happened yet. This status supersedes the pre-rebase candidate snapshot immediately below; production evidence will be appended after release.
+
+## Historical snapshot: VH-PORT-ATLAS-024 warm-light Port Atlas candidate (2026-09-26)
 
 - The final implementation candidate is `02a0cacd4345861d4ff92662b1ae7cac96c82243`, following the main redesign commit `f58bd52de819eaf4c62880f2f2c5422dfc87720d` on local branch `codex/vh-port-atlas-layout`, created directly from `2e0e6d8c530257e77fa0459bac8ee9e27f45b3a9`. This is a local review candidate; no push, merge, deployment, or production acceptance check was performed.
 - The home page now leads with a compact field-guide introduction, a source-linked latest-signal row, and a three-column project atlas before the collapsed interactive Vita showcase and personal panels. Search and filters remain keyboard operable with 44px controls. Cards use source screenshots when available and typographic fallbacks otherwise; selecting “Show on Vita” opens the preview. The prerendered no-JavaScript home follows the same directory-first structure.
