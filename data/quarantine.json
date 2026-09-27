@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-09-27T18:39:03.111Z",
+  "generated_at": "2026-09-27T22:18:54.917Z",
   "source": "r/vitahacks + r/VitaPiracy + r/PSVitaHomebrew RSS",
   "items": [
     {
@@ -39,7 +39,7 @@
       },
       "classification": {
         "confidence": "high",
-        "reason": "3 dev signals: \\brelease\\b, \\bplayable\\b, \\bupdate\\b \u00b7 category=project_update",
+        "reason": "3 dev signals: \\brelease\\b, \\bplayable\\b, \\bupdate\\b · category=project_update",
         "candidate_type": "wrapper",
         "category": "project_update",
         "question": false,
@@ -117,7 +117,7 @@
       },
       "classification": {
         "confidence": "high",
-        "reason": "6 dev signals: \\brelease\\b, \\brender(?:s|ed|ing)?\\b, \\bfps\\b \u00b7 category=project_update",
+        "reason": "6 dev signals: \\brelease\\b, \\brender(?:s|ed|ing)?\\b, \\bfps\\b · category=project_update",
         "candidate_type": "port",
         "category": "project_update",
         "question": false,
@@ -197,12 +197,12 @@
         "canonical_url": "https://www.reddit.com/r/vitahacks/comments/1wqtbfl/update_gta_lcs_ps2_running_on_the_vita_natively/",
         "author": "Wookie_von_Gondor",
         "title": "UPDATE: GTA LCS PS2 running on the Vita natively - 25-60 FPS with native resolution, audio works too! (AI PORT)",
-        "body": "Me and my AI assistant are very close to get the decompiled PS2 version of GTA LCS fully working on the Vita. It already runs much better than the PSP version - not to mention it's double the resolution (960\u00d7544)! Whats working: 2D & 3D rendering Audio Controls Settings Very playable performance Needs testing: Save files Bugs Needs fixing: Collision textures are not loading properly (work in progress) Texture load times in general Planned features: PS Vita settings preset FPS limiter for 30 and 60 This is a fork of Epic0522's REGTA-3DSPort-Complete project on Github. &#32; submitte",
+        "body": "Me and my AI assistant are very close to get the decompiled PS2 version of GTA LCS fully working on the Vita. It already runs much better than the PSP version - not to mention it's double the resolution (960×544)! Whats working: 2D & 3D rendering Audio Controls Settings Very playable performance Needs testing: Save files Bugs Needs fixing: Collision textures are not loading properly (work in progress) Texture load times in general Planned features: PS Vita settings preset FPS limiter for 30 and 60 This is a fork of Epic0522's REGTA-3DSPort-Complete project on Github. &#32; submitte",
         "published_at": "2026-09-26T15:26:37.000Z"
       },
       "classification": {
         "confidence": "high",
-        "reason": "7 dev signals: \\bplayable\\b, \\brender(?:s|ed|ing)?\\b, \\bfps\\b \u00b7 category=project_update",
+        "reason": "7 dev signals: \\bplayable\\b, \\brender(?:s|ed|ing)?\\b, \\bfps\\b · category=project_update",
         "candidate_type": "port",
         "category": "project_update",
         "question": false,
@@ -384,7 +384,7 @@
       },
       "classification": {
         "confidence": "high",
-        "reason": "4 dev signals: \\bin.?game\\b, \\bfps\\b, \\bframerate\\b \u00b7 category=new_project",
+        "reason": "4 dev signals: \\bin.?game\\b, \\bfps\\b, \\bframerate\\b · category=new_project",
         "candidate_type": "port",
         "category": "new_project",
         "question": false,
@@ -2231,8 +2231,8 @@
         "subreddit": "vitahacks",
         "canonical_url": "https://www.reddit.com/r/vitahacks/comments/1wjte26/tfouad_development_update_where_ive_been_whats/",
         "author": "noradninja",
-        "title": "TFoUAD Development Update \u2014 Where I\u2019ve Been, What\u2019s Changed, and How We\u2019re Pushing the Vita Further",
-        "body": "<!-- SC_OFF --><div class=\"md\"><p>I figure I owe the Vita community an update on TFoUAD, because it has been a while since the last public release and, from the outside, I realize it probably looks like development has slowed down or stopped.</p> <p>It hasn\u2019t.</p> <p>The less interesting explanation is that my body has been trying very hard to kill my productivity.</p> <p>I\u2019ve spent roughly the last year dealing with increasingly serious kidney problems: recurrent stones, obstruction, hydronephrosis, persistent infections, hospita",
+        "title": "TFoUAD Development Update — Where I’ve Been, What’s Changed, and How We’re Pushing the Vita Further",
+        "body": "<!-- SC_OFF --><div class=\"md\"><p>I figure I owe the Vita community an update on TFoUAD, because it has been a while since the last public release and, from the outside, I realize it probably looks like development has slowed down or stopped.</p> <p>It hasn’t.</p> <p>The less interesting explanation is that my body has been trying very hard to kill my productivity.</p> <p>I’ve spent roughly the last year dealing with increasingly serious kidney problems: recurrent stones, obstruction, hydronephrosis, persistent infections, hospita",
         "published_at": "2026-09-18T15:30:31.000Z"
       },
       "classification": {
@@ -2399,13 +2399,13 @@
         "subreddit": "vitahacks",
         "canonical_url": "https://www.reddit.com/r/vitahacks/comments/1wcx3o6/golden_balloon_v169_diddy_kong_racing_source_port/",
         "author": "zm2283145",
-        "title": "Golden Balloon v1.6.9 \u2013 Diddy Kong Racing source port for PS Vita with 98 trophies, save editor, extra racers and remappable controls",
-        "body": "Golden Balloon v1.7.1 is now available for PS Vita! This was made with AI assistance. Release and download: Release Golden Balloon Vita v1.7.1 \u00b7 zm2283145/goldenballoon-vita-port Golden Balloon is a native source port based on the Diddy Kong Racing decompilation and the upstream Golden Balloon project. It is not an emulator\u2014the game is compiled for the Vita and reads the original game data from a legally obtained ROM. This release has now completed a full Adventure playthrough on real PS Vita hardware using the default Restored visual preset. Trophy unlock requests run on a dedicated Vita work",
+        "title": "Golden Balloon v1.6.9 – Diddy Kong Racing source port for PS Vita with 98 trophies, save editor, extra racers and remappable controls",
+        "body": "Golden Balloon v1.7.1 is now available for PS Vita! This was made with AI assistance. Release and download: Release Golden Balloon Vita v1.7.1 · zm2283145/goldenballoon-vita-port Golden Balloon is a native source port based on the Diddy Kong Racing decompilation and the upstream Golden Balloon project. It is not an emulator—the game is compiled for the Vita and reads the original game data from a legally obtained ROM. This release has now completed a full Adventure playthrough on real PS Vita hardware using the default Restored visual preset. Trophy unlock requests run on a dedicated Vita work",
         "published_at": "2026-09-10T21:54:04.000Z"
       },
       "classification": {
         "confidence": "high",
-        "reason": "5 dev signals: \\brelease\\b, \\bcompiled\\b, \\bdecomp(ilation)?\\b \u00b7 category=new_project",
+        "reason": "5 dev signals: \\brelease\\b, \\bcompiled\\b, \\bdecomp(ilation)?\\b · category=new_project",
         "candidate_type": "decompilation",
         "category": "new_project",
         "question": false,
@@ -2501,7 +2501,7 @@
       },
       "classification": {
         "confidence": "high",
-        "reason": "4 dev signals: \\bported\\b, \\bupdate\\b, github\\.com\\b \u00b7 category=project_update",
+        "reason": "4 dev signals: \\bported\\b, \\bupdate\\b, github\\.com\\b · category=project_update",
         "candidate_type": "port",
         "category": "project_update",
         "question": false,
