@@ -1,9 +1,9 @@
-# Handoff - VH-MASTER-HANDOFF-PLAYSTATION-BLACK
+# Handoff - VH-LINKS-026 link fix release
 
-- Gegenereerd: 2026-09-27T15:09:43Z
+- Gegenereerd: 2026-09-27T15:25:13Z
 - Actor: codex
-- Model: gemini-3.8-flash
-- ProjectRoot: C:\Users\suloW\Documents\ChatGPT\VitaPort
+- Model: gemini-3.7-flash
+- ProjectRoot: C:\Users\suloW\.codex\worktrees\vh-port-atlas-layout\VitaPort
 - Bronnen: 23
 
 ## Bronintegriteit
@@ -13,8 +13,6 @@
 | AGENTS.md | 6808 | 18871EEF82DD846289B8076A8555B404A58851DA75FA9CD6621E5D3B37F9C644 |
 | README.md | 3080 | B54A25C02A048BD1D94067EBE7D8697B8069CA0D05980D569D360676CC51AD8B |
 | docs\MASTER_BLUEPRINT.md | 59195 | 23A4E7CDAB06E9171D22A23C6E412C1E1001683A44A2193CFC5CF234B5A9DE55 |
-| docs\PREMIUM_UX_BLUEPRINT.md | 3386 | C65677003E203E18E916ACEDE4D841DD457F0B3A726FF1709FCBA7B4694AE196 |
-| HANDOFF_UI_WORKER.md | 1553 | AD6F8105D0867F83D017C0D50DA5362684FC1646749EFA18E17E25FBD9539E6E |
 | PROJECT_STATE.md | 54881 | BFB1AEA3734B96F97F99CAFF20BCAD1389BD92475F3F018EE8567E786553700A |
 | AGENT_TEAM.json | 4554 | D2510F5F6169ACE43EC47D1B45323A2E5029C2A6619938A2ABD4D2FAB77590A2 |
 | EVIDENCE.jsonl | 67516 | F4F315B6144762231602B6F833AF644BFBC375015220F5575236BF78817C4491 |
@@ -22,26 +20,28 @@
 | index.html | 2391 | 7935144B9607A9E07BFA8EB3DBECE5A16A49F378D0EBB95DC118EA27AE3141E4 |
 | scripts\prerender.mjs | 11930 | 5D62743FE5A58C1456410734E8B0298F601F31FF72CC1E49FB1F733C1E8B2AC6 |
 | src\web\routes\HomePage.tsx | 34801 | 3FA4AC5CCE952B164F116AC5CDBBA4B91FBA70119A14F4D7B3E7AFDC37FF32E8 |
-| src\web\components\3d\VitaConsoleScene.tsx | 25460 | 82949EE1E9F90B94062B590B54092C6DE073F3CE59E13DF4F75FE9383361427A |
-| src\web\components\ledger\ConsoleStage.tsx | 18212 | DEE0E7487B0F4AC48042F344F5075629D79AA80BBB247C149B1183EEEBC2D349 |
 | src\web\components\ledger\DirectoryTable.tsx | 25437 | 4310493F7BF4CCD0684DE6E4E855ACF8933862A1D6FDF8D465890B4030BBCF09 |
 | src\web\components\ledger\ProjectPanel.tsx | 14678 | 0AFF7B9153CB59E7A7F8BB9C14EA6F155019679AA4AC0A76F6F5A53BF2E93931 |
+| src\web\components\ledger\ConsoleStage.tsx | 18212 | DEE0E7487B0F4AC48042F344F5075629D79AA80BBB247C149B1183EEEBC2D349 |
+| src\shared\constants\fallbackData.ts | 76657 | B0821BE8931DE71EE9E5FDD42BD3CA779AE102DE245A09480956F8F4381A65F1 |
 | src\web\styles\index.css | 18611 | 8609AC695EE0B5A9D27C2A3367C0C469F0FDA6D0936C924C9F8ED1484D33EF94 |
 | tailwind.config.js | 2534 | 5BA5430D349BF6CB8A9FFAF0FAA5E947504E8FB450A0EDE36B14DE2862AE1A8C |
-| src\shared\constants\fallbackData.ts | 76647 | 686A54E5A39C37061C59EDE416AEC708DFEFA6418230828ABFB9F033ED4ED72C |
-| tests\unit\console-stage.test.tsx | 6271 | E7FD5D6FEBE6B96579E262CE86E7797EC17DCC32B4C641D28466B9F7EE80BA3F |
+| tests\e2e\archive.spec.ts | 20228 | 07F38057FD21F5CFD62FF6C7692EDF959404568FF666E0F740B1209A9D1CE8C8 |
 | package.json | 3194 | 003E5C41FEF5F2E89E84CA6AB320A1D8AC592D0D86E6C928DFA4E75E28A3CB4D |
+| package-lock.json | 179620 | A18B995DB3E0A41A1964617E573F1F64FCB7359FC491A9ACB1CA313084902304 |
 | playwright.config.ts | 519 | 44F825F1226460A69368B61FFB0508D80D6F44488F672D80EE210BD0A4744AB7 |
-| public\vita-render.png | 156824 | A02F9C2A13DBA3CEE748B42F1DE3893CFF47EC4B11290CAD6C4643D4FB137705 |
+| data\quarantine.json | 92872 | C342128A1A1C971524DC119F4E141D2D61AFE2E059D6C6EE7DDD3134DDD28FCF |
+| public\api\feed.json | 22604 | 80523366670F79E6058FBF29E5468344BAA52BD2EB9DCDE9A02EB89FC394D3F0 |
+| public\api\rss.xml | 20135 | AA01A24C3DB1BB201DC1EB04ECAE7377DA3E049F795CCE4A10636AE201A2F405 |
 
 ## Samenvatting
 
-Full audit and delivery of PlayStation Black Theme and interactive 3D console. Overrode OS reducedMotion/saveData traps to guarantee live 3D rendering and mouse/scroll parallax on all devices. Deployed to Vercel production as dpl_7D5ShGZNPxHSjPaBtafQtQJpRx59 (READY) on vitaharbor.vercel.app. All 116 tests pass, 0 contrast failures, full mobile compliance. Next delegation scope for Master chat: 1. Curate more classic ports (GTA, Bully, Max Payne, etc.), 2. Process quarantine leads, 3. Enhance 3D model with GLTF/GLB asset and PlayStation particle effects, 4. Advanced filters (developer/engine/source platform) and timeline UI.
+Fixed release tag URLs for LinuxOnVita and AlephOne. Validated all 22 GitHub repository, release, and screenshot URLs return 200 OK. Curated links verified.
 
 ## Verificatie
 
 Controleer de hashes voordat je deze samenvatting vertrouwt:
 
-    powershell -NoProfile -ExecutionPolicy Bypass -File %USERPROFILE%\.codex\workflow\NEW-HANDOFF.ps1 -Verify "C:\Users\suloW\Documents\ChatGPT\VitaPort\HANDOFF.md"
+    powershell -NoProfile -ExecutionPolicy Bypass -File %USERPROFILE%\.codex\workflow\NEW-HANDOFF.ps1 -Verify "C:\Users\suloW\.codex\worktrees\vh-port-atlas-layout\VitaPort\HANDOFF.md"
 
 Een handoff is context, geen bron van waarheid. Workspace en Git zijn leidend.
