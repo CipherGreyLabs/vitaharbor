@@ -10,6 +10,7 @@
 - Promoted source-verified candidate items in `data/quarantine.json` (`reddit-1wnekpf` and `reddit-1wmax82`).
 - Rebuilt feeds and prerendered static assets: 34 project detail pages generated, 37 sitemap URLs.
 - Verification: `npm run verify` passed (typecheck, 116/116 unit tests, build); Playwright E2E passed 21/21 against local preview server.
+- Production release: Deployed to Vercel production as `dpl_Dxae4RVN5wuSpZKAJCZw8uTGhHR9` (READY) on alias `https://vitaharbor.vercel.app` from commit `03e20d2`. Verified live: 34 projects in API and JSON feed, live Playwright E2E passed 21/21.
 
 # VitaHarbor project state
 
