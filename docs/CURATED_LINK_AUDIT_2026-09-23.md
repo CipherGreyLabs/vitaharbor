@@ -1,10 +1,10 @@
 # Curated link integrity audit — 2026-09-23
 
-Generated at 2026-09-23T15:48:29.118Z. This is a non-destructive report over curated source, repository, screenshot and release links in `src/shared/constants/fallbackData.ts`. No URL was replaced automatically.
+Generated at 2026-09-27T15:22:41.962Z. This is a non-destructive report over curated source, repository, screenshot and release links in `src/shared/constants/fallbackData.ts`. No URL was replaced automatically.
 
 Wrong-target is reported only after a content/identity check; an HTTP 200 alone is not treated as proof of correctness.
 
-Summary: ok: 16 · dead: 0 · redirect: 0 · wrong-target: 0 · unverifiable: 36 · browser-verified unique Reddit URLs: 19
+Summary: ok: 2 · dead: 0 · redirect: 0 · wrong-target: 0 · unverifiable: 65 · browser-verified unique Reddit URLs: 19
 
 The direct HTTP audit can report Reddit as UNKNOWN/UNVERIFIABLE because Reddit returns HTTP 403 to the non-browser fetcher. Where possible, the companion read-only authenticated-browser review records the page title and content assessment per URL.
 
@@ -19,7 +19,7 @@ The direct HTTP audit can report Reddit as UNKNOWN/UNVERIFIABLE because Reddit r
 | unverifiable | source | renpy-8-runtime-engine | https://www.reddit.com/r/vitahacks/comments/1h4yhyi/release_renpy_vita_8_port/ | Initial request returned HTTP 403 | browser_verified: valid release source |
 | ok | repository | renpy-8-runtime-engine | https://github.com/Grimiku/RenPy-Vita-8 | GitHub repository identity/content checked as Grimiku/RenPy-Vita-8 | none |
 | unverifiable | source | zelda-ship-of-harkinian-vita | https://www.reddit.com/r/VitaPiracy/comments/1leugn2/ocarina_of_time_ship_of_harkinian_is_out_now_baby/ | Initial request returned HTTP 403 | browser_verified: valid release source; comments contain uncurated game-data discussion that was not followed |
-| ok | source | cave-story-evo-vita | https://github.com/nxengine/nxengine-evo/blob/master/screenshot.png | GitHub repository identity/content checked as nxengine/nxengine-evo | none |
+| unverifiable | source | cave-story-evo-vita | https://github.com/nxengine/nxengine-evo/blob/master/screenshot.png | GitHub repository exists but the linked path check returned HTTP 403 | none |
 | unverifiable | source | renegade-vita-demo-release | https://www.reddit.com/r/vitahacks/comments/1wgp613/renegade_vita_demo_release/ | Initial request returned HTTP 403 | browser_verified: valid development source |
 | unverifiable | source | rc-cars-vita | https://www.reddit.com/r/vitahacks/comments/1wjn8zg/rc_cars_port_progress/ | Initial request returned HTTP 403 | browser_verified: valid development source; comments mention private prebuilt sharing but no such link was adopted |
 | unverifiable | source | rc-cars-vita | https://www.reddit.com/r/vitahacks/comments/1wjn8zg/rc_cars_port_progress/ | Initial request returned HTTP 403 | browser_verified: valid development source; comments mention private prebuilt sharing but no such link was adopted |
@@ -27,23 +27,31 @@ The direct HTTP audit can report Reddit as UNKNOWN/UNVERIFIABLE because Reddit r
 | unverifiable | source | d2vita | https://www.reddit.com/r/VitaPiracy/comments/1wj8dvz/d2vita_is_here_diablo_ii_lord_of_destruction/ | Initial request returned HTTP 403 | browser_verified: valid release source; no game-data URL was adopted |
 | unverifiable | source | cod-zombies-ios-loader | https://www.reddit.com/r/vitahacks/comments/1wjjx7w/a_bounty_that_deserves_more_visibility/ | Initial request returned HTTP 403 | browser_verified: valid announcement-only development lead; no payment or download URL adopted |
 | unverifiable | source | illusia-vita | https://www.reddit.com/r/vitahacks/comments/1w4y5tz/release_illusia_vita_a_port_of_illusia_to_the/ | Initial request returned HTTP 403 | browser_verified: valid release source; donation link not adopted |
-| ok | repository | illusia-vita | https://github.com/withLogic/illusia-vita | GitHub repository identity/content checked as withLogic/illusia-vita | none |
-| ok | source | illusia-vita | https://github.com/withLogic/illusia-vita/blob/master/extras/screenshots/screenshot1.jpg | GitHub repository identity/content checked as withLogic/illusia-vita | none |
-| ok | source | Illusia | https://github.com/withLogic/illusia-vita | GitHub repository identity/content checked as withLogic/illusia-vita | none |
+| unverifiable | repository | illusia-vita | https://github.com/withLogic/illusia-vita | GitHub repository identity API returned HTTP 403 | none |
+| unverifiable | source | illusia-vita | https://github.com/withLogic/illusia-vita/blob/master/extras/screenshots/screenshot1.jpg | GitHub repository exists but the linked path check returned HTTP 403 | none |
+| unverifiable | source | Illusia | https://github.com/withLogic/illusia-vita | GitHub repository identity API returned HTTP 403 | none |
 | unverifiable | source | jedi-academy-vita | https://www.reddit.com/r/VitaPiracy/comments/1vvp4j6/star_wars_jedi_knight_jedi_academy_files/ | Initial request returned HTTP 403 | browser_verified: valid release source; keep only Reddit/GitHub provenance and never curate the direct game-data URL |
-| ok | repository | jedi-academy-vita | https://github.com/NDRWhun/JAVITA | GitHub repository identity/content checked as NDRWhun/JAVITA | none |
+| unverifiable | repository | jedi-academy-vita | https://github.com/NDRWhun/JAVITA | GitHub repository identity API returned HTTP 403 | none |
 | unverifiable | source | jedi-academy-vita | https://www.reddit.com/r/VitaPiracy/comments/1vvp4j6/star_wars_jedi_knight_jedi_academy_files/ | Initial request returned HTTP 403 | browser_verified: valid release source; keep only Reddit/GitHub provenance and never curate the direct game-data URL |
-| ok | source | Star Wars Jedi Knight: Jedi Academy | https://github.com/NDRWhun/JAVITA | GitHub repository identity/content checked as NDRWhun/JAVITA | none |
+| unverifiable | source | Star Wars Jedi Knight: Jedi Academy | https://github.com/NDRWhun/JAVITA | GitHub repository identity API returned HTTP 403 | none |
 | unverifiable | source | jedi-outcast-vita | https://www.reddit.com/r/VitaPiracy/comments/1vws22e/star_wars_jedi_knight_ii_jedi_outcast_data_files/ | Initial request returned HTTP 403 | browser_verified: valid release source; keep only Reddit/GitHub provenance and never curate the direct game-data URL |
-| ok | repository | jedi-outcast-vita | https://github.com/NDRWhun/JK2VITA | GitHub repository identity/content checked as NDRWhun/JK2VITA | none |
-| ok | source | Star Wars Jedi Knight II: Jedi Outcast | https://github.com/NDRWhun/JK2VITA | GitHub repository identity/content checked as NDRWhun/JK2VITA | none |
+| unverifiable | repository | jedi-outcast-vita | https://github.com/NDRWhun/JK2VITA | GitHub repository identity API returned HTTP 403 | none |
+| unverifiable | source | Star Wars Jedi Knight II: Jedi Outcast | https://github.com/NDRWhun/JK2VITA | GitHub repository identity API returned HTTP 403 | none |
 | unverifiable | source | barony-vita | https://www.reddit.com/r/vitahacks/comments/1v8zqrw/barony_vita/ | Initial request returned HTTP 403 | browser_verified: valid release source |
-| ok | repository | barony-vita | https://github.com/Brendonm17/Barony-Vita | GitHub repository identity/content checked as Brendonm17/Barony-Vita | none |
-| ok | source | Barony | https://github.com/Brendonm17/Barony-Vita | GitHub repository identity/content checked as Brendonm17/Barony-Vita | none |
+| unverifiable | repository | barony-vita | https://github.com/Brendonm17/Barony-Vita | GitHub repository identity API returned HTTP 403 | none |
+| unverifiable | source | Barony | https://github.com/Brendonm17/Barony-Vita | GitHub repository identity API returned HTTP 403 | none |
 | unverifiable | source | c-dogs-sdl-vita | https://www.reddit.com/r/vitahacks/comments/1wkw14c/prerelease_cdogs_sdl_port_for_ps_vita_pstv/ | Initial request returned HTTP 403 | browser_verified: valid development source |
-| ok | repository | c-dogs-sdl-vita | https://github.com/abduct/cdogs-sdl | GitHub repository identity/content checked as abduct/cdogs-sdl | none |
+| unverifiable | repository | c-dogs-sdl-vita | https://github.com/abduct/cdogs-sdl | GitHub repository identity API returned HTTP 403 | none |
 | unverifiable | source | test-drive-1987-vita | https://www.reddit.com/r/vitahacks/comments/1wlqxq4/test_drive_1987_native_vita_port/ | Initial request returned HTTP 403 | browser_verified: valid release source; no game-data URL adopted |
-| ok | repository | test-drive-1987-vita | https://github.com/smart-pickle/TestDrive-Vita | GitHub repository identity/content checked as smart-pickle/TestDrive-Vita | none |
+| unverifiable | repository | test-drive-1987-vita | https://github.com/smart-pickle/TestDrive-Vita | GitHub repository identity API returned HTTP 403 | none |
+| unverifiable | source | linux-on-vita | https://www.reddit.com/r/vitahacks/comments/1wnekpf/linux_on_vita/ | Initial request returned HTTP 403 | none |
+| unverifiable | repository | linux-on-vita | https://github.com/devwithzachary/LinuxOnVita | GitHub repository identity API returned HTTP 403 | none |
+| unverifiable | source | Linux on Vita (Alpine Linux) | https://github.com/devwithzachary/LinuxOnVita | GitHub repository identity API returned HTTP 403 | none |
+| unverifiable | repository | aleph-one-vita | https://github.com/DrDecki/Aleph-One-PsVita | GitHub repository identity API returned HTTP 403 | none |
+| unverifiable | repository | apotris-psvita | https://github.com/Rocroverss/apotris-psvita | GitHub repository identity API returned HTTP 403 | none |
+| unverifiable | repository | prince-of-persia-classic-vita | https://github.com/MetalSyntax/prince-of-persia-classic-psvita-port | GitHub repository identity API returned HTTP 403 | none |
+| unverifiable | source | resident-evil-4-vita | https://www.reddit.com/r/VitaPiracy/comments/1wmax82/guess_it_is_happening/ | Initial request returned HTTP 403 | none |
+| unverifiable | repository | resident-evil-4-vita | https://github.com/Rinnegatamante/re4-vita | GitHub repository identity API returned HTTP 403 | none |
 | unverifiable | source | src_mohaa | https://www.reddit.com/r/vitahacks/comments/1tapf2b/wip_openmohaa_on_ps_vita_medal_of_honor_allied/ | Initial request returned HTTP 403 | browser_verified: valid development source |
 | unverifiable | source | src_melee | https://www.reddit.com/r/vitahacks/comments/1whm4hp/smash_bros_melee_vita/ | Initial request returned HTTP 403 | browser_verified: valid development source |
 | unverifiable | source | src_melee_robin994 | https://www.reddit.com/r/vitahacks/comments/1wivnp0/super_smash_melee/ | Initial request returned HTTP 403 | browser_verified: valid development source |
@@ -59,9 +67,16 @@ The direct HTTP audit can report Reddit as UNKNOWN/UNVERIFIABLE because Reddit r
 | unverifiable | source | src_jedi_outcast | https://www.reddit.com/r/VitaPiracy/comments/1vws22e/star_wars_jedi_knight_ii_jedi_outcast_data_files/ | Initial request returned HTTP 403 | browser_verified: valid release source; keep only Reddit/GitHub provenance and never curate the direct game-data URL |
 | unverifiable | source | src_barony_sep | https://www.reddit.com/r/vitahacks/comments/1w8b9pp/barony_online_update_v002/ | Initial request returned HTTP 403 | browser_verified: valid update source |
 | unverifiable | source | src_cdogs_vita_reddit | https://www.reddit.com/r/vitahacks/comments/1wkw14c/prerelease_cdogs_sdl_port_for_ps_vita_pstv/ | Initial request returned HTTP 403 | browser_verified: valid development source |
-| ok | release | src_cdogs_vita_github | https://github.com/abduct/cdogs-sdl/releases/tag/vita-preview-1 | GitHub repository identity/content checked as abduct/cdogs-sdl | none |
+| unverifiable | release | src_cdogs_vita_github | https://github.com/abduct/cdogs-sdl/releases/tag/vita-preview-1 | GitHub repository identity API returned HTTP 403 | none |
 | unverifiable | source | src_test_drive_reddit | https://www.reddit.com/r/vitahacks/comments/1wlqxq4/test_drive_1987_native_vita_port/ | Initial request returned HTTP 403 | browser_verified: valid release source; no game-data URL adopted |
-| ok | release | src_test_drive_release | https://github.com/smart-pickle/TestDrive-Vita/releases/tag/v0.1 | GitHub repository identity/content checked as smart-pickle/TestDrive-Vita | none |
+| unverifiable | release | src_test_drive_release | https://github.com/smart-pickle/TestDrive-Vita/releases/tag/v0.1 | GitHub repository identity API returned HTTP 403 | none |
+| unverifiable | source | src_linux_on_vita_reddit | https://www.reddit.com/r/vitahacks/comments/1wnekpf/linux_on_vita/ | Initial request returned HTTP 403 | none |
+| unverifiable | release | src_linux_on_vita_repo | https://github.com/devwithzachary/LinuxOnVita/releases/tag/1.2.0 | GitHub repository identity API returned HTTP 403 | none |
+| unverifiable | release | src_aleph_one_repo | https://github.com/DrDecki/Aleph-One-PsVita/releases/tag/AlephOneVita2.0 | GitHub repository identity API returned HTTP 403 | none |
+| unverifiable | release | src_apotris_repo | https://github.com/Rocroverss/apotris-psvita/releases/tag/v1.0 | GitHub repository identity API returned HTTP 403 | none |
+| unverifiable | release | src_pop_classic_repo | https://github.com/MetalSyntax/prince-of-persia-classic-psvita-port/releases/tag/v01.28 | GitHub repository identity API returned HTTP 403 | none |
+| unverifiable | source | src_re4_vita_repo | https://github.com/Rinnegatamante/re4-vita | GitHub repository identity API returned HTTP 403 | none |
+| unverifiable | source | src_re4_vita_reddit | https://www.reddit.com/r/VitaPiracy/comments/1wmax82/guess_it_is_happening/ | Initial request returned HTTP 403 | none |
 
 ## Correction policy
 

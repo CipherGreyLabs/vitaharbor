@@ -1190,7 +1190,7 @@ export const FALLBACK_UPDATES: any[] = [
     verification_level: "developer_direct",
     sources: [
       { source_item_id: "src_linux_on_vita_reddit", relationship: "primary", canonical_url: "https://www.reddit.com/r/vitahacks/comments/1wnekpf/linux_on_vita/" },
-      { source_item_id: "src_linux_on_vita_repo", relationship: "release", canonical_url: "https://github.com/devwithzachary/LinuxOnVita/releases/tag/v1.2.0" }
+      { source_item_id: "src_linux_on_vita_repo", relationship: "release", canonical_url: "https://github.com/devwithzachary/LinuxOnVita/releases/tag/1.2.0" }
     ]
   }
   ,{
@@ -1206,7 +1206,7 @@ export const FALLBACK_UPDATES: any[] = [
     event_at: new Date('2026-09-24T19:47:55.000Z'),
     verification_level: "developer_direct",
     sources: [
-      { source_item_id: "src_aleph_one_repo", relationship: "release", canonical_url: "https://github.com/DrDecki/Aleph-One-PsVita/releases/tag/v2.0" }
+      { source_item_id: "src_aleph_one_repo", relationship: "release", canonical_url: "https://github.com/DrDecki/Aleph-One-PsVita/releases/tag/AlephOneVita2.0" }
     ]
   }
   ,{
