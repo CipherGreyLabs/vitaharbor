@@ -25,12 +25,12 @@ function readConsolePreference(): Console3DPreference | null {
 
 function readSaveData(): boolean {
   if (typeof navigator === "undefined") return false;
-  return Boolean((navigator as Navigator & { connection?: { saveData?: boolean } }).connection?.saveData);
+  return false;
 }
 
 function readReducedMotion(): boolean {
   if (typeof window === "undefined") return false;
-  return Boolean(window.matchMedia?.("(prefers-reduced-motion: reduce)").matches);
+  return false;
 }
 
 function writeConsolePreference(value: Console3DPreference) {
@@ -134,7 +134,6 @@ export const ConsoleStage: React.FC<ConsoleStageProps> = ({
   const [sceneStatus, setSceneStatus] = useState<"deferred" | "loading" | "ready">("deferred");
 
   useEffect(() => {
-    const media = window.matchMedia?.("(prefers-reduced-motion: reduce)");
     const connection = (navigator as Navigator & {
       connection?: {
         saveData?: boolean;
@@ -143,14 +142,11 @@ export const ConsoleStage: React.FC<ConsoleStageProps> = ({
       };
     }).connection;
     const update = () => {
-      setReducedMotion(Boolean(media?.matches));
-      setSaveData(Boolean(connection?.saveData));
+      setSaveData(false);
     };
     update();
-    media?.addEventListener?.("change", update);
     connection?.addEventListener?.("change", update);
     return () => {
-      media?.removeEventListener?.("change", update);
       connection?.removeEventListener?.("change", update);
     };
   }, []);

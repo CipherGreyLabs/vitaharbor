@@ -481,7 +481,7 @@ const recessMat = new THREE.MeshStandardMaterial({color:'#14161a',roughness:0.52
     let px = 0, py = 0, visible = true, raf = 0, previous = '', readyReported = false;
     let targetRotX = 0, targetRotY = 0;
     let targetScrollProgress = 0, scrollProgress = 0;
-    const reduced = reducedMotion || Boolean(window.matchMedia?.('(prefers-reduced-motion: reduce)').matches);
+    const reduced = reducedMotion 
     const sceneTop = el.getBoundingClientRect().top + window.scrollY;
     const updateScrollProgress = () => {
       const range = Math.max(window.innerHeight * 0.9, 400);
