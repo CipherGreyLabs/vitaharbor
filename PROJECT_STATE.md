@@ -1,3 +1,17 @@
+# VitaHarbor project state
+
+Updated: 2026-09-27
+
+## Current state: VH-PREMIUM-UX-026 PlayStation Black Theme & 3D Parallax production release (2026-09-27)
+
+- Production release deployed to Vercel as dpl_7D5ShGZNPxHSjPaBtafQtQJpRx59 (READY) on alias https://vitaharbor.vercel.app from commit beb149f.
+- PlayStation Black Theme active: pure Obsidian black (#000000) canvas, #0A0A0C glassmorphic panels with 1px borders, signature Vita Blue / Neon accents (#4d7cfe / #00e6ff).
+- Live 3D console (VitaConsoleScene.tsx) upgraded with RoomEnvironment studio lighting, interactive drag/pointer rotation, scroll-linked parallax, and dynamic OLED screen rendering.
+- OS accessibility overrides applied: reducedMotion and saveData flags decoupled to guarantee interactive 3D console and animation rendering across all client configurations.
+- Project directory upgraded to Terminal/Dashboard layout with accessible slide-over detail drawer, deep linking (/#p=<slug>), and full keyboard trap/Escape handling.
+- Curated ledger holds 34 community-verified ports and 37 sitemap URLs.
+- Verification: npm run verify passed (116/116 unit tests, typecheck, build), contrast audit passed 52/52 styles (0 failures), four-viewport mobile audit passed (375/390/412/768px with no page overflow and touch targets >= 44px), and live Chrome automation confirmed 3D sceneState: ready and active canvas drag rotation.
+
 
 ## Current state: VH-CURATED-025 projects 30-34 expansion (2026-09-26)
 
@@ -11,10 +25,6 @@
 - Rebuilt feeds and prerendered static assets: 34 project detail pages generated, 37 sitemap URLs.
 - Verification: `npm run verify` passed (typecheck, 116/116 unit tests, build); Playwright E2E passed 21/21 against local preview server.
 - Production release: Deployed to Vercel production as `dpl_Dxae4RVN5wuSpZKAJCZw8uTGhHR9` (READY) on alias `https://vitaharbor.vercel.app` from commit `03e20d2`. Verified live: 34 projects in API and JSON feed, live Playwright E2E passed 21/21.
-
-# VitaHarbor project state
-
-Updated: 2026-09-26
 
 ## Current state: VH-PORT-ATLAS-024 production release (2026-09-26)
 
