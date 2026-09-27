@@ -60,6 +60,7 @@ npx vercel --prod --yes
    entry `detection: detected`. Do not fill in performance numbers that were not stated.
 6. **No piracy.** Never link ROMs, ISOs or game data. Only discussion threads and source repos.
 7. **Worker model rule.** All worker chats in this project must strictly and exclusively use `gemini-3.7-flash` with `low` reasoning effort as a fixed rule. Never dispatch or configure workers with other models or higher thinking levels for VitaHarbor.
+8. **Asynchronous worker reporting.** Workers must report their completion and handoff directly back to the master chat using `send_message_to_thread` upon finishing their turn. The master does not run blocking sleep/wait loops; workers push their final status to the master asynchronously without altering model settings.
 
 ## Project traceability contract
 
