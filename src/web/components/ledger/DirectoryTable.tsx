@@ -1,4 +1,5 @@
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useRef } from "react";
+import { createPortal } from "react-dom";
 import { ProjectPanel } from "./ProjectPanel";
 import {
   type LedgerProject,
@@ -6,13 +7,11 @@ import {
   prettyStage,
   deriveProjectType,
   PROJECT_TYPE_META,
-  STAGE_TONE,
   STAGE_CHIP,
-  STAGE_STEP,
   formatDay,
   formatUtcDateTime
 } from "./types";
-import { Search, ExternalLink, X, ChevronDown, Link2, Check, Filter, Camera } from "lucide-react";
+import { Search, ExternalLink, X, ChevronRight, Link2, Check, Filter, Camera } from "lucide-react";
 
 const STAGE_FILTERS = [
   { key: "all", label: "All ports" },
@@ -42,35 +41,6 @@ interface LatestSignal {
   project_slug?: string | null;
   sources?: Array<{ canonical_url?: string | null }>;
 }
-
-const ProjectCardArtwork: React.FC<{ project: LedgerProject; title: string }> = ({ project, title }) => {
-  const [imageFailed, setImageFailed] = useState(false);
-  const hasScreenshot = Boolean(project.screenshot_url) && !imageFailed;
-  const initials = title.split(/\s+/).filter(Boolean).slice(0, 2).map((word) => word[0]).join("").toUpperCase();
-
-  return (
-    <div className="relative -mx-4 -mt-4 mb-0 aspect-[16/9] overflow-hidden bg-sunken sm:-mx-5 sm:-mt-5" aria-hidden="true">
-      {hasScreenshot ? (
-        <img
-          data-testid="project-artwork"
-          src={project.screenshot_url || undefined}
-          alt=""
-          loading="lazy"
-          decoding="async"
-          className="h-full w-full object-cover"
-          onError={() => setImageFailed(true)}
-        />
-      ) : (
-        <div data-testid="project-artwork-fallback" className="flex h-full items-end justify-between bg-accent/5 p-4 sm:p-5">
-          <span className="font-display text-5xl font-semibold leading-none tracking-[-0.06em] text-accent sm:text-6xl">{initials}</span>
-          <span className="max-w-[45%] text-right font-mono text-micro font-semibold uppercase tracking-[0.14em] text-ink-medium">
-            {PROJECT_TYPE_META[deriveProjectType(project)].shortLabel}
-          </span>
-        </div>
-      )}
-    </div>
-  );
-};
 
 interface DirectoryTableProps {
   projects: LedgerProject[];
@@ -143,12 +113,70 @@ export const DirectoryTable: React.FC<DirectoryTableProps> = ({
     return counts;
   }, [projects]);
 
+  const openProject = projects.find((project) => project.id === expandedId) || null;
+  const drawerOpen = openProject !== null;
+  const drawerRef = useRef<HTMLElement | null>(null);
+  const closeButtonRef = useRef<HTMLButtonElement | null>(null);
+  const returnFocusRef = useRef<HTMLElement | null>(null);
+  const closeDrawerRef = useRef<() => void>(() => undefined);
+  closeDrawerRef.current = () => {
+    if (openProject) onToggleEntry(openProject);
+  };
+
+  useEffect(() => {
+    if (!drawerOpen) return;
+
+    const active = document.activeElement;
+    returnFocusRef.current = active instanceof HTMLElement ? active : null;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    const focusFrame = window.requestAnimationFrame(() => closeButtonRef.current?.focus());
+
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        event.preventDefault();
+        closeDrawerRef.current();
+        return;
+      }
+      if (event.key !== "Tab") return;
+
+      const drawer = drawerRef.current;
+      if (!drawer) return;
+      const focusable = Array.from(drawer.querySelectorAll<HTMLElement>(
+        'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
+      ));
+      if (focusable.length === 0) {
+        event.preventDefault();
+        drawer.focus();
+        return;
+      }
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (event.shiftKey && (document.activeElement === first || !drawer.contains(document.activeElement))) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && (document.activeElement === last || !drawer.contains(document.activeElement))) {
+        event.preventDefault();
+        first.focus();
+      }
+    };
+
+    window.addEventListener("keydown", onKeyDown);
+    return () => {
+      window.cancelAnimationFrame(focusFrame);
+      window.removeEventListener("keydown", onKeyDown);
+      document.body.style.overflow = previousOverflow;
+      const returnFocus = returnFocusRef.current;
+      if (returnFocus?.isConnected) window.requestAnimationFrame(() => returnFocus.focus());
+    };
+  }, [drawerOpen]);
+
   return (
     <section
       id="directory"
       ref={directoryRef}
       aria-labelledby="directory-heading"
-      className="mx-auto mt-2 max-w-6xl px-4 sm:px-6"
+      className="mx-auto mt-7 max-w-7xl px-4 sm:px-6"
     >
       <div>
         <h2 id="directory-heading" className="text-title font-semibold text-ink">
@@ -317,174 +345,139 @@ export const DirectoryTable: React.FC<DirectoryTableProps> = ({
             </button>
           </div>
         ) : (
-          <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {visible.map((project) => {
-              const title = splitTitle(project.game_title || project.display_name);
-              const expanded = expandedId === project.id;
-              const selected = selectedId === project.id;
-              const seenAt = project.first_seen_at ? new Date(project.first_seen_at).getTime() : 0;
-              const isNew = seenAt > 0 && Date.now() - seenAt < 7 * 24 * 60 * 60 * 1000;
+          <div className="overflow-hidden rounded-2xl border border-white/[0.07] bg-surface shadow-card">
+            <div className="hidden grid-cols-[minmax(0,1fr)_auto] border-b border-hairline bg-white/[0.025] px-0 py-2 lg:grid">
+              <div className="grid grid-cols-[minmax(0,1.8fr)_minmax(8.5rem,0.9fr)_minmax(6rem,0.65fr)_minmax(7rem,0.75fr)_1.5rem] items-center gap-3 px-4 font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-ink-muted">
+                <span>Project</span><span>Current stage</span><span>Type</span><span>Last observed</span><span aria-hidden="true" />
+              </div>
+              <span className="w-12 sm:w-[5.5rem]" aria-hidden="true" />
+            </div>
+            <ul className="divide-y divide-white/[0.055]">
+              {visible.map((project) => {
+                const title = splitTitle(project.game_title || project.display_name);
+                const expanded = expandedId === project.id;
+                const selected = selectedId === project.id;
+                const seenAt = project.first_seen_at ? new Date(project.first_seen_at).getTime() : 0;
+                const isNew = seenAt > 0 && Date.now() - seenAt < 7 * 24 * 60 * 60 * 1000;
+                const projectType = PROJECT_TYPE_META[deriveProjectType(project)].shortLabel;
 
-              return (
-                <li
-                  key={project.id}
-                  id={"entry-" + project.slug}
-                  onClick={(event) => {
-                    if ((event.target as HTMLElement).closest("a, button")) return;
-                    onToggleEntry(project);
-                  }}
-                  className={
-                    "min-w-0 overflow-hidden rounded-2xl border border-hairline bg-surface transition-all duration-300 " +
-                    (expanded ? "sm:col-span-2 lg:col-span-3 " : "") +
-                    (selected ? "border-hairline-strong/60 bg-sunken/60 shadow-lift" : "")
-                  }
-                >
-                  <div className="group/row relative grid gap-4 p-4 transition-colors hover:bg-sunken/50 sm:p-5">
-                    <span
-                      aria-hidden="true"
-                      className="absolute left-0 top-0 h-full w-0.5 origin-top scale-y-0 bg-accent transition-transform duration-200 group-hover/row:scale-y-100"
-                    />
-                    <ProjectCardArtwork project={project} title={title.name} />
-
-                    <div className="min-w-0">
-                      <span className="flex items-center gap-2.5">
-                        <span className="min-w-0">
-                          <span className="flex items-center gap-2">
-                            <button
-                              type="button"
-                              aria-expanded={expanded}
-                              aria-controls={"panel-" + project.slug}
-                              aria-label={`${expanded ? "Hide" : "Show"} details for ${title.name}`}
-                              onClick={() => onToggleEntry(project)}
-                              className="min-h-[44px] min-w-0 truncate text-left text-subtitle font-semibold text-ink transition-colors hover:text-accent focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
-                            >
-                              {title.name}
-                            </button>
-                            {isNew && (
-                              <span className="shrink-0 rounded border border-accent/20 bg-accent/15 px-1.5 py-0.5 text-micro font-semibold uppercase tracking-wide text-ink">
-                                New
-                              </span>
-                            )}
-                            {project.screenshot_url && (
-                              <span title="Source screenshot available"><Camera className="h-3 w-3 shrink-0 text-ink-muted" aria-hidden="true" /></span>
-                            )}
-                          </span>
-                      <span className="mt-0.5 block font-mono text-micro uppercase text-ink-muted">
-                            {title.engine || project.original_platform || PROJECT_TYPE_META[deriveProjectType(project)].shortLabel}
-                          </span>
-                          <span className="mt-1 block text-micro text-ink-muted">
-                            Observed {formatDay(project.last_activity_at) || "date not recorded"}
-                          </span>
-                        </span>
-                      </span>
-                      <span aria-hidden="true" className="mt-2.5 flex gap-1 pl-[38px]">
-                        {[1, 2, 3, 4, 5].map((segment) => (
-                          <span
-                            key={segment}
-                            className={
-                              "h-[3px] w-5 rounded-full " +
-                              (segment <= (STAGE_STEP[String(project.current_stage)] || 1)
-                                ? STAGE_TONE[String(project.current_stage)] || "bg-stage-idle"
-                                : "bg-hairline")
-                            }
-                          />
-                        ))}
-                      </span>
-                    </div>
-
-                    <div className="flex flex-wrap items-center gap-1">
-                      <span
-                        className={
-                          "inline-flex rounded-md px-2 py-1 text-micro font-semibold uppercase " +
-                          (STAGE_CHIP[String(project.current_stage)] || "bg-sunken text-ink-medium")
-                        }
-                      >
-                        {prettyStage(project.current_stage)}
-                      </span>
-                      {project.verification === "detected" && (
-                        <span className="ml-1.5 inline-flex rounded-md border border-hairline-strong/30 px-2 py-1 text-micro font-semibold uppercase text-ink-muted">
-                          Unverified
-                        </span>
-                      )}
-                      <span className="inline-flex rounded-md border border-hairline bg-surface px-2 py-1 text-micro font-semibold uppercase text-ink-muted">
-                        {PROJECT_TYPE_META[deriveProjectType(project)].shortLabel}
-                      </span>
-                    </div>
-
-                    <div className="min-w-0">
-                      <p className="line-clamp-3 text-body text-ink-medium">
-                        {project.performance_notes || project.playability_notes || project.summary || "No hardware note recorded."}
-                      </p>
-                      {Array.isArray(project.technologies) && project.technologies.length > 0 && (
-                        <div className="mt-1.5 flex flex-wrap items-center gap-1">
-                          {project.technologies.slice(0, 3).map((tech: string, techIndex: number) => (
-                            <span
-                              key={tech}
-                              className={
-                                "rounded border border-hairline bg-surface px-1.5 py-0.5 font-mono text-micro text-ink-muted" +
-                                (techIndex >= 2 ? " hidden sm:inline" : "")
-                              }
-                            >
-                              {tech}
-                            </span>
-                          ))}
-                        </div>
-                      )}
-                    </div>
-
-                    <div className="flex items-center justify-end gap-1 border-t border-hairline pt-3">
+                return (
+                  <li
+                    key={project.id}
+                    id={"entry-" + project.slug}
+                    className={"group relative transition-colors " + (selected ? "bg-accent/[0.055]" : "hover:bg-white/[0.018]")}
+                  >
+                    <div className="grid grid-cols-[minmax(0,1fr)_auto] items-center">
                       <button
                         type="button"
-                        onClick={() => onCopyLink(project)}
-                        title="Copy a direct link to this entry"
-                        aria-label={"Copy a direct link to " + title.name}
-                        className="inline-flex h-11 w-11 items-center justify-center rounded-md text-ink-muted transition-colors hover:bg-sunken hover:text-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-accent"
-                      >
-                        {copiedSlug === project.slug ? (
-                          <Check className="h-4 w-4 text-stage-done" />
-                        ) : (
-                          <Link2 className="h-4 w-4" />
-                        )}
-                      </button>
-                      {project.reddit_url && (
-                        <a
-                          href={project.reddit_url}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          title="Open the source discussion"
-                          aria-label={"Open the source discussion for " + title.name}
-                          className="inline-flex h-11 w-11 items-center justify-center rounded-md text-ink-muted transition-colors hover:bg-sunken hover:text-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-accent"
-                        >
-                          <ExternalLink className="h-4 w-4" />
-                        </a>
-                      )}
-                      <button
-                        type="button"
-                        onClick={() => onToggleEntry(project)}
                         aria-expanded={expanded}
-                        aria-controls={"panel-" + project.slug}
-                        aria-label={`${expanded ? "Collapse" : "Expand"} details for ${title.name}`}
-                        className="inline-flex h-11 w-11 items-center justify-center rounded-md text-ink-muted transition-colors hover:bg-sunken hover:text-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-accent"
+                        aria-controls={expanded ? "panel-" + project.slug : undefined}
+                        aria-label={`${expanded ? "Close" : "Open"} project details for ${title.name}`}
+                        onClick={() => onToggleEntry(project)}
+                        className="grid min-h-[76px] min-w-0 grid-cols-[minmax(0,1fr)_auto_1.5rem] items-center gap-3 px-4 py-2.5 text-left transition-colors focus-visible:z-10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-inset focus-visible:outline-accent lg:grid-cols-[minmax(0,1.8fr)_minmax(8.5rem,0.9fr)_minmax(6rem,0.65fr)_minmax(7rem,0.75fr)_1.5rem]"
                       >
-                        <ChevronDown aria-hidden="true" className={"h-4 w-4 transition-transform duration-200 " + (expanded ? "rotate-180" : "")} />
-                      </button>
-                    </div>
-                  </div>
+                        <span className="min-w-0">
+                          <span className="flex min-w-0 items-center gap-2">
+                            <span className="truncate text-body font-semibold text-ink transition-colors group-hover:text-accent-hover">{title.name}</span>
+                            {isNew && <span className="shrink-0 rounded border border-accent/25 bg-accent/10 px-1.5 py-0.5 font-mono text-[9px] font-semibold uppercase tracking-wider text-accent-hover">New</span>}
+                            {project.screenshot_url && <span title="Source screenshot available" className="inline-flex shrink-0"><Camera className="h-3.5 w-3.5 text-ink-muted" aria-hidden="true" /></span>}
+                            <span className={"shrink-0 rounded px-1.5 py-0.5 text-[9px] font-semibold uppercase lg:hidden " + (STAGE_CHIP[String(project.current_stage)] || "bg-sunken text-ink-medium")}>
+                              {prettyStage(project.current_stage)}
+                            </span>
+                          </span>
+                          <span className="mt-1 flex min-w-0 flex-wrap items-center gap-x-2 gap-y-1 text-micro text-ink-muted">
+                            <span className="truncate font-mono uppercase tracking-wide">{title.engine || project.original_platform || projectType}</span>
+                            <span className="lg:hidden">· {formatDay(project.last_activity_at) || "date not recorded"}</span>
+                          </span>
+                        </span>
 
-                  {expanded && (
-                    <ProjectPanel
-                      project={project}
-                      onSelectProject={onSelectProject}
-                      onCopyLink={onCopyLink}
-                      isCopied={copiedSlug === project.slug}
-                    />
-                  )}
-                </li>
-              );
-            })}
-          </ul>
+                        <span className="hidden min-w-0 items-center gap-1.5 lg:flex">
+                          <span className={"inline-flex max-w-full rounded-md px-2 py-1 text-micro font-semibold uppercase " + (STAGE_CHIP[String(project.current_stage)] || "bg-sunken text-ink-medium")}>
+                            {prettyStage(project.current_stage)}
+                          </span>
+                          {project.verification === "detected" && <span className="shrink-0 rounded border border-hairline-strong/30 px-1.5 py-1 font-mono text-[9px] uppercase text-ink-muted">Unverified</span>}
+                        </span>
+
+                        <span className="hidden min-w-0 truncate font-mono text-micro uppercase text-ink-muted lg:block">{projectType}</span>
+                        <span className="hidden min-w-0 text-caption text-ink-medium lg:block">{formatDay(project.last_activity_at) || "Not recorded"}</span>
+                        <ChevronRight className="h-4 w-4 justify-self-end text-ink-muted transition-transform group-hover:translate-x-0.5 group-hover:text-accent-hover" aria-hidden="true" />
+                      </button>
+
+                      <div className="flex w-12 shrink-0 items-center justify-center sm:w-[5.5rem]">
+                        <button
+                          type="button"
+                          onClick={() => onCopyLink(project)}
+                          title="Copy a direct link to this entry"
+                          aria-label={copiedSlug === project.slug ? "Link copied for " + title.name : "Copy a direct link to " + title.name}
+                          className="inline-flex h-11 w-11 items-center justify-center rounded-lg text-ink-muted transition-colors hover:bg-sunken hover:text-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-accent"
+                        >
+                          {copiedSlug === project.slug ? <Check className="h-4 w-4 text-stage-done" /> : <Link2 className="h-4 w-4" />}
+                        </button>
+                        {project.reddit_url && (
+                          <a
+                            href={project.reddit_url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            title="Open the source discussion"
+                            aria-label={"Open the source discussion for " + title.name}
+                            className="hidden h-11 w-11 items-center justify-center rounded-lg text-ink-muted transition-colors hover:bg-sunken hover:text-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-accent sm:inline-flex"
+                          >
+                            <ExternalLink className="h-4 w-4" />
+                          </a>
+                        )}
+                      </div>
+                    </div>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
         )}
       </div>
+
+      {openProject && typeof document !== "undefined" && createPortal(
+        <div className="fixed inset-0 z-[80] flex justify-end">
+          <button
+            type="button"
+            aria-label="Close project details"
+            aria-hidden="true"
+            tabIndex={-1}
+            onClick={() => onToggleEntry(openProject)}
+            className="vh-panel-backdrop absolute inset-0 h-full w-full cursor-default bg-black/75 backdrop-blur-[2px]"
+          />
+          <aside
+            ref={drawerRef}
+            id="project-details-dialog"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby={"panel-title-" + openProject.slug}
+            tabIndex={-1}
+            className="vh-panel-sheet relative z-10 flex h-full w-full max-w-2xl flex-col overflow-hidden border-l border-white/[0.08] bg-[#0a0a0c] shadow-[-30px_0_100px_rgba(0,0,0,0.7)] outline-none"
+          >
+            <div className="sticky top-0 z-20 flex min-h-14 shrink-0 items-center justify-between border-b border-white/[0.07] bg-[#0a0a0c]/90 px-4 backdrop-blur-xl sm:px-6">
+              <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-accent-hover">Project record</p>
+              <button
+                ref={closeButtonRef}
+                type="button"
+                onClick={() => onToggleEntry(openProject)}
+                className="inline-flex min-h-[44px] items-center gap-2 rounded-lg px-3 text-caption font-medium text-ink-medium transition-colors hover:bg-white/[0.06] hover:text-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-accent"
+              >
+                <X className="h-4 w-4" aria-hidden="true" />
+                Close
+              </button>
+            </div>
+            <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain">
+              <ProjectPanel
+                project={openProject}
+                onSelectProject={onSelectProject}
+                onCopyLink={onCopyLink}
+                isCopied={copiedSlug === openProject.slug}
+              />
+            </div>
+          </aside>
+        </div>,
+        document.body
+      )}
     </section>
   );
 };

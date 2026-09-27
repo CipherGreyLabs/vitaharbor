@@ -332,7 +332,7 @@ export const ConsoleStage: React.FC<ConsoleStageProps> = ({
                   {selectedProject?.original_platform ? " · " + selectedProject.original_platform : ""}
                 </p>
               </div>
-              <div className="flex shrink-0 items-center gap-2">
+              <div className="flex min-w-0 max-w-full flex-wrap items-center gap-2 sm:shrink-0 sm:flex-nowrap sm:justify-end">
                 <div className="flex items-center gap-1 border-r border-hairline pr-2 mr-1">
                   <button
                     type="button"
@@ -356,7 +356,7 @@ export const ConsoleStage: React.FC<ConsoleStageProps> = ({
                 <button
                   type="button"
                   onClick={() => onCopyLink(selectedProject)}
-                  className="inline-flex items-center gap-1.5 rounded-lg border border-hairline bg-surface px-3 py-2 text-caption font-medium text-ink-medium transition-colors hover:border-hairline-strong hover:text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink/20"
+                  className="inline-flex min-h-[44px] items-center gap-1.5 rounded-lg border border-hairline bg-surface px-3 py-2 text-caption font-medium text-ink-medium transition-colors hover:border-hairline-strong hover:text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink/20"
                 >
                   {copiedSlug === (selectedProject as any)?.slug ? (
                     <>
@@ -375,7 +375,7 @@ export const ConsoleStage: React.FC<ConsoleStageProps> = ({
                     href={(selectedProject as any).reddit_url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 rounded-lg bg-ink px-3.5 py-2 text-caption font-medium text-canvas transition-colors hover:bg-ink/90"
+                    className="inline-flex min-h-[44px] items-center gap-1.5 rounded-lg bg-ink px-3.5 py-2 text-caption font-medium text-canvas transition-colors hover:bg-ink/90"
                   >
                     Source discussion
                     <ExternalLink className="h-3.5 w-3.5" />

@@ -27,10 +27,16 @@ function prettyStage(stage) {
   return value.charAt(0).toUpperCase() + value.slice(1);
 }
 
-const projectItemsHtml = FALLBACK_PROJECTS.map((p, idx) => {
+function formatDay(value) {
+  const date = new Date(value || '');
+  if (Number.isNaN(date.getTime())) return 'Not recorded';
+  return date.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric', timeZone: 'UTC' });
+}
+
+const projectItemsHtml = FALLBACK_PROJECTS.map((p) => {
   const title = escapeXml(p.display_name || p.game_title || 'Untitled');
   const stage = escapeXml(prettyStage(p.current_stage));
-  const notes = escapeXml(p.performance_notes || p.playability_notes || '');
+  const summary = escapeXml(p.summary || '');
   const platform = escapeXml(p.original_platform || 'PlayStation Vita');
   const stageTone = ['released', 'playable', 'completable'].includes(String(p.current_stage))
     ? 'ready'
@@ -39,25 +45,24 @@ const projectItemsHtml = FALLBACK_PROJECTS.map((p, idx) => {
       : String(p.current_stage) === 'booting'
         ? 'caution'
         : 'idle';
-  const initials = escapeXml((p.display_name || p.game_title || 'Vita').split(/\s+/).filter(Boolean).slice(0, 2).map((word) => word[0]).join('').toUpperCase());
-  const artwork = p.screenshot_url
-    ? `<img class="vh-static-art-image" src="${escapeXml(p.screenshot_url)}" alt="${escapeXml(p.screenshot_alt || ('Screenshot for ' + title))}" loading="lazy" decoding="async">`
-    : `<div class="vh-static-art-fallback" aria-hidden="true"><span>${initials}</span><span>${platform}</span></div>`;
   const redditLink = p.reddit_url
-    ? `<a href="${escapeXml(p.reddit_url)}" target="_blank" rel="noopener noreferrer" class="vh-static-source">Open source discussion</a>`
-    : '';
+    ? `<a href="${escapeXml(p.reddit_url)}" target="_blank" rel="noopener noreferrer" class="vh-static-row-source">Source</a>`
+    : '<span class="vh-static-row-source vh-static-row-source--empty">—</span>';
+  const lastObserved = escapeXml(formatDay(p.last_activity_at));
 
-  return `          <li id="entry-${escapeXml(p.slug)}" class="vh-static-card">
-            <div class="vh-static-art">${artwork}</div>
-            <div class="vh-static-card-body">
-              <div class="vh-static-card-meta"><span>${String(idx + 1).padStart(2, '0')} · ${platform}</span><span class="vh-static-stage vh-static-stage--${stageTone}">${stage}</span></div>
-              <h3><a href="/projects/${escapeXml(p.slug)}/">${title}</a></h3>
-              <p>${escapeXml(p.summary || '')}</p>
-              ${notes ? `<p class="vh-static-notes">Project notes: ${notes}</p>` : ''}
-              ${redditLink}
-            </div>
+  return `          <li id="entry-${escapeXml(p.slug)}" class="vh-static-row">
+            <a href="/projects/${escapeXml(p.slug)}/" class="vh-static-row-main">
+              <span class="vh-static-row-title">${title}</span>
+              <span class="vh-static-row-summary">${summary || platform}</span>
+            </a>
+            <span class="vh-static-stage vh-static-stage--${stageTone}">${stage}</span>
+            <span class="vh-static-row-date">${lastObserved}</span>
+            ${redditLink}
           </li>`;
 }).join('\n');
+
+const playableCount = FALLBACK_PROJECTS.filter((project) => ['playable', 'released', 'completable'].includes(String(project.current_stage))).length;
+const inProgressCount = FALLBACK_PROJECTS.filter((project) => ['in_game', 'booting', 'early_wip', 'research'].includes(String(project.current_stage))).length;
 
 function formatUtcDateTime(value) {
   const date = new Date(value);
@@ -163,12 +168,21 @@ const prerenderedBody = `<div id="top" class="vh-static-page">
 
     <main id="main-content">
       <section class="vh-static-hero">
-        <div>
-          <p class="vh-static-eyebrow">PlayStation Vita · ports, decompilations &amp; wrappers</p>
-          <h1>A field guide to Vita ports.</h1>
-          <p>Browse source-linked projects and follow what the community is building.</p>
+        <div class="vh-static-hero-copy">
+          <p class="vh-static-eyebrow">PlayStation Vita <span>/</span> Port atlas</p>
+          <h1>A field guide to <span>Vita ports.</span></h1>
+          <p>Follow source-linked ports, decompilations and wrappers built by the community.</p>
+          <div class="vh-static-telemetry" aria-label="Project totals">
+            <div><span>Tracked</span><strong>${FALLBACK_PROJECTS.length}</strong><small>projects</small></div>
+            <div><span>Playable</span><strong>${playableCount}</strong><small>reported in source</small></div>
+            <div><span>In progress</span><strong>${inProgressCount}</strong><small>active records</small></div>
+          </div>
+          <a class="vh-static-explore" href="#directory">Explore the directory</a>
         </div>
-        <div class="vh-static-count"><strong>${FALLBACK_PROJECTS.length}</strong><span>projects in the atlas</span></div>
+        <figure class="vh-static-console">
+          <img src="/vita-render.png" alt="PlayStation Vita PCH-1000 handheld console" />
+          <figcaption>PS Vita PCH-1000 <span>·</span> Project display</figcaption>
+        </figure>
       </section>
 
       <div class="vh-static-content">
@@ -178,6 +192,7 @@ const prerenderedBody = `<div id="top" class="vh-static-page">
             <div><p class="vh-static-eyebrow">Project index</p><h2 id="directory-heading">Directory</h2></div>
             <span>${FALLBACK_PROJECTS.length} projects</span>
           </div>
+          <div class="vh-static-project-head" aria-hidden="true"><span>Project</span><span>Current stage</span><span>Last observed</span><span>Source</span></div>
           <ul class="vh-static-projects">
 ${projectItemsHtml}
           </ul>

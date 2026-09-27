@@ -115,15 +115,20 @@ export const VitaConsoleScene: React.FC<VitaConsoleSceneProps> = ({
 
     const handleMouseMove = (e: MouseEvent) => {
       const rect = el.getBoundingClientRect();
-      const mx = ((e.clientX - rect.left) / rect.width) * 2 - 1;
-      const my = -((e.clientY - rect.top) / rect.height) * 2 + 1;
+      if (e.clientX < rect.left || e.clientX > rect.right || e.clientY < rect.top || e.clientY > rect.bottom) {
+        targetRotX = 0;
+        targetRotY = 0;
+        return;
+      }
+      const mx = THREE.MathUtils.clamp(((e.clientX - rect.left) / rect.width) * 2 - 1, -1, 1);
+      const my = THREE.MathUtils.clamp(-((e.clientY - rect.top) / rect.height) * 2 + 1, -1, 1);
       targetRotY = mx * 0.15;
       targetRotX = -my * 0.15;
     };
     window.addEventListener("mousemove", handleMouseMove);
 
     scene.environment = env.texture;
-    scene.environmentIntensity = 0.65;
+    scene.environmentIntensity = 0.9;
 
     const vita = new THREE.Group();
     scene.add(vita);
@@ -138,8 +143,8 @@ export const VitaConsoleScene: React.FC<VitaConsoleSceneProps> = ({
     const shadowCtx = shadowCanvas.getContext('2d');
     if (shadowCtx) {
       const pool = shadowCtx.createRadialGradient(128, 64, 4, 128, 64, 124);
-      pool.addColorStop(0, 'rgba(15, 23, 42, 0.30)');
-      pool.addColorStop(0.45, 'rgba(15, 23, 42, 0.13)');
+      pool.addColorStop(0, 'rgba(15, 45, 94, 0.34)');
+      pool.addColorStop(0.45, 'rgba(15, 45, 94, 0.14)');
       pool.addColorStop(1, 'rgba(15, 23, 42, 0)');
       shadowCtx.fillStyle = pool;
       shadowCtx.fillRect(0, 0, 256, 128);
@@ -152,8 +157,8 @@ export const VitaConsoleScene: React.FC<VitaConsoleSceneProps> = ({
     );
     contactShadow.position.set(0, -50, 0);
     scene.add(contactShadow);
-    const shell = new THREE.MeshPhysicalMaterial({ color: '#101217', roughness: 0.15, metalness: 0.35, clearcoat: 1.0, clearcoatRoughness: 0.1 });
-    const face = new THREE.MeshPhysicalMaterial({ color: '#030408', roughness: 0.05, metalness: 0.2, clearcoat: 1, clearcoatRoughness: 0.05, transmission: 0.2, transparent: true });
+    const shell = new THREE.MeshPhysicalMaterial({ color: '#101014', roughness: 0.22, metalness: 0.24, clearcoat: 0.88, clearcoatRoughness: 0.16, envMapIntensity: 1.15 });
+    const face = new THREE.MeshPhysicalMaterial({ color: '#030305', roughness: 0.08, metalness: 0.12, clearcoat: 1, clearcoatRoughness: 0.08, transmission: 0.06, envMapIntensity: 1.2 });
     const silver = new THREE.MeshStandardMaterial({ color: '#c0c8d4', roughness: 0.12, metalness: 1.0 });
     const button = new THREE.MeshStandardMaterial({ color: '#23262a', roughness: 0.35, metalness: 0.12 });
     const rubber = new THREE.MeshStandardMaterial({ color: '#1d1e22', roughness: 0.88 });
@@ -317,10 +322,10 @@ export const VitaConsoleScene: React.FC<VitaConsoleSceneProps> = ({
       g.fillStyle = base;
       g.fillRect(0, 0, 960, 544);
 
-      const accents = ['#2f6bff', '#0f9d8a', '#c2410c', '#7c3aed', '#be123c'];
-      const accent = accents[title.length % accents.length];
+      const accent = '#4d7cfe';
       const glow = g.createRadialGradient(720, 110, 10, 720, 110, 640);
-      glow.addColorStop(0, accent + '59');
+      glow.addColorStop(0, 'rgba(0, 230, 255, 0.32)');
+      glow.addColorStop(0.34, 'rgba(77, 124, 254, 0.2)');
       glow.addColorStop(1, 'rgba(0,0,0,0)');
       g.fillStyle = glow;
       g.fillRect(0, 0, 960, 544);
@@ -331,14 +336,22 @@ export const VitaConsoleScene: React.FC<VitaConsoleSceneProps> = ({
       g.fillStyle = vignette;
       g.fillRect(0, 0, 960, 544);
 
-      g.fillStyle = 'rgba(255,255,255,0.02)';
+      g.strokeStyle = 'rgba(122, 159, 255, 0.09)';
+      g.lineWidth = 1;
+      for (let x = 40; x < 960; x += 48) {
+        g.beginPath();
+        g.moveTo(x, 0);
+        g.lineTo(x, 544);
+        g.stroke();
+      }
+      g.fillStyle = 'rgba(255,255,255,0.025)';
       for (let scan = 0; scan < 544; scan += 3) g.fillRect(0, scan, 960, 1);
 
       g.textAlign = 'left';
       g.textBaseline = 'alphabetic';
-      g.fillStyle = 'rgba(255,255,255,0.40)';
-      g.font = '500 15px -apple-system, Helvetica, Arial, sans-serif';
-      g.fillText('VITAHARBOR', 56, 72);
+      g.fillStyle = 'rgba(155,185,255,0.76)';
+      g.font = '600 15px ui-monospace, SFMono-Regular, Menlo, monospace';
+      g.fillText('VITAHARBOR  /  PORT RECORD', 56, 72);
 
       const words = title.split(' ').filter(Boolean);
       const longest = words.reduce((a, b) => (b.length > a.length ? b : a), '');
@@ -364,14 +377,14 @@ export const VitaConsoleScene: React.FC<VitaConsoleSceneProps> = ({
       }
       g.fillText(line, 56, cursorY);
 
-      g.fillStyle = 'rgba(255,255,255,0.52)';
-      g.font = '500 18px -apple-system, Helvetica, Arial, sans-serif';
+      g.fillStyle = 'rgba(225,232,247,0.66)';
+      g.font = '500 18px ui-monospace, SFMono-Regular, Menlo, monospace';
       g.fillText(platform.toUpperCase(), 56, cursorY + size * 0.95);
 
       g.fillStyle = accent;
       g.fillRect(56, cursorY + size * 1.24, 40, 3);
-      g.fillStyle = 'rgba(255,255,255,0.60)';
-      g.font = '500 15px -apple-system, Helvetica, Arial, sans-serif';
+      g.fillStyle = 'rgba(255,255,255,0.78)';
+      g.font = '600 15px ui-monospace, SFMono-Regular, Menlo, monospace';
       g.fillText(stage, 110, cursorY + size * 1.32);
 
       screenTexture.needsUpdate = true;
@@ -458,7 +471,7 @@ const recessMat = new THREE.MeshStandardMaterial({color:'#14161a',roughness:0.52
     const fill = new THREE.DirectionalLight('#a9ceff', 0.72);
     fill.position.set(180, 0, 100);
     scene.add(fill);
-    const rimLight = new THREE.DirectionalLight('#249cf4', 0.78);
+    const rimLight = new THREE.DirectionalLight('#4d7cfe', 0.88);
     rimLight.position.set(0, -140, -180);
     scene.add(rimLight);
     const topRimLight = new THREE.DirectionalLight('#8fbaff', 0.4);
@@ -467,7 +480,15 @@ const recessMat = new THREE.MeshStandardMaterial({color:'#14161a',roughness:0.52
 
     let px = 0, py = 0, visible = true, raf = 0, previous = '', readyReported = false;
     let targetRotX = 0, targetRotY = 0;
+    let targetScrollProgress = 0, scrollProgress = 0;
     const reduced = reducedMotion || Boolean(window.matchMedia?.('(prefers-reduced-motion: reduce)').matches);
+    const sceneTop = el.getBoundingClientRect().top + window.scrollY;
+    const updateScrollProgress = () => {
+      const range = Math.max(window.innerHeight * 0.9, 400);
+      targetScrollProgress = THREE.MathUtils.clamp((window.scrollY - sceneTop) / range, 0, 1);
+    };
+    updateScrollProgress();
+    window.addEventListener('scroll', updateScrollProgress, { passive: true });
 
     const move = (e: PointerEvent) => {
       if (reduced) return;
@@ -516,16 +537,18 @@ const recessMat = new THREE.MeshStandardMaterial({color:'#14161a',roughness:0.52
         light.position.x = -80 + (targetRotY * 100);
         rimLight.position.x = (targetRotY * 150);
       }
+      scrollProgress += ((reduced ? 0 : targetScrollProgress) - scrollProgress) * 0.07;
       if (!visible || document.hidden) return;
       const signature = JSON.stringify(selected.current);
       if (signature !== previous) {
         paint();
         previous = signature;
       }
-      vita.rotation.y += ((reduced ? 0 : px * 0.28) - vita.rotation.y) * 0.08;
+      vita.rotation.y += ((reduced ? 0 : px * 0.28 - scrollProgress * 0.16) - vita.rotation.y) * 0.08;
       vita.rotation.x += ((reduced ? 0 : py * 0.15) - vita.rotation.x) * 0.08;
-      vita.rotation.z = -0.02;
-      vita.position.x += ((vita.userData.targetX ?? 0) - vita.position.x) * 0.1;
+      vita.rotation.z += ((-0.02 - scrollProgress * 0.12) - vita.rotation.z) * 0.08;
+      vita.scale.setScalar(1 - scrollProgress * 0.09);
+      vita.position.x += ((vita.userData.targetX ?? 0) + scrollProgress * 16 - vita.position.x) * 0.1;
       try {
         renderer.render(scene, camera);
         if (!reportedError && !readyReported) {
@@ -571,6 +594,7 @@ const recessMat = new THREE.MeshStandardMaterial({color:'#14161a',roughness:0.52
 
     return () => {
       window.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener('scroll', updateScrollProgress);
       el.removeEventListener("pointerdown", pressDown);
       window.removeEventListener("pointerup", releaseButton);
       window.removeEventListener("pointercancel", releaseButton);

@@ -44,9 +44,9 @@ export const ProjectPanel: React.FC<ProjectPanelProps> = ({
       <div className="mb-6 flex items-center gap-4">
         <ProjectMark seed={project.display_name || project.game_title || "vita"} size={56} className="shrink-0 rounded-2xl" />
         <div className="min-w-0">
-          <p className="truncate text-lead font-semibold tracking-tight text-ink">
+          <h2 id={"panel-title-" + project.slug} className="truncate text-lead font-semibold tracking-tight text-ink">
             {title.name}
-          </p>
+          </h2>
           <p className="mt-1.5 flex flex-wrap items-center gap-2 text-caption text-ink-muted">
             <span
               className={
@@ -290,7 +290,7 @@ export const ProjectPanel: React.FC<ProjectPanelProps> = ({
         <button
           type="button"
           onClick={() => onCopyLink(project)}
-          className="rounded-lg border border-hairline-strong/30 vh-glass px-3.5 py-2 text-caption font-medium text-ink-medium transition-colors hover:border-hairline-strong/30-strong hover:text-ink"
+          className="min-h-[44px] rounded-lg border border-hairline-strong/30 vh-glass px-3.5 py-2 text-caption font-medium text-ink-medium transition-colors hover:border-hairline-strong hover:text-ink"
         >
           {isCopied ? "Link copied" : "Copy link"}
         </button>
@@ -300,7 +300,7 @@ export const ProjectPanel: React.FC<ProjectPanelProps> = ({
             href={repoUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 rounded-lg border border-hairline-strong/30 vh-glass px-3.5 py-2 text-caption font-medium text-ink transition-colors hover:border-hairline-strong/30-strong"
+            className="inline-flex min-h-[44px] items-center gap-1.5 rounded-lg border border-hairline-strong/30 vh-glass px-3.5 py-2 text-caption font-medium text-ink transition-colors hover:border-hairline-strong"
           >
             <GitBranch className="h-3.5 w-3.5 text-accent" />
             <span>Source repository</span>

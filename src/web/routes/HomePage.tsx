@@ -15,7 +15,7 @@ import {
   formatDay,
   formatUtcDateTime
 } from "../components/ledger/types";
-import { ArrowUp, ExternalLink } from "lucide-react";
+import { ArrowRight, ArrowUp, ExternalLink } from "lucide-react";
 import { countUpdatesSince, readLastVisit, readWatchlist, wasRecentlyUpdated, writeLastVisit, writeWatchlist } from "../lib/visitorState";
 import { fetchCommunityPosts, type CommunityPost } from "../lib/scannerAssets";
 
@@ -120,13 +120,11 @@ export const HomePage: React.FC = () => {
   const [scrolled, setScrolled] = useState(false);
   const [showScrollTop, setShowScrollTop] = useState(false);
   const [webgl, setWebgl] = useState<boolean | null>(null);
-  const [consoleShowcaseOpen, setConsoleShowcaseOpen] = useState(false);
   const [communityPosts, setCommunityPosts] = useState<CommunityPost[]>([]);
   const [previousVisit, setPreviousVisit] = useState<number | null>(null);
   const [watchlistSlugs, setWatchlistSlugs] = useState<string[]>([]);
 
   const consoleRef = useRef<HTMLDivElement>(null);
-  const consoleDisclosureRef = useRef<HTMLDetailsElement>(null);
   const searchRef = useRef<HTMLInputElement>(null);
   const directoryReveal = useReveal<HTMLElement>();
   const methodReveal = useReveal<HTMLElement>();
@@ -257,14 +255,14 @@ export const HomePage: React.FC = () => {
           setSelectedId(next.id);
         }
       }
-      if (event.key === "Escape") {
+      if (event.key === "Escape" && typing) {
         setSearchTerm("");
-        if (typing) target?.blur();
+        target?.blur();
       }
     };
     window.addEventListener("keydown", onKeyDown);
     return () => window.removeEventListener("keydown", onKeyDown);
-  }, []);
+  }, [projects, selectedId]);
 
   const selectedProject = useMemo(
     () => projects.find((item) => item.id === selectedId) || null,
@@ -358,9 +356,12 @@ export const HomePage: React.FC = () => {
 
   const selectProject = (project: LedgerProject, scroll = true) => {
     setSelectedId(project.id);
+    setExpandedId(null);
+    const url = new URL(window.location.href);
+    url.hash = "";
+    if (/^\/projects\/[a-z0-9-]+\/?$/i.test(url.pathname)) url.pathname = "/";
+    window.history.replaceState(null, "", url.pathname + (url.search ? url.search : ""));
     if (scroll) {
-      setConsoleShowcaseOpen(true);
-      if (consoleDisclosureRef.current) consoleDisclosureRef.current.open = true;
       requestAnimationFrame(() => {
         const el = consoleRef.current;
         if (!el) return;
@@ -376,7 +377,13 @@ export const HomePage: React.FC = () => {
     setExpandedId(next);
     setSelectedId(project.id);
     const url = new URL(window.location.href);
-    url.hash = next ? "p=" + project.slug : "";
+    if (next) {
+      if (/^\/projects\/[a-z0-9-]+\/?$/i.test(url.pathname)) url.pathname = "/";
+      url.hash = "p=" + project.slug;
+    } else {
+      url.hash = "";
+      if (/^\/projects\/[a-z0-9-]+\/?$/i.test(url.pathname)) url.pathname = "/";
+    }
     history.replaceState(null, "", url.pathname + url.search + url.hash);
   };
 
@@ -426,7 +433,7 @@ export const HomePage: React.FC = () => {
           (scrolled ? "border-hairline-strong/30" : "border-transparent")
         }
       >
-        <div className="mx-auto flex h-14 max-w-5xl items-center justify-between px-6">
+        <div className="mx-auto flex h-14 max-w-7xl items-center justify-between px-5 sm:px-6">
           <a
             href="#top"
             className="inline-flex min-h-[44px] items-center rounded-md px-1 text-lead font-semibold tracking-tight text-ink outline-none focus-visible:ring-2 focus-visible:ring-ink/20"
@@ -453,22 +460,67 @@ export const HomePage: React.FC = () => {
       </header>
 
       <main id="main-content" className="vh-boot">
-        {/* Hero Copy */}
-        <section className="relative mx-auto flex max-w-6xl flex-col justify-between gap-5 px-5 pb-4 pt-7 sm:px-6 sm:pt-9 lg:flex-row lg:items-end lg:gap-8">
-          <div className="max-w-3xl">
-            <p className="text-micro font-semibold uppercase tracking-[0.18em] text-accent">
-              PlayStation Vita · ports, decompilations &amp; wrappers
-            </p>
-            <h1 className="mt-2 font-display text-[38px] font-semibold leading-[1.05] tracking-[-0.04em] text-ink sm:text-[48px]">
-              A field guide to Vita ports.
-            </h1>
-            <p className="mt-3 max-w-2xl text-body leading-relaxed text-ink-medium sm:text-lead">
-              Browse source-linked projects and follow what the community is building.
-            </p>
-          </div>
-          <div className="flex shrink-0 items-center gap-3 border-l-2 border-accent pl-4 lg:mb-1">
-            <span className="font-display text-[32px] font-semibold leading-none tracking-tight text-ink">{projects.length}</span>
-            <span className="max-w-28 text-caption leading-snug text-ink-medium">projects in the atlas</span>
+        <section aria-labelledby="hero-heading" className="vh-hero relative border-b border-white/[0.06]">
+          <div className="relative mx-auto grid max-w-7xl gap-7 px-5 pb-7 pt-8 sm:px-6 sm:pt-10 lg:grid-cols-[minmax(0,0.86fr)_minmax(0,1.14fr)] lg:items-center lg:gap-8 lg:py-9">
+            <div className="relative z-10">
+              <p className="font-mono text-micro font-semibold uppercase tracking-[0.2em] text-accent">
+                PlayStation Vita <span className="px-1 text-ink-muted">/</span> Port atlas
+              </p>
+              <h1 id="hero-heading" className="mt-3 max-w-xl font-display text-[42px] font-semibold leading-[0.98] tracking-[-0.055em] text-ink sm:text-[54px] lg:text-[62px]">
+                A field guide to <span className="text-accent">Vita ports.</span>
+              </h1>
+              <p className="mt-4 max-w-xl text-body leading-relaxed text-ink-medium sm:text-lead">
+                Follow source-linked ports, decompilations and wrappers built by the community.
+              </p>
+
+              <div aria-label="Project totals" className="mt-7 grid max-w-xl grid-cols-3 gap-2 sm:gap-3">
+                <div className="rounded-xl border border-white/[0.06] bg-white/[0.025] px-3 py-3 sm:px-4">
+                  <span className="block font-mono text-[10px] font-semibold uppercase tracking-[0.12em] text-ink-muted sm:text-micro">Tracked</span>
+                  <span className="mt-1.5 block font-display text-2xl font-semibold leading-none text-ink sm:text-[30px]">{projects.length}</span>
+                  <span className="mt-1 block text-micro text-ink-muted">projects</span>
+                </div>
+                <div className="rounded-xl border border-white/[0.06] bg-white/[0.025] px-3 py-3 sm:px-4">
+                  <span className="block font-mono text-[10px] font-semibold uppercase tracking-[0.12em] text-ink-muted sm:text-micro">Playable</span>
+                  <span className="mt-1.5 block font-display text-2xl font-semibold leading-none text-stage-done sm:text-[30px]">{headerCounts.playable}</span>
+                  <span className="mt-1 block text-micro text-ink-muted">reported in source</span>
+                </div>
+                <div className="rounded-xl border border-white/[0.06] bg-white/[0.025] px-3 py-3 sm:px-4">
+                  <span className="block font-mono text-[10px] font-semibold uppercase tracking-[0.12em] text-ink-muted sm:text-micro">In progress</span>
+                  <span className="mt-1.5 block font-display text-2xl font-semibold leading-none text-accent-hover sm:text-[30px]">{headerCounts.dev}</span>
+                  <span className="mt-1 block text-micro text-ink-muted">stage in source</span>
+                </div>
+              </div>
+
+              <a href="#directory" className="mt-5 inline-flex min-h-[44px] items-center gap-2 rounded-lg border border-accent/30 bg-accent/10 px-4 text-caption font-semibold text-accent-hover transition-colors hover:border-accent/60 hover:bg-accent/15 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent">
+                Explore the directory <ArrowRight className="h-4 w-4" aria-hidden="true" />
+              </a>
+            </div>
+
+            <div className="vh-console-frame relative min-w-0 overflow-hidden rounded-[1.6rem] border border-white/[0.08] shadow-glow sm:rounded-[2rem]">
+              <div className="flex items-center justify-between gap-3 border-b border-white/[0.06] px-4 py-3 sm:px-6">
+                <div>
+                  <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.17em] text-accent-hover">Interactive hardware</p>
+                  <p className="mt-1 text-caption text-ink-medium">PS Vita PCH-1000 · selected project display</p>
+                </div>
+                <span className="inline-flex shrink-0 items-center gap-2 rounded-full border border-white/[0.08] bg-black/40 px-3 py-1.5 font-mono text-[10px] uppercase tracking-wider text-ink-medium">
+                  <span aria-hidden="true" className="h-1.5 w-1.5 rounded-full bg-accent shadow-glow" />
+                  Vita preview
+                </span>
+              </div>
+              <div className="px-1 pb-2 pt-3 sm:px-3">
+                <ConsoleStage
+                  selectedProject={selectedProject as any}
+                  projects={projects}
+                  selectedId={selectedId}
+                  onSelectProject={(project) => selectProject(project, false)}
+                  webgl={webgl}
+                  onRetryWebgl={detectWebgl}
+                  onCopyLink={copyEntryLink}
+                  copiedSlug={copiedSlug}
+                  consoleRef={consoleRef}
+                />
+              </div>
+            </div>
           </div>
         </section>
 
@@ -496,38 +548,6 @@ export const HomePage: React.FC = () => {
           directoryRef={directoryReveal}
           latestSignal={recentUpdates[0]}
         />
-
-        <section aria-label="Vita console showcase" className="mx-auto mt-5 max-w-6xl px-4 sm:px-6">
-          <details
-            ref={consoleDisclosureRef}
-            open={consoleShowcaseOpen}
-            onToggle={(event) => setConsoleShowcaseOpen(event.currentTarget.open)}
-            className="overflow-hidden rounded-2xl border border-hairline bg-surface"
-          >
-            <summary className="flex min-h-16 cursor-pointer list-none items-center justify-between gap-4 px-4 py-3 text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-accent sm:px-5">
-              <span>
-                <span className="block text-subtitle font-semibold">Interactive Vita console</span>
-                <span className="mt-0.5 block text-caption text-ink-medium">Preview a project on the handheld</span>
-              </span>
-              <span className="inline-flex min-h-[44px] shrink-0 items-center rounded-lg border border-accent/25 bg-accent/5 px-3 text-caption font-semibold text-accent">
-                {consoleShowcaseOpen ? "Hide preview" : "Open preview"}
-              </span>
-            </summary>
-            <div className="border-t border-hairline bg-canvas/70 py-3">
-              <ConsoleStage
-                selectedProject={selectedProject as any}
-                projects={projects}
-                selectedId={selectedId}
-                onSelectProject={(project) => selectProject(project, false)}
-                webgl={webgl}
-                onRetryWebgl={detectWebgl}
-                onCopyLink={copyEntryLink}
-                copiedSlug={copiedSlug}
-                consoleRef={consoleRef}
-              />
-            </div>
-          </details>
-        </section>
 
         <section id="watchlist" aria-label="Your VitaHarbor" className="mx-auto mt-8 max-w-5xl px-5 sm:px-6">
           <div className="grid gap-3 sm:grid-cols-2">
