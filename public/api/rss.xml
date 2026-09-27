@@ -5,7 +5,7 @@
     <link>https://vitaharbor.vercel.app/</link>
     <description>Community PlayStation Vita ports tracked from r/vitahacks + r/VitaPiracy + r/PSVitaHomebrew</description>
     <language>en-us</language>
-    <lastBuildDate>Sun, 27 Sep 2026 18:28:49 GMT</lastBuildDate>
+    <lastBuildDate>Sun, 27 Sep 2026 18:46:37 GMT</lastBuildDate>
     <item>
       <title><![CDATA[Medal of Honor: Allied Assault (OpenMoHAA) - IN_GAME]]></title>
       <link>https://www.reddit.com/r/vitahacks/comments/1tapf2b/wip_openmohaa_on_ps_vita_medal_of_honor_allied/</link>
@@ -159,6 +159,34 @@
       <guid isPermaLink="false">resident-evil-4-vita</guid>
       <pubDate>Fri, 25 Sep 2026 17:04:11 GMT</pubDate>
       <description><![CDATA[Official public repository established by Rinnegatamante for the upcoming PlayStation Vita port of Resident Evil 4. Hardware Status: Early stage pipeline development; target framerate and memory profiling underway.]]></description>
+    </item>
+    <item>
+      <title><![CDATA[Real Racing 2 (RR2 Vita Port) - PLAYABLE]]></title>
+      <link>https://www.reddit.com/r/PSVitaHomebrew/comments/1wmabvz/updates_on_rr2_port/</link>
+      <guid isPermaLink="false">real-racing-2-vita</guid>
+      <pubDate>Mon, 21 Sep 2026 11:39:44 GMT</pubDate>
+      <description><![CDATA[Playable public beta release of Real Racing 2 ported to PS Vita via ARMv7 Android soloader wrapper. Hardware Status: Stable performance targeting 30-60 FPS with vitaGL and OpenGLES shader pipeline.]]></description>
+    </item>
+    <item>
+      <title><![CDATA[Diddy Kong Racing 64 (Golden Balloon) - PLAYABLE]]></title>
+      <link>https://www.reddit.com/r/vitahacks/comments/1wcx3o6/golden_balloon_v169_diddy_kong_racing_source_port/</link>
+      <guid isPermaLink="false">diddy-kong-racing-golden-balloon</guid>
+      <pubDate>Thu, 10 Sep 2026 21:54:04 GMT</pubDate>
+      <description><![CDATA[Native source port based on the Diddy Kong Racing decompilation running full Adventure playthrough with custom visuals and Vita trophies. Hardware Status: Fluid framerate via native C and vitaGL renderer.]]></description>
+    </item>
+    <item>
+      <title><![CDATA[Command & Conquer: Renegade - EARLY_WIP]]></title>
+      <link>https://www.reddit.com/r/vitahacks/comments/1waninh/cnc_renegade_native_ps_vita_port/</link>
+      <guid isPermaLink="false">cnc-renegade-vita</guid>
+      <pubDate>Tue, 08 Sep 2026 12:49:38 GMT</pubDate>
+      <description><![CDATA[Native PlayStation Vita port of Command & Conquer: Renegade, bringing the classic C&C FPS to handheld. Hardware Status: Work in progress targeting playable framerates on native Vita hardware.]]></description>
+    </item>
+    <item>
+      <title><![CDATA[Memory Mastermind - ANNOUNCED]]></title>
+      <link>https://www.reddit.com/r/vitahacks/comments/1wrek0r/memory_mastermind_a_old_game_by_robtop_ps_vita/</link>
+      <guid isPermaLink="false">memory-mastermind-vita</guid>
+      <pubDate>Sun, 27 Sep 2026 08:11:00 GMT</pubDate>
+      <description><![CDATA[Homebrew port of RobTop's classic memory puzzle game targeting PlayStation Vita. Hardware Status: Lightweight asset footprint designed to run at full speed on Vita hardware.]]></description>
     </item>
   </channel>
 </rss>

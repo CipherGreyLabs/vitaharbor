@@ -23,6 +23,11 @@ export const FALLBACK_GAMES: Game[] = [
   { id: 27, slug: "call-of-duty-4-modern-warfare", title: "Call of Duty 4: Modern Warfare", normalized_title: "call of duty 4 modern warfare", original_release_year: 2007, original_platform: "PS3", created_at: new Date('2026-09-12T00:00:00.000Z'), updated_at: new Date('2026-09-12T00:00:00.000Z') },
   { id: 28, slug: "c-dogs-sdl-vita", title: "C-Dogs SDL Vita", normalized_title: "c-dogs sdl vita", original_release_year: null, original_platform: "DOS / SDL", created_at: new Date('2026-09-19T20:01:51.653Z'), updated_at: new Date('2026-09-19T20:01:51.653Z') },
   { id: 34, slug: "resident-evil-4-vita", title: "Resident Evil 4", normalized_title: "resident evil 4", original_release_year: 2005, original_platform: "GameCube / PS2 / Android", created_at: new Date('2026-09-21T00:00:00.000Z'), updated_at: new Date('2026-09-25T17:04:11.000Z') }
+,
+  { id: 35, slug: "real-racing-2", title: "Real Racing 2", normalized_title: "real racing 2", original_release_year: 2010, original_platform: "iOS / Android", created_at: new Date('2026-09-21T11:39:44.312Z'), updated_at: new Date('2026-09-21T11:39:44.312Z') },
+  { id: 36, slug: "diddy-kong-racing-golden-balloon", title: "Diddy Kong Racing (Golden Balloon)", normalized_title: "diddy kong racing (golden balloon)", original_release_year: 1997, original_platform: "N64 / Decomp", created_at: new Date('2026-09-09T02:45:26.000Z'), updated_at: new Date('2026-09-10T21:54:04.000Z') },
+  { id: 37, slug: "command-and-conquer-renegade", title: "Command & Conquer: Renegade", normalized_title: "command & conquer: renegade", original_release_year: 2002, original_platform: "PC", created_at: new Date('2026-09-08T12:49:38.000Z'), updated_at: new Date('2026-09-08T12:49:38.000Z') },
+  { id: 38, slug: "memory-mastermind", title: "Memory Mastermind", normalized_title: "memory mastermind", original_release_year: 2013, original_platform: "Mobile / RobTop", created_at: new Date('2026-09-27T08:11:00.000Z'), updated_at: new Date('2026-09-27T08:11:00.000Z') }
 ];
 
 export const FALLBACK_PROJECTS: any[] = [
@@ -517,6 +522,118 @@ export const FALLBACK_PROJECTS: any[] = [
     technologies: ["ARMv7 Wrapper / Soloader", "vitaGL"],
     developers: [{ id: 5, role: "lead", display_name: "Rinnegatamante", slug: "rinnegatamante" }]
   }
+,
+  {
+    id: 35,
+    game_id: 35,
+    slug: "real-racing-2-vita",
+    reddit_url: "https://www.reddit.com/r/PSVitaHomebrew/comments/1wmabvz/updates_on_rr2_port/",
+    repo_url: "https://github.com/CHUTA7X/Real-Racing-2-Vita-Port-Release",
+    display_name: "Real Racing 2 (RR2 Vita Port)",
+    current_stage: "playable",
+    lifecycle: "active",
+    summary: "Playable public beta release of Real Racing 2 ported to PS Vita via ARMv7 Android soloader wrapper.",
+    playability_notes: "Public beta release featuring full career mode, car physics, and track rendering with hardware acceleration.",
+    performance_notes: "Stable performance targeting 30-60 FPS with vitaGL and OpenGLES shader pipeline.",
+    first_seen_at: new Date('2026-09-21T11:39:44.312Z'),
+    last_activity_at: new Date('2026-09-21T11:39:44.312Z'),
+    released_at: null,
+    is_featured: true,
+    is_archived: false,
+    verification: "developer_direct",
+    game_title: "Real Racing 2",
+    original_platform: "iOS / Android",
+    original_release_year: 2010,
+    technologies: ["ARMv7 Wrapper", "vitaGL", "OpenGLES"],
+    developers: [{ id: 23, role: "lead", display_name: "chutA7X", slug: "chuta7x" }],
+    stage_history: [
+      { id: 350, stage: "announced", effective_at: new Date('2026-09-21T11:39:44.312Z'), reason: "Port development and public beta announced" },
+      { id: 351, stage: "playable", effective_at: new Date('2026-09-21T11:39:44.312Z'), reason: "Public beta build playable on hardware" }
+    ]
+  },
+  {
+    id: 36,
+    game_id: 36,
+    slug: "diddy-kong-racing-golden-balloon",
+    reddit_url: "https://www.reddit.com/r/vitahacks/comments/1wcx3o6/golden_balloon_v169_diddy_kong_racing_source_port/",
+    repo_url: "https://github.com/zm2283145/goldenballoon-vita-port",
+    display_name: "Diddy Kong Racing 64 (Golden Balloon)",
+    current_stage: "playable",
+    lifecycle: "active",
+    summary: "Native source port based on the Diddy Kong Racing decompilation running full Adventure playthrough with custom visuals and Vita trophies.",
+    playability_notes: "Adventure mode fully playable with 98 custom trophies, save editor, extra racers, and remappable controls.",
+    performance_notes: "Fluid framerate via native C and vitaGL renderer.",
+    first_seen_at: new Date('2026-09-09T02:45:26.000Z'),
+    last_activity_at: new Date('2026-09-10T21:54:04.000Z'),
+    released_at: null,
+    is_featured: true,
+    is_archived: false,
+    verification: "developer_direct",
+    game_title: "Diddy Kong Racing (Golden Balloon)",
+    original_platform: "N64 / Decomp",
+    original_release_year: 1997,
+    technologies: ["Native C", "N64 Decompilation", "vitaGL", "Restored Visuals"],
+    developers: [{ id: 14, role: "lead", display_name: "zm2283145", slug: "zm2283145" }],
+    stage_history: [
+      { id: 360, stage: "announced", effective_at: new Date('2026-09-09T02:45:26.000Z'), reason: "Initial GoldenBalloon Vita port release announced" },
+      { id: 361, stage: "playable", effective_at: new Date('2026-09-10T21:54:04.000Z'), reason: "v1.6.9 and v1.7.1 updates provide complete playable adventure" }
+    ]
+  },
+  {
+    id: 37,
+    game_id: 37,
+    slug: "cnc-renegade-vita",
+    reddit_url: "https://www.reddit.com/r/vitahacks/comments/1waninh/cnc_renegade_native_ps_vita_port/",
+    repo_url: null,
+    display_name: "Command & Conquer: Renegade",
+    current_stage: "early_wip",
+    lifecycle: "active",
+    summary: "Native PlayStation Vita port of Command & Conquer: Renegade, bringing the classic C&C FPS to handheld.",
+    playability_notes: "Early WIP development and engine bringup targeting native handheld controls and rendering.",
+    performance_notes: "Work in progress targeting playable framerates on native Vita hardware.",
+    first_seen_at: new Date('2026-09-08T12:49:38.000Z'),
+    last_activity_at: new Date('2026-09-08T12:49:38.000Z'),
+    released_at: null,
+    is_featured: false,
+    is_archived: false,
+    verification: "community_report",
+    game_title: "Command & Conquer: Renegade",
+    original_platform: "PC",
+    original_release_year: 2002,
+    technologies: ["Native C++", "Open-Source Engine", "vitaGL"],
+    developers: [{ id: 24, role: "lead", display_name: "Renegade Team", slug: "renegade-team" }],
+    stage_history: [
+      { id: 370, stage: "announced", effective_at: new Date('2026-09-08T12:49:38.000Z'), reason: "Community announcement of native PS Vita port development" },
+      { id: 371, stage: "early_wip", effective_at: new Date('2026-09-08T12:49:38.000Z'), reason: "Engine bringup and initial VitaSDK/vitaGL build tests" }
+    ]
+  },
+  {
+    id: 38,
+    game_id: 38,
+    slug: "memory-mastermind-vita",
+    reddit_url: "https://www.reddit.com/r/vitahacks/comments/1wrek0r/memory_mastermind_a_old_game_by_robtop_ps_vita/",
+    repo_url: null,
+    display_name: "Memory Mastermind",
+    current_stage: "announced",
+    lifecycle: "active",
+    summary: "Homebrew port of RobTop's classic memory puzzle game targeting PlayStation Vita.",
+    playability_notes: "Announced lightweight port bringup targeting complete playability and touch/button controls.",
+    performance_notes: "Lightweight asset footprint designed to run at full speed on Vita hardware.",
+    first_seen_at: new Date('2026-09-27T08:11:00.000Z'),
+    last_activity_at: new Date('2026-09-27T08:11:00.000Z'),
+    released_at: null,
+    is_featured: false,
+    is_archived: false,
+    verification: "community_report",
+    game_title: "Memory Mastermind",
+    original_platform: "Mobile / RobTop",
+    original_release_year: 2013,
+    technologies: ["Native C", "VitaSDK"],
+    developers: [{ id: 25, role: "lead", display_name: "LefterisDaGamer", slug: "lefterisdagamer" }],
+    stage_history: [
+      { id: 380, stage: "announced", effective_at: new Date('2026-09-27T08:11:00.000Z'), reason: "Public port announcement by community developer" }
+    ]
+  }
 ];
 
 export const FALLBACK_DEVELOPERS: any[] = [
@@ -543,6 +660,41 @@ export const FALLBACK_DEVELOPERS: any[] = [
   { id: 20, slug: "drdecki", display_name: "DrDecki", description: "Developer of the Aleph One PS Vita engine port for Marathon Trilogy.", is_known_developer: true, identities: [{ provider: "github", username: "DrDecki" }], projects: [] },
   { id: 21, slug: "rocroverss", display_name: "Rocroverss", description: "Developer of the Apotris PS Vita native port.", is_known_developer: true, identities: [{ provider: "github", username: "Rocroverss" }], projects: [] },
   { id: 22, slug: "metalsyntax", display_name: "MetalSyntax", description: "Developer of the Prince of Persia Classic Android ARMv7 Vita wrapper/port.", is_known_developer: true, identities: [{ provider: "github", username: "MetalSyntax" }], projects: [] }
+,
+  {
+    id: 23,
+    slug: "chuta7x",
+    display_name: "chutA7X",
+    description: "Developer of the Real Racing 2 ARMv7 Android soloader port for PS Vita.",
+    is_known_developer: true,
+    identities: [
+      { provider: "github", username: "CHUTA7X" },
+      { provider: "reddit", username: "chutA7X" }
+    ],
+    projects: []
+  },
+  {
+    id: 24,
+    slug: "renegade-team",
+    display_name: "Renegade Team",
+    description: "Development team behind the native Command & Conquer: Renegade PlayStation Vita port.",
+    is_known_developer: true,
+    identities: [
+      { provider: "reddit", username: "Angrymilks" }
+    ],
+    projects: []
+  },
+  {
+    id: 25,
+    slug: "lefterisdagamer",
+    display_name: "LefterisDaGamer",
+    description: "Community developer porting RobTop classic games such as Memory Mastermind to PlayStation Vita.",
+    is_known_developer: true,
+    identities: [
+      { provider: "reddit", username: "LefterisDaGamer" }
+    ],
+    projects: []
+  }
 ];
 
 export const FALLBACK_UPDATES: any[] = [
@@ -732,6 +884,73 @@ export const FALLBACK_UPDATES: any[] = [
     sources: [
       { source_item_id: "src_re4_vita_repo", relationship: "primary", canonical_url: "https://github.com/Rinnegatamante/re4-vita" },
       { source_item_id: "src_re4_vita_reddit", relationship: "community", canonical_url: "https://www.reddit.com/r/VitaPiracy/comments/1wmax82/guess_it_is_happening/" }
+    ]
+  }
+,
+  {
+    id: "upd_rr2_vita",
+    port_project_id: 35,
+    project_slug: "real-racing-2-vita",
+    project_display_name: "Real Racing 2 (RR2 Vita Port)",
+    developer_display_name: "chutA7X",
+    developer_slug: "chuta7x",
+    event_type: "playable_demo",
+    title: "Real Racing 2 Vita public beta release published",
+    summary: "chutA7X released a playable public beta of Real Racing 2 for PlayStation Vita via an ARMv7 Android wrapper.",
+    event_at: new Date('2026-09-21T11:39:44.312Z'),
+    verification_level: "developer_direct",
+    sources: [
+      { source_item_id: "src_rr2_repo", relationship: "primary", canonical_url: "https://github.com/CHUTA7X/Real-Racing-2-Vita-Port-Release" },
+      { source_item_id: "src_rr2_reddit", relationship: "community", canonical_url: "https://www.reddit.com/r/PSVitaHomebrew/comments/1wmabvz/updates_on_rr2_port/" }
+    ]
+  },
+  {
+    id: "upd_dkr_golden_balloon",
+    port_project_id: 36,
+    project_slug: "diddy-kong-racing-golden-balloon",
+    project_display_name: "Diddy Kong Racing 64 (Golden Balloon)",
+    developer_display_name: "zm2283145",
+    developer_slug: "zm2283145",
+    event_type: "playable_demo",
+    title: "Golden Balloon Diddy Kong Racing port v1.7.1 released with full trophy support",
+    summary: "zm2283145 published major updates to Golden Balloon featuring full Adventure completion, 98 Vita trophies, save editor, and custom visuals.",
+    event_at: new Date('2026-09-10T21:54:04.000Z'),
+    verification_level: "developer_direct",
+    sources: [
+      { source_item_id: "src_dkr_repo", relationship: "primary", canonical_url: "https://github.com/zm2283145/goldenballoon-vita-port" },
+      { source_item_id: "src_dkr_reddit", relationship: "community", canonical_url: "https://www.reddit.com/r/vitahacks/comments/1wcx3o6/golden_balloon_v169_diddy_kong_racing_source_port/" }
+    ]
+  },
+  {
+    id: "upd_cnc_renegade",
+    port_project_id: 37,
+    project_slug: "cnc-renegade-vita",
+    project_display_name: "Command & Conquer: Renegade",
+    developer_display_name: "Renegade Team",
+    developer_slug: "renegade-team",
+    event_type: "project_announced",
+    title: "Command & Conquer: Renegade native Vita port announced",
+    summary: "Development announced for bringing the classic C&C FPS to PS Vita with native controls and hardware rendering.",
+    event_at: new Date('2026-09-08T12:49:38.000Z'),
+    verification_level: "community_report",
+    sources: [
+      { source_item_id: "src_cnc_renegade_reddit", relationship: "primary", canonical_url: "https://www.reddit.com/r/vitahacks/comments/1waninh/cnc_renegade_native_ps_vita_port/" }
+    ]
+  },
+  {
+    id: "upd_memory_mastermind",
+    port_project_id: 38,
+    project_slug: "memory-mastermind-vita",
+    project_display_name: "Memory Mastermind",
+    developer_display_name: "LefterisDaGamer",
+    developer_slug: "lefterisdagamer",
+    event_type: "project_announced",
+    title: "Memory Mastermind PS Vita port announced",
+    summary: "LefterisDaGamer announced a lightweight homebrew port of RobTop's classic memory puzzle game targeting PlayStation Vita.",
+    event_at: new Date('2026-09-27T08:11:00.000Z'),
+    verification_level: "community_report",
+    sources: [
+      { source_item_id: "src_memory_mastermind_reddit", relationship: "primary", canonical_url: "https://www.reddit.com/r/vitahacks/comments/1wrek0r/memory_mastermind_a_old_game_by_robtop_ps_vita/" }
     ]
   }
 ];

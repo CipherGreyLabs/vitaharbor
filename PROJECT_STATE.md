@@ -2,6 +2,18 @@
 
 Updated: 2026-09-27
 
+## Current state: VH-LEDGER-EXPANSION-029 active ongoing ports addition (2026-09-27)
+
+- Active tracked port ledger expanded to 26 projects (22 in-development/ongoing ports + 4 standalone non-VitaDB ports).
+- Newly added ongoing ports:
+  1. Real Racing 2 (real-racing-2-vita, playable beta, chutA7X, ARMv7 soloader)
+  2. Diddy Kong Racing 64 / Golden Balloon (diddy-kong-racing-golden-balloon, playable v1.7.1, zm2283145, N64 decomp)
+  3. Command & Conquer: Renegade (cnc-renegade-vita, early_wip, Renegade Team, native engine)
+  4. Memory Mastermind (memory-mastermind-vita, announced, LefterisDaGamer, RobTop homebrew)
+- Quarantine updated with 5 promoted entries (reddit-1wmabvz, reddit-1wcx3o6, reddit-1wb99lj, reddit-1waninh, reddit-1wrek0r).
+- Feeds regenerated (public/api/feed.json, public/api/rss.xml, public/og.png and 26 project cards).
+- Verification: npm run verify passed (tsc clean, 121/121 unit tests, 26 prerendered project pages, 29 sitemap URLs).
+
 ## Current state: VH-LEDGER-FILTER-028 refocus on active ongoing ports (2026-09-27)
 
 - Active tracked port ledger refocused from 34 down to 22 projects by filtering out 12 officially released ports present on VitaDB (1,126 items catalog).

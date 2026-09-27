@@ -286,6 +286,62 @@
         "ARMv7 Wrapper / Soloader",
         "vitaGL"
       ]
+    },
+    {
+      "id": "real-racing-2-vita",
+      "url": "https://www.reddit.com/r/PSVitaHomebrew/comments/1wmabvz/updates_on_rr2_port/",
+      "title": "Real Racing 2 (RR2 Vita Port)",
+      "content_text": "Stage: playable | Platform: iOS / Android | Summary: Playable public beta release of Real Racing 2 ported to PS Vita via ARMv7 Android soloader wrapper. | Hardware: Stable performance targeting 30-60 FPS with vitaGL and OpenGLES shader pipeline.",
+      "date_modified": "2026-09-21T11:39:44.312Z",
+      "tags": [
+        "playable",
+        "iOS / Android",
+        "ARMv7 Wrapper",
+        "vitaGL",
+        "OpenGLES"
+      ]
+    },
+    {
+      "id": "diddy-kong-racing-golden-balloon",
+      "url": "https://www.reddit.com/r/vitahacks/comments/1wcx3o6/golden_balloon_v169_diddy_kong_racing_source_port/",
+      "title": "Diddy Kong Racing 64 (Golden Balloon)",
+      "content_text": "Stage: playable | Platform: N64 / Decomp | Summary: Native source port based on the Diddy Kong Racing decompilation running full Adventure playthrough with custom visuals and Vita trophies. | Hardware: Fluid framerate via native C and vitaGL renderer.",
+      "date_modified": "2026-09-10T21:54:04.000Z",
+      "tags": [
+        "playable",
+        "N64 / Decomp",
+        "Native C",
+        "N64 Decompilation",
+        "vitaGL",
+        "Restored Visuals"
+      ]
+    },
+    {
+      "id": "cnc-renegade-vita",
+      "url": "https://www.reddit.com/r/vitahacks/comments/1waninh/cnc_renegade_native_ps_vita_port/",
+      "title": "Command & Conquer: Renegade",
+      "content_text": "Stage: early_wip | Platform: PC | Summary: Native PlayStation Vita port of Command & Conquer: Renegade, bringing the classic C&C FPS to handheld. | Hardware: Work in progress targeting playable framerates on native Vita hardware.",
+      "date_modified": "2026-09-08T12:49:38.000Z",
+      "tags": [
+        "early_wip",
+        "PC",
+        "Native C++",
+        "Open-Source Engine",
+        "vitaGL"
+      ]
+    },
+    {
+      "id": "memory-mastermind-vita",
+      "url": "https://www.reddit.com/r/vitahacks/comments/1wrek0r/memory_mastermind_a_old_game_by_robtop_ps_vita/",
+      "title": "Memory Mastermind",
+      "content_text": "Stage: announced | Platform: Mobile / RobTop | Summary: Homebrew port of RobTop's classic memory puzzle game targeting PlayStation Vita. | Hardware: Lightweight asset footprint designed to run at full speed on Vita hardware.",
+      "date_modified": "2026-09-27T08:11:00.000Z",
+      "tags": [
+        "announced",
+        "Mobile / RobTop",
+        "Native C",
+        "VitaSDK"
+      ]
     }
   ]
 }

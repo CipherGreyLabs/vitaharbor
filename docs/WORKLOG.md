@@ -714,3 +714,9 @@ The five remaining candidates were checked against their source threads. None wa
 | Time | Commit / state | Change | Why | Model | Verified |
 |---|---|---|---|---|---|
 | 18:45 UTC | working tree | Cross-referenced 34 fallbackData projects against official VitaDB catalog (1,126 items) and removed 12 fully released ports present on VitaDB (Class of 09, NXEngine-EVO/Cave Story, D2Vita, Illusia, Jedi Academy, Jedi Outcast, Barony, Test Drive 1987, Linux on Vita, Aleph One, Apotris, Prince of Persia Classic). Retained 22 active / ongoing and non-VitaDB ports. Updated test suites in data.test.ts, link-integrity.test.ts, archive.spec.ts, KNOWN_REPOS, and regenerated feed.json, rss.xml, and prerendered HTML. | Fulfill Deel B delegation: refocus VitaHarbor purely on active in-development PS Vita ports and deduplicate already finalized releases readily available on VitaDB. | gemini-3.7-flash | npm run verify passed (tsc --noEmit, 121/121 unit tests, 22 project pages, 25 sitemap URLs prerendered). |
+
+### VH-LEDGER-EXPANSION-029 active ongoing ports addition and production deployment (2026-09-27)
+
+| Time | Commit / state | Change | Why | Model | Verified |
+|---|---|---|---|---|---|
+| 19:00 UTC | working tree | Added 4 verified ongoing port projects to `fallbackData.ts` (35-38: Real Racing 2, Diddy Kong Racing 64 Golden Balloon, Command & Conquer: Renegade, Memory Mastermind), updated `KNOWN_REPOS`, marked 5 matching quarantine records as `PROMOTED` in `quarantine.json`, and regenerated feeds and OG assets. | Expand active curated ledger to 26 ongoing/active PS Vita ports following master delegation. | gemini-3.7-flash | `npm run verify` passed (typecheck clean, 121/121 unit tests, static build for 26 project pages, 29 sitemap URLs). |

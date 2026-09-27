@@ -1,13 +1,13 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-09-27T18:28:22.350Z",
+  "generated_at": "2026-09-27T18:39:03.111Z",
   "source": "r/vitahacks + r/VitaPiracy + r/PSVitaHomebrew RSS",
   "items": [
     {
       "schema_version": 2,
       "id": "reddit-1wrek0r",
       "external_id": "1wrek0r",
-      "state": "QUARANTINED",
+      "state": "PROMOTED",
       "state_history": [
         {
           "state": "DETECTED",
@@ -20,6 +20,12 @@
           "at": "2026-09-27T17:47:42.387Z",
           "actor": "reddit-scanner",
           "reason": "Scanner result is unverified and cannot enter the curated ledger"
+        },
+        {
+          "state": "PROMOTED",
+          "at": "2026-09-27T18:55:00.000Z",
+          "actor": "codex",
+          "reason": "Promote community-announced Memory Mastermind RobTop puzzle game port"
         }
       ],
       "source": {
@@ -33,7 +39,7 @@
       },
       "classification": {
         "confidence": "high",
-        "reason": "3 dev signals: \\brelease\\b, \\bplayable\\b, \\bupdate\\b · category=project_update",
+        "reason": "3 dev signals: \\brelease\\b, \\bplayable\\b, \\bupdate\\b \u00b7 category=project_update",
         "candidate_type": "wrapper",
         "category": "project_update",
         "question": false,
@@ -111,7 +117,7 @@
       },
       "classification": {
         "confidence": "high",
-        "reason": "6 dev signals: \\brelease\\b, \\brender(?:s|ed|ing)?\\b, \\bfps\\b · category=project_update",
+        "reason": "6 dev signals: \\brelease\\b, \\brender(?:s|ed|ing)?\\b, \\bfps\\b \u00b7 category=project_update",
         "candidate_type": "port",
         "category": "project_update",
         "question": false,
@@ -191,12 +197,12 @@
         "canonical_url": "https://www.reddit.com/r/vitahacks/comments/1wqtbfl/update_gta_lcs_ps2_running_on_the_vita_natively/",
         "author": "Wookie_von_Gondor",
         "title": "UPDATE: GTA LCS PS2 running on the Vita natively - 25-60 FPS with native resolution, audio works too! (AI PORT)",
-        "body": "Me and my AI assistant are very close to get the decompiled PS2 version of GTA LCS fully working on the Vita. It already runs much better than the PSP version - not to mention it's double the resolution (960×544)! Whats working: 2D & 3D rendering Audio Controls Settings Very playable performance Needs testing: Save files Bugs Needs fixing: Collision textures are not loading properly (work in progress) Texture load times in general Planned features: PS Vita settings preset FPS limiter for 30 and 60 This is a fork of Epic0522's REGTA-3DSPort-Complete project on Github. &#32; submitte",
+        "body": "Me and my AI assistant are very close to get the decompiled PS2 version of GTA LCS fully working on the Vita. It already runs much better than the PSP version - not to mention it's double the resolution (960\u00d7544)! Whats working: 2D & 3D rendering Audio Controls Settings Very playable performance Needs testing: Save files Bugs Needs fixing: Collision textures are not loading properly (work in progress) Texture load times in general Planned features: PS Vita settings preset FPS limiter for 30 and 60 This is a fork of Epic0522's REGTA-3DSPort-Complete project on Github. &#32; submitte",
         "published_at": "2026-09-26T15:26:37.000Z"
       },
       "classification": {
         "confidence": "high",
-        "reason": "7 dev signals: \\bplayable\\b, \\brender(?:s|ed|ing)?\\b, \\bfps\\b · category=project_update",
+        "reason": "7 dev signals: \\bplayable\\b, \\brender(?:s|ed|ing)?\\b, \\bfps\\b \u00b7 category=project_update",
         "candidate_type": "port",
         "category": "project_update",
         "question": false,
@@ -312,14 +318,16 @@
         }
       },
       "campaign": {
-        "cluster_id": "campaign-ae299730",
+        "cluster_id": "campaign-910f856f",
         "linkage_confidence": "medium",
         "signals": [
           "shared_outbound_fingerprint"
         ],
         "related_candidate_ids": [
           "reddit-1wmxc2y",
-          "reddit-1wllsbo"
+          "reddit-1wllsbo",
+          "reddit-1wcx3o6",
+          "reddit-1wb99lj"
         ],
         "text_fingerprint": "8dededc5",
         "media_fingerprints": [],
@@ -376,7 +384,7 @@
       },
       "classification": {
         "confidence": "high",
-        "reason": "4 dev signals: \\bin.?game\\b, \\bfps\\b, \\bframerate\\b · category=new_project",
+        "reason": "4 dev signals: \\bin.?game\\b, \\bfps\\b, \\bframerate\\b \u00b7 category=new_project",
         "candidate_type": "port",
         "category": "new_project",
         "question": false,
@@ -846,7 +854,7 @@
         }
       },
       "campaign": {
-        "cluster_id": "campaign-ae299730",
+        "cluster_id": "campaign-910f856f",
         "linkage_confidence": "medium",
         "signals": [
           "shared_outbound_fingerprint",
@@ -854,7 +862,9 @@
         ],
         "related_candidate_ids": [
           "reddit-1wq1o7g",
-          "reddit-1wllsbo"
+          "reddit-1wllsbo",
+          "reddit-1wcx3o6",
+          "reddit-1wb99lj"
         ],
         "text_fingerprint": "7a252a3c",
         "media_fingerprints": [],
@@ -1125,7 +1135,7 @@
       "schema_version": 2,
       "id": "reddit-1wmabvz",
       "external_id": "1wmabvz",
-      "state": "VERIFIED_FOR_REVIEW",
+      "state": "PROMOTED",
       "state_history": [
         {
           "state": "DETECTED",
@@ -1144,6 +1154,12 @@
           "at": "2026-09-21T13:25:27.225Z",
           "actor": "codex",
           "reason": "Verified Real Racing 2 development progress while the port remains non-public"
+        },
+        {
+          "state": "PROMOTED",
+          "at": "2026-09-27T18:55:00.000Z",
+          "actor": "codex",
+          "reason": "Promote developer-direct Real Racing 2 ARMv7 soloader beta port with public repository"
         }
       ],
       "source": {
@@ -1666,7 +1682,7 @@
         }
       },
       "campaign": {
-        "cluster_id": "campaign-ae299730",
+        "cluster_id": "campaign-910f856f",
         "linkage_confidence": "medium",
         "signals": [
           "shared_outbound_fingerprint",
@@ -1674,7 +1690,9 @@
         ],
         "related_candidate_ids": [
           "reddit-1wq1o7g",
-          "reddit-1wmxc2y"
+          "reddit-1wmxc2y",
+          "reddit-1wcx3o6",
+          "reddit-1wb99lj"
         ],
         "text_fingerprint": "3439b9dd",
         "media_fingerprints": [],
@@ -2213,8 +2231,8 @@
         "subreddit": "vitahacks",
         "canonical_url": "https://www.reddit.com/r/vitahacks/comments/1wjte26/tfouad_development_update_where_ive_been_whats/",
         "author": "noradninja",
-        "title": "TFoUAD Development Update — Where I’ve Been, What’s Changed, and How We’re Pushing the Vita Further",
-        "body": "<!-- SC_OFF --><div class=\"md\"><p>I figure I owe the Vita community an update on TFoUAD, because it has been a while since the last public release and, from the outside, I realize it probably looks like development has slowed down or stopped.</p> <p>It hasn’t.</p> <p>The less interesting explanation is that my body has been trying very hard to kill my productivity.</p> <p>I’ve spent roughly the last year dealing with increasingly serious kidney problems: recurrent stones, obstruction, hydronephrosis, persistent infections, hospita",
+        "title": "TFoUAD Development Update \u2014 Where I\u2019ve Been, What\u2019s Changed, and How We\u2019re Pushing the Vita Further",
+        "body": "<!-- SC_OFF --><div class=\"md\"><p>I figure I owe the Vita community an update on TFoUAD, because it has been a while since the last public release and, from the outside, I realize it probably looks like development has slowed down or stopped.</p> <p>It hasn\u2019t.</p> <p>The less interesting explanation is that my body has been trying very hard to kill my productivity.</p> <p>I\u2019ve spent roughly the last year dealing with increasingly serious kidney problems: recurrent stones, obstruction, hydronephrosis, persistent infections, hospita",
         "published_at": "2026-09-18T15:30:31.000Z"
       },
       "classification": {
@@ -2349,6 +2367,288 @@
         "explicit_campaign_reference": false,
         "incident_id": null
       },
+      "incident": null
+    },
+    {
+      "schema_version": 2,
+      "id": "reddit-1wcx3o6",
+      "external_id": "1wcx3o6",
+      "state": "PROMOTED",
+      "state_history": [
+        {
+          "state": "DETECTED",
+          "at": "2026-09-27T18:39:03.111Z",
+          "actor": "reddit-scanner",
+          "reason": "Canonical Reddit search RSS entry accepted during bounded historical backfill"
+        },
+        {
+          "state": "QUARANTINED",
+          "at": "2026-09-27T18:39:03.111Z",
+          "actor": "reddit-scanner",
+          "reason": "Scanner result is unverified and cannot enter the curated ledger"
+        },
+        {
+          "state": "PROMOTED",
+          "at": "2026-09-27T18:55:00.000Z",
+          "actor": "codex",
+          "reason": "Promote developer-direct Golden Balloon Diddy Kong Racing 64 native port v1.7.1 with full trophies"
+        }
+      ],
+      "source": {
+        "platform": "reddit",
+        "subreddit": "vitahacks",
+        "canonical_url": "https://www.reddit.com/r/vitahacks/comments/1wcx3o6/golden_balloon_v169_diddy_kong_racing_source_port/",
+        "author": "zm2283145",
+        "title": "Golden Balloon v1.6.9 \u2013 Diddy Kong Racing source port for PS Vita with 98 trophies, save editor, extra racers and remappable controls",
+        "body": "Golden Balloon v1.7.1 is now available for PS Vita! This was made with AI assistance. Release and download: Release Golden Balloon Vita v1.7.1 \u00b7 zm2283145/goldenballoon-vita-port Golden Balloon is a native source port based on the Diddy Kong Racing decompilation and the upstream Golden Balloon project. It is not an emulator\u2014the game is compiled for the Vita and reads the original game data from a legally obtained ROM. This release has now completed a full Adventure playthrough on real PS Vita hardware using the default Restored visual preset. Trophy unlock requests run on a dedicated Vita work",
+        "published_at": "2026-09-10T21:54:04.000Z"
+      },
+      "classification": {
+        "confidence": "high",
+        "reason": "5 dev signals: \\brelease\\b, \\bcompiled\\b, \\bdecomp(ilation)?\\b \u00b7 category=new_project",
+        "candidate_type": "decompilation",
+        "category": "new_project",
+        "question": false,
+        "spam": false
+      },
+      "provenance": {
+        "repository_url": null,
+        "release_url": null,
+        "evidence_urls": [],
+        "evidence_bundle_id": null,
+        "repository_identity": null,
+        "repository_created_at": null,
+        "repository_last_activity_at": null,
+        "release_facts": [],
+        "vita_evidence": [],
+        "author_linkage": null,
+        "corroboration": [],
+        "duplicate_relation": {
+          "content_hash": "cab33ddb1c0a37512be194aa02644052741bf7f715b50154206a2020e57fa906",
+          "related_candidate_ids": []
+        }
+      },
+      "campaign": {
+        "cluster_id": "campaign-910f856f",
+        "linkage_confidence": "medium",
+        "signals": [
+          "shared_outbound_fingerprint",
+          "same_author_burst"
+        ],
+        "related_candidate_ids": [
+          "reddit-1wq1o7g",
+          "reddit-1wmxc2y",
+          "reddit-1wllsbo",
+          "reddit-1wb99lj"
+        ],
+        "text_fingerprint": "b90c4729",
+        "media_fingerprints": [],
+        "outbound_fingerprints": [
+          "github.com/zm2283145/goldenballoon-vita-port/releases/tag/v1.7.1",
+          "github.com/rinnegatamante/notrpdrm/releases/download/v.1.1/notrpdrm.suprx",
+          "github.com/rinnegatamante/notrpdrm",
+          "www.reddit.com/user/zm2283145",
+          "www.reddit.com/r/vitahacks/comments/1wcx3o6/golden_balloon_v169_diddy_kong_racing_source_port"
+        ],
+        "direct_intent": false,
+        "explicit_campaign_reference": false,
+        "incident_id": null
+      },
+      "risk_signals": [],
+      "evidence_gaps": [
+        "exact project repository",
+        "repository identity and activity facts",
+        "Vita-specific hardware evidence",
+        "author/developer linkage and independent corroboration"
+      ],
+      "content_hash": "cab33ddb1c0a37512be194aa02644052741bf7f715b50154206a2020e57fa906",
+      "review": null,
+      "incident": null
+    },
+    {
+      "schema_version": 2,
+      "id": "reddit-1wb99lj",
+      "external_id": "1wb99lj",
+      "state": "PROMOTED",
+      "state_history": [
+        {
+          "state": "DETECTED",
+          "at": "2026-09-27T18:39:03.111Z",
+          "actor": "reddit-scanner",
+          "reason": "Canonical Reddit search RSS entry accepted during bounded historical backfill"
+        },
+        {
+          "state": "QUARANTINED",
+          "at": "2026-09-27T18:39:03.111Z",
+          "actor": "reddit-scanner",
+          "reason": "Scanner result is unverified and cannot enter the curated ledger"
+        },
+        {
+          "state": "PROMOTED",
+          "at": "2026-09-27T18:55:00.000Z",
+          "actor": "codex",
+          "reason": "Promote initial GoldenBalloon Diddy Kong Racing port release"
+        }
+      ],
+      "source": {
+        "platform": "reddit",
+        "subreddit": "vitahacks",
+        "canonical_url": "https://www.reddit.com/r/vitahacks/comments/1wb99lj/goldenballoon_vita_port_diddy_kong_racing_64/",
+        "author": "zm2283145",
+        "title": "GoldenBalloon Vita Port (Diddy Kong Racing 64)",
+        "body": "I posted last week stating I was working on porting the DK64 Racing port called GoldBalloon ported to the vita well as of today https://github.com/zm2283145/goldenballoon-vita-port My repo now can build a functional build that will play in vita. You will need to supply your own 1.1 us z64 version of the rom. It currently does not have any live area assets so if anyone would like to contribute please do. This is made with AI assistants so and again this is a port of a port of a port so expect issues or bugs. Update: I've pushed a new update I've fixed the upstream FFL trophy race the ga",
+        "published_at": "2026-09-09T02:45:26.000Z"
+      },
+      "classification": {
+        "confidence": "high",
+        "reason": "4 dev signals: \\bported\\b, \\bupdate\\b, github\\.com\\b \u00b7 category=project_update",
+        "candidate_type": "port",
+        "category": "project_update",
+        "question": false,
+        "spam": false
+      },
+      "provenance": {
+        "repository_url": null,
+        "release_url": null,
+        "evidence_urls": [],
+        "evidence_bundle_id": null,
+        "repository_identity": null,
+        "repository_created_at": null,
+        "repository_last_activity_at": null,
+        "release_facts": [],
+        "vita_evidence": [],
+        "author_linkage": null,
+        "corroboration": [],
+        "duplicate_relation": {
+          "content_hash": "bac9eafc253d91c1804b93decb0b0ca4aa2d6b97d70007f73cdefdf1db075382",
+          "related_candidate_ids": []
+        }
+      },
+      "campaign": {
+        "cluster_id": "campaign-910f856f",
+        "linkage_confidence": "medium",
+        "signals": [
+          "shared_outbound_fingerprint",
+          "same_author_burst"
+        ],
+        "related_candidate_ids": [
+          "reddit-1wq1o7g",
+          "reddit-1wmxc2y",
+          "reddit-1wllsbo",
+          "reddit-1wcx3o6"
+        ],
+        "text_fingerprint": "3184a3da",
+        "media_fingerprints": [],
+        "outbound_fingerprints": [
+          "github.com/zm2283145/goldenballoon-vita-port",
+          "www.reddit.com/user/zm2283145",
+          "www.reddit.com/r/vitahacks/comments/1wb99lj/goldenballoon_vita_port_diddy_kong_racing_64"
+        ],
+        "direct_intent": false,
+        "explicit_campaign_reference": false,
+        "incident_id": null
+      },
+      "risk_signals": [],
+      "evidence_gaps": [
+        "repository identity and activity facts",
+        "Vita-specific hardware evidence",
+        "author/developer linkage and independent corroboration"
+      ],
+      "content_hash": "bac9eafc253d91c1804b93decb0b0ca4aa2d6b97d70007f73cdefdf1db075382",
+      "review": null,
+      "incident": null
+    },
+    {
+      "schema_version": 2,
+      "id": "reddit-1waninh",
+      "external_id": "1waninh",
+      "state": "PROMOTED",
+      "state_history": [
+        {
+          "state": "DETECTED",
+          "at": "2026-09-27T18:39:03.111Z",
+          "actor": "reddit-scanner",
+          "reason": "Canonical Reddit search RSS entry accepted during bounded historical backfill"
+        },
+        {
+          "state": "QUARANTINED",
+          "at": "2026-09-27T18:39:03.111Z",
+          "actor": "reddit-scanner",
+          "reason": "Scanner result is unverified and cannot enter the curated ledger"
+        },
+        {
+          "state": "PROMOTED",
+          "at": "2026-09-27T18:55:00.000Z",
+          "actor": "codex",
+          "reason": "Promote community-announced Command & Conquer: Renegade native Vita port"
+        }
+      ],
+      "source": {
+        "platform": "reddit",
+        "subreddit": "vitahacks",
+        "canonical_url": "https://www.reddit.com/r/vitahacks/comments/1waninh/cnc_renegade_native_ps_vita_port/",
+        "author": "Angrymilks",
+        "title": "CNC Renegade - Native PS Vita Port",
+        "body": "Work in progress - Full port of Command and Conquer: Renegade for PS Vita. Taking the existing C++ source that EA released years ago and translating it to PS Vita. Just some quick screen captures from the various dev builds. All tests are run on physical Vita / PSTV hardware, not Vita3K. Some AI used mostly for documentation, research, and debugging builds as they get larger and encapsulate more of the original EA code. As it stands right now, I've got M00 Tutorial working, audio, textures, menus working. Installing will be as simple as moving retail assets to PS Vita, and installing VPK (",
+        "published_at": "2026-09-08T12:49:38.000Z"
+      },
+      "classification": {
+        "confidence": "medium",
+        "reason": "2 dev signal(s), 2 passive term(s), category=project_update",
+        "candidate_type": "port",
+        "category": "project_update",
+        "question": false,
+        "spam": false
+      },
+      "provenance": {
+        "repository_url": null,
+        "release_url": null,
+        "evidence_urls": [],
+        "evidence_bundle_id": null,
+        "repository_identity": null,
+        "repository_created_at": null,
+        "repository_last_activity_at": null,
+        "release_facts": [],
+        "vita_evidence": [],
+        "author_linkage": null,
+        "corroboration": [],
+        "duplicate_relation": {
+          "content_hash": "b3d532494b12975477dee9651868b69e84ac9a5a0b2e2c283ce1db3bb886256b",
+          "related_candidate_ids": []
+        }
+      },
+      "campaign": {
+        "cluster_id": null,
+        "linkage_confidence": "none",
+        "signals": [],
+        "related_candidate_ids": [],
+        "text_fingerprint": "b76d49ab",
+        "media_fingerprints": [
+          "preview.redd.it/hhzg1ef5laoh1.png",
+          "i.redd.it/hhzg1ef5laoh1.png"
+        ],
+        "outbound_fingerprints": [
+          "www.reddit.com/r/vitahacks/comments/1waninh/cnc_renegade_native_ps_vita_port",
+          "preview.redd.it/hhzg1ef5laoh1.png",
+          "www.reddit.com/user/angrymilks",
+          "i.redd.it/hhzg1ef5laoh1.png"
+        ],
+        "direct_intent": false,
+        "explicit_campaign_reference": false,
+        "incident_id": null
+      },
+      "risk_signals": [
+        "no_project_evidence_in_post"
+      ],
+      "evidence_gaps": [
+        "exact project repository",
+        "repository identity and activity facts",
+        "release or build evidence",
+        "Vita-specific hardware evidence",
+        "author/developer linkage and independent corroboration"
+      ],
+      "content_hash": "b3d532494b12975477dee9651868b69e84ac9a5a0b2e2c283ce1db3bb886256b",
+      "review": null,
       "incident": null
     }
   ]
