@@ -138,19 +138,6 @@
       ]
     },
     {
-      "id": "class-of-09-vita",
-      "url": "https://www.reddit.com/r/VitaPiracy/comments/1whqvmz/class_of_09_vita_port_is_finally_released/",
-      "title": "Class of '09 Vita Port",
-      "content_text": "Stage: released | Platform: PC / Ren'Py | Summary: Feature-full Vita port of the dark comedy visual novel. The September release post says playtesting and polish are still continuing, so this record does not claim every route or edge case is verified. | Hardware: The release post describes the build as playable and feature-complete, with further route testing and bug fixing still underway.",
-      "date_modified": "2026-09-16T00:00:00.000Z",
-      "tags": [
-        "released",
-        "PC / Ren'Py",
-        "Ren'Py Vita",
-        "Python 3"
-      ]
-    },
-    {
       "id": "renpy-8-runtime-engine",
       "url": "https://www.reddit.com/r/vitahacks/comments/1h4yhyi/release_renpy_vita_8_port/",
       "title": "Ren'Py 8 Vita Engine Runtime",
@@ -230,19 +217,6 @@
       ]
     },
     {
-      "id": "cave-story-evo-vita",
-      "url": "https://vitaharbor.vercel.app/projects/cave-story-evo-vita",
-      "title": "Cave Story (NXEngine-evo)",
-      "content_text": "Stage: released | Platform: PC | Summary: Complete open-source NXEngine-evo upgrade supporting remastered music and wide aspect ratio. | Hardware: Rock solid 60 FPS.",
-      "date_modified": "2026-08-28T15:34:00.000Z",
-      "tags": [
-        "released",
-        "PC",
-        "Native C++",
-        "SDL2"
-      ]
-    },
-    {
       "id": "renegade-vita-demo-release",
       "url": "https://www.reddit.com/r/vitahacks/comments/1wgp613/renegade_vita_demo_release/",
       "title": "Renegade Vita - Demo Release",
@@ -265,20 +239,6 @@
       ]
     },
     {
-      "id": "d2vita",
-      "url": "https://www.reddit.com/r/VitaPiracy/comments/1wj8dvz/d2vita_is_here_diablo_ii_lord_of_destruction/",
-      "title": "D2Vita (Diablo II: Lord of Destruction)",
-      "content_text": "Stage: released | Platform: PC | Summary: Public release that runs the original Diablo II: Lord of Destruction 1.14d Windows build on PS Vita. The x86 game code executes through winx86, a compatibility layer with an x86 to ARMv7 dynamic recompiler, while the Windows APIs are replaced by native Vita implementations. | Hardware: Diablo II itself is capped at 25 FPS, so the settled 20 to 25 FPS range is close to the original ceiling.",
-      "date_modified": "2026-09-17T22:27:31.000Z",
-      "tags": [
-        "released",
-        "PC",
-        "winx86",
-        "x86 to ARMv7 recompiler",
-        "Native Windows API layer"
-      ]
-    },
-    {
       "id": "cod-zombies-ios-loader",
       "url": "https://www.reddit.com/r/vitahacks/comments/1wjjx7w/a_bounty_that_deserves_more_visibility/",
       "title": "Call of Duty: Zombies (iOS)",
@@ -288,56 +248,6 @@
         "announced",
         "iOS",
         "iOS loader"
-      ]
-    },
-    {
-      "id": "illusia-vita",
-      "url": "https://www.reddit.com/r/vitahacks/comments/1w4y5tz/release_illusia_vita_a_port_of_illusia_to_the/",
-      "title": "Illusia Vita",
-      "content_text": "Stage: released | Platform: Android ARMv6 | Summary: Release of Illusia for PlayStation Vita by withLogic. The source repository describes an Android ARMv6 wrapper that resolves imports to native Vita functions and patches the original executable to run on Vita. | Hardware: Hardware result not recorded.",
-      "date_modified": "2026-09-02T00:00:00.000Z",
-      "tags": [
-        "released",
-        "Android ARMv6",
-        "Android ARMv6 wrapper",
-        "FalsoNDK / FalsoJNI"
-      ]
-    },
-    {
-      "id": "jedi-academy-vita",
-      "url": "https://www.reddit.com/r/VitaPiracy/comments/1vvp4j6/star_wars_jedi_knight_jedi_academy_files/",
-      "title": "Star Wars Jedi Knight: Jedi Academy Vita",
-      "content_text": "Stage: released | Platform: PC / OpenJK | Summary: First v1.0 release of the single-player Jedi Academy Vita port. The project repository identifies OpenJK as its base and documents a native sceGxm rendering backend. | Hardware: The release thread documents a v1.0 build; the repository contains setup, controls and known-issue notes. No independent hardware verification is recorded in this ledger.",
-      "date_modified": "2026-09-02T00:00:00.000Z",
-      "tags": [
-        "released",
-        "PC / OpenJK",
-        "OpenJK",
-        "sceGxm"
-      ]
-    },
-    {
-      "id": "jedi-outcast-vita",
-      "url": "https://www.reddit.com/r/VitaPiracy/comments/1vws22e/star_wars_jedi_knight_ii_jedi_outcast_data_files/",
-      "title": "Star Wars Jedi Knight II: Jedi Outcast Vita",
-      "content_text": "Stage: released | Platform: PC / OpenJK | Summary: First v1.0 release of the single-player Jedi Outcast Vita port. The project repository identifies OpenJK as its base and documents a native sceGxm rendering backend. | Hardware: The release thread documents a v1.0 build; the repository contains setup, controls and known-issue notes. No independent hardware verification is recorded in this ledger.",
-      "date_modified": "2026-09-08T00:00:00.000Z",
-      "tags": [
-        "released",
-        "PC / OpenJK",
-        "OpenJK",
-        "sceGxm"
-      ]
-    },
-    {
-      "id": "barony-vita",
-      "url": "https://www.reddit.com/r/vitahacks/comments/1v8zqrw/barony_vita/",
-      "title": "Barony Vita",
-      "content_text": "Stage: released | Platform: PC | Summary: Developer release of Barony for Vita. The original release described single-player support; a September update reports online, LAN and ad-hoc multiplayer plus an online leaderboard. | Hardware: Hardware result not recorded.",
-      "date_modified": "2026-09-05T00:00:00.000Z",
-      "tags": [
-        "released",
-        "PC"
       ]
     },
     {
@@ -362,83 +272,6 @@
         "DOS / SDL",
         "Native Vita build",
         "SDL"
-      ]
-    },
-    {
-      "id": "test-drive-1987-vita",
-      "url": "https://www.reddit.com/r/vitahacks/comments/1wlqxq4/test_drive_1987_native_vita_port/",
-      "title": "Test Drive (1987) Vita",
-      "content_text": "Stage: released | Platform: DOS / PC | Summary: Native PS Vita/PSTV port of Test Drive (1987) built from kylofon's static recompilation, with a public v0.1 release published on GitHub. | Hardware: The repository describes hardware-accelerated Vita rendering; no independent performance measurement is recorded.",
-      "date_modified": "2026-09-20T19:50:09.288Z",
-      "tags": [
-        "released",
-        "DOS / PC",
-        "Static recompilation",
-        "VitaSDK",
-        "SDL2",
-        "VitaGL / GXM"
-      ]
-    },
-    {
-      "id": "linux-on-vita",
-      "url": "https://www.reddit.com/r/vitahacks/comments/1wnekpf/linux_on_vita/",
-      "title": "Linux on Vita (Alpine Linux)",
-      "content_text": "Stage: released | Platform: ARMv7-A / Linux | Summary: Complete standalone handheld Linux 6.12 distribution for PS Vita with onscreen touch typing, gamepad navigation, automated Wi-Fi, package management (apk), and native framebuffer DOOM. | Hardware: Kernel 6.12 boots with responsive touch UI; framebuffer DOOM runs at smooth framerates on native hardware.",
-      "date_modified": "2026-09-25T15:25:25.000Z",
-      "tags": [
-        "released",
-        "ARMv7-A / Linux",
-        "ARMv7-A",
-        "Linux 6.12 Kernel",
-        "Alpine Linux",
-        "Framebuffer DOOM",
-        "Touch Keyboard"
-      ]
-    },
-    {
-      "id": "aleph-one-vita",
-      "url": "https://vitaharbor.vercel.app/projects/aleph-one-vita",
-      "title": "Aleph One Vita (Marathon Engine)",
-      "content_text": "Stage: released | Platform: Mac / PC | Summary: Native PS Vita port of Bungie's open-source Aleph One engine, running Marathon, Marathon 2: Durandal, Marathon Infinity, and custom scenarios. | Hardware: Solid 60 FPS performance powered by SDL2 and vitaGL.",
-      "date_modified": "2026-09-24T20:19:09.000Z",
-      "tags": [
-        "released",
-        "Mac / PC",
-        "Native C++",
-        "VitaSDK",
-        "SDL2",
-        "OpenGL / vitaGL"
-      ]
-    },
-    {
-      "id": "apotris-psvita",
-      "url": "https://vitaharbor.vercel.app/projects/apotris-psvita",
-      "title": "Apotris PS Vita",
-      "content_text": "Stage: released | Platform: GBA / PC | Summary: Native Vita port of the open-source block-stacking game Apotris with 14 unique game modes, customizable controls, and 60 FPS performance. | Hardware: Flawless 60 FPS gameplay using Tilengine and SoLoud audio subsystem.",
-      "date_modified": "2026-09-25T08:32:53.000Z",
-      "tags": [
-        "released",
-        "GBA / PC",
-        "Native C",
-        "VitaSDK",
-        "SDL2",
-        "vitaGL",
-        "Tilengine",
-        "SoLoud"
-      ]
-    },
-    {
-      "id": "prince-of-persia-classic-vita",
-      "url": "https://vitaharbor.vercel.app/projects/prince-of-persia-classic-vita",
-      "title": "Prince of Persia Classic Vita",
-      "content_text": "Stage: released | Platform: Android ARMv7 / XBLA | Summary: Android ARMv7 wrapper/loader for Prince of Persia Classic, recreating the 1989 classic with modernized 3D graphics on PlayStation Vita. | Hardware: Runs smoothly at full native Vita screen resolution with vitaGL shaders.",
-      "date_modified": "2026-09-26T13:26:25.000Z",
-      "tags": [
-        "released",
-        "Android ARMv7 / XBLA",
-        "ARMv7 SO Loader",
-        "Cocos2d-x",
-        "OpenGL ES / vitaGL"
       ]
     },
     {

@@ -19,7 +19,11 @@ export default defineConfig({
       }
     }
   },
-  test: { environment: "jsdom", globals: true },
+  test: {
+    environment: "jsdom",
+    globals: true,
+    exclude: ["tests/e2e/**", "node_modules/**"]
+  },
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src")

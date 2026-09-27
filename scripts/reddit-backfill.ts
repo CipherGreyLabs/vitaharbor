@@ -27,8 +27,8 @@ const PUBLIC_OUT = path.resolve(process.cwd(), "public/data/discovered.json");
 const LEDGER = path.resolve(process.cwd(), "src/shared/constants/fallbackData.ts");
 const MAX_ITEMS = 100;
 const DEFAULT_DAYS = 21;
-const SEARCH_QUERY = 'port OR recompiled OR recomp OR decomp OR decompilation OR wrapper OR "work in progress"';
-const BACKFILL_TITLE_SIGNAL = /\bport(?:ed|ing)?\b|\brecompil(?:e|ed|er|ation)\b|\bdecomp(?:ilation)?\b|\bwrapper\b|\bw\.?i\.?p\.?\b/i;
+const SEARCH_QUERY = 'port OR recompiled OR recomp OR decomp OR decompilation OR wrapper OR "work in progress" OR soloader OR kubridge OR vitaGL OR "source port" OR "custom engine"';
+const BACKFILL_TITLE_SIGNAL = /\bport(?:ed|ing)?\b|\brecompil(?:e|ed|er|ation)\b|\bdecomp(?:ilation)?\b|\bwrapper\b|\bw\.?i\.?p\.?\b|\bsoloader\b|\bkubridge\b|\bvitagl\b|\bsource\s+port\b|\bcustom\s+engine\b/i;
 
 function boundedDays() {
   const requested = Number.parseInt(process.env.REDDIT_BACKFILL_DAYS || String(DEFAULT_DAYS), 10);

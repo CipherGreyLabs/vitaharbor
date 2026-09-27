@@ -75,12 +75,7 @@ export const KNOWN_REPOS: Record<string, string> = {
   "openmohaa-vita": "https://github.com/HenryKun55/openmohaa/tree/vita-port",
   "smash-melee-vita": "https://github.com/robin994/SmashMeleeVita",
   "hollow-knight-vita": "https://github.com/PatnosDD/Hollow-Knight-PsVita",
-  "class-of-09-vita": "https://github.com/TheSpasticGamer/Class-Of-09-Vita-Port",
-  "renpy-8-runtime-engine": "https://github.com/Grimiku/RenPy-Vita-8",
-  "illusia-vita": "https://github.com/withLogic/illusia-vita",
-  "jedi-academy-vita": "https://github.com/NDRWhun/JAVITA",
-  "jedi-outcast-vita": "https://github.com/NDRWhun/JK2VITA",
-  "barony-vita": "https://github.com/Brendonm17/Barony-Vita"
+  "renpy-8-runtime-engine": "https://github.com/Grimiku/RenPy-Vita-8"
 };
 
 export const STAGE_TONE: Record<string, string> = {

@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-09-27T17:47:42.387Z",
+  "generated_at": "2026-09-27T18:28:22.350Z",
   "source": "r/vitahacks + r/VitaPiracy + r/PSVitaHomebrew RSS",
   "items": [
     {
@@ -223,6 +223,7 @@
         "cluster_id": "campaign-ac790c64",
         "linkage_confidence": "medium",
         "signals": [
+          "right_direct_poison_intent",
           "same_author_burst",
           "shared_outbound_fingerprint"
         ],
@@ -402,6 +403,7 @@
         "cluster_id": "campaign-ac790c64",
         "linkage_confidence": "medium",
         "signals": [
+          "right_direct_poison_intent",
           "same_author_burst",
           "shared_outbound_fingerprint"
         ],
@@ -419,7 +421,7 @@
           "www.reddit.com/user/wookie_von_gondor",
           "v.redd.it/v4agj93t8nrh1"
         ],
-        "direct_intent": false,
+        "direct_intent": true,
         "explicit_campaign_reference": false,
         "incident_id": null
       },

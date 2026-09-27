@@ -221,4 +221,50 @@ describe("Reddit candidate classifier", () => {
     expect(result.accept).toBe(false);
     expect(result.reason).toContain("spam");
   });
+
+  it("recognizes modern decompilations and static recompilations", () => {
+    const recomp = classify({
+      title: "Zelda64Recomp ported to PS Vita [WIP]",
+      body: "Static recompilation running on real hardware using VitaGL. Framerate is solid 30fps with custom render targets."
+    });
+    expect(recomp.accept).toBe(true);
+    expect(recomp.confidence).toBe("high");
+    expect(classifyCandidateType({ title: "Zelda64Recomp ported to PS Vita", body: "decomp" })).toBe("decompilation");
+  });
+
+  it("recognizes ARMv7 android wrapper development signals", () => {
+    const wrapper = classify({
+      title: "Android soloader wrapper for Hollow Knight on Vita",
+      body: "Using kubridge and VitaGL with custom GXM shaders. Touch controls overlay and audio decoder working."
+    });
+    expect(wrapper.accept).toBe(true);
+    expect(classifyCandidateType({ title: "Android soloader wrapper for Vita", body: "kubridge" })).toBe("wrapper");
+  });
+
+  it("recognizes custom engine rewrites and engine ports", () => {
+    const engine = classify({
+      title: "OpenTomb Custom Engine Reimplementation for Vita",
+      body: "Rewritten in C++ with Raylib and Tilengine backend targeting native Vita hardware."
+    });
+    expect(engine.accept).toBe(true);
+    expect(classifyCandidateType({ title: "OpenTomb Custom Engine Reimplementation", body: "Tilengine" })).toBe("engine");
+  });
+
+  it("recognizes technical signals and serious bounties with GitHub evidence", () => {
+    const technical = classify({
+      title: "[WIP] Dynamic recompilation dynarec optimization for Vita",
+      body: "LLVM shader compiler fixes and vertex buffer texture pipeline improvements https://github.com/vitatest/dynarec"
+    });
+    expect(technical.accept).toBe(true);
+    expect(technical.category).toBe("project_update");
+  });
+
+  it("rejects AI slop and explicit troll terms", () => {
+    const slop = classify({
+      title: "I made an AI slop port of GTA V for Vita",
+      body: "Just vibecoding hallucinated code."
+    });
+    expect(slop.accept).toBe(false);
+    expect(slop.category).toBe("discussion");
+  });
 });

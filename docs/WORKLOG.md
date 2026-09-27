@@ -703,3 +703,14 @@ The five remaining candidates were checked against their source threads. None wa
 
 | 12:05 | 6656228 | Production deploy | Deployed PlayStation Black Theme UI/UX changes to Vercel | gemini-3.1-pro | Deployment dpl_HM2drkTe4KJP5kmQkJDdL7C5967n reached READY at vitaharbor.vercel.app |
 \n| 13:00 | working tree | Forced reducedMotion and saveData to false in ConsoleStage | Ensure 3D console always shows up and animates, explicitly overriding OS and connection accessibility settings as requested by user to guarantee the Premium UI visuals. | gemini-3.1-pro | Unit tests patched and passed. |\n
+### VH-SCANNER-SIGNALS-027 scanner detection and classification logic expansion (2026-09-27)
+
+| Time | Commit / state | Change | Why | Model | Verified |
+|---|---|---|---|---|---|
+| 18:35 UTC | working tree | Expanded scanner & classification signals in `scripts/reddit-classifier.mjs`, `scripts/reddit-provenance.mjs`, and `scripts/reddit-backfill.ts` for decompilations, static recompilations, custom engine rewrites, ARMv7 Android wrappers, low-level technical terms, and bounties. Strengthened anti-troll/fake-announcement/AI-slop filters. Added 5 comprehensive test cases in `tests/unit/reddit-scanner.test.mjs`. | Fulfill Deel A delegation from master: upgrade classifier logic to reliably capture genuine ongoing Vita port developments and reject slop/troll attempts. | gemini-3.7-flash | `npm run verify` passed (typecheck, 121/121 unit tests, static build with 22 project pages); `npm run data:scan` successfully parsed and classified live subreddit feed entries. |
+
+### VH-LEDGER-FILTER-028 filtering released VitaDB ports from active tracker (2026-09-27)
+
+| Time | Commit / state | Change | Why | Model | Verified |
+|---|---|---|---|---|---|
+| 18:45 UTC | working tree | Cross-referenced 34 fallbackData projects against official VitaDB catalog (1,126 items) and removed 12 fully released ports present on VitaDB (Class of 09, NXEngine-EVO/Cave Story, D2Vita, Illusia, Jedi Academy, Jedi Outcast, Barony, Test Drive 1987, Linux on Vita, Aleph One, Apotris, Prince of Persia Classic). Retained 22 active / ongoing and non-VitaDB ports. Updated test suites in data.test.ts, link-integrity.test.ts, archive.spec.ts, KNOWN_REPOS, and regenerated feed.json, rss.xml, and prerendered HTML. | Fulfill Deel B delegation: refocus VitaHarbor purely on active in-development PS Vita ports and deduplicate already finalized releases readily available on VitaDB. | gemini-3.7-flash | npm run verify passed (tsc --noEmit, 121/121 unit tests, 22 project pages, 25 sitemap URLs prerendered). |

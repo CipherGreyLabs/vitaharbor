@@ -47,7 +47,10 @@ const FAKE_OR_TROLL_SIGNALS = [
   /\btroll(?:ing)?\b/i,
   /\bshitpost\b/i,
   /\bprank\b/i,
-  /\bbait\b/i
+  /\bbait\b/i,
+  /\bai\s+slop\b/i,
+  /\bhallucinat(?:ion|ed|ing)\b/i,
+  /\bparody\b/i
 ];
 
 const VITA_CONTEXT_SIGNALS = [
@@ -70,7 +73,12 @@ const EVIDENCE_TERMS = [
   /\btested\b/i,
   /\bin.?game\b/i,
   /\bscreenshot\b/i,
-  /\bvideo\b/i
+  /\bvideo\b/i,
+  /youtube\.com\/|youtu\.be\//i,
+  /streamable\.com\//i,
+  /\bcommit\b/i,
+  /\bdiff\b/i,
+  /\bpull.?request\b/i
 ];
 
 const CAMPAIGN_REFERENCE_SIGNALS = [

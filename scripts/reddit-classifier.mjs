@@ -24,6 +24,7 @@ const SPAM_SIGNALS = [
   /\b(?:promo|referral)\s+code\b/i,
   /\bclick\s+(?:here|the\s+link)\b/i,
   /\b(?:free|cheap)\s+(?:money|gift\s*card|followers|likes)\b/i,
+  /\b(?:free\s+nitro|discord\s+nitro|telegram\s+channel|whatsapp\s+group)\b/i,
 ];
 
 // Phrases that strongly indicate the post is a question or request, not development.
@@ -53,6 +54,7 @@ const QUESTION_SIGNALS = [
 // Neutral port-adjacent terms counted only when not in a question context.
 const PASSIVE_PORT_TERMS = [
   "port", "ports", "engine", "unity", "unreal", "wrapper", "release", "homebrew",
+  "decomp", "recomp", "soloader", "kubridge", "vitagl", "godot", "raylib", "tilengine"
 ];
 
 export const CANDIDATE_CATEGORIES = Object.freeze([
@@ -73,19 +75,26 @@ const STRONG_DEVELOPMENT_SIGNALS = [
   /\b(?:github\.com|gitlab\.com|codeberg\.org|vitasdk|vpk)\b/i,
   /\b(?:source code|pull.?request|release build|demo build)\b/i,
   /\[release\]/i,
-  /\b(?:initial|public)\s+release\b/i
+  /\b(?:initial|public)\s+release\b/i,
+  /\b(?:static\s+recompil(?:ation|e|er)|dynarec|dynamic\s+recompilation|soloader|kubridge|vitagl)\b/i,
+  /\b(?:n64recomp|zelda64recomp|custom\s+engine|engine\s+rewrite|decompilation\s+progress)\b/i,
+  /\b(?:reverse\s+engineering\s+progress|c\+\+\s+rewrite|openbor|openmw|scummvm)\b/i,
+  /\b(?:bounty|dev\s+call|developer\s+call)\b/i
 ];
 
 const UPDATE_SIGNALS = [
   /\b(?:update|progress|wip|work in progress|new build|version|patch(?:es)?|fix(?:es)?)\b/i,
   /\b(?:now|still|again)\b[\s\S]{0,40}\b(?:runs?|boots?|works?|renders?|plays?)\b/i,
-  /\b(?:runs?|boots?|works?|renders?|plays?)\b[\s\S]{0,40}\b(?:now|again|on vita)\b/i
+  /\b(?:runs?|boots?|works?|renders?|plays?)\b[\s\S]{0,40}\b(?:now|again|on vita)\b/i,
+  /\b(?:commit|diff|shader|glsl|framerate|fps|performance\s+gain|optimization)\b/i,
 ];
 
 const DISCUSSION_SIGNALS = [
   /\bwe need to talk\b/i,
   /\bvibecod(?:er|ing)\b/i,
   /\bslop\b/i,
+  /\bai\s+slop\b/i,
+  /\bhallucinat(?:ion|ed|ing)\b/i,
   /\bshould have never\b/i,
   /\bcommunity deserves\b/i,
   /\bi(?:'m| am) not against\b/i,
@@ -195,9 +204,9 @@ export function classifyCandidateType(entry) {
   const text = ((entry.title || "") + " " + (entry.body || "")).toLowerCase();
   if (/\b(plugin|controller|adrenaline|input support)\b/.test(text)) return "plugin";
   if (/\b(app|application|database|tracker|tool|launcher|mod|mods|modding)\b/.test(text)) return "tool";
-  if (/\b(wrapper|loader|armv7|recompiler)\b/.test(text)) return "wrapper";
-  if (/\b(decompilation|decomp|source port)\b/.test(text)) return "decompilation";
-  if (/\b(runtime|engine)\b/.test(text)) return "engine";
+  if (/\b(wrapper|loader|soloader|kubridge|armv7|recompiler)\b/.test(text)) return "wrapper";
+  if (/\b(decompilation|decomp|source port|n64recomp|zelda64recomp)\b/.test(text)) return "decompilation";
+  if (/\b(runtime|engine|tilengine|raylib|openbor|openmw|scummvm|solarus)\b/.test(text)) return "engine";
   return "port";
 }
 

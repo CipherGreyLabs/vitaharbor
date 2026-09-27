@@ -97,8 +97,8 @@ test.describe("archive", () => {
   });
 
   test("expanded project details show an absolute project-activity date, not a relative age", async ({ page }) => {
-    await page.goto("/#p=test-drive-1987-vita", { waitUntil: "domcontentloaded" });
-    const panel = page.locator("#panel-test-drive-1987-vita");
+    await page.goto("/#p=hollow-knight-vita", { waitUntil: "domcontentloaded" });
+    const panel = page.locator("#panel-hollow-knight-vita");
     await expect(panel).toBeVisible();
     await expect(panel.getByText("Latest project activity", { exact: true })).toBeVisible();
     const activityField = panel.locator("dl > div").filter({ hasText: "Latest project activity" });
@@ -239,17 +239,15 @@ test.describe("archive", () => {
   });
 
   test("Show on Vita opens the preview with the selected project's screenshot", async ({ page }) => {
-    await toggleProjectDetails(page, "illusia-vita");
+    await toggleProjectDetails(page, "rc-cars-vita");
     await page.getByRole("button", { name: "Show on Vita" }).click();
     await expect(page.getByText("Source screenshot on display", { exact: true })).toBeVisible();
-    await expect(page.getByAltText("Illusia title screen running on the Vita port")).toBeVisible();
+    await expect(page.getByAltText("RC Cars gameplay photographed on two PS Vita consoles")).toBeVisible();
   });
 
   test("new source-backed Vita screenshots load from their matching projects", async ({ page }) => {
     const screenshots = [
       ["rc-cars-vita", "RC Cars gameplay photographed on two PS Vita consoles"],
-      ["d2vita", "Diablo II: Lord of Destruction title screen from the D2Vita Vita port"],
-      ["jedi-academy-vita", "Jedi Academy Vita title screen photographed on a PS Vita"],
       ["call-of-duty-4-vita", "Call of Duty 4 gameplay photographed on a PS Vita"]
     ] as const;
 
@@ -293,7 +291,7 @@ test.describe("archive", () => {
   test("Show on Vita updates the reduced-motion 3D preview", async ({ page }) => {
     await page.emulateMedia({ reducedMotion: "reduce" });
     await page.reload({ waitUntil: "domcontentloaded" });
-    await toggleProjectDetails(page, "illusia-vita");
+    await toggleProjectDetails(page, "rc-cars-vita");
     await expect(page.getByRole("button", { name: "Show on Vita" })).toBeVisible();
     await page.getByRole("button", { name: "Show on Vita" }).click();
     await expect(page.getByText("Source screenshot on display", { exact: true })).toBeVisible();

@@ -11,31 +11,18 @@ export const FALLBACK_GAMES: Game[] = [
   { id: 8, slug: "star-wars-kotor", title: "Star Wars: Knights of the Old Republic", normalized_title: "star wars: knights of the old republic", original_release_year: 2003, original_platform: "Xbox / PC / Android", created_at: new Date('2026-09-17T15:34:00.000Z'), updated_at: new Date('2026-09-17T15:34:00.000Z') },
   { id: 9, slug: "baldurs-gate-dark-alliance", title: "Baldur's Gate: Dark Alliance", normalized_title: "baldur's gate: dark alliance", original_release_year: 2001, original_platform: "PS2 / GameCube", created_at: new Date('2026-09-17T15:34:00.000Z'), updated_at: new Date('2026-09-17T15:34:00.000Z') },
   { id: 10, slug: "need-for-speed-hot-pursuit", title: "Need for Speed: Hot Pursuit", normalized_title: "need for speed: hot pursuit", original_release_year: 2010, original_platform: "Android", created_at: new Date('2026-09-17T15:34:00.000Z'), updated_at: new Date('2026-09-17T15:34:00.000Z') },
-  { id: 11, slug: "class-of-09", title: "Class of '09", normalized_title: "class of '09", original_release_year: 2021, original_platform: "PC / Ren'Py", created_at: new Date('2026-09-17T15:34:00.000Z'), updated_at: new Date('2026-09-17T15:34:00.000Z') },
   { id: 12, slug: "renpy-8-runtime", title: "Ren'Py 8 Runtime (Python 3.11)", normalized_title: "ren'py 8 runtime (python 3.11)", original_release_year: 2024, original_platform: "Multiplatform Engine", created_at: new Date('2026-09-17T15:34:00.000Z'), updated_at: new Date('2026-09-17T15:34:00.000Z') },
   { id: 13, slug: "zelda-ship-of-harkinian", title: "Zelda: Ship of Harkinian (Ocarina of Time)", normalized_title: "zelda: ship of harkinian (ocarina of time)", original_release_year: 1998, original_platform: "N64 / PC Decomp", created_at: new Date('2026-09-17T15:34:00.000Z'), updated_at: new Date('2026-09-17T15:34:00.000Z') },
   { id: 14, slug: "slingshot-racing", title: "Slingshot Racing", normalized_title: "slingshot racing", original_release_year: 2012, original_platform: "Android / iOS", created_at: new Date('2026-09-17T15:34:00.000Z'), updated_at: new Date('2026-09-17T15:34:00.000Z') },
   { id: 15, slug: "fallout-2", title: "Fallout 2 Community Edition", normalized_title: "fallout 2 community edition", original_release_year: 1998, original_platform: "PC", created_at: new Date('2026-09-17T15:34:00.000Z'), updated_at: new Date('2026-09-17T15:34:00.000Z') },
   { id: 16, slug: "render96-sm64", title: "Render96 HD SM64 Vita", normalized_title: "render96 hd sm64 vita", original_release_year: 2020, original_platform: "PC Decomp", created_at: new Date('2026-09-17T15:34:00.000Z'), updated_at: new Date('2026-09-17T15:34:00.000Z') },
   { id: 17, slug: "celeste-classic", title: "Celeste Classic Vita", normalized_title: "celeste classic vita", original_release_year: 2016, original_platform: "PICO-8 / C", created_at: new Date('2026-09-17T15:34:00.000Z'), updated_at: new Date('2026-09-17T15:34:00.000Z') },
-  { id: 18, slug: "cave-story-nxengine", title: "Cave Story (NXEngine-evo)", normalized_title: "cave story (nxengine-evo)", original_release_year: 2004, original_platform: "PC", created_at: new Date('2026-09-17T15:34:00.000Z'), updated_at: new Date('2026-09-17T15:34:00.000Z') },
-  { id: 19, slug: "renegade-vita-demo-release", title: "Renegade Vita - Demo Release", normalized_title: "renegade vita - demo release", original_release_year: null, original_platform: "Unknown", created_at: new Date('2026-09-15T03:40:12.000Z'), updated_at: new Date('2026-09-17T15:34:20.988Z') }
-  ,{ id: 20, slug: "rc-cars", title: "RC Cars", normalized_title: "rc cars", original_release_year: null, original_platform: "PC", created_at: new Date('2026-09-18T11:09:43.000Z'), updated_at: new Date('2026-09-18T15:20:00.000Z') }
-  ,{ id: 21, slug: "diablo-ii-lord-of-destruction", title: "Diablo II: Lord of Destruction", normalized_title: "diablo ii: lord of destruction", original_release_year: 2001, original_platform: "PC", created_at: new Date('2026-09-17T22:27:31.000Z'), updated_at: new Date('2026-09-17T22:27:31.000Z') }
-  ,{ id: 22, slug: "call-of-duty-zombies", title: "Call of Duty: Zombies", normalized_title: "call of duty: zombies", original_release_year: 2009, original_platform: "iOS", created_at: new Date('2026-09-18T07:54:45.000Z'), updated_at: new Date('2026-09-18T07:54:45.000Z') }
-  ,{ id: 23, slug: "illusia", title: "Illusia", normalized_title: "illusia", original_release_year: null, original_platform: "Android ARMv6", created_at: new Date('2026-09-02T00:00:00.000Z'), updated_at: new Date('2026-09-02T00:00:00.000Z') }
-  ,{ id: 24, slug: "star-wars-jedi-academy", title: "Star Wars Jedi Knight: Jedi Academy", normalized_title: "star wars jedi knight jedi academy", original_release_year: 2003, original_platform: "PC / OpenJK", created_at: new Date('2026-08-22T00:00:00.000Z'), updated_at: new Date('2026-09-02T00:00:00.000Z') }
-  ,{ id: 25, slug: "star-wars-jedi-outcast", title: "Star Wars Jedi Knight II: Jedi Outcast", normalized_title: "star wars jedi knight ii jedi outcast", original_release_year: 2002, original_platform: "PC / OpenJK", created_at: new Date('2026-08-24T00:00:00.000Z'), updated_at: new Date('2026-09-08T00:00:00.000Z') }
-  ,{ id: 26, slug: "barony", title: "Barony", normalized_title: "barony", original_release_year: 2015, original_platform: "PC", created_at: new Date('2026-07-28T00:00:00.000Z'), updated_at: new Date('2026-09-05T00:00:00.000Z') }
-  ,{ id: 27, slug: "call-of-duty-4-modern-warfare", title: "Call of Duty 4: Modern Warfare", normalized_title: "call of duty 4 modern warfare", original_release_year: 2007, original_platform: "PS3", created_at: new Date('2026-09-12T00:00:00.000Z'), updated_at: new Date('2026-09-12T00:00:00.000Z') }
-  ,{ id: 28, slug: "c-dogs-sdl-vita", title: "C-Dogs SDL Vita", normalized_title: "c-dogs sdl vita", original_release_year: null, original_platform: "DOS / SDL", created_at: new Date('2026-09-19T20:01:51.653Z'), updated_at: new Date('2026-09-19T20:01:51.653Z') }
-  ,{ id: 29, slug: "test-drive-1987-vita", title: "Test Drive (1987)", normalized_title: "test drive (1987)", original_release_year: 1987, original_platform: "DOS / PC", created_at: new Date('2026-09-20T19:39:46.000Z'), updated_at: new Date('2026-09-20T19:50:09.288Z') }
-
-  ,{ id: 30, slug: "linux-on-vita", title: "Linux on Vita (Alpine Linux)", normalized_title: "linux on vita (alpine linux)", original_release_year: 2026, original_platform: "ARMv7-A / Linux", created_at: new Date('2026-09-22T16:39:19.000Z'), updated_at: new Date('2026-09-25T15:25:25.000Z') }
-  ,{ id: 31, slug: "aleph-one-vita", title: "Aleph One (Marathon Trilogy)", normalized_title: "aleph one (marathon trilogy)", original_release_year: 1994, original_platform: "Mac / PC", created_at: new Date('2026-06-03T11:49:18.000Z'), updated_at: new Date('2026-09-24T20:19:09.000Z') }
-  ,{ id: 32, slug: "apotris-psvita", title: "Apotris", normalized_title: "apotris", original_release_year: 2022, original_platform: "GBA / PC", created_at: new Date('2026-09-23T23:06:45.000Z'), updated_at: new Date('2026-09-25T08:32:53.000Z') }
-  ,{ id: 33, slug: "prince-of-persia-classic-vita", title: "Prince of Persia Classic", normalized_title: "prince of persia classic", original_release_year: 2007, original_platform: "Android ARMv7 / XBLA", created_at: new Date('2026-07-08T04:37:10.000Z'), updated_at: new Date('2026-09-26T13:26:25.000Z') }
-  ,{ id: 34, slug: "resident-evil-4-vita", title: "Resident Evil 4", normalized_title: "resident evil 4", original_release_year: 2005, original_platform: "GameCube / PS2 / Android", created_at: new Date('2026-09-21T00:00:00.000Z'), updated_at: new Date('2026-09-25T17:04:11.000Z') }
+  { id: 19, slug: "renegade-vita-demo-release", title: "Renegade Vita - Demo Release", normalized_title: "renegade vita - demo release", original_release_year: null, original_platform: "Unknown", created_at: new Date('2026-09-15T03:40:12.000Z'), updated_at: new Date('2026-09-17T15:34:20.988Z') },
+  { id: 20, slug: "rc-cars", title: "RC Cars", normalized_title: "rc cars", original_release_year: null, original_platform: "PC", created_at: new Date('2026-09-18T11:09:43.000Z'), updated_at: new Date('2026-09-18T15:20:00.000Z') },
+  { id: 22, slug: "call-of-duty-zombies", title: "Call of Duty: Zombies", normalized_title: "call of duty: zombies", original_release_year: 2009, original_platform: "iOS", created_at: new Date('2026-09-18T07:54:45.000Z'), updated_at: new Date('2026-09-18T07:54:45.000Z') },
+  { id: 27, slug: "call-of-duty-4-modern-warfare", title: "Call of Duty 4: Modern Warfare", normalized_title: "call of duty 4 modern warfare", original_release_year: 2007, original_platform: "PS3", created_at: new Date('2026-09-12T00:00:00.000Z'), updated_at: new Date('2026-09-12T00:00:00.000Z') },
+  { id: 28, slug: "c-dogs-sdl-vita", title: "C-Dogs SDL Vita", normalized_title: "c-dogs sdl vita", original_release_year: null, original_platform: "DOS / SDL", created_at: new Date('2026-09-19T20:01:51.653Z'), updated_at: new Date('2026-09-19T20:01:51.653Z') },
+  { id: 34, slug: "resident-evil-4-vita", title: "Resident Evil 4", normalized_title: "resident evil 4", original_release_year: 2005, original_platform: "GameCube / PS2 / Android", created_at: new Date('2026-09-21T00:00:00.000Z'), updated_at: new Date('2026-09-25T17:04:11.000Z') }
 ];
 
 export const FALLBACK_PROJECTS: any[] = [
@@ -257,29 +244,6 @@ export const FALLBACK_PROJECTS: any[] = [
     developers: [{ id: 7, role: "lead", display_name: "hatoving", slug: "hatoving" }]
   },
   {
-    id: 11,
-    game_id: 11,
-    slug: "class-of-09-vita",
-    reddit_url: "https://www.reddit.com/r/VitaPiracy/comments/1whqvmz/class_of_09_vita_port_is_finally_released/",
-    repo_url: "https://github.com/TheSpasticGamer/Class-Of-09-Vita-Port",
-    display_name: "Class of '09 Vita Port",
-    current_stage: "released",
-    lifecycle: "active",
-    summary: "Feature-full Vita port of the dark comedy visual novel. The September release post says playtesting and polish are still continuing, so this record does not claim every route or edge case is verified.",
-    playability_notes: "The release post describes the build as playable and feature-complete, with further route testing and bug fixing still underway.",
-    performance_notes: null,
-    first_seen_at: new Date('2026-03-11T15:34:00.000Z'),
-    last_activity_at: new Date('2026-09-16T00:00:00.000Z'),
-    released_at: new Date('2026-09-15T00:00:00.000Z'),
-    is_featured: false,
-    is_archived: false,
-    game_title: "Class of '09",
-    original_platform: "PC / Ren'Py",
-    original_release_year: 2021,
-    technologies: ["Ren'Py Vita", "Python 3"],
-    developers: [{ id: 8, role: "lead", display_name: "SonicMastr", slug: "sonicmastr" }]
-  },
-  {
     id: 12,
     game_id: 12,
     slug: "renpy-8-runtime-engine",
@@ -409,30 +373,6 @@ export const FALLBACK_PROJECTS: any[] = [
     developers: [{ id: 12, role: "lead", display_name: "MyLegGuy", slug: "mylegguy" }]
   },
   {
-    id: 18,
-    game_id: 18,
-    slug: "cave-story-evo-vita",
-    screenshot_url: "/screenshots/cave-story-evo-vita.png",
-    screenshot_source_url: "https://github.com/nxengine/nxengine-evo/blob/master/screenshot.png",
-    screenshot_alt: "Cave Story title screen rendered by NXEngine-evo",
-    display_name: "Cave Story (NXEngine-evo)",
-    current_stage: "released",
-    lifecycle: "active",
-    summary: "Complete open-source NXEngine-evo upgrade supporting remastered music and wide aspect ratio.",
-    playability_notes: "All story endings, Hell Sanctuary, and Curly story mode fully playable.",
-    performance_notes: "Rock solid 60 FPS.",
-    first_seen_at: new Date('2025-04-15T15:34:00.000Z'),
-    last_activity_at: new Date('2026-08-28T15:34:00.000Z'),
-    released_at: new Date('2025-06-24T15:34:00.000Z'),
-    is_featured: false,
-    is_archived: false,
-    game_title: "Cave Story (NXEngine-evo)",
-    original_platform: "PC",
-    original_release_year: 2004,
-    technologies: ["Native C++", "SDL2"],
-    developers: [{ id: 9, role: "lead", display_name: "Northfear", slug: "northfear" }]
-  },
-  {
     id: 19,
     game_id: 19,
     slug: "renegade-vita-demo-release",
@@ -454,8 +394,8 @@ export const FALLBACK_PROJECTS: any[] = [
     original_release_year: null,
     technologies: [],
     developers: []
-  }
-  ,{
+  },
+  {
     id: 20,
     game_id: 20,
     slug: "rc-cars-vita",
@@ -480,34 +420,8 @@ export const FALLBACK_PROJECTS: any[] = [
     original_release_year: null,
     technologies: [],
     developers: []
-  }
-  ,{
-    id: 21,
-    game_id: 21,
-    slug: "d2vita",
-    reddit_url: "https://www.reddit.com/r/VitaPiracy/comments/1wj8dvz/d2vita_is_here_diablo_ii_lord_of_destruction/",
-    screenshot_url: "/screenshots/d2vita.webp",
-    screenshot_source_url: "https://www.reddit.com/r/VitaPiracy/comments/1wj8dvz/d2vita_is_here_diablo_ii_lord_of_destruction/",
-    screenshot_alt: "Diablo II: Lord of Destruction title screen from the D2Vita Vita port",
-    display_name: "D2Vita (Diablo II: Lord of Destruction)",
-    current_stage: "released",
-    lifecycle: "active",
-    summary: "Public release that runs the original Diablo II: Lord of Destruction 1.14d Windows build on PS Vita. The x86 game code executes through winx86, a compatibility layer with an x86 to ARMv7 dynamic recompiler, while the Windows APIs are replaced by native Vita implementations.",
-    playability_notes: "Runs the original 1.14d build rather than a rewritten engine. Performance varies between 10 and 25 FPS while the cache is being built, then settles around 20 to 25 FPS.",
-    performance_notes: "Diablo II itself is capped at 25 FPS, so the settled 20 to 25 FPS range is close to the original ceiling.",
-    first_seen_at: new Date('2026-09-17T22:27:31.000Z'),
-    last_activity_at: new Date('2026-09-17T22:27:31.000Z'),
-    released_at: new Date('2026-09-17T22:27:31.000Z'),
-    is_featured: false,
-    is_archived: false,
-    verification: "developer_direct",
-    game_title: "Diablo II: Lord of Destruction",
-    original_platform: "PC",
-    original_release_year: 2001,
-    technologies: ["winx86", "x86 to ARMv7 recompiler", "Native Windows API layer"],
-    developers: []
-  }
-  ,{
+  },
+  {
     id: 22,
     game_id: 22,
     slug: "cod-zombies-ios-loader",
@@ -529,144 +443,8 @@ export const FALLBACK_PROJECTS: any[] = [
     original_release_year: 2009,
     technologies: ["iOS loader"],
     developers: []
-  }
-  ,{
-    id: 23,
-    game_id: 23,
-    slug: "illusia-vita",
-    reddit_url: "https://www.reddit.com/r/vitahacks/comments/1w4y5tz/release_illusia_vita_a_port_of_illusia_to_the/",
-    repo_url: "https://github.com/withLogic/illusia-vita",
-    screenshot_url: "/screenshots/illusia-vita.jpg",
-    screenshot_source_url: "https://github.com/withLogic/illusia-vita/blob/master/extras/screenshots/screenshot1.jpg",
-    screenshot_alt: "Illusia title screen running on the Vita port",
-    display_name: "Illusia Vita",
-    current_stage: "released",
-    lifecycle: "active",
-    summary: "Release of Illusia for PlayStation Vita by withLogic. The source repository describes an Android ARMv6 wrapper that resolves imports to native Vita functions and patches the original executable to run on Vita.",
-    playability_notes: null,
-    performance_notes: null,
-    first_seen_at: new Date('2026-09-02T00:00:00.000Z'),
-    last_activity_at: new Date('2026-09-02T00:00:00.000Z'),
-    released_at: new Date('2026-09-02T00:00:00.000Z'),
-    last_verified_at: new Date('2026-09-20T00:00:00.000Z'),
-    is_featured: false,
-    is_archived: false,
-    verification: "developer_direct",
-    game_title: "Illusia",
-    original_platform: "Android ARMv6",
-    original_release_year: null,
-    technologies: ["Android ARMv6 wrapper", "FalsoNDK / FalsoJNI"],
-    setup_evidence: {
-      categoryLabel: "Android wrapper",
-      plugins: ["kubridge", "FdFix", "libshacccg.suprx"],
-      overclock: "Optional PSVshell 500 MHz setting is documented by the repository.",
-      assetPath: "ux0:data/illusia",
-      instructions: "Install the VPK, then provide the legally owned Illusia v1.0.2 Android assets and libgameDSO.so in ux0:data/illusia.",
-      sourceUrl: "https://github.com/withLogic/illusia-vita",
-      verifiedOnHardware: false
-    },
-    developers: [{ id: 15, role: "lead", display_name: "withLogic", slug: "withlogic" }]
-  }
-  ,{
-    id: 24,
-    game_id: 24,
-    slug: "jedi-academy-vita",
-    reddit_url: "https://www.reddit.com/r/VitaPiracy/comments/1vvp4j6/star_wars_jedi_knight_jedi_academy_files/",
-    repo_url: "https://github.com/NDRWhun/JAVITA",
-    screenshot_url: "/screenshots/jedi-academy.jpg",
-    screenshot_source_url: "https://www.reddit.com/r/VitaPiracy/comments/1vvp4j6/star_wars_jedi_knight_jedi_academy_files/",
-    screenshot_alt: "Jedi Academy Vita title screen photographed on a PS Vita",
-    display_name: "Star Wars Jedi Knight: Jedi Academy Vita",
-    current_stage: "released",
-    lifecycle: "active",
-    summary: "First v1.0 release of the single-player Jedi Academy Vita port. The project repository identifies OpenJK as its base and documents a native sceGxm rendering backend.",
-    playability_notes: "The release thread documents a v1.0 build; the repository contains setup, controls and known-issue notes. No independent hardware verification is recorded in this ledger.",
-    performance_notes: null,
-    first_seen_at: new Date('2026-08-22T00:00:00.000Z'),
-    last_activity_at: new Date('2026-09-02T00:00:00.000Z'),
-    released_at: new Date('2026-08-22T00:00:00.000Z'),
-    last_verified_at: new Date('2026-09-20T00:00:00.000Z'),
-    is_featured: false,
-    is_archived: false,
-    verification: "developer_direct",
-    game_title: "Star Wars Jedi Knight: Jedi Academy",
-    original_platform: "PC / OpenJK",
-    original_release_year: 2003,
-    technologies: ["OpenJK", "sceGxm"],
-    setup_evidence: {
-      categoryLabel: "OpenJK native port",
-      assetPath: "ux0:data/JAVITA/base",
-      instructions: "Install JAVITA.vpk and provide the legally owned PC Jedi Academy base PK3 files in ux0:data/JAVITA/base.",
-      sourceUrl: "https://github.com/NDRWhun/JAVITA",
-      verifiedOnHardware: false
-    },
-    developers: [{ id: 16, role: "lead", display_name: "NDRW", slug: "ndrwhun" }]
-  }
-  ,{
-    id: 25,
-    game_id: 25,
-    slug: "jedi-outcast-vita",
-    reddit_url: "https://www.reddit.com/r/VitaPiracy/comments/1vws22e/star_wars_jedi_knight_ii_jedi_outcast_data_files/",
-    repo_url: "https://github.com/NDRWhun/JK2VITA",
-    display_name: "Star Wars Jedi Knight II: Jedi Outcast Vita",
-    current_stage: "released",
-    lifecycle: "active",
-    summary: "First v1.0 release of the single-player Jedi Outcast Vita port. The project repository identifies OpenJK as its base and documents a native sceGxm rendering backend.",
-    playability_notes: "The release thread documents a v1.0 build; the repository contains setup, controls and known-issue notes. No independent hardware verification is recorded in this ledger.",
-    performance_notes: null,
-    first_seen_at: new Date('2026-08-24T00:00:00.000Z'),
-    last_activity_at: new Date('2026-09-08T00:00:00.000Z'),
-    released_at: new Date('2026-08-24T00:00:00.000Z'),
-    last_verified_at: new Date('2026-09-20T00:00:00.000Z'),
-    is_featured: false,
-    is_archived: false,
-    verification: "developer_direct",
-    game_title: "Star Wars Jedi Knight II: Jedi Outcast",
-    original_platform: "PC / OpenJK",
-    original_release_year: 2002,
-    technologies: ["OpenJK", "sceGxm"],
-    setup_evidence: {
-      categoryLabel: "OpenJK native port",
-      assetPath: "ux0:data/JK2VITA/base",
-      instructions: "Install JK2VITA.vpk and provide the legally owned PC Jedi Outcast 1.04 base PK3 files in ux0:data/JK2VITA/base.",
-      sourceUrl: "https://github.com/NDRWhun/JK2VITA",
-      verifiedOnHardware: false
-    },
-    developers: [{ id: 16, role: "lead", display_name: "NDRW", slug: "ndrwhun" }]
-  }
-  ,{
-    id: 26,
-    game_id: 26,
-    slug: "barony-vita",
-    reddit_url: "https://www.reddit.com/r/vitahacks/comments/1v8zqrw/barony_vita/",
-    repo_url: "https://github.com/Brendonm17/Barony-Vita",
-    display_name: "Barony Vita",
-    current_stage: "released",
-    lifecycle: "active",
-    summary: "Developer release of Barony for Vita. The original release described single-player support; a September update reports online, LAN and ad-hoc multiplayer plus an online leaderboard.",
-    playability_notes: null,
-    performance_notes: null,
-    first_seen_at: new Date('2026-07-28T00:00:00.000Z'),
-    last_activity_at: new Date('2026-09-05T00:00:00.000Z'),
-    released_at: new Date('2026-07-28T00:00:00.000Z'),
-    last_verified_at: new Date('2026-09-20T00:00:00.000Z'),
-    is_featured: false,
-    is_archived: false,
-    verification: "developer_direct",
-    game_title: "Barony",
-    original_platform: "PC",
-    original_release_year: 2015,
-    technologies: [],
-    setup_evidence: {
-      categoryLabel: "Native port",
-      assetPath: "ux0:data/Barony",
-      instructions: "Build the data files from a legally owned Steam copy, then place the generated data in ux0:data/Barony.",
-      sourceUrl: "https://github.com/Brendonm17/Barony-Vita",
-      verifiedOnHardware: false
-    },
-    developers: [{ id: 17, role: "lead", display_name: "Brendonm17", slug: "brendonm17" }]
-  }
-  ,{
+  },
+  {
     id: 27,
     game_id: 27,
     slug: "call-of-duty-4-vita",
@@ -690,8 +468,8 @@ export const FALLBACK_PROJECTS: any[] = [
     original_release_year: 2007,
     technologies: [],
     developers: []
-  }
-  ,{
+  },
+  {
     id: 28,
     game_id: 28,
     slug: "c-dogs-sdl-vita",
@@ -714,129 +492,8 @@ export const FALLBACK_PROJECTS: any[] = [
     original_release_year: null,
     technologies: ["Native Vita build", "SDL"],
     developers: []
-  }
-  ,{
-    id: 29,
-    game_id: 29,
-    slug: "test-drive-1987-vita",
-    reddit_url: "https://www.reddit.com/r/vitahacks/comments/1wlqxq4/test_drive_1987_native_vita_port/",
-    repo_url: "https://github.com/smart-pickle/TestDrive-Vita",
-    display_name: "Test Drive (1987) Vita",
-    current_stage: "released",
-    lifecycle: "active",
-    summary: "Native PS Vita/PSTV port of Test Drive (1987) built from kylofon's static recompilation, with a public v0.1 release published on GitHub.",
-    playability_notes: "The developer reports the initial Vita release running on hardware.",
-    performance_notes: "The repository describes hardware-accelerated Vita rendering; no independent performance measurement is recorded.",
-    first_seen_at: new Date('2026-09-20T19:39:46.000Z'),
-    last_activity_at: new Date('2026-09-20T19:50:09.288Z'),
-    released_at: new Date('2026-09-20T19:39:46.000Z'),
-    is_featured: false,
-    is_archived: false,
-    verification: "developer_direct",
-    game_title: "Test Drive (1987)",
-    original_platform: "DOS / PC",
-    original_release_year: 1987,
-    technologies: ["Static recompilation", "VitaSDK", "SDL2", "VitaGL / GXM"],
-    developers: []
-  }
-
-  ,{
-    id: 30,
-    game_id: 30,
-    slug: "linux-on-vita",
-    reddit_url: "https://www.reddit.com/r/vitahacks/comments/1wnekpf/linux_on_vita/",
-    repo_url: "https://github.com/devwithzachary/LinuxOnVita",
-    display_name: "Linux on Vita (Alpine Linux)",
-    current_stage: "released",
-    lifecycle: "active",
-    summary: "Complete standalone handheld Linux 6.12 distribution for PS Vita with onscreen touch typing, gamepad navigation, automated Wi-Fi, package management (apk), and native framebuffer DOOM.",
-    playability_notes: "Boots to interactive graphical userland and terminal on Vita hardware. Features on-screen virtual keyboard, touch navigation, Wi-Fi connectivity, apk package repository support, and framebuffer DOOM.",
-    performance_notes: "Kernel 6.12 boots with responsive touch UI; framebuffer DOOM runs at smooth framerates on native hardware.",
-    first_seen_at: new Date('2026-09-22T16:39:19.000Z'),
-    last_activity_at: new Date('2026-09-25T15:25:25.000Z'),
-    released_at: new Date('2026-09-22T18:00:32.000Z'),
-    is_featured: true,
-    is_archived: false,
-    verification: "developer_direct",
-    game_title: "Linux on Vita (Alpine Linux)",
-    original_platform: "ARMv7-A / Linux",
-    original_release_year: 2026,
-    technologies: ["ARMv7-A", "Linux 6.12 Kernel", "Alpine Linux", "Framebuffer DOOM", "Touch Keyboard"],
-    screenshot_url: "https://raw.githubusercontent.com/devwithzachary/LinuxOnVita/main/screenshot.png",
-    screenshot_source_url: "https://github.com/devwithzachary/LinuxOnVita",
-    screenshot_alt: "Linux on Vita running Alpine Linux with touchscreen interface",
-    developers: [{ id: 19, role: "lead", display_name: "DevWithZachary", slug: "devwithzachary" }]
-  }
-  ,{
-    id: 31,
-    game_id: 31,
-    slug: "aleph-one-vita",
-    repo_url: "https://github.com/DrDecki/Aleph-One-PsVita",
-    display_name: "Aleph One Vita (Marathon Engine)",
-    current_stage: "released",
-    lifecycle: "active",
-    summary: "Native PS Vita port of Bungie's open-source Aleph One engine, running Marathon, Marathon 2: Durandal, Marathon Infinity, and custom scenarios.",
-    playability_notes: "Fully playable across the entire Marathon trilogy and community plugins with dual analog stick aiming and hardware-accelerated rendering.",
-    performance_notes: "Solid 60 FPS performance powered by SDL2 and vitaGL.",
-    first_seen_at: new Date('2026-06-03T11:49:18.000Z'),
-    last_activity_at: new Date('2026-09-24T20:19:09.000Z'),
-    released_at: new Date('2026-09-24T19:47:55.000Z'),
-    is_featured: false,
-    is_archived: false,
-    verification: "developer_direct",
-    game_title: "Aleph One (Marathon Trilogy)",
-    original_platform: "Mac / PC",
-    original_release_year: 1994,
-    technologies: ["Native C++", "VitaSDK", "SDL2", "OpenGL / vitaGL"],
-    developers: [{ id: 20, role: "lead", display_name: "DrDecki", slug: "drdecki" }]
-  }
-  ,{
-    id: 32,
-    game_id: 32,
-    slug: "apotris-psvita",
-    repo_url: "https://github.com/Rocroverss/apotris-psvita",
-    display_name: "Apotris PS Vita",
-    current_stage: "released",
-    lifecycle: "active",
-    summary: "Native Vita port of the open-source block-stacking game Apotris with 14 unique game modes, customizable controls, and 60 FPS performance.",
-    playability_notes: "Full game content functional including Sprint, Marathon, Survival, Dig, and all 14 game modes with comprehensive statistics tracking.",
-    performance_notes: "Flawless 60 FPS gameplay using Tilengine and SoLoud audio subsystem.",
-    first_seen_at: new Date('2026-09-23T23:06:45.000Z'),
-    last_activity_at: new Date('2026-09-25T08:32:53.000Z'),
-    released_at: new Date('2026-09-23T23:06:45.000Z'),
-    is_featured: false,
-    is_archived: false,
-    verification: "developer_direct",
-    game_title: "Apotris",
-    original_platform: "GBA / PC",
-    original_release_year: 2022,
-    technologies: ["Native C", "VitaSDK", "SDL2", "vitaGL", "Tilengine", "SoLoud"],
-    developers: [{ id: 21, role: "lead", display_name: "Rocroverss", slug: "rocroverss" }]
-  }
-  ,{
-    id: 33,
-    game_id: 33,
-    slug: "prince-of-persia-classic-vita",
-    repo_url: "https://github.com/MetalSyntax/prince-of-persia-classic-psvita-port",
-    display_name: "Prince of Persia Classic Vita",
-    current_stage: "released",
-    lifecycle: "active",
-    summary: "Android ARMv7 wrapper/loader for Prince of Persia Classic, recreating the 1989 classic with modernized 3D graphics on PlayStation Vita.",
-    playability_notes: "Complete game is playable start to finish with full physical gamepad mapping, touch menus, and hardware audio.",
-    performance_notes: "Runs smoothly at full native Vita screen resolution with vitaGL shaders.",
-    first_seen_at: new Date('2026-07-08T04:37:10.000Z'),
-    last_activity_at: new Date('2026-09-26T13:26:25.000Z'),
-    released_at: new Date('2026-09-03T02:52:45.000Z'),
-    is_featured: false,
-    is_archived: false,
-    verification: "developer_direct",
-    game_title: "Prince of Persia Classic",
-    original_platform: "Android ARMv7 / XBLA",
-    original_release_year: 2007,
-    technologies: ["ARMv7 SO Loader", "Cocos2d-x", "OpenGL ES / vitaGL"],
-    developers: [{ id: 22, role: "lead", display_name: "MetalSyntax", slug: "metalsyntax" }]
-  }
-  ,{
+  },
+  {
     id: 34,
     game_id: 34,
     slug: "resident-evil-4-vita",
@@ -974,20 +631,6 @@ export const FALLBACK_UPDATES: any[] = [
     sources: []
   },
   {
-    id: "upd_class09",
-    port_project_id: 11,
-    project_slug: "class-of-09-vita",
-    project_display_name: "Class of '09 Vita Port",
-    developer_display_name: "SonicMastr",
-    developer_slug: "sonicmastr",
-    event_type: "release",
-    title: "The Class of '09 Vita Port is finally released!",
-    summary: "Full commercial VN ported natively with complete voice acting, gallery unlocks, and touchscreen/button controls.",
-    event_at: new Date('2026-09-12T15:34:00.000Z'),
-    verification_level: "developer_direct",
-    sources: [{ source_item_id: "src_class09", relationship: "primary", canonical_url: "https://www.reddit.com/r/VitaPiracy/comments/1whqvmz/class_of_09_vita_port_is_finally_released/" }]
-  },
-  {
     id: "upd_renpy8",
     port_project_id: 12,
     project_slug: "renpy-8-runtime-engine",
@@ -1014,8 +657,8 @@ export const FALLBACK_UPDATES: any[] = [
     event_at: new Date('2026-09-10T15:34:00.000Z'),
     verification_level: "developer_direct",
     sources: []
-  }
-  ,{
+  },
+  {
     id: "upd_rc_cars",
     port_project_id: 20,
     project_slug: "rc-cars-vita",
@@ -1028,22 +671,8 @@ export const FALLBACK_UPDATES: any[] = [
     event_at: new Date('2026-09-18T11:09:43.000Z'),
     verification_level: "developer_direct",
     sources: [{ source_item_id: "src_rc_cars", relationship: "primary", canonical_url: "https://www.reddit.com/r/vitahacks/comments/1wjn8zg/rc_cars_port_progress/" }]
-  }
-  ,{
-    id: "upd_d2vita",
-    port_project_id: 21,
-    project_slug: "d2vita",
-    project_display_name: "D2Vita (Diablo II: Lord of Destruction)",
-    developer_display_name: "Realistic-Pitch-3467",
-    developer_slug: "realistic-pitch-3467",
-    event_type: "release",
-    title: "D2Vita is here — Diablo II: Lord of Destruction running on PS Vita",
-    summary: "Public release running the original 1.14d Windows build through winx86, an x86 to ARMv7 dynamic recompiler with native Vita API replacements. Settles around 20 to 25 FPS once its cache is built.",
-    event_at: new Date('2026-09-17T22:27:31.000Z'),
-    verification_level: "developer_direct",
-    sources: [{ source_item_id: "src_d2vita", relationship: "primary", canonical_url: "https://www.reddit.com/r/VitaPiracy/comments/1wj8dvz/d2vita_is_here_diablo_ii_lord_of_destruction/" }]
-  }
-  ,{
+  },
+  {
     id: "upd_cod_zombies",
     port_project_id: 22,
     project_slug: "cod-zombies-ios-loader",
@@ -1056,78 +685,8 @@ export const FALLBACK_UPDATES: any[] = [
     event_at: new Date('2026-09-18T07:54:45.000Z'),
     verification_level: "community_report",
     sources: [{ source_item_id: "src_cod_zombies", relationship: "primary", canonical_url: "https://www.reddit.com/r/vitahacks/comments/1wjjx7w/a_bounty_that_deserves_more_visibility/" }]
-  }
-  ,{
-    id: "upd_class09_sep",
-    port_project_id: 11,
-    project_slug: "class-of-09-vita",
-    project_display_name: "Class of '09 Vita Port",
-    developer_display_name: "TheSpasticGamer",
-    developer_slug: "thespasticgamer",
-    event_type: "release",
-    title: "Class of '09 Vita port reaches feature-complete public release",
-    summary: "The September release post describes a feature-full playable version, with route testing and polish continuing after release.",
-    event_at: new Date('2026-09-16T00:00:00.000Z'),
-    verification_level: "developer_direct",
-    sources: [{ source_item_id: "src_class09_sep", relationship: "primary", canonical_url: "https://www.reddit.com/r/VitaPiracy/comments/1whqvmz/class_of_09_vita_port_is_finally_released/" }]
-  }
-  ,{
-    id: "upd_illusia",
-    port_project_id: 23,
-    project_slug: "illusia-vita",
-    project_display_name: "Illusia Vita",
-    developer_display_name: "withLogic",
-    developer_slug: "withlogic",
-    event_type: "release",
-    title: "Illusia Vita released",
-    summary: "The release thread announces the Android game Illusia port for PlayStation Vita and links the withLogic source repository.",
-    event_at: new Date('2026-09-02T00:00:00.000Z'),
-    verification_level: "developer_direct",
-    sources: [{ source_item_id: "src_illusia", relationship: "primary", canonical_url: "https://www.reddit.com/r/vitahacks/comments/1w4y5tz/release_illusia_vita_a_port_of_illusia_to_the/" }]
-  }
-  ,{
-    id: "upd_jedi_academy",
-    port_project_id: 24,
-    project_slug: "jedi-academy-vita",
-    project_display_name: "Star Wars Jedi Knight: Jedi Academy Vita",
-    developer_display_name: "NDRW",
-    developer_slug: "ndrwhun",
-    event_type: "release",
-    title: "Jedi Academy Vita v1.0 released",
-    summary: "The release thread documents the first v1.0 release of the OpenJK-based single-player Vita port.",
-    event_at: new Date('2026-08-22T00:00:00.000Z'),
-    verification_level: "developer_direct",
-    sources: [{ source_item_id: "src_jedi_academy", relationship: "primary", canonical_url: "https://www.reddit.com/r/VitaPiracy/comments/1vvp4j6/star_wars_jedi_knight_jedi_academy_files/" }]
-  }
-  ,{
-    id: "upd_jedi_outcast",
-    port_project_id: 25,
-    project_slug: "jedi-outcast-vita",
-    project_display_name: "Star Wars Jedi Knight II: Jedi Outcast Vita",
-    developer_display_name: "NDRW",
-    developer_slug: "ndrwhun",
-    event_type: "release",
-    title: "Jedi Outcast Vita v1.0 released",
-    summary: "The release thread documents the first v1.0 release of the OpenJK-based single-player Vita port.",
-    event_at: new Date('2026-08-24T00:00:00.000Z'),
-    verification_level: "developer_direct",
-    sources: [{ source_item_id: "src_jedi_outcast", relationship: "primary", canonical_url: "https://www.reddit.com/r/VitaPiracy/comments/1vws22e/star_wars_jedi_knight_ii_jedi_outcast_data_files/" }]
-  }
-  ,{
-    id: "upd_barony",
-    port_project_id: 26,
-    project_slug: "barony-vita",
-    project_display_name: "Barony Vita",
-    developer_display_name: "Brendonm17",
-    developer_slug: "brendonm17",
-    event_type: "technical_progress",
-    title: "Barony Vita adds online, LAN and ad-hoc multiplayer",
-    summary: "The September update reports multiplayer modes, an online leaderboard and additional bug fixes for the Vita port.",
-    event_at: new Date('2026-09-05T00:00:00.000Z'),
-    verification_level: "developer_direct",
-    sources: [{ source_item_id: "src_barony_sep", relationship: "primary", canonical_url: "https://www.reddit.com/r/vitahacks/comments/1w8b9pp/barony_online_update_v002/" }]
-  }
-  ,{
+  },
+  {
     id: "upd_cod4",
     port_project_id: 27,
     project_slug: "call-of-duty-4-vita",
@@ -1140,8 +699,8 @@ export const FALLBACK_UPDATES: any[] = [
     event_at: new Date('2026-09-12T00:00:00.000Z'),
     verification_level: "community_report",
     sources: []
-  }
-  ,{
+  },
+  {
     id: "upd_cdogs_vita",
     port_project_id: 28,
     project_slug: "c-dogs-sdl-vita",
@@ -1157,91 +716,8 @@ export const FALLBACK_UPDATES: any[] = [
       { source_item_id: "src_cdogs_vita_reddit", relationship: "primary", canonical_url: "https://www.reddit.com/r/vitahacks/comments/1wkw14c/prerelease_cdogs_sdl_port_for_ps_vita_pstv/" },
       { source_item_id: "src_cdogs_vita_github", relationship: "release", canonical_url: "https://github.com/abduct/cdogs-sdl/releases/tag/vita-preview-1" }
     ]
-  }
-  ,{
-    id: "upd_test_drive_1987",
-    port_project_id: 29,
-    project_slug: "test-drive-1987-vita",
-    project_display_name: "Test Drive (1987) Vita",
-    developer_display_name: "gainusha",
-    developer_slug: "gainusha",
-    event_type: "release",
-    title: "Test Drive (1987) native Vita port v0.1 released",
-    summary: "The release post and linked repository document the first public Vita/PSTV release built with VitaSDK, SDL2 and VitaGL/GXM.",
-    event_at: new Date('2026-09-20T19:39:46.000Z'),
-    verification_level: "developer_direct",
-    sources: [
-      { source_item_id: "src_test_drive_reddit", relationship: "primary", canonical_url: "https://www.reddit.com/r/vitahacks/comments/1wlqxq4/test_drive_1987_native_vita_port/" },
-      { source_item_id: "src_test_drive_release", relationship: "release", canonical_url: "https://github.com/smart-pickle/TestDrive-Vita/releases/tag/v0.1" }
-    ]
-  }
-
-  ,{
-    id: "upd_linux_on_vita",
-    port_project_id: 30,
-    project_slug: "linux-on-vita",
-    project_display_name: "Linux on Vita (Alpine Linux)",
-    developer_display_name: "DevWithZachary",
-    developer_slug: "devwithzachary",
-    event_type: "release",
-    title: "Linux on Vita v1.2.0 released with Alpine Linux and Framebuffer DOOM",
-    summary: "DevWithZachary released v1.2.0 of LinuxOnVita featuring Linux kernel 6.12, touch virtual keyboard, apk package management, and native framebuffer DOOM.",
-    event_at: new Date('2026-09-25T15:25:25.000Z'),
-    verification_level: "developer_direct",
-    sources: [
-      { source_item_id: "src_linux_on_vita_reddit", relationship: "primary", canonical_url: "https://www.reddit.com/r/vitahacks/comments/1wnekpf/linux_on_vita/" },
-      { source_item_id: "src_linux_on_vita_repo", relationship: "release", canonical_url: "https://github.com/devwithzachary/LinuxOnVita/releases/tag/1.2.0" }
-    ]
-  }
-  ,{
-    id: "upd_aleph_one_vita",
-    port_project_id: 31,
-    project_slug: "aleph-one-vita",
-    project_display_name: "Aleph One Vita (Marathon Engine)",
-    developer_display_name: "DrDecki",
-    developer_slug: "drdecki",
-    event_type: "release",
-    title: "Aleph One PS Vita v2.0 released with Marathon Trilogy support",
-    summary: "DrDecki published the v2.0 release of the Aleph One engine port for PS Vita with hardware-accelerated vitaGL rendering and dual analog controls.",
-    event_at: new Date('2026-09-24T19:47:55.000Z'),
-    verification_level: "developer_direct",
-    sources: [
-      { source_item_id: "src_aleph_one_repo", relationship: "release", canonical_url: "https://github.com/DrDecki/Aleph-One-PsVita/releases/tag/AlephOneVita2.0" }
-    ]
-  }
-  ,{
-    id: "upd_apotris_psvita",
-    port_project_id: 32,
-    project_slug: "apotris-psvita",
-    project_display_name: "Apotris PS Vita",
-    developer_display_name: "Rocroverss",
-    developer_slug: "rocroverss",
-    event_type: "release",
-    title: "Apotris PS Vita v1.0 released natively with 14 game modes",
-    summary: "Rocroverss published the initial native PS Vita release of Apotris running at a locked 60 FPS with complete audio and gameplay features.",
-    event_at: new Date('2026-09-23T23:06:45.000Z'),
-    verification_level: "developer_direct",
-    sources: [
-      { source_item_id: "src_apotris_repo", relationship: "release", canonical_url: "https://github.com/Rocroverss/apotris-psvita/releases/tag/v1.0" }
-    ]
-  }
-  ,{
-    id: "upd_pop_classic_vita",
-    port_project_id: 33,
-    project_slug: "prince-of-persia-classic-vita",
-    project_display_name: "Prince of Persia Classic Vita",
-    developer_display_name: "MetalSyntax",
-    developer_slug: "metalsyntax",
-    event_type: "release",
-    title: "Prince of Persia Classic PS Vita wrapper v01.28 released",
-    summary: "MetalSyntax released an Android ARMv7 wrapper for Prince of Persia Classic with full hardware graphics, controls, and sound.",
-    event_at: new Date('2026-09-03T02:52:45.000Z'),
-    verification_level: "developer_direct",
-    sources: [
-      { source_item_id: "src_pop_classic_repo", relationship: "release", canonical_url: "https://github.com/MetalSyntax/prince-of-persia-classic-psvita-port/releases/tag/v01.28" }
-    ]
-  }
-  ,{
+  },
+  {
     id: "upd_re4_vita",
     port_project_id: 34,
     project_slug: "resident-evil-4-vita",

@@ -5,7 +5,7 @@
     <link>https://vitaharbor.vercel.app/</link>
     <description>Community PlayStation Vita ports tracked from r/vitahacks + r/VitaPiracy + r/PSVitaHomebrew</description>
     <language>en-us</language>
-    <lastBuildDate>Sun, 27 Sep 2026 17:47:43 GMT</lastBuildDate>
+    <lastBuildDate>Sun, 27 Sep 2026 18:28:49 GMT</lastBuildDate>
     <item>
       <title><![CDATA[Medal of Honor: Allied Assault (OpenMoHAA) - IN_GAME]]></title>
       <link>https://www.reddit.com/r/vitahacks/comments/1tapf2b/wip_openmohaa_on_ps_vita_medal_of_honor_allied/</link>
@@ -77,13 +77,6 @@
       <description><![CDATA[ARM wrapper port of NFS Hot Pursuit mobile with analog steering and custom Vita shaders. Hardware Status: Smooth 30 FPS across sprint and pursuit courses.]]></description>
     </item>
     <item>
-      <title><![CDATA[Class of '09 Vita Port - RELEASED]]></title>
-      <link>https://www.reddit.com/r/VitaPiracy/comments/1whqvmz/class_of_09_vita_port_is_finally_released/</link>
-      <guid isPermaLink="false">class-of-09-vita</guid>
-      <pubDate>Wed, 16 Sep 2026 00:00:00 GMT</pubDate>
-      <description><![CDATA[Feature-full Vita port of the dark comedy visual novel. The September release post says playtesting and polish are still continuing, so this record does not claim every route or edge case is verified. Hardware Status: The release post describes the build as playable and feature-complete, with further route testing and bug fixing still underway.]]></description>
-    </item>
-    <item>
       <title><![CDATA[Ren'Py 8 Vita Engine Runtime - RELEASED]]></title>
       <link>https://www.reddit.com/r/vitahacks/comments/1h4yhyi/release_renpy_vita_8_port/</link>
       <guid isPermaLink="false">renpy-8-runtime-engine</guid>
@@ -126,13 +119,6 @@
       <description><![CDATA[C-rewrite of the original PICO-8 Celeste prototype compiled directly for PlayStation Vita. Hardware Status: Locked 60 FPS with pixel-perfect integer scaling.]]></description>
     </item>
     <item>
-      <title><![CDATA[Cave Story (NXEngine-evo) - RELEASED]]></title>
-      <link>https://vitaharbor.vercel.app/projects/cave-story-evo-vita</link>
-      <guid isPermaLink="false">cave-story-evo-vita</guid>
-      <pubDate>Fri, 28 Aug 2026 15:34:00 GMT</pubDate>
-      <description><![CDATA[Complete open-source NXEngine-evo upgrade supporting remastered music and wide aspect ratio. Hardware Status: Rock solid 60 FPS.]]></description>
-    </item>
-    <item>
       <title><![CDATA[Renegade Vita - Demo Release - ANNOUNCED]]></title>
       <link>https://www.reddit.com/r/vitahacks/comments/1wgp613/renegade_vita_demo_release/</link>
       <guid isPermaLink="false">renegade-vita-demo-release</guid>
@@ -147,46 +133,11 @@
       <description><![CDATA[Native RC Cars port by antoxa2584x, published with source at github.com/antoxa2584x/rc_cars_vita. The progress post reports PC save file support, an implemented progression system, local multiplayer and an in-game interface. Hardware Status: Developer reports progression, local multiplayer and the in-game interface as implemented, with PC save files compatible.]]></description>
     </item>
     <item>
-      <title><![CDATA[D2Vita (Diablo II: Lord of Destruction) - RELEASED]]></title>
-      <link>https://www.reddit.com/r/VitaPiracy/comments/1wj8dvz/d2vita_is_here_diablo_ii_lord_of_destruction/</link>
-      <guid isPermaLink="false">d2vita</guid>
-      <pubDate>Thu, 17 Sep 2026 22:27:31 GMT</pubDate>
-      <description><![CDATA[Public release that runs the original Diablo II: Lord of Destruction 1.14d Windows build on PS Vita. The x86 game code executes through winx86, a compatibility layer with an x86 to ARMv7 dynamic recompiler, while the Windows APIs are replaced by native Vita implementations. Hardware Status: Diablo II itself is capped at 25 FPS, so the settled 20 to 25 FPS range is close to the original ceiling.]]></description>
-    </item>
-    <item>
       <title><![CDATA[Call of Duty: Zombies (iOS) - ANNOUNCED]]></title>
       <link>https://www.reddit.com/r/vitahacks/comments/1wjjx7w/a_bounty_that_deserves_more_visibility/</link>
       <guid isPermaLink="false">cod-zombies-ios-loader</guid>
       <pubDate>Fri, 18 Sep 2026 07:54:45 GMT</pubDate>
       <description><![CDATA[A community bounty is funding an effort to bring the iOS release of Call of Duty: Zombies to Vita, tied to the iOS loader devnoname120 is developing. The thread names Metal Gear Solid Touch as another iOS title the same loader could open up. No build exists yet. Hardware Status: Hardware result not recorded.]]></description>
-    </item>
-    <item>
-      <title><![CDATA[Illusia Vita - RELEASED]]></title>
-      <link>https://www.reddit.com/r/vitahacks/comments/1w4y5tz/release_illusia_vita_a_port_of_illusia_to_the/</link>
-      <guid isPermaLink="false">illusia-vita</guid>
-      <pubDate>Wed, 02 Sep 2026 00:00:00 GMT</pubDate>
-      <description><![CDATA[Release of Illusia for PlayStation Vita by withLogic. The source repository describes an Android ARMv6 wrapper that resolves imports to native Vita functions and patches the original executable to run on Vita. Hardware Status: Hardware result not recorded.]]></description>
-    </item>
-    <item>
-      <title><![CDATA[Star Wars Jedi Knight: Jedi Academy Vita - RELEASED]]></title>
-      <link>https://www.reddit.com/r/VitaPiracy/comments/1vvp4j6/star_wars_jedi_knight_jedi_academy_files/</link>
-      <guid isPermaLink="false">jedi-academy-vita</guid>
-      <pubDate>Wed, 02 Sep 2026 00:00:00 GMT</pubDate>
-      <description><![CDATA[First v1.0 release of the single-player Jedi Academy Vita port. The project repository identifies OpenJK as its base and documents a native sceGxm rendering backend. Hardware Status: The release thread documents a v1.0 build; the repository contains setup, controls and known-issue notes. No independent hardware verification is recorded in this ledger.]]></description>
-    </item>
-    <item>
-      <title><![CDATA[Star Wars Jedi Knight II: Jedi Outcast Vita - RELEASED]]></title>
-      <link>https://www.reddit.com/r/VitaPiracy/comments/1vws22e/star_wars_jedi_knight_ii_jedi_outcast_data_files/</link>
-      <guid isPermaLink="false">jedi-outcast-vita</guid>
-      <pubDate>Tue, 08 Sep 2026 00:00:00 GMT</pubDate>
-      <description><![CDATA[First v1.0 release of the single-player Jedi Outcast Vita port. The project repository identifies OpenJK as its base and documents a native sceGxm rendering backend. Hardware Status: The release thread documents a v1.0 build; the repository contains setup, controls and known-issue notes. No independent hardware verification is recorded in this ledger.]]></description>
-    </item>
-    <item>
-      <title><![CDATA[Barony Vita - RELEASED]]></title>
-      <link>https://www.reddit.com/r/vitahacks/comments/1v8zqrw/barony_vita/</link>
-      <guid isPermaLink="false">barony-vita</guid>
-      <pubDate>Sat, 05 Sep 2026 00:00:00 GMT</pubDate>
-      <description><![CDATA[Developer release of Barony for Vita. The original release described single-player support; a September update reports online, LAN and ad-hoc multiplayer plus an online leaderboard. Hardware Status: Hardware result not recorded.]]></description>
     </item>
     <item>
       <title><![CDATA[Call of Duty 4: Modern Warfare Vita - IN_GAME]]></title>
@@ -201,41 +152,6 @@
       <guid isPermaLink="false">c-dogs-sdl-vita</guid>
       <pubDate>Sat, 19 Sep 2026 20:01:51 GMT</pubDate>
       <description><![CDATA[Public C-Dogs SDL Vita/PSTV pre-release posted by abby_6112. The source thread reports a native build tested on Vita/PSTV hardware and links a GitHub preview release; LAN multiplayer work is still in progress. Hardware Status: The author reports a native Vita/PSTV build and requests real-hardware testing; no independent hardware report is recorded in this ledger.]]></description>
-    </item>
-    <item>
-      <title><![CDATA[Test Drive (1987) Vita - RELEASED]]></title>
-      <link>https://www.reddit.com/r/vitahacks/comments/1wlqxq4/test_drive_1987_native_vita_port/</link>
-      <guid isPermaLink="false">test-drive-1987-vita</guid>
-      <pubDate>Sun, 20 Sep 2026 19:50:09 GMT</pubDate>
-      <description><![CDATA[Native PS Vita/PSTV port of Test Drive (1987) built from kylofon's static recompilation, with a public v0.1 release published on GitHub. Hardware Status: The repository describes hardware-accelerated Vita rendering; no independent performance measurement is recorded.]]></description>
-    </item>
-    <item>
-      <title><![CDATA[Linux on Vita (Alpine Linux) - RELEASED]]></title>
-      <link>https://www.reddit.com/r/vitahacks/comments/1wnekpf/linux_on_vita/</link>
-      <guid isPermaLink="false">linux-on-vita</guid>
-      <pubDate>Fri, 25 Sep 2026 15:25:25 GMT</pubDate>
-      <description><![CDATA[Complete standalone handheld Linux 6.12 distribution for PS Vita with onscreen touch typing, gamepad navigation, automated Wi-Fi, package management (apk), and native framebuffer DOOM. Hardware Status: Kernel 6.12 boots with responsive touch UI; framebuffer DOOM runs at smooth framerates on native hardware.]]></description>
-    </item>
-    <item>
-      <title><![CDATA[Aleph One Vita (Marathon Engine) - RELEASED]]></title>
-      <link>https://vitaharbor.vercel.app/projects/aleph-one-vita</link>
-      <guid isPermaLink="false">aleph-one-vita</guid>
-      <pubDate>Thu, 24 Sep 2026 20:19:09 GMT</pubDate>
-      <description><![CDATA[Native PS Vita port of Bungie's open-source Aleph One engine, running Marathon, Marathon 2: Durandal, Marathon Infinity, and custom scenarios. Hardware Status: Solid 60 FPS performance powered by SDL2 and vitaGL.]]></description>
-    </item>
-    <item>
-      <title><![CDATA[Apotris PS Vita - RELEASED]]></title>
-      <link>https://vitaharbor.vercel.app/projects/apotris-psvita</link>
-      <guid isPermaLink="false">apotris-psvita</guid>
-      <pubDate>Fri, 25 Sep 2026 08:32:53 GMT</pubDate>
-      <description><![CDATA[Native Vita port of the open-source block-stacking game Apotris with 14 unique game modes, customizable controls, and 60 FPS performance. Hardware Status: Flawless 60 FPS gameplay using Tilengine and SoLoud audio subsystem.]]></description>
-    </item>
-    <item>
-      <title><![CDATA[Prince of Persia Classic Vita - RELEASED]]></title>
-      <link>https://vitaharbor.vercel.app/projects/prince-of-persia-classic-vita</link>
-      <guid isPermaLink="false">prince-of-persia-classic-vita</guid>
-      <pubDate>Sat, 26 Sep 2026 13:26:25 GMT</pubDate>
-      <description><![CDATA[Android ARMv7 wrapper/loader for Prince of Persia Classic, recreating the 1989 classic with modernized 3D graphics on PlayStation Vita. Hardware Status: Runs smoothly at full native Vita screen resolution with vitaGL shaders.]]></description>
     </item>
     <item>
       <title><![CDATA[Resident Evil 4 Vita (re4-vita) - RESEARCH]]></title>

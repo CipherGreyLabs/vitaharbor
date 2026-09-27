@@ -30,7 +30,6 @@ describe("public link integrity", () => {
     expect(KNOWN_REPOS["portal-vita"]).toBeUndefined();
     expect(KNOWN_REPOS["zelda-ship-of-harkinian-vita"]).toBeUndefined();
     expect(KNOWN_REPOS["fallout-2-ce-vita"]).toBeUndefined();
-    expect(KNOWN_REPOS["cave-story-evo-vita"]).toBeUndefined();
     expect(KNOWN_REPOS["render96-sm64-hd-vita"]).toBeUndefined();
     expect(KNOWN_REPOS["celeste-classic-vita"]).toBeUndefined();
   });
@@ -45,8 +44,7 @@ describe("public link integrity", () => {
       "slingshot-racing-vita",
       "fallout-2-ce-vita",
       "render96-sm64-hd-vita",
-      "celeste-classic-vita",
-      "cave-story-evo-vita"
+      "celeste-classic-vita"
     ]);
 
     FALLBACK_PROJECTS

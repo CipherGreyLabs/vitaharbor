@@ -2,6 +2,14 @@
 
 Updated: 2026-09-27
 
+## Current state: VH-LEDGER-FILTER-028 refocus on active ongoing ports (2026-09-27)
+
+- Active tracked port ledger refocused from 34 down to 22 projects by filtering out 12 officially released ports present on VitaDB (1,126 items catalog).
+- 18 ongoing/in-development ports retained (OpenMoHAA, Smash Melee, Hollow Knight, Twilight Princess, Portal, Spider-Man: Total Mayhem, The Simpsons: Hit & Run, KOTOR, Baldur Gate: Dark Alliance, NFS: Hot Pursuit, Zelda: Ship of Harkinian, Fallout 2 CE, Renegade Demo, RC Cars, CoD Zombies iOS loader, Call of Duty 4, C-Dogs SDL, Resident Evil 4).
+- 4 standalone released ports not on VitaDB retained (RenPy 8 Engine, Slingshot Racing, Render96 SM64 HD, Celeste Classic).
+- Feeds regenerated (public/api/feed.json, public/api/rss.xml, public/og.png and 22 project cards).
+- Verification: npm run verify passed (tsc clean, 121/121 unit tests, 22 prerendered project pages, 25 sitemap URLs).
+
 ## Current state: VH-PREMIUM-UX-026 PlayStation Black Theme & 3D Parallax production release (2026-09-27)
 
 - Production release deployed to Vercel as dpl_7D5ShGZNPxHSjPaBtafQtQJpRx59 (READY) on alias https://vitaharbor.vercel.app from commit beb149f.

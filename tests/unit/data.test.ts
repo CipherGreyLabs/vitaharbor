@@ -49,12 +49,8 @@ describe("ledger data integrity", () => {
       "fallout-2-ce-vita",
       "render96-sm64-hd-vita",
       "celeste-classic-vita",
-      "cave-story-evo-vita",
       "nfs-hot-pursuit-vita",
-      "call-of-duty-4-vita",
-      "aleph-one-vita",
-      "apotris-psvita",
-      "prince-of-persia-classic-vita"
+      "call-of-duty-4-vita"
     ]);
     for (const project of FALLBACK_PROJECTS) {
       if (intentionallyUnlinked.has(project.slug)) {
