@@ -1,8 +1,86 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-09-27T13:03:38.076Z",
+  "generated_at": "2026-09-27T17:47:42.387Z",
   "source": "r/vitahacks + r/VitaPiracy + r/PSVitaHomebrew RSS",
   "items": [
+    {
+      "schema_version": 2,
+      "id": "reddit-1wrek0r",
+      "external_id": "1wrek0r",
+      "state": "QUARANTINED",
+      "state_history": [
+        {
+          "state": "DETECTED",
+          "at": "2026-09-27T17:47:42.387Z",
+          "actor": "reddit-scanner",
+          "reason": "Canonical Reddit RSS entry accepted at the ingestion boundary"
+        },
+        {
+          "state": "QUARANTINED",
+          "at": "2026-09-27T17:47:42.387Z",
+          "actor": "reddit-scanner",
+          "reason": "Scanner result is unverified and cannot enter the curated ledger"
+        }
+      ],
+      "source": {
+        "platform": "reddit",
+        "subreddit": "vitahacks",
+        "canonical_url": "https://www.reddit.com/r/vitahacks/comments/1wrek0r/memory_mastermind_a_old_game_by_robtop_ps_vita/",
+        "author": "LefterisDaGamer",
+        "title": "MEMORY MASTERMIND ( A old game by robtop) PS VITA PORT ANNOUNCEMENT!",
+        "body": "so , as a dumb little joke , i wanted to port robtop's OTHER non gd games to the ps vita cause gdash-vita exists already so Then it hit me \"why not\" i mean , memory mastermind is 9MB (aka enough to theoretically fit into a standard 8MB n64 cartidge if compressed slightly ) and its last update was in 2015 ( and was cosnidered lightweight even when it launched , especially compared to other ps vita .so loader ports that we have now such as gta:sa and minecraft story mode) So i vibecoded it myself anyways it probably will release within a week goals the game being fully playable ( d",
+        "published_at": "2026-09-27T08:11:00.000Z"
+      },
+      "classification": {
+        "confidence": "high",
+        "reason": "3 dev signals: \\brelease\\b, \\bplayable\\b, \\bupdate\\b · category=project_update",
+        "candidate_type": "wrapper",
+        "category": "project_update",
+        "question": false,
+        "spam": false
+      },
+      "provenance": {
+        "repository_url": null,
+        "release_url": null,
+        "evidence_urls": [],
+        "evidence_bundle_id": null,
+        "repository_identity": null,
+        "repository_created_at": null,
+        "repository_last_activity_at": null,
+        "release_facts": [],
+        "vita_evidence": [],
+        "author_linkage": null,
+        "corroboration": [],
+        "duplicate_relation": {
+          "content_hash": "886e106d48435fbcf60531f0c909c394750e5de10422f9592bce79755671e701",
+          "related_candidate_ids": []
+        }
+      },
+      "campaign": {
+        "cluster_id": null,
+        "linkage_confidence": "none",
+        "signals": [],
+        "related_candidate_ids": [],
+        "text_fingerprint": "54194d01",
+        "media_fingerprints": [],
+        "outbound_fingerprints": [
+          "www.reddit.com/user/lefterisdagamer",
+          "www.reddit.com/r/vitahacks/comments/1wrek0r/memory_mastermind_a_old_game_by_robtop_ps_vita"
+        ],
+        "direct_intent": false,
+        "explicit_campaign_reference": false,
+        "incident_id": null
+      },
+      "risk_signals": [],
+      "evidence_gaps": [
+        "exact project repository",
+        "repository identity and activity facts",
+        "author/developer linkage and independent corroboration"
+      ],
+      "content_hash": "886e106d48435fbcf60531f0c909c394750e5de10422f9592bce79755671e701",
+      "review": null,
+      "incident": null
+    },
     {
       "schema_version": 2,
       "id": "reddit-1wqx8qz",
