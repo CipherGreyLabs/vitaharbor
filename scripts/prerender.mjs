@@ -50,10 +50,11 @@ const projectItemsHtml = FALLBACK_PROJECTS.map((p) => {
     : '<span class="vh-static-row-source vh-static-row-source--empty">—</span>';
   const lastObserved = escapeXml(formatDay(p.last_activity_at));
 
-  return `          <li id="entry-${escapeXml(p.slug)}" class="vh-static-row">
+  const techBadges = (p.technologies || []).slice(0, 2).map(t => `<span class="vh-tech-badge">[${escapeXml(t)}]</span>`).join(' ');
+  return `          <li id="entry-${escapeXml(p.slug)}" class="vh-static-row vh-row-glass">
             <a href="/projects/${escapeXml(p.slug)}/" class="vh-static-row-main">
               <span class="vh-static-row-title">${title}</span>
-              <span class="vh-static-row-summary">${summary || platform}</span>
+              <span class="vh-static-row-summary">${summary || platform} ${techBadges}</span>
             </a>
             <span class="vh-static-stage vh-static-stage--${stageTone}">${stage}</span>
             <span class="vh-static-row-date">${lastObserved}</span>
@@ -170,8 +171,8 @@ const prerenderedBody = `<div id="top" class="vh-static-page">
       <section class="vh-static-hero">
         <div class="vh-static-hero-copy">
           <p class="vh-static-eyebrow">PlayStation Vita <span>/</span> Port atlas</p>
-          <h1>A field guide to <span>Vita ports.</span></h1>
-          <p>Follow source-linked ports, decompilations and wrappers built by the community.</p>
+          <h1>Hardware as hero. <span>Living 3D Atlas.</span></h1>
+          <p>Track and inspect community PlayStation Vita source ports, decompilations and ARM wrappers in real-time 3D.</p>
           <div class="vh-static-telemetry" aria-label="Project totals">
             <div><span>Tracked</span><strong>${FALLBACK_PROJECTS.length}</strong><small>projects</small></div>
             <div><span>Playable</span><strong>${playableCount}</strong><small>reported in source</small></div>
