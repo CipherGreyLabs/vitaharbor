@@ -720,3 +720,9 @@ The five remaining candidates were checked against their source threads. None wa
 | Time | Commit / state | Change | Why | Model | Verified |
 |---|---|---|---|---|---|
 | 19:00 UTC | working tree | Added 4 verified ongoing port projects to `fallbackData.ts` (35-38: Real Racing 2, Diddy Kong Racing 64 Golden Balloon, Command & Conquer: Renegade, Memory Mastermind), updated `KNOWN_REPOS`, marked 5 matching quarantine records as `PROMOTED` in `quarantine.json`, and regenerated feeds and OG assets. | Expand active curated ledger to 26 ongoing/active PS Vita ports following master delegation. | gemini-3.7-flash | `npm run verify` passed (typecheck clean, 121/121 unit tests, static build for 26 project pages, 29 sitemap URLs). |
+
+### VH-PREMIUM-FEEL-030 Live Premium Feel frontend refinements (2026-09-28)
+
+| Time | Commit / state | Change | Why | Model | Verified |
+|---|---|---|---|---|---|
+| 08:45 UTC | working tree | Implemented 'Live Premium Feel' design refinements across the Port Atlas layout: added `@keyframes vh-live-pulse` and `.vh-live-dot` (6px cyan pulsating dot for active WIP ports), `.vh-tech-badge` (Analogue Pocket style monospace tag), `.vh-oled-aura` (PlayStation Portal radial OLED blue glow behind 3D console), `.vh-row-glass` (Linear soft hover-lift and glass border highlights), and `.vh-kbd-hint` ('/' keyboard search hint). Updated `DirectoryTable.tsx`, `ProjectPanel.tsx`, `ConsoleStage.tsx`, and `index.css`. | Implement frontend polish and tactile hardware-inspired aesthetics as requested by master. | gemini-3.7-flash | `npm run verify` passed (typecheck clean, 121/121 unit tests, 26 project pages, 29 sitemap URLs). |

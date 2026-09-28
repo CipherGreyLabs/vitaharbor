@@ -117,9 +117,9 @@ export const ProjectPanel: React.FC<ProjectPanelProps> = ({
                 {project.technologies.map((tech: string) => (
                   <span
                     key={tech}
-                    className="rounded-md border border-hairline bg-surface px-2 py-1 font-mono text-micro text-ink-muted"
+                    className="vh-tech-badge"
                   >
-                    {tech}
+                    [{tech}]
                   </span>
                 ))}
               </div>

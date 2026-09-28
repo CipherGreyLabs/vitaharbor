@@ -248,9 +248,10 @@ export const ConsoleStage: React.FC<ConsoleStageProps> = ({
         
 
         <div className="relative px-2 pt-0 sm:px-6">
+          <div className="vh-oled-aura" aria-hidden="true" />
           <div
             ref={consoleRef}
-            className="h-[200px] sm:h-[260px] lg:h-[310px]"
+            className="relative z-10 h-[200px] sm:h-[260px] lg:h-[310px]"
             data-testid="console-stage"
             data-vita-mode={staticMode ? "static" : "3d"}
             data-vita-fallback-reason={fallbackReason || "none"}

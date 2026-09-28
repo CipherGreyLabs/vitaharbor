@@ -1,6 +1,16 @@
 # VitaHarbor project state
 
-Updated: 2026-09-27
+Updated: 2026-09-28
+
+## Current state: VH-PREMIUM-FEEL-030 Live Premium Feel frontend refinements (2026-09-28)
+
+- Live Premium Feel UI active:
+  - Analogue Pocket inspired `.vh-tech-badge` monospace tags with subtle glass borders.
+  - PlayStation Portal & PS5 inspired `.vh-oled-aura` radial glow behind interactive 3D console.
+  - Pulsating cyan `.vh-live-dot` indicator on active in-development ports.
+  - Linear inspired `.vh-row-glass` soft hover-lift and `.vh-kbd-hint` ('/' search shortcut badge).
+- Curated active port ledger holds 26 active ports (22 ongoing + 4 standalone non-VitaDB ports).
+- Verification: npm run verify passed (tsc clean, 121/121 unit tests, 26 prerendered project pages, 29 sitemap URLs).
 
 ## Current state: VH-LEDGER-EXPANSION-029 active ongoing ports addition (2026-09-27)
 

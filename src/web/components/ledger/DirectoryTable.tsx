@@ -224,7 +224,7 @@ export const DirectoryTable: React.FC<DirectoryTableProps> = ({
             placeholder="Search games, engines, developers or platform"
             className="min-h-[48px] w-full rounded-xl border border-hairline-strong bg-surface py-3 pl-10 pr-10 text-body text-ink placeholder:text-ink-muted outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
           />
-          {searchTerm && (
+          {searchTerm ? (
             <button
               type="button"
               onClick={() => onSearchChange("")}
@@ -233,6 +233,10 @@ export const DirectoryTable: React.FC<DirectoryTableProps> = ({
             >
               <X className="h-3.5 w-3.5" />
             </button>
+          ) : (
+            <div className="pointer-events-none absolute right-3 top-1/2 hidden -translate-y-1/2 items-center sm:flex">
+              <kbd className="vh-kbd-hint" aria-hidden="true">/</kbd>
+            </div>
           )}
         </div>
 
@@ -365,7 +369,7 @@ export const DirectoryTable: React.FC<DirectoryTableProps> = ({
                   <li
                     key={project.id}
                     id={"entry-" + project.slug}
-                    className={"group relative transition-colors " + (selected ? "bg-accent/[0.055]" : "hover:bg-white/[0.018]")}
+                    className={"group relative rounded-lg transition-all vh-row-glass " + (selected ? "bg-accent/[0.055]" : "hover:bg-white/[0.018]")}
                   >
                     <div className="grid grid-cols-[minmax(0,1fr)_auto] items-center">
                       <button
@@ -378,6 +382,9 @@ export const DirectoryTable: React.FC<DirectoryTableProps> = ({
                       >
                         <span className="min-w-0">
                           <span className="flex min-w-0 items-center gap-2">
+                            {["in_game", "early_wip", "booting", "research"].includes(String(project.current_stage)) && (
+                              <span className="vh-live-dot shrink-0" title="Active development" aria-hidden="true" />
+                            )}
                             <span className="truncate text-body font-semibold text-ink transition-colors group-hover:text-accent-hover">{title.name}</span>
                             {isNew && <span className="shrink-0 rounded border border-accent/25 bg-accent/10 px-1.5 py-0.5 font-mono text-[9px] font-semibold uppercase tracking-wider text-accent-hover">New</span>}
                             {project.screenshot_url && <span title="Source screenshot available" className="inline-flex shrink-0"><Camera className="h-3.5 w-3.5 text-ink-muted" aria-hidden="true" /></span>}
@@ -387,6 +394,13 @@ export const DirectoryTable: React.FC<DirectoryTableProps> = ({
                           </span>
                           <span className="mt-1 flex min-w-0 flex-wrap items-center gap-x-2 gap-y-1 text-micro text-ink-muted">
                             <span className="truncate font-mono uppercase tracking-wide">{title.engine || project.original_platform || projectType}</span>
+                            {project.technologies && project.technologies.length > 0 && (
+                              <span className="hidden gap-1 sm:inline-flex">
+                                {project.technologies.slice(0, 2).map((tech: string) => (
+                                  <span key={tech} className="vh-tech-badge">[{tech}]</span>
+                                ))}
+                              </span>
+                            )}
                             <span className="lg:hidden">· {formatDay(project.last_activity_at) || "date not recorded"}</span>
                           </span>
                         </span>

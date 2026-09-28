@@ -650,3 +650,92 @@
 }
 
 /* Hide cursor logic */
+
+/* Live Premium Feel additions: Analogue Pocket, PS Portal & Linear */
+
+@keyframes vh-live-pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+    box-shadow: 0 0 0 0 rgba(0, 230, 255, 0.7);
+  }
+  50% {
+    transform: scale(1.18);
+    opacity: 0.85;
+    box-shadow: 0 0 0 4px rgba(0, 230, 255, 0);
+  }
+}
+
+.vh-live-dot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 9999px;
+  background-color: #00e6ff;
+  animation: vh-live-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.vh-tech-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  padding: 0.125rem 0.45rem;
+  border-radius: 0.375rem;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.035);
+  color: rgb(var(--vh-ink-medium));
+  white-space: nowrap;
+  transition: border-color 0.15s ease, color 0.15s ease, background-color 0.15s ease;
+}
+
+.vh-tech-badge:hover {
+  border-color: rgba(77, 124, 254, 0.35);
+  background: rgba(77, 124, 254, 0.08);
+  color: rgb(var(--vh-ink));
+}
+
+.vh-oled-aura {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: min(92%, 680px);
+  aspect-ratio: 1.8;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(ellipse at center, rgba(0, 230, 255, 0.075) 0%, rgba(77, 124, 254, 0.04) 45%, transparent 70%);
+  filter: blur(28px);
+  pointer-events: none;
+  z-index: 0;
+  border-radius: 50%;
+}
+
+.vh-row-glass {
+  position: relative;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.vh-row-glass:hover {
+  background: rgba(255, 255, 255, 0.025);
+  box-shadow: inset 0 0 0 1px rgba(77, 124, 254, 0.22), 0 4px 20px -2px rgba(0, 0, 0, 0.5);
+}
+
+.vh-kbd-hint {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 1.35rem;
+  min-width: 1.35rem;
+  padding: 0 0.35rem;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  color: rgb(var(--vh-ink-muted));
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 0.35rem;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  pointer-events: none;
+}
