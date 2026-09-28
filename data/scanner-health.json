@@ -1,18 +1,28 @@
 {
   "schema_version": 3,
-  "attempted_at": "2026-09-28T20:08:48.417Z",
+  "attempted_at": "2026-09-28T23:51:21.532Z",
   "state": "partial",
   "successful_sources": 1,
   "total_sources": 3,
   "github_action": {
     "provider": "github-actions",
     "status": "unknown",
-    "run_id": "36477039635",
+    "run_id": "36500098092",
     "event": "schedule",
-    "sha": "a761ffbb0e9feaeaf728a2b2e64fd53ed9d8e797"
+    "sha": "5bfe8e011866fa91d48ebfebf0e492d6a41bcb82"
   },
   "consecutive_degraded_runs": 12,
   "recent_runs": [
+    {
+      "attempted_at": "2026-09-28T23:51:21.532Z",
+      "state": "partial",
+      "successful_sources": 1,
+      "source_statuses": {
+        "vitahacks": "available",
+        "VitaPiracy": "rate_limited",
+        "PSVitaHomebrew": "rate_limited"
+      }
+    },
     {
       "attempted_at": "2026-09-28T20:08:48.417Z",
       "state": "partial",
@@ -122,23 +132,13 @@
         "VitaPiracy": "rate_limited",
         "PSVitaHomebrew": "rate_limited"
       }
-    },
-    {
-      "attempted_at": "2026-09-25T17:58:49.152Z",
-      "state": "partial",
-      "successful_sources": 1,
-      "source_statuses": {
-        "vitahacks": "available",
-        "VitaPiracy": "rate_limited",
-        "PSVitaHomebrew": "rate_limited"
-      }
     }
   ],
   "sources": [
     {
       "subreddit": "vitahacks",
       "status": "available",
-      "last_successful_scan_at": "2026-09-28T20:08:48.417Z",
+      "last_successful_scan_at": "2026-09-28T23:51:21.532Z",
       "consecutive_failures": 0,
       "retry_after_seconds": null
     },
@@ -146,14 +146,14 @@
       "subreddit": "VitaPiracy",
       "status": "rate_limited",
       "last_successful_scan_at": null,
-      "consecutive_failures": 23,
+      "consecutive_failures": 24,
       "retry_after_seconds": null
     },
     {
       "subreddit": "PSVitaHomebrew",
       "status": "rate_limited",
       "last_successful_scan_at": null,
-      "consecutive_failures": 23,
+      "consecutive_failures": 24,
       "retry_after_seconds": null
     }
   ]
