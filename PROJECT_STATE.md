@@ -2,6 +2,17 @@
 
 Updated: 2026-09-28
 
+## Current state: VH-PREMIUM-3D-031 High-End 3D Hardware Live Visual experience (2026-09-28)
+
+- High-End 3D Hardware Showcase live:
+  - Majestic, expansive 3D viewport with floating PS Vita PCH-1000 hardware model.
+  - Interactive 3D drag-to-rotate physics with momentum and smooth cursor-follow parallax damping.
+  - 4 floating glassmorphic HUD chips (`.vh-hud-chip`) displaying real-time OLED specs, stage, ARMv7 architecture, and target framerate.
+  - Studio-grade volumetric lighting with cool cyan/blue rim illumination and radial OLED aura.
+  - Cinematic hero typography and glassmorphic hardware frame.
+- Curated active port ledger holds 26 active community ports (22 ongoing + 4 standalone non-VitaDB ports).
+- Verification: npm run verify passed (tsc clean, 121/121 unit tests, 26 prerendered project pages, 29 sitemap URLs).
+
 ## Current state: VH-PREMIUM-FEEL-030 Live Premium Feel frontend refinements (2026-09-28)
 
 - Live Premium Feel UI active:

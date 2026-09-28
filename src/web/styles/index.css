@@ -739,3 +739,42 @@
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
   pointer-events: none;
 }
+
+.vh-hud-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.35rem 0.7rem;
+  border-radius: 0.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(10, 10, 14, 0.75);
+  color: rgb(var(--vh-ink-medium));
+  backdrop-filter: blur(14px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5), inset 0 0 0 1px rgba(255, 255, 255, 0.03);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: auto;
+}
+
+.vh-hud-chip:hover {
+  border-color: rgba(0, 230, 255, 0.4);
+  background: rgba(15, 22, 34, 0.9);
+  color: #00e6ff;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 230, 255, 0.15), inset 0 0 0 1px rgba(0, 230, 255, 0.2);
+}
+
+.vh-oled-glow {
+  position: absolute;
+  inset: -15%;
+  background: radial-gradient(circle at 50% 50%, rgba(0, 230, 255, 0.12) 0%, rgba(77, 124, 254, 0.05) 42%, transparent 72%);
+  filter: blur(40px);
+  pointer-events: none;
+  z-index: 0;
+  border-radius: 50%;
+  animation: vh-hero-glow 14s ease-in-out infinite alternate;
+}

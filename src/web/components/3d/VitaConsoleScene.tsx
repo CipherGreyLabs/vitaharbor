@@ -474,9 +474,13 @@ const recessMat = new THREE.MeshStandardMaterial({color:'#14161a',roughness:0.52
     const rimLight = new THREE.DirectionalLight('#4d7cfe', 0.88);
     rimLight.position.set(0, -140, -180);
     scene.add(rimLight);
-    const topRimLight = new THREE.DirectionalLight('#8fbaff', 0.4);
+    const topRimLight = new THREE.DirectionalLight('#8fbaff', 0.45);
     topRimLight.position.set(0, 180, -120);
     scene.add(topRimLight);
+
+    const cyanRim = new THREE.DirectionalLight('#00e6ff', 0.65);
+    cyanRim.position.set(-140, -100, -140);
+    scene.add(cyanRim);
 
     let px = 0, py = 0, visible = true, raf = 0, previous = '', readyReported = false;
     let targetRotX = 0, targetRotY = 0;
@@ -490,15 +494,50 @@ const recessMat = new THREE.MeshStandardMaterial({color:'#14161a',roughness:0.52
     updateScrollProgress();
     window.addEventListener('scroll', updateScrollProgress, { passive: true });
 
+    let isDragging = false;
+    let dragStartX = 0, dragStartY = 0;
+    let dragRotX = 0, dragRotY = 0;
+    let targetDragRotX = 0, targetDragRotY = 0;
+
+    const onPointerDown = (e: PointerEvent) => {
+      isDragging = true;
+      dragStartX = e.clientX;
+      dragStartY = e.clientY;
+      targetDragRotX = dragRotX;
+      targetDragRotY = dragRotY;
+      try { el.setPointerCapture?.(e.pointerId); } catch {}
+    };
+
     const move = (e: PointerEvent) => {
+      if (isDragging) {
+        const deltaX = e.clientX - dragStartX;
+        const deltaY = e.clientY - dragStartY;
+        dragStartX = e.clientX;
+        dragStartY = e.clientY;
+        targetDragRotY += deltaX * 0.008;
+        targetDragRotX += deltaY * 0.008;
+        targetDragRotX = THREE.MathUtils.clamp(targetDragRotX, -Math.PI / 3, Math.PI / 3);
+      }
       if (reduced) return;
       const r = el.getBoundingClientRect();
       px = (e.clientX - r.left) / r.width - 0.5;
       py = (e.clientY - r.top) / r.height - 0.5;
     };
-    const leave = () => { px = 0; py = 0; };
 
+    const onPointerUp = (e: PointerEvent) => {
+      isDragging = false;
+      try { el.releasePointerCapture?.(e.pointerId); } catch {}
+    };
+
+    const leave = () => {
+      isDragging = false;
+      px = 0;
+      py = 0;
+    };
+
+    el.addEventListener('pointerdown', onPointerDown);
     el.addEventListener('pointermove', move);
+    window.addEventListener('pointerup', onPointerUp);
     el.addEventListener('pointerleave', leave);
 
     function resize() {
@@ -544,9 +583,19 @@ const recessMat = new THREE.MeshStandardMaterial({color:'#14161a',roughness:0.52
         paint();
         previous = signature;
       }
-      vita.rotation.y += ((reduced ? 0 : px * 0.28 - scrollProgress * 0.16) - vita.rotation.y) * 0.08;
-      vita.rotation.x += ((reduced ? 0 : py * 0.15) - vita.rotation.x) * 0.08;
-      vita.rotation.z += ((-0.02 - scrollProgress * 0.12) - vita.rotation.z) * 0.08;
+      dragRotX += (targetDragRotX - dragRotX) * 0.12;
+      dragRotY += (targetDragRotY - dragRotY) * 0.12;
+      if (!isDragging) {
+        targetDragRotX *= 0.985;
+        targetDragRotY *= 0.985;
+      }
+
+      const rotY = (reduced ? 0 : px * 0.38 - scrollProgress * 0.16) + dragRotY;
+      const rotX = (reduced ? 0 : py * 0.22) + dragRotX;
+
+      vita.rotation.y += (rotY - vita.rotation.y) * 0.09;
+      vita.rotation.x += (rotX - vita.rotation.x) * 0.09;
+      vita.rotation.z += ((-0.02 - scrollProgress * 0.12) - vita.rotation.z) * 0.09;
       vita.scale.setScalar(1 - scrollProgress * 0.09);
       vita.position.x += ((vita.userData.targetX ?? 0) + scrollProgress * 16 - vita.position.x) * 0.1;
       try {
@@ -601,7 +650,9 @@ const recessMat = new THREE.MeshStandardMaterial({color:'#14161a',roughness:0.52
       cancelAnimationFrame(raf);
       ro.disconnect();
       io?.disconnect();
+      el.removeEventListener('pointerdown', onPointerDown);
       el.removeEventListener('pointermove', move);
+      window.removeEventListener('pointerup', onPointerUp);
       el.removeEventListener('pointerleave', leave);
       renderer.domElement.removeEventListener("webglcontextlost", handleContextLost);
       scene.traverse(obj => {

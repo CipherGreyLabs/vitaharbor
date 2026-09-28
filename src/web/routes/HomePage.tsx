@@ -461,53 +461,64 @@ export const HomePage: React.FC = () => {
 
       <main id="main-content" className="vh-boot">
         <section aria-labelledby="hero-heading" className="vh-hero relative border-b border-white/[0.06]">
-          <div className="relative mx-auto grid max-w-7xl gap-7 px-5 pb-7 pt-8 sm:px-6 sm:pt-10 lg:grid-cols-[minmax(0,0.86fr)_minmax(0,1.14fr)] lg:items-center lg:gap-8 lg:py-9">
+          <div className="relative mx-auto grid max-w-7xl gap-8 px-5 pb-8 pt-8 sm:px-6 sm:pt-10 lg:grid-cols-[minmax(0,0.82fr)_minmax(0,1.18fr)] lg:items-center lg:gap-10 lg:py-10">
             <div className="relative z-10">
-              <p className="font-mono text-micro font-semibold uppercase tracking-[0.2em] text-accent">
-                PlayStation Vita <span className="px-1 text-ink-muted">/</span> Port atlas
-              </p>
-              <h1 id="hero-heading" className="mt-3 max-w-xl font-display text-[42px] font-semibold leading-[0.98] tracking-[-0.055em] text-ink sm:text-[54px] lg:text-[62px]">
-                A field guide to <span className="text-accent">Vita ports.</span>
+              <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-3.5 py-1.5 backdrop-blur-md">
+                <span className="h-2 w-2 rounded-full bg-[#00e6ff] shadow-[0_0_10px_#00e6ff]" />
+                <p className="font-mono text-micro font-semibold uppercase tracking-[0.18em] text-accent-hover">
+                  PlayStation Vita <span className="px-1 text-ink-muted">/</span> Port atlas
+                </p>
+              </div>
+              <h1 id="hero-heading" className="mt-4 max-w-xl font-display text-[44px] font-semibold leading-[0.96] tracking-[-0.055em] text-ink sm:text-[56px] lg:text-[66px]">
+                Hardware as hero. <br className="hidden sm:inline" /><span className="bg-gradient-to-r from-[#00e6ff] via-[#4d7cfe] to-[#a9ceff] bg-clip-text text-transparent">Living 3D Atlas.</span>
               </h1>
               <p className="mt-4 max-w-xl text-body leading-relaxed text-ink-medium sm:text-lead">
-                Follow source-linked ports, decompilations and wrappers built by the community.
+                Track and inspect community PlayStation Vita source ports, decompilations and ARM wrappers in real-time 3D.
               </p>
 
-              <div aria-label="Project totals" className="mt-7 grid max-w-xl grid-cols-3 gap-2 sm:gap-3">
-                <div className="rounded-xl border border-white/[0.06] bg-white/[0.025] px-3 py-3 sm:px-4">
+              <div aria-label="Project totals" className="mt-7 grid max-w-xl grid-cols-3 gap-2.5 sm:gap-3.5">
+                <div className="rounded-xl border border-white/[0.08] bg-white/[0.03] p-3.5 backdrop-blur-sm transition-all hover:border-white/20">
                   <span className="block font-mono text-[10px] font-semibold uppercase tracking-[0.12em] text-ink-muted sm:text-micro">Tracked</span>
-                  <span className="mt-1.5 block font-display text-2xl font-semibold leading-none text-ink sm:text-[30px]">{projects.length}</span>
-                  <span className="mt-1 block text-micro text-ink-muted">projects</span>
+                  <span className="mt-1 block font-display text-2xl font-semibold leading-none text-ink sm:text-[32px]">{projects.length}</span>
+                  <span className="mt-1 block text-micro text-ink-muted">active ports</span>
                 </div>
-                <div className="rounded-xl border border-white/[0.06] bg-white/[0.025] px-3 py-3 sm:px-4">
+                <div className="rounded-xl border border-white/[0.08] bg-white/[0.03] p-3.5 backdrop-blur-sm transition-all hover:border-stage-done/40">
                   <span className="block font-mono text-[10px] font-semibold uppercase tracking-[0.12em] text-ink-muted sm:text-micro">Playable</span>
-                  <span className="mt-1.5 block font-display text-2xl font-semibold leading-none text-stage-done sm:text-[30px]">{headerCounts.playable}</span>
-                  <span className="mt-1 block text-micro text-ink-muted">reported in source</span>
+                  <span className="mt-1 block font-display text-2xl font-semibold leading-none text-stage-done sm:text-[32px]">{headerCounts.playable}</span>
+                  <span className="mt-1 block text-micro text-ink-muted">verified builds</span>
                 </div>
-                <div className="rounded-xl border border-white/[0.06] bg-white/[0.025] px-3 py-3 sm:px-4">
-                  <span className="block font-mono text-[10px] font-semibold uppercase tracking-[0.12em] text-ink-muted sm:text-micro">In progress</span>
-                  <span className="mt-1.5 block font-display text-2xl font-semibold leading-none text-accent-hover sm:text-[30px]">{headerCounts.dev}</span>
-                  <span className="mt-1 block text-micro text-ink-muted">stage in source</span>
+                <div className="rounded-xl border border-white/[0.08] bg-white/[0.03] p-3.5 backdrop-blur-sm transition-all hover:border-accent/40">
+                  <span className="block font-mono text-[10px] font-semibold uppercase tracking-[0.12em] text-ink-muted sm:text-micro">In Progress</span>
+                  <span className="mt-1 block font-display text-2xl font-semibold leading-none text-accent-hover sm:text-[32px]">{headerCounts.dev}</span>
+                  <span className="mt-1 block text-micro text-ink-muted">active WIPs</span>
                 </div>
               </div>
 
-              <a href="#directory" className="mt-5 inline-flex min-h-[44px] items-center gap-2 rounded-lg border border-accent/30 bg-accent/10 px-4 text-caption font-semibold text-accent-hover transition-colors hover:border-accent/60 hover:bg-accent/15 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent">
-                Explore the directory <ArrowRight className="h-4 w-4" aria-hidden="true" />
-              </a>
-            </div>
-
-            <div className="vh-console-frame relative min-w-0 overflow-hidden rounded-[1.6rem] border border-white/[0.08] shadow-glow sm:rounded-[2rem]">
-              <div className="flex items-center justify-between gap-3 border-b border-white/[0.06] px-4 py-3 sm:px-6">
-                <div>
-                  <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.17em] text-accent-hover">Interactive hardware</p>
-                  <p className="mt-1 text-caption text-ink-medium">PS Vita PCH-1000 · selected project display</p>
-                </div>
-                <span className="inline-flex shrink-0 items-center gap-2 rounded-full border border-white/[0.08] bg-black/40 px-3 py-1.5 font-mono text-[10px] uppercase tracking-wider text-ink-medium">
-                  <span aria-hidden="true" className="h-1.5 w-1.5 rounded-full bg-accent shadow-glow" />
-                  Vita preview
+              <div className="mt-6 flex flex-wrap items-center gap-3">
+                <a href="#directory" className="inline-flex min-h-[46px] items-center gap-2 rounded-xl border border-[#00e6ff]/40 bg-[#00e6ff]/10 px-5 text-caption font-semibold text-[#00e6ff] shadow-[0_0_20px_rgba(0,230,255,0.15)] transition-all hover:border-[#00e6ff]/70 hover:bg-[#00e6ff]/20 hover:shadow-[0_0_30px_rgba(0,230,255,0.25)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent">
+                  Explore directory <ArrowRight className="h-4 w-4" aria-hidden="true" />
+                </a>
+                <span className="hidden font-mono text-micro text-ink-muted sm:inline-flex items-center gap-1.5">
+                  <kbd className="vh-kbd-hint">/</kbd> to search
                 </span>
               </div>
-              <div className="px-1 pb-2 pt-3 sm:px-3">
+            </div>
+
+            <div className="vh-console-frame relative min-w-0 overflow-hidden rounded-[1.8rem] border border-white/[0.1] bg-gradient-to-b from-white/[0.04] to-black/80 shadow-[0_20px_80px_rgba(0,0,0,0.8),0_0_50px_rgba(0,230,255,0.06)] backdrop-blur-xl sm:rounded-[2.2rem]">
+              <div className="flex items-center justify-between gap-3 border-b border-white/[0.08] bg-black/40 px-4 py-3 sm:px-6">
+                <div className="flex items-center gap-2.5">
+                  <span className="h-2 w-2 rounded-full bg-stage-done shadow-[0_0_8px_rgba(117,211,159,0.8)]" />
+                  <div>
+                    <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-accent-hover">3D Interactive Stage</p>
+                    <p className="text-[11px] text-ink-medium">PlayStation Vita PCH-1000 · Live Hardware Inspection</p>
+                  </div>
+                </div>
+                <span className="inline-flex shrink-0 items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-3 py-1.5 font-mono text-[10px] font-medium uppercase tracking-wider text-ink-medium backdrop-blur-sm">
+                  <span aria-hidden="true" className="vh-live-dot" />
+                  Drag to rotate
+                </span>
+              </div>
+              <div className="px-1 pb-3 pt-2 sm:px-3 sm:pb-4 sm:pt-3">
                 <ConsoleStage
                   selectedProject={selectedProject as any}
                   projects={projects}
