@@ -1,8 +1,92 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-09-29T14:05:45.412Z",
+  "generated_at": "2026-09-29T18:40:19.515Z",
   "source": "r/vitahacks + r/VitaPiracy + r/PSVitaHomebrew RSS",
   "items": [
+    {
+      "schema_version": 2,
+      "id": "reddit-1wte7gf",
+      "external_id": "1wte7gf",
+      "state": "QUARANTINED",
+      "state_history": [
+        {
+          "state": "DETECTED",
+          "at": "2026-09-29T18:40:19.515Z",
+          "actor": "reddit-scanner",
+          "reason": "Canonical Reddit RSS entry accepted at the ingestion boundary"
+        },
+        {
+          "state": "QUARANTINED",
+          "at": "2026-09-29T18:40:19.515Z",
+          "actor": "reddit-scanner",
+          "reason": "Scanner result is unverified and cannot enter the curated ledger"
+        }
+      ],
+      "source": {
+        "platform": "reddit",
+        "subreddit": "vitahacks",
+        "canonical_url": "https://www.reddit.com/r/vitahacks/comments/1wte7gf/gta_liberty_city_stories_my_ps_vita_port_is_now/",
+        "author": "amplieboy",
+        "title": "GTA: Liberty City Stories — my PS Vita port is now on GitHub",
+        "body": "Hey everyone, I’ve been working on a native PS Vita port of GTA: Liberty City Stories, based on reStories. The source code and an installable VPK are now available. Getting it running has taken a lot of testing on my Vita, from fixing crashes and graphics issues to getting the full intro working with sound. There’s also a custom icon and LiveArea. Performance still varies depending on the scene, so don’t expect a locked 60 FPS. I’d appreciate hearing how it runs on other Vitas, especially during longer sessions. You’ll need your own PS2 copy of the game to prepare the game files. The README wa",
+        "published_at": "2026-09-29T16:07:11.000Z"
+      },
+      "classification": {
+        "confidence": "medium",
+        "reason": "2 dev signal(s), 1 passive term(s), category=project_update",
+        "candidate_type": "port",
+        "category": "project_update",
+        "question": false,
+        "spam": false
+      },
+      "provenance": {
+        "repository_url": null,
+        "release_url": null,
+        "evidence_urls": [],
+        "evidence_bundle_id": null,
+        "repository_identity": null,
+        "repository_created_at": null,
+        "repository_last_activity_at": null,
+        "release_facts": [],
+        "vita_evidence": [],
+        "author_linkage": null,
+        "corroboration": [],
+        "duplicate_relation": {
+          "content_hash": "7d0ff7535dcda0921ac188bc13b8f127804c28bf449c7eaeba9a69ea8ad4a514",
+          "related_candidate_ids": []
+        }
+      },
+      "campaign": {
+        "cluster_id": null,
+        "linkage_confidence": "none",
+        "signals": [],
+        "related_candidate_ids": [],
+        "text_fingerprint": "7f90d6e2",
+        "media_fingerprints": [],
+        "outbound_fingerprints": [
+          "github.com/fauxrougee/gtalcs-psvita-port",
+          "github.com/fauxrougee/gtalcs-psvita-port/releases/latest",
+          "www.reddit.com/user/amplieboy",
+          "www.reddit.com/r/vitahacks/comments/1wte7gf/gta_liberty_city_stories_my_ps_vita_port_is_now"
+        ],
+        "direct_intent": false,
+        "explicit_campaign_reference": false,
+        "incident_id": null
+      },
+      "risk_signals": [
+        "no_project_evidence_in_post"
+      ],
+      "evidence_gaps": [
+        "exact project repository",
+        "repository identity and activity facts",
+        "release or build evidence",
+        "Vita-specific hardware evidence",
+        "author/developer linkage and independent corroboration"
+      ],
+      "content_hash": "7d0ff7535dcda0921ac188bc13b8f127804c28bf449c7eaeba9a69ea8ad4a514",
+      "review": null,
+      "incident": null
+    },
     {
       "schema_version": 2,
       "id": "reddit-1wrek0r",
