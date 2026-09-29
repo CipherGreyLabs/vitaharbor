@@ -1,8 +1,9 @@
 const base = 'https://vitaharbor.vercel.app';
 
 const paths = [
-  '/projects/d2vita/',
-  '/projects/d2vita',
+  '/projects/openmohaa-vita/',
+  '/projects/real-racing-2-vita/',
+  '/projects/gta-lcs-vita/',
   '/projects/openmohaa-vita/',
   '/sitemap.xml',
   '/',

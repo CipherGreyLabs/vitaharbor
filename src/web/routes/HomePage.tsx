@@ -470,7 +470,7 @@ export const HomePage: React.FC = () => {
                 </p>
               </div>
               <h1 id="hero-heading" className="mt-4 max-w-xl font-display text-[44px] font-semibold leading-[0.96] tracking-[-0.055em] text-ink sm:text-[56px] lg:text-[66px]">
-                Hardware as hero. <br className="hidden sm:inline" /><span className="bg-gradient-to-r from-[#00e6ff] via-[#4d7cfe] to-[#a9ceff] bg-clip-text text-transparent">Living 3D Atlas.</span>
+                Hardware as hero. <br className="hidden sm:inline" /><span className="text-[#00e6ff]">Living 3D Atlas.</span>
               </h1>
               <p className="mt-4 max-w-xl text-body leading-relaxed text-ink-medium sm:text-lead">
                 Track and inspect community PlayStation Vita source ports, decompilations and ARM wrappers in real-time 3D.

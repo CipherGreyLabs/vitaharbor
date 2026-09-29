@@ -342,6 +342,21 @@
         "Native C",
         "VitaSDK"
       ]
+    },
+    {
+      "id": "gta-lcs-vita",
+      "url": "https://www.reddit.com/r/vitahacks/comments/1wte7gf/gta_liberty_city_stories_my_ps_vita_port_is_now/",
+      "title": "GTA: Liberty City Stories (reStories)",
+      "content_text": "Stage: playable | Platform: PSP / PS2 | Summary: Native PlayStation Vita port of GTA: Liberty City Stories based on the reStories decompilation project, running with hardware audio, controls, and custom LiveArea. | Hardware: Hardware accelerated rendering via vitaGL with variable scene framerates.",
+      "date_modified": "2026-09-29T16:07:11.000Z",
+      "tags": [
+        "playable",
+        "PSP / PS2",
+        "Native C++",
+        "reStories Decompilation",
+        "vitaGL",
+        "Hardware Shaders"
+      ]
     }
   ]
 }

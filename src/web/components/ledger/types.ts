@@ -77,7 +77,8 @@ export const KNOWN_REPOS: Record<string, string> = {
   "hollow-knight-vita": "https://github.com/PatnosDD/Hollow-Knight-PsVita",
   "renpy-8-runtime-engine": "https://github.com/Grimiku/RenPy-Vita-8",
   "real-racing-2-vita": "https://github.com/CHUTA7X/Real-Racing-2-Vita-Port-Release",
-  "diddy-kong-racing-golden-balloon": "https://github.com/zm2283145/goldenballoon-vita-port"
+  "diddy-kong-racing-golden-balloon": "https://github.com/zm2283145/goldenballoon-vita-port",
+  "gta-lcs-vita": "https://github.com/fauxrougee/GTALCS-psvita-port"
 };
 
 export const STAGE_TONE: Record<string, string> = {

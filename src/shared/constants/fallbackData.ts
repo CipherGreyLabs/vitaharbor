@@ -28,6 +28,8 @@ export const FALLBACK_GAMES: Game[] = [
   { id: 36, slug: "diddy-kong-racing-golden-balloon", title: "Diddy Kong Racing (Golden Balloon)", normalized_title: "diddy kong racing (golden balloon)", original_release_year: 1997, original_platform: "N64 / Decomp", created_at: new Date('2026-09-09T02:45:26.000Z'), updated_at: new Date('2026-09-10T21:54:04.000Z') },
   { id: 37, slug: "command-and-conquer-renegade", title: "Command & Conquer: Renegade", normalized_title: "command & conquer: renegade", original_release_year: 2002, original_platform: "PC", created_at: new Date('2026-09-08T12:49:38.000Z'), updated_at: new Date('2026-09-08T12:49:38.000Z') },
   { id: 38, slug: "memory-mastermind", title: "Memory Mastermind", normalized_title: "memory mastermind", original_release_year: 2013, original_platform: "Mobile / RobTop", created_at: new Date('2026-09-27T08:11:00.000Z'), updated_at: new Date('2026-09-27T08:11:00.000Z') }
+,
+  { id: 39, slug: "gta-liberty-city-stories", title: "GTA: Liberty City Stories (reStories)", normalized_title: "gta: liberty city stories (restories)", original_release_year: 2005, original_platform: "PSP / PS2", created_at: new Date('2026-09-29T16:07:11.000Z'), updated_at: new Date('2026-09-29T16:07:11.000Z') }
 ];
 
 export const FALLBACK_PROJECTS: any[] = [
@@ -634,6 +636,35 @@ export const FALLBACK_PROJECTS: any[] = [
       { id: 380, stage: "announced", effective_at: new Date('2026-09-27T08:11:00.000Z'), reason: "Public port announcement by community developer" }
     ]
   }
+,
+  {
+    id: 39,
+    game_id: 39,
+    slug: "gta-lcs-vita",
+    reddit_url: "https://www.reddit.com/r/vitahacks/comments/1wte7gf/gta_liberty_city_stories_my_ps_vita_port_is_now/",
+    repo_url: "https://github.com/fauxrougee/GTALCS-psvita-port",
+    display_name: "GTA: Liberty City Stories (reStories)",
+    current_stage: "playable",
+    lifecycle: "active",
+    summary: "Native PlayStation Vita port of GTA: Liberty City Stories based on the reStories decompilation project, running with hardware audio, controls, and custom LiveArea.",
+    playability_notes: "v01.15 release featuring working full intro, hardware sound, controls, and custom icon / LiveArea. Requires user-supplied PS2 game assets.",
+    performance_notes: "Hardware accelerated rendering via vitaGL with variable scene framerates.",
+    first_seen_at: new Date('2026-09-29T16:07:11.000Z'),
+    last_activity_at: new Date('2026-09-29T16:07:11.000Z'),
+    released_at: new Date('2026-09-29T16:07:11.000Z'),
+    is_featured: true,
+    is_archived: false,
+    verification: "developer_direct",
+    game_title: "GTA: Liberty City Stories (reStories)",
+    original_platform: "PSP / PS2",
+    original_release_year: 2005,
+    technologies: ["Native C++", "reStories Decompilation", "vitaGL", "Hardware Shaders"],
+    developers: [{ id: 26, role: "lead", display_name: "fauxrouge", slug: "fauxrouge" }],
+    stage_history: [
+      { id: 390, stage: "announced", effective_at: new Date('2026-09-29T16:07:11.000Z'), reason: "Port development announced by developer" },
+      { id: 391, stage: "playable", effective_at: new Date('2026-09-29T16:07:11.000Z'), reason: "v01.15 release published with full intro, sound, and installable VPK" }
+    ]
+  }
 ];
 
 export const FALLBACK_DEVELOPERS: any[] = [
@@ -692,6 +723,19 @@ export const FALLBACK_DEVELOPERS: any[] = [
     is_known_developer: true,
     identities: [
       { provider: "reddit", username: "LefterisDaGamer" }
+    ],
+    projects: []
+  }
+,
+  {
+    id: 26,
+    slug: "fauxrouge",
+    display_name: "fauxrouge",
+    description: "Developer behind the native GTA: Liberty City Stories PS Vita port based on reStories.",
+    is_known_developer: true,
+    identities: [
+      { provider: "github", username: "fauxrougee" },
+      { provider: "reddit", username: "amplieboy" }
     ],
     projects: []
   }
@@ -951,6 +995,24 @@ export const FALLBACK_UPDATES: any[] = [
     verification_level: "community_report",
     sources: [
       { source_item_id: "src_memory_mastermind_reddit", relationship: "primary", canonical_url: "https://www.reddit.com/r/vitahacks/comments/1wrek0r/memory_mastermind_a_old_game_by_robtop_ps_vita/" }
+    ]
+  }
+,
+  {
+    id: "upd_gta_lcs_vita",
+    port_project_id: 39,
+    project_slug: "gta-lcs-vita",
+    project_display_name: "GTA: Liberty City Stories (reStories)",
+    developer_display_name: "fauxrouge",
+    developer_slug: "fauxrouge",
+    event_type: "playable_demo",
+    title: "GTA: Liberty City Stories native PS Vita port v01.15 released on GitHub",
+    summary: "fauxrouge published the native PS Vita port of GTA: Liberty City Stories based on reStories with hardware sound, controls, and custom LiveArea.",
+    event_at: new Date('2026-09-29T16:07:11.000Z'),
+    verification_level: "developer_direct",
+    sources: [
+      { source_item_id: "src_gta_lcs_repo", relationship: "primary", canonical_url: "https://github.com/fauxrougee/GTALCS-psvita-port" },
+      { source_item_id: "src_gta_lcs_reddit", relationship: "community", canonical_url: "https://www.reddit.com/r/vitahacks/comments/1wte7gf/gta_liberty_city_stories_my_ps_vita_port_is_now/" }
     ]
   }
 ];

@@ -1,6 +1,15 @@
 # VitaHarbor project state
 
-Updated: 2026-09-28
+Updated: 2026-09-29
+
+## Current state: VH-CONTENT-LCS-032 GTA: Liberty City Stories port addition & WCAG AA contrast compliance (2026-09-29)
+
+- Curated active port ledger expanded to 27 active projects (23 ongoing/in-development ports + 4 standalone non-VitaDB ports).
+- Newly added port: GTA: Liberty City Stories (`gta-lcs-vita`, reStories native C++ decompilation port v01.15 by fauxrouge, playable with hardware sound, controls, and custom LiveArea).
+- Quarantine updated with promoted record (`reddit-1wte7gf`).
+- 100% WCAG AA contrast compliance achieved: 55/55 text styles checked by `contrast-audit.mjs` with 0 failures.
+- Feeds regenerated (public/api/feed.json, public/api/rss.xml, public/og.png and 27 project cards).
+- Verification: npm run verify passed (tsc clean, 121/121 unit tests, 27 prerendered project pages, 30 sitemap URLs).
 
 ## Current state: VH-PREMIUM-3D-031 High-End 3D Hardware Live Visual experience (2026-09-28)
 
