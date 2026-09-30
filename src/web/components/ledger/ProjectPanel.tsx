@@ -15,6 +15,24 @@ import {
   STAGE_CHIP,
   STAGE_TONE
 } from "./types";
+
+const PROGRESSION_STEPS = [
+  { stage: "announced", label: "Announced", rank: 1 },
+  { stage: "early_wip", label: "WIP / Boot", rank: 2 },
+  { stage: "in_game", label: "In-Game", rank: 3 },
+  { stage: "playable", label: "Playable", rank: 4 },
+  { stage: "released", label: "Released", rank: 5 }
+];
+
+function getStageRank(stageStr: string): number {
+  const s = String(stageStr || "").toLowerCase();
+  if (s === "released") return 5;
+  if (s === "playable" || s === "completable") return 4;
+  if (s === "in_game") return 3;
+  if (s === "booting" || s === "early_wip" || s === "research") return 2;
+  return 1;
+}
+
 import { ExternalLink, Cpu, HardDrive, CheckCircle2, GitBranch, ShieldCheck, CircleAlert, MonitorPlay } from "lucide-react";
 
 interface ProjectPanelProps {
@@ -69,6 +87,70 @@ export const ProjectPanel: React.FC<ProjectPanelProps> = ({
         </p>
       )}
 
+      {/* Option 3: Visual Horizontal Milestone Stepper */}
+      <div className="mb-6 rounded-2xl border border-white/[0.08] bg-black/40 p-4 sm:p-5 backdrop-blur-md">
+        <div className="flex flex-wrap items-center justify-between gap-2 mb-3">
+          <p className="font-mono text-micro font-semibold uppercase tracking-[0.16em] text-accent-hover">
+            Porting Progression
+          </p>
+          <span className="font-mono text-[11px] text-ink-muted">
+            Status: <span className="text-[#00e6ff] font-semibold">{prettyStage(project.current_stage)}</span>
+          </span>
+        </div>
+
+        <div className="relative flex items-center justify-between gap-1 sm:gap-2 overflow-x-auto no-scrollbar py-2">
+          {PROGRESSION_STEPS.map((step, idx) => {
+            const currentRank = getStageRank(project.current_stage);
+            const isPassed = currentRank > step.rank;
+            const isCurrent = currentRank === step.rank;
+            const matchedHistory = history.find(h => {
+              const hs = String(h.stage).toLowerCase();
+              if (step.stage === "early_wip") return hs === "early_wip" || hs === "booting" || hs === "research";
+              if (step.stage === "playable") return hs === "playable" || hs === "completable";
+              return hs === step.stage;
+            });
+
+            return (
+              <React.Fragment key={step.stage}>
+                <div className="flex flex-col items-center text-center min-w-[62px] sm:min-w-[84px] shrink-0">
+                  <div className={
+                    "relative flex h-7 w-7 sm:h-8 sm:w-8 items-center justify-center rounded-full transition-all duration-300 " +
+                    (isCurrent
+                      ? "border-2 border-[#00e6ff] bg-[#00e6ff]/20 text-[#00e6ff] shadow-[0_0_14px_rgba(0,230,255,0.6)]"
+                      : isPassed
+                      ? "border border-[#00e6ff]/60 bg-[#00e6ff]/10 text-[#00e6ff]"
+                      : "border border-white/10 bg-white/[0.02] text-ink-muted opacity-40")
+                  }>
+                    {isCurrent && <span className="vh-live-dot absolute -top-0.5 -right-0.5" />}
+                    {isPassed ? (
+                      <CheckCircle2 className="h-3.5 w-3.5 text-[#00e6ff]" />
+                    ) : (
+                      <span className="font-mono text-[10px] font-bold">{idx + 1}</span>
+                    )}
+                  </div>
+                  <span className={
+                    "mt-1.5 font-mono text-[10px] sm:text-[11px] font-semibold uppercase tracking-wider " +
+                    (isCurrent ? "text-[#00e6ff]" : isPassed ? "text-ink" : "text-ink-muted opacity-50")
+                  }>
+                    {step.label}
+                  </span>
+                  {matchedHistory?.effective_at && (
+                    <span className="mt-0.5 font-mono text-[9px] text-ink-muted">
+                      {formatDay(matchedHistory.effective_at)}
+                    </span>
+                  )}
+                </div>
+                {idx < PROGRESSION_STEPS.length - 1 && (
+                  <div className={
+                    "h-[2px] flex-1 min-w-[12px] sm:min-w-[24px] transition-all duration-300 " +
+                    (isPassed ? "bg-[#00e6ff]/50" : "bg-white/10 opacity-30")
+                  } />
+                )}
+              </React.Fragment>
+            );
+          })}
+        </div>
+      </div>
       <dl className="mb-6 grid gap-3 sm:grid-cols-3">
         <div className="rounded-xl border border-hairline bg-surface px-3.5 py-3">
           <dt className="flex items-center gap-1.5 text-micro font-semibold uppercase text-ink-muted">

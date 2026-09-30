@@ -243,3 +243,18 @@ export const SPECS: Array<[string, string]> = [
   ["Display", "960 × 544 OLED"],
   ["Memory", "512 MB unified"]
 ];
+
+export interface TechFilter {
+  key: string;
+  label: string;
+  match?: (p: LedgerProject) => boolean;
+}
+
+export const TECH_FILTERS: TechFilter[] = [
+  { key: "all", label: "All techniques" },
+  { key: "decomp", label: "Decompilation", match: (p: LedgerProject) => (p.technologies || []).some(t => /decomp/i.test(t)) || deriveProjectType(p) === "decomp" },
+  { key: "wrapper", label: "ARMv7 Wrapper", match: (p: LedgerProject) => (p.technologies || []).some(t => /armv7|wrapper|soloader/i.test(t)) || deriveProjectType(p) === "wrapper" },
+  { key: "vitagl", label: "vitaGL", match: (p: LedgerProject) => (p.technologies || []).some(t => /vitagl|gxm/i.test(t)) },
+  { key: "native_c", label: "Native C/C++", match: (p: LedgerProject) => (p.technologies || []).some(t => /native c|c\+\+/i.test(t)) || deriveProjectType(p) === "native" },
+  { key: "engine_sdl", label: "Custom Engine / SDL", match: (p: LedgerProject) => (p.technologies || []).some(t => /engine|sdl|unity|godot|ren'?py|pico/i.test(t)) || deriveProjectType(p) === "engine" }
+];

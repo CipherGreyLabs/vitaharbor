@@ -8,6 +8,7 @@ import {
   deriveProjectType,
   PROJECT_TYPE_META,
   STAGE_CHIP,
+  TECH_FILTERS,
   formatDay,
   formatUtcDateTime
 } from "./types";
@@ -50,6 +51,8 @@ interface DirectoryTableProps {
   onFilterChange: (f: string) => void;
   activeCategory: string;
   onCategoryChange: (c: string) => void;
+  activeTech: string;
+  onTechChange: (t: string) => void;
   activeSort: string;
   onSortChange: (s: string) => void;
   searchTerm: string;
@@ -74,6 +77,8 @@ export const DirectoryTable: React.FC<DirectoryTableProps> = ({
   onFilterChange,
   activeCategory,
   onCategoryChange,
+  activeTech,
+  onTechChange,
   activeSort,
   onSortChange,
   searchTerm,
@@ -109,6 +114,15 @@ export const DirectoryTable: React.FC<DirectoryTableProps> = ({
     for (const p of projects) {
       const cat = deriveProjectType(p);
       if (cat && cat in counts) counts[cat]++;
+    }
+    return counts;
+  }, [projects]);
+
+  const techCounts = useMemo(() => {
+    const counts: Record<string, number> = { all: projects.length };
+    for (const tf of TECH_FILTERS) {
+      if (tf.key === "all") continue;
+      counts[tf.key] = projects.filter(p => tf.match ? tf.match(p) : true).length;
     }
     return counts;
   }, [projects]);
@@ -203,6 +217,7 @@ export const DirectoryTable: React.FC<DirectoryTableProps> = ({
           {searchTerm && <span className="rounded-full bg-sunken px-2.5 py-1 text-micro text-ink-medium">“{searchTerm}”</span>}
           {activeFilter !== "all" && <span className="rounded-full bg-sunken px-2.5 py-1 text-micro text-ink-medium">{STAGE_FILTERS.find((item) => item.key === activeFilter)?.label}</span>}
           {activeCategory !== "all" && <span className="rounded-full bg-sunken px-2.5 py-1 text-micro text-ink-medium">{CATEGORY_FILTERS.find((item) => item.key === activeCategory)?.label}</span>}
+          {activeTech !== "all" && <span className="rounded-full bg-sunken px-2.5 py-1 text-micro text-ink-medium">{TECH_FILTERS.find((item) => item.key === activeTech)?.label}</span>}
           {activeSort !== "recent" && <span className="rounded-full bg-sunken px-2.5 py-1 text-micro text-ink-medium">{SORTS.find((item) => item.key === activeSort)?.label}</span>}
           <button type="button" onClick={onResetFilters} className="inline-flex min-h-[44px] items-center gap-1 rounded-full px-3 py-1 text-caption font-semibold text-accent underline underline-offset-4 hover:text-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-accent">
             Clear all
@@ -265,7 +280,7 @@ export const DirectoryTable: React.FC<DirectoryTableProps> = ({
 
         {/* Type is the secondary axis, so it reads quieter than the stage filters. */}
         <div className="mt-2.5 flex items-center gap-1 overflow-x-auto no-scrollbar">
-          <span className="mr-1 shrink-0 text-micro uppercase tracking-wider text-ink-muted">Type</span>
+          <span className="mr-1 shrink-0 font-mono text-[10px] uppercase tracking-wider text-ink-muted">Type</span>
           {CATEGORY_FILTERS.map((cat) => {
             const active = activeCategory === cat.key;
             return (
@@ -275,11 +290,36 @@ export const DirectoryTable: React.FC<DirectoryTableProps> = ({
                 onClick={() => onCategoryChange(cat.key)}
                 aria-pressed={active}
                 className={
-                  "inline-flex min-h-[44px] shrink-0 items-center whitespace-nowrap rounded-md px-3 py-2 text-caption font-medium transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent " +
-                  (active ? "bg-accent/10 text-ink" : "text-ink-muted hover:bg-sunken hover:text-ink")
+                  "inline-flex min-h-[40px] shrink-0 items-center whitespace-nowrap rounded-lg px-2.5 py-1.5 text-caption font-medium transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent " +
+                  (active ? "bg-accent/10 text-ink font-semibold" : "text-ink-muted hover:bg-sunken hover:text-ink")
                 }
               >
                 {cat.label} ({categoryCounts[cat.key] ?? 0})
+              </button>
+            );
+          })}
+        </div>
+
+        {/* Technology Filters (Option 1) */}
+        <div className="mt-2 flex items-center gap-1.5 overflow-x-auto no-scrollbar border-t border-white/[0.04] pt-2">
+          <span className="mr-1 shrink-0 font-mono text-[10px] uppercase tracking-wider text-[#00e6ff]">Tech</span>
+          {TECH_FILTERS.map((tech) => {
+            const active = activeTech === tech.key;
+            return (
+              <button
+                key={tech.key}
+                type="button"
+                onClick={() => onTechChange(tech.key)}
+                aria-pressed={active}
+                className={
+                  "inline-flex min-h-[36px] shrink-0 items-center gap-1 whitespace-nowrap rounded-md px-2.5 py-1 font-mono text-[11px] transition-all focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent " +
+                  (active
+                    ? "border border-[#00e6ff]/50 bg-[#00e6ff]/15 text-[#00e6ff] font-semibold shadow-[0_0_10px_rgba(0,230,255,0.2)]"
+                    : "border border-white/10 bg-white/[0.03] text-ink-muted hover:border-white/20 hover:text-ink")
+                }
+              >
+                <span>[{tech.label}]</span>
+                <span className="opacity-70 text-[9px]">({techCounts[tech.key] ?? 0})</span>
               </button>
             );
           })}
@@ -369,7 +409,9 @@ export const DirectoryTable: React.FC<DirectoryTableProps> = ({
                   <li
                     key={project.id}
                     id={"entry-" + project.slug}
-                    className={"group relative rounded-lg transition-all vh-row-glass " + (selected ? "bg-accent/[0.055]" : "hover:bg-white/[0.018]")}
+                    onMouseEnter={() => onSelectProject(project)}
+                    onFocus={() => onSelectProject(project)}
+                    className={"group relative rounded-lg transition-all vh-row-glass " + (selected ? "bg-accent/[0.055] border-l-2 border-l-accent" : "hover:bg-white/[0.018]")}
                   >
                     <div className="grid grid-cols-[minmax(0,1fr)_auto] items-center">
                       <button

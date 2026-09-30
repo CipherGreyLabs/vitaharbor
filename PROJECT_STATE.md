@@ -1,6 +1,16 @@
 # VitaHarbor project state
 
-Updated: 2026-09-29
+Updated: 2026-09-30
+
+## Current state: VH-FEATURES-034 Advanced Tech Filters, 3D Game-Switch & Visual Milestone Progression (2026-09-30)
+
+- Advanced Technology Filters active in directory:
+  - Decompilation, ARMv7 Wrapper, vitaGL, Native C/C++, and Custom Engine / SDL chips with live counts.
+- Interactive 3D Game-Switch active:
+  - Hovering/focusing on directory project cards immediately updates the 3D PS Vita OLED screen with title, platform, technology badges, and framerate target.
+- Visual Horizontal Milestone Stepper active in ProjectPanel:
+  - `[Announced] ──► [WIP / Boot] ──► [In-Game] ──► [Playable] ──► [Released]` progression with status-linked pulse, timestamps, and checkmarks.
+- Verification: npm run verify passed (tsc clean, 127/127 unit tests, 30 prerendered project pages, 33 sitemap URLs); contrast audit passed 59/59 styles (0 failures).
 
 ## Current state: VH-CONTENT-LCS-032 GTA: Liberty City Stories port addition & WCAG AA contrast compliance (2026-09-29)
 

@@ -11,6 +11,7 @@ import {
   splitTitle,
   prettyStage,
   deriveProjectType,
+  TECH_FILTERS,
   STAGE_RANK,
   formatDay,
   formatUtcDateTime
@@ -23,16 +24,18 @@ interface DirectoryFilters {
   search: string;
   stage: string;
   type: string;
+  tech: string;
   sort: string;
 }
 
 function readDirectoryFilters(): DirectoryFilters {
-  if (typeof window === "undefined") return { search: "", stage: "all", type: "all", sort: "recent" };
+  if (typeof window === "undefined") return { search: "", stage: "all", type: "all", tech: "all", sort: "recent" };
   const params = new URLSearchParams(window.location.search);
   return {
     search: params.get("q") || "",
     stage: params.get("stage") || "all",
     type: params.get("type") || "all",
+    tech: params.get("tech") || "all",
     sort: params.get("sort") || "recent"
   };
 }
@@ -113,6 +116,7 @@ export const HomePage: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState(() => readDirectoryFilters().search);
   const [activeFilter, setActiveFilter] = useState(() => readDirectoryFilters().stage);
   const [activeCategory, setActiveCategory] = useState(() => readDirectoryFilters().type);
+  const [activeTech, setActiveTech] = useState(() => readDirectoryFilters().tech);
   const [activeSort, setActiveSort] = useState(() => readDirectoryFilters().sort);
   const [loading] = useState(false);
   const [copiedSlug, setCopiedSlug] = useState("");
@@ -157,6 +161,7 @@ export const HomePage: React.FC = () => {
       ["q", searchTerm.trim(), ""],
       ["stage", activeFilter, "all"],
       ["type", activeCategory, "all"],
+      ["tech", activeTech, "all"],
       ["sort", activeSort, "recent"]
     ];
     for (const [key, value, defaultValue] of values) {
@@ -164,7 +169,7 @@ export const HomePage: React.FC = () => {
       else url.searchParams.set(key, value);
     }
     window.history.replaceState(null, "", url.pathname + (url.search ? url.search : "") + url.hash);
-  }, [searchTerm, activeFilter, activeCategory, activeSort]);
+  }, [searchTerm, activeFilter, activeCategory, activeTech, activeSort]);
 
   useEffect(() => {
     const bundled = FALLBACK_PROJECTS as any[];
@@ -319,6 +324,13 @@ export const HomePage: React.FC = () => {
       list = list.filter((p) => deriveProjectType(p) === activeCategory);
     }
 
+    if (activeTech !== "all") {
+      const techDef = TECH_FILTERS.find((t) => t.key === activeTech);
+      if (techDef?.match) {
+        list = list.filter(techDef.match);
+      }
+    }
+
     const term = searchTerm.trim().toLowerCase();
     if (term) {
       list = list.filter(
@@ -352,7 +364,7 @@ export const HomePage: React.FC = () => {
     });
 
     return list;
-  }, [projects, activeFilter, activeCategory, activeSort, searchTerm]);
+  }, [projects, activeFilter, activeCategory, activeTech, activeSort, searchTerm]);
 
   const selectProject = (project: LedgerProject, scroll = true) => {
     setSelectedId(project.id);
@@ -391,6 +403,7 @@ export const HomePage: React.FC = () => {
     setSearchTerm("");
     setActiveFilter("all");
     setActiveCategory("all");
+    setActiveTech("all");
     setActiveSort("recent");
   };
 
@@ -544,6 +557,8 @@ export const HomePage: React.FC = () => {
           onFilterChange={setActiveFilter}
           activeCategory={activeCategory}
           onCategoryChange={setActiveCategory}
+          activeTech={activeTech}
+          onTechChange={setActiveTech}
           activeSort={activeSort}
           onSortChange={setActiveSort}
           searchTerm={searchTerm}

@@ -381,11 +381,21 @@ export const VitaConsoleScene: React.FC<VitaConsoleSceneProps> = ({
       g.font = '500 18px ui-monospace, SFMono-Regular, Menlo, monospace';
       g.fillText(platform.toUpperCase(), 56, cursorY + size * 0.95);
 
-      g.fillStyle = accent;
+      g.fillStyle = '#00e6ff';
       g.fillRect(56, cursorY + size * 1.24, 40, 3);
-      g.fillStyle = 'rgba(255,255,255,0.78)';
+      g.fillStyle = 'rgba(255,255,255,0.85)';
       g.font = '600 15px ui-monospace, SFMono-Regular, Menlo, monospace';
       g.fillText(stage, 110, cursorY + size * 1.32);
+
+      const techs = (current.technologies || []).slice(0, 2).join(' · ');
+      const techLabel = techs || 'ARMv7 · vitaGL';
+      g.fillStyle = 'rgba(0, 230, 255, 0.82)';
+      g.font = '600 13px ui-monospace, SFMono-Regular, Menlo, monospace';
+      g.fillText('[' + techLabel + ']', 56, cursorY + size * 1.54);
+
+      g.fillStyle = 'rgba(255, 255, 255, 0.55)';
+      g.font = '500 12px ui-monospace, SFMono-Regular, Menlo, monospace';
+      g.fillText('HARDWARE TARGET: 60 FPS', 56, cursorY + size * 1.76);
 
       screenTexture.needsUpdate = true;
     }
