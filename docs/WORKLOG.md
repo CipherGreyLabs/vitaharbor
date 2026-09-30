@@ -750,3 +750,10 @@ The five remaining candidates were checked against their source threads. None wa
 | Time | Commit / state | Change | Why | Model | Verified |
 |---|---|---|---|---|---|
 | 22:05 UTC | working tree | Modeled authentic PS Vita PCH-1000 rear detailing in `VitaConsoleScene.tsx`: 1) Central Rear Touchpad with canvas texture rendering the repeating PlayStation symbol matrix (`△ ◯ ✕ ▢`), central PS emblem, and silver extruded bezel; 2) Dual ergonomic matte oval finger grips with beveled rims; 3) Rear camera assembly with silver ring, dark glass lens, cyan AR reflection, and mic pinhole; 4) 4 recessed corner screws with slot details; 5) Rear directional fill light (`#c8dcff`) for 360° inspection. | Fulfill master delegation: ensure rotating the 3D Vita reveals a complete, authentic hardware model. | gemini-3.7-flash | `npm run verify` passed (tsc clean, 127/127 unit tests, 30 project pages, 33 sitemap URLs). |
+
+### VH-UI-036 Project card hover scroll fix (2026-09-30)
+
+| Time | Commit / state | Change | Why | Model | Verified |
+|---|---|---|---|---|---|
+| 22:30 UTC | 02176b1 | Changed selectProject default in HomePage.tsx to scroll = false, added optional scroll?: boolean to the DirectoryTableProps.onSelectProject signature, passed alse on onMouseEnter/onFocus row handlers, and passed 	rue only from the ProjectPanel \"Show on Vita\" button. | Project-card hover/focus was firing window.scrollTo(...) to the 3D console stage, so the page jumped to the top on every row hover. Scrolling now happens only on explicit selection. | openrouter/free | 
+pm run verify passed (tsc clean, 127/127 unit tests, 30 project pages, 33 sitemap URLs). |
