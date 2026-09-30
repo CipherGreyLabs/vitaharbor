@@ -58,6 +58,10 @@ jobs:
       - name: Verify unit and integration tests
         run: npm run test:unit && npm run test:integration
 
+      - name: Install Playwright browser for browser scan fallback
+        if: ${{ github.event_name == 'schedule' || github.event_name == 'workflow_dispatch' }}
+        run: npx playwright install chromium
+
       - name: Scan Reddit for new port threads
         if: ${{ github.event_name == 'schedule' || github.event_name == 'workflow_dispatch' }}
         run: node scripts/cron-reddit-scan.mjs

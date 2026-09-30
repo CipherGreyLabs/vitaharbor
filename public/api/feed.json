@@ -357,6 +357,43 @@
         "vitaGL",
         "Hardware Shaders"
       ]
+    },
+    {
+      "id": "test-drive-iii-vita",
+      "url": "https://www.reddit.com/r/vitahacks/comments/1wudlni/test_drive_iii_vita_port/",
+      "title": "Test Drive III",
+      "content_text": "Stage: playable | Platform: Various | Summary: Community PlayStation Vita port of Test Drive III with source repository on GitHub. | Hardware: Targeting native hardware performance.",
+      "date_modified": "2026-09-30T19:00:45.000Z",
+      "tags": [
+        "playable",
+        "Various",
+        "VitaSDK"
+      ]
+    },
+    {
+      "id": "test-drive-ii-vita",
+      "url": "https://www.reddit.com/r/vitahacks/comments/1wu6lsx/test_drive_ii_vita_port/",
+      "title": "Test Drive II",
+      "content_text": "Stage: playable | Platform: Various | Summary: Community PlayStation Vita port of Test Drive II with source repository on GitHub. | Hardware: Targeting native hardware performance.",
+      "date_modified": "2026-09-30T14:36:07.000Z",
+      "tags": [
+        "playable",
+        "Various",
+        "VitaSDK"
+      ]
+    },
+    {
+      "id": "halo-ce-decomp-pc-and-android-vita",
+      "url": "https://www.reddit.com/r/PSVitaHomebrew/comments/1wtm0y6/halo_ce_decomp_pc_and_android/",
+      "title": "Halo CE Decomp - Pc and Android",
+      "content_text": "Stage: announced | Platform: Various | Summary: Community PlayStation Vita port of Halo CE Decomp - Pc and Android with source repository on GitHub. | Hardware: Targeting native hardware performance.",
+      "date_modified": "2026-09-30T19:19:17.427Z",
+      "tags": [
+        "announced",
+        "Various",
+        "Decompilation",
+        "ARMv7 Wrapper"
+      ]
     }
   ]
 }

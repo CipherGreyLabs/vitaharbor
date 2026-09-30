@@ -1,25 +1,365 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-09-30T18:28:04.025Z",
+  "generated_at": "2026-09-30T19:19:17.422Z",
   "source": "r/vitahacks + r/VitaPiracy + r/PSVitaHomebrew RSS",
   "items": [
     {
       "schema_version": 2,
-      "id": "reddit-1wu6lsx",
-      "external_id": "1wu6lsx",
-      "state": "QUARANTINED",
+      "id": "reddit-1wtm0y6",
+      "external_id": "1wtm0y6",
+      "state": "PROMOTED",
       "state_history": [
         {
           "state": "DETECTED",
-          "at": "2026-09-30T18:28:04.025Z",
+          "at": "2026-09-30T19:19:05.523Z",
           "actor": "reddit-scanner",
           "reason": "Canonical Reddit RSS entry accepted at the ingestion boundary"
         },
         {
           "state": "QUARANTINED",
-          "at": "2026-09-30T18:28:04.025Z",
+          "at": "2026-09-30T19:19:05.523Z",
           "actor": "reddit-scanner",
           "reason": "Scanner result is unverified and cannot enter the curated ledger"
+        },
+        {
+          "state": "PROMOTED",
+          "at": "2026-09-30T19:19:17.422Z",
+          "actor": "auto-curate-pipeline",
+          "reason": "Automated curation: verified valid PS Vita source repository (https://github.com/cybersecurity/halo-ce-universal) with concrete code indicators"
+        }
+      ],
+      "source": {
+        "platform": "reddit",
+        "subreddit": "PSVitaHomebrew",
+        "canonical_url": "https://www.reddit.com/r/PSVitaHomebrew/comments/1wtm0y6/halo_ce_decomp_pc_and_android/",
+        "author": "karat46",
+        "title": "Halo CE Decomp - Pc and Android",
+        "body": "https://github.com/cybersecurity/halo-ce-universal",
+        "published_at": null
+      },
+      "classification": {
+        "confidence": "medium",
+        "reason": "2 dev signal(s), 1 passive term(s), category=new_project",
+        "candidate_type": "decompilation",
+        "category": "new_project",
+        "question": false,
+        "spam": false
+      },
+      "provenance": {
+        "repository_url": null,
+        "release_url": null,
+        "evidence_urls": [],
+        "evidence_bundle_id": null,
+        "repository_identity": null,
+        "repository_created_at": null,
+        "repository_last_activity_at": null,
+        "release_facts": [],
+        "vita_evidence": [],
+        "author_linkage": null,
+        "corroboration": [],
+        "duplicate_relation": {
+          "content_hash": "f4e7c8c6439528dd72c245f1a7ae03c6b3261ffe0917e9e2793151c1db2832a4",
+          "related_candidate_ids": []
+        }
+      },
+      "campaign": {
+        "cluster_id": null,
+        "linkage_confidence": "none",
+        "signals": [],
+        "related_candidate_ids": [],
+        "text_fingerprint": "ede33342",
+        "media_fingerprints": [],
+        "outbound_fingerprints": [
+          "github.com/cybersecurity/halo-ce-universal"
+        ],
+        "direct_intent": false,
+        "explicit_campaign_reference": false,
+        "incident_id": null
+      },
+      "risk_signals": [
+        "generic_upstream_repository"
+      ],
+      "evidence_gaps": [
+        "repository identity and activity facts",
+        "release or build evidence",
+        "Vita-specific hardware evidence",
+        "author/developer linkage and independent corroboration"
+      ],
+      "content_hash": "f4e7c8c6439528dd72c245f1a7ae03c6b3261ffe0917e9e2793151c1db2832a4",
+      "review": null,
+      "incident": null
+    },
+    {
+      "schema_version": 2,
+      "id": "reddit-1wsh59n",
+      "external_id": "1wsh59n",
+      "state": "QUARANTINED",
+      "state_history": [
+        {
+          "state": "DETECTED",
+          "at": "2026-09-30T19:19:05.523Z",
+          "actor": "reddit-scanner",
+          "reason": "Canonical Reddit RSS entry accepted at the ingestion boundary"
+        },
+        {
+          "state": "QUARANTINED",
+          "at": "2026-09-30T19:19:05.523Z",
+          "actor": "reddit-scanner",
+          "reason": "Scanner result is unverified and cannot enter the curated ledger"
+        }
+      ],
+      "source": {
+        "platform": "reddit",
+        "subreddit": "PSVitaHomebrew",
+        "canonical_url": "https://www.reddit.com/r/PSVitaHomebrew/comments/1wsh59n/the_impossible_real_racing_3_vita_port/",
+        "author": "chutA7X",
+        "title": "The impossible Real Racing 3 Vita Port",
+        "body": "Well I'm happy to announce that Real Racing 3 for Vita it's a reality it will come to public beta on this Saturday October 3rd the release will be announced with a proper YouTube video a full list of features and future plans, announcement here in Reddit and game VPK and explanation on GitHub, already made the repository a few days ago but it's private, for now here you have 3 minutes on gameplay of the alpha 1 version.",
+        "published_at": null
+      },
+      "classification": {
+        "confidence": "medium",
+        "reason": "2 dev signal(s), 2 passive term(s), category=project_update",
+        "candidate_type": "port",
+        "category": "project_update",
+        "question": false,
+        "spam": false
+      },
+      "provenance": {
+        "repository_url": null,
+        "release_url": null,
+        "evidence_urls": [],
+        "evidence_bundle_id": null,
+        "repository_identity": null,
+        "repository_created_at": null,
+        "repository_last_activity_at": null,
+        "release_facts": [],
+        "vita_evidence": [],
+        "author_linkage": null,
+        "corroboration": [],
+        "duplicate_relation": {
+          "content_hash": "f0c5e2c0df08cd5b337a9981eaf26f9853c48326377d8baa648852d68e8de3e8",
+          "related_candidate_ids": []
+        }
+      },
+      "campaign": {
+        "cluster_id": null,
+        "linkage_confidence": "none",
+        "signals": [],
+        "related_candidate_ids": [],
+        "text_fingerprint": "397b8025",
+        "media_fingerprints": [],
+        "outbound_fingerprints": [],
+        "direct_intent": false,
+        "explicit_campaign_reference": false,
+        "incident_id": null
+      },
+      "risk_signals": [],
+      "evidence_gaps": [
+        "exact project repository",
+        "repository identity and activity facts",
+        "Vita-specific hardware evidence",
+        "author/developer linkage and independent corroboration"
+      ],
+      "content_hash": "f0c5e2c0df08cd5b337a9981eaf26f9853c48326377d8baa648852d68e8de3e8",
+      "review": null,
+      "incident": null
+    },
+    {
+      "schema_version": 2,
+      "id": "reddit-1wu93pz",
+      "external_id": "1wu93pz",
+      "state": "QUARANTINED",
+      "state_history": [
+        {
+          "state": "DETECTED",
+          "at": "2026-09-30T19:17:23.729Z",
+          "actor": "reddit-scanner",
+          "reason": "Canonical Reddit RSS entry accepted at the ingestion boundary"
+        },
+        {
+          "state": "QUARANTINED",
+          "at": "2026-09-30T19:17:23.729Z",
+          "actor": "reddit-scanner",
+          "reason": "Scanner result is unverified and cannot enter the curated ledger"
+        }
+      ],
+      "source": {
+        "platform": "reddit",
+        "subreddit": "VitaPiracy",
+        "canonical_url": "https://www.reddit.com/r/VitaPiracy/comments/1wu93pz/is_a_port_of_minion_rush_110_or_180_possible/",
+        "author": "brickyismynickname",
+        "title": "is a port of minion rush 1.10 or 1.8.0 possible",
+        "body": "I stumbled across this submission on the android2vita wrapper page recently, i know like nothing about making vita ports but i have come here to check if it is actually possible at all and if somebody would be able to make it https://github.com/Rinnegatamante/Android2Vita-Candidate-Ports-List/issues/901",
+        "published_at": null
+      },
+      "classification": {
+        "confidence": "medium",
+        "reason": "1 dev signal(s), 3 passive term(s), category=new_project",
+        "candidate_type": "wrapper",
+        "category": "new_project",
+        "question": false,
+        "spam": false
+      },
+      "provenance": {
+        "repository_url": null,
+        "release_url": null,
+        "evidence_urls": [],
+        "evidence_bundle_id": null,
+        "repository_identity": null,
+        "repository_created_at": null,
+        "repository_last_activity_at": null,
+        "release_facts": [],
+        "vita_evidence": [],
+        "author_linkage": null,
+        "corroboration": [],
+        "duplicate_relation": {
+          "content_hash": "ab82824ab993efa02b268ebee8880d5558bea31d87bac5c4cfd68dffe2af3952",
+          "related_candidate_ids": []
+        }
+      },
+      "campaign": {
+        "cluster_id": null,
+        "linkage_confidence": "none",
+        "signals": [],
+        "related_candidate_ids": [],
+        "text_fingerprint": "bae30039",
+        "media_fingerprints": [],
+        "outbound_fingerprints": [
+          "github.com/rinnegatamante/android2vita-candidate-ports-list/issues/901"
+        ],
+        "direct_intent": false,
+        "explicit_campaign_reference": false,
+        "incident_id": null
+      },
+      "risk_signals": [],
+      "evidence_gaps": [
+        "repository identity and activity facts",
+        "release or build evidence",
+        "Vita-specific hardware evidence",
+        "author/developer linkage and independent corroboration"
+      ],
+      "content_hash": "ab82824ab993efa02b268ebee8880d5558bea31d87bac5c4cfd68dffe2af3952",
+      "review": null,
+      "incident": null
+    },
+    {
+      "schema_version": 2,
+      "id": "reddit-1wudlni",
+      "external_id": "1wudlni",
+      "state": "PROMOTED",
+      "state_history": [
+        {
+          "state": "DETECTED",
+          "at": "2026-09-30T19:17:23.729Z",
+          "actor": "reddit-scanner",
+          "reason": "Canonical Reddit RSS entry accepted at the ingestion boundary"
+        },
+        {
+          "state": "QUARANTINED",
+          "at": "2026-09-30T19:17:23.729Z",
+          "actor": "reddit-scanner",
+          "reason": "Scanner result is unverified and cannot enter the curated ledger"
+        },
+        {
+          "state": "PROMOTED",
+          "at": "2026-09-30T19:17:30.529Z",
+          "actor": "auto-curate-pipeline",
+          "reason": "Automated curation: verified valid PS Vita source repository (https://github.com/smart-pickle/TestDriveIII-Vita) with concrete code indicators"
+        }
+      ],
+      "source": {
+        "platform": "reddit",
+        "subreddit": "vitahacks",
+        "canonical_url": "https://www.reddit.com/r/vitahacks/comments/1wudlni/test_drive_iii_vita_port/",
+        "author": "gainusha",
+        "title": "Test Drive III Vita port",
+        "body": "https://preview.redd.it/1t6316fegpsh1.png?width=640&format=png&auto=webp&s=f3300d5ea2ee0d9d983ad411a561fd021357a908 To end with the Test Drive DOS trilogy I present you Test Drive III Vita Native port. You can find it here: https://github.com/smart-pickle/TestDriveIII-Vita Thanks to the work of kylofon who created the Test Drive III recompilation for windows I present to you the Vita native version of the original Test Drive III. It's the initial release, it runs OK on Vita 3K, i have not found any bugs so far but i'm really bad at it, as i was when it was first released...",
+        "published_at": "2026-09-30T19:00:45.000Z"
+      },
+      "classification": {
+        "confidence": "high",
+        "reason": "4 dev signals: \\brelease\\b, \\brecompil(?:e|ed|er|ation)\\b, github\\.com\\b · category=project_update",
+        "candidate_type": "port",
+        "category": "project_update",
+        "question": false,
+        "spam": false
+      },
+      "provenance": {
+        "repository_url": null,
+        "release_url": null,
+        "evidence_urls": [],
+        "evidence_bundle_id": null,
+        "repository_identity": null,
+        "repository_created_at": null,
+        "repository_last_activity_at": null,
+        "release_facts": [],
+        "vita_evidence": [],
+        "author_linkage": null,
+        "corroboration": [],
+        "duplicate_relation": {
+          "content_hash": "43f3628d28d5c54c807db340063bcdaf3e877004257a44b003b6fb255f7ada90",
+          "related_candidate_ids": []
+        }
+      },
+      "campaign": {
+        "cluster_id": "campaign-56b2addd",
+        "linkage_confidence": "medium",
+        "signals": [
+          "same_author_burst",
+          "shared_outbound_fingerprint"
+        ],
+        "related_candidate_ids": [
+          "reddit-1wu6lsx"
+        ],
+        "text_fingerprint": "0ad3595c",
+        "media_fingerprints": [
+          "preview.redd.it/1t6316fegpsh1.png"
+        ],
+        "outbound_fingerprints": [
+          "preview.redd.it/1t6316fegpsh1.png",
+          "github.com/smart-pickle/testdriveiii-vita",
+          "www.reddit.com/r/vitahacks/comments/1wudlni/test_drive_iii_vita_port",
+          "github.com/kylofon",
+          "www.reddit.com/user/gainusha"
+        ],
+        "direct_intent": false,
+        "explicit_campaign_reference": false,
+        "incident_id": null
+      },
+      "risk_signals": [],
+      "evidence_gaps": [
+        "repository identity and activity facts",
+        "Vita-specific hardware evidence",
+        "author/developer linkage and independent corroboration"
+      ],
+      "content_hash": "43f3628d28d5c54c807db340063bcdaf3e877004257a44b003b6fb255f7ada90",
+      "review": null,
+      "incident": null
+    },
+    {
+      "schema_version": 2,
+      "id": "reddit-1wu6lsx",
+      "external_id": "1wu6lsx",
+      "state": "PROMOTED",
+      "state_history": [
+        {
+          "state": "DETECTED",
+          "at": "2026-09-30T19:17:23.729Z",
+          "actor": "reddit-scanner",
+          "reason": "Canonical Reddit RSS entry accepted at the ingestion boundary"
+        },
+        {
+          "state": "QUARANTINED",
+          "at": "2026-09-30T19:17:23.729Z",
+          "actor": "reddit-scanner",
+          "reason": "Scanner result is unverified and cannot enter the curated ledger"
+        },
+        {
+          "state": "PROMOTED",
+          "at": "2026-09-30T19:17:30.529Z",
+          "actor": "auto-curate-pipeline",
+          "reason": "Automated curation: verified valid PS Vita source repository (https://github.com/smart-pickle/TestDriveII-Vita) with concrete code indicators"
         }
       ],
       "source": {
@@ -57,10 +397,15 @@
         }
       },
       "campaign": {
-        "cluster_id": null,
-        "linkage_confidence": "none",
-        "signals": [],
-        "related_candidate_ids": [],
+        "cluster_id": "campaign-56b2addd",
+        "linkage_confidence": "medium",
+        "signals": [
+          "same_author_burst",
+          "shared_outbound_fingerprint"
+        ],
+        "related_candidate_ids": [
+          "reddit-1wudlni"
+        ],
         "text_fingerprint": "21ffefdc",
         "media_fingerprints": [
           "external-preview.redd.it/kji-hnjt5_rutvxg2l59pgbmpbmn1gykynh1tgqcqsg.png",
@@ -443,7 +788,7 @@
       "schema_version": 2,
       "id": "reddit-1wq1o7g",
       "external_id": "1wq1o7g",
-      "state": "QUARANTINED",
+      "state": "REJECTED",
       "state_history": [
         {
           "state": "DETECTED",
@@ -456,6 +801,12 @@
           "at": "2026-09-25T17:58:49.152Z",
           "actor": "reddit-scanner",
           "reason": "Scanner result is unverified and cannot enter the curated ledger"
+        },
+        {
+          "state": "REJECTED",
+          "at": "2026-09-29T22:11:49.126Z",
+          "actor": "auto-curate-pipeline",
+          "reason": "Identified as troll, prank, AI-slop or unauthorized fund request"
         }
       ],
       "source": {
@@ -533,7 +884,7 @@
       "schema_version": 2,
       "id": "reddit-1wpsyhn",
       "external_id": "1wpsyhn",
-      "state": "QUARANTINED",
+      "state": "REJECTED",
       "state_history": [
         {
           "state": "DETECTED",
@@ -546,6 +897,12 @@
           "at": "2026-09-25T12:47:34.565Z",
           "actor": "reddit-scanner",
           "reason": "Scanner result is unverified and cannot enter the curated ledger"
+        },
+        {
+          "state": "REJECTED",
+          "at": "2026-09-29T22:11:49.126Z",
+          "actor": "auto-curate-pipeline",
+          "reason": "Identified as troll, prank, AI-slop or unauthorized fund request"
         }
       ],
       "source": {

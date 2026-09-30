@@ -30,6 +30,12 @@ export const FALLBACK_GAMES: Game[] = [
   { id: 38, slug: "memory-mastermind", title: "Memory Mastermind", normalized_title: "memory mastermind", original_release_year: 2013, original_platform: "Mobile / RobTop", created_at: new Date('2026-09-27T08:11:00.000Z'), updated_at: new Date('2026-09-27T08:11:00.000Z') }
 ,
   { id: 39, slug: "gta-liberty-city-stories", title: "GTA: Liberty City Stories (reStories)", normalized_title: "gta: liberty city stories (restories)", original_release_year: 2005, original_platform: "PSP / PS2", created_at: new Date('2026-09-29T16:07:11.000Z'), updated_at: new Date('2026-09-29T16:07:11.000Z') }
+,
+  { id: 40, slug: "test-drive-iii-vita", title: "Test Drive III", normalized_title: "test drive iii", original_release_year: null, original_platform: "Various", created_at: new Date('2026-09-30T19:00:45.000Z'), updated_at: new Date('2026-09-30T19:17:30.535Z') }
+,
+  { id: 41, slug: "test-drive-ii-vita", title: "Test Drive II", normalized_title: "test drive ii", original_release_year: null, original_platform: "Various", created_at: new Date('2026-09-30T14:36:07.000Z'), updated_at: new Date('2026-09-30T19:17:30.541Z') }
+,
+  { id: 42, slug: "halo-ce-decomp-pc-and-android-vita", title: "Halo CE Decomp - Pc and Android", normalized_title: "halo ce decomp - pc and android", original_release_year: null, original_platform: "Various", created_at: new Date('2026-09-30T19:19:17.427Z'), updated_at: new Date('2026-09-30T19:19:17.427Z') }
 ];
 
 export const FALLBACK_PROJECTS: any[] = [
@@ -665,6 +671,90 @@ export const FALLBACK_PROJECTS: any[] = [
       { id: 391, stage: "playable", effective_at: new Date('2026-09-29T16:07:11.000Z'), reason: "v01.15 release published with full intro, sound, and installable VPK" }
     ]
   }
+,
+  {
+    id: 40,
+    game_id: 40,
+    slug: "test-drive-iii-vita",
+    reddit_url: "https://www.reddit.com/r/vitahacks/comments/1wudlni/test_drive_iii_vita_port/",
+    repo_url: "https://github.com/smart-pickle/TestDriveIII-Vita",
+    display_name: "Test Drive III",
+    current_stage: "playable",
+    lifecycle: "active",
+    summary: "Community PlayStation Vita port of Test Drive III with source repository on GitHub.",
+    playability_notes: "Automatically promoted from verified community source with repository and code evidence.",
+    performance_notes: "Targeting native hardware performance.",
+    first_seen_at: new Date('2026-09-30T19:00:45.000Z'),
+    last_activity_at: new Date('2026-09-30T19:00:45.000Z'),
+    released_at: new Date('2026-09-30T19:00:45.000Z'),
+    is_featured: false,
+    is_archived: false,
+    verification: "developer_direct",
+    game_title: "Test Drive III",
+    original_platform: "Various",
+    original_release_year: null,
+    technologies: ["VitaSDK"],
+    developers: [{ id: 40, role: "lead", display_name: "gainusha", slug: "gainusha" }],
+    stage_history: [
+      { id: 400, stage: "playable", effective_at: new Date('2026-09-30T19:00:45.000Z'), reason: "Verified source port release/development on GitHub" }
+    ]
+  }
+,
+  {
+    id: 41,
+    game_id: 41,
+    slug: "test-drive-ii-vita",
+    reddit_url: "https://www.reddit.com/r/vitahacks/comments/1wu6lsx/test_drive_ii_vita_port/",
+    repo_url: "https://github.com/smart-pickle/TestDriveII-Vita",
+    display_name: "Test Drive II",
+    current_stage: "playable",
+    lifecycle: "active",
+    summary: "Community PlayStation Vita port of Test Drive II with source repository on GitHub.",
+    playability_notes: "Automatically promoted from verified community source with repository and code evidence.",
+    performance_notes: "Targeting native hardware performance.",
+    first_seen_at: new Date('2026-09-30T14:36:07.000Z'),
+    last_activity_at: new Date('2026-09-30T14:36:07.000Z'),
+    released_at: new Date('2026-09-30T14:36:07.000Z'),
+    is_featured: false,
+    is_archived: false,
+    verification: "developer_direct",
+    game_title: "Test Drive II",
+    original_platform: "Various",
+    original_release_year: null,
+    technologies: ["VitaSDK"],
+    developers: [{ id: 41, role: "lead", display_name: "gainusha", slug: "gainusha" }],
+    stage_history: [
+      { id: 410, stage: "playable", effective_at: new Date('2026-09-30T14:36:07.000Z'), reason: "Verified source port release/development on GitHub" }
+    ]
+  }
+,
+  {
+    id: 42,
+    game_id: 42,
+    slug: "halo-ce-decomp-pc-and-android-vita",
+    reddit_url: "https://www.reddit.com/r/PSVitaHomebrew/comments/1wtm0y6/halo_ce_decomp_pc_and_android/",
+    repo_url: "https://github.com/cybersecurity/halo-ce-universal",
+    display_name: "Halo CE Decomp - Pc and Android",
+    current_stage: "announced",
+    lifecycle: "active",
+    summary: "Community PlayStation Vita port of Halo CE Decomp - Pc and Android with source repository on GitHub.",
+    playability_notes: "Automatically promoted from verified community source with repository and code evidence.",
+    performance_notes: "Targeting native hardware performance.",
+    first_seen_at: new Date('2026-09-30T19:19:17.427Z'),
+    last_activity_at: new Date('2026-09-30T19:19:17.427Z'),
+    released_at: null,
+    is_featured: false,
+    is_archived: false,
+    verification: "developer_direct",
+    game_title: "Halo CE Decomp - Pc and Android",
+    original_platform: "Various",
+    original_release_year: null,
+    technologies: ["Decompilation","ARMv7 Wrapper"],
+    developers: [{ id: 42, role: "lead", display_name: "karat46", slug: "karat46" }],
+    stage_history: [
+      { id: 420, stage: "announced", effective_at: new Date('2026-09-30T19:19:17.427Z'), reason: "Verified source port release/development on GitHub" }
+    ]
+  }
 ];
 
 export const FALLBACK_DEVELOPERS: any[] = [
@@ -736,6 +826,30 @@ export const FALLBACK_DEVELOPERS: any[] = [
     identities: [
       { provider: "github", username: "fauxrougee" },
       { provider: "reddit", username: "amplieboy" }
+    ],
+    projects: []
+  }
+,
+  {
+    id: 40,
+    slug: "gainusha",
+    display_name: "gainusha",
+    description: "Developer of Test Drive III for PlayStation Vita.",
+    is_known_developer: true,
+    identities: [
+      { provider: "reddit", username: "gainusha" }
+    ],
+    projects: []
+  }
+,
+  {
+    id: 42,
+    slug: "karat46",
+    display_name: "karat46",
+    description: "Developer of Halo CE Decomp - Pc and Android for PlayStation Vita.",
+    is_known_developer: true,
+    identities: [
+      { provider: "reddit", username: "karat46" }
     ],
     projects: []
   }
@@ -1013,6 +1127,60 @@ export const FALLBACK_UPDATES: any[] = [
     sources: [
       { source_item_id: "src_gta_lcs_repo", relationship: "primary", canonical_url: "https://github.com/fauxrougee/GTALCS-psvita-port" },
       { source_item_id: "src_gta_lcs_reddit", relationship: "community", canonical_url: "https://www.reddit.com/r/vitahacks/comments/1wte7gf/gta_liberty_city_stories_my_ps_vita_port_is_now/" }
+    ]
+  }
+,
+  {
+    id: "upd_test_drive_iii_vita",
+    port_project_id: 40,
+    project_slug: "test-drive-iii-vita",
+    project_display_name: "Test Drive III",
+    developer_display_name: "gainusha",
+    developer_slug: "gainusha",
+    event_type: "playable_demo",
+    title: "Test Drive III PS Vita port surfaced with repository",
+    summary: "Automated verification confirmed active repository and code evidence for Test Drive III.",
+    event_at: new Date('2026-09-30T19:00:45.000Z'),
+    verification_level: "developer_direct",
+    sources: [
+      { source_item_id: "src_upd_test_drive_iii_vita_repo", relationship: "primary", canonical_url: "https://github.com/smart-pickle/TestDriveIII-Vita" },
+      { source_item_id: "src_upd_test_drive_iii_vita_reddit", relationship: "community", canonical_url: "https://www.reddit.com/r/vitahacks/comments/1wudlni/test_drive_iii_vita_port/" }
+    ]
+  }
+,
+  {
+    id: "upd_test_drive_ii_vita",
+    port_project_id: 41,
+    project_slug: "test-drive-ii-vita",
+    project_display_name: "Test Drive II",
+    developer_display_name: "gainusha",
+    developer_slug: "gainusha",
+    event_type: "playable_demo",
+    title: "Test Drive II PS Vita port surfaced with repository",
+    summary: "Automated verification confirmed active repository and code evidence for Test Drive II.",
+    event_at: new Date('2026-09-30T14:36:07.000Z'),
+    verification_level: "developer_direct",
+    sources: [
+      { source_item_id: "src_upd_test_drive_ii_vita_repo", relationship: "primary", canonical_url: "https://github.com/smart-pickle/TestDriveII-Vita" },
+      { source_item_id: "src_upd_test_drive_ii_vita_reddit", relationship: "community", canonical_url: "https://www.reddit.com/r/vitahacks/comments/1wu6lsx/test_drive_ii_vita_port/" }
+    ]
+  }
+,
+  {
+    id: "upd_halo_ce_decomp_pc_and_android_vita",
+    port_project_id: 42,
+    project_slug: "halo-ce-decomp-pc-and-android-vita",
+    project_display_name: "Halo CE Decomp - Pc and Android",
+    developer_display_name: "karat46",
+    developer_slug: "karat46",
+    event_type: "project_announced",
+    title: "Halo CE Decomp - Pc and Android PS Vita port surfaced with repository",
+    summary: "Automated verification confirmed active repository and code evidence for Halo CE Decomp - Pc and Android.",
+    event_at: new Date('2026-09-30T19:19:17.427Z'),
+    verification_level: "developer_direct",
+    sources: [
+      { source_item_id: "src_upd_halo_ce_decomp_pc_and_android_vita_repo", relationship: "primary", canonical_url: "https://github.com/cybersecurity/halo-ce-universal" },
+      { source_item_id: "src_upd_halo_ce_decomp_pc_and_android_vita_reddit", relationship: "community", canonical_url: "https://www.reddit.com/r/PSVitaHomebrew/comments/1wtm0y6/halo_ce_decomp_pc_and_android/" }
     ]
   }
 ];

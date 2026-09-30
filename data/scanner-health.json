@@ -1,45 +1,45 @@
 {
   "schema_version": 3,
-  "attempted_at": "2026-09-30T18:28:04.025Z",
-  "state": "partial",
-  "successful_sources": 1,
+  "attempted_at": "2026-09-30T19:19:05.523Z",
+  "state": "complete",
+  "successful_sources": 3,
   "total_sources": 3,
   "github_action": {
-    "provider": "github-actions",
+    "provider": "local",
     "status": "unknown",
-    "run_id": "36758694908",
-    "event": "schedule",
-    "sha": "3d6c11189e5e62e8434dbbca80e6216f4a7e5d3f"
+    "run_id": null,
+    "event": null,
+    "sha": null
   },
-  "consecutive_degraded_runs": 12,
+  "consecutive_degraded_runs": 0,
   "recent_runs": [
     {
-      "attempted_at": "2026-09-30T18:28:04.025Z",
-      "state": "partial",
-      "successful_sources": 1,
+      "attempted_at": "2026-09-30T19:19:05.523Z",
+      "state": "complete",
+      "successful_sources": 3,
       "source_statuses": {
         "vitahacks": "available",
-        "VitaPiracy": "rate_limited",
+        "VitaPiracy": "available",
+        "PSVitaHomebrew": "available"
+      }
+    },
+    {
+      "attempted_at": "2026-09-30T19:18:12.217Z",
+      "state": "partial",
+      "successful_sources": 2,
+      "source_statuses": {
+        "vitahacks": "available",
+        "VitaPiracy": "available",
         "PSVitaHomebrew": "rate_limited"
       }
     },
     {
-      "attempted_at": "2026-09-30T13:46:16.915Z",
+      "attempted_at": "2026-09-30T19:17:23.729Z",
       "state": "partial",
-      "successful_sources": 1,
+      "successful_sources": 2,
       "source_statuses": {
         "vitahacks": "available",
-        "VitaPiracy": "rate_limited",
-        "PSVitaHomebrew": "rate_limited"
-      }
-    },
-    {
-      "attempted_at": "2026-09-29T23:01:25.444Z",
-      "state": "partial",
-      "successful_sources": 1,
-      "source_statuses": {
-        "vitahacks": "available",
-        "VitaPiracy": "rate_limited",
+        "VitaPiracy": "available",
         "PSVitaHomebrew": "rate_limited"
       }
     },
@@ -138,22 +138,22 @@
     {
       "subreddit": "vitahacks",
       "status": "available",
-      "last_successful_scan_at": "2026-09-30T18:28:04.025Z",
+      "last_successful_scan_at": "2026-09-30T19:19:05.523Z",
       "consecutive_failures": 0,
       "retry_after_seconds": null
     },
     {
       "subreddit": "VitaPiracy",
-      "status": "rate_limited",
-      "last_successful_scan_at": null,
-      "consecutive_failures": 29,
+      "status": "available",
+      "last_successful_scan_at": "2026-09-30T19:19:05.523Z",
+      "consecutive_failures": 0,
       "retry_after_seconds": null
     },
     {
       "subreddit": "PSVitaHomebrew",
-      "status": "rate_limited",
-      "last_successful_scan_at": null,
-      "consecutive_failures": 29,
+      "status": "available",
+      "last_successful_scan_at": "2026-09-30T19:19:05.523Z",
+      "consecutive_failures": 0,
       "retry_after_seconds": null
     }
   ]

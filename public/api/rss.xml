@@ -5,7 +5,7 @@
     <link>https://vitaharbor.vercel.app/</link>
     <description>Community PlayStation Vita ports tracked from r/vitahacks + r/VitaPiracy + r/PSVitaHomebrew</description>
     <language>en-us</language>
-    <lastBuildDate>Wed, 30 Sep 2026 18:28:05 GMT</lastBuildDate>
+    <lastBuildDate>Wed, 30 Sep 2026 19:26:40 GMT</lastBuildDate>
     <item>
       <title><![CDATA[Medal of Honor: Allied Assault (OpenMoHAA) - IN_GAME]]></title>
       <link>https://www.reddit.com/r/vitahacks/comments/1tapf2b/wip_openmohaa_on_ps_vita_medal_of_honor_allied/</link>
@@ -194,6 +194,27 @@
       <guid isPermaLink="false">gta-lcs-vita</guid>
       <pubDate>Tue, 29 Sep 2026 16:07:11 GMT</pubDate>
       <description><![CDATA[Native PlayStation Vita port of GTA: Liberty City Stories based on the reStories decompilation project, running with hardware audio, controls, and custom LiveArea. Hardware Status: Hardware accelerated rendering via vitaGL with variable scene framerates.]]></description>
+    </item>
+    <item>
+      <title><![CDATA[Test Drive III - PLAYABLE]]></title>
+      <link>https://www.reddit.com/r/vitahacks/comments/1wudlni/test_drive_iii_vita_port/</link>
+      <guid isPermaLink="false">test-drive-iii-vita</guid>
+      <pubDate>Wed, 30 Sep 2026 19:00:45 GMT</pubDate>
+      <description><![CDATA[Community PlayStation Vita port of Test Drive III with source repository on GitHub. Hardware Status: Targeting native hardware performance.]]></description>
+    </item>
+    <item>
+      <title><![CDATA[Test Drive II - PLAYABLE]]></title>
+      <link>https://www.reddit.com/r/vitahacks/comments/1wu6lsx/test_drive_ii_vita_port/</link>
+      <guid isPermaLink="false">test-drive-ii-vita</guid>
+      <pubDate>Wed, 30 Sep 2026 14:36:07 GMT</pubDate>
+      <description><![CDATA[Community PlayStation Vita port of Test Drive II with source repository on GitHub. Hardware Status: Targeting native hardware performance.]]></description>
+    </item>
+    <item>
+      <title><![CDATA[Halo CE Decomp - Pc and Android - ANNOUNCED]]></title>
+      <link>https://www.reddit.com/r/PSVitaHomebrew/comments/1wtm0y6/halo_ce_decomp_pc_and_android/</link>
+      <guid isPermaLink="false">halo-ce-decomp-pc-and-android-vita</guid>
+      <pubDate>Wed, 30 Sep 2026 19:19:17 GMT</pubDate>
+      <description><![CDATA[Community PlayStation Vita port of Halo CE Decomp - Pc and Android with source repository on GitHub. Hardware Status: Targeting native hardware performance.]]></description>
     </item>
   </channel>
 </rss>

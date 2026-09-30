@@ -78,7 +78,10 @@ export const KNOWN_REPOS: Record<string, string> = {
   "renpy-8-runtime-engine": "https://github.com/Grimiku/RenPy-Vita-8",
   "real-racing-2-vita": "https://github.com/CHUTA7X/Real-Racing-2-Vita-Port-Release",
   "diddy-kong-racing-golden-balloon": "https://github.com/zm2283145/goldenballoon-vita-port",
-  "gta-lcs-vita": "https://github.com/fauxrougee/GTALCS-psvita-port"
+  "gta-lcs-vita": "https://github.com/fauxrougee/GTALCS-psvita-port",
+  "test-drive-iii-vita": "https://github.com/smart-pickle/TestDriveIII-Vita",
+  "test-drive-ii-vita": "https://github.com/smart-pickle/TestDriveII-Vita",
+  "halo-ce-decomp-pc-and-android-vita": "https://github.com/cybersecurity/halo-ce-universal",
 };
 
 export const STAGE_TONE: Record<string, string> = {

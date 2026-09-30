@@ -11,6 +11,7 @@ import { createHash } from "node:crypto";
 import { REDDIT_SOURCE_LABEL, REDDIT_SUBREDDITS, redditRssUrl } from "./reddit-sources.mjs";
 import { buildScannerHealth } from "./reddit-scan-health.mjs";
 import { fetchRedditFeed } from "./reddit-fetch.mjs";
+import { scrapeRedditSubreddit } from "./browser-reddit-scraper.mjs";
 import { classify, classifyCandidateType, isTrackableCandidateCategory, isTrackableCandidateType, keyOf, parseEntries } from "./reddit-classifier.mjs";
 import {
   assessCandidate,
@@ -88,6 +89,15 @@ async function fetchFeed(subreddit) {
   }
   if (result.status === "rate_limited") {
     console.warn("r/" + subreddit + " returned HTTP 429; bounded Retry-After hint: " + (result.retryAfterSeconds ?? "unavailable") + " seconds; no immediate retry");
+    try {
+      const scraped = await scrapeRedditSubreddit(subreddit, 25);
+      if (scraped && scraped.length > 0) {
+        console.log("[browser-fallback] r/" + subreddit + ": successfully scraped " + scraped.length + " entries via browser");
+        return { entries: scraped, status: "available", retryAfterSeconds: null };
+      }
+    } catch (err) {
+      console.warn("[browser-fallback] r/" + subreddit + " failed:", err.message);
+    }
   } else {
     console.warn("r/" + subreddit + " fetch unavailable" + (result.httpStatus ? " (HTTP " + result.httpStatus + ")" : ""));
   }
