@@ -473,6 +473,218 @@ const recessMat = new THREE.MeshStandardMaterial({color:'#14161a',roughness:0.52
       }
     }
 
+
+    // ==========================================
+    // REAR DETAILS: TOUCHPAD, GRIPS, CAMERA, SCREWS
+    // ==========================================
+
+    // 1. Rear Touchpad Canvas Texture (Iconic PlayStation symbols pattern)
+    const rearPadCanvas = document.createElement('canvas');
+    rearPadCanvas.width = 1024;
+    rearPadCanvas.height = 512;
+    const rCtx = rearPadCanvas.getContext('2d');
+    if (rCtx) {
+      // Base dark glossy surface
+      const bgGrad = rCtx.createLinearGradient(0, 0, 1024, 512);
+      bgGrad.addColorStop(0, '#0a0c10');
+      bgGrad.addColorStop(0.5, '#050608');
+      bgGrad.addColorStop(1, '#090b0e');
+      rCtx.fillStyle = bgGrad;
+      rCtx.fillRect(0, 0, 1024, 512);
+
+      // Subtle border line inside touchpad
+      rCtx.strokeStyle = 'rgba(255, 255, 255, 0.08)';
+      rCtx.lineWidth = 2;
+      rCtx.strokeRect(16, 16, 992, 480);
+
+      // Repeating subtle PlayStation symbols: △ ◯ ✕ ▢
+      const symbols = ['△', '◯', '✕', '▢'];
+      rCtx.font = '600 13px Arial, sans-serif';
+      rCtx.textAlign = 'center';
+      rCtx.textBaseline = 'middle';
+      rCtx.fillStyle = 'rgba(255, 255, 255, 0.05)';
+
+      const stepX = 36;
+      const stepY = 32;
+      let rowIdx = 0;
+      for (let y = 36; y < 480; y += stepY) {
+        let symIdx = rowIdx % symbols.length;
+        for (let x = 36; x < 990; x += stepX) {
+          // Leave central zone cleaner for PS emblem
+          const distToCenter = Math.hypot(x - 512, y - 256);
+          if (distToCenter > 90) {
+            rCtx.fillText(symbols[symIdx], x, y);
+          }
+          symIdx = (symIdx + 1) % symbols.length;
+        }
+        rowIdx++;
+      }
+
+      // Center PlayStation Logo Emblem
+      rCtx.fillStyle = 'rgba(215, 225, 240, 0.38)';
+      rCtx.font = 'bold 36px Arial, sans-serif';
+      rCtx.fillText('PS', 512, 248);
+
+      // Bottom subtle regulatory branding
+      rCtx.font = '500 10px ui-monospace, SFMono-Regular, Menlo, monospace';
+      rCtx.fillStyle = 'rgba(255, 255, 255, 0.22)';
+      rCtx.fillText('MODEL PCH-1000 · SONY COMPUTER ENTERTAINMENT INC.', 512, 455);
+    }
+
+    const rearPadTexture = new THREE.CanvasTexture(rearPadCanvas);
+    rearPadTexture.colorSpace = THREE.SRGBColorSpace;
+    textures.push(rearPadTexture);
+
+    const rearPadMat = new THREE.MeshPhysicalMaterial({
+      map: rearPadTexture,
+      roughness: 0.12,
+      metalness: 0.15,
+      clearcoat: 0.95,
+      clearcoatRoughness: 0.1,
+      envMapIntensity: 1.2
+    });
+
+    // Helper to create rounded rectangle shape
+    function createRoundedRectShape(w: number, h: number, r: number) {
+      const shape = new THREE.Shape();
+      const x0 = -w / 2, y0 = -h / 2;
+      shape.moveTo(x0 + r, y0);
+      shape.lineTo(x0 + w - r, y0);
+      shape.quadraticCurveTo(x0 + w, y0, x0 + w, y0 + r);
+      shape.lineTo(x0 + w, y0 + h - r);
+      shape.quadraticCurveTo(x0 + w, y0 + h, x0 + w - r, y0 + h);
+      shape.lineTo(x0 + r, y0 + h);
+      shape.quadraticCurveTo(x0, y0 + h, x0, y0 + h - r);
+      shape.lineTo(x0, y0 + r);
+      shape.quadraticCurveTo(x0, y0, x0 + r, y0);
+      return shape;
+    }
+
+    // Rear Touchpad Bezel (glossy silver border)
+    const rearBezelShape = createRoundedRectShape(108.5, 54.5, 9);
+    const rearBezelMesh = new THREE.Mesh(
+      new THREE.ExtrudeGeometry(rearBezelShape, { depth: 0.35, bevelEnabled: true, bevelSize: 0.2, bevelThickness: 0.2, bevelSegments: 3, curveSegments: 24 }),
+      silver
+    );
+    rearBezelMesh.position.set(0, 0, -7.5);
+    rearBezelMesh.rotation.y = Math.PI;
+    vita.add(rearBezelMesh);
+
+    // Rear Touchpad Active Surface
+    const rearPadShape = createRoundedRectShape(107, 53, 8);
+    const rearPadMesh = new THREE.Mesh(
+      new THREE.ShapeGeometry(rearPadShape, 32),
+      rearPadMat
+    );
+    rearPadMesh.position.set(0, 0, -7.72);
+    rearPadMesh.rotation.y = Math.PI;
+    vita.add(rearPadMesh);
+
+    // 2. Ergonomic Finger Grips (Left & Right matte oval recesses)
+    const gripMat = new THREE.MeshStandardMaterial({
+      color: '#0d0f13',
+      roughness: 0.88,
+      metalness: 0.04
+    });
+    const gripRimMat = new THREE.MeshStandardMaterial({
+      color: '#16191f',
+      roughness: 0.72,
+      metalness: 0.08
+    });
+
+    for (const sign of [-1, 1]) {
+      // Textured oval grip surface
+      const gripMesh = new THREE.Mesh(
+        new THREE.CylinderGeometry(14, 14, 0.4, 48),
+        gripMat
+      );
+      gripMesh.scale.set(1.0, 1.6, 0.5);
+      gripMesh.rotation.x = Math.PI / 2;
+      gripMesh.position.set(sign * 66.5, 0, -7.65);
+      vita.add(gripMesh);
+
+      // Subtle beveled rim around grip
+      const gripRim = new THREE.Mesh(
+        new THREE.TorusGeometry(14.2, 0.5, 12, 48),
+        gripRimMat
+      );
+      gripRim.scale.set(1.0, 1.6, 1.0);
+      gripRim.position.set(sign * 66.5, 0, -7.58);
+      vita.add(gripRim);
+    }
+
+    // 3. Rear Camera Assembly (Top Center, facing backwards)
+    const camRing = new THREE.Mesh(
+      new THREE.CylinderGeometry(3.4, 3.4, 0.45, 36),
+      silver
+    );
+    camRing.rotation.x = Math.PI / 2;
+    camRing.position.set(0, 28.5, -7.6);
+    vita.add(camRing);
+
+    const lensMat = new THREE.MeshPhysicalMaterial({
+      color: '#020406',
+      roughness: 0.05,
+      metalness: 0.2,
+      clearcoat: 1.0,
+      clearcoatRoughness: 0.05,
+      reflectivity: 0.9
+    });
+    const camLens = new THREE.Mesh(
+      new THREE.CylinderGeometry(2.6, 2.6, 0.5, 36),
+      lensMat
+    );
+    camLens.rotation.x = Math.PI / 2;
+    camLens.position.set(0, 28.5, -7.68);
+    vita.add(camLens);
+
+    const camPupil = new THREE.Mesh(
+      new THREE.CylinderGeometry(1.2, 1.2, 0.55, 24),
+      new THREE.MeshBasicMaterial({ color: '#00e6ff' })
+    );
+    camPupil.rotation.x = Math.PI / 2;
+    camPupil.position.set(0, 28.5, -7.7);
+    vita.add(camPupil);
+
+    const rearMic = new THREE.Mesh(
+      new THREE.CylinderGeometry(0.5, 0.5, 0.4, 16),
+      black
+    );
+    rearMic.rotation.x = Math.PI / 2;
+    rearMic.position.set(6.5, 28.5, -7.6);
+    vita.add(rearMic);
+
+    // 4. Corner Screws on Rear Casing
+    const screwMat = new THREE.MeshStandardMaterial({
+      color: '#9ba0aa',
+      roughness: 0.25,
+      metalness: 0.85
+    });
+
+    const screwPositions = [
+      [-76, 29],
+      [76, 29],
+      [-76, -29],
+      [76, -29]
+    ];
+
+    for (const [sx, sy] of screwPositions) {
+      const screw = new THREE.Mesh(
+        new THREE.CylinderGeometry(1.1, 1.1, 0.35, 18),
+        screwMat
+      );
+      screw.rotation.x = Math.PI / 2;
+      screw.position.set(sx, sy, -7.58);
+      vita.add(screw);
+
+      const slot = new THREE.Mesh(
+        new THREE.BoxGeometry(1.3, 0.25, 0.4),
+        black
+      );
+      slot.position.set(sx, sy, -7.62);
+      vita.add(slot);
+    }
+
     // STUDIO LIGHTING SETUP WITH EDGE RIM ILLUMINATION
     scene.add(new THREE.HemisphereLight('#e7f1ff', '#151c26', 0.72));
     const light = new THREE.DirectionalLight('#edf5ff', 1.55);
@@ -491,6 +703,10 @@ const recessMat = new THREE.MeshStandardMaterial({color:'#14161a',roughness:0.52
     const cyanRim = new THREE.DirectionalLight('#00e6ff', 0.65);
     cyanRim.position.set(-140, -100, -140);
     scene.add(cyanRim);
+
+    const rearLight = new THREE.DirectionalLight('#c8dcff', 0.95);
+    rearLight.position.set(60, 100, -240);
+    scene.add(rearLight);
 
     let px = 0, py = 0, visible = true, raf = 0, previous = '', readyReported = false;
     let targetRotX = 0, targetRotY = 0;
