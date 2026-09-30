@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-09-30T19:19:17.422Z",
+  "generated_at": "2026-09-30T19:40:51.044Z",
   "source": "r/vitahacks + r/VitaPiracy + r/PSVitaHomebrew RSS",
   "items": [
     {
@@ -169,7 +169,7 @@
       "schema_version": 2,
       "id": "reddit-1wu93pz",
       "external_id": "1wu93pz",
-      "state": "QUARANTINED",
+      "state": "REJECTED",
       "state_history": [
         {
           "state": "DETECTED",
@@ -182,6 +182,12 @@
           "at": "2026-09-30T19:17:23.729Z",
           "actor": "reddit-scanner",
           "reason": "Scanner result is unverified and cannot enter the curated ledger"
+        },
+        {
+          "state": "REJECTED",
+          "at": "2026-09-30T19:40:51.044Z",
+          "actor": "master-triage",
+          "reason": "User question/request without development progress"
         }
       ],
       "source": {
@@ -611,7 +617,7 @@
       "schema_version": 2,
       "id": "reddit-1wqx8qz",
       "external_id": "1wqx8qz",
-      "state": "QUARANTINED",
+      "state": "PROMOTED",
       "state_history": [
         {
           "state": "DETECTED",
@@ -624,6 +630,12 @@
           "at": "2026-09-26T21:59:40.024Z",
           "actor": "reddit-scanner",
           "reason": "Scanner result is unverified and cannot enter the curated ledger"
+        },
+        {
+          "state": "PROMOTED",
+          "at": "2026-09-30T19:40:51.044Z",
+          "actor": "master-triage",
+          "reason": "Duplicate of curated aleph-one-vita"
         }
       ],
       "source": {
@@ -696,7 +708,7 @@
       "schema_version": 2,
       "id": "reddit-1wqtbfl",
       "external_id": "1wqtbfl",
-      "state": "QUARANTINED",
+      "state": "REJECTED",
       "state_history": [
         {
           "state": "DETECTED",
@@ -709,6 +721,12 @@
           "at": "2026-09-26T17:13:39.126Z",
           "actor": "reddit-scanner",
           "reason": "Scanner result is unverified and cannot enter the curated ledger"
+        },
+        {
+          "state": "REJECTED",
+          "at": "2026-09-30T19:40:51.044Z",
+          "actor": "master-triage",
+          "reason": "Fake port / AI-slop claim"
         }
       ],
       "source": {
@@ -1336,7 +1354,7 @@
       "schema_version": 2,
       "id": "reddit-1wmxc2y",
       "external_id": "1wmxc2y",
-      "state": "QUARANTINED",
+      "state": "PROMOTED",
       "state_history": [
         {
           "state": "DETECTED",
@@ -1349,6 +1367,12 @@
           "at": "2026-09-22T12:16:16.397Z",
           "actor": "reddit-scanner",
           "reason": "Scanner result is unverified and cannot enter the curated ledger"
+        },
+        {
+          "state": "PROMOTED",
+          "at": "2026-09-30T19:40:51.044Z",
+          "actor": "master-triage",
+          "reason": "Tracked in curated smash-melee-vita"
         }
       ],
       "source": {
@@ -1422,7 +1446,7 @@
       "schema_version": 2,
       "id": "reddit-1wadsa7",
       "external_id": "1wadsa7",
-      "state": "VERIFIED_FOR_REVIEW",
+      "state": "PROMOTED",
       "state_history": [
         {
           "state": "DETECTED",
@@ -1441,6 +1465,12 @@
           "at": "2026-09-21T19:03:23.766Z",
           "actor": "codex",
           "reason": "Verified genuine Halo CE Vita development; no public repo or release verified"
+        },
+        {
+          "state": "PROMOTED",
+          "at": "2026-09-30T19:40:51.044Z",
+          "actor": "master-triage",
+          "reason": "Tracked in curated halo-ce-recompiled"
         }
       ],
       "source": {
@@ -2164,7 +2194,7 @@
       "schema_version": 2,
       "id": "reddit-1wllsbo",
       "external_id": "1wllsbo",
-      "state": "QUARANTINED",
+      "state": "PROMOTED",
       "state_history": [
         {
           "state": "DETECTED",
@@ -2177,6 +2207,12 @@
           "at": "2026-09-21T18:40:07.572Z",
           "actor": "reddit-scanner",
           "reason": "Scanner result is unverified and cannot enter the curated ledger"
+        },
+        {
+          "state": "PROMOTED",
+          "at": "2026-09-30T19:40:51.044Z",
+          "actor": "master-triage",
+          "reason": "Tracked in curated smash-melee-vita"
         }
       ],
       "source": {
@@ -2825,7 +2861,7 @@
       "schema_version": 2,
       "id": "reddit-1wh0klj",
       "external_id": "1wh0klj",
-      "state": "QUARANTINED",
+      "state": "REJECTED",
       "state_history": [
         {
           "state": "DETECTED",
@@ -2838,6 +2874,12 @@
           "at": "2026-09-17T15:34:20.988Z",
           "actor": "reddit-scanner",
           "reason": "Migrated from legacy discovery queue; requires fresh source review"
+        },
+        {
+          "state": "REJECTED",
+          "at": "2026-09-30T19:40:51.044Z",
+          "actor": "master-triage",
+          "reason": "Official release available on VitaDB"
         }
       ],
       "source": {
