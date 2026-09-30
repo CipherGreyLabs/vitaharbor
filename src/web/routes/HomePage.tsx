@@ -366,7 +366,7 @@ export const HomePage: React.FC = () => {
     return list;
   }, [projects, activeFilter, activeCategory, activeTech, activeSort, searchTerm]);
 
-  const selectProject = (project: LedgerProject, scroll = true) => {
+  const selectProject = (project: LedgerProject, scroll = false) => {
     setSelectedId(project.id);
     setExpandedId(null);
     const url = new URL(window.location.href);

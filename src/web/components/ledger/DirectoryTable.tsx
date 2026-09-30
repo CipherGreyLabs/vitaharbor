@@ -62,7 +62,7 @@ interface DirectoryTableProps {
   selectedId: number | null;
   expandedId: number | null;
   onToggleEntry: (project: LedgerProject) => void;
-  onSelectProject: (project: LedgerProject) => void;
+  onSelectProject: (project: LedgerProject, scroll?: boolean) => void;
   onCopyLink: (project: LedgerProject) => void;
   copiedSlug: string;
   directoryRef: React.RefObject<HTMLElement | null>;
@@ -409,8 +409,8 @@ export const DirectoryTable: React.FC<DirectoryTableProps> = ({
                   <li
                     key={project.id}
                     id={"entry-" + project.slug}
-                    onMouseEnter={() => onSelectProject(project)}
-                    onFocus={() => onSelectProject(project)}
+                    onMouseEnter={() => onSelectProject(project, false)}
+                    onFocus={() => onSelectProject(project, false)}
                     className={"group relative rounded-lg transition-all vh-row-glass " + (selected ? "bg-accent/[0.055] border-l-2 border-l-accent" : "hover:bg-white/[0.018]")}
                   >
                     <div className="grid grid-cols-[minmax(0,1fr)_auto] items-center">
@@ -525,7 +525,7 @@ export const DirectoryTable: React.FC<DirectoryTableProps> = ({
             <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain">
               <ProjectPanel
                 project={openProject}
-                onSelectProject={onSelectProject}
+                onSelectProject={(p) => onSelectProject(p, true)}
                 onCopyLink={onCopyLink}
                 isCopied={copiedSlug === openProject.slug}
               />
