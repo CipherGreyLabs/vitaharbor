@@ -1,18 +1,28 @@
 {
   "schema_version": 3,
-  "attempted_at": "2026-09-30T19:19:05.523Z",
-  "state": "complete",
-  "successful_sources": 3,
+  "attempted_at": "2026-09-30T23:04:10.986Z",
+  "state": "partial",
+  "successful_sources": 1,
   "total_sources": 3,
   "github_action": {
-    "provider": "local",
+    "provider": "github-actions",
     "status": "unknown",
-    "run_id": null,
-    "event": null,
-    "sha": null
+    "run_id": "36789049626",
+    "event": "schedule",
+    "sha": "cdfc4d60898be1152a4865819b6f0ad9a7580a24"
   },
-  "consecutive_degraded_runs": 0,
+  "consecutive_degraded_runs": 1,
   "recent_runs": [
+    {
+      "attempted_at": "2026-09-30T23:04:10.986Z",
+      "state": "partial",
+      "successful_sources": 1,
+      "source_statuses": {
+        "vitahacks": "available",
+        "VitaPiracy": "rate_limited",
+        "PSVitaHomebrew": "rate_limited"
+      }
+    },
     {
       "attempted_at": "2026-09-30T19:19:05.523Z",
       "state": "complete",
@@ -122,38 +132,28 @@
         "VitaPiracy": "rate_limited",
         "PSVitaHomebrew": "rate_limited"
       }
-    },
-    {
-      "attempted_at": "2026-09-27T17:47:42.387Z",
-      "state": "partial",
-      "successful_sources": 1,
-      "source_statuses": {
-        "vitahacks": "available",
-        "VitaPiracy": "rate_limited",
-        "PSVitaHomebrew": "rate_limited"
-      }
     }
   ],
   "sources": [
     {
       "subreddit": "vitahacks",
       "status": "available",
-      "last_successful_scan_at": "2026-09-30T19:19:05.523Z",
+      "last_successful_scan_at": "2026-09-30T23:04:10.986Z",
       "consecutive_failures": 0,
       "retry_after_seconds": null
     },
     {
       "subreddit": "VitaPiracy",
-      "status": "available",
+      "status": "rate_limited",
       "last_successful_scan_at": "2026-09-30T19:19:05.523Z",
-      "consecutive_failures": 0,
+      "consecutive_failures": 1,
       "retry_after_seconds": null
     },
     {
       "subreddit": "PSVitaHomebrew",
-      "status": "available",
+      "status": "rate_limited",
       "last_successful_scan_at": "2026-09-30T19:19:05.523Z",
-      "consecutive_failures": 0,
+      "consecutive_failures": 1,
       "retry_after_seconds": null
     }
   ]

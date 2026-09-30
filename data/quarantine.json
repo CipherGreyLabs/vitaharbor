@@ -1,8 +1,84 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-09-30T19:40:51.044Z",
+  "generated_at": "2026-09-30T23:04:10.986Z",
   "source": "r/vitahacks + r/VitaPiracy + r/PSVitaHomebrew RSS",
   "items": [
+    {
+      "schema_version": 2,
+      "id": "reddit-1wsh59n",
+      "external_id": "1wsh59n",
+      "state": "QUARANTINED",
+      "state_history": [
+        {
+          "state": "DETECTED",
+          "at": "2026-09-30T19:19:05.523Z",
+          "actor": "reddit-scanner",
+          "reason": "Canonical Reddit RSS entry accepted at the ingestion boundary"
+        },
+        {
+          "state": "QUARANTINED",
+          "at": "2026-09-30T19:19:05.523Z",
+          "actor": "reddit-scanner",
+          "reason": "Scanner result is unverified and cannot enter the curated ledger"
+        }
+      ],
+      "source": {
+        "platform": "reddit",
+        "subreddit": "PSVitaHomebrew",
+        "canonical_url": "https://www.reddit.com/r/PSVitaHomebrew/comments/1wsh59n/the_impossible_real_racing_3_vita_port/",
+        "author": "chutA7X",
+        "title": "The impossible Real Racing 3 Vita Port",
+        "body": "Well I'm happy to announce that Real Racing 3 for Vita it's a reality it will come to public beta on this Saturday October 3rd the release will be announced with a proper YouTube video a full list of features and future plans, announcement here in Reddit and game VPK and explanation on GitHub, already made the repository a few days ago but it's private, for now here you have 3 minutes on gameplay of the alpha 1 version.",
+        "published_at": null
+      },
+      "classification": {
+        "confidence": "medium",
+        "reason": "2 dev signal(s), 2 passive term(s), category=project_update",
+        "candidate_type": "port",
+        "category": "project_update",
+        "question": false,
+        "spam": false
+      },
+      "provenance": {
+        "repository_url": null,
+        "release_url": null,
+        "evidence_urls": [],
+        "evidence_bundle_id": null,
+        "repository_identity": null,
+        "repository_created_at": null,
+        "repository_last_activity_at": null,
+        "release_facts": [],
+        "vita_evidence": [],
+        "author_linkage": null,
+        "corroboration": [],
+        "duplicate_relation": {
+          "content_hash": "f0c5e2c0df08cd5b337a9981eaf26f9853c48326377d8baa648852d68e8de3e8",
+          "related_candidate_ids": []
+        }
+      },
+      "campaign": {
+        "cluster_id": null,
+        "linkage_confidence": "none",
+        "signals": [],
+        "related_candidate_ids": [],
+        "text_fingerprint": "397b8025",
+        "media_fingerprints": [],
+        "outbound_fingerprints": [],
+        "direct_intent": false,
+        "explicit_campaign_reference": false,
+        "incident_id": null
+      },
+      "risk_signals": [],
+      "evidence_gaps": [
+        "exact project repository",
+        "repository identity and activity facts",
+        "Vita-specific hardware evidence",
+        "author/developer linkage and independent corroboration"
+      ],
+      "content_hash": "f0c5e2c0df08cd5b337a9981eaf26f9853c48326377d8baa648852d68e8de3e8",
+      "review": null,
+      "incident": null
+    },
     {
       "schema_version": 2,
       "id": "reddit-1wtm0y6",
@@ -86,82 +162,6 @@
         "author/developer linkage and independent corroboration"
       ],
       "content_hash": "f4e7c8c6439528dd72c245f1a7ae03c6b3261ffe0917e9e2793151c1db2832a4",
-      "review": null,
-      "incident": null
-    },
-    {
-      "schema_version": 2,
-      "id": "reddit-1wsh59n",
-      "external_id": "1wsh59n",
-      "state": "QUARANTINED",
-      "state_history": [
-        {
-          "state": "DETECTED",
-          "at": "2026-09-30T19:19:05.523Z",
-          "actor": "reddit-scanner",
-          "reason": "Canonical Reddit RSS entry accepted at the ingestion boundary"
-        },
-        {
-          "state": "QUARANTINED",
-          "at": "2026-09-30T19:19:05.523Z",
-          "actor": "reddit-scanner",
-          "reason": "Scanner result is unverified and cannot enter the curated ledger"
-        }
-      ],
-      "source": {
-        "platform": "reddit",
-        "subreddit": "PSVitaHomebrew",
-        "canonical_url": "https://www.reddit.com/r/PSVitaHomebrew/comments/1wsh59n/the_impossible_real_racing_3_vita_port/",
-        "author": "chutA7X",
-        "title": "The impossible Real Racing 3 Vita Port",
-        "body": "Well I'm happy to announce that Real Racing 3 for Vita it's a reality it will come to public beta on this Saturday October 3rd the release will be announced with a proper YouTube video a full list of features and future plans, announcement here in Reddit and game VPK and explanation on GitHub, already made the repository a few days ago but it's private, for now here you have 3 minutes on gameplay of the alpha 1 version.",
-        "published_at": null
-      },
-      "classification": {
-        "confidence": "medium",
-        "reason": "2 dev signal(s), 2 passive term(s), category=project_update",
-        "candidate_type": "port",
-        "category": "project_update",
-        "question": false,
-        "spam": false
-      },
-      "provenance": {
-        "repository_url": null,
-        "release_url": null,
-        "evidence_urls": [],
-        "evidence_bundle_id": null,
-        "repository_identity": null,
-        "repository_created_at": null,
-        "repository_last_activity_at": null,
-        "release_facts": [],
-        "vita_evidence": [],
-        "author_linkage": null,
-        "corroboration": [],
-        "duplicate_relation": {
-          "content_hash": "f0c5e2c0df08cd5b337a9981eaf26f9853c48326377d8baa648852d68e8de3e8",
-          "related_candidate_ids": []
-        }
-      },
-      "campaign": {
-        "cluster_id": null,
-        "linkage_confidence": "none",
-        "signals": [],
-        "related_candidate_ids": [],
-        "text_fingerprint": "397b8025",
-        "media_fingerprints": [],
-        "outbound_fingerprints": [],
-        "direct_intent": false,
-        "explicit_campaign_reference": false,
-        "incident_id": null
-      },
-      "risk_signals": [],
-      "evidence_gaps": [
-        "exact project repository",
-        "repository identity and activity facts",
-        "Vita-specific hardware evidence",
-        "author/developer linkage and independent corroboration"
-      ],
-      "content_hash": "f0c5e2c0df08cd5b337a9981eaf26f9853c48326377d8baa648852d68e8de3e8",
       "review": null,
       "incident": null
     },
