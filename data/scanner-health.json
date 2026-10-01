@@ -1,18 +1,28 @@
 {
   "schema_version": 3,
-  "attempted_at": "2026-10-01T14:29:48.016Z",
+  "attempted_at": "2026-10-01T18:55:33.022Z",
   "state": "partial",
   "successful_sources": 1,
   "total_sources": 3,
   "github_action": {
     "provider": "github-actions",
     "status": "unknown",
-    "run_id": "36876657064",
+    "run_id": "36910362918",
     "event": "schedule",
-    "sha": "a5412f437c9aed3bae6f9bf3e95ef2cfe97f3b5f"
+    "sha": "37961c54d684bc9b33293dc3f42694dc2cf69f15"
   },
-  "consecutive_degraded_runs": 2,
+  "consecutive_degraded_runs": 3,
   "recent_runs": [
+    {
+      "attempted_at": "2026-10-01T18:55:33.022Z",
+      "state": "partial",
+      "successful_sources": 1,
+      "source_statuses": {
+        "vitahacks": "available",
+        "VitaPiracy": "rate_limited",
+        "PSVitaHomebrew": "rate_limited"
+      }
+    },
     {
       "attempted_at": "2026-10-01T14:29:48.016Z",
       "state": "partial",
@@ -122,23 +132,13 @@
         "VitaPiracy": "rate_limited",
         "PSVitaHomebrew": "rate_limited"
       }
-    },
-    {
-      "attempted_at": "2026-09-27T18:38:58.197Z",
-      "state": "partial",
-      "successful_sources": 1,
-      "source_statuses": {
-        "vitahacks": "available",
-        "VitaPiracy": "rate_limited",
-        "PSVitaHomebrew": "rate_limited"
-      }
     }
   ],
   "sources": [
     {
       "subreddit": "vitahacks",
       "status": "available",
-      "last_successful_scan_at": "2026-10-01T14:29:48.016Z",
+      "last_successful_scan_at": "2026-10-01T18:55:33.022Z",
       "consecutive_failures": 0,
       "retry_after_seconds": null
     },
@@ -146,14 +146,14 @@
       "subreddit": "VitaPiracy",
       "status": "rate_limited",
       "last_successful_scan_at": "2026-09-30T19:19:05.523Z",
-      "consecutive_failures": 2,
+      "consecutive_failures": 3,
       "retry_after_seconds": null
     },
     {
       "subreddit": "PSVitaHomebrew",
       "status": "rate_limited",
       "last_successful_scan_at": "2026-09-30T19:19:05.523Z",
-      "consecutive_failures": 2,
+      "consecutive_failures": 3,
       "retry_after_seconds": null
     }
   ]
