@@ -2,6 +2,15 @@
 
 Updated: 2026-10-01
 
+## Current state: VH-MINIMALIST-APPLE-040 Apple Product Hardware Showcase Dark Mode (2026-10-01)
+
+- Apple Product Hardware Showcase Dark Mode active:
+  - Palette: Deep pure black (#000000) canvas, muted silver (#9ca3af), crisp white typography, neutral hairline borders (#27272a).
+  - Hero: Elegant headline ('PlayStation Vita. The definitive port atlas.'), solitary floating 3D hardware console.
+  - 3D Console: Minimalist camera view presets ([Front] · [3D Angle] · [Rear View] · [Screen Focus]), pure black OLED screen with centered typography.
+  - Directory: Clean Bento Grid & Table toggle with refined monochrome tech tags and subtle stage chips.
+- Verification: npm run verify passed (tsc clean, 127/127 unit tests, 28 prerendered project pages, 31 sitemap URLs).
+
 ## Current state: VH-REDESIGN-COMPLETION-039 Full 3D Configurator with Presets Toolbar & Game Dock Shelf (2026-10-01)
 
 - Live Visual & 3D Gaming Showcase active:

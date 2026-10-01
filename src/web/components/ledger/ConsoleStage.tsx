@@ -245,20 +245,18 @@ export const ConsoleStage: React.FC<ConsoleStageProps> = ({
       </h2>
 
       <div className="relative w-full py-2">
-        <LiveAreaWaves className="pointer-events-none absolute inset-x-0 inset-y-0 h-full w-full opacity-60" />
-        <div aria-hidden="true" className="vh-dots pointer-events-none absolute inset-0 opacity-80" />
+        <LiveAreaWaves className="pointer-events-none absolute inset-x-0 inset-y-0 h-full w-full opacity-30" />
 
-        {/* Camera View Presets Toolbar */}
-        <div className="mb-4 flex flex-wrap items-center justify-between gap-3 px-2 sm:px-6">
-          <div className="flex flex-wrap items-center gap-1.5 rounded-full border border-white/10 bg-black/60 p-1 backdrop-blur-md">
+        {/* Minimalist Camera Presets */}
+        <div className="mb-4 flex flex-wrap items-center justify-center gap-2 px-2 sm:px-6">
+          <div className="inline-flex items-center gap-1 rounded-full border border-white/10 bg-zinc-900/80 p-1 backdrop-blur-md">
             {[
-              { id: "front", label: "Front View", icon: Monitor },
-              { id: "inspect", label: "Inspect 3D", icon: Eye },
-              { id: "rear", label: "Flip Rear", icon: RotateCw },
-              { id: "screen", label: "OLED Focus", icon: Maximize2 }
+              { id: "front", label: "Front" },
+              { id: "inspect", label: "3D Angle" },
+              { id: "rear", label: "Rear View" },
+              { id: "screen", label: "Screen Focus" }
             ].map((p) => {
               const active = viewPreset === p.id;
-              const Icon = p.icon;
               return (
                 <button
                   key={p.id}
@@ -268,22 +266,16 @@ export const ConsoleStage: React.FC<ConsoleStageProps> = ({
                     setIsFlipped(p.id === "rear");
                   }}
                   className={
-                    "inline-flex items-center gap-1.5 rounded-full px-3 py-1 font-mono text-[11px] font-semibold uppercase tracking-wider transition-all " +
+                    "inline-flex items-center rounded-full px-3.5 py-1 text-[11px] font-medium transition-all " +
                     (active
-                      ? "border border-[#00e6ff]/60 bg-[#00e6ff]/20 text-[#00e6ff] shadow-[0_0_12px_rgba(0,230,255,0.3)]"
-                      : "text-ink-muted hover:text-ink")
+                      ? "bg-white text-black font-semibold shadow-sm"
+                      : "text-zinc-400 hover:text-white")
                   }
                 >
-                  <Icon className="h-3.5 w-3.5" />
                   <span>{p.label}</span>
                 </button>
               );
             })}
-          </div>
-
-          <div className="hidden font-mono text-[11px] text-ink-muted sm:flex items-center gap-2">
-            <span className="vh-live-dot" />
-            <span>PCH-1000 OLED · Real-time 3D</span>
           </div>
         </div>
 
@@ -320,12 +312,12 @@ export const ConsoleStage: React.FC<ConsoleStageProps> = ({
           </div>
           {showPreviewControls && (
             <div className="mt-2 flex flex-wrap items-center justify-center gap-2" role="group" aria-label="3D Vita preview controls">
-              <span className="text-micro uppercase tracking-[0.12em] text-ink-muted">{fallbackLabel}</span>
+              <span className="text-micro uppercase tracking-[0.12em] text-zinc-500">{fallbackLabel}</span>
               {staticMode && canLoad3d && (
                 <button
                   type="button"
                   onClick={() => persistPreference("3d")}
-                  className="inline-flex min-h-[44px] items-center rounded-lg border border-hairline bg-surface px-3 py-1.5 text-caption font-medium text-ink transition-colors hover:border-hairline-strong focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink/20"
+                  className="inline-flex min-h-[44px] items-center rounded-lg border border-zinc-800 bg-zinc-900 px-3 py-1.5 text-caption font-medium text-white transition-colors hover:border-zinc-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/20"
                 >
                   Load 3D Vita
                 </button>
@@ -334,7 +326,7 @@ export const ConsoleStage: React.FC<ConsoleStageProps> = ({
                 <button
                   type="button"
                   onClick={retry3d}
-                  className="inline-flex min-h-[44px] items-center rounded-lg border border-hairline bg-surface px-3 py-1.5 text-caption font-medium text-ink transition-colors hover:border-hairline-strong focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink/20"
+                  className="inline-flex min-h-[44px] items-center rounded-lg border border-zinc-800 bg-zinc-900 px-3 py-1.5 text-caption font-medium text-white transition-colors hover:border-zinc-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/20"
                 >
                   Retry 3D Vita
                 </button>
@@ -343,102 +335,58 @@ export const ConsoleStage: React.FC<ConsoleStageProps> = ({
                 <button
                   type="button"
                   onClick={() => persistPreference("static")}
-                  className="inline-flex min-h-[44px] items-center rounded-lg border border-hairline bg-surface px-3 py-1.5 text-caption font-medium text-ink transition-colors hover:border-hairline-strong focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink/20"
+                  className="inline-flex min-h-[44px] items-center rounded-lg border border-zinc-800 bg-zinc-900 px-3 py-1.5 text-caption font-medium text-white transition-colors hover:border-zinc-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/20"
                 >
                   Use static preview
                 </button>
               )}
             </div>
           )}
-          <div className="mt-2 flex flex-wrap items-center justify-center gap-2.5 font-mono text-[10px] sm:text-[11px] text-ink-muted">
-            <span>OLED 960 × 544</span>
-            <span className="text-white/20">·</span>
-            <span>60 FPS Target</span>
-            <span className="text-white/20">·</span>
-            <span>360° Hardware View</span>
-          </div>
           <div aria-hidden="true" className="vh-floor mx-auto h-px w-[84%]" />
         </div>
 
-        {/* Tactile Interactive Game Dock (Shelf) */}
-        <div className="mt-4 px-2 sm:px-6">
-          <div className="flex items-center justify-between gap-2 mb-2.5 px-1">
-            <p className="font-mono text-micro font-semibold uppercase tracking-[0.16em] text-accent-hover flex items-center gap-1.5">
-              Featured Ports
-            </p>
-            <span className="font-mono text-[10px] text-ink-muted">
-              {projects.length} Available in 3D
-            </span>
-          </div>
-
-          <div
-            aria-label="Choose a project to preview"
-            className="no-scrollbar flex max-w-full gap-2 overflow-x-auto rounded-2xl border border-white/10 bg-black/50 p-2 backdrop-blur-md"
-          >
-            {projects.map((project: any) => {
-              const active = selectedId === project.id;
-              const title = splitTitle(project.game_title || project.display_name);
-              return (
-                <button
-                  key={project.id}
-                  type="button"
-                  aria-pressed={active}
-                  onClick={() => onSelectProject(project)}
-                  onMouseEnter={() => onSelectProject(project)}
-                  className={
-                    "group flex shrink-0 items-center gap-2.5 rounded-xl border px-3 py-2 text-left transition-all duration-200 " +
-                    (active
-                      ? "border-[#00e6ff] bg-[#00e6ff]/15 text-ink shadow-[0_0_15px_rgba(0,230,255,0.25)] scale-[1.02]"
-                      : "border-white/5 bg-white/[0.02] text-ink-muted hover:border-white/20 hover:bg-white/[0.05] hover:text-ink")
-                  }
-                >
-                  <ProjectMark seed={project.display_name || project.game_title || "vita"} size={28} className="shrink-0 rounded-lg" />
-                  <div className="min-w-0">
-                    <p className={"truncate text-caption font-semibold transition-colors " + (active ? "text-[#00e6ff]" : "group-hover:text-ink")}>
-                      {title.name}
-                    </p>
-                    <p className="font-mono text-[9px] uppercase tracking-wider text-ink-muted">
-                      {title.engine || project.original_platform || "Port"}
-                    </p>
-                  </div>
-                </button>
-              );
-            })}
-          </div>
-
-          {/* Clean Active Game Status Bar */}
-          {selectedProject && (
-            <div className="mt-3 flex flex-wrap items-center justify-between gap-3 rounded-xl border border-white/10 bg-white/[0.02] px-4 py-2.5 backdrop-blur-sm">
-              <div className="flex items-center gap-2.5 min-w-0">
-                <span className="h-2 w-2 rounded-full bg-[#00e6ff] shadow-[0_0_8px_#00e6ff]" />
-                <span className="truncate text-caption font-semibold text-ink">{preview?.name}</span>
-                <span className="font-mono text-micro text-ink-muted">· {prettyStage(selectedProject.current_stage)}</span>
-                {selectedProject.original_platform && (
-                  <span className="hidden font-mono text-micro text-ink-muted sm:inline">({selectedProject.original_platform})</span>
-                )}
+        {/* Minimalist Active Display Status Card */}
+        <div className="relative mx-auto max-w-xl px-4 pt-4 pb-2">
+          {preview && (
+            <div className="flex items-center justify-between gap-3 border-t border-zinc-900 pt-3">
+              <div className="min-w-0">
+                <p className="truncate text-[15px] font-semibold text-white">{preview.name}</p>
+                <p className="text-[12px] text-zinc-400">
+                  {prettyStage(selectedProject?.current_stage)} · {selectedProject?.original_platform || "Various"}
+                </p>
               </div>
-              <div className="flex items-center gap-2 shrink-0">
+
+              <div className="flex items-center gap-1.5 shrink-0">
+                <button
+                  type="button"
+                  onClick={handlePrev}
+                  aria-label="Previous project"
+                  title="Previous project"
+                  className="inline-flex h-9 w-9 items-center justify-center rounded-lg border border-zinc-800 bg-zinc-900 text-zinc-400 hover:border-zinc-700 hover:text-white transition-colors"
+                >
+                  <ChevronLeft className="h-4 w-4" />
+                </button>
+                <button
+                  type="button"
+                  onClick={handleNext}
+                  aria-label="Next project"
+                  title="Next project"
+                  className="inline-flex h-9 w-9 items-center justify-center rounded-lg border border-zinc-800 bg-zinc-900 text-zinc-400 hover:border-zinc-700 hover:text-white transition-colors"
+                >
+                  <ChevronRight className="h-4 w-4" />
+                </button>
                 <button
                   type="button"
                   onClick={() => onCopyLink(selectedProject)}
-                  className="inline-flex min-h-[34px] items-center gap-1.5 rounded-lg border border-white/10 bg-white/[0.04] px-3 py-1 font-mono text-micro text-ink-medium hover:border-white/20 hover:text-ink transition-colors"
+                  className="inline-flex h-9 items-center gap-1 rounded-lg border border-zinc-800 bg-zinc-900 px-2.5 text-caption font-medium text-zinc-300 hover:border-zinc-700 hover:text-white transition-colors"
                 >
                   {copiedSlug === (selectedProject as any)?.slug ? (
-                    <><Check className="h-3.5 w-3.5 text-stage-done" /> Copied</>
+                    <Check className="h-3.5 w-3.5 text-emerald-400" />
                   ) : (
-                    <><Link2 className="h-3.5 w-3.5" /> Share</>
+                    <Link2 className="h-3.5 w-3.5" />
                   )}
+                  <span>{copiedSlug === (selectedProject as any)?.slug ? "Copied" : "Link"}</span>
                 </button>
-                {(selectedProject as any)?.reddit_url && (
-                  <a
-                    href={(selectedProject as any).reddit_url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex min-h-[34px] items-center gap-1.5 rounded-lg border border-white/10 bg-white/[0.04] px-3 py-1 font-mono text-micro text-ink-medium hover:border-white/20 hover:text-ink transition-colors"
-                  >
-                    Discussion <ExternalLink className="h-3 w-3" />
-                  </a>
-                )}
               </div>
             </div>
           )}

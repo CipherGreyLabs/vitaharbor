@@ -83,7 +83,7 @@ export const ProjectPanel: React.FC<ProjectPanelProps> = ({
 
       {project.verification === "detected" && (
         <p className="mb-6 max-w-3xl rounded-xl border border-hairline bg-surface px-4 py-3 text-caption text-ink-medium">
-          <span className="font-medium text-[#00e6ff]">Early Community WIP.</span> Performance, audio and stability are currently being tested on real hardware.
+          <span className="font-medium text-white">Early Community WIP.</span> Performance, audio and stability are currently being tested on real hardware.
         </p>
       )}
 
@@ -94,7 +94,7 @@ export const ProjectPanel: React.FC<ProjectPanelProps> = ({
             Porting Progression
           </p>
           <span className="font-mono text-[11px] text-ink-muted">
-            Status: <span className="text-[#00e6ff] font-semibold">{prettyStage(project.current_stage)}</span>
+            Status: <span className="text-white font-semibold">{prettyStage(project.current_stage)}</span>
           </span>
         </div>
 
@@ -116,21 +116,21 @@ export const ProjectPanel: React.FC<ProjectPanelProps> = ({
                   <div className={
                     "relative flex h-7 w-7 sm:h-8 sm:w-8 items-center justify-center rounded-full transition-all duration-300 " +
                     (isCurrent
-                      ? "border-2 border-[#00e6ff] bg-[#00e6ff]/20 text-[#00e6ff] shadow-[0_0_14px_rgba(0,230,255,0.6)]"
+                      ? "border-2 border-white bg-white/15 text-white shadow-sm"
                       : isPassed
-                      ? "border border-[#00e6ff]/60 bg-[#00e6ff]/10 text-[#00e6ff]"
+                      ? "border border-white/60 bg-white/10 text-white"
                       : "border border-white/10 bg-white/[0.02] text-ink-muted opacity-40")
                   }>
                     {isCurrent && <span className="vh-live-dot absolute -top-0.5 -right-0.5" />}
                     {isPassed ? (
-                      <CheckCircle2 className="h-3.5 w-3.5 text-[#00e6ff]" />
+                      <CheckCircle2 className="h-3.5 w-3.5 text-white" />
                     ) : (
                       <span className="font-mono text-[10px] font-bold">{idx + 1}</span>
                     )}
                   </div>
                   <span className={
                     "mt-1.5 font-mono text-[10px] sm:text-[11px] font-semibold uppercase tracking-wider " +
-                    (isCurrent ? "text-[#00e6ff]" : isPassed ? "text-ink" : "text-ink-muted opacity-50")
+                    (isCurrent ? "text-white" : isPassed ? "text-ink" : "text-ink-muted opacity-50")
                   }>
                     {step.label}
                   </span>
@@ -143,7 +143,7 @@ export const ProjectPanel: React.FC<ProjectPanelProps> = ({
                 {idx < PROGRESSION_STEPS.length - 1 && (
                   <div className={
                     "h-[2px] flex-1 min-w-[12px] sm:min-w-[24px] transition-all duration-300 " +
-                    (isPassed ? "bg-[#00e6ff]/50" : "bg-white/10 opacity-30")
+                    (isPassed ? "bg-white/30" : "bg-white/10 opacity-30")
                   } />
                 )}
               </React.Fragment>

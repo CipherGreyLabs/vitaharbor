@@ -271,7 +271,7 @@ export const DirectoryTable: React.FC<DirectoryTableProps> = ({
                 title="Bento Grid View"
                 className={
                   "inline-flex h-8 items-center gap-1.5 rounded-md px-2.5 text-caption font-medium transition-colors " +
-                  (viewMode === "bento" ? "bg-[#00e6ff]/20 text-[#00e6ff] font-semibold" : "text-ink-muted hover:text-ink")
+                  (viewMode === "bento" ? "bg-[#00e6ff]/20 text-zinc-400 font-semibold" : "text-ink-muted hover:text-ink")
                 }
               >
                 <LayoutGrid className="h-3.5 w-3.5" />
@@ -284,7 +284,7 @@ export const DirectoryTable: React.FC<DirectoryTableProps> = ({
                 title="Compact List View"
                 className={
                   "inline-flex h-8 items-center gap-1.5 rounded-md px-2.5 text-caption font-medium transition-colors " +
-                  (viewMode === "list" ? "bg-[#00e6ff]/20 text-[#00e6ff] font-semibold" : "text-ink-muted hover:text-ink")
+                  (viewMode === "list" ? "bg-[#00e6ff]/20 text-zinc-400 font-semibold" : "text-ink-muted hover:text-ink")
                 }
               >
                 <List className="h-3.5 w-3.5" />
@@ -333,7 +333,7 @@ export const DirectoryTable: React.FC<DirectoryTableProps> = ({
 
         {/* Technology Filters (Option 1) */}
         <div className="mt-2 flex items-center gap-1.5 overflow-x-auto no-scrollbar border-t border-white/[0.04] pt-2">
-          <span className="mr-1 shrink-0 font-mono text-[10px] uppercase tracking-wider text-[#00e6ff]">Tech</span>
+          <span className="mr-1 shrink-0 font-mono text-[10px] uppercase tracking-wider text-zinc-400">Tech</span>
           {TECH_FILTERS.map((tech) => {
             const active = activeTech === tech.key;
             return (
@@ -345,7 +345,7 @@ export const DirectoryTable: React.FC<DirectoryTableProps> = ({
                 className={
                   "inline-flex min-h-[36px] shrink-0 items-center gap-1 whitespace-nowrap rounded-md px-2.5 py-1 font-mono text-[11px] transition-all focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent " +
                   (active
-                    ? "border border-[#00e6ff]/50 bg-[#00e6ff]/15 text-[#00e6ff] font-semibold shadow-[0_0_10px_rgba(0,230,255,0.2)]"
+                    ? "border border-[#00e6ff]/50 bg-[#00e6ff]/15 text-zinc-400 font-semibold shadow-[0_0_10px_rgba(0,230,255,0.2)]"
                     : "border border-white/10 bg-white/[0.03] text-ink-muted hover:border-white/20 hover:text-ink")
                 }
               >

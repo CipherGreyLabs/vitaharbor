@@ -781,3 +781,9 @@ pm run verify passed (tsc clean, 127/127 unit tests, 30 project pages, 33 sitema
 | Time | Commit / state | Change | Why | Model | Verified |
 |---|---|---|---|---|---|
 | 08:45 UTC | working tree | Completed 3D hardware configurator features in `ConsoleStage.tsx`: 1) Camera View Presets toolbar (`[Front View]`, `[Inspect 3D]`, `[Flip Rear]`, `[OLED Focus]`) triggering smooth 3D camera transitions; 2) Tactile Interactive Game Dock (Shelf) beneath the 3D console allowing instant OLED screen switching via cartridge buttons; 3) Full integration with Bento Grid view mode. | Fulfill master delegation: complete the full interactive 3D configurator experience. | gemini-3.7-flash | `npm run verify` passed (tsc clean, 127/127 unit tests, 28 project pages, 31 sitemap URLs). |
+
+### VH-MINIMALIST-APPLE-040 Apple Product Hardware Showcase Dark Mode redesign (2026-10-01)
+
+| Time | Commit / state | Change | Why | Model | Verified |
+|---|---|---|---|---|---|
+| 16:55 UTC | working tree | Redesigned storefront into Apple Product Hardware Showcase Dark Mode: 1) Shifted to pure black (#000000) canvas with muted silver (#9ca3af) and white typography; 2) Minimalist hero ("PlayStation Vita. The definitive port atlas.") with solitary floating 3D console; 3) Removed gamer neon accents and busy docks; 4) Refined monochrome camera view presets and clean Bento Grid / List directory; 5) Minimalist OLED screen card in `VitaConsoleScene.tsx`. | Fulfill master delegation: eliminate neon gamer clichés and deliver an ultra-clean, elegant hardware showcase. | gemini-3.7-flash | `npm run verify` passed (tsc clean, 127/127 unit tests, 28 project pages, 31 sitemap URLs). |
