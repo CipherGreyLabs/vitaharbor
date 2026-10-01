@@ -483,57 +483,53 @@ const recessMat = new THREE.MeshStandardMaterial({color:'#14161a',roughness:0.52
     // REAR DETAILS: TOUCHPAD, GRIPS, CAMERA, SCREWS
     // ==========================================
 
-    // 1. Rear Touchpad Canvas Texture (Iconic PlayStation symbols pattern)
+    // 1. Rear Touchpad Canvas Texture (Authentic PS Vita PCH-1000 OLED full pattern)
     const rearPadCanvas = document.createElement('canvas');
     rearPadCanvas.width = 1024;
     rearPadCanvas.height = 512;
     const rCtx = rearPadCanvas.getContext('2d');
     if (rCtx) {
-      // Base dark glossy surface
+      // Base dark glossy OLED-era resin surface
       const bgGrad = rCtx.createLinearGradient(0, 0, 1024, 512);
-      bgGrad.addColorStop(0, '#0a0c10');
-      bgGrad.addColorStop(0.5, '#050608');
-      bgGrad.addColorStop(1, '#090b0e');
+      bgGrad.addColorStop(0, '#0c0e12');
+      bgGrad.addColorStop(0.5, '#06070a');
+      bgGrad.addColorStop(1, '#0b0d11');
       rCtx.fillStyle = bgGrad;
       rCtx.fillRect(0, 0, 1024, 512);
 
-      // Subtle border line inside touchpad
-      rCtx.strokeStyle = 'rgba(255, 255, 255, 0.08)';
-      rCtx.lineWidth = 2;
+      // Outer boundary of the active touchpad
+      rCtx.strokeStyle = 'rgba(255, 255, 255, 0.09)';
+      rCtx.lineWidth = 2.5;
       rCtx.strokeRect(16, 16, 992, 480);
 
-      // Repeating subtle PlayStation symbols: △ ◯ ✕ ▢
+      // Authentic PCH-1000: Full continuous field of repeating PlayStation geometric symbols (no 2000 Slim PS logo cutout)
       const symbols = ['△', '◯', '✕', '▢'];
-      rCtx.font = '600 13px Arial, sans-serif';
+      rCtx.font = '600 11px Arial, sans-serif';
       rCtx.textAlign = 'center';
       rCtx.textBaseline = 'middle';
-      rCtx.fillStyle = 'rgba(255, 255, 255, 0.05)';
+      rCtx.fillStyle = 'rgba(255, 255, 255, 0.055)';
 
-      const stepX = 36;
-      const stepY = 32;
+      const stepX = 26;
+      const stepY = 24;
       let rowIdx = 0;
-      for (let y = 36; y < 480; y += stepY) {
-        let symIdx = rowIdx % symbols.length;
-        for (let x = 36; x < 990; x += stepX) {
-          // Leave central zone cleaner for PS emblem
-          const distToCenter = Math.hypot(x - 512, y - 256);
-          if (distToCenter > 90) {
-            rCtx.fillText(symbols[symIdx], x, y);
-          }
+      for (let y = 30; y < 450; y += stepY) {
+        let symIdx = (rowIdx * 2) % symbols.length;
+        for (let x = 32; x < 992; x += stepX) {
+          rCtx.fillText(symbols[symIdx], x, y);
           symIdx = (symIdx + 1) % symbols.length;
         }
         rowIdx++;
       }
 
-      // Center PlayStation Logo Emblem
-      rCtx.fillStyle = 'rgba(215, 225, 240, 0.38)';
-      rCtx.font = 'bold 36px Arial, sans-serif';
-      rCtx.fillText('PS', 512, 248);
+      // Top SONY branding printed on touchpad
+      rCtx.fillStyle = 'rgba(220, 230, 245, 0.32)';
+      rCtx.font = 'bold 15px Arial, sans-serif';
+      rCtx.fillText('SONY', 512, 46);
 
-      // Bottom subtle regulatory branding
+      // Bottom authentic regulatory text
       rCtx.font = '500 10px ui-monospace, SFMono-Regular, Menlo, monospace';
       rCtx.fillStyle = 'rgba(255, 255, 255, 0.22)';
-      rCtx.fillText('MODEL PCH-1000 · SONY COMPUTER ENTERTAINMENT INC.', 512, 455);
+      rCtx.fillText('PlayStation®Vita  ·  MODEL PCH-1000  ·  SONY COMPUTER ENTERTAINMENT INC.  ·  MADE IN JAPAN', 512, 468);
     }
 
     const rearPadTexture = new THREE.CanvasTexture(rearPadCanvas);
