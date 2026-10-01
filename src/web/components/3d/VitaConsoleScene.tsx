@@ -489,60 +489,65 @@ const recessMat = new THREE.MeshStandardMaterial({color:'#14161a',roughness:0.52
     rearPadCanvas.height = 512;
     const rCtx = rearPadCanvas.getContext('2d');
     if (rCtx) {
-      // Base dark glossy OLED-era resin surface
+      // Base dark glossy OLED-era resin surface with subtle blue gradient
       const bgGrad = rCtx.createLinearGradient(0, 0, 1024, 512);
-      bgGrad.addColorStop(0, '#0c0e12');
-      bgGrad.addColorStop(0.5, '#06070a');
-      bgGrad.addColorStop(1, '#0b0d11');
+      bgGrad.addColorStop(0, '#13161c');
+      bgGrad.addColorStop(0.5, '#0b0d12');
+      bgGrad.addColorStop(1, '#11141a');
       rCtx.fillStyle = bgGrad;
       rCtx.fillRect(0, 0, 1024, 512);
 
-      // Outer boundary of the active touchpad
-      rCtx.strokeStyle = 'rgba(255, 255, 255, 0.09)';
-      rCtx.lineWidth = 2.5;
+      // Outer silver/white chamfered border of the active touchpad
+      rCtx.strokeStyle = 'rgba(255, 255, 255, 0.28)';
+      rCtx.lineWidth = 3;
       rCtx.strokeRect(16, 16, 992, 480);
 
-      // Authentic PCH-1000: Full continuous field of repeating PlayStation geometric symbols (no 2000 Slim PS logo cutout)
+      // Inner cyan tech hairline
+      rCtx.strokeStyle = 'rgba(0, 230, 255, 0.24)';
+      rCtx.lineWidth = 1.5;
+      rCtx.strokeRect(22, 22, 980, 468);
+
+      // Authentic PCH-1000: Full continuous field of repeating PlayStation geometric symbols (△ ◯ ✕ ▢)
       const symbols = ['△', '◯', '✕', '▢'];
-      rCtx.font = '600 11px Arial, sans-serif';
+      rCtx.font = '700 13px Arial, sans-serif';
       rCtx.textAlign = 'center';
       rCtx.textBaseline = 'middle';
-      rCtx.fillStyle = 'rgba(255, 255, 255, 0.055)';
+      rCtx.fillStyle = 'rgba(220, 235, 255, 0.32)';
 
-      const stepX = 26;
-      const stepY = 24;
+      const stepX = 28;
+      const stepY = 25;
       let rowIdx = 0;
-      for (let y = 30; y < 450; y += stepY) {
+      for (let y = 34; y < 445; y += stepY) {
         let symIdx = (rowIdx * 2) % symbols.length;
-        for (let x = 32; x < 992; x += stepX) {
-          rCtx.fillText(symbols[symIdx], x, y);
+        for (let x = 34; x < 990; x += stepX) {
+          // Leave clean band for SONY header and bottom regulatory
+          if (y > 65 && y < 435) {
+            rCtx.fillText(symbols[symIdx], x, y);
+          }
           symIdx = (symIdx + 1) % symbols.length;
         }
         rowIdx++;
       }
 
-      // Top SONY branding printed on touchpad
-      rCtx.fillStyle = 'rgba(220, 230, 245, 0.32)';
-      rCtx.font = 'bold 15px Arial, sans-serif';
-      rCtx.fillText('SONY', 512, 46);
+      // Top SONY branding printed on touchpad in crisp silver/white
+      rCtx.fillStyle = 'rgba(255, 255, 255, 0.9)';
+      rCtx.font = 'bold 22px Arial, sans-serif';
+      rCtx.fillText('SONY', 512, 48);
 
-      // Bottom authentic regulatory text
-      rCtx.font = '500 10px ui-monospace, SFMono-Regular, Menlo, monospace';
-      rCtx.fillStyle = 'rgba(255, 255, 255, 0.22)';
-      rCtx.fillText('PlayStation®Vita  ·  MODEL PCH-1000  ·  SONY COMPUTER ENTERTAINMENT INC.  ·  MADE IN JAPAN', 512, 468);
+      // Bottom authentic regulatory branding
+      rCtx.font = '600 11px ui-monospace, SFMono-Regular, Menlo, monospace';
+      rCtx.fillStyle = 'rgba(220, 235, 255, 0.7)';
+      rCtx.fillText('PlayStation®Vita  ·  MODEL PCH-1000  ·  SONY COMPUTER ENTERTAINMENT INC.  ·  MADE IN JAPAN', 512, 464);
     }
-
     const rearPadTexture = new THREE.CanvasTexture(rearPadCanvas);
     rearPadTexture.colorSpace = THREE.SRGBColorSpace;
     textures.push(rearPadTexture);
 
-    const rearPadMat = new THREE.MeshPhysicalMaterial({
+    const rearPadMat = new THREE.MeshStandardMaterial({
       map: rearPadTexture,
-      roughness: 0.12,
-      metalness: 0.15,
-      clearcoat: 0.95,
-      clearcoatRoughness: 0.1,
-      envMapIntensity: 1.2
+      roughness: 0.4,
+      metalness: 0.1,
+      envMapIntensity: 0.35
     });
 
     // Helper to create rounded rectangle shape
@@ -573,79 +578,82 @@ const recessMat = new THREE.MeshStandardMaterial({color:'#14161a',roughness:0.52
 
     // Rear Touchpad Active Surface (z = -8.14 cleanly resting inside bezel without Z-fighting)
     const rearPadShape = createRoundedRectShape(107, 53, 8);
-    const rearPadMesh = new THREE.Mesh(
-      new THREE.ShapeGeometry(rearPadShape, 32),
-      rearPadMat
-    );
-    rearPadMesh.position.set(0, 0, -8.14);
+    const rearPadGeom = new THREE.ShapeGeometry(rearPadShape, 32);
+    // CRITICAL: Three.js ShapeGeometry does not normalize UVs to [0, 1] by default; normalize them so the canvas texture maps correctly!
+    const rPos = rearPadGeom.attributes.position;
+    const rUvs = rearPadGeom.attributes.uv;
+    for (let i = 0; i < rUvs.count; i++) {
+      const u = (rPos.getX(i) + 53.5) / 107;
+      const v = (rPos.getY(i) + 26.5) / 53;
+      rUvs.setXY(i, u, v);
+    }
+    rUvs.needsUpdate = true;
+
+    const rearPadMesh = new THREE.Mesh(rearPadGeom, rearPadMat);
+    rearPadMesh.position.set(0, 0, -8.36);
     rearPadMesh.rotation.y = Math.PI;
     vita.add(rearPadMesh);
 
-    // 2. Ergonomic Finger Grips (Left & Right matte oval recesses at z = -7.80)
-    const gripMat = new THREE.MeshStandardMaterial({
-      color: '#0d0f13',
-      roughness: 0.88,
-      metalness: 0.04
+    // Authentic PCH-1000 Ergonomic Finger Rests: Smooth matte contoured oval recesses
+    const gripOuterShape = createRoundedRectShape(25, 45, 12.5);
+    const gripInnerShape = createRoundedRectShape(22, 42, 11);
+
+    const gripBezelMat = new THREE.MeshStandardMaterial({
+      color: '#2a2f3a',
+      roughness: 0.35,
+      metalness: 0.4
     });
-    const gripRimMat = new THREE.MeshStandardMaterial({
-      color: '#16191f',
-      roughness: 0.72,
+    const gripMat = new THREE.MeshStandardMaterial({
+      color: '#13151b',
+      roughness: 0.88,
       metalness: 0.08
     });
 
     for (const sign of [-1, 1]) {
-      // Textured oval grip surface
-      const gripMesh = new THREE.Mesh(
-        new THREE.CylinderGeometry(14, 14, 0.4, 48),
+      // Outer recessed bevel ring
+      const gripBezel = new THREE.Mesh(
+        new THREE.ShapeGeometry(gripOuterShape, 32),
+        gripBezelMat
+      );
+      gripBezel.position.set(sign * 67.5, 0, -7.86);
+      gripBezel.rotation.y = Math.PI;
+      vita.add(gripBezel);
+
+      // Inner textured matte finger pad
+      const gripPad = new THREE.Mesh(
+        new THREE.ShapeGeometry(gripInnerShape, 32),
         gripMat
       );
-      gripMesh.scale.set(1.0, 1.6, 0.5);
-      gripMesh.rotation.x = Math.PI / 2;
-      gripMesh.position.set(sign * 66.5, 0, -7.80);
-      vita.add(gripMesh);
-
-      // Subtle beveled rim around grip
-      const gripRim = new THREE.Mesh(
-        new THREE.TorusGeometry(14.2, 0.5, 12, 48),
-        gripRimMat
-      );
-      gripRim.scale.set(1.0, 1.6, 1.0);
-      gripRim.position.set(sign * 66.5, 0, -7.78);
-      vita.add(gripRim);
+      gripPad.position.set(sign * 67.5, 0, -7.92);
+      gripPad.rotation.y = Math.PI;
+      vita.add(gripPad);
     }
 
     // 3. Rear Camera Assembly (Top Center at z = -7.80 to -7.87)
-    const camRing = new THREE.Mesh(
-      new THREE.CylinderGeometry(3.4, 3.4, 0.45, 36),
+    // Prominent authentic rear camera housing (silver ring + cyan AR coating lens)
+    const camBezel = new THREE.Mesh(
+      new THREE.CylinderGeometry(4.2, 4.2, 0.6, 36),
       silver
     );
+    camBezel.rotation.x = Math.PI / 2;
+    camBezel.position.set(0, 31.2, -7.95);
+    vita.add(camBezel);
+
+    const camRing = new THREE.Mesh(
+      new THREE.CylinderGeometry(3.2, 3.2, 0.65, 36),
+      new THREE.MeshStandardMaterial({ color: '#111317', roughness: 0.3 })
+    );
     camRing.rotation.x = Math.PI / 2;
-    camRing.position.set(0, 28.5, -7.80);
+    camRing.position.set(0, 31.2, -8.0);
     vita.add(camRing);
 
-    const lensMat = new THREE.MeshPhysicalMaterial({
-      color: '#020406',
-      roughness: 0.05,
-      metalness: 0.2,
-      clearcoat: 1.0,
-      clearcoatRoughness: 0.05,
-      reflectivity: 0.9
-    });
     const camLens = new THREE.Mesh(
-      new THREE.CylinderGeometry(2.6, 2.6, 0.5, 36),
-      lensMat
+      new THREE.CylinderGeometry(2.2, 2.2, 0.7, 36),
+      new THREE.MeshStandardMaterial({ color: '#00e6ff', roughness: 0.1, metalness: 0.8 })
     );
     camLens.rotation.x = Math.PI / 2;
-    camLens.position.set(0, 28.5, -7.85);
+    camLens.position.set(0, 31.2, -8.05);
     vita.add(camLens);
-
-    const camPupil = new THREE.Mesh(
-      new THREE.CylinderGeometry(1.2, 1.2, 0.55, 24),
-      new THREE.MeshBasicMaterial({ color: '#00e6ff' })
-    );
-    camPupil.rotation.x = Math.PI / 2;
-    camPupil.position.set(0, 28.5, -7.87);
-    vita.add(camPupil);
 
     const rearMic = new THREE.Mesh(
       new THREE.CylinderGeometry(0.5, 0.5, 0.4, 16),
@@ -815,10 +823,10 @@ const recessMat = new THREE.MeshStandardMaterial({color:'#14161a',roughness:0.52
         targetDragRotY = isFlippedRef.current ? Math.PI : 0;
       }
 
-      dragRotX += (targetDragRotX - dragRotX) * 0.12;
-      dragRotY += (targetDragRotY - dragRotY) * 0.12;
+      dragRotX += (targetDragRotX - dragRotX) * 0.28;
+      dragRotY += (targetDragRotY - dragRotY) * 0.32;
       if (!isDragging) {
-        targetDragRotX *= 0.96;
+        targetDragRotX *= 0.92;
       }
 
       const rotY = (reduced ? 0 : px * 0.38 - scrollProgress * 0.16) + dragRotY;
@@ -826,12 +834,13 @@ const recessMat = new THREE.MeshStandardMaterial({color:'#14161a',roughness:0.52
 
       // Dynamic studio lighting adaptation when rotated to rear
       const isRearFacing = Math.cos(vita.rotation.y) < 0;
-      rearLight.intensity = isRearFacing ? 1.45 : 0.45;
-      light.intensity = isRearFacing ? 0.65 : 1.55;
-      cyanRim.intensity = isRearFacing ? 0.9 : 0.65;
+      light.intensity = isRearFacing ? 1.25 : 1.55;
+      fill.intensity = isRearFacing ? 0.95 : 0.72;
+      cyanRim.intensity = isRearFacing ? 1.15 : 0.65;
+      rearLight.intensity = isRearFacing ? 1.6 : 0.45;
 
-      vita.rotation.y += (rotY - vita.rotation.y) * 0.09;
-      vita.rotation.x += (rotX - vita.rotation.x) * 0.09;
+      vita.rotation.y = rotY;
+      vita.rotation.x = rotX;
       vita.rotation.z += ((-0.02 - scrollProgress * 0.12) - vita.rotation.z) * 0.09;
       vita.scale.setScalar(1 - scrollProgress * 0.09);
       vita.position.x += ((vita.userData.targetX ?? 0) + scrollProgress * 16 - vita.position.x) * 0.1;
