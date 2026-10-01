@@ -239,23 +239,59 @@ export const ConsoleStage: React.FC<ConsoleStageProps> = ({
   };
 
   return (
-    <section aria-labelledby="console-heading" className="mx-auto max-w-3xl px-4 pt-0 sm:px-6">
+    <section aria-labelledby="console-heading" className="w-full">
       <h2 id="console-heading" className="sr-only">
         Interactive console preview
       </h2>
 
       <div className="relative w-full py-2">
         <LiveAreaWaves className="pointer-events-none absolute inset-x-0 inset-y-0 h-full w-full opacity-60" />
-        
         <div aria-hidden="true" className="vh-dots pointer-events-none absolute inset-0 opacity-80" />
-        
+
+        {/* Camera View Presets Toolbar */}
+        <div className="mb-4 flex flex-wrap items-center justify-between gap-3 px-2 sm:px-6">
+          <div className="flex flex-wrap items-center gap-1.5 rounded-full border border-white/10 bg-black/60 p-1 backdrop-blur-md">
+            {[
+              { id: "front", label: "Front View", icon: Monitor },
+              { id: "inspect", label: "Inspect 3D", icon: Eye },
+              { id: "rear", label: "Flip Rear", icon: RotateCw },
+              { id: "screen", label: "OLED Focus", icon: Maximize2 }
+            ].map((p) => {
+              const active = viewPreset === p.id;
+              const Icon = p.icon;
+              return (
+                <button
+                  key={p.id}
+                  type="button"
+                  onClick={() => {
+                    setViewPreset(p.id as CameraViewPreset);
+                    setIsFlipped(p.id === "rear");
+                  }}
+                  className={
+                    "inline-flex items-center gap-1.5 rounded-full px-3 py-1 font-mono text-[11px] font-semibold uppercase tracking-wider transition-all " +
+                    (active
+                      ? "border border-[#00e6ff]/60 bg-[#00e6ff]/20 text-[#00e6ff] shadow-[0_0_12px_rgba(0,230,255,0.3)]"
+                      : "text-ink-muted hover:text-ink")
+                  }
+                >
+                  <Icon className="h-3.5 w-3.5" />
+                  <span>{p.label}</span>
+                </button>
+              );
+            })}
+          </div>
+
+          <div className="hidden font-mono text-[11px] text-ink-muted sm:flex items-center gap-2">
+            <span className="vh-live-dot" />
+            <span>Interactive 3D Configurator</span>
+          </div>
+        </div>
 
         <div className="relative px-1 pt-0 sm:px-4">
           <div className="vh-oled-aura" aria-hidden="true" />
-
           <div
             ref={consoleRef}
-            className="relative z-10 h-[260px] sm:h-[350px] md:h-[410px] lg:h-[450px]"
+            className="relative z-10 h-[340px] sm:h-[440px] md:h-[480px] lg:h-[520px]"
             data-testid="console-stage"
             data-vita-mode={staticMode ? "static" : "3d"}
             data-vita-fallback-reason={fallbackReason || "none"}
@@ -324,6 +360,54 @@ export const ConsoleStage: React.FC<ConsoleStageProps> = ({
           <div aria-hidden="true" className="vh-floor mx-auto h-px w-[84%]" />
         </div>
 
+        {/* Tactile Interactive Game Dock (Shelf) */}
+        <div className="mt-4 px-2 sm:px-6">
+          <div className="flex items-center justify-between gap-2 mb-2 px-1">
+            <p className="font-mono text-micro font-semibold uppercase tracking-[0.16em] text-accent-hover flex items-center gap-1.5">
+              <Sparkles className="h-3.5 w-3.5 text-[#00e6ff]" />
+              Featured Port Cartridges · Click or Hover to Switch OLED Screen
+            </p>
+            <span className="font-mono text-[10px] text-ink-muted hidden sm:inline">
+              {projects.length} Ports Live in 3D
+            </span>
+          </div>
+
+          <div
+            aria-label="Choose a project to preview"
+            className="no-scrollbar flex max-w-full gap-2 overflow-x-auto rounded-2xl border border-white/10 bg-black/50 p-2 backdrop-blur-md"
+          >
+            {projects.map((project: any) => {
+              const active = selectedId === project.id;
+              const title = splitTitle(project.game_title || project.display_name);
+              return (
+                <button
+                  key={project.id}
+                  type="button"
+                  aria-pressed={active}
+                  onClick={() => onSelectProject(project)}
+                  onMouseEnter={() => onSelectProject(project)}
+                  className={
+                    "group flex shrink-0 items-center gap-2.5 rounded-xl border px-3 py-2 text-left transition-all duration-200 " +
+                    (active
+                      ? "border-[#00e6ff] bg-[#00e6ff]/15 text-ink shadow-[0_0_15px_rgba(0,230,255,0.25)] scale-[1.02]"
+                      : "border-white/5 bg-white/[0.02] text-ink-muted hover:border-white/20 hover:bg-white/[0.05] hover:text-ink")
+                  }
+                >
+                  <ProjectMark seed={project.display_name || project.game_title || "vita"} size={28} className="shrink-0 rounded-lg" />
+                  <div className="min-w-0">
+                    <p className={"truncate text-caption font-semibold transition-colors " + (active ? "text-[#00e6ff]" : "group-hover:text-ink")}>
+                      {title.name}
+                    </p>
+                    <p className="font-mono text-[9px] uppercase tracking-wider text-ink-muted">
+                      {title.engine || project.original_platform || "Port"}
+                    </p>
+                  </div>
+                </button>
+              );
+            })}
+          </div>
+        </div>
+
         <div className="relative px-4 pb-4 pt-4 sm:px-8">
           {preview && (
             <div className="flex flex-col gap-3.5 rounded-2xl border border-hairline bg-surface/90 p-4 shadow-sm backdrop-blur-md">
@@ -331,84 +415,80 @@ export const ConsoleStage: React.FC<ConsoleStageProps> = ({
                 <ProjectMark
                   seed={selectedProject?.display_name || selectedProject?.game_title || "vita"}
                   size={42}
-                  className="shrink-0 rounded-xl"
+                  className="hidden shrink-0 rounded-xl sm:block"
                 />
                 <div className="min-w-0 flex-1">
-                  <div className="flex flex-wrap items-center gap-2">
-                    <h3 className="truncate text-subtitle font-semibold text-ink">{preview.name}</h3>
-                    <span className="rounded-md border border-hairline bg-sunken px-2 py-0.5 text-micro font-semibold uppercase text-ink-medium">
-                      {prettyStage(selectedProject?.current_stage)}
-                    </span>
-                  </div>
+                  <p className="text-micro font-medium uppercase text-ink-muted">
+                    {selectedProject?.screenshot_url ? "Source screenshot on display" : "Record card on display"}
+                  </p>
+                  <p className="mt-0.5 truncate text-lead font-semibold text-ink">{preview.name}</p>
                   <p className="mt-0.5 text-caption text-ink-muted">
-                    {selectedProject?.original_platform ? "Source: " + selectedProject.original_platform : "Community port"}
-                    {selectedProject?.technologies?.length ? " · " + selectedProject.technologies.slice(0, 2).join(", ") : ""}
+                    {prettyStage(selectedProject?.current_stage)}
+                    {selectedProject?.original_platform ? " · " + selectedProject.original_platform : ""}
                   </p>
                 </div>
               </div>
-
-              <div className="flex flex-wrap items-center justify-between gap-2.5 border-t border-hairline/60 pt-3">
-                <div className="flex items-center gap-2">
+              <div className="flex flex-wrap items-center justify-between gap-2 border-t border-hairline pt-3">
+                <button
+                  type="button"
+                  onClick={() => {
+                    const nextFlipped = !isFlipped;
+                    setIsFlipped(nextFlipped);
+                    setViewPreset(nextFlipped ? "rear" : "front");
+                  }}
+                  aria-label={isFlipped ? "Show front of PlayStation Vita" : "Inspect back of PlayStation Vita (360° View)"}
+                  title={isFlipped ? "Show front of PlayStation Vita" : "Inspect back of PlayStation Vita (360° View)"}
+                  className="inline-flex min-h-[44px] items-center gap-1.5 rounded-lg border border-white/10 bg-black/60 px-3.5 py-1.5 font-mono text-[11px] font-medium uppercase tracking-wider text-ink-medium backdrop-blur-md transition-all hover:border-[#00e6ff]/50 hover:text-[#00e6ff] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00e6ff]/40 shadow-sm"
+                >
+                  <RotateCw className={"h-3.5 w-3.5 transition-transform duration-300 " + (isFlipped ? "rotate-180 text-[#00e6ff]" : "")} />
+                  <span>{isFlipped ? "Front view" : "Flip / 360° rear"}</span>
+                </button>
+                <div className="flex items-center gap-1 border-r border-hairline pr-2 mr-1">
                   <button
                     type="button"
-                    onClick={() => setIsFlipped((f) => !f)}
-                    aria-label={isFlipped ? "Show front of PlayStation Vita" : "Inspect back of PlayStation Vita (360° View)"}
-                    title={isFlipped ? "Show front of PlayStation Vita" : "Inspect back of PlayStation Vita (360° View)"}
-                    className="inline-flex min-h-[38px] items-center gap-1.5 rounded-lg border border-white/10 bg-black/60 px-3.5 py-1.5 font-mono text-[11px] font-medium uppercase tracking-wider text-ink-medium backdrop-blur-md transition-all hover:border-[#00e6ff]/50 hover:text-[#00e6ff] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00e6ff]/40 shadow-sm"
+                    onClick={handlePrev}
+                    aria-label="Previous project"
+                    title="Previous project"
+                    className="inline-flex h-11 w-11 items-center justify-center rounded-lg border border-hairline bg-surface text-ink-muted transition-colors hover:border-hairline-strong hover:text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink/20 sm:h-9 sm:w-9"
                   >
-                    <RotateCw className={"h-3.5 w-3.5 transition-transform duration-300 " + (isFlipped ? "rotate-180 text-[#00e6ff]" : "")} />
-                    <span>{isFlipped ? "Front view" : "Flip / 360° rear"}</span>
+                    <ChevronLeft className="h-3.5 w-3.5" />
                   </button>
-
-                  <div className="flex items-center gap-1 border-l border-hairline pl-2">
-                    <button
-                      type="button"
-                      onClick={handlePrev}
-                      aria-label="Previous project"
-                      title="Previous project"
-                      className="inline-flex h-9 w-9 items-center justify-center rounded-lg border border-hairline bg-surface text-ink-muted transition-colors hover:border-hairline-strong hover:text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink/20"
-                    >
-                      <ChevronLeft className="h-4 w-4" />
-                    </button>
-                    <button
-                      type="button"
-                      onClick={handleNext}
-                      aria-label="Next project"
-                      title="Next project"
-                      className="inline-flex h-9 w-9 items-center justify-center rounded-lg border border-hairline bg-surface text-ink-muted transition-colors hover:border-hairline-strong hover:text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink/20"
-                    >
-                      <ChevronRight className="h-4 w-4" />
-                    </button>
-                  </div>
+                  <button
+                    type="button"
+                    onClick={handleNext}
+                    aria-label="Next project"
+                    title="Next project"
+                    className="inline-flex h-11 w-11 items-center justify-center rounded-lg border border-hairline bg-surface text-ink-muted transition-colors hover:border-hairline-strong hover:text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink/20 sm:h-9 sm:w-9"
+                  >
+                    <ChevronRight className="h-3.5 w-3.5" />
+                  </button>
                 </div>
-
-                <div className="flex items-center gap-2">
+                <div className="flex flex-wrap items-center gap-2">
                   <button
                     type="button"
                     onClick={() => onCopyLink(selectedProject)}
-                    className="inline-flex min-h-[38px] items-center gap-1.5 rounded-lg border border-hairline bg-surface px-3 py-1.5 text-caption font-medium text-ink-medium transition-colors hover:border-hairline-strong hover:text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink/20"
+                    className="inline-flex min-h-[44px] items-center gap-1.5 rounded-lg border border-hairline bg-surface px-3 py-2 text-caption font-medium text-ink-medium transition-colors hover:border-hairline-strong hover:text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink/20"
                   >
                     {copiedSlug === (selectedProject as any)?.slug ? (
                       <>
                         <Check className="h-3.5 w-3.5 text-stage-done" />
-                        <span>Copied</span>
+                        Copied
                       </>
                     ) : (
                       <>
                         <Link2 className="h-3.5 w-3.5" />
-                        <span>Copy link</span>
+                        Copy link
                       </>
                     )}
                   </button>
-
                   {(selectedProject as any)?.reddit_url && (
                     <a
                       href={(selectedProject as any).reddit_url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex min-h-[38px] items-center gap-1.5 rounded-lg bg-ink px-3.5 py-1.5 text-caption font-medium text-canvas transition-colors hover:bg-ink/90"
+                      className="inline-flex min-h-[44px] items-center gap-1.5 rounded-lg bg-ink px-3.5 py-2 text-caption font-medium text-canvas transition-colors hover:bg-ink/90"
                     >
-                      <span>Discussion</span>
+                      Source discussion
                       <ExternalLink className="h-3.5 w-3.5" />
                     </a>
                   )}
@@ -416,33 +496,6 @@ export const ConsoleStage: React.FC<ConsoleStageProps> = ({
               </div>
             </div>
           )}
-
-          <div className="mt-4 flex justify-center">
-            <div
-              aria-label="Choose a project to preview"
-              className="no-scrollbar flex max-w-full gap-1 overflow-x-auto rounded-full border border-hairline bg-sunken p-1"
-            >
-              {projects.map((project) => {
-                const active = selectedId === project.id;
-                return (
-                  <button
-                    key={project.id}
-                    type="button"
-                    aria-pressed={active}
-                    onClick={() => onSelectProject(project)}
-                    className={
-                      "whitespace-nowrap rounded-full px-3.5 py-1.5 text-caption font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink/20 " +
-                      (active
-                        ? "border border-hairline bg-surface text-ink shadow-card"
-                        : "border border-transparent text-ink-muted hover:text-ink")
-                    }
-                  >
-                    {splitTitle(project.game_title || project.display_name).name}
-                  </button>
-                );
-              })}
-            </div>
-          </div>
 
           <p className="mt-3 text-center text-micro uppercase text-ink-muted">
             <span className="hidden sm:inline">
@@ -452,15 +505,6 @@ export const ConsoleStage: React.FC<ConsoleStageProps> = ({
           </p>
         </div>
       </div>
-
-      <dl className="mx-auto mt-14 grid max-w-3xl grid-cols-2 gap-x-8 gap-y-7 sm:grid-cols-4">
-        {SPECS.map(([term, value]) => (
-          <div key={term}>
-            <dt className="text-micro font-medium uppercase text-ink-muted">{term}</dt>
-            <dd className="mt-1.5 text-body text-ink">{value}</dd>
-          </div>
-        ))}
-      </dl>
     </section>
   );
 };

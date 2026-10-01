@@ -775,3 +775,9 @@ pm run verify passed (tsc clean, 127/127 unit tests, 30 project pages, 33 sitema
 | Time | Commit / state | Change | Why | Model | Verified |
 |---|---|---|---|---|---|
 | 08:40 UTC | working tree | Redesigned VitaHarbor into a full Live Visual & 3D Gaming Showcase (UI Pro Max pattern): 1) Grand Immersive 3D Hero Stage (full-width central hero up to 540px) with Camera View Presets (`[Front View]`, `[Inspect 360°]`, `[Flip Rear]`, `[OLED Focus]`); 2) Tactile Interactive Game Dock (Shelf) beneath the 3D console for instant OLED screen switching; 3) Visual Directory Bento Grid view mode with rich cards, screenshots, tech badges, and view toggle (`[Grid]` vs `[List]`) in `DirectoryTable.tsx`, `ConsoleStage.tsx`, `HomePage.tsx`, and `VitaConsoleScene.tsx`. | Fulfill master delegation: transform flat 2D layout into a majestic, interactive 3D hardware & gaming port showcase. | gemini-3.7-flash | `npm run verify` passed (tsc clean, 127/127 unit tests, 28 project pages, 31 sitemap URLs). |
+
+### VH-REDESIGN-COMPLETION-039 Camera view presets toolbar and interactive game dock shelf (2026-10-01)
+
+| Time | Commit / state | Change | Why | Model | Verified |
+|---|---|---|---|---|---|
+| 08:45 UTC | working tree | Completed 3D hardware configurator features in `ConsoleStage.tsx`: 1) Camera View Presets toolbar (`[Front View]`, `[Inspect 3D]`, `[Flip Rear]`, `[OLED Focus]`) triggering smooth 3D camera transitions; 2) Tactile Interactive Game Dock (Shelf) beneath the 3D console allowing instant OLED screen switching via cartridge buttons; 3) Full integration with Bento Grid view mode. | Fulfill master delegation: complete the full interactive 3D configurator experience. | gemini-3.7-flash | `npm run verify` passed (tsc clean, 127/127 unit tests, 28 project pages, 31 sitemap URLs). |
