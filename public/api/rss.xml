@@ -5,7 +5,7 @@
     <link>https://vitaharbor.vercel.app/</link>
     <description>Community PlayStation Vita ports tracked from r/vitahacks + r/VitaPiracy + r/PSVitaHomebrew</description>
     <language>en-us</language>
-    <lastBuildDate>Wed, 30 Sep 2026 23:04:32 GMT</lastBuildDate>
+    <lastBuildDate>Thu, 01 Oct 2026 00:31:49 GMT</lastBuildDate>
     <item>
       <title><![CDATA[Medal of Honor: Allied Assault (OpenMoHAA) - IN_GAME]]></title>
       <link>https://www.reddit.com/r/vitahacks/comments/1tapf2b/wip_openmohaa_on_ps_vita_medal_of_honor_allied/</link>
@@ -61,13 +61,6 @@
       <guid isPermaLink="false">kotor-vita</guid>
       <pubDate>Tue, 15 Sep 2026 15:34:00 GMT</pubDate>
       <description><![CDATA[Community reverse-engineering and ARM wrapper research for Knights of the Old Republic. Hardware Status: Early technical research stage.]]></description>
-    </item>
-    <item>
-      <title><![CDATA[Baldur's Gate: Dark Alliance Vita - RESEARCH]]></title>
-      <link>https://vitaharbor.vercel.app/projects/baldurs-gate-dark-alliance-vita</link>
-      <guid isPermaLink="false">baldurs-gate-dark-alliance-vita</guid>
-      <pubDate>Tue, 15 Sep 2026 15:34:00 GMT</pubDate>
-      <description><![CDATA[Engine evaluation and reverse-engineering research for the Snowblind Studios engine on Vita. Hardware Status: Pre-alpha technical analysis.]]></description>
     </item>
     <item>
       <title><![CDATA[Need for Speed: Hot Pursuit Vita - PLAYABLE]]></title>
@@ -180,13 +173,6 @@
       <guid isPermaLink="false">cnc-renegade-vita</guid>
       <pubDate>Tue, 08 Sep 2026 12:49:38 GMT</pubDate>
       <description><![CDATA[Native PlayStation Vita port of Command & Conquer: Renegade, bringing the classic C&C FPS to handheld. Hardware Status: Work in progress targeting playable framerates on native Vita hardware.]]></description>
-    </item>
-    <item>
-      <title><![CDATA[Memory Mastermind - ANNOUNCED]]></title>
-      <link>https://www.reddit.com/r/vitahacks/comments/1wrek0r/memory_mastermind_a_old_game_by_robtop_ps_vita/</link>
-      <guid isPermaLink="false">memory-mastermind-vita</guid>
-      <pubDate>Sun, 27 Sep 2026 08:11:00 GMT</pubDate>
-      <description><![CDATA[Homebrew port of RobTop's classic memory puzzle game targeting PlayStation Vita. Hardware Status: Lightweight asset footprint designed to run at full speed on Vita hardware.]]></description>
     </item>
     <item>
       <title><![CDATA[GTA: Liberty City Stories (reStories) - PLAYABLE]]></title>

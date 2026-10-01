@@ -50,7 +50,13 @@ const FAKE_OR_TROLL_SIGNALS = [
   /\bbait\b/i,
   /\bai\s+slop\b/i,
   /\bhallucinat(?:ion|ed|ing)\b/i,
-  /\bparody\b/i
+  /\bparody\b/i,
+  /\blefterisdagamer\b/i,
+  /\bvibecod(?:ed|er|ing|es)?\b/i,
+  /\bvibe\s*cod(?:ed|er|ing|es|e)\b/i,
+  /\bdumb\s+little\s+joke\b/i,
+  /\btroll\s+vitaharbor\b/i,
+  /\bjoke\s+port\b/i
 ];
 
 const VITA_CONTEXT_SIGNALS = [

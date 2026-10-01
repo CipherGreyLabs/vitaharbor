@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-09-30T23:04:10.986Z",
+  "generated_at": "2026-10-01T00:28:57.129Z",
   "source": "r/vitahacks + r/VitaPiracy + r/PSVitaHomebrew RSS",
   "items": [
     {
@@ -533,7 +533,7 @@
       "schema_version": 2,
       "id": "reddit-1wrek0r",
       "external_id": "1wrek0r",
-      "state": "PROMOTED",
+      "state": "REJECTED",
       "state_history": [
         {
           "state": "DETECTED",
@@ -552,6 +552,12 @@
           "at": "2026-09-27T18:55:00.000Z",
           "actor": "codex",
           "reason": "Promote community-announced Memory Mastermind RobTop puzzle game port"
+        },
+        {
+          "state": "REJECTED",
+          "at": "2026-10-01T00:28:57.129Z",
+          "actor": "codex",
+          "reason": "Fake port / troll campaign by LefterisDaGamer"
         }
       ],
       "source": {

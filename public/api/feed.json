@@ -112,19 +112,6 @@
       ]
     },
     {
-      "id": "baldurs-gate-dark-alliance-vita",
-      "url": "https://vitaharbor.vercel.app/projects/baldurs-gate-dark-alliance-vita",
-      "title": "Baldur's Gate: Dark Alliance Vita",
-      "content_text": "Stage: research | Platform: PS2 / GameCube | Summary: Engine evaluation and reverse-engineering research for the Snowblind Studios engine on Vita. | Hardware: Pre-alpha technical analysis.",
-      "date_modified": "2026-09-15T15:34:00.000Z",
-      "tags": [
-        "research",
-        "PS2 / GameCube",
-        "ARMv7 Wrapper",
-        "Reverse-Engineering"
-      ]
-    },
-    {
       "id": "nfs-hot-pursuit-vita",
       "url": "https://vitaharbor.vercel.app/projects/nfs-hot-pursuit-vita",
       "title": "Need for Speed: Hot Pursuit Vita",
@@ -328,19 +315,6 @@
         "Native C++",
         "Open-Source Engine",
         "vitaGL"
-      ]
-    },
-    {
-      "id": "memory-mastermind-vita",
-      "url": "https://www.reddit.com/r/vitahacks/comments/1wrek0r/memory_mastermind_a_old_game_by_robtop_ps_vita/",
-      "title": "Memory Mastermind",
-      "content_text": "Stage: announced | Platform: Mobile / RobTop | Summary: Homebrew port of RobTop's classic memory puzzle game targeting PlayStation Vita. | Hardware: Lightweight asset footprint designed to run at full speed on Vita hardware.",
-      "date_modified": "2026-09-27T08:11:00.000Z",
-      "tags": [
-        "announced",
-        "Mobile / RobTop",
-        "Native C",
-        "VitaSDK"
       ]
     },
     {

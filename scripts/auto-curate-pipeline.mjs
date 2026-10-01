@@ -20,7 +20,18 @@ const PIRACY_HOSTS = [
   /mediafire\.com\/.*(?:\.iso|\.rom|\.pkg|\.zip)/i
 ];
 
+const BLOCKED_AUTHORS = new Set([
+  "lefterisdagamer"
+]);
+
 const TROLL_PRANK_AI_PATTERNS = [
+  /\blefterisdagamer\b/i,
+  /\bvibecod(?:ed|er|ing|es)?\b/i,
+  /\bvibe\s*cod(?:ed|er|ing|es|e)\b/i,
+  /\bdumb\s+little\s+joke\b/i,
+  /\btroll\s+(?:vitaharbor|the\s+community)\b/i,
+  /\bjoke\s+port\b/i,
+  /\bas\s+a\s+(?:dumb\s+)?joke\b/i,
   /\b(?:fake|troll|prank|shitpost|bait|parody)\b/i,
   /\bai\s+slop\b/i,
   /\bhallucinat(?:ion|ed|ing)\b/i,
@@ -87,6 +98,10 @@ export function extractOutboundRepository(item) {
 }
 
 export function checkSafetyAndPiracy(item) {
+  const author = String(item?.source?.author || "").toLowerCase().replace(/[^a-z0-9]/g, "");
+  if (BLOCKED_AUTHORS.has(author)) {
+    return { ok: false, type: "troll", reason: "Author is on the identified troll/fake port blacklist" };
+  }
   const text = `${item?.source?.title || ""} ${item?.source?.body || ""}`;
   for (const pattern of TROLL_PRANK_AI_PATTERNS) {
     if (pattern.test(text)) {

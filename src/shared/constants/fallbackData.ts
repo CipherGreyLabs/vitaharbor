@@ -9,7 +9,6 @@ export const FALLBACK_GAMES: Game[] = [
   { id: 6, slug: "spider-man-total-mayhem", title: "Spider-Man: Total Mayhem", normalized_title: "spider-man: total mayhem", original_release_year: 2010, original_platform: "Android ARMv7", created_at: new Date('2026-09-17T15:34:00.000Z'), updated_at: new Date('2026-09-17T15:34:00.000Z') },
   { id: 7, slug: "the-simpsons-hit-and-run", title: "The Simpsons: Hit & Run", normalized_title: "the simpsons: hit & run", original_release_year: 2003, original_platform: "PS2 / GameCube", created_at: new Date('2026-09-17T15:34:00.000Z'), updated_at: new Date('2026-09-17T15:34:00.000Z') },
   { id: 8, slug: "star-wars-kotor", title: "Star Wars: Knights of the Old Republic", normalized_title: "star wars: knights of the old republic", original_release_year: 2003, original_platform: "Xbox / PC / Android", created_at: new Date('2026-09-17T15:34:00.000Z'), updated_at: new Date('2026-09-17T15:34:00.000Z') },
-  { id: 9, slug: "baldurs-gate-dark-alliance", title: "Baldur's Gate: Dark Alliance", normalized_title: "baldur's gate: dark alliance", original_release_year: 2001, original_platform: "PS2 / GameCube", created_at: new Date('2026-09-17T15:34:00.000Z'), updated_at: new Date('2026-09-17T15:34:00.000Z') },
   { id: 10, slug: "need-for-speed-hot-pursuit", title: "Need for Speed: Hot Pursuit", normalized_title: "need for speed: hot pursuit", original_release_year: 2010, original_platform: "Android", created_at: new Date('2026-09-17T15:34:00.000Z'), updated_at: new Date('2026-09-17T15:34:00.000Z') },
   { id: 12, slug: "renpy-8-runtime", title: "Ren'Py 8 Runtime (Python 3.11)", normalized_title: "ren'py 8 runtime (python 3.11)", original_release_year: 2024, original_platform: "Multiplatform Engine", created_at: new Date('2026-09-17T15:34:00.000Z'), updated_at: new Date('2026-09-17T15:34:00.000Z') },
   { id: 13, slug: "zelda-ship-of-harkinian", title: "Zelda: Ship of Harkinian (Ocarina of Time)", normalized_title: "zelda: ship of harkinian (ocarina of time)", original_release_year: 1998, original_platform: "N64 / PC Decomp", created_at: new Date('2026-09-17T15:34:00.000Z'), updated_at: new Date('2026-09-17T15:34:00.000Z') },
@@ -210,27 +209,6 @@ export const FALLBACK_PROJECTS: any[] = [
     original_platform: "Xbox / PC / Android",
     original_release_year: 2003,
     technologies: ["ARMv7 Wrapper"],
-    developers: [{ id: 5, role: "lead", display_name: "Rinnegatamante", slug: "rinnegatamante" }]
-  },
-  {
-    id: 9,
-    game_id: 9,
-    slug: "baldurs-gate-dark-alliance-vita",
-    display_name: "Baldur's Gate: Dark Alliance Vita",
-    current_stage: "research",
-    lifecycle: "active",
-    summary: "Engine evaluation and reverse-engineering research for the Snowblind Studios engine on Vita.",
-    playability_notes: "Analyzing Android ARMv7 binary symbol tables and memory models.",
-    performance_notes: "Pre-alpha technical analysis.",
-    first_seen_at: new Date('2026-08-08T15:34:00.000Z'),
-    last_activity_at: new Date('2026-09-15T15:34:00.000Z'),
-    released_at: null,
-    is_featured: true,
-    is_archived: false,
-    game_title: "Baldur's Gate: Dark Alliance",
-    original_platform: "PS2 / GameCube",
-    original_release_year: 2001,
-    technologies: ["ARMv7 Wrapper", "Reverse-Engineering"],
     developers: [{ id: 5, role: "lead", display_name: "Rinnegatamante", slug: "rinnegatamante" }]
   },
   {
@@ -775,17 +753,7 @@ export const FALLBACK_DEVELOPERS: any[] = [
     ],
     projects: []
   },
-  {
-    id: 25,
-    slug: "lefterisdagamer",
-    display_name: "LefterisDaGamer",
-    description: "Community developer porting RobTop classic games such as Memory Mastermind to PlayStation Vita.",
-    is_known_developer: true,
-    identities: [
-      { provider: "reddit", username: "LefterisDaGamer" }
-    ],
-    projects: []
-  }
+  
 ,
   {
     id: 26,
