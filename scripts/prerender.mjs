@@ -170,7 +170,7 @@ const prerenderedBody = `<div id="top" class="vh-static-page">
     <main id="main-content">
       <section class="vh-static-hero">
         <div class="vh-static-hero-copy">
-          <p class="vh-static-eyebrow">PlayStation Vita <span>/</span> Port atlas</p>
+          <p class="vh-static-eyebrow">PlayStation Vita <span>·</span> Homebrew &amp; Source Ports</p>
           <h1>Community ports in <span>active development.</span></h1>
           <p>Tracking PS Vita source ports, PC decompilations, and native ARM wrappers with real-time 3D hardware inspection.</p>
           <div class="vh-static-telemetry" aria-label="Project totals">
