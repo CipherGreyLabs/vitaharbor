@@ -250,33 +250,6 @@ export const ConsoleStage: React.FC<ConsoleStageProps> = ({
 
         <div className="relative px-1 pt-0 sm:px-4">
           <div className="vh-oled-aura" aria-hidden="true" />
-          
-          {/* Floating Glassmorphic HUD Chips */}
-          <div className="pointer-events-none absolute left-3 top-2 z-20 hidden sm:block">
-            <div className="vh-hud-chip">
-              <span className="h-1.5 w-1.5 rounded-full bg-[#00e6ff] shadow-[0_0_8px_#00e6ff]" />
-              <span>OLED · 960 × 544</span>
-            </div>
-          </div>
-
-          <div className="pointer-events-none absolute right-3 top-2 z-20 hidden sm:block">
-            <div className="vh-hud-chip">
-              <span className="vh-live-dot" />
-              <span>STAGE: {prettyStage(selectedProject?.current_stage)}</span>
-            </div>
-          </div>
-
-          <div className="pointer-events-none absolute bottom-2 left-3 z-20 hidden md:block">
-            <div className="vh-hud-chip">
-              <span>[ARMv7 CORTEX-A9]</span>
-            </div>
-          </div>
-
-          <div className="pointer-events-none absolute bottom-2 right-3 z-20 hidden md:block">
-            <div className="vh-hud-chip">
-              <span>{selectedProject?.original_platform ? `[SOURCE: ${selectedProject.original_platform}]` : "[HARDWARE: 60 FPS]"}</span>
-            </div>
-          </div>
 
           <div
             ref={consoleRef}
@@ -338,6 +311,13 @@ export const ConsoleStage: React.FC<ConsoleStageProps> = ({
               )}
             </div>
           )}
+          <div className="mt-2 flex flex-wrap items-center justify-center gap-2.5 font-mono text-[10px] sm:text-[11px] text-ink-muted">
+            <span>OLED 960 × 544</span>
+            <span className="text-white/20">·</span>
+            <span>60 FPS Target</span>
+            <span className="text-white/20">·</span>
+            <span>360° Hardware View</span>
+          </div>
           <div aria-hidden="true" className="vh-floor mx-auto h-px w-[84%]" />
         </div>
 

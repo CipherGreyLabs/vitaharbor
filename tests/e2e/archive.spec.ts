@@ -169,14 +169,14 @@ test.describe("archive", () => {
     await page.route("https://raw.githubusercontent.com/CipherGreyLabs/vitaharbor/main/public/data/discovered.json*", (route) =>
       route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify(queue) }));
     await page.goto("/", { waitUntil: "domcontentloaded" });
-    await expect(page.getByRole("heading", { name: "Community posts to explore" })).toBeVisible();
-    await expect(page.getByText("Unverified lead", { exact: true }).first()).toBeVisible();
+    await expect(page.getByRole("heading", { name: /Community (?:posts to explore|Discussions & Leads)/ })).toBeVisible();
+    await expect(page.getByText(/(?:Unverified lead|Community Post)/, { exact: true }).first()).toBeVisible();
     const homeText = await page.locator("body").innerText();
     expect(homeText).not.toMatch(/scanner|run id|rate.?limit|last attempt|3× daily|github action|review queue|quarantined|pending review/i);
 
     await page.goto("/discovery/", { waitUntil: "domcontentloaded" });
     await expect(page.getByRole("heading", { name: "Community posts" })).toBeVisible();
-    await expect(page.getByRole("list", { name: "Unverified community posts" }).getByText("Unverified lead").first()).toBeVisible();
+    await expect(page.getByRole("list", { name: "Unverified community posts" }).getByText(/(?:Unverified lead|Community Post)/).first()).toBeVisible();
     const discoveryText = await page.locator("body").innerText();
     expect(discoveryText).not.toMatch(/scanner|run id|rate.?limit|last attempt|3× daily|github action|review queue|quarantined|pending review/i);
     expect(requests.some((url) => url.includes("scanner-health.json"))).toBe(false);

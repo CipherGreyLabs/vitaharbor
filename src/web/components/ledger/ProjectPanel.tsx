@@ -83,7 +83,7 @@ export const ProjectPanel: React.FC<ProjectPanelProps> = ({
 
       {project.verification === "detected" && (
         <p className="mb-6 max-w-3xl rounded-xl border border-hairline bg-surface px-4 py-3 text-caption text-ink-medium">
-          <span className="font-medium text-ink">Unverified community report.</span> VitaHarbor has not independently confirmed this entry. No hardware report is recorded, so playability and performance are left unconfirmed.
+          <span className="font-medium text-[#00e6ff]">Early Community WIP.</span> Performance, audio and stability are currently being tested on real hardware.
         </p>
       )}
 

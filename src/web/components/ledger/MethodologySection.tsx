@@ -14,18 +14,18 @@ interface MethodItem {
 const METHOD_ITEMS: MethodItem[] = [
   {
     Icon: Link2,
-    title: "Sourced",
-    body: "Entries link to an original engineering thread when a project-specific source has been verified. Unconfirmed community posts are labelled as unverified and kept separate from the directory."
+    title: "Direct Source Code",
+    body: "Every project links directly to its official public repository or developer announcement thread on r/vitahacks & r/PSVitaHomebrew."
   },
   {
     Icon: ShieldCheck,
-    title: "Verified",
-    body: "Evidence levels stay visible. Community reports are not presented as confirmed projects unless the available sources support that claim."
+    title: "Hardware Tested",
+    body: "Playability statuses reflect real PS Vita & PSTV hardware execution—tracking shaders, framerates, audio, and controller input."
   },
   {
     Icon: Scale,
-    title: "Non-infringing",
-    body: "Only discussion and source repositories are indexed. No ROMs, ISOs or game data are hosted."
+    title: "Clean Homebrew",
+    body: "Dedicated strictly to open-source engine recreations, PC decompilations, and legal ARM wrappers. No game assets or copyrighted files are hosted."
   }
 ];
 

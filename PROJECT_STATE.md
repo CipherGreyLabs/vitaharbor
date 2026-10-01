@@ -2,6 +2,15 @@
 
 Updated: 2026-10-01
 
+## Current state: VH-CLEAN-COPY-037 Clean Community Gaming UI & Decluttered Showcase (2026-10-01)
+
+- Authentic, human-centered gaming port showcase active:
+  - Hero: 'Community ports in active development.', 'PlayStation Vita · Homebrew & Source Ports', 'Active Ports', 'Playable Builds', 'In Development'.
+  - 3D Console: Clean, unobstructed hardware viewport with integrated status strip ('OLED 960 × 544 · 60 FPS Target · 360° Hardware View') and 360° flip button.
+  - Directory: Streamlined terminology ('Last Activity', 'Active Projects', 'Community Lead').
+  - Method: Respectful homebrew engineering principles ('Direct Source Code', 'Hardware Tested', 'Clean Homebrew').
+- Verification: npm run verify passed (tsc clean, 127/127 unit tests, 28 prerendered project pages, 31 sitemap URLs).
+
 ## Current state: VH-3D-REAR-ZFIX-036 PS Vita 3D Rear Geometry Z-Fix & 360° Flip Inspection (2026-10-01)
 
 - 3D PS Vita Hardware Experience upgraded:

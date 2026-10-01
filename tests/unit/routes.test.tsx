@@ -62,7 +62,7 @@ describe("public routes", () => {
 
     expect(await screen.findByText("Example Vita port thread")).toBeTruthy();
     expect(document.body.textContent).not.toContain("must-not-render");
-    expect(screen.getByText("Unverified lead")).toBeTruthy();
+    expect(screen.getByText("Community Post")).toBeTruthy();
     expect(screen.getByText("r/vitahacks")).toBeTruthy();
     expect(document.body.textContent).not.toMatch(/scanner|scan health|rate.?limit|review queue/i);
   });

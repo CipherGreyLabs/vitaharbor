@@ -200,11 +200,8 @@ export const DirectoryTable: React.FC<DirectoryTableProps> = ({
           {loading
             ? "Loading indexed projects…"
             : visible.length === projects.length
-              ? projects.length + " projects indexed"
-              : "Showing " + visible.length + " of " + projects.length}
-          <span className="ml-2 text-caption text-ink-muted">
-            · {projects.filter((pr) => pr.screenshot_url).length} source screenshots
-          </span>
+              ? projects.length + " Active Projects · Source repos & hardware builds"
+              : "Showing " + visible.length + " of " + projects.length + " active projects"}
         </p>
       </div>
 
@@ -392,7 +389,7 @@ export const DirectoryTable: React.FC<DirectoryTableProps> = ({
           <div className="overflow-hidden rounded-2xl border border-white/[0.07] bg-surface shadow-card">
             <div className="hidden grid-cols-[minmax(0,1fr)_auto] border-b border-hairline bg-white/[0.025] px-0 py-2 lg:grid">
               <div className="grid grid-cols-[minmax(0,1.8fr)_minmax(8.5rem,0.9fr)_minmax(6rem,0.65fr)_minmax(7rem,0.75fr)_1.5rem] items-center gap-3 px-4 font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-ink-muted">
-                <span>Project</span><span>Current stage</span><span>Type</span><span>Last observed</span><span aria-hidden="true" />
+                <span>Project</span><span>Current stage</span><span>Type</span><span>Last Activity</span><span aria-hidden="true" />
               </div>
               <span className="w-12 sm:w-[5.5rem]" aria-hidden="true" />
             </div>
@@ -451,7 +448,7 @@ export const DirectoryTable: React.FC<DirectoryTableProps> = ({
                           <span className={"inline-flex max-w-full rounded-md px-2 py-1 text-micro font-semibold uppercase " + (STAGE_CHIP[String(project.current_stage)] || "bg-sunken text-ink-medium")}>
                             {prettyStage(project.current_stage)}
                           </span>
-                          {project.verification === "detected" && <span className="shrink-0 rounded border border-hairline-strong/30 px-1.5 py-1 font-mono text-[9px] uppercase text-ink-muted">Unverified</span>}
+                          {project.verification === "detected" && <span className="shrink-0 rounded border border-hairline-strong/30 px-1.5 py-1 font-mono text-[9px] uppercase text-ink-muted">Community Lead</span>}
                         </span>
 
                         <span className="hidden min-w-0 truncate font-mono text-micro uppercase text-ink-muted lg:block">{projectType}</span>

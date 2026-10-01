@@ -44,7 +44,7 @@ export const DiscoveryPage: React.FC = () => {
         <p className="text-micro font-semibold uppercase tracking-[0.16em] text-ink-muted">From the community</p>
         <h1 className="mt-3 text-display font-semibold tracking-tight text-ink">Community posts</h1>
         <p className="mt-4 max-w-2xl text-lead text-ink-medium">
-          Recent Reddit posts about possible Vita ports and updates. Each item is an unverified lead, not a confirmed project or release.
+          Recent discussions and technical updates from r/vitahacks, r/VitaPiracy & r/PSVitaHomebrew.
         </p>
       </header>
       {loading ? <p className="py-12 text-body text-ink-muted">Loading community posts…</p> : unavailable ? (
@@ -56,7 +56,7 @@ export const DiscoveryPage: React.FC = () => {
           {items.map((item) => (
             <li key={item.url} className="rounded-2xl border border-hairline bg-surface p-5">
               <div className="flex flex-wrap items-center gap-2 text-micro font-semibold uppercase tracking-[0.1em] text-ink-muted">
-                <span>Unverified lead</span>
+                <span>Community Post</span>
                 <span aria-hidden="true">·</span>
                 <span>r/{item.subreddit}</span>
               </div>

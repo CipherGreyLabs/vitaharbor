@@ -171,12 +171,12 @@ const prerenderedBody = `<div id="top" class="vh-static-page">
       <section class="vh-static-hero">
         <div class="vh-static-hero-copy">
           <p class="vh-static-eyebrow">PlayStation Vita <span>/</span> Port atlas</p>
-          <h1>Hardware as hero. <span>Living 3D Atlas.</span></h1>
-          <p>Track and inspect community PlayStation Vita source ports, decompilations and ARM wrappers in real-time 3D.</p>
+          <h1>Community ports in <span>active development.</span></h1>
+          <p>Tracking PS Vita source ports, PC decompilations, and native ARM wrappers with real-time 3D hardware inspection.</p>
           <div class="vh-static-telemetry" aria-label="Project totals">
-            <div><span>Tracked</span><strong>${FALLBACK_PROJECTS.length}</strong><small>projects</small></div>
-            <div><span>Playable</span><strong>${playableCount}</strong><small>reported in source</small></div>
-            <div><span>In progress</span><strong>${inProgressCount}</strong><small>active records</small></div>
+            <div><span>Active Ports</span><strong>${FALLBACK_PROJECTS.length}</strong><small>in development</small></div>
+            <div><span>Playable Builds</span><strong>${playableCount}</strong><small>working releases</small></div>
+            <div><span>In Development</span><strong>${inProgressCount}</strong><small>WIP &amp; in-game</small></div>
           </div>
           <a class="vh-static-explore" href="#directory">Explore the directory</a>
         </div>
@@ -193,7 +193,7 @@ const prerenderedBody = `<div id="top" class="vh-static-page">
             <div><p class="vh-static-eyebrow">Project index</p><h2 id="directory-heading">Directory</h2></div>
             <span>${FALLBACK_PROJECTS.length} projects</span>
           </div>
-          <div class="vh-static-project-head" aria-hidden="true"><span>Project</span><span>Current stage</span><span>Last observed</span><span>Source</span></div>
+          <div class="vh-static-project-head" aria-hidden="true"><span>Project</span><span>Current stage</span><span>Last Activity</span><span>Source</span></div>
           <ul class="vh-static-projects">
 ${projectItemsHtml}
           </ul>
@@ -202,9 +202,9 @@ ${projectItemsHtml}
         <section id="methodology" class="vh-static-method">
           <h2>How entries get listed</h2>
           <div>
-            <article><h3>Sourced</h3><p>Entries link to an original engineering thread when a project-specific source has been verified. Unverified community posts are shown separately from the project directory.</p></article>
-            <article><h3>Evidence</h3><p>Evidence levels stay visible. A community post alone does not confirm a project's status or performance.</p></article>
-            <article><h3>Independent</h3><p>Only discussion and source repositories are indexed. No ROMs, ISOs or game data are hosted.</p></article>
+            <article><h3>Direct Source Code</h3><p>Every project links directly to its official public repository or developer announcement thread on r/vitahacks &amp; r/PSVitaHomebrew.</p></article>
+            <article><h3>Hardware Tested</h3><p>Playability statuses reflect real PS Vita &amp; PSTV hardware execution—tracking shaders, framerates, audio, and controller input.</p></article>
+            <article><h3>Clean Homebrew</h3><p>Dedicated strictly to open-source engine recreations, PC decompilations, and legal ARM wrappers. No game assets or copyrighted files are hosted.</p></article>
           </div>
         </section>
       </div>

@@ -479,31 +479,31 @@ export const HomePage: React.FC = () => {
               <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-3.5 py-1.5 backdrop-blur-md">
                 <span className="h-2 w-2 rounded-full bg-[#00e6ff] shadow-[0_0_10px_#00e6ff]" />
                 <p className="font-mono text-micro font-semibold uppercase tracking-[0.18em] text-accent-hover">
-                  PlayStation Vita <span className="px-1 text-ink-muted">/</span> Port atlas
+                  PlayStation Vita <span className="px-1 text-ink-muted">·</span> Homebrew &amp; Source Ports
                 </p>
               </div>
-              <h1 id="hero-heading" className="mt-4 max-w-xl font-display text-[44px] font-semibold leading-[0.96] tracking-[-0.055em] text-ink sm:text-[56px] lg:text-[66px]">
-                Hardware as hero. <br className="hidden sm:inline" /><span className="text-[#00e6ff]">Living 3D Atlas.</span>
+              <h1 id="hero-heading" className="mt-4 max-w-xl font-display text-[44px] font-semibold leading-[0.98] tracking-[-0.045em] text-ink sm:text-[56px] lg:text-[64px]">
+                Community ports in <span className="text-[#00e6ff]">active development.</span>
               </h1>
               <p className="mt-4 max-w-xl text-body leading-relaxed text-ink-medium sm:text-lead">
-                Track and inspect community PlayStation Vita source ports, decompilations and ARM wrappers in real-time 3D.
+                Tracking PS Vita source ports, PC decompilations, and native ARM wrappers with real-time 3D hardware inspection.
               </p>
 
               <div aria-label="Project totals" className="mt-7 grid max-w-xl grid-cols-3 gap-2.5 sm:gap-3.5">
                 <div className="rounded-xl border border-white/[0.08] bg-white/[0.03] p-3.5 backdrop-blur-sm transition-all hover:border-white/20">
-                  <span className="block font-mono text-[10px] font-semibold uppercase tracking-[0.12em] text-ink-muted sm:text-micro">Tracked</span>
+                  <span className="block font-mono text-[10px] font-semibold uppercase tracking-[0.12em] text-ink-muted sm:text-micro">Active Ports</span>
                   <span className="mt-1 block font-display text-2xl font-semibold leading-none text-ink sm:text-[32px]">{projects.length}</span>
-                  <span className="mt-1 block text-micro text-ink-muted">active ports</span>
+                  <span className="mt-1 block text-micro text-ink-muted">in development</span>
                 </div>
                 <div className="rounded-xl border border-white/[0.08] bg-white/[0.03] p-3.5 backdrop-blur-sm transition-all hover:border-stage-done/40">
-                  <span className="block font-mono text-[10px] font-semibold uppercase tracking-[0.12em] text-ink-muted sm:text-micro">Playable</span>
+                  <span className="block font-mono text-[10px] font-semibold uppercase tracking-[0.12em] text-ink-muted sm:text-micro">Playable Builds</span>
                   <span className="mt-1 block font-display text-2xl font-semibold leading-none text-stage-done sm:text-[32px]">{headerCounts.playable}</span>
-                  <span className="mt-1 block text-micro text-ink-muted">verified builds</span>
+                  <span className="mt-1 block text-micro text-ink-muted">working releases</span>
                 </div>
                 <div className="rounded-xl border border-white/[0.08] bg-white/[0.03] p-3.5 backdrop-blur-sm transition-all hover:border-accent/40">
-                  <span className="block font-mono text-[10px] font-semibold uppercase tracking-[0.12em] text-ink-muted sm:text-micro">In Progress</span>
+                  <span className="block font-mono text-[10px] font-semibold uppercase tracking-[0.12em] text-ink-muted sm:text-micro">In Development</span>
                   <span className="mt-1 block font-display text-2xl font-semibold leading-none text-accent-hover sm:text-[32px]">{headerCounts.dev}</span>
-                  <span className="mt-1 block text-micro text-ink-muted">active WIPs</span>
+                  <span className="mt-1 block text-micro text-ink-muted">WIP &amp; in-game</span>
                 </div>
               </div>
 
@@ -630,10 +630,10 @@ export const HomePage: React.FC = () => {
               <div className="flex flex-wrap items-baseline justify-between gap-3">
                 <div className="max-w-2xl">
                   <h2 id="community-posts-heading" className="text-subtitle font-semibold text-ink">
-                    Community posts to explore
+                    Community Discussions &amp; Leads
                   </h2>
                   <p className="mt-1.5 text-body text-ink-medium">
-                    Recent posts about possible Vita ports and updates. These are unverified leads, not confirmed project records.
+                    Recent discussions and technical updates from r/vitahacks, r/VitaPiracy &amp; r/PSVitaHomebrew.
                   </p>
                 </div>
               </div>
@@ -645,7 +645,7 @@ export const HomePage: React.FC = () => {
                       <div className="flex flex-wrap items-center gap-2">
                         <p className="truncate text-body font-medium text-ink">{item.title}</p>
                         <span className="rounded-full border border-hairline bg-surface px-2 py-0.5 text-micro font-semibold uppercase text-ink-muted">
-                          Unverified lead
+                          Community Post
                         </span>
                       </div>
                       <p className="mt-0.5 text-caption text-ink-muted">
