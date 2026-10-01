@@ -283,7 +283,7 @@ export const ConsoleStage: React.FC<ConsoleStageProps> = ({
 
           <div className="hidden font-mono text-[11px] text-ink-muted sm:flex items-center gap-2">
             <span className="vh-live-dot" />
-            <span>Interactive 3D Configurator</span>
+            <span>PCH-1000 OLED · Real-time 3D</span>
           </div>
         </div>
 

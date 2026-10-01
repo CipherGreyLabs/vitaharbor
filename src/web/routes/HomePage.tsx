@@ -473,76 +473,72 @@ export const HomePage: React.FC = () => {
       </header>
 
       <main id="main-content" className="vh-boot">
-        <section aria-labelledby="hero-heading" className="vh-hero relative border-b border-white/[0.06]">
-          <div className="relative mx-auto grid max-w-7xl gap-8 px-5 pb-8 pt-8 sm:px-6 sm:pt-10 lg:grid-cols-[minmax(0,0.82fr)_minmax(0,1.18fr)] lg:items-center lg:gap-10 lg:py-10">
-            <div className="relative z-10">
-              <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-3.5 py-1.5 backdrop-blur-md">
+        <section aria-labelledby="hero-heading" className="vh-hero relative border-b border-white/[0.06] overflow-hidden pt-8 pb-12 sm:pt-12 sm:pb-16">
+          <div className="relative mx-auto max-w-6xl px-4 sm:px-6">
+            {/* Centered Grand Hero Header */}
+            <div className="mx-auto max-w-3xl text-center">
+              <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-4 py-1.5 backdrop-blur-md">
                 <span className="h-2 w-2 rounded-full bg-[#00e6ff] shadow-[0_0_10px_#00e6ff]" />
                 <p className="font-mono text-micro font-semibold uppercase tracking-[0.18em] text-accent-hover">
-                  PlayStation Vita <span className="px-1 text-ink-muted">·</span> Homebrew &amp; Source Ports
+                  PlayStation Vita <span className="px-1 text-ink-muted">·</span> Homebrew & Source Ports
                 </p>
               </div>
-              <h1 id="hero-heading" className="mt-4 max-w-xl font-display text-[44px] font-semibold leading-[0.98] tracking-[-0.045em] text-ink sm:text-[56px] lg:text-[64px]">
+
+              <h1 id="hero-heading" className="mt-5 font-display text-[44px] font-semibold leading-[0.98] tracking-[-0.045em] text-ink sm:text-[58px] lg:text-[68px]">
                 Community ports in <span className="text-[#00e6ff]">active development.</span>
               </h1>
-              <p className="mt-4 max-w-xl text-body leading-relaxed text-ink-medium sm:text-lead">
-                Tracking PS Vita source ports, PC decompilations, and native ARM wrappers with real-time 3D hardware inspection.
+
+              <p className="mx-auto mt-4 max-w-2xl text-body leading-relaxed text-ink-medium sm:text-lead">
+                Real-time 3D hardware tracker for PlayStation Vita decompilations, PC source ports, and native ARM wrappers.
               </p>
 
-              <div aria-label="Project totals" className="mt-7 grid max-w-xl grid-cols-3 gap-2.5 sm:gap-3.5">
-                <div className="rounded-xl border border-white/[0.08] bg-white/[0.03] p-3.5 backdrop-blur-sm transition-all hover:border-white/20">
-                  <span className="block font-mono text-[10px] font-semibold uppercase tracking-[0.12em] text-ink-muted sm:text-micro">Active Ports</span>
-                  <span className="mt-1 block font-display text-2xl font-semibold leading-none text-ink sm:text-[32px]">{projects.length}</span>
-                  <span className="mt-1 block text-micro text-ink-muted">in development</span>
+              {/* Centered Stat Badges */}
+              <div aria-label="Project totals" className="mt-6 flex flex-wrap items-center justify-center gap-2.5 sm:gap-3.5">
+                <div className="flex items-center gap-2 rounded-full border border-white/[0.08] bg-white/[0.03] px-4 py-2 backdrop-blur-sm">
+                  <span className="font-mono text-caption font-bold text-ink sm:text-body">{projects.length}</span>
+                  <span className="font-mono text-micro uppercase tracking-wider text-ink-muted">Active Ports</span>
                 </div>
-                <div className="rounded-xl border border-white/[0.08] bg-white/[0.03] p-3.5 backdrop-blur-sm transition-all hover:border-stage-done/40">
-                  <span className="block font-mono text-[10px] font-semibold uppercase tracking-[0.12em] text-ink-muted sm:text-micro">Playable Builds</span>
-                  <span className="mt-1 block font-display text-2xl font-semibold leading-none text-stage-done sm:text-[32px]">{headerCounts.playable}</span>
-                  <span className="mt-1 block text-micro text-ink-muted">working releases</span>
+                <div className="flex items-center gap-2 rounded-full border border-white/[0.08] bg-white/[0.03] px-4 py-2 backdrop-blur-sm">
+                  <span className="font-mono text-caption font-bold text-stage-done sm:text-body">{headerCounts.playable}</span>
+                  <span className="font-mono text-micro uppercase tracking-wider text-ink-muted">Playable Builds</span>
                 </div>
-                <div className="rounded-xl border border-white/[0.08] bg-white/[0.03] p-3.5 backdrop-blur-sm transition-all hover:border-accent/40">
-                  <span className="block font-mono text-[10px] font-semibold uppercase tracking-[0.12em] text-ink-muted sm:text-micro">In Development</span>
-                  <span className="mt-1 block font-display text-2xl font-semibold leading-none text-accent-hover sm:text-[32px]">{headerCounts.dev}</span>
-                  <span className="mt-1 block text-micro text-ink-muted">WIP &amp; in-game</span>
+                <div className="flex items-center gap-2 rounded-full border border-white/[0.08] bg-white/[0.03] px-4 py-2 backdrop-blur-sm">
+                  <span className="font-mono text-caption font-bold text-accent-hover sm:text-body">{headerCounts.dev}</span>
+                  <span className="font-mono text-micro uppercase tracking-wider text-ink-muted">In Development</span>
                 </div>
-              </div>
-
-              <div className="mt-6 flex flex-wrap items-center gap-3">
-                <a href="#directory" className="inline-flex min-h-[46px] items-center gap-2 rounded-xl border border-[#00e6ff]/40 bg-[#00e6ff]/10 px-5 text-caption font-semibold text-[#00e6ff] shadow-[0_0_20px_rgba(0,230,255,0.15)] transition-all hover:border-[#00e6ff]/70 hover:bg-[#00e6ff]/20 hover:shadow-[0_0_30px_rgba(0,230,255,0.25)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent">
-                  Explore directory <ArrowRight className="h-4 w-4" aria-hidden="true" />
-                </a>
-                <span className="hidden font-mono text-micro text-ink-muted sm:inline-flex items-center gap-1.5">
-                  <kbd className="vh-kbd-hint">/</kbd> to search
-                </span>
               </div>
             </div>
 
-            <div className="vh-console-frame relative min-w-0 overflow-hidden rounded-[1.8rem] border border-white/[0.1] bg-gradient-to-b from-white/[0.04] to-black/80 shadow-[0_20px_80px_rgba(0,0,0,0.8),0_0_50px_rgba(0,230,255,0.06)] backdrop-blur-xl sm:rounded-[2.2rem]">
-              <div className="flex items-center justify-between gap-3 border-b border-white/[0.08] bg-black/40 px-4 py-3 sm:px-6">
-                <div className="flex items-center gap-2.5">
-                  <span className="h-2 w-2 rounded-full bg-stage-done shadow-[0_0_8px_rgba(117,211,159,0.8)]" />
-                  <div>
-                    <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-accent-hover">3D Interactive Stage</p>
-                    <p className="text-[11px] text-ink-medium">PlayStation Vita PCH-1000 · Live Hardware Inspection</p>
+            {/* Grand Centered 3D Showcase Stage */}
+            <div className="mt-8 sm:mt-10">
+              <div className="vh-console-frame relative mx-auto max-w-5xl overflow-hidden rounded-[2rem] border border-white/[0.1] bg-gradient-to-b from-white/[0.04] to-black/80 shadow-[0_25px_90px_rgba(0,0,0,0.85),0_0_60px_rgba(0,230,255,0.08)] backdrop-blur-xl sm:rounded-[2.4rem]">
+                <div className="flex items-center justify-between gap-3 border-b border-white/[0.08] bg-black/40 px-4 py-3 sm:px-6">
+                  <div className="flex items-center gap-2.5">
+                    <span className="h-2 w-2 rounded-full bg-stage-done shadow-[0_0_8px_rgba(117,211,159,0.8)]" />
+                    <div>
+                      <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-accent-hover">3D Interactive Stage</p>
+                      <p className="text-[11px] text-ink-medium">PlayStation Vita PCH-1000 · Live Hardware Inspection</p>
+                    </div>
                   </div>
+                  <span className="inline-flex shrink-0 items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-3.5 py-1.5 font-mono text-[10px] font-medium uppercase tracking-wider text-ink-medium backdrop-blur-sm">
+                    <span aria-hidden="true" className="vh-live-dot" />
+                    360° Drag & Zoom
+                  </span>
                 </div>
-                <span className="inline-flex shrink-0 items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-3 py-1.5 font-mono text-[10px] font-medium uppercase tracking-wider text-ink-medium backdrop-blur-sm">
-                  <span aria-hidden="true" className="vh-live-dot" />
-                  Drag to rotate
-                </span>
-              </div>
-              <div className="px-1 pb-3 pt-2 sm:px-3 sm:pb-4 sm:pt-3">
-                <ConsoleStage
-                  selectedProject={selectedProject as any}
-                  projects={projects}
-                  selectedId={selectedId}
-                  onSelectProject={(project) => selectProject(project, false)}
-                  webgl={webgl}
-                  onRetryWebgl={detectWebgl}
-                  onCopyLink={copyEntryLink}
-                  copiedSlug={copiedSlug}
-                  consoleRef={consoleRef}
-                />
+
+                <div className="px-1 pb-4 pt-2 sm:px-4 sm:pb-6 sm:pt-3">
+                  <ConsoleStage
+                    selectedProject={selectedProject as any}
+                    projects={projects}
+                    selectedId={selectedId}
+                    onSelectProject={(project) => selectProject(project, false)}
+                    webgl={webgl}
+                    onRetryWebgl={detectWebgl}
+                    onCopyLink={copyEntryLink}
+                    copiedSlug={copiedSlug}
+                    consoleRef={consoleRef}
+                  />
+                </div>
               </div>
             </div>
           </div>
