@@ -512,19 +512,7 @@ export const HomePage: React.FC = () => {
             {/* Grand Centered 3D Showcase Stage */}
             <div className="mt-8 sm:mt-10">
               <div className="vh-console-frame relative mx-auto max-w-5xl overflow-hidden rounded-[2rem] border border-white/[0.1] bg-gradient-to-b from-white/[0.04] to-black/80 shadow-[0_25px_90px_rgba(0,0,0,0.85),0_0_60px_rgba(0,230,255,0.08)] backdrop-blur-xl sm:rounded-[2.4rem]">
-                <div className="flex items-center justify-between gap-3 border-b border-white/[0.08] bg-black/40 px-4 py-3 sm:px-6">
-                  <div className="flex items-center gap-2.5">
-                    <span className="h-2 w-2 rounded-full bg-stage-done shadow-[0_0_8px_rgba(117,211,159,0.8)]" />
-                    <div>
-                      <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-accent-hover">3D Interactive Stage</p>
-                      <p className="text-[11px] text-ink-medium">PlayStation Vita PCH-1000 · Live Hardware Inspection</p>
-                    </div>
-                  </div>
-                  <span className="inline-flex shrink-0 items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-3.5 py-1.5 font-mono text-[10px] font-medium uppercase tracking-wider text-ink-medium backdrop-blur-sm">
-                    <span aria-hidden="true" className="vh-live-dot" />
-                    360° Drag & Zoom
-                  </span>
-                </div>
+
 
                 <div className="px-1 pb-4 pt-2 sm:px-4 sm:pb-6 sm:pt-3">
                   <ConsoleStage

@@ -362,13 +362,12 @@ export const ConsoleStage: React.FC<ConsoleStageProps> = ({
 
         {/* Tactile Interactive Game Dock (Shelf) */}
         <div className="mt-4 px-2 sm:px-6">
-          <div className="flex items-center justify-between gap-2 mb-2 px-1">
+          <div className="flex items-center justify-between gap-2 mb-2.5 px-1">
             <p className="font-mono text-micro font-semibold uppercase tracking-[0.16em] text-accent-hover flex items-center gap-1.5">
-              <Sparkles className="h-3.5 w-3.5 text-[#00e6ff]" />
-              Featured Port Cartridges · Click or Hover to Switch OLED Screen
+              Featured Ports
             </p>
-            <span className="font-mono text-[10px] text-ink-muted hidden sm:inline">
-              {projects.length} Ports Live in 3D
+            <span className="font-mono text-[10px] text-ink-muted">
+              {projects.length} Available in 3D
             </span>
           </div>
 
@@ -406,103 +405,43 @@ export const ConsoleStage: React.FC<ConsoleStageProps> = ({
               );
             })}
           </div>
-        </div>
 
-        <div className="relative px-4 pb-4 pt-4 sm:px-8">
-          {preview && (
-            <div className="flex flex-col gap-3.5 rounded-2xl border border-hairline bg-surface/90 p-4 shadow-sm backdrop-blur-md">
-              <div className="flex items-center gap-3">
-                <ProjectMark
-                  seed={selectedProject?.display_name || selectedProject?.game_title || "vita"}
-                  size={42}
-                  className="hidden shrink-0 rounded-xl sm:block"
-                />
-                <div className="min-w-0 flex-1">
-                  <p className="text-micro font-medium uppercase text-ink-muted">
-                    {selectedProject?.screenshot_url ? "Source screenshot on display" : "Record card on display"}
-                  </p>
-                  <p className="mt-0.5 truncate text-lead font-semibold text-ink">{preview.name}</p>
-                  <p className="mt-0.5 text-caption text-ink-muted">
-                    {prettyStage(selectedProject?.current_stage)}
-                    {selectedProject?.original_platform ? " · " + selectedProject.original_platform : ""}
-                  </p>
-                </div>
+          {/* Clean Active Game Status Bar */}
+          {selectedProject && (
+            <div className="mt-3 flex flex-wrap items-center justify-between gap-3 rounded-xl border border-white/10 bg-white/[0.02] px-4 py-2.5 backdrop-blur-sm">
+              <div className="flex items-center gap-2.5 min-w-0">
+                <span className="h-2 w-2 rounded-full bg-[#00e6ff] shadow-[0_0_8px_#00e6ff]" />
+                <span className="truncate text-caption font-semibold text-ink">{preview?.name}</span>
+                <span className="font-mono text-micro text-ink-muted">· {prettyStage(selectedProject.current_stage)}</span>
+                {selectedProject.original_platform && (
+                  <span className="hidden font-mono text-micro text-ink-muted sm:inline">({selectedProject.original_platform})</span>
+                )}
               </div>
-              <div className="flex flex-wrap items-center justify-between gap-2 border-t border-hairline pt-3">
+              <div className="flex items-center gap-2 shrink-0">
                 <button
                   type="button"
-                  onClick={() => {
-                    const nextFlipped = !isFlipped;
-                    setIsFlipped(nextFlipped);
-                    setViewPreset(nextFlipped ? "rear" : "front");
-                  }}
-                  aria-label={isFlipped ? "Show front of PlayStation Vita" : "Inspect back of PlayStation Vita (360° View)"}
-                  title={isFlipped ? "Show front of PlayStation Vita" : "Inspect back of PlayStation Vita (360° View)"}
-                  className="inline-flex min-h-[44px] items-center gap-1.5 rounded-lg border border-white/10 bg-black/60 px-3.5 py-1.5 font-mono text-[11px] font-medium uppercase tracking-wider text-ink-medium backdrop-blur-md transition-all hover:border-[#00e6ff]/50 hover:text-[#00e6ff] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00e6ff]/40 shadow-sm"
+                  onClick={() => onCopyLink(selectedProject)}
+                  className="inline-flex min-h-[34px] items-center gap-1.5 rounded-lg border border-white/10 bg-white/[0.04] px-3 py-1 font-mono text-micro text-ink-medium hover:border-white/20 hover:text-ink transition-colors"
                 >
-                  <RotateCw className={"h-3.5 w-3.5 transition-transform duration-300 " + (isFlipped ? "rotate-180 text-[#00e6ff]" : "")} />
-                  <span>{isFlipped ? "Front view" : "Flip / 360° rear"}</span>
-                </button>
-                <div className="flex items-center gap-1 border-r border-hairline pr-2 mr-1">
-                  <button
-                    type="button"
-                    onClick={handlePrev}
-                    aria-label="Previous project"
-                    title="Previous project"
-                    className="inline-flex h-11 w-11 items-center justify-center rounded-lg border border-hairline bg-surface text-ink-muted transition-colors hover:border-hairline-strong hover:text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink/20 sm:h-9 sm:w-9"
-                  >
-                    <ChevronLeft className="h-3.5 w-3.5" />
-                  </button>
-                  <button
-                    type="button"
-                    onClick={handleNext}
-                    aria-label="Next project"
-                    title="Next project"
-                    className="inline-flex h-11 w-11 items-center justify-center rounded-lg border border-hairline bg-surface text-ink-muted transition-colors hover:border-hairline-strong hover:text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink/20 sm:h-9 sm:w-9"
-                  >
-                    <ChevronRight className="h-3.5 w-3.5" />
-                  </button>
-                </div>
-                <div className="flex flex-wrap items-center gap-2">
-                  <button
-                    type="button"
-                    onClick={() => onCopyLink(selectedProject)}
-                    className="inline-flex min-h-[44px] items-center gap-1.5 rounded-lg border border-hairline bg-surface px-3 py-2 text-caption font-medium text-ink-medium transition-colors hover:border-hairline-strong hover:text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink/20"
-                  >
-                    {copiedSlug === (selectedProject as any)?.slug ? (
-                      <>
-                        <Check className="h-3.5 w-3.5 text-stage-done" />
-                        Copied
-                      </>
-                    ) : (
-                      <>
-                        <Link2 className="h-3.5 w-3.5" />
-                        Copy link
-                      </>
-                    )}
-                  </button>
-                  {(selectedProject as any)?.reddit_url && (
-                    <a
-                      href={(selectedProject as any).reddit_url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex min-h-[44px] items-center gap-1.5 rounded-lg bg-ink px-3.5 py-2 text-caption font-medium text-canvas transition-colors hover:bg-ink/90"
-                    >
-                      Source discussion
-                      <ExternalLink className="h-3.5 w-3.5" />
-                    </a>
+                  {copiedSlug === (selectedProject as any)?.slug ? (
+                    <><Check className="h-3.5 w-3.5 text-stage-done" /> Copied</>
+                  ) : (
+                    <><Link2 className="h-3.5 w-3.5" /> Share</>
                   )}
-                </div>
+                </button>
+                {(selectedProject as any)?.reddit_url && (
+                  <a
+                    href={(selectedProject as any).reddit_url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex min-h-[34px] items-center gap-1.5 rounded-lg border border-white/10 bg-white/[0.04] px-3 py-1 font-mono text-micro text-ink-medium hover:border-white/20 hover:text-ink transition-colors"
+                  >
+                    Discussion <ExternalLink className="h-3 w-3" />
+                  </a>
+                )}
               </div>
             </div>
           )}
-
-          <p className="mt-3 text-center text-micro uppercase text-ink-muted">
-            <span className="hidden sm:inline">
-              {staticMode ? "Static preview · " : reducedMotion ? "Reduced motion · " : "Drag to rotate · "}Press <span className="font-mono">/</span> to search the directory
-            </span>
-            <span className="sm:hidden">Swipe to rotate · use the arrows to switch ports</span>
-          </p>
         </div>
       </div>
     </section>
