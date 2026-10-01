@@ -3,7 +3,8 @@ import { type RendererErrorReason, type SelectedProjectView } from "../3d/VitaCo
 import { LiveAreaWaves } from "../visual/LiveAreaWaves";
 import { ProjectMark } from "../projects/ProjectMark";
 import { splitTitle, prettyStage, SPECS } from "./types";
-import { Check, Link2, ExternalLink, ChevronLeft, ChevronRight, RotateCw } from "lucide-react";
+import { Check, Link2, ExternalLink, ChevronLeft, ChevronRight, RotateCw, Monitor, Eye, Maximize2, Sparkles, MonitorPlay } from "lucide-react";
+import { type CameraViewPreset } from "../3d/VitaConsoleScene";
 
 const VitaConsoleScene = lazy(() =>
   import("../3d/VitaConsoleScene").then((m) => ({ default: m.VitaConsoleScene }))
@@ -133,6 +134,7 @@ export const ConsoleStage: React.FC<ConsoleStageProps> = ({
   const [sceneReady, setSceneReady] = useState(false);
   const [sceneStatus, setSceneStatus] = useState<"deferred" | "loading" | "ready">("deferred");
   const [isFlipped, setIsFlipped] = useState(false);
+  const [viewPreset, setViewPreset] = useState<CameraViewPreset>("front");
 
   useEffect(() => {
     const connection = (navigator as Navigator & {
@@ -270,6 +272,7 @@ export const ConsoleStage: React.FC<ConsoleStageProps> = ({
                 <div className="vh-rise h-full w-full" data-vita-scene="3d">
                   <VitaConsoleScene
                     selectedProject={selectedProject}
+                    viewPreset={viewPreset}
                     isFlipped={isFlipped}
                     reducedMotion={reducedMotion}
                     onRendererError={handleRendererError}

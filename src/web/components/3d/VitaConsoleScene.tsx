@@ -1,3 +1,4 @@
+export type CameraViewPreset = "front" | "inspect" | "rear" | "screen";
 import React, { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
 import { RoomEnvironment } from "three/examples/jsm/environments/RoomEnvironment.js";
@@ -18,6 +19,7 @@ export interface SelectedProjectView {
 export interface VitaConsoleSceneProps {
   selectedProject?: SelectedProjectView | null;
   align?: "center" | "split";
+  viewPreset?: CameraViewPreset;
   isFlipped?: boolean;
   onConsoleClick?: () => void;
   reducedMotion?: boolean;
@@ -56,6 +58,7 @@ const BODY_TRACE: Array<[string, ...number[]]> = [
 export const VitaConsoleScene: React.FC<VitaConsoleSceneProps> = ({
   selectedProject,
   align = "center",
+  viewPreset = "front",
   isFlipped = false,
   onConsoleClick,
   reducedMotion = false,
@@ -68,6 +71,9 @@ export const VitaConsoleScene: React.FC<VitaConsoleSceneProps> = ({
   const isFlippedRef = useRef(isFlipped);
   isFlippedRef.current = isFlipped;
   const lastFlippedRef = useRef(isFlipped);
+  const viewPresetRef = useRef<CameraViewPreset>(viewPreset || "front");
+  viewPresetRef.current = viewPreset || "front";
+  const lastPresetRef = useRef<CameraViewPreset>(viewPreset || "front");
   const [unavailable, setUnavailable] = useState(false);
 
   useEffect(() => {
@@ -729,6 +735,9 @@ const recessMat = new THREE.MeshStandardMaterial({color:'#14161a',roughness:0.52
     updateScrollProgress();
     window.addEventListener('scroll', updateScrollProgress, { passive: true });
 
+    let baseDistance = 350;
+    let targetZoom = 1.0;
+    let currentZoom = 1.0;
     let isDragging = false;
     let dragStartX = 0, dragStartY = 0;
     let dragRotX = 0, dragRotY = 0;
@@ -782,9 +791,9 @@ const recessMat = new THREE.MeshStandardMaterial({color:'#14161a',roughness:0.52
       const wide = camera.aspect > 1.45;
       const isSplit = align === "split";
       const widthFrac = isSplit ? (wide ? 0.502 : 0.92) : (wide ? 0.90 : 0.96);
-      const distance = Math.max(182 / (2 * tan * camera.aspect * widthFrac), 100 / (2 * tan * 0.9));
-      camera.position.set(0, 0, distance);
-      const targetX = isSplit && wide ? (0.735 - 0.5) * 2 * tan * distance * camera.aspect : 0;
+      baseDistance = Math.max(182 / (2 * tan * camera.aspect * widthFrac), 100 / (2 * tan * 0.9));
+      camera.position.set(0, 0, baseDistance / currentZoom);
+      const targetX = isSplit && wide ? (0.735 - 0.5) * 2 * tan * baseDistance * camera.aspect : 0;
       vita.userData.targetX = targetX;
       vita.position.x = targetX;
       camera.updateProjectionMatrix();
@@ -818,10 +827,35 @@ const recessMat = new THREE.MeshStandardMaterial({color:'#14161a',roughness:0.52
         paint();
         previous = signature;
       }
+      if (lastPresetRef.current !== viewPresetRef.current) {
+        lastPresetRef.current = viewPresetRef.current;
+        const preset = viewPresetRef.current;
+        if (preset === "front") {
+          targetDragRotY = 0;
+          targetDragRotX = 0;
+          targetZoom = 1.0;
+        } else if (preset === "inspect") {
+          targetDragRotY = 0.58;
+          targetDragRotX = -0.22;
+          targetZoom = 1.06;
+        } else if (preset === "rear") {
+          targetDragRotY = Math.PI;
+          targetDragRotX = 0;
+          targetZoom = 1.0;
+        } else if (preset === "screen") {
+          targetDragRotY = 0;
+          targetDragRotX = 0.04;
+          targetZoom = 1.38;
+        }
+      }
+
       if (lastFlippedRef.current !== isFlippedRef.current) {
         lastFlippedRef.current = isFlippedRef.current;
         targetDragRotY = isFlippedRef.current ? Math.PI : 0;
       }
+
+      currentZoom += (targetZoom - currentZoom) * 0.1;
+      camera.position.z = baseDistance / currentZoom;
 
       dragRotX += (targetDragRotX - dragRotX) * 0.28;
       dragRotY += (targetDragRotY - dragRotY) * 0.32;

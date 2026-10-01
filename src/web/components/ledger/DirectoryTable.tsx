@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useRef } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { ProjectPanel } from "./ProjectPanel";
 import {
@@ -12,7 +12,8 @@ import {
   formatDay,
   formatUtcDateTime
 } from "./types";
-import { Search, ExternalLink, X, ChevronRight, Link2, Check, Filter, Camera } from "lucide-react";
+import { Search, ExternalLink, X, ChevronRight, Link2, Check, Filter, Camera, LayoutGrid, List, MonitorPlay } from "lucide-react";
+import { ProjectMark } from "../projects/ProjectMark";
 
 const STAGE_FILTERS = [
   { key: "all", label: "All ports" },
@@ -127,6 +128,7 @@ export const DirectoryTable: React.FC<DirectoryTableProps> = ({
     return counts;
   }, [projects]);
 
+  const [viewMode, setViewMode] = useState<"bento" | "list">("bento");
   const openProject = projects.find((project) => project.id === expandedId) || null;
   const drawerOpen = openProject !== null;
   const drawerRef = useRef<HTMLElement | null>(null);
@@ -259,8 +261,39 @@ export const DirectoryTable: React.FC<DirectoryTableProps> = ({
             ))}
           </div>
 
-          <label className="flex items-center gap-2 text-caption text-ink-muted">
-            <span className="hidden sm:inline">Sort</span>
+          <div className="flex items-center gap-2.5">
+            {/* View Mode Switcher */}
+            <div className="inline-flex items-center rounded-lg border border-white/10 bg-surface p-0.5">
+              <button
+                type="button"
+                onClick={() => setViewMode("bento")}
+                aria-pressed={viewMode === "bento"}
+                title="Bento Grid View"
+                className={
+                  "inline-flex h-8 items-center gap-1.5 rounded-md px-2.5 text-caption font-medium transition-colors " +
+                  (viewMode === "bento" ? "bg-[#00e6ff]/20 text-[#00e6ff] font-semibold" : "text-ink-muted hover:text-ink")
+                }
+              >
+                <LayoutGrid className="h-3.5 w-3.5" />
+                <span className="hidden sm:inline">Grid</span>
+              </button>
+              <button
+                type="button"
+                onClick={() => setViewMode("list")}
+                aria-pressed={viewMode === "list"}
+                title="Compact List View"
+                className={
+                  "inline-flex h-8 items-center gap-1.5 rounded-md px-2.5 text-caption font-medium transition-colors " +
+                  (viewMode === "list" ? "bg-[#00e6ff]/20 text-[#00e6ff] font-semibold" : "text-ink-muted hover:text-ink")
+                }
+              >
+                <List className="h-3.5 w-3.5" />
+                <span className="hidden sm:inline">List</span>
+              </button>
+            </div>
+
+            <label className="flex items-center gap-2 text-caption text-ink-muted">
+              <span className="hidden sm:inline">Sort</span>
             <select
               value={activeSort}
               onChange={(event) => onSortChange(event.target.value)}
@@ -273,6 +306,7 @@ export const DirectoryTable: React.FC<DirectoryTableProps> = ({
               ))}
             </select>
           </label>
+          </div>
         </div>
 
         {/* Type is the secondary axis, so it reads quieter than the stage filters. */}
