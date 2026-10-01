@@ -323,81 +323,93 @@ export const ConsoleStage: React.FC<ConsoleStageProps> = ({
 
         <div className="relative px-4 pb-4 pt-4 sm:px-8">
           {preview && (
-            <div className="flex flex-col gap-3 rounded-2xl border border-hairline bg-surface px-4 py-3 sm:flex-row sm:items-center sm:justify-between">
-              <ProjectMark
-                seed={selectedProject?.display_name || selectedProject?.game_title || "vita"}
-                size={38}
-                className="hidden shrink-0 rounded-xl sm:block"
-              />
-              <div className="min-w-0 flex-1">
-                <p className="text-micro font-medium uppercase text-ink-muted">
-                  {selectedProject?.screenshot_url ? "Source screenshot on display" : "Record card on display"}
-                </p>
-                <p className="mt-1 truncate text-subtitle font-medium text-ink">{preview.name}</p>
-                <p className="mt-0.5 text-caption text-ink-muted">
-                  {prettyStage(selectedProject?.current_stage)}
-                  {selectedProject?.original_platform ? " · " + selectedProject.original_platform : ""}
-                </p>
-              </div>
-              <div className="flex min-w-0 max-w-full flex-wrap items-center gap-2 sm:shrink-0 sm:flex-nowrap sm:justify-end">
-              <button
-                type="button"
-                onClick={() => setIsFlipped((f) => !f)}
-                aria-label={isFlipped ? "Show front of PlayStation Vita" : "Inspect back of PlayStation Vita (360° View)"}
-                title={isFlipped ? "Show front of PlayStation Vita" : "Inspect back of PlayStation Vita (360° View)"}
-                className="inline-flex min-h-[44px] items-center gap-1.5 rounded-lg border border-white/10 bg-black/60 px-3.5 py-1.5 font-mono text-[11px] font-medium uppercase tracking-wider text-ink-medium backdrop-blur-md transition-all hover:border-[#00e6ff]/50 hover:text-[#00e6ff] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00e6ff]/40 shadow-sm"
-              >
-                <RotateCw className={"h-3.5 w-3.5 transition-transform duration-300 " + (isFlipped ? "rotate-180 text-[#00e6ff]" : "")} />
-                <span>{isFlipped ? "Front view" : "Flip / 360° rear"}</span>
-              </button>
-                <div className="flex items-center gap-1 border-r border-hairline pr-2 mr-1">
-                  <button
-                    type="button"
-                    onClick={handlePrev}
-                    aria-label="Previous project"
-                    title="Previous project"
-                    className="inline-flex h-11 w-11 items-center justify-center rounded-lg border border-hairline bg-surface text-ink-muted transition-colors hover:border-hairline-strong hover:text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink/20 sm:h-9 sm:w-9"
-                  >
-                    <ChevronLeft className="h-3.5 w-3.5" />
-                  </button>
-                  <button
-                    type="button"
-                    onClick={handleNext}
-                    aria-label="Next project"
-                    title="Next project"
-                    className="inline-flex h-11 w-11 items-center justify-center rounded-lg border border-hairline bg-surface text-ink-muted transition-colors hover:border-hairline-strong hover:text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink/20 sm:h-9 sm:w-9"
-                  >
-                    <ChevronRight className="h-3.5 w-3.5" />
-                  </button>
+            <div className="flex flex-col gap-3.5 rounded-2xl border border-hairline bg-surface/90 p-4 shadow-sm backdrop-blur-md">
+              <div className="flex items-center gap-3">
+                <ProjectMark
+                  seed={selectedProject?.display_name || selectedProject?.game_title || "vita"}
+                  size={42}
+                  className="shrink-0 rounded-xl"
+                />
+                <div className="min-w-0 flex-1">
+                  <div className="flex flex-wrap items-center gap-2">
+                    <h3 className="truncate text-subtitle font-semibold text-ink">{preview.name}</h3>
+                    <span className="rounded-md border border-hairline bg-sunken px-2 py-0.5 text-micro font-semibold uppercase text-ink-medium">
+                      {prettyStage(selectedProject?.current_stage)}
+                    </span>
+                  </div>
+                  <p className="mt-0.5 text-caption text-ink-muted">
+                    {selectedProject?.original_platform ? "Source: " + selectedProject.original_platform : "Community port"}
+                    {selectedProject?.technologies?.length ? " · " + selectedProject.technologies.slice(0, 2).join(", ") : ""}
+                  </p>
                 </div>
-                <button
-                  type="button"
-                  onClick={() => onCopyLink(selectedProject)}
-                  className="inline-flex min-h-[44px] items-center gap-1.5 rounded-lg border border-hairline bg-surface px-3 py-2 text-caption font-medium text-ink-medium transition-colors hover:border-hairline-strong hover:text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink/20"
-                >
-                  {copiedSlug === (selectedProject as any)?.slug ? (
-                    <>
-                      <Check className="h-3.5 w-3.5" />
-                      Copied
-                    </>
-                  ) : (
-                    <>
-                      <Link2 className="h-3.5 w-3.5" />
-                      Copy link
-                    </>
-                  )}
-                </button>
-                {(selectedProject as any)?.reddit_url && (
-                  <a
-                    href={(selectedProject as any).reddit_url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex min-h-[44px] items-center gap-1.5 rounded-lg bg-ink px-3.5 py-2 text-caption font-medium text-canvas transition-colors hover:bg-ink/90"
+              </div>
+
+              <div className="flex flex-wrap items-center justify-between gap-2.5 border-t border-hairline/60 pt-3">
+                <div className="flex items-center gap-2">
+                  <button
+                    type="button"
+                    onClick={() => setIsFlipped((f) => !f)}
+                    aria-label={isFlipped ? "Show front of PlayStation Vita" : "Inspect back of PlayStation Vita (360° View)"}
+                    title={isFlipped ? "Show front of PlayStation Vita" : "Inspect back of PlayStation Vita (360° View)"}
+                    className="inline-flex min-h-[38px] items-center gap-1.5 rounded-lg border border-white/10 bg-black/60 px-3.5 py-1.5 font-mono text-[11px] font-medium uppercase tracking-wider text-ink-medium backdrop-blur-md transition-all hover:border-[#00e6ff]/50 hover:text-[#00e6ff] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00e6ff]/40 shadow-sm"
                   >
-                    Source discussion
-                    <ExternalLink className="h-3.5 w-3.5" />
-                  </a>
-                )}
+                    <RotateCw className={"h-3.5 w-3.5 transition-transform duration-300 " + (isFlipped ? "rotate-180 text-[#00e6ff]" : "")} />
+                    <span>{isFlipped ? "Front view" : "Flip / 360° rear"}</span>
+                  </button>
+
+                  <div className="flex items-center gap-1 border-l border-hairline pl-2">
+                    <button
+                      type="button"
+                      onClick={handlePrev}
+                      aria-label="Previous project"
+                      title="Previous project"
+                      className="inline-flex h-9 w-9 items-center justify-center rounded-lg border border-hairline bg-surface text-ink-muted transition-colors hover:border-hairline-strong hover:text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink/20"
+                    >
+                      <ChevronLeft className="h-4 w-4" />
+                    </button>
+                    <button
+                      type="button"
+                      onClick={handleNext}
+                      aria-label="Next project"
+                      title="Next project"
+                      className="inline-flex h-9 w-9 items-center justify-center rounded-lg border border-hairline bg-surface text-ink-muted transition-colors hover:border-hairline-strong hover:text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink/20"
+                    >
+                      <ChevronRight className="h-4 w-4" />
+                    </button>
+                  </div>
+                </div>
+
+                <div className="flex items-center gap-2">
+                  <button
+                    type="button"
+                    onClick={() => onCopyLink(selectedProject)}
+                    className="inline-flex min-h-[38px] items-center gap-1.5 rounded-lg border border-hairline bg-surface px-3 py-1.5 text-caption font-medium text-ink-medium transition-colors hover:border-hairline-strong hover:text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink/20"
+                  >
+                    {copiedSlug === (selectedProject as any)?.slug ? (
+                      <>
+                        <Check className="h-3.5 w-3.5 text-stage-done" />
+                        <span>Copied</span>
+                      </>
+                    ) : (
+                      <>
+                        <Link2 className="h-3.5 w-3.5" />
+                        <span>Copy link</span>
+                      </>
+                    )}
+                  </button>
+
+                  {(selectedProject as any)?.reddit_url && (
+                    <a
+                      href={(selectedProject as any).reddit_url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex min-h-[38px] items-center gap-1.5 rounded-lg bg-ink px-3.5 py-1.5 text-caption font-medium text-canvas transition-colors hover:bg-ink/90"
+                    >
+                      <span>Discussion</span>
+                      <ExternalLink className="h-3.5 w-3.5" />
+                    </a>
+                  )}
+                </div>
               </div>
             </div>
           )}
