@@ -420,7 +420,7 @@ export const DirectoryTable: React.FC<DirectoryTableProps> = ({
             </button>
           </div>
         ) : (
-          <div className="overflow-hidden rounded-2xl border border-white/[0.07] bg-surface shadow-card">
+          <div className="overflow-hidden rounded-2xl border border-zinc-900 bg-black">
             <div className="hidden grid-cols-[minmax(0,1fr)_auto] border-b border-hairline bg-white/[0.025] px-0 py-2 lg:grid">
               <div className="grid grid-cols-[minmax(0,1.8fr)_minmax(8.5rem,0.9fr)_minmax(6rem,0.65fr)_minmax(7rem,0.75fr)_1.5rem] items-center gap-3 px-4 font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-ink-muted">
                 <span>Project</span><span>Current stage</span><span>Type</span><span>Last Activity</span><span aria-hidden="true" />
@@ -442,7 +442,7 @@ export const DirectoryTable: React.FC<DirectoryTableProps> = ({
                     id={"entry-" + project.slug}
                     onMouseEnter={() => onSelectProject(project, false)}
                     onFocus={() => onSelectProject(project, false)}
-                    className={"group relative rounded-lg transition-all vh-row-glass " + (selected ? "bg-accent/[0.055] border-l-2 border-l-accent" : "hover:bg-white/[0.018]")}
+                    className={"group relative rounded-lg transition-all vh-row-glass " + (selected ? "bg-accent/[0.055] border-l-2 border-l-accent" : "hover:bg-zinc-950")}
                   >
                     <div className="grid grid-cols-[minmax(0,1fr)_auto] items-center">
                       <button
@@ -455,9 +455,7 @@ export const DirectoryTable: React.FC<DirectoryTableProps> = ({
                       >
                         <span className="min-w-0">
                           <span className="flex min-w-0 items-center gap-2">
-                            {["in_game", "early_wip", "booting", "research"].includes(String(project.current_stage)) && (
-                              <span className="vh-live-dot shrink-0" title="Active development" aria-hidden="true" />
-                            )}
+    
                             <span className="truncate text-body font-semibold text-ink transition-colors group-hover:text-accent-hover">{title.name}</span>
                             {isNew && <span className="shrink-0 rounded border border-accent/25 bg-accent/10 px-1.5 py-0.5 font-mono text-[9px] font-semibold uppercase tracking-wider text-accent-hover">New</span>}
                             {project.screenshot_url && <span title="Source screenshot available" className="inline-flex shrink-0"><Camera className="h-3.5 w-3.5 text-ink-muted" aria-hidden="true" /></span>}

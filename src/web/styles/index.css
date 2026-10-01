@@ -24,10 +24,10 @@
     --vh-ink-muted: 143, 148, 159;
     --vh-accent: 229, 231, 235;
     --vh-accent-hover: 255, 255, 255;
-    --vh-stage-done: 117, 211, 159;
-    --vh-stage-progress: 117, 160, 255;
-    --vh-stage-caution: 240, 203, 115;
-    --vh-stage-idle: 154, 170, 189;
+    --vh-stage-done: 244, 245, 247;
+    --vh-stage-progress: 161, 161, 170;
+    --vh-stage-caution: 148, 163, 184;
+    --vh-stage-idle: 113, 113, 122;
   }
 
   html {
@@ -138,18 +138,7 @@
 }
 
 .vh-hero::before {
-  position: absolute;
-  z-index: -1;
-  top: -48%;
-  right: -19%;
-  width: min(78vw, 920px);
-  aspect-ratio: 1;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(0, 67, 156, 0.27) 0%, rgba(0, 230, 255, 0.08) 35%, transparent 69%);
-  content: "";
-  filter: blur(22px);
-  pointer-events: none;
-  animation: vh-hero-glow 18s ease-in-out infinite alternate;
+  display: none;
 }
 
 .vh-console-frame {
@@ -666,11 +655,10 @@
 
 .vh-live-dot {
   display: inline-block;
-  width: 6px;
-  height: 6px;
+  width: 5px;
+  height: 5px;
   border-radius: 9999px;
-  background-color: #00e6ff;
-  animation: vh-live-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  background-color: #ffffff;
 }
 
 .vh-tech-badge {

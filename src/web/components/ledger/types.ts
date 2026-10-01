@@ -96,14 +96,14 @@ export const STAGE_TONE: Record<string, string> = {
 };
 
 export const STAGE_CHIP: Record<string, string> = {
-  released: "bg-stage-done/15 text-stage-done",
-  completable: "bg-stage-done/15 text-stage-done",
-  playable: "bg-stage-done/15 text-stage-done",
-  in_game: "bg-stage-progress/15 text-stage-progress",
-  booting: "bg-stage-caution/15 text-stage-caution",
-  early_wip: "bg-stage-idle/10 text-stage-idle",
-  research: "bg-stage-idle/10 text-stage-idle",
-  announced: "bg-stage-idle/10 text-stage-idle"
+  released: "bg-white/10 text-white font-medium",
+  completable: "bg-white/10 text-white font-medium",
+  playable: "bg-white/10 text-white font-medium",
+  in_game: "bg-zinc-800 text-zinc-300 font-normal",
+  booting: "bg-zinc-800 text-zinc-400 font-normal",
+  early_wip: "bg-zinc-900 text-zinc-500 font-normal",
+  research: "bg-zinc-900 text-zinc-500 font-normal",
+  announced: "bg-zinc-900 text-zinc-500 font-normal"
 };
 
 export const STAGE_STEP: Record<string, number> = {

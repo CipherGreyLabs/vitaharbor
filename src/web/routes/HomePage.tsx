@@ -473,61 +473,31 @@ export const HomePage: React.FC = () => {
       </header>
 
       <main id="main-content" className="vh-boot">
-        <section aria-labelledby="hero-heading" className="vh-hero relative border-b border-white/[0.06] overflow-hidden pt-8 pb-12 sm:pt-12 sm:pb-16">
+        <section aria-labelledby="hero-heading" className="relative bg-black pt-16 pb-20 sm:pt-24 sm:pb-28 border-b border-zinc-900">
           <div className="relative mx-auto max-w-6xl px-4 sm:px-6">
-            {/* Centered Grand Hero Header */}
-            <div className="mx-auto max-w-3xl text-center">
-              <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-4 py-1.5 backdrop-blur-md">
-                <span className="h-2 w-2 rounded-full bg-[#00e6ff] shadow-[0_0_10px_#00e6ff]" />
-                <p className="font-mono text-micro font-semibold uppercase tracking-[0.18em] text-accent-hover">
-                  PlayStation Vita <span className="px-1 text-ink-muted">·</span> Homebrew & Source Ports
-                </p>
-              </div>
-
-              <h1 id="hero-heading" className="mt-5 font-display text-[44px] font-semibold leading-[0.98] tracking-[-0.045em] text-ink sm:text-[58px] lg:text-[68px]">
-                Community ports in <span className="text-[#00e6ff]">active development.</span>
+            {/* Pure Minimalist Apple Product Headline */}
+            <div className="mx-auto max-w-3xl text-center mb-12 sm:mb-16">
+              <h1 id="hero-heading" className="font-display text-[52px] sm:text-[76px] lg:text-[88px] font-semibold tracking-[-0.04em] text-white leading-none">
+                PlayStation Vita.
               </h1>
-
-              <p className="mx-auto mt-4 max-w-2xl text-body leading-relaxed text-ink-medium sm:text-lead">
-                Real-time 3D hardware tracker for PlayStation Vita decompilations, PC source ports, and native ARM wrappers.
-              </p>
-
-              {/* Centered Stat Badges */}
-              <div aria-label="Project totals" className="mt-6 flex flex-wrap items-center justify-center gap-2.5 sm:gap-3.5">
-                <div className="flex items-center gap-2 rounded-full border border-white/[0.08] bg-white/[0.03] px-4 py-2 backdrop-blur-sm">
-                  <span className="font-mono text-caption font-bold text-ink sm:text-body">{projects.length}</span>
-                  <span className="font-mono text-micro uppercase tracking-wider text-ink-muted">Active Ports</span>
-                </div>
-                <div className="flex items-center gap-2 rounded-full border border-white/[0.08] bg-white/[0.03] px-4 py-2 backdrop-blur-sm">
-                  <span className="font-mono text-caption font-bold text-stage-done sm:text-body">{headerCounts.playable}</span>
-                  <span className="font-mono text-micro uppercase tracking-wider text-ink-muted">Playable Builds</span>
-                </div>
-                <div className="flex items-center gap-2 rounded-full border border-white/[0.08] bg-white/[0.03] px-4 py-2 backdrop-blur-sm">
-                  <span className="font-mono text-caption font-bold text-accent-hover sm:text-body">{headerCounts.dev}</span>
-                  <span className="font-mono text-micro uppercase tracking-wider text-ink-muted">In Development</span>
-                </div>
-              </div>
+              <h2 className="mt-3 font-display text-[26px] sm:text-[36px] lg:text-[42px] font-normal tracking-[-0.025em] text-zinc-400">
+                The definitive port atlas.
+              </h2>
             </div>
 
-            {/* Grand Centered 3D Showcase Stage */}
-            <div className="mt-8 sm:mt-10">
-              <div className="vh-console-frame relative mx-auto max-w-5xl overflow-hidden rounded-[2rem] border border-white/[0.1] bg-gradient-to-b from-white/[0.04] to-black/80 shadow-[0_25px_90px_rgba(0,0,0,0.85),0_0_60px_rgba(0,230,255,0.08)] backdrop-blur-xl sm:rounded-[2.4rem]">
-
-
-                <div className="px-1 pb-4 pt-2 sm:px-4 sm:pb-6 sm:pt-3">
-                  <ConsoleStage
-                    selectedProject={selectedProject as any}
-                    projects={projects}
-                    selectedId={selectedId}
-                    onSelectProject={(project) => selectProject(project, false)}
-                    webgl={webgl}
-                    onRetryWebgl={detectWebgl}
-                    onCopyLink={copyEntryLink}
-                    copiedSlug={copiedSlug}
-                    consoleRef={consoleRef}
-                  />
-                </div>
-              </div>
+            {/* Solitary 3D Hardware Canvas on Pure Black */}
+            <div className="relative mx-auto max-w-5xl">
+              <ConsoleStage
+                selectedProject={selectedProject as any}
+                projects={projects}
+                selectedId={selectedId}
+                onSelectProject={(project) => selectProject(project, false)}
+                webgl={webgl}
+                onRetryWebgl={detectWebgl}
+                onCopyLink={copyEntryLink}
+                copiedSlug={copiedSlug}
+                consoleRef={consoleRef}
+              />
             </div>
           </div>
         </section>

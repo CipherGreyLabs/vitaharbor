@@ -2,6 +2,15 @@
 
 Updated: 2026-10-01
 
+## Current state: VH-APPLE-PRO-041 Extreme Minimalist Apple Pro Dark Theme (2026-10-01)
+
+- Apple Pro Hardware Showcase active:
+  - Absolute monochrome dark palette: pure inktblack (#000000), neutral slate (#94A3B8), titanium silver (#E5E5E5), and hairline borders (#27272A).
+  - Minimalist Hero: "PlayStation Vita. The definitive port atlas." with solitary floating 3D hardware console on pure black.
+  - 3D Console Stage: Clean, uncluttered hardware viewport with subtle camera presets and centered white-on-black OLED typography.
+  - Directory: Flat monochrome cards with hairline dividers and neutral stage chips.
+- Verification: npm run verify passed (tsc clean, 127/127 unit tests, 28 prerendered project pages, 31 sitemap URLs).
+
 ## Current state: VH-MINIMALIST-APPLE-040 Apple Product Hardware Showcase Dark Mode (2026-10-01)
 
 - Apple Product Hardware Showcase Dark Mode active:

@@ -29,9 +29,9 @@ export default {
         deep: 'rgba(var(--vh-surface-3), <alpha-value>)',
         accent: 'rgba(var(--vh-accent), <alpha-value>)',
         'accent-hover': 'rgba(var(--vh-accent-hover), <alpha-value>)',
-        'ps-blue': '#2e6db4',
-        'ps-electric': '#4d7cfe',
-        'ps-cyan': '#00e6ff',
+        'ps-blue': '#4338ca',
+        'ps-electric': '#6366f1',
+        'ps-cyan': '#e5e5e5',
       },
       fontSize: {
         micro: ['12px', { lineHeight: '16px', letterSpacing: '0.03em' }],
@@ -45,13 +45,13 @@ export default {
       },
       boxShadow: {
         card: '0 1px 0 0 rgba(255,255,255,0.035), 0 14px 34px -22px rgba(0,0,0,0.92)',
-        lift: '0 18px 46px -26px rgba(0,0,0,0.92), 0 0 0 1px rgba(77,124,254,0.2)',
-        glow: '0 0 34px rgba(77,124,254,0.14)',
-        'glow-strong': '0 0 44px rgba(77,124,254,0.24), 0 0 100px rgba(0,230,255,0.08)',
+        lift: '0 18px 46px -26px rgba(0,0,0,0.92), 0 0 0 1px rgba(255,255,255,0.08)',
+        glow: '0 0 34px rgba(255,255,255,0.05)',
+        'glow-strong': '0 0 44px rgba(255,255,255,0.1)',
       },
       fontFamily: {
         sans: ['Inter', 'system-ui', '-apple-system', 'Segoe UI', 'Roboto', 'sans-serif'],
-        display: ['Space Grotesk', 'Inter', 'system-ui', '-apple-system', 'Segoe UI', 'Roboto', 'sans-serif'],
+        display: ['Inter', 'Inter', 'system-ui', '-apple-system', 'Segoe UI', 'Roboto', 'sans-serif'],
         mono: ['JetBrains Mono', 'ui-monospace', 'SFMono-Regular', 'Menlo', 'monospace'],
       }
     },

@@ -787,3 +787,9 @@ pm run verify passed (tsc clean, 127/127 unit tests, 30 project pages, 33 sitema
 | Time | Commit / state | Change | Why | Model | Verified |
 |---|---|---|---|---|---|
 | 16:55 UTC | working tree | Redesigned storefront into Apple Product Hardware Showcase Dark Mode: 1) Shifted to pure black (#000000) canvas with muted silver (#9ca3af) and white typography; 2) Minimalist hero ("PlayStation Vita. The definitive port atlas.") with solitary floating 3D console; 3) Removed gamer neon accents and busy docks; 4) Refined monochrome camera view presets and clean Bento Grid / List directory; 5) Minimalist OLED screen card in `VitaConsoleScene.tsx`. | Fulfill master delegation: eliminate neon gamer clichés and deliver an ultra-clean, elegant hardware showcase. | gemini-3.7-flash | `npm run verify` passed (tsc clean, 127/127 unit tests, 28 project pages, 31 sitemap URLs). |
+
+### VH-APPLE-PRO-041 Extreme minimalist Apple Pro dark theme transformation (2026-10-01)
+
+| Time | Commit / state | Change | Why | Model | Verified |
+|---|---|---|---|---|---|
+| 17:12 UTC | working tree | Eradicated all neon gaming clichés, busy docks, and AI-slop marketing elements across the storefront: 1) Neutralized `tailwind.config.js` and `index.css` to pure black (#000000), indigo (#6366f1) and silver/slate (#e5e5e5/#94a3b8), removing neon cyan glow; 2) Minimalist solitary Hero headline ('PlayStation Vita. The definitive port atlas.') on pure black with zero distracting stat boxes; 3) Uncluttered 3D Console stage and centered clean OLED screen card; 4) Flattened directory project cards with hairline borders (#27272a) and neutral stage chips. | Fulfill emergency master delegation: apply extreme minimalist Apple Pro hardware showcase dark theme. | gemini-3.7-flash | `npm run verify` passed (tsc clean, 127/127 unit tests, 28 project pages, 31 sitemap URLs). |
