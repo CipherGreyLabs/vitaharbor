@@ -18,6 +18,7 @@ export interface SelectedProjectView {
 export interface VitaConsoleSceneProps {
   selectedProject?: SelectedProjectView | null;
   align?: "center" | "split";
+  isFlipped?: boolean;
   onConsoleClick?: () => void;
   reducedMotion?: boolean;
   onRendererError?: (reason: RendererErrorReason) => void;
@@ -55,6 +56,7 @@ const BODY_TRACE: Array<[string, ...number[]]> = [
 export const VitaConsoleScene: React.FC<VitaConsoleSceneProps> = ({
   selectedProject,
   align = "center",
+  isFlipped = false,
   onConsoleClick,
   reducedMotion = false,
   onRendererError,
@@ -63,6 +65,9 @@ export const VitaConsoleScene: React.FC<VitaConsoleSceneProps> = ({
   const host = useRef<HTMLDivElement>(null);
   const selected = useRef(selectedProject);
   selected.current = selectedProject;
+  const isFlippedRef = useRef(isFlipped);
+  isFlippedRef.current = isFlipped;
+  const lastFlippedRef = useRef(isFlipped);
   const [unavailable, setUnavailable] = useState(false);
 
   useEffect(() => {
@@ -560,27 +565,27 @@ const recessMat = new THREE.MeshStandardMaterial({color:'#14161a',roughness:0.52
       return shape;
     }
 
-    // Rear Touchpad Bezel (glossy silver border)
+    // Rear Touchpad Bezel (glossy silver border cleanly seated at -7.78, depth 0.35 to -8.13)
     const rearBezelShape = createRoundedRectShape(108.5, 54.5, 9);
     const rearBezelMesh = new THREE.Mesh(
       new THREE.ExtrudeGeometry(rearBezelShape, { depth: 0.35, bevelEnabled: true, bevelSize: 0.2, bevelThickness: 0.2, bevelSegments: 3, curveSegments: 24 }),
       silver
     );
-    rearBezelMesh.position.set(0, 0, -7.5);
+    rearBezelMesh.position.set(0, 0, -7.78);
     rearBezelMesh.rotation.y = Math.PI;
     vita.add(rearBezelMesh);
 
-    // Rear Touchpad Active Surface
+    // Rear Touchpad Active Surface (z = -8.14 cleanly resting inside bezel without Z-fighting)
     const rearPadShape = createRoundedRectShape(107, 53, 8);
     const rearPadMesh = new THREE.Mesh(
       new THREE.ShapeGeometry(rearPadShape, 32),
       rearPadMat
     );
-    rearPadMesh.position.set(0, 0, -7.72);
+    rearPadMesh.position.set(0, 0, -8.14);
     rearPadMesh.rotation.y = Math.PI;
     vita.add(rearPadMesh);
 
-    // 2. Ergonomic Finger Grips (Left & Right matte oval recesses)
+    // 2. Ergonomic Finger Grips (Left & Right matte oval recesses at z = -7.80)
     const gripMat = new THREE.MeshStandardMaterial({
       color: '#0d0f13',
       roughness: 0.88,
@@ -600,7 +605,7 @@ const recessMat = new THREE.MeshStandardMaterial({color:'#14161a',roughness:0.52
       );
       gripMesh.scale.set(1.0, 1.6, 0.5);
       gripMesh.rotation.x = Math.PI / 2;
-      gripMesh.position.set(sign * 66.5, 0, -7.65);
+      gripMesh.position.set(sign * 66.5, 0, -7.80);
       vita.add(gripMesh);
 
       // Subtle beveled rim around grip
@@ -609,17 +614,17 @@ const recessMat = new THREE.MeshStandardMaterial({color:'#14161a',roughness:0.52
         gripRimMat
       );
       gripRim.scale.set(1.0, 1.6, 1.0);
-      gripRim.position.set(sign * 66.5, 0, -7.58);
+      gripRim.position.set(sign * 66.5, 0, -7.78);
       vita.add(gripRim);
     }
 
-    // 3. Rear Camera Assembly (Top Center, facing backwards)
+    // 3. Rear Camera Assembly (Top Center at z = -7.80 to -7.87)
     const camRing = new THREE.Mesh(
       new THREE.CylinderGeometry(3.4, 3.4, 0.45, 36),
       silver
     );
     camRing.rotation.x = Math.PI / 2;
-    camRing.position.set(0, 28.5, -7.6);
+    camRing.position.set(0, 28.5, -7.80);
     vita.add(camRing);
 
     const lensMat = new THREE.MeshPhysicalMaterial({
@@ -635,7 +640,7 @@ const recessMat = new THREE.MeshStandardMaterial({color:'#14161a',roughness:0.52
       lensMat
     );
     camLens.rotation.x = Math.PI / 2;
-    camLens.position.set(0, 28.5, -7.68);
+    camLens.position.set(0, 28.5, -7.85);
     vita.add(camLens);
 
     const camPupil = new THREE.Mesh(
@@ -643,7 +648,7 @@ const recessMat = new THREE.MeshStandardMaterial({color:'#14161a',roughness:0.52
       new THREE.MeshBasicMaterial({ color: '#00e6ff' })
     );
     camPupil.rotation.x = Math.PI / 2;
-    camPupil.position.set(0, 28.5, -7.7);
+    camPupil.position.set(0, 28.5, -7.87);
     vita.add(camPupil);
 
     const rearMic = new THREE.Mesh(
@@ -651,10 +656,10 @@ const recessMat = new THREE.MeshStandardMaterial({color:'#14161a',roughness:0.52
       black
     );
     rearMic.rotation.x = Math.PI / 2;
-    rearMic.position.set(6.5, 28.5, -7.6);
+    rearMic.position.set(6.5, 28.5, -7.80);
     vita.add(rearMic);
 
-    // 4. Corner Screws on Rear Casing
+    // 4. Corner Screws on Rear Casing (z = -7.82 / -7.84)
     const screwMat = new THREE.MeshStandardMaterial({
       color: '#9ba0aa',
       roughness: 0.25,
@@ -674,14 +679,14 @@ const recessMat = new THREE.MeshStandardMaterial({color:'#14161a',roughness:0.52
         screwMat
       );
       screw.rotation.x = Math.PI / 2;
-      screw.position.set(sx, sy, -7.58);
+      screw.position.set(sx, sy, -7.82);
       vita.add(screw);
 
       const slot = new THREE.Mesh(
         new THREE.BoxGeometry(1.3, 0.25, 0.4),
         black
       );
-      slot.position.set(sx, sy, -7.62);
+      slot.position.set(sx, sy, -7.84);
       vita.add(slot);
     }
 
@@ -809,15 +814,25 @@ const recessMat = new THREE.MeshStandardMaterial({color:'#14161a',roughness:0.52
         paint();
         previous = signature;
       }
+      if (lastFlippedRef.current !== isFlippedRef.current) {
+        lastFlippedRef.current = isFlippedRef.current;
+        targetDragRotY = isFlippedRef.current ? Math.PI : 0;
+      }
+
       dragRotX += (targetDragRotX - dragRotX) * 0.12;
       dragRotY += (targetDragRotY - dragRotY) * 0.12;
       if (!isDragging) {
-        targetDragRotX *= 0.985;
-        targetDragRotY *= 0.985;
+        targetDragRotX *= 0.96;
       }
 
       const rotY = (reduced ? 0 : px * 0.38 - scrollProgress * 0.16) + dragRotY;
       const rotX = (reduced ? 0 : py * 0.22) + dragRotX;
+
+      // Dynamic studio lighting adaptation when rotated to rear
+      const isRearFacing = Math.cos(vita.rotation.y) < 0;
+      rearLight.intensity = isRearFacing ? 1.45 : 0.45;
+      light.intensity = isRearFacing ? 0.65 : 1.55;
+      cyanRim.intensity = isRearFacing ? 0.9 : 0.65;
 
       vita.rotation.y += (rotY - vita.rotation.y) * 0.09;
       vita.rotation.x += (rotX - vita.rotation.x) * 0.09;

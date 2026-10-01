@@ -1,6 +1,15 @@
 # VitaHarbor project state
 
-Updated: 2026-09-30
+Updated: 2026-10-01
+
+## Current state: VH-3D-REAR-ZFIX-036 PS Vita 3D Rear Geometry Z-Fix & 360° Flip Inspection (2026-10-01)
+
+- 3D PS Vita Hardware Experience upgraded:
+  - Rear geometry Z-fighting resolved: bezel, touchpad surface, textured oval grips, camera lens with AR coating, and corner screws layered with zero clipping.
+  - Smooth 360° free drag orbiting with dynamic rear studio illumination.
+  - One-click 'Flip / 360° rear' view toggle button on console stage.
+  - 3D model defaults across all laptops/desktops without falling back to static images unless WebGL is truly unsupported.
+- Verification: npm run verify passed (tsc clean, 127/127 unit tests, 29 prerendered project pages, 32 sitemap URLs).
 
 ## Current state: VH-3D-REAR-035 PS Vita 3D Hardware Model 360° Rear Detailing (2026-09-30)
 

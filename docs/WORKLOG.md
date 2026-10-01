@@ -757,3 +757,9 @@ The five remaining candidates were checked against their source threads. None wa
 |---|---|---|---|---|---|
 | 22:30 UTC | 02176b1 | Changed selectProject default in HomePage.tsx to scroll = false, added optional scroll?: boolean to the DirectoryTableProps.onSelectProject signature, passed alse on onMouseEnter/onFocus row handlers, and passed 	rue only from the ProjectPanel \"Show on Vita\" button. | Project-card hover/focus was firing window.scrollTo(...) to the 3D console stage, so the page jumped to the top on every row hover. Scrolling now happens only on explicit selection. | openrouter/free | 
 pm run verify passed (tsc clean, 127/127 unit tests, 30 project pages, 33 sitemap URLs). |
+
+### VH-3D-REAR-ZFIX-036 3D PS Vita rear geometry Z-fighting fix & laptop 3D display (2026-10-01)
+
+| Time | Commit / state | Change | Why | Model | Verified |
+|---|---|---|---|---|---|
+| 02:30 UTC | working tree | Fixed rear geometry Z-fighting and depth clipping in `VitaConsoleScene.tsx` (bezel at z = -7.78, active touchpad at -8.14, grips at -7.80, camera at -7.80/-7.85, screws at -7.82); added dynamic rear lighting boost when rotated; updated drag orbiting so visitors can rotate 360° smoothly and inspect the back at any angle; added 'Flip / 360° rear' button in `ConsoleStage.tsx`; guaranteed 3D model loads by default on laptops/desktops. | Fulfill master delegation: eliminate visual Z-fighting on the rear Vita chassis and ensure 3D experience loads reliably across all devices. | gemini-3.7-flash | `npm run verify` passed (tsc clean, 127/127 unit tests, 29 project pages, 32 sitemap URLs). |

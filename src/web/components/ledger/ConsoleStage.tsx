@@ -3,7 +3,7 @@ import { type RendererErrorReason, type SelectedProjectView } from "../3d/VitaCo
 import { LiveAreaWaves } from "../visual/LiveAreaWaves";
 import { ProjectMark } from "../projects/ProjectMark";
 import { splitTitle, prettyStage, SPECS } from "./types";
-import { Check, Link2, ExternalLink, ChevronLeft, ChevronRight } from "lucide-react";
+import { Check, Link2, ExternalLink, ChevronLeft, ChevronRight, RotateCw } from "lucide-react";
 
 const VitaConsoleScene = lazy(() =>
   import("../3d/VitaConsoleScene").then((m) => ({ default: m.VitaConsoleScene }))
@@ -128,10 +128,11 @@ export const ConsoleStage: React.FC<ConsoleStageProps> = ({
 }) => {
   const [saveData, setSaveData] = useState(readSaveData);
   const [reducedMotion, setReducedMotion] = useState(readReducedMotion);
-  const [preference, setPreference] = useState<Console3DPreference | null>(readConsolePreference);
+  const [preference, setPreference] = useState<Console3DPreference | null>(() => readConsolePreference() || "3d");
   const [rendererFailure, setRendererFailure] = useState<RendererErrorReason | null>(null);
   const [sceneReady, setSceneReady] = useState(false);
   const [sceneStatus, setSceneStatus] = useState<"deferred" | "loading" | "ready">("deferred");
+  const [isFlipped, setIsFlipped] = useState(false);
 
   useEffect(() => {
     const connection = (navigator as Navigator & {
@@ -296,6 +297,7 @@ export const ConsoleStage: React.FC<ConsoleStageProps> = ({
                 <div className="vh-rise h-full w-full" data-vita-scene="3d">
                   <VitaConsoleScene
                     selectedProject={selectedProject}
+                    isFlipped={isFlipped}
                     reducedMotion={reducedMotion}
                     onRendererError={handleRendererError}
                     onRendererReady={handleRendererReady}
@@ -358,6 +360,16 @@ export const ConsoleStage: React.FC<ConsoleStageProps> = ({
                 </p>
               </div>
               <div className="flex min-w-0 max-w-full flex-wrap items-center gap-2 sm:shrink-0 sm:flex-nowrap sm:justify-end">
+              <button
+                type="button"
+                onClick={() => setIsFlipped((f) => !f)}
+                aria-label={isFlipped ? "Show front of PlayStation Vita" : "Inspect back of PlayStation Vita (360° View)"}
+                title={isFlipped ? "Show front of PlayStation Vita" : "Inspect back of PlayStation Vita (360° View)"}
+                className="inline-flex min-h-[44px] items-center gap-1.5 rounded-lg border border-white/10 bg-black/60 px-3.5 py-1.5 font-mono text-[11px] font-medium uppercase tracking-wider text-ink-medium backdrop-blur-md transition-all hover:border-[#00e6ff]/50 hover:text-[#00e6ff] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00e6ff]/40 shadow-sm"
+              >
+                <RotateCw className={"h-3.5 w-3.5 transition-transform duration-300 " + (isFlipped ? "rotate-180 text-[#00e6ff]" : "")} />
+                <span>{isFlipped ? "Front view" : "Flip / 360° rear"}</span>
+              </button>
                 <div className="flex items-center gap-1 border-r border-hairline pr-2 mr-1">
                   <button
                     type="button"

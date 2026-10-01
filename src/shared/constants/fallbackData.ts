@@ -27,8 +27,6 @@ export const FALLBACK_GAMES: Game[] = [
   { id: 35, slug: "real-racing-2", title: "Real Racing 2", normalized_title: "real racing 2", original_release_year: 2010, original_platform: "iOS / Android", created_at: new Date('2026-09-21T11:39:44.312Z'), updated_at: new Date('2026-09-21T11:39:44.312Z') },
   { id: 36, slug: "diddy-kong-racing-golden-balloon", title: "Diddy Kong Racing (Golden Balloon)", normalized_title: "diddy kong racing (golden balloon)", original_release_year: 1997, original_platform: "N64 / Decomp", created_at: new Date('2026-09-09T02:45:26.000Z'), updated_at: new Date('2026-09-10T21:54:04.000Z') },
   { id: 37, slug: "command-and-conquer-renegade", title: "Command & Conquer: Renegade", normalized_title: "command & conquer: renegade", original_release_year: 2002, original_platform: "PC", created_at: new Date('2026-09-08T12:49:38.000Z'), updated_at: new Date('2026-09-08T12:49:38.000Z') },
-  { id: 38, slug: "memory-mastermind", title: "Memory Mastermind", normalized_title: "memory mastermind", original_release_year: 2013, original_platform: "Mobile / RobTop", created_at: new Date('2026-09-27T08:11:00.000Z'), updated_at: new Date('2026-09-27T08:11:00.000Z') }
-,
   { id: 39, slug: "gta-liberty-city-stories", title: "GTA: Liberty City Stories (reStories)", normalized_title: "gta: liberty city stories (restories)", original_release_year: 2005, original_platform: "PSP / PS2", created_at: new Date('2026-09-29T16:07:11.000Z'), updated_at: new Date('2026-09-29T16:07:11.000Z') }
 ,
   { id: 40, slug: "test-drive-iii-vita", title: "Test Drive III", normalized_title: "test drive iii", original_release_year: null, original_platform: "Various", created_at: new Date('2026-09-30T19:00:45.000Z'), updated_at: new Date('2026-09-30T19:17:30.535Z') }
@@ -616,34 +614,6 @@ export const FALLBACK_PROJECTS: any[] = [
     ]
   },
   {
-    id: 38,
-    game_id: 38,
-    slug: "memory-mastermind-vita",
-    reddit_url: "https://www.reddit.com/r/vitahacks/comments/1wrek0r/memory_mastermind_a_old_game_by_robtop_ps_vita/",
-    repo_url: null,
-    display_name: "Memory Mastermind",
-    current_stage: "announced",
-    lifecycle: "active",
-    summary: "Homebrew port of RobTop's classic memory puzzle game targeting PlayStation Vita.",
-    playability_notes: "Announced lightweight port bringup targeting complete playability and touch/button controls.",
-    performance_notes: "Lightweight asset footprint designed to run at full speed on Vita hardware.",
-    first_seen_at: new Date('2026-09-27T08:11:00.000Z'),
-    last_activity_at: new Date('2026-09-27T08:11:00.000Z'),
-    released_at: null,
-    is_featured: false,
-    is_archived: false,
-    verification: "community_report",
-    game_title: "Memory Mastermind",
-    original_platform: "Mobile / RobTop",
-    original_release_year: 2013,
-    technologies: ["Native C", "VitaSDK"],
-    developers: [{ id: 25, role: "lead", display_name: "LefterisDaGamer", slug: "lefterisdagamer" }],
-    stage_history: [
-      { id: 380, stage: "announced", effective_at: new Date('2026-09-27T08:11:00.000Z'), reason: "Public port announcement by community developer" }
-    ]
-  }
-,
-  {
     id: 39,
     game_id: 39,
     slug: "gta-lcs-vita",
@@ -1095,23 +1065,6 @@ export const FALLBACK_UPDATES: any[] = [
       { source_item_id: "src_cnc_renegade_reddit", relationship: "primary", canonical_url: "https://www.reddit.com/r/vitahacks/comments/1waninh/cnc_renegade_native_ps_vita_port/" }
     ]
   },
-  {
-    id: "upd_memory_mastermind",
-    port_project_id: 38,
-    project_slug: "memory-mastermind-vita",
-    project_display_name: "Memory Mastermind",
-    developer_display_name: "LefterisDaGamer",
-    developer_slug: "lefterisdagamer",
-    event_type: "project_announced",
-    title: "Memory Mastermind PS Vita port announced",
-    summary: "LefterisDaGamer announced a lightweight homebrew port of RobTop's classic memory puzzle game targeting PlayStation Vita.",
-    event_at: new Date('2026-09-27T08:11:00.000Z'),
-    verification_level: "community_report",
-    sources: [
-      { source_item_id: "src_memory_mastermind_reddit", relationship: "primary", canonical_url: "https://www.reddit.com/r/vitahacks/comments/1wrek0r/memory_mastermind_a_old_game_by_robtop_ps_vita/" }
-    ]
-  }
-,
   {
     id: "upd_gta_lcs_vita",
     port_project_id: 39,
