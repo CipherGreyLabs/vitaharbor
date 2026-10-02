@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-01T18:55:33.022Z",
+  "generated_at": "2026-10-02T04:04:27.110Z",
   "source": "r/vitahacks + r/VitaPiracy + r/PSVitaHomebrew RSS",
   "items": [
     {
@@ -184,7 +184,7 @@
       "schema_version": 2,
       "id": "reddit-1wsh59n",
       "external_id": "1wsh59n",
-      "state": "QUARANTINED",
+      "state": "VERIFIED_FOR_REVIEW",
       "state_history": [
         {
           "state": "DETECTED",
@@ -197,6 +197,12 @@
           "at": "2026-09-30T19:19:05.523Z",
           "actor": "reddit-scanner",
           "reason": "Scanner result is unverified and cannot enter the curated ledger"
+        },
+        {
+          "state": "VERIFIED_FOR_REVIEW",
+          "at": "2026-10-02T04:04:27.110Z",
+          "actor": "codex",
+          "reason": "Re-verified Oct 2 scan: Real Racing 3 announced by chutA7X (RR2 Vita dev); repo private, public beta pending"
         }
       ],
       "source": {
@@ -253,7 +259,42 @@
         "author/developer linkage and independent corroboration"
       ],
       "content_hash": "f0c5e2c0df08cd5b337a9981eaf26f9853c48326377d8baa648852d68e8de3e8",
-      "review": null,
+      "review": {
+        "reviewer": "codex",
+        "reviewed_at": "2026-10-02T04:04:27.110Z",
+        "reason": "Re-verified Oct 2 scan: Real Racing 3 announced by chutA7X (RR2 Vita dev); repo private, public beta pending",
+        "evidence_bundle": {
+          "file": "data/references/real-racing-3-2026-10-02.json",
+          "sha256": "41bd77065aa8b15395833075c62824446c97204e5042d0ee86fa72857745d309",
+          "schema_version": 1,
+          "reviewer": "codex",
+          "reviewed_at": "2026-10-02T12:00:00.000Z",
+          "sources": [
+            {
+              "type": "reddit",
+              "url": "https://www.reddit.com/r/PSVitaHomebrew/comments/1wsh59n/the_impossible_real_racing_3_vita_port/",
+              "observed_at": "2026-09-30T19:19:05.523Z",
+              "note": "Developer chutA7X (same author as the released Real Racing 2 Vita port) announces a Real Racing 3 Vita public beta for Saturday Oct 3."
+            }
+          ],
+          "findings": "Re-verified in the Oct 2 scan: Real Racing 3 is announced by the same developer who shipped the Real Racing 2 Vita port, which gives strong author linkage. The repo is still private and no public release/build artifact exists yet, so it stays review-only until the public beta lands.",
+          "repository_url": null,
+          "repository_identity": "",
+          "repository_created_at": null,
+          "repository_last_activity_at": null,
+          "release_facts": [],
+          "release_url": null,
+          "vita_hardware_result": "",
+          "vita_evidence": [],
+          "author_linkage": "chutA7X is the same developer behind the released Real Racing 2 Vita port (ledger id 35)",
+          "corroboration": [],
+          "duplicate_relation": {
+            "related_candidate_ids": []
+          },
+          "content_hash": "f0c5e2c0df08cd5b337a9981eaf26f9853c48326377d8baa648852d68e8de3e8",
+          "risk_disposition": "No risk signals fired. Strong author linkage exists but no public repository or release evidence, so no promotion."
+        }
+      },
       "incident": null
     },
     {
@@ -2114,6 +2155,12 @@
           "at": "2026-09-21T13:25:26.723Z",
           "actor": "codex",
           "reason": "Verified genuine TheForceEngine Vita progress but repository evidence is incomplete"
+        },
+        {
+          "state": "VERIFIED_FOR_REVIEW",
+          "at": "2026-10-02T04:05:00.462Z",
+          "actor": "codex",
+          "reason": "Review bundle refreshed from the Oct 2 scan re-verification"
         }
       ],
       "source": {
@@ -2175,23 +2222,23 @@
       "content_hash": "1e1afbafe359a60d328be655b00ccaf382613bfad2c31971bffd98af6924e594",
       "review": {
         "reviewer": "codex",
-        "reviewed_at": "2026-09-21T13:25:26.723Z",
-        "reason": "Verified genuine TheForceEngine Vita progress but repository evidence is incomplete",
+        "reviewed_at": "2026-10-02T04:05:00.462Z",
+        "reason": "Re-verified in the Oct 2 scan: genuine TheForceEngine-VITA main-menu boot; repository evidence still incomplete",
         "evidence_bundle": {
-          "file": "data/references/theforceengine-2026-09-21.json",
-          "sha256": "ba4ad8c9046e53d951687772a3102630f88fbed6d7961d50602cbc357a0ca06a",
+          "file": "data/references/theforceengine-2026-10-02.json",
+          "sha256": "951218abaaf9e35b44c3b7d0dd5c4d8f19601f312d4e702834f59be42936207f",
           "schema_version": 1,
           "reviewer": "codex",
-          "reviewed_at": "2026-09-21T13:23:12.000Z",
+          "reviewed_at": "2026-10-02T12:00:00.000Z",
           "sources": [
             {
               "type": "reddit",
               "url": "https://www.reddit.com/r/vitahacks/comments/1wlrv6x/theforceenginevita_successfully_booting_into_the/",
               "observed_at": "2026-09-21T13:23:12.000Z",
-              "note": "Authenticated thread shows TheForceEngine-VITA reaching its menu; OP says substantial work remains."
+              "note": "Thread shows TheForceEngine-VITA reaching its main menu; OP says substantial work remains."
             }
           ],
-          "findings": "The post is a credible development signal: TheForceEngine-VITA reaches the main menu. No exact public Vita repository, release/build artifact, independent corroboration or verified hardware result was found in this review, so it remains review-only.",
+          "findings": "Re-verified in the Oct 2 scan: TheForceEngine-VITA main-menu boot is a genuine development signal. No exact public Vita repository, release/build artifact, independent corroboration or verified hardware result was found, so it stays review-only.",
           "repository_url": null,
           "repository_identity": "",
           "repository_created_at": null,
@@ -2206,7 +2253,7 @@
             "related_candidate_ids": []
           },
           "content_hash": "1e1afbafe359a60d328be655b00ccaf382613bfad2c31971bffd98af6924e594",
-          "risk_disposition": "The generic question/request heuristic fired on thread wording, but the observed post itself is a development progress report. Missing project evidence is unresolved, so no promotion."
+          "risk_disposition": "No risk signals fired; the post is a development progress report. Missing project evidence remains unresolved, so no promotion."
         }
       },
       "incident": null

@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "reviewer": "codex",
+  "reviewed_at": "2026-10-02T12:00:00.000Z",
+  "sources": [
+    {
+      "type": "reddit",
+      "url": "https://www.reddit.com/r/vitahacks/comments/1wlrv6x/theforceenginevita_successfully_booting_into_the/",
+      "observed_at": "2026-09-21T13:23:12.000Z",
+      "note": "Thread shows TheForceEngine-VITA reaching its main menu; OP says substantial work remains."
+    }
+  ],
+  "findings": "Re-verified in the Oct 2 scan: TheForceEngine-VITA main-menu boot is a genuine development signal. No exact public Vita repository, release/build artifact, independent corroboration or verified hardware result was found, so it stays review-only.",
+  "repository_url": null,
+  "repository_identity": "",
+  "repository_created_at": null,
+  "repository_last_activity_at": null,
+  "release_facts": [],
+  "release_url": null,
+  "vita_hardware_result": "",
+  "vita_evidence": [],
+  "author_linkage": "",
+  "corroboration": [],
+  "duplicate_relation": {
+    "related_candidate_ids": []
+  },
+  "content_hash": "1e1afbafe359a60d328be655b00ccaf382613bfad2c31971bffd98af6924e594",
+  "risk_disposition": "No risk signals fired; the post is a development progress report. Missing project evidence remains unresolved, so no promotion."
+}

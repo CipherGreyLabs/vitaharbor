@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "reviewer": "codex",
+  "reviewed_at": "2026-10-02T12:00:00.000Z",
+  "sources": [
+    {
+      "type": "reddit",
+      "url": "https://www.reddit.com/r/PSVitaHomebrew/comments/1wsh59n/the_impossible_real_racing_3_vita_port/",
+      "observed_at": "2026-09-30T19:19:05.523Z",
+      "note": "Developer chutA7X (same author as the released Real Racing 2 Vita port) announces a Real Racing 3 Vita public beta for Saturday Oct 3."
+    }
+  ],
+  "findings": "Re-verified in the Oct 2 scan: Real Racing 3 is announced by the same developer who shipped the Real Racing 2 Vita port, which gives strong author linkage. The repo is still private and no public release/build artifact exists yet, so it stays review-only until the public beta lands.",
+  "repository_url": null,
+  "repository_identity": "",
+  "repository_created_at": null,
+  "repository_last_activity_at": null,
+  "release_facts": [],
+  "release_url": null,
+  "vita_hardware_result": "",
+  "vita_evidence": [],
+  "author_linkage": "chutA7X is the same developer behind the released Real Racing 2 Vita port (ledger id 35)",
+  "corroboration": [],
+  "duplicate_relation": {
+    "related_candidate_ids": []
+  },
+  "content_hash": "f0c5e2c0df08cd5b337a9981eaf26f9853c48326377d8baa648852d68e8de3e8",
+  "risk_disposition": "No risk signals fired. Strong author linkage exists but no public repository or release evidence, so no promotion."
+}

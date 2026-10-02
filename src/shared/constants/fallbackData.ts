@@ -980,6 +980,23 @@ export const FALLBACK_UPDATES: any[] = [
     sources: [
       { source_item_id: "src_re4_vita_repo", relationship: "primary", canonical_url: "https://github.com/Rinnegatamante/re4-vita" },
       { source_item_id: "src_re4_vita_reddit", relationship: "community", canonical_url: "https://www.reddit.com/r/VitaPiracy/comments/1wmax82/guess_it_is_happening/" }
+, 
+  {
+    id: "upd_re4_vita_livestream",
+    port_project_id: 34,
+    project_slug: "resident-evil-4-vita",
+    project_display_name: "Resident Evil 4 Vita (re4-vita)",
+    developer_display_name: "Rinnegatamante",
+    developer_slug: "rinnegatamante",
+    event_type: "technical_progress",
+    title: "Rinnegatamante live-streams Resident Evil 4 Vita CPU optimizations",
+    summary: "During a live-stream Rinnegatamante reported ongoing CPU optimizations for the re4-vita port, stating a 20 rendered FPS target with auto frameskip as the ideal v1.0 release candidate and that no release will happen until beta testers can finish the game start to finish.",
+    event_at: new Date("2026-09-30T21:29:28.000Z"),
+    verification_level: "community_report",
+    sources: [
+      { source_item_id: "src_upd_re4_vita_livestream_reddit", relationship: "community", canonical_url: "https://www.reddit.com/r/vitahacks/comments/1wuhe87/to_anyone_interested_rinnegatamante_is_streaming/" }
+    ]
+  }
     ]
   }
 ,
