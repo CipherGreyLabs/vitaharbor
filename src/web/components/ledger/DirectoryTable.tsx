@@ -271,7 +271,7 @@ export const DirectoryTable: React.FC<DirectoryTableProps> = ({
                 title="Bento Grid View"
                 className={
                   "inline-flex h-8 items-center gap-1.5 rounded-md px-2.5 text-caption font-medium transition-colors " +
-                  (viewMode === "bento" ? "bg-[#00e6ff]/20 text-[#cbd5e1] font-semibold" : "text-ink-muted hover:text-ink")
+                  (viewMode === "bento" ? "bg-[#2563eb] text-white font-semibold" : "text-ink-muted hover:text-ink")
                 }
               >
                 <LayoutGrid className="h-3.5 w-3.5" />
@@ -284,7 +284,7 @@ export const DirectoryTable: React.FC<DirectoryTableProps> = ({
                 title="Compact List View"
                 className={
                   "inline-flex h-8 items-center gap-1.5 rounded-md px-2.5 text-caption font-medium transition-colors " +
-                  (viewMode === "list" ? "bg-[#00e6ff]/20 text-[#cbd5e1] font-semibold" : "text-ink-muted hover:text-ink")
+                  (viewMode === "list" ? "bg-[#2563eb] text-white font-semibold" : "text-ink-muted hover:text-ink")
                 }
               >
                 <List className="h-3.5 w-3.5" />
@@ -331,31 +331,7 @@ export const DirectoryTable: React.FC<DirectoryTableProps> = ({
           })}
         </div>
 
-        {/* Technology Filters (Option 1) */}
-        <div className="mt-2 flex items-center gap-1.5 overflow-x-auto no-scrollbar border-t border-white/[0.04] pt-2">
-          <span className="mr-1 shrink-0 font-mono text-[10px] uppercase tracking-wider text-[#cbd5e1]">Tech</span>
-          {TECH_FILTERS.map((tech) => {
-            const active = activeTech === tech.key;
-            return (
-              <button
-                key={tech.key}
-                type="button"
-                onClick={() => onTechChange(tech.key)}
-                aria-pressed={active}
-                className={
-                  "inline-flex min-h-[36px] shrink-0 items-center gap-1 whitespace-nowrap rounded-md px-2.5 py-1 font-mono text-[11px] transition-all focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent " +
-                  (active
-                    ? "border border-[#00e6ff]/50 bg-[#00e6ff]/15 text-[#cbd5e1] font-semibold shadow-[0_0_10px_rgba(0,230,255,0.2)]"
-                    : "border border-white/10 bg-white/[0.03] text-ink-muted hover:border-white/20 hover:text-ink")
-                }
-              >
-                <span>[{tech.label}]</span>
-                <span className="opacity-70 text-[9px]">({techCounts[tech.key] ?? 0})</span>
-              </button>
-            );
-          })}
         </div>
-      </div>
 
       {latestSignal && (
         <section aria-label="Latest signal" className="mt-4 grid gap-2 rounded-xl border border-hairline border-l-[3px] border-l-accent bg-surface px-4 py-3 sm:grid-cols-[minmax(0,1fr)_auto] sm:items-center sm:gap-5 sm:px-5">
@@ -419,8 +395,124 @@ export const DirectoryTable: React.FC<DirectoryTableProps> = ({
               Reset filters
             </button>
           </div>
+        ) : viewMode === "bento" ? (
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {visible.map((project) => {
+              const title = splitTitle(project.game_title || project.display_name);
+              const selected = selectedId === project.id;
+              const projectType = PROJECT_TYPE_META[deriveProjectType(project)].shortLabel;
+              const seenAt = project.first_seen_at ? new Date(project.first_seen_at).getTime() : 0;
+              const isNew = seenAt > 0 && Date.now() - seenAt < 7 * 24 * 60 * 60 * 1000;
+
+              return (
+                <div
+                  key={project.id}
+                  id={"card-" + project.slug}
+                  onMouseEnter={() => onSelectProject(project, false)}
+                  onFocus={() => onSelectProject(project, false)}
+                  className={
+                    "group relative flex flex-col justify-between overflow-hidden rounded-2xl border transition-all duration-200 " +
+                    (selected
+                      ? "border-blue-500/80 bg-zinc-900/90 shadow-[0_0_24px_rgba(59,130,246,0.18)]"
+                      : "border-white/10 bg-zinc-950/80 hover:border-white/20 hover:bg-zinc-900/60")
+                  }
+                >
+                  {/* Card Media Banner */}
+                  <div className="relative aspect-[16/9] w-full overflow-hidden bg-black/60 border-b border-white/[0.06]">
+                    {project.screenshot_url ? (
+                      <img
+                        src={project.screenshot_url}
+                        alt={project.screenshot_alt || title.name}
+                        loading="lazy"
+                        className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                      />
+                    ) : (
+                      <div className="flex h-full w-full flex-col items-center justify-center p-4 text-center bg-gradient-to-br from-zinc-900 to-black">
+                        <ProjectMark seed={project.display_name || project.game_title || "vita"} size={48} className="rounded-2xl mb-2 opacity-80" />
+                        <span className="font-mono text-[10px] text-zinc-500 uppercase tracking-wider">{title.engine || project.original_platform || "Community Port"}</span>
+                      </div>
+                    )}
+                    
+                    {/* Stage Badge on top of image */}
+                    <div className="absolute left-3 top-3 flex items-center gap-1.5">
+                      <span className={"rounded-md px-2 py-0.5 font-mono text-[10px] font-semibold uppercase backdrop-blur-md " + (STAGE_CHIP[String(project.current_stage)] || "bg-black/70 text-zinc-300")}>
+                        {prettyStage(project.current_stage)}
+                      </span>
+                      {isNew && <span className="rounded bg-blue-500/20 border border-blue-500/40 px-1.5 py-0.5 font-mono text-[9px] font-semibold uppercase text-blue-400">New</span>}
+                    </div>
+
+                    {/* Show on 3D Vita Quick Trigger */}
+                    <button
+                      type="button"
+                      onClick={() => onSelectProject(project, true)}
+                      title="Show on 3D Vita"
+                      className="absolute right-3 top-3 rounded-lg border border-white/20 bg-black/70 px-2.5 py-1 font-mono text-[10px] font-medium text-white opacity-0 backdrop-blur-md transition-all group-hover:opacity-100 hover:bg-black"
+                    >
+                      Show on Vita
+                    </button>
+                  </div>
+
+                  {/* Card Content */}
+                  <div className="flex flex-1 flex-col justify-between p-4">
+                    <div>
+                      <h3 className="text-[16px] font-bold text-white transition-colors group-hover:text-blue-400">
+                        {title.name}
+                      </h3>
+                      <p className="mt-1 line-clamp-2 text-[13px] text-zinc-400 leading-relaxed">
+                        {project.summary || "Community PlayStation Vita homebrew port in active development."}
+                      </p>
+                    </div>
+
+                    <div className="mt-4 pt-3 border-t border-white/[0.06]">
+                      {/* Tech & Platform Tags */}
+                      <div className="flex flex-wrap items-center gap-1.5 mb-3">
+                        <span className="font-mono text-[10px] uppercase text-zinc-400 bg-white/[0.04] px-1.5 py-0.5 rounded border border-white/5">{projectType}</span>
+                        {project.technologies?.slice(0, 2).map((tech: string) => (
+                          <span key={tech} className="rounded bg-white/[0.04] border border-white/5 px-1.5 py-0.5 font-mono text-[10px] text-zinc-400">
+                            {tech}
+                          </span>
+                        ))}
+                      </div>
+
+                      {/* Card Footer Actions */}
+                      <div className="flex items-center justify-between gap-2">
+                        <button
+                          type="button"
+                          onClick={() => onToggleEntry(project)}
+                          className="inline-flex min-h-[34px] items-center text-caption font-semibold text-blue-400 hover:underline"
+                        >
+                          View Details
+                        </button>
+                        <div className="flex items-center gap-1">
+                          <button
+                            type="button"
+                            onClick={() => onCopyLink(project)}
+                            className="inline-flex h-8 w-8 items-center justify-center rounded-lg text-zinc-400 hover:bg-zinc-800 hover:text-white transition-colors"
+                            title="Copy link"
+                          >
+                            {copiedSlug === project.slug ? <Check className="h-3.5 w-3.5 text-emerald-400" /> : <Link2 className="h-3.5 w-3.5" />}
+                          </button>
+                          {project.reddit_url && (
+                            <a
+                              href={project.reddit_url}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="inline-flex h-8 w-8 items-center justify-center rounded-lg text-zinc-400 hover:bg-zinc-800 hover:text-white transition-colors"
+                              title="Source discussion"
+                            >
+                              <ExternalLink className="h-3.5 w-3.5" />
+                            </a>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
         ) : (
-          <div className="overflow-hidden rounded-2xl border border-[#334155] bg-black">
+<div className="overflow-hidden rounded-2xl border border-[#334155] bg-black">
             <div className="hidden grid-cols-[minmax(0,1fr)_auto] border-b border-hairline bg-white/[0.025] px-0 py-2 lg:grid">
               <div className="grid grid-cols-[minmax(0,1.8fr)_minmax(8.5rem,0.9fr)_minmax(6rem,0.65fr)_minmax(7rem,0.75fr)_1.5rem] items-center gap-3 px-4 font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-ink-muted">
                 <span>Project</span><span>Current stage</span><span>Type</span><span>Last Activity</span><span aria-hidden="true" />

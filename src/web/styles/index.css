@@ -14,17 +14,17 @@
 
 @layer base {
   :root {
-    --vh-canvas: 15, 23, 42;
-    --vh-surface-1: 17, 24, 39;
-    --vh-surface-2: 30, 41, 59;
+    --vh-canvas: 10, 13, 20;
+    --vh-surface-1: 15, 20, 30;
+    --vh-surface-2: 24, 32, 47;
     --vh-surface-3: 51, 65, 85;
-    --vh-border: 51, 65, 85;
+    --vh-border: 38, 48, 68;
     --vh-border-strong: 71, 85, 105;
     --vh-ink: 248, 250, 252;
     --vh-ink-medium: 203, 213, 225;
     --vh-ink-muted: 148, 163, 184;
-    --vh-accent: 220, 38, 38;
-    --vh-accent-hover: 239, 68, 68;
+    --vh-accent: 37, 99, 235;
+    --vh-accent-hover: 59, 130, 246;
     --vh-stage-done: 248, 250, 252;
     --vh-stage-progress: 203, 213, 225;
     --vh-stage-caution: 148, 163, 184;
@@ -757,7 +757,7 @@
 
 /* UI UX Pro Max Button Specs */
 .btn-primary {
-  background: #dc2626;
+  background: #2563eb;
   color: #ffffff;
   padding: 10px 22px;
   border-radius: 8px;
@@ -771,7 +771,7 @@
 }
 
 .btn-primary:hover {
-  background: #ef4444;
+  background: #3b82f6;
   transform: translateY(-1px);
-  box-shadow: 0 4px 14px rgba(220, 38, 38, 0.35);
+  box-shadow: 0 4px 16px rgba(37, 99, 235, 0.35);
 }

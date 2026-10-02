@@ -460,22 +460,20 @@ export const HomePage: React.FC = () => {
               <span className="sm:hidden">Posts</span>
               <span className="hidden sm:inline">Community posts</span>
             </a>
-            <a href="#directory" className="btn-primary text-micro sm:text-caption py-1.5 px-3.5 rounded-full font-semibold">
-              Explore Ports
-            </a>
+
           </nav>
         </div>
       </header>
 
       <main id="main-content" className="vh-boot">
-        <section aria-labelledby="hero-heading" className="relative bg-black pt-16 pb-20 sm:pt-24 sm:pb-28 border-b border-zinc-900">
+        <section aria-labelledby="hero-heading" className="relative pt-10 pb-14 sm:pt-14 sm:pb-18 border-b border-white/[0.06]">
           <div className="relative mx-auto max-w-6xl px-4 sm:px-6">
             {/* Pure Minimalist Apple Product Headline */}
             <div className="mx-auto max-w-3xl text-center mb-12 sm:mb-16">
               <h1 id="hero-heading" className="font-display text-[54px] sm:text-[76px] lg:text-[88px] font-bold tracking-[-0.04em] text-white leading-[1.02]">
                 PlayStation Vita.
               </h1>
-              <h2 className="mt-3 font-display text-[26px] sm:text-[34px] lg:text-[40px] font-normal tracking-[-0.025em] text-slate-300">
+              <h2 className="mt-3 font-display text-[26px] sm:text-[34px] lg:text-[40px] font-normal tracking-[-0.025em] text-ink-medium">
                 The definitive port atlas.
               </h2>
               <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
