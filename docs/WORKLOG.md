@@ -807,3 +807,9 @@ pm run verify passed (tsc clean, 127/127 unit tests, 30 project pages, 33 sitema
 | Time | Commit / state | Change | Why | Model | Verified |
 |---|---|---|---|---|---|
 | 05:05 UTC | working tree | Implemented the official UI UX Pro Max generated Design System (design-system/vitaharbor/MASTER.md): 1) Colors: Background #0F172A, Foreground #F8FAFC, Card #111827, Muted #1E293B, Border #334155, Accent/CTA #DC2626; 2) Typography: Outfit for Headings and Rubik for Body; 3) Hero-Centric pattern with dominant headline, Action Red (.btn-primary) CTA buttons, solitary 3D hardware stage; 4) Bento Grid cards styled with #111827 background and #334155 borders. | Fulfill explicit user instruction to integrate the UI UX Pro Max generated master design system. | gemini-3.7-flash | npm run verify passed (tsc clean, 127/127 unit tests, 28 project pages, 31 sitemap URLs). |
+
+### Multi-Subreddit Live Scan & Real Racing 2 Beta 2 Update (2026-10-02)
+
+| Time | Commit / state | Change | Why | Model | Verified |
+|---|---|---|---|---|---|
+| 11:20 UTC | 8d379ab | Executed manual live 3-subreddit scan across r/vitahacks, r/VitaPiracy and r/PSVitaHomebrew; added Real Racing 2 Beta 2 update (30/60 FPS toggle, 2x/4x MSAA) to FALLBACK_UPDATES; verified Insurgency Vita gameplay candidate (reddit-1wvob17) as VERIFIED_FOR_REVIEW with review bundle | Incorporate live community updates and verify fresh incoming posts across all 3 mapped subreddits | gemini-3.8-flash | npm run verify (tsc clean, 127/127 unit tests, 28 project pages); production deploy vitaharbor-970dy9m7s aliased to vitaharbor.vercel.app |
