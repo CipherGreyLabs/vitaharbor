@@ -843,3 +843,9 @@ pm run verify passed (tsc clean, 127/127 unit tests, 30 project pages, 33 sitema
 | Time | Commit / state | Change | Why | Model | Verified |
 |---|---|---|---|---|---|
 | 12:55 UTC | 7c19e25 | Added floating glassmorphic left/right navigation chevrons flanking the 3D console stage for instant cycling through projects; increased camera view preset button touch targets to min-h-[44px] | Enhance interactive 3D console UX on both desktop and mobile devices without requiring scrolling down to directory table | gemini-3.8-flash | npm run verify clean (127/127 tests); deployed vitaharbor-jhqhrsl33 aliased to vitaharbor.vercel.app |
+
+### OLED Screen LiveArea Restoration, Acrylic Bumpers & Clean Navigation (2026-10-02)
+
+| Time | Commit / state | Change | Why | Model | Verified |
+|---|---|---|---|---|---|
+| 13:10 UTC | 960e3bf | 1) Restored authentic PlayStation Vita LiveArea start title card on the 3D OLED screen for projects without raw screenshots, eradicating the generic website OG text banner; 2) Modeled crystal-clear transparent acrylic L and R shoulder triggers with physical transmission and chrome internal hinges instead of blocky gray solids; 3) Removed redundant duplicate bottom arrow buttons from the status bar | Resolve issues visible in user-provided screenshot: website banner shown on Vita screen instead of game title, opaque gray shoulder buttons, and duplicate arrow controls | gemini-3.8-flash | npm run verify clean (127/127 tests); deployed vitaharbor-oub3mayy8 aliased to vitaharbor.vercel.app |
