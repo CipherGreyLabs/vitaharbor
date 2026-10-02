@@ -819,3 +819,9 @@ pm run verify passed (tsc clean, 127/127 unit tests, 30 project pages, 33 sitema
 | Time | Commit / state | Change | Why | Model | Verified |
 |---|---|---|---|---|---|
 | 11:35 UTC | cc966a6 | Promoted Halo: Combat Evolved Vita (id: 42) from announced to playable/released with initial build + data files update (upd_halo_ce_vita_release); relaxed classifier to accept port release patterns | Community release surfaced on r/VitaPiracy and r/PSVitaHomebrew overnight | gemini-3.8-flash | npm run verify (127/127 tests, 28 pages); deployed vitaharbor-l2dzhpqdt aliased to vitaharbor.vercel.app |
+
+### WCAG AA Contrast Compliance & Developer Linkage Boost (2026-10-02)
+
+| Time | Commit / state | Change | Why | Model | Verified |
+|---|---|---|---|---|---|
+| 11:55 UTC | ba9ce16 | Integrated known developer usernames list into classifier, boosted dev signal confidence for known authors; tuned accent colors to #3b82f6 / #60a5fa and zinc-500 to zinc-400 across table and badges; expanded mobile button touch targets | Resolve 6 live contrast audit failures to achieve 100% WCAG AA compliance (51/51 styles PASS) and eliminate detection blind spots for known homebrew authors | gemini-3.8-flash | scripts/_oneoff/contrast-audit.mjs: 51 checked styles, 0 failures; npm run verify clean; deployed vitaharbor-i2p6wdrgx aliased to vitaharbor.vercel.app |
