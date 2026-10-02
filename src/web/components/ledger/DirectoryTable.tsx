@@ -1,3 +1,4 @@
+import { GameCardBanner } from "../projects/GameCardBanner";
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { ProjectPanel } from "./ProjectPanel";
@@ -419,17 +420,20 @@ export const DirectoryTable: React.FC<DirectoryTableProps> = ({
                 >
                   {/* Card Media Banner */}
                   <div className="relative aspect-[16/9] w-full overflow-hidden bg-black/60 border-b border-white/[0.06]">
-                    {(() => {
-                      const imageSrc = project.screenshot_url || `/og/projects/${project.slug}.png`;
-                      return (
-                        <img
-                          src={imageSrc}
-                          alt={project.screenshot_alt || title.name}
-                          loading="lazy"
-                          className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
-                        />
-                      );
-                    })()}
+                    {project.screenshot_url ? (
+                      <img
+                        src={project.screenshot_url}
+                        alt={project.screenshot_alt || title.name}
+                        loading="lazy"
+                        className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                      />
+                    ) : (
+                      <GameCardBanner
+                        project={project}
+                        titleName={title.name}
+                        engineLabel={title.engine}
+                      />
+                    )}
                     
                     {/* Stage Badge on top of image */}
                     <div className="absolute left-3 top-3 flex items-center gap-1.5">
