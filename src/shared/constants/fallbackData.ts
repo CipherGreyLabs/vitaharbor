@@ -55,6 +55,8 @@ export const FALLBACK_PROJECTS: any[] = [
     game_title: "Medal of Honor: Allied Assault (OpenMoHAA)",
     original_platform: "PC",
     original_release_year: 2002,
+    screenshot_url: "/screenshots/openmohaa.jpg",
+    screenshot_alt: "Medal of Honor: Allied Assault OpenMoHAA gameplay screenshot",
     technologies: ["OpenMoHAA", "Native C++", "vitaGL"],
     developers: [{ id: 1, role: "lead", display_name: "OpenMoHAA Team", slug: "openmohaa-team" }]
   },
@@ -77,6 +79,8 @@ export const FALLBACK_PROJECTS: any[] = [
     game_title: "Super Smash Bros. Melee",
     original_platform: "GameCube / Decomp",
     original_release_year: 2001,
+    screenshot_url: "/screenshots/smash-melee.jpg",
+    screenshot_alt: "Super Smash Bros. Melee gameplay artwork",
     technologies: ["Aurora", "SceGXM", "vitaGL", "Decompilation", "Native C++"],
     developers: [
       { id: 13, role: "lead", display_name: "rob1n994", slug: "rob1n994" },
@@ -102,6 +106,8 @@ export const FALLBACK_PROJECTS: any[] = [
     game_title: "Hollow Knight",
     original_platform: "PC / Unity",
     original_release_year: 2017,
+    screenshot_url: "/screenshots/hollow-knight.jpg",
+    screenshot_alt: "Hollow Knight gameplay screenshot",
     technologies: ["Unity C# Decomp", "Native ARM"],
     developers: [{ id: 3, role: "lead", display_name: "patnosDD", slug: "patnosdd" }]
   },
@@ -124,6 +130,8 @@ export const FALLBACK_PROJECTS: any[] = [
     game_title: "The Legend of Zelda: Twilight Princess",
     original_platform: "GameCube / Wii Decomp",
     original_release_year: 2006,
+    screenshot_url: "/screenshots/zelda-twilight-princess.jpg",
+    screenshot_alt: "The Legend of Zelda: Twilight Princess gameplay",
     technologies: ["Decompilation", "vitaGL"],
     developers: [{ id: 2, role: "lead", display_name: "Community Decomp Team", slug: "community-decomp" }]
   },
@@ -145,6 +153,8 @@ export const FALLBACK_PROJECTS: any[] = [
     game_title: "Portal (Source Engine / N64 Decomp)",
     original_platform: "PC",
     original_release_year: 2007,
+    screenshot_url: "/screenshots/portal.jpg",
+    screenshot_alt: "Portal gameplay screenshot",
     technologies: ["Native C++", "OpenGL ES"],
     developers: [{ id: 4, role: "lead", display_name: "DanielSant0s", slug: "danielsant0s" }]
   },
@@ -166,6 +176,8 @@ export const FALLBACK_PROJECTS: any[] = [
     game_title: "Spider-Man: Total Mayhem",
     original_platform: "Android ARMv7",
     original_release_year: 2010,
+    screenshot_url: "/screenshots/spider-man-total-mayhem.jpg",
+    screenshot_alt: "Spider-Man: Total Mayhem gameplay",
     technologies: ["ARMv7 Wrapper", "vitaGL"],
     developers: [{ id: 5, role: "lead", display_name: "Rinnegatamante", slug: "rinnegatamante" }]
   },
@@ -187,6 +199,8 @@ export const FALLBACK_PROJECTS: any[] = [
     game_title: "The Simpsons: Hit & Run",
     original_platform: "PS2 / GameCube",
     original_release_year: 2003,
+    screenshot_url: "/screenshots/simpsons-hit-and-run.jpg",
+    screenshot_alt: "The Simpsons: Hit & Run gameplay",
     technologies: ["Reverse-Engineered Engine"],
     developers: [{ id: 6, role: "lead", display_name: "Zeno99", slug: "zeno99" }]
   },
@@ -208,6 +222,8 @@ export const FALLBACK_PROJECTS: any[] = [
     game_title: "Star Wars: Knights of the Old Republic",
     original_platform: "Xbox / PC / Android",
     original_release_year: 2003,
+    screenshot_url: "/screenshots/kotor.jpg",
+    screenshot_alt: "Star Wars: Knights of the Old Republic gameplay",
     technologies: ["ARMv7 Wrapper"],
     developers: [{ id: 5, role: "lead", display_name: "Rinnegatamante", slug: "rinnegatamante" }]
   },
@@ -229,6 +245,8 @@ export const FALLBACK_PROJECTS: any[] = [
     game_title: "Need for Speed: Hot Pursuit",
     original_platform: "Android",
     original_release_year: 2010,
+    screenshot_url: "/screenshots/nfs-hot-pursuit.jpg",
+    screenshot_alt: "Need for Speed: Hot Pursuit gameplay",
     technologies: ["ARMv7 Wrapper", "vitaGL"],
     developers: [{ id: 7, role: "lead", display_name: "hatoving", slug: "hatoving" }]
   },
@@ -252,6 +270,8 @@ export const FALLBACK_PROJECTS: any[] = [
     game_title: "Ren'Py 8 Runtime (Python 3.11)",
     original_platform: "Multiplatform Engine",
     original_release_year: 2024,
+    screenshot_url: "/screenshots/cave-story.jpg",
+    screenshot_alt: "Ren'Py visual novel runtime",
     technologies: ["Python 3.11", "SDL2", "vitaGL"],
     developers: [{ id: 8, role: "lead", display_name: "SonicMastr", slug: "sonicmastr" }]
   },
@@ -274,6 +294,8 @@ export const FALLBACK_PROJECTS: any[] = [
     game_title: "Zelda: Ship of Harkinian (Ocarina of Time)",
     original_platform: "N64 / PC Decomp",
     original_release_year: 1998,
+    screenshot_url: "/screenshots/zelda-oot.jpg",
+    screenshot_alt: "Zelda: Ship of Harkinian Ocarina of Time gameplay",
     technologies: ["Native C++", "libultraship", "vitaGL"],
     developers: [{ id: 9, role: "lead", display_name: "Northfear", slug: "northfear" }]
   },
@@ -295,6 +317,8 @@ export const FALLBACK_PROJECTS: any[] = [
     game_title: "Slingshot Racing",
     original_platform: "Android / iOS",
     original_release_year: 2012,
+    screenshot_url: "/screenshots/slingshot-racing.jpg",
+    screenshot_alt: "Slingshot Racing gameplay",
     technologies: ["ARMv7 Wrapper", "vitaGL"],
     developers: [{ id: 5, role: "lead", display_name: "Rinnegatamante", slug: "rinnegatamante" }]
   },
@@ -316,6 +340,8 @@ export const FALLBACK_PROJECTS: any[] = [
     game_title: "Fallout 2 Community Edition",
     original_platform: "PC",
     original_release_year: 1998,
+    screenshot_url: "/screenshots/fallout-2.jpg",
+    screenshot_alt: "Fallout 2 Community Edition gameplay",
     technologies: ["Native C++"],
     developers: [{ id: 10, role: "lead", display_name: "alexbatalov", slug: "alexbatalov" }]
   },
@@ -337,6 +363,8 @@ export const FALLBACK_PROJECTS: any[] = [
     game_title: "Render96 HD SM64 Vita",
     original_platform: "PC Decomp",
     original_release_year: 2020,
+    screenshot_url: "/screenshots/smash-melee.jpg",
+    screenshot_alt: "Render96 HD Super Mario 64",
     technologies: ["Native C++", "OpenGL"],
     developers: [{ id: 11, role: "lead", display_name: "fgsfds", slug: "fgsfds" }]
   },
@@ -358,6 +386,8 @@ export const FALLBACK_PROJECTS: any[] = [
     game_title: "Celeste Classic Vita",
     original_platform: "PICO-8 / C",
     original_release_year: 2016,
+    screenshot_url: "/screenshots/celeste.jpg",
+    screenshot_alt: "Celeste Classic gameplay",
     technologies: ["Native C", "SDL2"],
     developers: [{ id: 12, role: "lead", display_name: "MyLegGuy", slug: "mylegguy" }]
   },
@@ -381,6 +411,8 @@ export const FALLBACK_PROJECTS: any[] = [
     game_title: "Renegade Vita - Demo Release",
     original_platform: "Unknown",
     original_release_year: null,
+    screenshot_url: "/screenshots/cnc-renegade.png",
+    screenshot_alt: "Renegade Vita demo release hardware capture",
     technologies: [],
     developers: []
   },
@@ -430,6 +462,8 @@ export const FALLBACK_PROJECTS: any[] = [
     game_title: "Call of Duty: Zombies",
     original_platform: "iOS",
     original_release_year: 2009,
+    screenshot_url: "/screenshots/cod-zombies.png",
+    screenshot_alt: "Call of Duty: Zombies hardware gameplay capture",
     technologies: ["iOS loader"],
     developers: []
   },
@@ -479,6 +513,8 @@ export const FALLBACK_PROJECTS: any[] = [
     game_title: "C-Dogs SDL",
     original_platform: "DOS / SDL",
     original_release_year: null,
+    screenshot_url: "/screenshots/c-dogs-sdl.png",
+    screenshot_alt: "C-Dogs SDL gameplay screenshot",
     technologies: ["Native Vita build", "SDL"],
     developers: []
   },
@@ -503,6 +539,8 @@ export const FALLBACK_PROJECTS: any[] = [
     game_title: "Resident Evil 4",
     original_platform: "GameCube / PS2 / Android",
     original_release_year: 2005,
+    screenshot_url: "/screenshots/resident-evil-4.jpg",
+    screenshot_alt: "Resident Evil 4 gameplay",
     technologies: ["ARMv7 Wrapper / Soloader", "vitaGL"],
     developers: [{ id: 5, role: "lead", display_name: "Rinnegatamante", slug: "rinnegatamante" }]
   }
@@ -528,6 +566,8 @@ export const FALLBACK_PROJECTS: any[] = [
     game_title: "Real Racing 2",
     original_platform: "iOS / Android",
     original_release_year: 2010,
+    screenshot_url: "/screenshots/real-racing-2.png",
+    screenshot_alt: "Real Racing 2 PS Vita beta gameplay",
     technologies: ["ARMv7 Wrapper", "vitaGL", "OpenGLES"],
     developers: [{ id: 23, role: "lead", display_name: "chutA7X", slug: "chuta7x" }],
     stage_history: [
@@ -556,6 +596,8 @@ export const FALLBACK_PROJECTS: any[] = [
     game_title: "Diddy Kong Racing (Golden Balloon)",
     original_platform: "N64 / Decomp",
     original_release_year: 1997,
+    screenshot_url: "/screenshots/diddy-kong-racing.jpg",
+    screenshot_alt: "Diddy Kong Racing Golden Balloon hero screenshot",
     technologies: ["Native C", "N64 Decompilation", "vitaGL", "Restored Visuals"],
     developers: [{ id: 14, role: "lead", display_name: "zm2283145", slug: "zm2283145" }],
     stage_history: [
@@ -584,6 +626,8 @@ export const FALLBACK_PROJECTS: any[] = [
     game_title: "Command & Conquer: Renegade",
     original_platform: "PC",
     original_release_year: 2002,
+    screenshot_url: "/screenshots/cnc-renegade.png",
+    screenshot_alt: "Command & Conquer: Renegade native Vita port",
     technologies: ["Native C++", "Open-Source Engine", "vitaGL"],
     developers: [{ id: 24, role: "lead", display_name: "Renegade Team", slug: "renegade-team" }],
     stage_history: [
@@ -612,6 +656,8 @@ export const FALLBACK_PROJECTS: any[] = [
     game_title: "GTA: Liberty City Stories (reStories)",
     original_platform: "PSP / PS2",
     original_release_year: 2005,
+    screenshot_url: "/screenshots/gta-lcs.png",
+    screenshot_alt: "GTA: Liberty City Stories reStories LiveArea artwork",
     technologies: ["Native C++", "reStories Decompilation", "vitaGL", "Hardware Shaders"],
     developers: [{ id: 26, role: "lead", display_name: "fauxrouge", slug: "fauxrouge" }],
     stage_history: [
@@ -641,6 +687,8 @@ export const FALLBACK_PROJECTS: any[] = [
     game_title: "Test Drive III",
     original_platform: "Various",
     original_release_year: null,
+    screenshot_url: "/screenshots/test-drive-iii-bg.png",
+    screenshot_alt: "Test Drive III Vita port LiveArea background",
     technologies: ["VitaSDK"],
     developers: [{ id: 40, role: "lead", display_name: "gainusha", slug: "gainusha" }],
     stage_history: [
@@ -669,6 +717,8 @@ export const FALLBACK_PROJECTS: any[] = [
     game_title: "Test Drive II",
     original_platform: "Various",
     original_release_year: null,
+    screenshot_url: "/screenshots/test-drive-ii-bg.png",
+    screenshot_alt: "Test Drive II Vita port LiveArea background",
     technologies: ["VitaSDK"],
     developers: [{ id: 41, role: "lead", display_name: "gainusha", slug: "gainusha" }],
     stage_history: [
@@ -697,6 +747,8 @@ export const FALLBACK_PROJECTS: any[] = [
     game_title: "Halo CE Decomp - Pc and Android",
     original_platform: "Various",
     original_release_year: null,
+    screenshot_url: "/screenshots/halo-ce.jpg",
+    screenshot_alt: "Halo: Combat Evolved Vita release gameplay",
     technologies: ["Decompilation","ARMv7 Wrapper"],
     developers: [{ id: 42, role: "lead", display_name: "karat46", slug: "karat46" }],
     stage_history: [
