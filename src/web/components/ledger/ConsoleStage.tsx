@@ -266,7 +266,7 @@ export const ConsoleStage: React.FC<ConsoleStageProps> = ({
                     setIsFlipped(p.id === "rear");
                   }}
                   className={
-                    "inline-flex items-center rounded-full px-3.5 py-1 text-[11px] font-medium transition-all " +
+                    "inline-flex min-h-[36px] sm:min-h-[28px] items-center rounded-full px-4 sm:px-3.5 py-1.5 sm:py-1 text-[12px] sm:text-[11px] font-medium transition-all " +
                     (active
                       ? "bg-white text-black font-semibold shadow-sm"
                       : "text-zinc-400 hover:text-white")
