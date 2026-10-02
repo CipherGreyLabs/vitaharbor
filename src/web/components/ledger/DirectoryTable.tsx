@@ -419,19 +419,17 @@ export const DirectoryTable: React.FC<DirectoryTableProps> = ({
                 >
                   {/* Card Media Banner */}
                   <div className="relative aspect-[16/9] w-full overflow-hidden bg-black/60 border-b border-white/[0.06]">
-                    {project.screenshot_url ? (
-                      <img
-                        src={project.screenshot_url}
-                        alt={project.screenshot_alt || title.name}
-                        loading="lazy"
-                        className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
-                      />
-                    ) : (
-                      <div className="flex h-full w-full flex-col items-center justify-center p-4 text-center bg-gradient-to-br from-zinc-900 to-black">
-                        <ProjectMark seed={project.display_name || project.game_title || "vita"} size={48} className="rounded-2xl mb-2 opacity-80" />
-                        <span className="font-mono text-[10px] text-zinc-400 uppercase tracking-wider">{title.engine || project.original_platform || "Community Port"}</span>
-                      </div>
-                    )}
+                    {(() => {
+                      const imageSrc = project.screenshot_url || `/og/projects/${project.slug}.png`;
+                      return (
+                        <img
+                          src={imageSrc}
+                          alt={project.screenshot_alt || title.name}
+                          loading="lazy"
+                          className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                        />
+                      );
+                    })()}
                     
                     {/* Stage Badge on top of image */}
                     <div className="absolute left-3 top-3 flex items-center gap-1.5">
