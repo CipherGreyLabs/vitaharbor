@@ -266,7 +266,7 @@ export const ConsoleStage: React.FC<ConsoleStageProps> = ({
                     setIsFlipped(p.id === "rear");
                   }}
                   className={
-                    "inline-flex min-h-[36px] sm:min-h-[28px] items-center rounded-full px-4 sm:px-3.5 py-1.5 sm:py-1 text-[12px] sm:text-[11px] font-medium transition-all " +
+                    "inline-flex min-h-[44px] sm:min-h-[36px] items-center rounded-full px-4 sm:px-4 py-2 sm:py-1.5 text-[12px] sm:text-[12px] font-medium transition-all " +
                     (active
                       ? "bg-white text-black font-semibold shadow-sm"
                       : "text-zinc-400 hover:text-white")
@@ -281,6 +281,25 @@ export const ConsoleStage: React.FC<ConsoleStageProps> = ({
 
         <div className="relative px-1 pt-0 sm:px-4">
           <div className="vh-oled-aura" aria-hidden="true" />
+          {/* Floating Left / Right project navigators */}
+          <button
+            type="button"
+            onClick={handlePrev}
+            aria-label="Previous Vita project (left arrow or K)"
+            title="Previous project (← or K)"
+            className="absolute left-2 sm:left-6 top-1/2 z-30 -translate-y-1/2 inline-flex min-h-[44px] min-w-[44px] items-center justify-center rounded-full border border-white/10 bg-black/60 p-2.5 text-zinc-300 backdrop-blur-md transition-all hover:scale-105 hover:border-white/30 hover:bg-black/90 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-blue-500"
+          >
+            <ChevronLeft className="h-5 w-5" />
+          </button>
+          <button
+            type="button"
+            onClick={handleNext}
+            aria-label="Next Vita project (right arrow or J)"
+            title="Next project (→ or J)"
+            className="absolute right-2 sm:right-6 top-1/2 z-30 -translate-y-1/2 inline-flex min-h-[44px] min-w-[44px] items-center justify-center rounded-full border border-white/10 bg-black/60 p-2.5 text-zinc-300 backdrop-blur-md transition-all hover:scale-105 hover:border-white/30 hover:bg-black/90 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-blue-500"
+          >
+            <ChevronRight className="h-5 w-5" />
+          </button>
           <div
             ref={consoleRef}
             className="relative z-10 h-[300px] sm:h-[380px] md:h-[420px] lg:h-[460px]"
