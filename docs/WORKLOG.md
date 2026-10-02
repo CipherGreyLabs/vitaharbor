@@ -837,3 +837,9 @@ pm run verify passed (tsc clean, 127/127 unit tests, 30 project pages, 33 sitema
 | Time | Commit / state | Change | Why | Model | Verified |
 |---|---|---|---|---|---|
 | 12:40 UTC | e270b6c | 1) Ensured 100% visual media coverage across all 28 directory cards and the 3D console screen by linking project screenshot_url with fallback to /og/projects/${slug}.png; 2) Perfected the authentic PS Vita PCH-1000 rear hardware assembly: vector-drawn PlayStation symbols (△ ◯ ✕ ▢) drawn directly via 2D canvas paths, aligned rear bezel and touchpad flush without floating offset, centered camera assembly, and ergonomic grip recesses | Fulfill user request: eradicate missing photos across project cards and fix incorrect rear PS Vita 3D hardware model | gemini-3.8-flash | npm run verify clean (127/127 tests); deployed vitaharbor-mpcu6lkva aliased to vitaharbor.vercel.app |
+
+### 3D Console Quick-Navigation Chevrons & Preset Touch Target Optimization (2026-10-02)
+
+| Time | Commit / state | Change | Why | Model | Verified |
+|---|---|---|---|---|---|
+| 12:55 UTC | 7c19e25 | Added floating glassmorphic left/right navigation chevrons flanking the 3D console stage for instant cycling through projects; increased camera view preset button touch targets to min-h-[44px] | Enhance interactive 3D console UX on both desktop and mobile devices without requiring scrolling down to directory table | gemini-3.8-flash | npm run verify clean (127/127 tests); deployed vitaharbor-jhqhrsl33 aliased to vitaharbor.vercel.app |
