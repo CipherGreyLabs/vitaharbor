@@ -1,87 +1,8 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-02T10:57:49.300Z",
+  "generated_at": "2026-10-02T11:06:34.175Z",
   "source": "r/vitahacks + r/VitaPiracy + r/PSVitaHomebrew RSS",
   "items": [
-    {
-      "schema_version": 2,
-      "id": "reddit-1wvfxzk",
-      "external_id": "1wvfxzk",
-      "state": "QUARANTINED",
-      "state_history": [
-        {
-          "state": "DETECTED",
-          "at": "2026-10-02T10:56:11.528Z",
-          "actor": "reddit-scanner",
-          "reason": "Canonical Reddit RSS entry accepted at the ingestion boundary"
-        },
-        {
-          "state": "QUARANTINED",
-          "at": "2026-10-02T10:56:11.528Z",
-          "actor": "reddit-scanner",
-          "reason": "Scanner result is unverified and cannot enter the curated ledger"
-        }
-      ],
-      "source": {
-        "platform": "reddit",
-        "subreddit": "VitaPiracy",
-        "canonical_url": "https://www.reddit.com/r/VitaPiracy/comments/1wvfxzk/real_racing_2_new_update_psvita_beta_2_3060_fps/",
-        "author": "JadedEntertainment34",
-        "title": "[REAL RACING 2] NEW UPDATE PSVITA BETA 2 30/60 FPS 2X OR 4X MSSAA |#psvita",
-        "body": "",
-        "published_at": null
-      },
-      "classification": {
-        "confidence": "high",
-        "reason": "3 dev signals: \\bfps\\b, \\bupdate\\b, \\bbeta\\b · category=project_update",
-        "candidate_type": "port",
-        "category": "project_update",
-        "question": false,
-        "spam": false
-      },
-      "provenance": {
-        "repository_url": null,
-        "release_url": null,
-        "evidence_urls": [],
-        "evidence_bundle_id": null,
-        "repository_identity": null,
-        "repository_created_at": null,
-        "repository_last_activity_at": null,
-        "release_facts": [],
-        "vita_evidence": [],
-        "author_linkage": null,
-        "corroboration": [],
-        "duplicate_relation": {
-          "content_hash": "d9134f11cd52466d5a8d7cb27030b6dd1e0aed7a531b5c81cafd47acdc50efa9",
-          "related_candidate_ids": []
-        }
-      },
-      "campaign": {
-        "cluster_id": null,
-        "linkage_confidence": "none",
-        "signals": [],
-        "related_candidate_ids": [],
-        "text_fingerprint": "9296dc1b",
-        "media_fingerprints": [],
-        "outbound_fingerprints": [],
-        "direct_intent": false,
-        "explicit_campaign_reference": false,
-        "incident_id": null
-      },
-      "risk_signals": [
-        "no_project_evidence_in_post"
-      ],
-      "evidence_gaps": [
-        "exact project repository",
-        "repository identity and activity facts",
-        "release or build evidence",
-        "Vita-specific hardware evidence",
-        "author/developer linkage and independent corroboration"
-      ],
-      "content_hash": "d9134f11cd52466d5a8d7cb27030b6dd1e0aed7a531b5c81cafd47acdc50efa9",
-      "review": null,
-      "incident": null
-    },
     {
       "schema_version": 2,
       "id": "reddit-1wvob17",
@@ -206,6 +127,170 @@
           "risk_disposition": "No risk signals fired; legitimate WIP showcase."
         }
       },
+      "incident": null
+    },
+    {
+      "schema_version": 2,
+      "id": "reddit-1wvhvz4",
+      "external_id": "1wvhvz4",
+      "state": "QUARANTINED",
+      "state_history": [
+        {
+          "state": "DETECTED",
+          "at": "2026-10-02T11:06:34.175Z",
+          "actor": "reddit-scanner",
+          "reason": "Canonical Reddit RSS entry accepted at the ingestion boundary"
+        },
+        {
+          "state": "QUARANTINED",
+          "at": "2026-10-02T11:06:34.175Z",
+          "actor": "reddit-scanner",
+          "reason": "Scanner result is unverified and cannot enter the curated ledger"
+        }
+      ],
+      "source": {
+        "platform": "reddit",
+        "subreddit": "PSVitaHomebrew",
+        "canonical_url": "https://www.reddit.com/r/PSVitaHomebrew/comments/1wvhvz4/halo_ce_port_release/",
+        "author": "CRYPT06",
+        "title": "Halo CE port Release",
+        "body": "&#32; submitted by &#32; /u/CRYPT06 [link] &#32; [comments]",
+        "published_at": "2026-10-02T02:07:19.000Z"
+      },
+      "classification": {
+        "confidence": "medium",
+        "reason": "1 dev signal(s), 2 passive term(s), category=new_project",
+        "candidate_type": "port",
+        "category": "new_project",
+        "question": false,
+        "spam": false
+      },
+      "provenance": {
+        "repository_url": null,
+        "release_url": null,
+        "evidence_urls": [],
+        "evidence_bundle_id": null,
+        "repository_identity": null,
+        "repository_created_at": null,
+        "repository_last_activity_at": null,
+        "release_facts": [],
+        "vita_evidence": [],
+        "author_linkage": null,
+        "corroboration": [],
+        "duplicate_relation": {
+          "content_hash": "fd3df84480bd939ed32e4366e678eb3f77ae46bbd18a5aa0ea14ee955491596c",
+          "related_candidate_ids": []
+        }
+      },
+      "campaign": {
+        "cluster_id": null,
+        "linkage_confidence": "none",
+        "signals": [],
+        "related_candidate_ids": [],
+        "text_fingerprint": "20fa176e",
+        "media_fingerprints": [],
+        "outbound_fingerprints": [
+          "www.reddit.com/user/crypt06",
+          "www.reddit.com/gallery/1wvhkaf",
+          "www.reddit.com/r/psvitahomebrew/comments/1wvhvz4/halo_ce_port_release"
+        ],
+        "direct_intent": false,
+        "explicit_campaign_reference": false,
+        "incident_id": null
+      },
+      "risk_signals": [],
+      "evidence_gaps": [
+        "exact project repository",
+        "repository identity and activity facts",
+        "Vita-specific hardware evidence",
+        "author/developer linkage and independent corroboration"
+      ],
+      "content_hash": "fd3df84480bd939ed32e4366e678eb3f77ae46bbd18a5aa0ea14ee955491596c",
+      "review": null,
+      "incident": null
+    },
+    {
+      "schema_version": 2,
+      "id": "reddit-1wvfy93",
+      "external_id": "1wvfy93",
+      "state": "QUARANTINED",
+      "state_history": [
+        {
+          "state": "DETECTED",
+          "at": "2026-10-02T11:06:34.175Z",
+          "actor": "reddit-scanner",
+          "reason": "Canonical Reddit RSS entry accepted at the ingestion boundary"
+        },
+        {
+          "state": "QUARANTINED",
+          "at": "2026-10-02T11:06:34.175Z",
+          "actor": "reddit-scanner",
+          "reason": "Scanner result is unverified and cannot enter the curated ledger"
+        }
+      ],
+      "source": {
+        "platform": "reddit",
+        "subreddit": "PSVitaHomebrew",
+        "canonical_url": "https://www.reddit.com/r/PSVitaHomebrew/comments/1wvfy93/real_racing_2_new_update_psvita_beta_2_3060_fps/",
+        "author": "JadedEntertainment34",
+        "title": "[REAL RACING 2] NEW UPDATE PSVITA BETA 2 30/60 FPS 2X OR 4X MSSAA |#psvita",
+        "body": "Link in video &#32; submitted by &#32; /u/JadedEntertainment34 [link] &#32; [comments]",
+        "published_at": "2026-10-02T00:34:16.000Z"
+      },
+      "classification": {
+        "confidence": "high",
+        "reason": "3 dev signals: \\bfps\\b, \\bupdate\\b, \\bbeta\\b · category=project_update",
+        "candidate_type": "port",
+        "category": "project_update",
+        "question": false,
+        "spam": false
+      },
+      "provenance": {
+        "repository_url": null,
+        "release_url": null,
+        "evidence_urls": [],
+        "evidence_bundle_id": null,
+        "repository_identity": null,
+        "repository_created_at": null,
+        "repository_last_activity_at": null,
+        "release_facts": [],
+        "vita_evidence": [],
+        "author_linkage": null,
+        "corroboration": [],
+        "duplicate_relation": {
+          "content_hash": "bad94fba7f25702c37ab9dda0047c72875cd9204e79003f4c36bbbe8b8c0576a",
+          "related_candidate_ids": []
+        }
+      },
+      "campaign": {
+        "cluster_id": null,
+        "linkage_confidence": "none",
+        "signals": [],
+        "related_candidate_ids": [],
+        "text_fingerprint": "7a484d0e",
+        "media_fingerprints": [
+          "external-preview.redd.it/23spqthwo87iqdzzvqsw-1lhuzqd_1hygs-fntcvz94.jpeg"
+        ],
+        "outbound_fingerprints": [
+          "www.reddit.com/r/psvitahomebrew/comments/1wvfy93/real_racing_2_new_update_psvita_beta_2_3060_fps",
+          "external-preview.redd.it/23spqthwo87iqdzzvqsw-1lhuzqd_1hygs-fntcvz94.jpeg",
+          "www.reddit.com/user/jadedentertainment34",
+          "youtu.be/bep_28xgzja"
+        ],
+        "direct_intent": false,
+        "explicit_campaign_reference": false,
+        "incident_id": null
+      },
+      "risk_signals": [],
+      "evidence_gaps": [
+        "exact project repository",
+        "repository identity and activity facts",
+        "release or build evidence",
+        "Vita-specific hardware evidence",
+        "author/developer linkage and independent corroboration"
+      ],
+      "content_hash": "bad94fba7f25702c37ab9dda0047c72875cd9204e79003f4c36bbbe8b8c0576a",
+      "review": null,
       "incident": null
     },
     {

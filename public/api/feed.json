@@ -359,11 +359,11 @@
     {
       "id": "halo-ce-decomp-pc-and-android-vita",
       "url": "https://www.reddit.com/r/PSVitaHomebrew/comments/1wtm0y6/halo_ce_decomp_pc_and_android/",
-      "title": "Halo CE Decomp - Pc and Android",
-      "content_text": "Stage: announced | Platform: Various | Summary: Community PlayStation Vita port of Halo CE Decomp - Pc and Android with source repository on GitHub. | Hardware: Targeting native hardware performance.",
-      "date_modified": "2026-09-30T19:19:17.427Z",
+      "title": "Halo: Combat Evolved Vita",
+      "content_text": "Stage: playable | Platform: Various | Summary: PlayStation Vita port of Halo: Combat Evolved based on the universal decompilation project. Initial playable release build and data files surfaced on October 2, 2026. | Hardware: Targeting native hardware performance.",
+      "date_modified": "2026-10-02T02:00:00.000Z",
       "tags": [
-        "announced",
+        "playable",
         "Various",
         "Decompilation",
         "ARMv7 Wrapper"

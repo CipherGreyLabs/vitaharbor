@@ -682,15 +682,15 @@ export const FALLBACK_PROJECTS: any[] = [
     slug: "halo-ce-decomp-pc-and-android-vita",
     reddit_url: "https://www.reddit.com/r/PSVitaHomebrew/comments/1wtm0y6/halo_ce_decomp_pc_and_android/",
     repo_url: "https://github.com/cybersecurity/halo-ce-universal",
-    display_name: "Halo CE Decomp - Pc and Android",
-    current_stage: "announced",
+    display_name: "Halo: Combat Evolved Vita",
+    current_stage: "playable",
     lifecycle: "active",
-    summary: "Community PlayStation Vita port of Halo CE Decomp - Pc and Android with source repository on GitHub.",
-    playability_notes: "Automatically promoted from verified community source with repository and code evidence.",
+    summary: "PlayStation Vita port of Halo: Combat Evolved based on the universal decompilation project. Initial playable release build and data files surfaced on October 2, 2026.",
+    playability_notes: "Initial community release build boots campaign missions on Vita hardware with controller bindings and audio. Data files and language assets circulating in community releases.",
     performance_notes: "Targeting native hardware performance.",
     first_seen_at: new Date('2026-09-30T19:19:17.427Z'),
-    last_activity_at: new Date('2026-09-30T19:19:17.427Z'),
-    released_at: null,
+    last_activity_at: new Date('2026-10-02T02:00:00.000Z'),
+    released_at: new Date('2026-10-02T02:00:00.000Z'),
     is_featured: false,
     is_archived: false,
     verification: "developer_direct",
@@ -700,7 +700,8 @@ export const FALLBACK_PROJECTS: any[] = [
     technologies: ["Decompilation","ARMv7 Wrapper"],
     developers: [{ id: 42, role: "lead", display_name: "karat46", slug: "karat46" }],
     stage_history: [
-      { id: 420, stage: "announced", effective_at: new Date('2026-09-30T19:19:17.427Z'), reason: "Verified source port release/development on GitHub" }
+      { id: 420, stage: "announced", effective_at: new Date('2026-09-30T19:19:17.427Z'), reason: "Port development surfaced on GitHub" },
+      { id: 421, stage: "playable", effective_at: new Date('2026-10-02T02:00:00.000Z'), reason: "Initial community release build and data files published" }
     ]
   }
 ];
@@ -1135,6 +1136,23 @@ export const FALLBACK_UPDATES: any[] = [
     verification_level: "community_report",
     sources: [
       { source_item_id: "src_rr2_beta2_reddit", relationship: "community", canonical_url: "https://www.reddit.com/r/VitaPiracy/comments/1wvfxzk/real_racing_2_new_update_psvita_beta_2_3060_fps/" }
+    ]
+  },
+  {
+    id: "upd_halo_ce_vita_release",
+    port_project_id: 42,
+    project_slug: "halo-ce-decomp-pc-and-android-vita",
+    project_display_name: "Halo: Combat Evolved Vita",
+    developer_display_name: "karat46",
+    developer_slug: "karat46",
+    event_type: "release",
+    title: "Halo: Combat Evolved Vita port release build and data files published",
+    summary: "The first playable community release of the Halo: Combat Evolved Vita port arrived overnight on October 2, 2026, accompanied by data file installation packages and performance updates.",
+    event_at: new Date('2026-10-02T02:00:00.000Z'),
+    verification_level: "community_report",
+    sources: [
+      { source_item_id: "src_halo_ce_release_reddit", relationship: "primary", canonical_url: "https://www.reddit.com/r/VitaPiracy/comments/1wvhkaf/halo_ce_port_release/" },
+      { source_item_id: "src_halo_ce_repo", relationship: "community", canonical_url: "https://github.com/cybersecurity/halo-ce-universal" }
     ]
   }
 ];
