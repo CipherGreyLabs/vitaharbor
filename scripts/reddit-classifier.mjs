@@ -1,3 +1,11 @@
+const KNOWN_DEVELOPER_USERNAMES = new Set([
+  "rinnegatamante", "chuta7x", "karat46", "sonicmastr", "northfear",
+  "patnosdd", "danielsant0s", "zeno99", "hatoving", "alexbatalov",
+  "fgsfds", "mylegguy", "rob1n994", "zm2283145", "withlogic",
+  "ndrwhun", "brendonm17", "thespasticgamer", "devwithzachary",
+  "drdecki", "rocroverss", "metalsyntax", "gainusha", "onedumbfox"
+]);
+
 // Pure scanner classification helpers. Keeping these separate makes the
 // question/spam boundary testable without executing network calls or writing
 // public/data/discovered.json.
@@ -167,7 +175,9 @@ export function classify(entry) {
   const qHits = QUESTION_SIGNALS.filter((re) => re.test(title) || re.test(body));
   const spamHits = SPAM_SIGNALS.filter((re) => re.test(title) || re.test(body));
   const passiveHits = PASSIVE_PORT_TERMS.filter((term) => full.includes(term));
-  const projectIdentity = hasProjectIdentity(entry);
+  const authorLower = String(entry.author || "").toLowerCase().replace(/^u\//, "");
+  const isKnownDev = KNOWN_DEVELOPER_USERNAMES.has(authorLower);
+  const projectIdentity = hasProjectIdentity(entry) || isKnownDev;
   const developmentEvidence = STRONG_DEVELOPMENT_SIGNALS.filter((re) => re.test(full));
 
   // A question pattern in the raw title dominates unless dev signals are very strong.
@@ -194,6 +204,9 @@ export function classify(entry) {
   if (devHits.length >= 3) {
     const sample = devHits.slice(0, 3).map((re) => re.source).join(", ");
     return { accept: accepted, confidence: "high", question: substantiveQuestion, spam: false, category, project_identity: projectIdentity, development_evidence: developmentEvidence.length, reason: devHits.length + " dev signals: " + sample + " · category=" + category };
+  }
+  if (isKnownDev && (devHits.length >= 1 || developmentEvidence.length >= 1)) {
+    return { accept: true, confidence: "high", question: false, spam: false, category: category === "out_of_scope" ? "project_update" : category, project_identity: true, development_evidence: Math.max(developmentEvidence.length, 1), reason: "known developer (" + authorLower + ") activity · category=" + category };
   }
   if (devHits.length >= 1 && qHits.length === 0 && passiveHits.length >= 1) {
     return { accept: accepted, confidence: "medium", question: false, spam: false, category, project_identity: projectIdentity, development_evidence: developmentEvidence.length, reason: devHits.length + " dev signal(s), " + passiveHits.length + " passive term(s), category=" + category };

@@ -312,7 +312,7 @@ export const ConsoleStage: React.FC<ConsoleStageProps> = ({
           </div>
           {showPreviewControls && (
             <div className="mt-2 flex flex-wrap items-center justify-center gap-2" role="group" aria-label="3D Vita preview controls">
-              <span className="text-micro uppercase tracking-[0.12em] text-zinc-500">{fallbackLabel}</span>
+              <span className="text-micro uppercase tracking-[0.12em] text-zinc-400">{fallbackLabel}</span>
               {staticMode && canLoad3d && (
                 <button
                   type="button"

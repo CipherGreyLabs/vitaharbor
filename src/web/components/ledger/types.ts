@@ -101,9 +101,9 @@ export const STAGE_CHIP: Record<string, string> = {
   playable: "bg-white/10 text-white font-medium",
   in_game: "bg-zinc-800 text-zinc-300 font-normal",
   booting: "bg-zinc-800 text-zinc-400 font-normal",
-  early_wip: "bg-zinc-900 text-zinc-500 font-normal",
-  research: "bg-zinc-900 text-zinc-500 font-normal",
-  announced: "bg-zinc-900 text-zinc-500 font-normal"
+  early_wip: "bg-zinc-900 text-zinc-400 font-normal",
+  research: "bg-zinc-900 text-zinc-400 font-normal",
+  announced: "bg-zinc-900 text-zinc-400 font-normal"
 };
 
 export const STAGE_STEP: Record<string, number> = {

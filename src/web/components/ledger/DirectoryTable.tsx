@@ -429,7 +429,7 @@ export const DirectoryTable: React.FC<DirectoryTableProps> = ({
                     ) : (
                       <div className="flex h-full w-full flex-col items-center justify-center p-4 text-center bg-gradient-to-br from-zinc-900 to-black">
                         <ProjectMark seed={project.display_name || project.game_title || "vita"} size={48} className="rounded-2xl mb-2 opacity-80" />
-                        <span className="font-mono text-[10px] text-zinc-500 uppercase tracking-wider">{title.engine || project.original_platform || "Community Port"}</span>
+                        <span className="font-mono text-[10px] text-zinc-400 uppercase tracking-wider">{title.engine || project.original_platform || "Community Port"}</span>
                       </div>
                     )}
                     
@@ -446,7 +446,7 @@ export const DirectoryTable: React.FC<DirectoryTableProps> = ({
                       type="button"
                       onClick={() => onSelectProject(project, true)}
                       title="Show on 3D Vita"
-                      className="absolute right-3 top-3 rounded-lg border border-white/20 bg-black/70 px-2.5 py-1 font-mono text-[10px] font-medium text-white opacity-0 backdrop-blur-md transition-all group-hover:opacity-100 hover:bg-black"
+                      className="absolute right-3 top-3 inline-flex min-h-[44px] items-center rounded-lg border border-white/20 bg-black/70 px-3 py-1.5 font-mono text-[11px] font-medium text-white opacity-0 backdrop-blur-md transition-all group-hover:opacity-100 hover:bg-black"
                     >
                       Show on Vita
                     </button>
