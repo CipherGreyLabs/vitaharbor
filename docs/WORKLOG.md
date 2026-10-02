@@ -813,3 +813,9 @@ pm run verify passed (tsc clean, 127/127 unit tests, 30 project pages, 33 sitema
 | Time | Commit / state | Change | Why | Model | Verified |
 |---|---|---|---|---|---|
 | 11:20 UTC | 8d379ab | Executed manual live 3-subreddit scan across r/vitahacks, r/VitaPiracy and r/PSVitaHomebrew; added Real Racing 2 Beta 2 update (30/60 FPS toggle, 2x/4x MSAA) to FALLBACK_UPDATES; verified Insurgency Vita gameplay candidate (reddit-1wvob17) as VERIFIED_FOR_REVIEW with review bundle | Incorporate live community updates and verify fresh incoming posts across all 3 mapped subreddits | gemini-3.8-flash | npm run verify (tsc clean, 127/127 unit tests, 28 project pages); production deploy vitaharbor-970dy9m7s aliased to vitaharbor.vercel.app |
+
+### Halo: Combat Evolved Vita Release Build Live Update (2026-10-02)
+
+| Time | Commit / state | Change | Why | Model | Verified |
+|---|---|---|---|---|---|
+| 11:35 UTC | cc966a6 | Promoted Halo: Combat Evolved Vita (id: 42) from announced to playable/released with initial build + data files update (upd_halo_ce_vita_release); relaxed classifier to accept port release patterns | Community release surfaced on r/VitaPiracy and r/PSVitaHomebrew overnight | gemini-3.8-flash | npm run verify (127/127 tests, 28 pages); deployed vitaharbor-l2dzhpqdt aliased to vitaharbor.vercel.app |
