@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-02T11:46:47.232Z",
+  "generated_at": "2026-10-02T13:53:21.048Z",
   "source": "r/vitahacks + r/VitaPiracy + r/PSVitaHomebrew RSS",
   "items": [
     {
@@ -960,6 +960,183 @@
     },
     {
       "schema_version": 2,
+      "id": "reddit-1wsrua2",
+      "external_id": "1wsrua2",
+      "state": "QUARANTINED",
+      "state_history": [
+        {
+          "state": "DETECTED",
+          "at": "2026-10-02T13:53:21.048Z",
+          "actor": "reddit-scanner",
+          "reason": "Canonical Reddit RSS entry accepted at the ingestion boundary"
+        },
+        {
+          "state": "QUARANTINED",
+          "at": "2026-10-02T13:53:21.048Z",
+          "actor": "reddit-scanner",
+          "reason": "Scanner result is unverified and cannot enter the curated ledger"
+        }
+      ],
+      "source": {
+        "platform": "reddit",
+        "subreddit": "vitahacks",
+        "canonical_url": "https://www.reddit.com/r/vitahacks/comments/1wsrua2/flashvita_first_alpha_release_flash_player_for_ps/",
+        "author": "rob1n994",
+        "title": "FlashVita – First Alpha Release | Flash Player for PS Vita powered by Ruffle",
+        "body": "Hi everyone, I'm releasing the first public alpha of FlashVita , an open-source project that aims to bring Flash/SWF content to the PlayStation Vita , using Ruffle as the Flash runtime. This is still a very early alpha, so don't expect full compatibility yet. The main purpose of this release is to get the project into more hands, collect feedback, identify problematic SWFs and continue improving performance and compatibility. Current state FlashVita can already load and execute a number of local .swf files directly on the Vita. Depending on the SWF, you may currently encounter: low fra",
+        "published_at": "2026-09-28T21:41:17.000Z"
+      },
+      "classification": {
+        "confidence": "high",
+        "reason": "known developer (rob1n994) activity · category=out_of_scope",
+        "candidate_type": "engine",
+        "category": "project_update",
+        "question": false,
+        "spam": false
+      },
+      "provenance": {
+        "repository_url": null,
+        "release_url": null,
+        "evidence_urls": [],
+        "evidence_bundle_id": null,
+        "repository_identity": null,
+        "repository_created_at": null,
+        "repository_last_activity_at": null,
+        "release_facts": [],
+        "vita_evidence": [],
+        "author_linkage": null,
+        "corroboration": [],
+        "duplicate_relation": {
+          "content_hash": "dbd0bc4bf776bd8abb242c7d5ba105d43f3c82380d792ae488078092102fc50a",
+          "related_candidate_ids": []
+        }
+      },
+      "campaign": {
+        "cluster_id": null,
+        "linkage_confidence": "none",
+        "signals": [],
+        "related_candidate_ids": [],
+        "text_fingerprint": "22a8bfcb",
+        "media_fingerprints": [],
+        "outbound_fingerprints": [
+          "github.com/robin994/flashvita",
+          "gofound.me",
+          "gofund.me/6d61e4455",
+          "www.reddit.com/user/rob1n994",
+          "www.reddit.com/r/vitahacks/comments/1wsrua2/flashvita_first_alpha_release_flash_player_for_ps"
+        ],
+        "direct_intent": false,
+        "explicit_campaign_reference": false,
+        "incident_id": null
+      },
+      "risk_signals": [],
+      "evidence_gaps": [
+        "exact project repository",
+        "repository identity and activity facts",
+        "Vita-specific hardware evidence",
+        "author/developer linkage and independent corroboration"
+      ],
+      "content_hash": "dbd0bc4bf776bd8abb242c7d5ba105d43f3c82380d792ae488078092102fc50a",
+      "review": null,
+      "incident": null
+    },
+    {
+      "schema_version": 2,
+      "id": "reddit-1wrq7gj",
+      "external_id": "1wrq7gj",
+      "state": "QUARANTINED",
+      "state_history": [
+        {
+          "state": "DETECTED",
+          "at": "2026-10-02T13:53:21.048Z",
+          "actor": "reddit-scanner",
+          "reason": "Canonical Reddit RSS entry accepted at the ingestion boundary"
+        },
+        {
+          "state": "QUARANTINED",
+          "at": "2026-10-02T13:53:21.048Z",
+          "actor": "reddit-scanner",
+          "reason": "Scanner result is unverified and cannot enter the curated ledger"
+        }
+      ],
+      "source": {
+        "platform": "reddit",
+        "subreddit": "vitahacks",
+        "canonical_url": "https://www.reddit.com/r/vitahacks/comments/1wrq7gj/ratchet_and_clank_collection_multiplayer_update/",
+        "author": "zm2283145",
+        "title": "Ratchet and clank collection Multiplayer update",
+        "body": "I thought I'd show some progress on my re-implementation of multiplayer back into ratchet 3 from the vita collection. I've got most of the menus almost working there still some UI issues I've restored enough of the state managers to get it in level correctly with correct audio playing, player model and animations currently the rest of the session manager is still stubs out to get things like game play rules running and to get the level scripts/AI working yet but I've made progress &#32; submitted by &#32; /u/zm2283145 [link] &#32; [comments]",
+        "published_at": "2026-09-27T17:32:02.000Z"
+      },
+      "classification": {
+        "confidence": "high",
+        "reason": "known developer (zm2283145) activity · category=project_update",
+        "candidate_type": "port",
+        "category": "project_update",
+        "question": false,
+        "spam": false
+      },
+      "provenance": {
+        "repository_url": null,
+        "release_url": null,
+        "evidence_urls": [],
+        "evidence_bundle_id": null,
+        "repository_identity": null,
+        "repository_created_at": null,
+        "repository_last_activity_at": null,
+        "release_facts": [],
+        "vita_evidence": [],
+        "author_linkage": null,
+        "corroboration": [],
+        "duplicate_relation": {
+          "content_hash": "822531d51e551946d8a98a685c1c9e6b14df5dbe1472b81a68a330e7a8424906",
+          "related_candidate_ids": []
+        }
+      },
+      "campaign": {
+        "cluster_id": "campaign-34a0305b",
+        "linkage_confidence": "medium",
+        "signals": [
+          "same_author_burst",
+          "shared_outbound_fingerprint"
+        ],
+        "related_candidate_ids": [
+          "reddit-1wq1o7g",
+          "reddit-1wmxc2y",
+          "reddit-1wllsbo",
+          "reddit-1wcx3o6",
+          "reddit-1wb99lj"
+        ],
+        "text_fingerprint": "41fe8d1f",
+        "media_fingerprints": [
+          "external-preview.redd.it/bxvqn2ozowxsm3nomcelo3e369zwspz98pei6zoeqw1afiaabbh3zx9okkgj.png"
+        ],
+        "outbound_fingerprints": [
+          "www.reddit.com/r/vitahacks/comments/1wrq7gj/ratchet_and_clank_collection_multiplayer_update",
+          "external-preview.redd.it/bxvqn2ozowxsm3nomcelo3e369zwspz98pei6zoeqw1afiaabbh3zx9okkgj.png",
+          "www.reddit.com/user/zm2283145",
+          "v.redd.it/d1m1tuall3sh1"
+        ],
+        "direct_intent": false,
+        "explicit_campaign_reference": false,
+        "incident_id": null
+      },
+      "risk_signals": [
+        "no_project_evidence_in_post"
+      ],
+      "evidence_gaps": [
+        "exact project repository",
+        "repository identity and activity facts",
+        "release or build evidence",
+        "Vita-specific hardware evidence",
+        "author/developer linkage and independent corroboration"
+      ],
+      "content_hash": "822531d51e551946d8a98a685c1c9e6b14df5dbe1472b81a68a330e7a8424906",
+      "review": null,
+      "incident": null
+    },
+    {
+      "schema_version": 2,
       "id": "reddit-1wrek0r",
       "external_id": "1wrek0r",
       "state": "REJECTED",
@@ -1297,16 +1474,18 @@
         }
       },
       "campaign": {
-        "cluster_id": "campaign-910f856f",
+        "cluster_id": "campaign-34a0305b",
         "linkage_confidence": "medium",
         "signals": [
-          "shared_outbound_fingerprint"
+          "shared_outbound_fingerprint",
+          "same_author_burst"
         ],
         "related_candidate_ids": [
           "reddit-1wmxc2y",
           "reddit-1wllsbo",
           "reddit-1wcx3o6",
-          "reddit-1wb99lj"
+          "reddit-1wb99lj",
+          "reddit-1wrq7gj"
         ],
         "text_fingerprint": "8dededc5",
         "media_fingerprints": [],
@@ -1845,7 +2024,7 @@
         }
       },
       "campaign": {
-        "cluster_id": "campaign-910f856f",
+        "cluster_id": "campaign-34a0305b",
         "linkage_confidence": "medium",
         "signals": [
           "shared_outbound_fingerprint",
@@ -1855,7 +2034,8 @@
           "reddit-1wq1o7g",
           "reddit-1wllsbo",
           "reddit-1wcx3o6",
-          "reddit-1wb99lj"
+          "reddit-1wb99lj",
+          "reddit-1wrq7gj"
         ],
         "text_fingerprint": "7a252a3c",
         "media_fingerprints": [],
@@ -2697,7 +2877,7 @@
         }
       },
       "campaign": {
-        "cluster_id": "campaign-910f856f",
+        "cluster_id": "campaign-34a0305b",
         "linkage_confidence": "medium",
         "signals": [
           "shared_outbound_fingerprint",
@@ -2707,7 +2887,8 @@
           "reddit-1wq1o7g",
           "reddit-1wmxc2y",
           "reddit-1wcx3o6",
-          "reddit-1wb99lj"
+          "reddit-1wb99lj",
+          "reddit-1wrq7gj"
         ],
         "text_fingerprint": "3439b9dd",
         "media_fingerprints": [],
@@ -3536,7 +3717,7 @@
         }
       },
       "campaign": {
-        "cluster_id": "campaign-910f856f",
+        "cluster_id": "campaign-34a0305b",
         "linkage_confidence": "medium",
         "signals": [
           "shared_outbound_fingerprint",
@@ -3546,7 +3727,8 @@
           "reddit-1wq1o7g",
           "reddit-1wmxc2y",
           "reddit-1wllsbo",
-          "reddit-1wb99lj"
+          "reddit-1wb99lj",
+          "reddit-1wrq7gj"
         ],
         "text_fingerprint": "b90c4729",
         "media_fingerprints": [],
@@ -3632,7 +3814,7 @@
         }
       },
       "campaign": {
-        "cluster_id": "campaign-910f856f",
+        "cluster_id": "campaign-34a0305b",
         "linkage_confidence": "medium",
         "signals": [
           "shared_outbound_fingerprint",
@@ -3642,7 +3824,8 @@
           "reddit-1wq1o7g",
           "reddit-1wmxc2y",
           "reddit-1wllsbo",
-          "reddit-1wcx3o6"
+          "reddit-1wcx3o6",
+          "reddit-1wrq7gj"
         ],
         "text_fingerprint": "3184a3da",
         "media_fingerprints": [],
