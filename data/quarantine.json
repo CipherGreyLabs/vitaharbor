@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-02T11:06:34.175Z",
+  "generated_at": "2026-10-02T11:46:47.232Z",
   "source": "r/vitahacks + r/VitaPiracy + r/PSVitaHomebrew RSS",
   "items": [
     {
@@ -133,7 +133,7 @@
       "schema_version": 2,
       "id": "reddit-1wvhvz4",
       "external_id": "1wvhvz4",
-      "state": "QUARANTINED",
+      "state": "PROMOTED",
       "state_history": [
         {
           "state": "DETECTED",
@@ -146,6 +146,12 @@
           "at": "2026-10-02T11:06:34.175Z",
           "actor": "reddit-scanner",
           "reason": "Scanner result is unverified and cannot enter the curated ledger"
+        },
+        {
+          "state": "PROMOTED",
+          "at": "2026-10-02T11:46:54.139Z",
+          "actor": "codex",
+          "reason": "Tracked in curated ledger under Halo: Combat Evolved Vita (id: 42)"
         }
       ],
       "source": {
@@ -213,7 +219,7 @@
       "schema_version": 2,
       "id": "reddit-1wvfy93",
       "external_id": "1wvfy93",
-      "state": "QUARANTINED",
+      "state": "PROMOTED",
       "state_history": [
         {
           "state": "DETECTED",
@@ -226,6 +232,12 @@
           "at": "2026-10-02T11:06:34.175Z",
           "actor": "reddit-scanner",
           "reason": "Scanner result is unverified and cannot enter the curated ledger"
+        },
+        {
+          "state": "PROMOTED",
+          "at": "2026-10-02T11:46:54.139Z",
+          "actor": "codex",
+          "reason": "Tracked in curated ledger under Real Racing 2 (id: 35, upd_rr2_vita_beta2)"
         }
       ],
       "source": {
@@ -2246,7 +2258,7 @@
       "schema_version": 2,
       "id": "reddit-1wltjdq",
       "external_id": "1wltjdq",
-      "state": "QUARANTINED",
+      "state": "REJECTED",
       "state_history": [
         {
           "state": "DETECTED",
@@ -2259,6 +2271,12 @@
           "at": "2026-09-21T18:32:56.666Z",
           "actor": "reddit-scanner",
           "reason": "Scanner result is unverified and cannot enter the curated ledger"
+        },
+        {
+          "state": "REJECTED",
+          "at": "2026-10-02T11:46:54.139Z",
+          "actor": "codex",
+          "reason": "Crosspost duplicate of reddit-1wlrv6x (TheForceEngine-VITA)"
         }
       ],
       "source": {
@@ -3035,7 +3053,7 @@
       "schema_version": 2,
       "id": "reddit-1wkrhnp",
       "external_id": "1wkrhnp",
-      "state": "QUARANTINED",
+      "state": "VERIFIED_FOR_REVIEW",
       "state_history": [
         {
           "state": "DETECTED",
@@ -3048,6 +3066,12 @@
           "at": "2026-09-21T18:42:23.382Z",
           "actor": "reddit-scanner",
           "reason": "Scanner result is unverified and cannot enter the curated ledger"
+        },
+        {
+          "state": "VERIFIED_FOR_REVIEW",
+          "at": "2026-10-02T11:46:47.232Z",
+          "actor": "codex",
+          "reason": "Verified genuine Call of Duty World at War Zombies hardware demonstration by devnoname120; repo not yet public"
         }
       ],
       "source": {
@@ -3116,14 +3140,51 @@
         "author/developer linkage and independent corroboration"
       ],
       "content_hash": "2eb5d0520f9fe2589e43211ba74ae557b558d077bcfd51d50c037b00e347e85b",
-      "review": null,
+      "review": {
+        "reviewer": "codex",
+        "reviewed_at": "2026-10-02T11:46:47.232Z",
+        "reason": "Verified genuine Call of Duty World at War Zombies hardware demonstration by devnoname120; repo not yet public",
+        "evidence_bundle": {
+          "file": "data/references/waw-zombies-2026-10-02.json",
+          "sha256": "b89753297a4081f61f3b378710963bd9145da507513f9de0bd43addbedf126a9",
+          "schema_version": 1,
+          "reviewer": "codex",
+          "reviewed_at": "2026-10-02T12:00:00.000Z",
+          "sources": [
+            {
+              "type": "reddit",
+              "url": "https://www.reddit.com/r/vitahacks/comments/1wkrhnp/gameplay_world_at_war_zombies_ported_to_the_ps/",
+              "observed_at": "2026-10-02T12:00:00.000Z",
+              "note": "Developer devnoname120 shares real-hardware gameplay footage of Call of Duty: World at War Zombies running on PS Vita."
+            }
+          ],
+          "findings": "World at War Zombies native Vita execution demonstrated on real hardware by veteran homebrew architect devnoname120. Shows Nacht der Untoten loading and gameplay rendering. No standalone public VPK or open-source repository published yet.",
+          "repository_url": null,
+          "repository_identity": "",
+          "repository_created_at": null,
+          "repository_last_activity_at": null,
+          "release_facts": [],
+          "release_url": null,
+          "vita_hardware_result": "Direct capture on real Vita hardware showing playable zombies round.",
+          "vita_evidence": [
+            "Hardware video demonstration by devnoname120"
+          ],
+          "author_linkage": "devnoname120 (renowned Vita homebrew developer)",
+          "corroboration": [],
+          "duplicate_relation": {
+            "related_candidate_ids": []
+          },
+          "content_hash": "22ff0f215d242696e5b4b1a47321fa4ce1f6f1c4df2e92c2ba5b106cbcc83b06",
+          "risk_disposition": "Authentic developer demonstration."
+        }
+      },
       "incident": null
     },
     {
       "schema_version": 2,
       "id": "reddit-1wkf9m5",
       "external_id": "1wkf9m5",
-      "state": "QUARANTINED",
+      "state": "VERIFIED_FOR_REVIEW",
       "state_history": [
         {
           "state": "DETECTED",
@@ -3136,6 +3197,12 @@
           "at": "2026-09-21T18:42:23.382Z",
           "actor": "reddit-scanner",
           "reason": "Scanner result is unverified and cannot enter the curated ledger"
+        },
+        {
+          "state": "VERIFIED_FOR_REVIEW",
+          "at": "2026-10-02T11:46:46.715Z",
+          "actor": "codex",
+          "reason": "Verified authentic Vulkan 1.1 native driver demonstration running SuperTuxKart by nyabsi; driver still private"
         }
       ],
       "source": {
@@ -3201,7 +3268,44 @@
         "author/developer linkage and independent corroboration"
       ],
       "content_hash": "60055093b7dbcd96434e1001480f67e4bf9f3bacdaa3fc0082973bdd7b368417",
-      "review": null,
+      "review": {
+        "reviewer": "codex",
+        "reviewed_at": "2026-10-02T11:46:46.715Z",
+        "reason": "Verified authentic Vulkan 1.1 native driver demonstration running SuperTuxKart by nyabsi; driver still private",
+        "evidence_bundle": {
+          "file": "data/references/supertuxkart-vulkan-2026-10-02.json",
+          "sha256": "96abb144d2c69c9eeec4d3bd7f1cb5d92e4edd7cae88d2f2b34657199f4b6987",
+          "schema_version": 1,
+          "reviewer": "codex",
+          "reviewed_at": "2026-10-02T12:00:00.000Z",
+          "sources": [
+            {
+              "type": "reddit",
+              "url": "https://www.reddit.com/r/vitahacks/comments/1wkf9m5/supertuxkart_wip_port_for_playstation_vita_with/",
+              "observed_at": "2026-10-02T12:00:00.000Z",
+              "note": "Developer nyabsi demonstrates SuperTuxKart running natively on PlayStation Vita utilizing a custom Vulkan 1.1 hardware driver."
+            }
+          ],
+          "findings": "Significant graphics breakthrough: first demonstration of Vulkan 1.1 running directly on PS Vita hardware powering SuperTuxKart. Video proof demonstrates rendering on OLED screen. Custom driver and port remain in active development without a public binary or open repository.",
+          "repository_url": null,
+          "repository_identity": "",
+          "repository_created_at": null,
+          "repository_last_activity_at": null,
+          "release_facts": [],
+          "release_url": null,
+          "vita_hardware_result": "SuperTuxKart gameplay rendering on physical PS Vita through native Vulkan 1.1 driver.",
+          "vita_evidence": [
+            "Direct capture of SuperTuxKart racing with Vulkan 1.1 driver execution on Vita"
+          ],
+          "author_linkage": "nyabsi on r/vitahacks",
+          "corroboration": [],
+          "duplicate_relation": {
+            "related_candidate_ids": []
+          },
+          "content_hash": "6b360b943d0473919fc7a0cf337f7663eebf6b48455581e64903ec41fbe755e1",
+          "risk_disposition": "Legitimate technological progress report."
+        }
+      },
       "incident": null
     },
     {

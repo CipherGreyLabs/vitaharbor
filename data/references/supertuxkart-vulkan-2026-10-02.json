@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "reviewer": "codex",
+  "reviewed_at": "2026-10-02T12:00:00.000Z",
+  "sources": [
+    {
+      "type": "reddit",
+      "url": "https://www.reddit.com/r/vitahacks/comments/1wkf9m5/supertuxkart_wip_port_for_playstation_vita_with/",
+      "observed_at": "2026-10-02T12:00:00.000Z",
+      "note": "Developer nyabsi demonstrates SuperTuxKart running natively on PlayStation Vita utilizing a custom Vulkan 1.1 hardware driver."
+    }
+  ],
+  "findings": "Significant graphics breakthrough: first demonstration of Vulkan 1.1 running directly on PS Vita hardware powering SuperTuxKart. Video proof demonstrates rendering on OLED screen. Custom driver and port remain in active development without a public binary or open repository.",
+  "repository_url": null,
+  "repository_identity": "",
+  "repository_created_at": null,
+  "repository_last_activity_at": null,
+  "release_facts": [],
+  "release_url": null,
+  "vita_hardware_result": "SuperTuxKart gameplay rendering on physical PS Vita through native Vulkan 1.1 driver.",
+  "vita_evidence": [
+    "Direct capture of SuperTuxKart racing with Vulkan 1.1 driver execution on Vita"
+  ],
+  "author_linkage": "nyabsi on r/vitahacks",
+  "corroboration": [],
+  "duplicate_relation": {
+    "related_candidate_ids": []
+  },
+  "content_hash": "6b360b943d0473919fc7a0cf337f7663eebf6b48455581e64903ec41fbe755e1",
+  "risk_disposition": "Legitimate technological progress report."
+}

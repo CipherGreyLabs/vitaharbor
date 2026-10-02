@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "reviewer": "codex",
+  "reviewed_at": "2026-10-02T12:00:00.000Z",
+  "sources": [
+    {
+      "type": "reddit",
+      "url": "https://www.reddit.com/r/vitahacks/comments/1wkrhnp/gameplay_world_at_war_zombies_ported_to_the_ps/",
+      "observed_at": "2026-10-02T12:00:00.000Z",
+      "note": "Developer devnoname120 shares real-hardware gameplay footage of Call of Duty: World at War Zombies running on PS Vita."
+    }
+  ],
+  "findings": "World at War Zombies native Vita execution demonstrated on real hardware by veteran homebrew architect devnoname120. Shows Nacht der Untoten loading and gameplay rendering. No standalone public VPK or open-source repository published yet.",
+  "repository_url": null,
+  "repository_identity": "",
+  "repository_created_at": null,
+  "repository_last_activity_at": null,
+  "release_facts": [],
+  "release_url": null,
+  "vita_hardware_result": "Direct capture on real Vita hardware showing playable zombies round.",
+  "vita_evidence": [
+    "Hardware video demonstration by devnoname120"
+  ],
+  "author_linkage": "devnoname120 (renowned Vita homebrew developer)",
+  "corroboration": [],
+  "duplicate_relation": {
+    "related_candidate_ids": []
+  },
+  "content_hash": "22ff0f215d242696e5b4b1a47321fa4ce1f6f1c4df2e92c2ba5b106cbcc83b06",
+  "risk_disposition": "Authentic developer demonstration."
+}
