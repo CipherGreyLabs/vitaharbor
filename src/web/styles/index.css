@@ -1,5 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Rubik:wght@300;400;500;600;700&display=swap');
 @font-face {
-  font-family: "Inter";
+  font-family: "Rubik";
   font-style: normal;
   font-weight: 400 700;
   font-display: swap;
@@ -13,21 +14,21 @@
 
 @layer base {
   :root {
-    --vh-canvas: 0, 0, 0;
-    --vh-surface-1: 10, 10, 12;
-    --vh-surface-2: 17, 17, 20;
-    --vh-surface-3: 24, 24, 28;
-    --vh-border: 37, 37, 43;
-    --vh-border-strong: 67, 67, 77;
-    --vh-ink: 244, 245, 247;
-    --vh-ink-medium: 180, 184, 193;
-    --vh-ink-muted: 143, 148, 159;
-    --vh-accent: 229, 231, 235;
-    --vh-accent-hover: 255, 255, 255;
-    --vh-stage-done: 244, 245, 247;
-    --vh-stage-progress: 161, 161, 170;
+    --vh-canvas: 15, 23, 42;
+    --vh-surface-1: 17, 24, 39;
+    --vh-surface-2: 30, 41, 59;
+    --vh-surface-3: 51, 65, 85;
+    --vh-border: 51, 65, 85;
+    --vh-border-strong: 71, 85, 105;
+    --vh-ink: 248, 250, 252;
+    --vh-ink-medium: 203, 213, 225;
+    --vh-ink-muted: 148, 163, 184;
+    --vh-accent: 220, 38, 38;
+    --vh-accent-hover: 239, 68, 68;
+    --vh-stage-done: 248, 250, 252;
+    --vh-stage-progress: 203, 213, 225;
     --vh-stage-caution: 148, 163, 184;
-    --vh-stage-idle: 113, 113, 122;
+    --vh-stage-idle: 100, 116, 139;
   }
 
   html {
@@ -40,7 +41,7 @@
     overflow-x: hidden;
     background-repeat: no-repeat;
     color: rgb(var(--vh-ink));
-    font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    font-family: "Rubik", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
   }
@@ -142,8 +143,8 @@
 }
 
 .vh-console-frame {
-  background: #000000;
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  background: #0f172a;
+  border: 1px solid #334155;
 }
 
 @keyframes vh-panel-backdrop-in {
@@ -206,7 +207,7 @@
   background: rgb(var(--vh-canvas));
   color: rgb(var(--vh-ink));
   color-scheme: dark;
-  font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  font-family: "Rubik", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
 }
 
 .vh-static-header {
@@ -303,7 +304,7 @@
 .vh-static-hero h1 {
   margin: 0.5rem 0 0;
   color: rgb(var(--vh-ink));
-  font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  font-family: "Rubik", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   font-size: clamp(2.6rem, 5.4vw, 4rem);
   font-weight: 650;
   letter-spacing: -0.045em;
@@ -384,7 +385,7 @@
 
 .vh-static-count strong {
   color: rgb(var(--vh-ink));
-  font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  font-family: "Rubik", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   font-size: 2rem;
   line-height: 1;
 }
@@ -517,7 +518,7 @@
 .vh-static-method h2 {
   margin: 0.25rem 0 0;
   color: rgb(var(--vh-ink));
-  font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  font-family: "Rubik", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   font-size: 1.625rem;
   font-weight: 650;
   letter-spacing: -0.03em;
@@ -559,7 +560,7 @@
 
 .vh-static-art-fallback span:first-child {
   color: rgb(var(--vh-accent-hover));
-  font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  font-family: "Rubik", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   font-size: 3.75rem;
   font-weight: 650;
   letter-spacing: -0.06em;
@@ -752,4 +753,25 @@
   z-index: 0;
   border-radius: 50%;
   animation: vh-hero-glow 14s ease-in-out infinite alternate;
+}
+
+/* UI UX Pro Max Button Specs */
+.btn-primary {
+  background: #dc2626;
+  color: #ffffff;
+  padding: 10px 22px;
+  border-radius: 8px;
+  font-weight: 600;
+  transition: all 200ms ease;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.btn-primary:hover {
+  background: #ef4444;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 14px rgba(220, 38, 38, 0.35);
 }

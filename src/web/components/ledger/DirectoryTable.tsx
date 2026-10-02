@@ -271,7 +271,7 @@ export const DirectoryTable: React.FC<DirectoryTableProps> = ({
                 title="Bento Grid View"
                 className={
                   "inline-flex h-8 items-center gap-1.5 rounded-md px-2.5 text-caption font-medium transition-colors " +
-                  (viewMode === "bento" ? "bg-[#00e6ff]/20 text-zinc-400 font-semibold" : "text-ink-muted hover:text-ink")
+                  (viewMode === "bento" ? "bg-[#00e6ff]/20 text-[#cbd5e1] font-semibold" : "text-ink-muted hover:text-ink")
                 }
               >
                 <LayoutGrid className="h-3.5 w-3.5" />
@@ -284,7 +284,7 @@ export const DirectoryTable: React.FC<DirectoryTableProps> = ({
                 title="Compact List View"
                 className={
                   "inline-flex h-8 items-center gap-1.5 rounded-md px-2.5 text-caption font-medium transition-colors " +
-                  (viewMode === "list" ? "bg-[#00e6ff]/20 text-zinc-400 font-semibold" : "text-ink-muted hover:text-ink")
+                  (viewMode === "list" ? "bg-[#00e6ff]/20 text-[#cbd5e1] font-semibold" : "text-ink-muted hover:text-ink")
                 }
               >
                 <List className="h-3.5 w-3.5" />
@@ -333,7 +333,7 @@ export const DirectoryTable: React.FC<DirectoryTableProps> = ({
 
         {/* Technology Filters (Option 1) */}
         <div className="mt-2 flex items-center gap-1.5 overflow-x-auto no-scrollbar border-t border-white/[0.04] pt-2">
-          <span className="mr-1 shrink-0 font-mono text-[10px] uppercase tracking-wider text-zinc-400">Tech</span>
+          <span className="mr-1 shrink-0 font-mono text-[10px] uppercase tracking-wider text-[#cbd5e1]">Tech</span>
           {TECH_FILTERS.map((tech) => {
             const active = activeTech === tech.key;
             return (
@@ -345,7 +345,7 @@ export const DirectoryTable: React.FC<DirectoryTableProps> = ({
                 className={
                   "inline-flex min-h-[36px] shrink-0 items-center gap-1 whitespace-nowrap rounded-md px-2.5 py-1 font-mono text-[11px] transition-all focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent " +
                   (active
-                    ? "border border-[#00e6ff]/50 bg-[#00e6ff]/15 text-zinc-400 font-semibold shadow-[0_0_10px_rgba(0,230,255,0.2)]"
+                    ? "border border-[#00e6ff]/50 bg-[#00e6ff]/15 text-[#cbd5e1] font-semibold shadow-[0_0_10px_rgba(0,230,255,0.2)]"
                     : "border border-white/10 bg-white/[0.03] text-ink-muted hover:border-white/20 hover:text-ink")
                 }
               >
@@ -420,7 +420,7 @@ export const DirectoryTable: React.FC<DirectoryTableProps> = ({
             </button>
           </div>
         ) : (
-          <div className="overflow-hidden rounded-2xl border border-zinc-900 bg-black">
+          <div className="overflow-hidden rounded-2xl border border-[#334155] bg-black">
             <div className="hidden grid-cols-[minmax(0,1fr)_auto] border-b border-hairline bg-white/[0.025] px-0 py-2 lg:grid">
               <div className="grid grid-cols-[minmax(0,1.8fr)_minmax(8.5rem,0.9fr)_minmax(6rem,0.65fr)_minmax(7rem,0.75fr)_1.5rem] items-center gap-3 px-4 font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-ink-muted">
                 <span>Project</span><span>Current stage</span><span>Type</span><span>Last Activity</span><span aria-hidden="true" />
@@ -442,7 +442,7 @@ export const DirectoryTable: React.FC<DirectoryTableProps> = ({
                     id={"entry-" + project.slug}
                     onMouseEnter={() => onSelectProject(project, false)}
                     onFocus={() => onSelectProject(project, false)}
-                    className={"group relative rounded-lg transition-all vh-row-glass " + (selected ? "bg-accent/[0.055] border-l-2 border-l-accent" : "hover:bg-zinc-950")}
+                    className={"group relative rounded-lg transition-all vh-row-glass " + (selected ? "bg-accent/[0.055] border-l-2 border-l-accent" : "hover:bg-[#0f172a]")}
                   >
                     <div className="grid grid-cols-[minmax(0,1fr)_auto] items-center">
                       <button

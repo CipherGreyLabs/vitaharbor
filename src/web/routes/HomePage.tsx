@@ -460,14 +460,9 @@ export const HomePage: React.FC = () => {
               <span className="sm:hidden">Posts</span>
               <span className="hidden sm:inline">Community posts</span>
             </a>
-            <div className="hidden items-center gap-2 rounded-full border border-hairline bg-surface px-3 py-1 font-mono text-micro text-ink-muted sm:inline-flex">
-              <span className="inline-flex items-center gap-1 text-stage-done font-medium">
-                <span className="h-1.5 w-1.5 rounded-full bg-stage-done" />
-                <span>{headerCounts.playable} playable</span>
-              </span>
-              <span className="text-hairline-strong">·</span>
-              <span>{headerCounts.dev} in dev</span>
-            </div>
+            <a href="#directory" className="btn-primary text-micro sm:text-caption py-1.5 px-3.5 rounded-full font-semibold">
+              Explore Ports
+            </a>
           </nav>
         </div>
       </header>
@@ -477,12 +472,17 @@ export const HomePage: React.FC = () => {
           <div className="relative mx-auto max-w-6xl px-4 sm:px-6">
             {/* Pure Minimalist Apple Product Headline */}
             <div className="mx-auto max-w-3xl text-center mb-12 sm:mb-16">
-              <h1 id="hero-heading" className="font-display text-[52px] sm:text-[76px] lg:text-[88px] font-semibold tracking-[-0.04em] text-white leading-none">
+              <h1 id="hero-heading" className="font-display text-[54px] sm:text-[76px] lg:text-[88px] font-bold tracking-[-0.04em] text-white leading-[1.02]">
                 PlayStation Vita.
               </h1>
-              <h2 className="mt-3 font-display text-[26px] sm:text-[36px] lg:text-[42px] font-normal tracking-[-0.025em] text-zinc-400">
+              <h2 className="mt-3 font-display text-[26px] sm:text-[34px] lg:text-[40px] font-normal tracking-[-0.025em] text-slate-300">
                 The definitive port atlas.
               </h2>
+              <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
+                <a href="#directory" className="btn-primary">
+                  Explore Active Ports
+                </a>
+              </div>
             </div>
 
             {/* Solitary 3D Hardware Canvas on Pure Black */}
