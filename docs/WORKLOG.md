@@ -855,3 +855,9 @@ pm run verify passed (tsc clean, 127/127 unit tests, 30 project pages, 33 sitema
 | Time | Commit / state | Change | Why | Model | Verified |
 |---|---|---|---|---|---|
 | 13:25 UTC | f4861d1 | Completely eradicated the repetitive website marketing banners from the directory cards; integrated custom GameCardBanner component with game-specific atmospheric gradients, prominent game typography, platform/engine tags, and subtle PlayStation geometric watermark patterns | Fix issue shown in user screenshot where cards identically displayed website slogan rather than unique game art | gemini-3.8-flash | npm run verify clean (127/127 tests); deployed vitaharbor-8284bm251 aliased to vitaharbor.vercel.app |
+
+### 100% Real In-Game Screenshot Coverage Across All 28 Ports (2026-10-02)
+
+| Time | Commit / state | Change | Why | Model | Verified |
+|---|---|---|---|---|---|
+| 13:45 UTC | e3b81b2 | Sourced, downloaded, and verified actual in-game screenshots and LiveArea artwork for all 28 tracked ports in fallbackData.ts; wired screenshot_url and screenshot_alt to each record; deployed assets under public/screenshots/ | Fulfill user demand to see real pictures across all projects rather than generic placeholders or website slogans | gemini-3.8-flash | 28/28 projects with local screenshot files; curl HTTP 200 on live /screenshots/halo-ce.jpg; npm run verify clean; deployed vitaharbor-74ms44n98 aliased to vitaharbor.vercel.app |
