@@ -861,3 +861,9 @@ pm run verify passed (tsc clean, 127/127 unit tests, 30 project pages, 33 sitema
 | Time | Commit / state | Change | Why | Model | Verified |
 |---|---|---|---|---|---|
 | 13:45 UTC | e3b81b2 | Sourced, downloaded, and verified actual in-game screenshots and LiveArea artwork for all 28 tracked ports in fallbackData.ts; wired screenshot_url and screenshot_alt to each record; deployed assets under public/screenshots/ | Fulfill user demand to see real pictures across all projects rather than generic placeholders or website slogans | gemini-3.8-flash | 28/28 projects with local screenshot files; curl HTTP 200 on live /screenshots/halo-ce.jpg; npm run verify clean; deployed vitaharbor-74ms44n98 aliased to vitaharbor.vercel.app |
+
+### VH-PERF-UI-043 3D UI optimizations & compression (2026-10-02)
+
+| Time | Commit / state | Change | Why | Model | Verified |
+|---|---|---|---|---|---|
+| 18:15 UTC | working tree | Implemented 4 UX and performance enhancements: 1) Interactive Cartridge Dock in `ConsoleStage.tsx` allowing instant switching between all 28 tracked ports via a scrollable shelf beneath the 3D model; 2) Added a direct 'Get VPK' button on Bento cards for playable/released ports in `DirectoryTable.tsx` enabling one-click repository access; 3) Added a visual keyboard hint (`<kbd>/</kbd>`) to the search bar; 4) Optimized heavy image assets including converting `call-of-duty-4.jpeg` to WebP (from 1.8MB to 124KB). | Fulfill master delegation: improve discovery flow with instant 3D switching, direct action buttons for playable ports, and reduce asset payload size. | gemini-3.7-flash | `npm run verify` passed (tsc clean, 127/127 unit tests, 28 project pages, 31 sitemap URLs). |

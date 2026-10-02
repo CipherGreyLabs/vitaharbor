@@ -364,6 +364,37 @@ export const ConsoleStage: React.FC<ConsoleStageProps> = ({
           <div aria-hidden="true" className="vh-floor mx-auto h-px w-[84%]" />
         </div>
 
+        {/* Tactile Interactive Game Dock (Shelf) */}
+        <div className="mt-5 px-2 sm:px-6">
+          <div className="no-scrollbar flex max-w-full gap-2.5 overflow-x-auto p-1 py-2" aria-label="Featured Ports">
+            {projects.map((project) => {
+              const active = selectedId === project.id;
+              const title = splitTitle(project.game_title || project.display_name);
+              return (
+                <button
+                  key={project.id}
+                  type="button"
+                  aria-pressed={active}
+                  onClick={() => onSelectProject(project)}
+                  className={
+                    "group flex shrink-0 items-center gap-2.5 rounded-xl border px-3.5 py-2 text-left transition-all duration-200 min-h-[44px] " +
+                    (active
+                      ? "border-zinc-500 bg-zinc-800 text-white shadow-sm"
+                      : "border-zinc-800 bg-zinc-900 text-zinc-400 hover:border-zinc-600 hover:text-white")
+                  }
+                >
+                  <ProjectMark seed={project.display_name || project.game_title || "vita"} size={24} className="shrink-0 rounded-md" />
+                  <div className="min-w-0">
+                    <p className="truncate text-[12px] font-semibold">
+                      {title.name}
+                    </p>
+                  </div>
+                </button>
+              );
+            })}
+          </div>
+        </div>
+
         {/* Minimalist Active Display Status Card */}
         <div className="relative mx-auto max-w-xl px-4 pt-4 pb-2">
           {preview && (

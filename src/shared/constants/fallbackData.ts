@@ -471,7 +471,7 @@ export const FALLBACK_PROJECTS: any[] = [
     id: 27,
     game_id: 27,
     slug: "call-of-duty-4-vita",
-    screenshot_url: "/screenshots/call-of-duty-4.jpeg",
+    screenshot_url: "/screenshots/call-of-duty-4.webp",
     screenshot_alt: "Call of Duty 4 gameplay photographed on a PS Vita",
     display_name: "Call of Duty 4: Modern Warfare Vita",
     current_stage: "in_game",

@@ -250,7 +250,7 @@ export const DirectoryTable: React.FC<DirectoryTableProps> = ({
             </button>
           ) : (
             <div className="pointer-events-none absolute right-3 top-1/2 hidden -translate-y-1/2 items-center sm:flex">
-              <kbd className="vh-kbd-hint" aria-hidden="true">/</kbd>
+              <kbd className="inline-flex items-center rounded border border-white/20 bg-zinc-800 px-1.5 py-0.5 text-[10px] font-mono text-zinc-400" aria-hidden="true">/</kbd>
             </div>
           )}
         </div>
@@ -478,13 +478,26 @@ export const DirectoryTable: React.FC<DirectoryTableProps> = ({
 
                       {/* Card Footer Actions */}
                       <div className="flex items-center justify-between gap-2">
-                        <button
-                          type="button"
-                          onClick={() => onToggleEntry(project)}
-                          className="inline-flex min-h-[34px] items-center text-caption font-semibold text-blue-400 hover:underline"
-                        >
-                          View Details
-                        </button>
+                        <div className="flex items-center gap-3">
+                          <button
+                            type="button"
+                            onClick={() => onToggleEntry(project)}
+                            className="inline-flex min-h-[34px] items-center text-caption font-semibold text-blue-400 hover:underline"
+                          >
+                            View Details
+                          </button>
+                          {(String(project.current_stage) === "playable" || String(project.current_stage) === "released" || String(project.current_stage) === "completable") && project.repo_url && (
+                            <a
+                              href={project.repo_url}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="inline-flex min-h-[34px] items-center gap-1.5 rounded-md bg-white px-2.5 py-1 text-[11px] font-semibold text-black hover:bg-zinc-200 transition-colors"
+                            >
+                              <span>Get VPK</span>
+                              <ExternalLink className="h-3 w-3" />
+                            </a>
+                          )}
+                        </div>
                         <div className="flex items-center gap-1">
                           <button
                             type="button"
