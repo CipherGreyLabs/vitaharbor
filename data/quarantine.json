@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-02T13:53:21.048Z",
+  "generated_at": "2026-10-02T18:28:18.152Z",
   "source": "r/vitahacks + r/VitaPiracy + r/PSVitaHomebrew RSS",
   "items": [
     {
@@ -1477,15 +1477,15 @@
         "cluster_id": "campaign-34a0305b",
         "linkage_confidence": "medium",
         "signals": [
-          "shared_outbound_fingerprint",
-          "same_author_burst"
+          "same_author_burst",
+          "shared_outbound_fingerprint"
         ],
         "related_candidate_ids": [
+          "reddit-1wrq7gj",
           "reddit-1wmxc2y",
           "reddit-1wllsbo",
           "reddit-1wcx3o6",
-          "reddit-1wb99lj",
-          "reddit-1wrq7gj"
+          "reddit-1wb99lj"
         ],
         "text_fingerprint": "8dededc5",
         "media_fingerprints": [],
@@ -2031,11 +2031,11 @@
           "same_author_burst"
         ],
         "related_candidate_ids": [
+          "reddit-1wrq7gj",
           "reddit-1wq1o7g",
           "reddit-1wllsbo",
           "reddit-1wcx3o6",
-          "reddit-1wb99lj",
-          "reddit-1wrq7gj"
+          "reddit-1wb99lj"
         ],
         "text_fingerprint": "7a252a3c",
         "media_fingerprints": [],
@@ -2884,11 +2884,11 @@
           "same_author_burst"
         ],
         "related_candidate_ids": [
+          "reddit-1wrq7gj",
           "reddit-1wq1o7g",
           "reddit-1wmxc2y",
           "reddit-1wcx3o6",
-          "reddit-1wb99lj",
-          "reddit-1wrq7gj"
+          "reddit-1wb99lj"
         ],
         "text_fingerprint": "3439b9dd",
         "media_fingerprints": [],
@@ -3724,11 +3724,11 @@
           "same_author_burst"
         ],
         "related_candidate_ids": [
+          "reddit-1wrq7gj",
           "reddit-1wq1o7g",
           "reddit-1wmxc2y",
           "reddit-1wllsbo",
-          "reddit-1wb99lj",
-          "reddit-1wrq7gj"
+          "reddit-1wb99lj"
         ],
         "text_fingerprint": "b90c4729",
         "media_fingerprints": [],
@@ -3821,11 +3821,11 @@
           "same_author_burst"
         ],
         "related_candidate_ids": [
+          "reddit-1wrq7gj",
           "reddit-1wq1o7g",
           "reddit-1wmxc2y",
           "reddit-1wllsbo",
-          "reddit-1wcx3o6",
-          "reddit-1wrq7gj"
+          "reddit-1wcx3o6"
         ],
         "text_fingerprint": "3184a3da",
         "media_fingerprints": [],
