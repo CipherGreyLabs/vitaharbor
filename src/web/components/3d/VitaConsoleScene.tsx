@@ -175,6 +175,7 @@ export const VitaConsoleScene: React.FC<VitaConsoleSceneProps> = ({
     const button = new THREE.MeshStandardMaterial({ color: '#23262a', roughness: 0.35, metalness: 0.12 });
     const rubber = new THREE.MeshStandardMaterial({ color: '#1d1e22', roughness: 0.88 });
     const black = new THREE.MeshBasicMaterial({ color: '#060708' });
+    const acrylic = new THREE.MeshPhysicalMaterial({ color: '#e8ecf2', transmission: 0.88, opacity: 0.95, transparent: true, roughness: 0.08, metalness: 0.02, clearcoat: 1.0, clearcoatRoughness: 0.05, ior: 1.49, envMapIntensity: 1.25 });
 
     function traced(shape: THREE.Shape, depth: number, z: number, mat: THREE.Material, bevel = 0.22) {
       const geometry = new THREE.ExtrudeGeometry(shape, { depth, bevelEnabled: true, bevelSize: bevel, bevelThickness: bevel, bevelSegments: 4, curveSegments: 32, steps: 1 });
@@ -201,7 +202,9 @@ export const VitaConsoleScene: React.FC<VitaConsoleSceneProps> = ({
     const shoulder = referenceShape([['M',36,30],['C',58,8,89,1,114,1],['C',99,4,100,17,83,23],['C',64,29,51,28,36,30]]);
     const corner = referenceShape([['M',42,234],['C',69,234,85,244,103,260],['C',76,258,57,246,42,234]]);
     for (const sign of [1, -1]) {
-      const top = traced(shoulder, 2.2, 5.7, silver, 0.25);
+      const hinge = traced(shoulder, 0.5, 5.3, silver, 0.1);
+      hinge.scale.x = sign;
+      const top = traced(shoulder, 1.9, 5.8, acrylic, 0.2);
       top.scale.x = sign;
       registerPress(top, 0.45);
       const bottom = traced(corner, 0.5, 8.4, silver, 0.15);
@@ -261,7 +264,7 @@ export const VitaConsoleScene: React.FC<VitaConsoleSceneProps> = ({
     let sourceImageUrl = '';
 
     function syncSourceImage(current: SelectedProjectView | null) {
-      const url = String(current?.screenshot_url || (current?.slug ? '/og/projects/' + current.slug + '.png' : ''));
+      const url = String(current?.screenshot_url || '');
       if (url === sourceImageUrl) return;
       sourceImageUrl = url;
       sourceImage = null;
