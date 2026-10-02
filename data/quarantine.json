@@ -1,8 +1,213 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-02T04:04:27.110Z",
+  "generated_at": "2026-10-02T10:57:49.300Z",
   "source": "r/vitahacks + r/VitaPiracy + r/PSVitaHomebrew RSS",
   "items": [
+    {
+      "schema_version": 2,
+      "id": "reddit-1wvfxzk",
+      "external_id": "1wvfxzk",
+      "state": "QUARANTINED",
+      "state_history": [
+        {
+          "state": "DETECTED",
+          "at": "2026-10-02T10:56:11.528Z",
+          "actor": "reddit-scanner",
+          "reason": "Canonical Reddit RSS entry accepted at the ingestion boundary"
+        },
+        {
+          "state": "QUARANTINED",
+          "at": "2026-10-02T10:56:11.528Z",
+          "actor": "reddit-scanner",
+          "reason": "Scanner result is unverified and cannot enter the curated ledger"
+        }
+      ],
+      "source": {
+        "platform": "reddit",
+        "subreddit": "VitaPiracy",
+        "canonical_url": "https://www.reddit.com/r/VitaPiracy/comments/1wvfxzk/real_racing_2_new_update_psvita_beta_2_3060_fps/",
+        "author": "JadedEntertainment34",
+        "title": "[REAL RACING 2] NEW UPDATE PSVITA BETA 2 30/60 FPS 2X OR 4X MSSAA |#psvita",
+        "body": "",
+        "published_at": null
+      },
+      "classification": {
+        "confidence": "high",
+        "reason": "3 dev signals: \\bfps\\b, \\bupdate\\b, \\bbeta\\b · category=project_update",
+        "candidate_type": "port",
+        "category": "project_update",
+        "question": false,
+        "spam": false
+      },
+      "provenance": {
+        "repository_url": null,
+        "release_url": null,
+        "evidence_urls": [],
+        "evidence_bundle_id": null,
+        "repository_identity": null,
+        "repository_created_at": null,
+        "repository_last_activity_at": null,
+        "release_facts": [],
+        "vita_evidence": [],
+        "author_linkage": null,
+        "corroboration": [],
+        "duplicate_relation": {
+          "content_hash": "d9134f11cd52466d5a8d7cb27030b6dd1e0aed7a531b5c81cafd47acdc50efa9",
+          "related_candidate_ids": []
+        }
+      },
+      "campaign": {
+        "cluster_id": null,
+        "linkage_confidence": "none",
+        "signals": [],
+        "related_candidate_ids": [],
+        "text_fingerprint": "9296dc1b",
+        "media_fingerprints": [],
+        "outbound_fingerprints": [],
+        "direct_intent": false,
+        "explicit_campaign_reference": false,
+        "incident_id": null
+      },
+      "risk_signals": [
+        "no_project_evidence_in_post"
+      ],
+      "evidence_gaps": [
+        "exact project repository",
+        "repository identity and activity facts",
+        "release or build evidence",
+        "Vita-specific hardware evidence",
+        "author/developer linkage and independent corroboration"
+      ],
+      "content_hash": "d9134f11cd52466d5a8d7cb27030b6dd1e0aed7a531b5c81cafd47acdc50efa9",
+      "review": null,
+      "incident": null
+    },
+    {
+      "schema_version": 2,
+      "id": "reddit-1wvob17",
+      "external_id": "1wvob17",
+      "state": "VERIFIED_FOR_REVIEW",
+      "state_history": [
+        {
+          "state": "DETECTED",
+          "at": "2026-10-02T10:56:11.528Z",
+          "actor": "reddit-scanner",
+          "reason": "Canonical Reddit RSS entry accepted at the ingestion boundary"
+        },
+        {
+          "state": "QUARANTINED",
+          "at": "2026-10-02T10:56:11.528Z",
+          "actor": "reddit-scanner",
+          "reason": "Scanner result is unverified and cannot enter the curated ledger"
+        },
+        {
+          "state": "VERIFIED_FOR_REVIEW",
+          "at": "2026-10-02T10:57:49.300Z",
+          "actor": "codex",
+          "reason": "Verified genuine Insurgency (2014) tactical FPS port gameplay by OneDumbFox (40-60 FPS bot matches); repo still private"
+        }
+      ],
+      "source": {
+        "platform": "reddit",
+        "subreddit": "vitahacks",
+        "canonical_url": "https://www.reddit.com/r/vitahacks/comments/1wvob17/insurgency_vita_gameplay_showcase_information/",
+        "author": "OneDumbFox",
+        "title": "INSURGENCY: Vita - Gameplay Showcase & Information",
+        "body": "Hi all! I've been working on a Vita version of the tactical FPS game, Insurgency. It is based on the 2014 release, with all of its weapons, attachments, maps, and audio. I am aiming to get it to as close as possible to the original in terms of gameplay, with some slight adjustments. It runs between 40-60fps in 16 vs 16, and a pretty solid 60fps in 12 vs 12 and 8 vs 8. Right now, it is offline only and I've implemented a fairly decent bot system. Hopefully, as is the goal, a multiplayer implementation will be added. Please excuse the fairly chaotic gameplay footage which is 16 v 16 Conq",
+        "published_at": "2026-10-02T08:20:55.000Z"
+      },
+      "classification": {
+        "confidence": "medium",
+        "reason": "2 dev signal(s), 1 passive term(s), category=project_update",
+        "candidate_type": "port",
+        "category": "project_update",
+        "question": false,
+        "spam": false
+      },
+      "provenance": {
+        "repository_url": null,
+        "release_url": null,
+        "evidence_urls": [],
+        "evidence_bundle_id": null,
+        "repository_identity": null,
+        "repository_created_at": null,
+        "repository_last_activity_at": null,
+        "release_facts": [],
+        "vita_evidence": [],
+        "author_linkage": null,
+        "corroboration": [],
+        "duplicate_relation": {
+          "content_hash": "cd2427951b28b484263e190f183a9cead9c69de788b4a98c2dae2de356cbaa3d",
+          "related_candidate_ids": []
+        }
+      },
+      "campaign": {
+        "cluster_id": null,
+        "linkage_confidence": "none",
+        "signals": [],
+        "related_candidate_ids": [],
+        "text_fingerprint": "fa0e1f02",
+        "media_fingerprints": [
+          "external-preview.redd.it/a2pjdhpwaxjqmhromahqrugcoxikvpwch40jjtbf8g_gxwborvkzpauq9had.png"
+        ],
+        "outbound_fingerprints": [
+          "www.reddit.com/r/vitahacks/comments/1wvob17/insurgency_vita_gameplay_showcase_information",
+          "external-preview.redd.it/a2pjdhpwaxjqmhromahqrugcoxikvpwch40jjtbf8g_gxwborvkzpauq9had.png",
+          "www.reddit.com/user/onedumbfox",
+          "v.redd.it/yymcwserj0th1"
+        ],
+        "direct_intent": false,
+        "explicit_campaign_reference": false,
+        "incident_id": null
+      },
+      "risk_signals": [],
+      "evidence_gaps": [
+        "exact project repository",
+        "repository identity and activity facts",
+        "Vita-specific hardware evidence",
+        "author/developer linkage and independent corroboration"
+      ],
+      "content_hash": "cd2427951b28b484263e190f183a9cead9c69de788b4a98c2dae2de356cbaa3d",
+      "review": {
+        "reviewer": "codex",
+        "reviewed_at": "2026-10-02T10:57:49.300Z",
+        "reason": "Verified genuine Insurgency (2014) tactical FPS port gameplay by OneDumbFox (40-60 FPS bot matches); repo still private",
+        "evidence_bundle": {
+          "file": "data/references/insurgency-vita-2026-10-02.json",
+          "sha256": "14f93cd9131f2d44ad81762e2114cd59e90977b720f13b82a747381eb8e2ecd9",
+          "schema_version": 1,
+          "reviewer": "codex",
+          "reviewed_at": "2026-10-02T11:05:00.000Z",
+          "sources": [
+            {
+              "type": "reddit",
+              "url": "https://www.reddit.com/r/vitahacks/comments/1wvob17/insurgency_vita_gameplay_showcase_information/",
+              "observed_at": "2026-10-02T10:56:11.528Z",
+              "note": "Developer OneDumbFox shares gameplay footage of Insurgency (2014) running on PS Vita with 40-60 FPS in 16v16 offline bots."
+            }
+          ],
+          "findings": "Credible WIP port of Insurgency (2014) tactical FPS with working bot AI, physics, weapon handling, and audio. Gameplay footage shows real Vita performance between 40-60 FPS. No public repository or standalone VPK release URL yet, so it is retained as verified for review without ledger promotion.",
+          "repository_url": null,
+          "repository_identity": "",
+          "repository_created_at": null,
+          "repository_last_activity_at": null,
+          "release_facts": [],
+          "release_url": null,
+          "vita_hardware_result": "Runs 40-60 FPS in 16v16 bot matches, solid 60 FPS in 12v12 / 8v8 on Vita hardware.",
+          "vita_evidence": [
+            "Direct footage showing 16v16 bot matches on Vita with working weapons and audio"
+          ],
+          "author_linkage": "OneDumbFox on r/vitahacks",
+          "corroboration": [],
+          "duplicate_relation": {
+            "related_candidate_ids": []
+          },
+          "content_hash": "cd2427951b28b484263e190f183a9cead9c69de788b4a98c2dae2de356cbaa3d",
+          "risk_disposition": "No risk signals fired; legitimate WIP showcase."
+        }
+      },
+      "incident": null
+    },
     {
       "schema_version": 2,
       "id": "reddit-1wukxc7",
@@ -57,14 +262,10 @@
         }
       },
       "campaign": {
-        "cluster_id": "campaign-704ebf18",
-        "linkage_confidence": "medium",
-        "signals": [
-          "shared_outbound_fingerprint"
-        ],
-        "related_candidate_ids": [
-          "reddit-1wuhe87"
-        ],
+        "cluster_id": null,
+        "linkage_confidence": "none",
+        "signals": [],
+        "related_candidate_ids": [],
         "text_fingerprint": "752fdcb0",
         "media_fingerprints": [
           "external-preview.redd.it/dv594biwjxqb4w0blg88iehx9vqg4lxzpuzdi07idr8.jpeg"
@@ -90,93 +291,6 @@
         "author/developer linkage and independent corroboration"
       ],
       "content_hash": "f490c9f0fba85befabfb1bfce8cd095e16732d0ba6e80dc21ba505721c9e2e16",
-      "review": null,
-      "incident": null
-    },
-    {
-      "schema_version": 2,
-      "id": "reddit-1wuhe87",
-      "external_id": "1wuhe87",
-      "state": "QUARANTINED",
-      "state_history": [
-        {
-          "state": "DETECTED",
-          "at": "2026-10-01T14:29:48.016Z",
-          "actor": "reddit-scanner",
-          "reason": "Canonical Reddit RSS entry accepted at the ingestion boundary"
-        },
-        {
-          "state": "QUARANTINED",
-          "at": "2026-10-01T14:29:48.016Z",
-          "actor": "reddit-scanner",
-          "reason": "Scanner result is unverified and cannot enter the curated ledger"
-        }
-      ],
-      "source": {
-        "platform": "reddit",
-        "subreddit": "vitahacks",
-        "canonical_url": "https://www.reddit.com/r/vitahacks/comments/1wuhe87/to_anyone_interested_rinnegatamante_is_streaming/",
-        "author": "ziobleed1",
-        "title": "To anyone interested Rinnegatamante is streaming another live on Resident Evil 4 on PS Vita right now",
-        "body": "Resident Evil 4 - PSVita Port: Latest CPU optimizations and general improvements From the yt lilve chat : Rinnegamanate \"release won't arrive until betatesters will manage to finish the game start to finish\" \"i don't want to release unfinishable messes\" From X: \"Target is 20 rendered FPS everywhere with Auto frameskip that ensures a fullspeed simulation. That would be the ideal v.1.0 release candidate (but probably we'll go for one or more pre v.1.0 once the game is confirmed beateable).\" &#32; submitted by &#32; /u/ziobleed1 [link] &#32; [comments]",
-        "published_at": "2026-09-30T21:29:28.000Z"
-      },
-      "classification": {
-        "confidence": "high",
-        "reason": "3 dev signals: \\brelease\\b, \\brender(?:s|ed|ing)?\\b, \\bfps\\b · category=project_update",
-        "candidate_type": "port",
-        "category": "project_update",
-        "question": false,
-        "spam": false
-      },
-      "provenance": {
-        "repository_url": null,
-        "release_url": null,
-        "evidence_urls": [],
-        "evidence_bundle_id": null,
-        "repository_identity": null,
-        "repository_created_at": null,
-        "repository_last_activity_at": null,
-        "release_facts": [],
-        "vita_evidence": [],
-        "author_linkage": null,
-        "corroboration": [],
-        "duplicate_relation": {
-          "content_hash": "7a5fe0d8b489dac1230c6ef57134979d65562fb503c684229405babb163e7a5b",
-          "related_candidate_ids": []
-        }
-      },
-      "campaign": {
-        "cluster_id": "campaign-704ebf18",
-        "linkage_confidence": "medium",
-        "signals": [
-          "shared_outbound_fingerprint"
-        ],
-        "related_candidate_ids": [
-          "reddit-1wukxc7"
-        ],
-        "text_fingerprint": "7398f495",
-        "media_fingerprints": [
-          "external-preview.redd.it/peeaw6ykm0lcass04vtxhr5byftzbxyfczr_i67-kkm.jpeg"
-        ],
-        "outbound_fingerprints": [
-          "www.reddit.com/r/vitahacks/comments/1wuhe87/to_anyone_interested_rinnegatamante_is_streaming",
-          "external-preview.redd.it/peeaw6ykm0lcass04vtxhr5byftzbxyfczr_i67-kkm.jpeg",
-          "www.reddit.com/user/ziobleed1",
-          "www.youtube.com/watch"
-        ],
-        "direct_intent": false,
-        "explicit_campaign_reference": false,
-        "incident_id": null
-      },
-      "risk_signals": [],
-      "evidence_gaps": [
-        "exact project repository",
-        "repository identity and activity facts",
-        "Vita-specific hardware evidence",
-        "author/developer linkage and independent corroboration"
-      ],
-      "content_hash": "7a5fe0d8b489dac1230c6ef57134979d65562fb503c684229405babb163e7a5b",
       "review": null,
       "incident": null
     },

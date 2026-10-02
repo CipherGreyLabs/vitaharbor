@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "reviewer": "codex",
+  "reviewed_at": "2026-10-02T11:05:00.000Z",
+  "sources": [
+    {
+      "type": "reddit",
+      "url": "https://www.reddit.com/r/vitahacks/comments/1wvob17/insurgency_vita_gameplay_showcase_information/",
+      "observed_at": "2026-10-02T10:56:11.528Z",
+      "note": "Developer OneDumbFox shares gameplay footage of Insurgency (2014) running on PS Vita with 40-60 FPS in 16v16 offline bots."
+    }
+  ],
+  "findings": "Credible WIP port of Insurgency (2014) tactical FPS with working bot AI, physics, weapon handling, and audio. Gameplay footage shows real Vita performance between 40-60 FPS. No public repository or standalone VPK release URL yet, so it is retained as verified for review without ledger promotion.",
+  "repository_url": null,
+  "repository_identity": "",
+  "repository_created_at": null,
+  "repository_last_activity_at": null,
+  "release_facts": [],
+  "release_url": null,
+  "vita_hardware_result": "Runs 40-60 FPS in 16v16 bot matches, solid 60 FPS in 12v12 / 8v8 on Vita hardware.",
+  "vita_evidence": [
+    "Direct footage showing 16v16 bot matches on Vita with working weapons and audio"
+  ],
+  "author_linkage": "OneDumbFox on r/vitahacks",
+  "corroboration": [],
+  "duplicate_relation": {
+    "related_candidate_ids": []
+  },
+  "content_hash": "cd2427951b28b484263e190f183a9cead9c69de788b4a98c2dae2de356cbaa3d",
+  "risk_disposition": "No risk signals fired; legitimate WIP showcase."
+}

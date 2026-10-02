@@ -5,7 +5,7 @@
     <link>https://vitaharbor.vercel.app/</link>
     <description>Community PlayStation Vita ports tracked from r/vitahacks + r/VitaPiracy + r/PSVitaHomebrew</description>
     <language>en-us</language>
-    <lastBuildDate>Thu, 01 Oct 2026 18:55:54 GMT</lastBuildDate>
+    <lastBuildDate>Fri, 02 Oct 2026 10:58:56 GMT</lastBuildDate>
     <item>
       <title><![CDATA[Medal of Honor: Allied Assault (OpenMoHAA) - IN_GAME]]></title>
       <link>https://www.reddit.com/r/vitahacks/comments/1tapf2b/wip_openmohaa_on_ps_vita_medal_of_honor_allied/</link>
@@ -157,7 +157,7 @@
       <title><![CDATA[Real Racing 2 (RR2 Vita Port) - PLAYABLE]]></title>
       <link>https://www.reddit.com/r/PSVitaHomebrew/comments/1wmabvz/updates_on_rr2_port/</link>
       <guid isPermaLink="false">real-racing-2-vita</guid>
-      <pubDate>Mon, 21 Sep 2026 11:39:44 GMT</pubDate>
+      <pubDate>Fri, 02 Oct 2026 10:00:00 GMT</pubDate>
       <description><![CDATA[Playable public beta release of Real Racing 2 ported to PS Vita via ARMv7 Android soloader wrapper. Hardware Status: Stable performance targeting 30-60 FPS with vitaGL and OpenGLES shader pipeline.]]></description>
     </item>
     <item>
