@@ -849,3 +849,9 @@ pm run verify passed (tsc clean, 127/127 unit tests, 30 project pages, 33 sitema
 | Time | Commit / state | Change | Why | Model | Verified |
 |---|---|---|---|---|---|
 | 13:10 UTC | 960e3bf | 1) Restored authentic PlayStation Vita LiveArea start title card on the 3D OLED screen for projects without raw screenshots, eradicating the generic website OG text banner; 2) Modeled crystal-clear transparent acrylic L and R shoulder triggers with physical transmission and chrome internal hinges instead of blocky gray solids; 3) Removed redundant duplicate bottom arrow buttons from the status bar | Resolve issues visible in user-provided screenshot: website banner shown on Vita screen instead of game title, opaque gray shoulder buttons, and duplicate arrow controls | gemini-3.8-flash | npm run verify clean (127/127 tests); deployed vitaharbor-oub3mayy8 aliased to vitaharbor.vercel.app |
+
+### Bespoke GameCardBanner Integration & Removal of Repetitive Web Banners (2026-10-02)
+
+| Time | Commit / state | Change | Why | Model | Verified |
+|---|---|---|---|---|---|
+| 13:25 UTC | f4861d1 | Completely eradicated the repetitive website marketing banners from the directory cards; integrated custom GameCardBanner component with game-specific atmospheric gradients, prominent game typography, platform/engine tags, and subtle PlayStation geometric watermark patterns | Fix issue shown in user screenshot where cards identically displayed website slogan rather than unique game art | gemini-3.8-flash | npm run verify clean (127/127 tests); deployed vitaharbor-8284bm251 aliased to vitaharbor.vercel.app |
