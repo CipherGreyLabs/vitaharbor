@@ -1,8 +1,272 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-03T22:11:10.611Z",
+  "generated_at": "2026-10-04T13:12:56.978Z",
   "source": "r/vitahacks + r/VitaPiracy + r/PSVitaHomebrew RSS",
   "items": [
+    {
+      "schema_version": 2,
+      "id": "reddit-1wwtsfr",
+      "external_id": "1wwtsfr",
+      "state": "QUARANTINED",
+      "state_history": [
+        {
+          "state": "DETECTED",
+          "at": "2026-10-04T13:12:56.978Z",
+          "actor": "reddit-scanner",
+          "reason": "Canonical Reddit RSS entry accepted at the ingestion boundary"
+        },
+        {
+          "state": "QUARANTINED",
+          "at": "2026-10-04T13:12:56.978Z",
+          "actor": "reddit-scanner",
+          "reason": "Scanner result is unverified and cannot enter the curated ledger"
+        }
+      ],
+      "source": {
+        "platform": "reddit",
+        "subreddit": "PSVitaHomebrew",
+        "canonical_url": "https://www.reddit.com/r/PSVitaHomebrew/comments/1wwtsfr/kindom_hearts_3582_days_nds_new_native_nds_game/",
+        "author": "JadedEntertainment34",
+        "title": "[KINDOM HEARTS 358/2 DAYS NDS] NEW NATIVE NDS GAME PORT PSVITA 30/60 FPS #psvita",
+        "body": "Link in video &#32; submitted by &#32; /u/JadedEntertainment34 [link] &#32; [comments]",
+        "published_at": "2026-10-03T18:07:56.000Z"
+      },
+      "classification": {
+        "confidence": "medium",
+        "reason": "2 dev signal(s), 1 passive term(s), category=project_update",
+        "candidate_type": "port",
+        "category": "project_update",
+        "question": false,
+        "spam": false
+      },
+      "provenance": {
+        "repository_url": null,
+        "release_url": null,
+        "evidence_urls": [],
+        "evidence_bundle_id": null,
+        "repository_identity": null,
+        "repository_created_at": null,
+        "repository_last_activity_at": null,
+        "release_facts": [],
+        "vita_evidence": [],
+        "author_linkage": null,
+        "corroboration": [],
+        "duplicate_relation": {
+          "content_hash": "dba47018c40621bfa8bd92a41d2fcff844411bc9b5e395a2063a40a2db8f1099",
+          "related_candidate_ids": []
+        }
+      },
+      "campaign": {
+        "cluster_id": "campaign-c47aea30",
+        "linkage_confidence": "medium",
+        "signals": [
+          "same_author_burst",
+          "shared_outbound_fingerprint"
+        ],
+        "related_candidate_ids": [
+          "reddit-1wvfy93"
+        ],
+        "text_fingerprint": "5e35c303",
+        "media_fingerprints": [
+          "external-preview.redd.it/zycnc-cigwvrwh5cvv8jokvi7yft6kahtm8kb48y13e.jpeg"
+        ],
+        "outbound_fingerprints": [
+          "www.reddit.com/r/psvitahomebrew/comments/1wwtsfr/kindom_hearts_3582_days_nds_new_native_nds_game",
+          "external-preview.redd.it/zycnc-cigwvrwh5cvv8jokvi7yft6kahtm8kb48y13e.jpeg",
+          "www.reddit.com/user/jadedentertainment34",
+          "youtu.be/ylwk3fqgkqq"
+        ],
+        "direct_intent": false,
+        "explicit_campaign_reference": false,
+        "incident_id": null
+      },
+      "risk_signals": [],
+      "evidence_gaps": [
+        "exact project repository",
+        "repository identity and activity facts",
+        "release or build evidence",
+        "Vita-specific hardware evidence",
+        "author/developer linkage and independent corroboration"
+      ],
+      "content_hash": "dba47018c40621bfa8bd92a41d2fcff844411bc9b5e395a2063a40a2db8f1099",
+      "review": null,
+      "incident": null
+    },
+    {
+      "schema_version": 2,
+      "id": "reddit-1ww8upq",
+      "external_id": "1ww8upq",
+      "state": "QUARANTINED",
+      "state_history": [
+        {
+          "state": "DETECTED",
+          "at": "2026-10-04T13:12:56.978Z",
+          "actor": "reddit-scanner",
+          "reason": "Canonical Reddit RSS entry accepted at the ingestion boundary"
+        },
+        {
+          "state": "QUARANTINED",
+          "at": "2026-10-04T13:12:56.978Z",
+          "actor": "reddit-scanner",
+          "reason": "Scanner result is unverified and cannot enter the curated ledger"
+        }
+      ],
+      "source": {
+        "platform": "reddit",
+        "subreddit": "PSVitaHomebrew",
+        "canonical_url": "https://www.reddit.com/r/PSVitaHomebrew/comments/1ww8upq/release_real_racing_3_vita_beta_11/",
+        "author": "chutA7X",
+        "title": "[Release] Real Racing 3 Vita Beta 1.1",
+        "body": "&#32; submitted by &#32; /u/chutA7X [link] &#32; [comments]",
+        "published_at": "2026-10-02T23:50:16.000Z"
+      },
+      "classification": {
+        "confidence": "high",
+        "reason": "3 dev signals: \\[release\\], \\brelease\\b, \\bbeta\\b · category=new_project",
+        "candidate_type": "port",
+        "category": "new_project",
+        "question": false,
+        "spam": false
+      },
+      "provenance": {
+        "repository_url": null,
+        "release_url": null,
+        "evidence_urls": [],
+        "evidence_bundle_id": null,
+        "repository_identity": null,
+        "repository_created_at": null,
+        "repository_last_activity_at": null,
+        "release_facts": [],
+        "vita_evidence": [],
+        "author_linkage": null,
+        "corroboration": [],
+        "duplicate_relation": {
+          "content_hash": "e32c4de3e39f1434822ae847392b7a8adc99bc5fe2580858be6e18c441a7bd42",
+          "related_candidate_ids": []
+        }
+      },
+      "campaign": {
+        "cluster_id": "campaign-7eca8d6b",
+        "linkage_confidence": "medium",
+        "signals": [
+          "same_author_burst",
+          "near_duplicate_wording",
+          "shared_outbound_fingerprint"
+        ],
+        "related_candidate_ids": [
+          "reddit-1ww89mj"
+        ],
+        "text_fingerprint": "76307b7d",
+        "media_fingerprints": [
+          "external-preview.redd.it/mssxevhc9xdpsixyrktb4w608p4lhu5b7g4hnkxw1l0.png"
+        ],
+        "outbound_fingerprints": [
+          "www.reddit.com/r/psvitahomebrew/comments/1ww8upq/release_real_racing_3_vita_beta_11",
+          "external-preview.redd.it/mssxevhc9xdpsixyrktb4w608p4lhu5b7g4hnkxw1l0.png",
+          "www.reddit.com/user/chuta7x",
+          "github.com/chuta7x/real-racing-3-port-release/releases/tag/public_beta_1.1"
+        ],
+        "direct_intent": false,
+        "explicit_campaign_reference": false,
+        "incident_id": null
+      },
+      "risk_signals": [],
+      "evidence_gaps": [
+        "exact project repository",
+        "repository identity and activity facts",
+        "Vita-specific hardware evidence",
+        "author/developer linkage and independent corroboration"
+      ],
+      "content_hash": "e32c4de3e39f1434822ae847392b7a8adc99bc5fe2580858be6e18c441a7bd42",
+      "review": null,
+      "incident": null
+    },
+    {
+      "schema_version": 2,
+      "id": "reddit-1ww89mj",
+      "external_id": "1ww89mj",
+      "state": "QUARANTINED",
+      "state_history": [
+        {
+          "state": "DETECTED",
+          "at": "2026-10-04T13:12:56.978Z",
+          "actor": "reddit-scanner",
+          "reason": "Canonical Reddit RSS entry accepted at the ingestion boundary"
+        },
+        {
+          "state": "QUARANTINED",
+          "at": "2026-10-04T13:12:56.978Z",
+          "actor": "reddit-scanner",
+          "reason": "Scanner result is unverified and cannot enter the curated ledger"
+        }
+      ],
+      "source": {
+        "platform": "reddit",
+        "subreddit": "PSVitaHomebrew",
+        "canonical_url": "https://www.reddit.com/r/PSVitaHomebrew/comments/1ww89mj/release_real_racing_3_vita_port_beta_11/",
+        "author": "chutA7X",
+        "title": "[Release] Real Racing 3 Vita Port Beta 1.1",
+        "body": "&#32; submitted by &#32; /u/chutA7X [link] &#32; [comments]",
+        "published_at": "2026-10-02T23:22:11.000Z"
+      },
+      "classification": {
+        "confidence": "high",
+        "reason": "3 dev signals: \\[release\\], \\brelease\\b, \\bbeta\\b · category=new_project",
+        "candidate_type": "port",
+        "category": "new_project",
+        "question": false,
+        "spam": false
+      },
+      "provenance": {
+        "repository_url": null,
+        "release_url": null,
+        "evidence_urls": [],
+        "evidence_bundle_id": null,
+        "repository_identity": null,
+        "repository_created_at": null,
+        "repository_last_activity_at": null,
+        "release_facts": [],
+        "vita_evidence": [],
+        "author_linkage": null,
+        "corroboration": [],
+        "duplicate_relation": {
+          "content_hash": "4f64adde92f65c6251bfb75d0f5290a82a10ea61846dfd289c8da88214bfdcf0",
+          "related_candidate_ids": []
+        }
+      },
+      "campaign": {
+        "cluster_id": "campaign-7eca8d6b",
+        "linkage_confidence": "medium",
+        "signals": [
+          "same_author_burst",
+          "near_duplicate_wording",
+          "shared_outbound_fingerprint"
+        ],
+        "related_candidate_ids": [
+          "reddit-1ww8upq"
+        ],
+        "text_fingerprint": "9d61ccc6",
+        "media_fingerprints": [],
+        "outbound_fingerprints": [
+          "www.reddit.com/user/chuta7x",
+          "github.com/chuta7x/rr3-vita-port/releases/tag/public_beta_1",
+          "www.reddit.com/r/psvitahomebrew/comments/1ww89mj/release_real_racing_3_vita_port_beta_11"
+        ],
+        "direct_intent": false,
+        "explicit_campaign_reference": false,
+        "incident_id": null
+      },
+      "risk_signals": [],
+      "evidence_gaps": [
+        "exact project repository",
+        "repository identity and activity facts",
+        "Vita-specific hardware evidence",
+        "author/developer linkage and independent corroboration"
+      ],
+      "content_hash": "4f64adde92f65c6251bfb75d0f5290a82a10ea61846dfd289c8da88214bfdcf0",
+      "review": null,
+      "incident": null
+    },
     {
       "schema_version": 2,
       "id": "reddit-1wvob17",
@@ -275,10 +539,15 @@
         }
       },
       "campaign": {
-        "cluster_id": null,
-        "linkage_confidence": "none",
-        "signals": [],
-        "related_candidate_ids": [],
+        "cluster_id": "campaign-c47aea30",
+        "linkage_confidence": "medium",
+        "signals": [
+          "same_author_burst",
+          "shared_outbound_fingerprint"
+        ],
+        "related_candidate_ids": [
+          "reddit-1wwtsfr"
+        ],
         "text_fingerprint": "7a484d0e",
         "media_fingerprints": [
           "external-preview.redd.it/23spqthwo87iqdzzvqsw-1lhuzqd_1hygs-fntcvz94.jpeg"
