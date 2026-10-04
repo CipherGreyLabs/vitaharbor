@@ -1,8 +1,97 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-04T13:12:56.978Z",
+  "generated_at": "2026-10-04T17:37:28.590Z",
   "source": "r/vitahacks + r/VitaPiracy + r/PSVitaHomebrew RSS",
   "items": [
+    {
+      "schema_version": 2,
+      "id": "reddit-1wxgz7q",
+      "external_id": "1wxgz7q",
+      "state": "QUARANTINED",
+      "state_history": [
+        {
+          "state": "DETECTED",
+          "at": "2026-10-04T17:37:28.590Z",
+          "actor": "reddit-scanner",
+          "reason": "Canonical Reddit RSS entry accepted at the ingestion boundary"
+        },
+        {
+          "state": "QUARANTINED",
+          "at": "2026-10-04T17:37:28.590Z",
+          "actor": "reddit-scanner",
+          "reason": "Scanner result is unverified and cannot enter the curated ledger"
+        }
+      ],
+      "source": {
+        "platform": "reddit",
+        "subreddit": "vitahacks",
+        "canonical_url": "https://www.reddit.com/r/vitahacks/comments/1wxgz7q/monster_hunter_tri_port_deviljho_quest/",
+        "author": "Grarakk",
+        "title": "Monster Hunter Tri Port Deviljho Quest",
+        "body": "With the release of Opus 5.5 I wanted to see what it can do, so I tasked it to do a recomp of one of my favorite Wii games. It took a week to get to this stage. I still have to manually go through the quests/maps now, but it does look promising. This was based on the work for Mario Kart Wii https://github.com/patchzyy/wiicompiled , I basically just pointed the AI to the repo and told it to do the same for the mh3 rom I've downloaded. I am still working on Azahar, been mostly conceptualisation and letting the AI write some prototypes to see what performs the best. For Azahar I do take a clo",
+        "published_at": "2026-10-04T14:25:54.000Z"
+      },
+      "classification": {
+        "confidence": "medium",
+        "reason": "2 dev signal(s), 3 passive term(s), category=new_project",
+        "candidate_type": "port",
+        "category": "new_project",
+        "question": false,
+        "spam": false
+      },
+      "provenance": {
+        "repository_url": null,
+        "release_url": null,
+        "evidence_urls": [],
+        "evidence_bundle_id": null,
+        "repository_identity": null,
+        "repository_created_at": null,
+        "repository_last_activity_at": null,
+        "release_facts": [],
+        "vita_evidence": [],
+        "author_linkage": null,
+        "corroboration": [],
+        "duplicate_relation": {
+          "content_hash": "d1323eb5d882d7ece757937590478ee3296b0b65e8411251b18a6c6151c007db",
+          "related_candidate_ids": []
+        }
+      },
+      "campaign": {
+        "cluster_id": "campaign-357805fa",
+        "linkage_confidence": "medium",
+        "signals": [
+          "shared_outbound_fingerprint"
+        ],
+        "related_candidate_ids": [
+          "reddit-1wukxc7"
+        ],
+        "text_fingerprint": "9275c509",
+        "media_fingerprints": [
+          "external-preview.redd.it/yk4yh7rmiyed4n_rnsji2khfrwdzpsotnpk5taity90.jpeg"
+        ],
+        "outbound_fingerprints": [
+          "github.com/patchzyy/wiicompiled",
+          "www.reddit.com/r/vitahacks/comments/1wxgz7q/monster_hunter_tri_port_deviljho_quest",
+          "external-preview.redd.it/yk4yh7rmiyed4n_rnsji2khfrwdzpsotnpk5taity90.jpeg",
+          "www.reddit.com/user/grarakk",
+          "www.youtube.com/watch"
+        ],
+        "direct_intent": false,
+        "explicit_campaign_reference": false,
+        "incident_id": null
+      },
+      "risk_signals": [
+        "generic_upstream_repository"
+      ],
+      "evidence_gaps": [
+        "repository identity and activity facts",
+        "Vita-specific hardware evidence",
+        "author/developer linkage and independent corroboration"
+      ],
+      "content_hash": "d1323eb5d882d7ece757937590478ee3296b0b65e8411251b18a6c6151c007db",
+      "review": null,
+      "incident": null
+    },
     {
       "schema_version": 2,
       "id": "reddit-1wwtsfr",
@@ -628,10 +717,14 @@
         }
       },
       "campaign": {
-        "cluster_id": null,
-        "linkage_confidence": "none",
-        "signals": [],
-        "related_candidate_ids": [],
+        "cluster_id": "campaign-357805fa",
+        "linkage_confidence": "medium",
+        "signals": [
+          "shared_outbound_fingerprint"
+        ],
+        "related_candidate_ids": [
+          "reddit-1wxgz7q"
+        ],
         "text_fingerprint": "752fdcb0",
         "media_fingerprints": [
           "external-preview.redd.it/dv594biwjxqb4w0blg88iehx9vqg4lxzpuzdi07idr8.jpeg"
