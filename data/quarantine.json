@@ -1,8 +1,175 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-04T22:22:22.885Z",
+  "generated_at": "2026-10-05T16:03:01.874Z",
   "source": "r/vitahacks + r/VitaPiracy + r/PSVitaHomebrew RSS",
   "items": [
+    {
+      "schema_version": 2,
+      "id": "reddit-1wy8t7x",
+      "external_id": "1wy8t7x",
+      "state": "QUARANTINED",
+      "state_history": [
+        {
+          "state": "DETECTED",
+          "at": "2026-10-05T16:03:01.874Z",
+          "actor": "reddit-scanner",
+          "reason": "Canonical Reddit RSS entry accepted at the ingestion boundary"
+        },
+        {
+          "state": "QUARANTINED",
+          "at": "2026-10-05T16:03:01.874Z",
+          "actor": "reddit-scanner",
+          "reason": "Scanner result is unverified and cannot enter the curated ledger"
+        }
+      ],
+      "source": {
+        "platform": "reddit",
+        "subreddit": "vitahacks",
+        "canonical_url": "https://www.reddit.com/r/vitahacks/comments/1wy8t7x/gta_iv_on_ps_vita_hoping_for_a_fully_playable_port/",
+        "author": "DistributionTop9843",
+        "title": "GTA IV on PS Vita: hoping for a fully playable port ❤️‍🔥",
+        "body": "The GTA IV port on PS Vita is really amazing to watch as it evolves. For now, the project is still in its early stages, but we can already see the engine running the map, characters, vehicles, and some elements of the game. I really hope the project continues to be developed until it becomes a complete GTA IV on Vita: all the missions, the entire story, activities, save games, and above all, a version optimized enough to be fully playable from start to finish, all the way to the credits. It would be absolutely crazy to be able to complete GTA IV on a PS Vita. Even if it takes a long time, I re",
+        "published_at": "2026-10-05T13:38:54.000Z"
+      },
+      "classification": {
+        "confidence": "medium",
+        "reason": "1 dev signal(s), 2 passive term(s), category=project_update",
+        "candidate_type": "engine",
+        "category": "project_update",
+        "question": false,
+        "spam": false
+      },
+      "provenance": {
+        "repository_url": null,
+        "release_url": null,
+        "evidence_urls": [],
+        "evidence_bundle_id": null,
+        "repository_identity": null,
+        "repository_created_at": null,
+        "repository_last_activity_at": null,
+        "release_facts": [],
+        "vita_evidence": [],
+        "author_linkage": null,
+        "corroboration": [],
+        "duplicate_relation": {
+          "content_hash": "29b041b84513d668190aeb7a0443046f57a7afa41df631062dbfdf81ffa7c5bb",
+          "related_candidate_ids": []
+        }
+      },
+      "campaign": {
+        "cluster_id": null,
+        "linkage_confidence": "none",
+        "signals": [],
+        "related_candidate_ids": [],
+        "text_fingerprint": "333dcb82",
+        "media_fingerprints": [],
+        "outbound_fingerprints": [
+          "www.reddit.com/user/distributiontop9843",
+          "www.reddit.com/r/vitahacks/comments/1wy8t7x/gta_iv_on_ps_vita_hoping_for_a_fully_playable_port"
+        ],
+        "direct_intent": false,
+        "explicit_campaign_reference": false,
+        "incident_id": null
+      },
+      "risk_signals": [
+        "no_project_evidence_in_post"
+      ],
+      "evidence_gaps": [
+        "exact project repository",
+        "repository identity and activity facts",
+        "release or build evidence",
+        "author/developer linkage and independent corroboration"
+      ],
+      "content_hash": "29b041b84513d668190aeb7a0443046f57a7afa41df631062dbfdf81ffa7c5bb",
+      "review": null,
+      "incident": null
+    },
+    {
+      "schema_version": 2,
+      "id": "reddit-1wxu4hr",
+      "external_id": "1wxu4hr",
+      "state": "QUARANTINED",
+      "state_history": [
+        {
+          "state": "DETECTED",
+          "at": "2026-10-05T16:03:01.874Z",
+          "actor": "reddit-scanner",
+          "reason": "Canonical Reddit RSS entry accepted at the ingestion boundary"
+        },
+        {
+          "state": "QUARANTINED",
+          "at": "2026-10-05T16:03:01.874Z",
+          "actor": "reddit-scanner",
+          "reason": "Scanner result is unverified and cannot enter the curated ledger"
+        }
+      ],
+      "source": {
+        "platform": "reddit",
+        "subreddit": "vitahacks",
+        "canonical_url": "https://www.reddit.com/r/vitahacks/comments/1wxu4hr/punch_quest_port_wip/",
+        "author": "sirjahjah",
+        "title": "Punch Quest Port WIP",
+        "body": "Ai assisted port of Punch Quest. First time attempting anything like this or using Ai assistance. &#32; submitted by &#32; /u/sirjahjah [link] &#32; [comments]",
+        "published_at": "2026-10-04T23:49:36.000Z"
+      },
+      "classification": {
+        "confidence": "medium",
+        "reason": "1 dev signal(s), 1 passive term(s), category=project_update",
+        "candidate_type": "port",
+        "category": "project_update",
+        "question": false,
+        "spam": false
+      },
+      "provenance": {
+        "repository_url": null,
+        "release_url": null,
+        "evidence_urls": [],
+        "evidence_bundle_id": null,
+        "repository_identity": null,
+        "repository_created_at": null,
+        "repository_last_activity_at": null,
+        "release_facts": [],
+        "vita_evidence": [],
+        "author_linkage": null,
+        "corroboration": [],
+        "duplicate_relation": {
+          "content_hash": "cd97cc248904e0f61ac88c5aa6566a067e839e6d51cae259cb4a53e894cb2366",
+          "related_candidate_ids": []
+        }
+      },
+      "campaign": {
+        "cluster_id": null,
+        "linkage_confidence": "none",
+        "signals": [],
+        "related_candidate_ids": [],
+        "text_fingerprint": "366408cc",
+        "media_fingerprints": [
+          "external-preview.redd.it/emf3adm0dgtmanromq9hrc6zrupoiorykeb24uyaqfwlz6y4jvneyvxdtbfn.jpeg"
+        ],
+        "outbound_fingerprints": [
+          "www.reddit.com/r/vitahacks/comments/1wxu4hr/punch_quest_port_wip",
+          "external-preview.redd.it/emf3adm0dgtmanromq9hrc6zrupoiorykeb24uyaqfwlz6y4jvneyvxdtbfn.jpeg",
+          "www.reddit.com/user/sirjahjah",
+          "v.redd.it/p7kp9hwkfjth1"
+        ],
+        "direct_intent": false,
+        "explicit_campaign_reference": false,
+        "incident_id": null
+      },
+      "risk_signals": [
+        "no_project_evidence_in_post"
+      ],
+      "evidence_gaps": [
+        "exact project repository",
+        "repository identity and activity facts",
+        "release or build evidence",
+        "Vita-specific hardware evidence",
+        "author/developer linkage and independent corroboration"
+      ],
+      "content_hash": "cd97cc248904e0f61ac88c5aa6566a067e839e6d51cae259cb4a53e894cb2366",
+      "review": null,
+      "incident": null
+    },
     {
       "schema_version": 2,
       "id": "reddit-1wxgz7q",
