@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-06T00:52:35.067Z",
+  "generated_at": "2026-10-06T14:13:10.190Z",
   "source": "r/vitahacks + r/VitaPiracy + r/PSVitaHomebrew RSS",
   "items": [
     {
@@ -405,8 +405,8 @@
           "shared_outbound_fingerprint"
         ],
         "related_candidate_ids": [
-          "reddit-1wukxc7",
-          "reddit-1wycxwx"
+          "reddit-1wycxwx",
+          "reddit-1wukxc7"
         ],
         "text_fingerprint": "9275c509",
         "media_fingerprints": [
@@ -1066,8 +1066,8 @@
           "shared_outbound_fingerprint"
         ],
         "related_candidate_ids": [
-          "reddit-1wxgz7q",
-          "reddit-1wycxwx"
+          "reddit-1wycxwx",
+          "reddit-1wxgz7q"
         ],
         "text_fingerprint": "752fdcb0",
         "media_fingerprints": [
