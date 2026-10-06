@@ -1,8 +1,196 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-06T18:56:33.218Z",
+  "generated_at": "2026-10-06T23:06:53.686Z",
   "source": "r/vitahacks + r/VitaPiracy + r/PSVitaHomebrew RSS",
   "items": [
+    {
+      "schema_version": 2,
+      "id": "reddit-1wzei5e",
+      "external_id": "1wzei5e",
+      "state": "QUARANTINED",
+      "state_history": [
+        {
+          "state": "DETECTED",
+          "at": "2026-10-06T23:06:53.686Z",
+          "actor": "reddit-scanner",
+          "reason": "Canonical Reddit RSS entry accepted at the ingestion boundary"
+        },
+        {
+          "state": "QUARANTINED",
+          "at": "2026-10-06T23:06:53.686Z",
+          "actor": "reddit-scanner",
+          "reason": "Scanner result is unverified and cannot enter the curated ledger"
+        }
+      ],
+      "source": {
+        "platform": "reddit",
+        "subreddit": "PSVitaHomebrew",
+        "canonical_url": "https://www.reddit.com/r/PSVitaHomebrew/comments/1wzei5e/scribblenauts_remix_new_native_port_psvita_test/",
+        "author": "JadedEntertainment34",
+        "title": "[SCRIBBLENAUTS REMIX] NEW NATIVE PORT PSVITA TEST YOUR INTELIGENCE #psvita",
+        "body": "&#32; submitted by &#32; /u/JadedEntertainment34 [link] &#32; [comments]",
+        "published_at": "2026-10-06T21:14:08.000Z"
+      },
+      "classification": {
+        "confidence": "medium",
+        "reason": "1 dev signal(s), 1 passive term(s), category=new_project",
+        "candidate_type": "port",
+        "category": "new_project",
+        "question": false,
+        "spam": false
+      },
+      "provenance": {
+        "repository_url": null,
+        "release_url": null,
+        "evidence_urls": [],
+        "evidence_bundle_id": null,
+        "repository_identity": null,
+        "repository_created_at": null,
+        "repository_last_activity_at": null,
+        "release_facts": [],
+        "vita_evidence": [],
+        "author_linkage": null,
+        "corroboration": [],
+        "duplicate_relation": {
+          "content_hash": "9773d53aa150e74d878057bea938469b1272ad1f94f69fb11066a0eca65e3d59",
+          "related_candidate_ids": [
+            "reddit-1wz8h1s"
+          ]
+        }
+      },
+      "campaign": {
+        "cluster_id": "campaign-6fb72882",
+        "linkage_confidence": "high",
+        "signals": [
+          "shared_outbound_fingerprint",
+          "same_author_burst",
+          "near_duplicate_wording",
+          "shared_media_fingerprint"
+        ],
+        "related_candidate_ids": [
+          "reddit-1wwtsfr",
+          "reddit-1wvfy93",
+          "reddit-1wz8h1s"
+        ],
+        "text_fingerprint": "b23d219e",
+        "media_fingerprints": [
+          "external-preview.redd.it/vqniu7lnqdp57fboiu5nkz8ppp2ap-p--satj67czyq.jpeg"
+        ],
+        "outbound_fingerprints": [
+          "www.reddit.com/r/psvitahomebrew/comments/1wzei5e/scribblenauts_remix_new_native_port_psvita_test",
+          "external-preview.redd.it/vqniu7lnqdp57fboiu5nkz8ppp2ap-p--satj67czyq.jpeg",
+          "www.reddit.com/user/jadedentertainment34",
+          "youtu.be/igiujczx_ts"
+        ],
+        "direct_intent": false,
+        "explicit_campaign_reference": false,
+        "incident_id": null
+      },
+      "risk_signals": [
+        "no_project_evidence_in_post",
+        "crosspost_duplicate"
+      ],
+      "evidence_gaps": [
+        "exact project repository",
+        "repository identity and activity facts",
+        "release or build evidence",
+        "Vita-specific hardware evidence",
+        "author/developer linkage and independent corroboration"
+      ],
+      "content_hash": "9773d53aa150e74d878057bea938469b1272ad1f94f69fb11066a0eca65e3d59",
+      "review": null,
+      "incident": null
+    },
+    {
+      "schema_version": 2,
+      "id": "reddit-1wzdh5y",
+      "external_id": "1wzdh5y",
+      "state": "QUARANTINED",
+      "state_history": [
+        {
+          "state": "DETECTED",
+          "at": "2026-10-06T23:06:53.686Z",
+          "actor": "reddit-scanner",
+          "reason": "Canonical Reddit RSS entry accepted at the ingestion boundary"
+        },
+        {
+          "state": "QUARANTINED",
+          "at": "2026-10-06T23:06:53.686Z",
+          "actor": "reddit-scanner",
+          "reason": "Scanner result is unverified and cannot enter the curated ledger"
+        }
+      ],
+      "source": {
+        "platform": "reddit",
+        "subreddit": "vitahacks",
+        "canonical_url": "https://www.reddit.com/r/vitahacks/comments/1wzdh5y/release_call_of_duty_world_at_war_zombies_port/",
+        "author": "devnoname120",
+        "title": "[Release] Call of Duty World at War Zombies port for the PS Vita",
+        "body": "Download it here: https://x.com/devnoname120/status/2107568999248560513 You can also donate if you want to support my work and see more ports in the future! https://ko-fi.com/devnoname120 &#32; submitted by &#32; /u/devnoname120 [link] &#32; [comments]",
+        "published_at": "2026-10-06T20:33:29.000Z"
+      },
+      "classification": {
+        "confidence": "medium",
+        "reason": "2 dev signal(s), 3 passive term(s), category=new_project",
+        "candidate_type": "port",
+        "category": "new_project",
+        "question": false,
+        "spam": false
+      },
+      "provenance": {
+        "repository_url": null,
+        "release_url": null,
+        "evidence_urls": [],
+        "evidence_bundle_id": null,
+        "repository_identity": null,
+        "repository_created_at": null,
+        "repository_last_activity_at": null,
+        "release_facts": [],
+        "vita_evidence": [],
+        "author_linkage": null,
+        "corroboration": [],
+        "duplicate_relation": {
+          "content_hash": "fa5229a7ad5e8bc0a1a0643142df615a2e4fec9d965174cc2aa6bc6faf94b0f0",
+          "related_candidate_ids": []
+        }
+      },
+      "campaign": {
+        "cluster_id": "campaign-2b41f976",
+        "linkage_confidence": "medium",
+        "signals": [
+          "shared_outbound_fingerprint"
+        ],
+        "related_candidate_ids": [
+          "reddit-1wkrhnp"
+        ],
+        "text_fingerprint": "642a708a",
+        "media_fingerprints": [
+          "preview.redd.it/mshme4bcqwth1.png",
+          "i.redd.it/mshme4bcqwth1.png"
+        ],
+        "outbound_fingerprints": [
+          "x.com/devnoname120/status/2107568999248560513",
+          "ko-fi.com/devnoname120",
+          "www.reddit.com/r/vitahacks/comments/1wzdh5y/release_call_of_duty_world_at_war_zombies_port",
+          "preview.redd.it/mshme4bcqwth1.png",
+          "www.reddit.com/user/devnoname120",
+          "i.redd.it/mshme4bcqwth1.png"
+        ],
+        "direct_intent": false,
+        "explicit_campaign_reference": false,
+        "incident_id": null
+      },
+      "risk_signals": [],
+      "evidence_gaps": [
+        "exact project repository",
+        "repository identity and activity facts",
+        "Vita-specific hardware evidence",
+        "author/developer linkage and independent corroboration"
+      ],
+      "content_hash": "fa5229a7ad5e8bc0a1a0643142df615a2e4fec9d965174cc2aa6bc6faf94b0f0",
+      "review": null,
+      "incident": null
+    },
     {
       "schema_version": 2,
       "id": "reddit-1wz99f0",
@@ -53,14 +241,21 @@
         "corroboration": [],
         "duplicate_relation": {
           "content_hash": "f733dbd0d37aeb811a66df81009cd4fc5839c9172cd1e60d2008fd0a378aedff",
-          "related_candidate_ids": []
+          "related_candidate_ids": [
+            "reddit-1wz8vrx"
+          ]
         }
       },
       "campaign": {
-        "cluster_id": null,
-        "linkage_confidence": "none",
-        "signals": [],
-        "related_candidate_ids": [],
+        "cluster_id": "campaign-bc2792b5",
+        "linkage_confidence": "medium",
+        "signals": [
+          "same_author_burst",
+          "shared_outbound_fingerprint"
+        ],
+        "related_candidate_ids": [
+          "reddit-1wz8vrx"
+        ],
         "text_fingerprint": "65a00565",
         "media_fingerprints": [
           "preview.redd.it/1ck6pkqkxvth1.png",
@@ -82,7 +277,8 @@
         "incident_id": null
       },
       "risk_signals": [
-        "no_project_evidence_in_post"
+        "no_project_evidence_in_post",
+        "crosspost_duplicate"
       ],
       "evidence_gaps": [
         "exact project repository",
@@ -92,6 +288,191 @@
         "author/developer linkage and independent corroboration"
       ],
       "content_hash": "f733dbd0d37aeb811a66df81009cd4fc5839c9172cd1e60d2008fd0a378aedff",
+      "review": null,
+      "incident": null
+    },
+    {
+      "schema_version": 2,
+      "id": "reddit-1wz8vrx",
+      "external_id": "1wz8vrx",
+      "state": "QUARANTINED",
+      "state_history": [
+        {
+          "state": "DETECTED",
+          "at": "2026-10-06T23:06:53.686Z",
+          "actor": "reddit-scanner",
+          "reason": "Canonical Reddit RSS entry accepted at the ingestion boundary"
+        },
+        {
+          "state": "QUARANTINED",
+          "at": "2026-10-06T23:06:53.686Z",
+          "actor": "reddit-scanner",
+          "reason": "Scanner result is unverified and cannot enter the curated ledger"
+        }
+      ],
+      "source": {
+        "platform": "reddit",
+        "subreddit": "PSVitaHomebrew",
+        "canonical_url": "https://www.reddit.com/r/PSVitaHomebrew/comments/1wz8vrx/wip_port_nativo_de_dragon_ball_z_budokai/",
+        "author": "AngelZINxL_BG",
+        "title": "[WIP] Port nativo de Dragon Ball Z: Budokai Tenkaichi 3 para PS Vita — novo progresso técnico",
+        "body": "&#32; submitted by &#32; /u/AngelZINxL_BG [link] &#32; [comments]",
+        "published_at": "2026-10-06T17:37:43.000Z"
+      },
+      "classification": {
+        "confidence": "medium",
+        "reason": "2 dev signal(s), 1 passive term(s), category=project_update",
+        "candidate_type": "port",
+        "category": "project_update",
+        "question": false,
+        "spam": false
+      },
+      "provenance": {
+        "repository_url": null,
+        "release_url": null,
+        "evidence_urls": [],
+        "evidence_bundle_id": null,
+        "repository_identity": null,
+        "repository_created_at": null,
+        "repository_last_activity_at": null,
+        "release_facts": [],
+        "vita_evidence": [],
+        "author_linkage": null,
+        "corroboration": [],
+        "duplicate_relation": {
+          "content_hash": "77297dab7f6c15823edda5976ea356904ee23bd64914496276bcdf3537f880b3",
+          "related_candidate_ids": []
+        }
+      },
+      "campaign": {
+        "cluster_id": "campaign-bc2792b5",
+        "linkage_confidence": "medium",
+        "signals": [
+          "same_author_burst",
+          "shared_outbound_fingerprint"
+        ],
+        "related_candidate_ids": [
+          "reddit-1wz99f0"
+        ],
+        "text_fingerprint": "57c4880b",
+        "media_fingerprints": [
+          "preview.redd.it/893va36xuvth1.png",
+          "i.redd.it/893va36xuvth1.png"
+        ],
+        "outbound_fingerprints": [
+          "www.reddit.com/r/psvitahomebrew/comments/1wz8vrx/wip_port_nativo_de_dragon_ball_z_budokai",
+          "preview.redd.it/893va36xuvth1.png",
+          "www.reddit.com/user/angelzinxl_bg",
+          "i.redd.it/893va36xuvth1.png"
+        ],
+        "direct_intent": false,
+        "explicit_campaign_reference": false,
+        "incident_id": null
+      },
+      "risk_signals": [
+        "no_project_evidence_in_post"
+      ],
+      "evidence_gaps": [
+        "exact project repository",
+        "repository identity and activity facts",
+        "release or build evidence",
+        "Vita-specific hardware evidence",
+        "author/developer linkage and independent corroboration"
+      ],
+      "content_hash": "77297dab7f6c15823edda5976ea356904ee23bd64914496276bcdf3537f880b3",
+      "review": null,
+      "incident": null
+    },
+    {
+      "schema_version": 2,
+      "id": "reddit-1wz8h1s",
+      "external_id": "1wz8h1s",
+      "state": "QUARANTINED",
+      "state_history": [
+        {
+          "state": "DETECTED",
+          "at": "2026-10-06T23:06:53.686Z",
+          "actor": "reddit-scanner",
+          "reason": "Canonical Reddit RSS entry accepted at the ingestion boundary"
+        },
+        {
+          "state": "QUARANTINED",
+          "at": "2026-10-06T23:06:53.686Z",
+          "actor": "reddit-scanner",
+          "reason": "Scanner result is unverified and cannot enter the curated ledger"
+        }
+      ],
+      "source": {
+        "platform": "reddit",
+        "subreddit": "PSVitaHomebrew",
+        "canonical_url": "https://www.reddit.com/r/PSVitaHomebrew/comments/1wz8h1s/scribblenauts_remix_new_native_port_psvita_test/",
+        "author": "JadedEntertainment34",
+        "title": "[SCRIBBLENAUTS REMIX] NEW NATIVE PORT PSVITA TEST YOUR INTELIGENCE #psvita",
+        "body": "Link in video &#32; submitted by &#32; /u/JadedEntertainment34 [link] &#32; [comments]",
+        "published_at": "2026-10-06T17:22:05.000Z"
+      },
+      "classification": {
+        "confidence": "medium",
+        "reason": "1 dev signal(s), 1 passive term(s), category=new_project",
+        "candidate_type": "port",
+        "category": "new_project",
+        "question": false,
+        "spam": false
+      },
+      "provenance": {
+        "repository_url": null,
+        "release_url": null,
+        "evidence_urls": [],
+        "evidence_bundle_id": null,
+        "repository_identity": null,
+        "repository_created_at": null,
+        "repository_last_activity_at": null,
+        "release_facts": [],
+        "vita_evidence": [],
+        "author_linkage": null,
+        "corroboration": [],
+        "duplicate_relation": {
+          "content_hash": "734c04fc81dcdd6a3db5bdc6d17eb42eaf1dba556b40835139d7d50400a08266",
+          "related_candidate_ids": []
+        }
+      },
+      "campaign": {
+        "cluster_id": "campaign-6fb72882",
+        "linkage_confidence": "high",
+        "signals": [
+          "same_author_burst",
+          "shared_outbound_fingerprint",
+          "near_duplicate_wording",
+          "shared_media_fingerprint"
+        ],
+        "related_candidate_ids": [
+          "reddit-1wwtsfr",
+          "reddit-1wvfy93",
+          "reddit-1wzei5e"
+        ],
+        "text_fingerprint": "0b0485b3",
+        "media_fingerprints": [
+          "external-preview.redd.it/vqniu7lnqdp57fboiu5nkz8ppp2ap-p--satj67czyq.jpeg"
+        ],
+        "outbound_fingerprints": [
+          "www.reddit.com/r/psvitahomebrew/comments/1wz8h1s/scribblenauts_remix_new_native_port_psvita_test",
+          "external-preview.redd.it/vqniu7lnqdp57fboiu5nkz8ppp2ap-p--satj67czyq.jpeg",
+          "www.reddit.com/user/jadedentertainment34",
+          "youtu.be/igiujczx_ts"
+        ],
+        "direct_intent": false,
+        "explicit_campaign_reference": false,
+        "incident_id": null
+      },
+      "risk_signals": [],
+      "evidence_gaps": [
+        "exact project repository",
+        "repository identity and activity facts",
+        "release or build evidence",
+        "Vita-specific hardware evidence",
+        "author/developer linkage and independent corroboration"
+      ],
+      "content_hash": "734c04fc81dcdd6a3db5bdc6d17eb42eaf1dba556b40835139d7d50400a08266",
       "review": null,
       "incident": null
     },
@@ -184,6 +565,92 @@
     },
     {
       "schema_version": 2,
+      "id": "reddit-1wysbt6",
+      "external_id": "1wysbt6",
+      "state": "QUARANTINED",
+      "state_history": [
+        {
+          "state": "DETECTED",
+          "at": "2026-10-06T23:06:53.686Z",
+          "actor": "reddit-scanner",
+          "reason": "Canonical Reddit RSS entry accepted at the ingestion boundary"
+        },
+        {
+          "state": "QUARANTINED",
+          "at": "2026-10-06T23:06:53.686Z",
+          "actor": "reddit-scanner",
+          "reason": "Scanner result is unverified and cannot enter the curated ledger"
+        }
+      ],
+      "source": {
+        "platform": "reddit",
+        "subreddit": "PSVitaHomebrew",
+        "canonical_url": "https://www.reddit.com/r/PSVitaHomebrew/comments/1wysbt6/super_mario_strikers/",
+        "author": "axetor",
+        "title": "Super Mario strikers",
+        "body": "Hi everyone, I wanted to introduce myself and share a personal challenge I recently set for myself: trying to create a native port for the PS Vita without being a programmer. I’m developing this project step by step, using AI tools such as Claude, with the goal of showing that, with dedication, learning, and the right tools, it’s possible to create amazing things even without traditional programming experience. My role in this project is mainly as the director. I’m responsible for defining the direction, performing manual testing, identifying problems, and working alongside AI to develop and i",
+        "published_at": "2026-10-06T03:24:34.000Z"
+      },
+      "classification": {
+        "confidence": "medium",
+        "reason": "1 dev signal(s), 1 passive term(s), category=new_project",
+        "candidate_type": "port",
+        "category": "new_project",
+        "question": false,
+        "spam": false
+      },
+      "provenance": {
+        "repository_url": null,
+        "release_url": null,
+        "evidence_urls": [],
+        "evidence_bundle_id": null,
+        "repository_identity": null,
+        "repository_created_at": null,
+        "repository_last_activity_at": null,
+        "release_facts": [],
+        "vita_evidence": [],
+        "author_linkage": null,
+        "corroboration": [],
+        "duplicate_relation": {
+          "content_hash": "1148eba7c09bb3ea40f9f0de8e8566a0052bf9096d0a669b36e39fa9b3ebd593",
+          "related_candidate_ids": []
+        }
+      },
+      "campaign": {
+        "cluster_id": null,
+        "linkage_confidence": "none",
+        "signals": [],
+        "related_candidate_ids": [],
+        "text_fingerprint": "adfc223d",
+        "media_fingerprints": [
+          "external-preview.redd.it/ytdrd3nwznhtcnromfs9unfpqd2nbymgmrnkjdy_q89o4fzfg9bhvlrmsl1w.jpeg"
+        ],
+        "outbound_fingerprints": [
+          "www.reddit.com/r/psvitahomebrew/comments/1wysbt6/super_mario_strikers",
+          "external-preview.redd.it/ytdrd3nwznhtcnromfs9unfpqd2nbymgmrnkjdy_q89o4fzfg9bhvlrmsl1w.jpeg",
+          "www.reddit.com/user/axetor",
+          "v.redd.it/kvhm5skxmrth1"
+        ],
+        "direct_intent": false,
+        "explicit_campaign_reference": false,
+        "incident_id": null
+      },
+      "risk_signals": [
+        "no_project_evidence_in_post"
+      ],
+      "evidence_gaps": [
+        "exact project repository",
+        "repository identity and activity facts",
+        "release or build evidence",
+        "Vita-specific hardware evidence",
+        "author/developer linkage and independent corroboration"
+      ],
+      "content_hash": "1148eba7c09bb3ea40f9f0de8e8566a0052bf9096d0a669b36e39fa9b3ebd593",
+      "review": null,
+      "incident": null
+    },
+    {
+      "schema_version": 2,
       "id": "reddit-1wyjges",
       "external_id": "1wyjges",
       "state": "QUARANTINED",
@@ -267,6 +734,105 @@
     },
     {
       "schema_version": 2,
+      "id": "reddit-1wyhqcq",
+      "external_id": "1wyhqcq",
+      "state": "QUARANTINED",
+      "state_history": [
+        {
+          "state": "DETECTED",
+          "at": "2026-10-06T23:06:53.686Z",
+          "actor": "reddit-scanner",
+          "reason": "Canonical Reddit RSS entry accepted at the ingestion boundary"
+        },
+        {
+          "state": "QUARANTINED",
+          "at": "2026-10-06T23:06:53.686Z",
+          "actor": "reddit-scanner",
+          "reason": "Scanner result is unverified and cannot enter the curated ledger"
+        }
+      ],
+      "source": {
+        "platform": "reddit",
+        "subreddit": "PSVitaHomebrew",
+        "canonical_url": "https://www.reddit.com/r/PSVitaHomebrew/comments/1wyhqcq/i_ported_tony_hawks_underground_natively_to_the/",
+        "author": "grignylagrandeborn",
+        "title": "I ported Tony Hawk's Underground natively to the PS Vita",
+        "body": "This is THUG running natively on the Vita. It's not an emulator or a wrapper, the whole engine was rebuilt for the console with its own graphics backend, and what you see in the trailer is captured straight from the hardware. You get the full game: Story mode, every level, Create-a-Skater, the soundtrack and your saves. Most levels run at or near 60 fps. The only thing missing is the FMV videos, which get skipped. The controls were reworked for the Vita, so L and R handle nollie and switch, the bottom corners of the touchscreen do the spins, and the rear touchpad stays out of your way. THU",
+        "published_at": "2026-10-05T19:25:31.000Z"
+      },
+      "classification": {
+        "confidence": "medium",
+        "reason": "2 dev signal(s), 3 passive term(s), category=project_update",
+        "candidate_type": "wrapper",
+        "category": "project_update",
+        "question": false,
+        "spam": false
+      },
+      "provenance": {
+        "repository_url": null,
+        "release_url": null,
+        "evidence_urls": [],
+        "evidence_bundle_id": null,
+        "repository_identity": null,
+        "repository_created_at": null,
+        "repository_last_activity_at": null,
+        "release_facts": [],
+        "vita_evidence": [],
+        "author_linkage": null,
+        "corroboration": [],
+        "duplicate_relation": {
+          "content_hash": "8dbae7c8487d883940bda09148f0627cabae06cee6cba0dc4da6df619ee84548",
+          "related_candidate_ids": [
+            "reddit-1wycxwx"
+          ]
+        }
+      },
+      "campaign": {
+        "cluster_id": "campaign-8989614d",
+        "linkage_confidence": "high",
+        "signals": [
+          "same_author_burst",
+          "same_wording_fingerprint",
+          "shared_media_fingerprint",
+          "shared_outbound_fingerprint"
+        ],
+        "related_candidate_ids": [
+          "reddit-1wycxwx",
+          "reddit-1wxgz7q",
+          "reddit-1wukxc7"
+        ],
+        "text_fingerprint": "b26a9692",
+        "media_fingerprints": [
+          "external-preview.redd.it/gs0qxxjgoxiu6agqj_lcs1hddvkyowskhkfgivwo_5o.jpeg"
+        ],
+        "outbound_fingerprints": [
+          "www.reddit.com/r/psvitahomebrew/comments/1wyhqcq/i_ported_tony_hawks_underground_natively_to_the",
+          "external-preview.redd.it/gs0qxxjgoxiu6agqj_lcs1hddvkyowskhkfgivwo_5o.jpeg",
+          "github.com/iwannagooutside/thug-vita-port",
+          "www.reddit.com/user/grignylagrandeborn",
+          "www.youtube.com/watch"
+        ],
+        "direct_intent": false,
+        "explicit_campaign_reference": false,
+        "incident_id": null
+      },
+      "risk_signals": [
+        "no_project_evidence_in_post",
+        "crosspost_duplicate"
+      ],
+      "evidence_gaps": [
+        "exact project repository",
+        "repository identity and activity facts",
+        "release or build evidence",
+        "Vita-specific hardware evidence",
+        "author/developer linkage and independent corroboration"
+      ],
+      "content_hash": "8dbae7c8487d883940bda09148f0627cabae06cee6cba0dc4da6df619ee84548",
+      "review": null,
+      "incident": null
+    },
+    {
+      "schema_version": 2,
       "id": "reddit-1wycxwx",
       "external_id": "1wycxwx",
       "state": "QUARANTINED",
@@ -319,14 +885,18 @@
         }
       },
       "campaign": {
-        "cluster_id": "campaign-73dd418c",
-        "linkage_confidence": "medium",
+        "cluster_id": "campaign-8989614d",
+        "linkage_confidence": "high",
         "signals": [
-          "shared_outbound_fingerprint"
+          "shared_outbound_fingerprint",
+          "same_author_burst",
+          "same_wording_fingerprint",
+          "shared_media_fingerprint"
         ],
         "related_candidate_ids": [
           "reddit-1wxgz7q",
-          "reddit-1wukxc7"
+          "reddit-1wukxc7",
+          "reddit-1wyhqcq"
         ],
         "text_fingerprint": "b26a9692",
         "media_fingerprints": [
@@ -435,6 +1005,99 @@
         "author/developer linkage and independent corroboration"
       ],
       "content_hash": "29b041b84513d668190aeb7a0443046f57a7afa41df631062dbfdf81ffa7c5bb",
+      "review": null,
+      "incident": null
+    },
+    {
+      "schema_version": 2,
+      "id": "reddit-1wy0409",
+      "external_id": "1wy0409",
+      "state": "QUARANTINED",
+      "state_history": [
+        {
+          "state": "DETECTED",
+          "at": "2026-10-06T23:06:53.686Z",
+          "actor": "reddit-scanner",
+          "reason": "Canonical Reddit RSS entry accepted at the ingestion boundary"
+        },
+        {
+          "state": "QUARANTINED",
+          "at": "2026-10-06T23:06:53.686Z",
+          "actor": "reddit-scanner",
+          "reason": "Scanner result is unverified and cannot enter the curated ledger"
+        }
+      ],
+      "source": {
+        "platform": "reddit",
+        "subreddit": "PSVitaHomebrew",
+        "canonical_url": "https://www.reddit.com/r/PSVitaHomebrew/comments/1wy0409/updates_real_racing_2_3_betas_200/",
+        "author": "chutA7X",
+        "title": "[Updates] Real Racing 2 & 3 beta's 2.0.0",
+        "body": "&#32; submitted by &#32; /u/chutA7X [link] &#32; [comments]",
+        "published_at": "2026-10-05T05:07:03.000Z"
+      },
+      "classification": {
+        "confidence": "high",
+        "reason": "known developer (chuta7x) activity · category=out_of_scope",
+        "candidate_type": "port",
+        "category": "project_update",
+        "question": false,
+        "spam": false
+      },
+      "provenance": {
+        "repository_url": null,
+        "release_url": null,
+        "evidence_urls": [],
+        "evidence_bundle_id": null,
+        "repository_identity": null,
+        "repository_created_at": null,
+        "repository_last_activity_at": null,
+        "release_facts": [],
+        "vita_evidence": [],
+        "author_linkage": null,
+        "corroboration": [],
+        "duplicate_relation": {
+          "content_hash": "6c5869622393900a693c6ab1589d9db9774a1b06c6788b02645d0e0bc11b7b69",
+          "related_candidate_ids": []
+        }
+      },
+      "campaign": {
+        "cluster_id": "campaign-9ea502c0",
+        "linkage_confidence": "medium",
+        "signals": [
+          "same_author_burst",
+          "shared_outbound_fingerprint"
+        ],
+        "related_candidate_ids": [
+          "reddit-1ww8upq",
+          "reddit-1ww89mj"
+        ],
+        "text_fingerprint": "0d04b8fa",
+        "media_fingerprints": [
+          "preview.redd.it/qy6wklz20lth1.jpeg",
+          "i.redd.it/qy6wklz20lth1.jpeg"
+        ],
+        "outbound_fingerprints": [
+          "www.reddit.com/r/psvitahomebrew/comments/1wy0409/updates_real_racing_2_3_betas_200",
+          "preview.redd.it/qy6wklz20lth1.jpeg",
+          "www.reddit.com/user/chuta7x",
+          "i.redd.it/qy6wklz20lth1.jpeg"
+        ],
+        "direct_intent": false,
+        "explicit_campaign_reference": false,
+        "incident_id": null
+      },
+      "risk_signals": [
+        "no_project_evidence_in_post"
+      ],
+      "evidence_gaps": [
+        "exact project repository",
+        "repository identity and activity facts",
+        "release or build evidence",
+        "Vita-specific hardware evidence",
+        "author/developer linkage and independent corroboration"
+      ],
+      "content_hash": "6c5869622393900a693c6ab1589d9db9774a1b06c6788b02645d0e0bc11b7b69",
       "review": null,
       "incident": null
     },
@@ -578,14 +1241,15 @@
         }
       },
       "campaign": {
-        "cluster_id": "campaign-73dd418c",
+        "cluster_id": "campaign-8989614d",
         "linkage_confidence": "medium",
         "signals": [
           "shared_outbound_fingerprint"
         ],
         "related_candidate_ids": [
           "reddit-1wycxwx",
-          "reddit-1wukxc7"
+          "reddit-1wukxc7",
+          "reddit-1wyhqcq"
         ],
         "text_fingerprint": "9275c509",
         "media_fingerprints": [
@@ -668,14 +1332,16 @@
         }
       },
       "campaign": {
-        "cluster_id": "campaign-c47aea30",
+        "cluster_id": "campaign-6fb72882",
         "linkage_confidence": "medium",
         "signals": [
           "same_author_burst",
           "shared_outbound_fingerprint"
         ],
         "related_candidate_ids": [
-          "reddit-1wvfy93"
+          "reddit-1wvfy93",
+          "reddit-1wzei5e",
+          "reddit-1wz8h1s"
         ],
         "text_fingerprint": "5e35c303",
         "media_fingerprints": [
@@ -757,7 +1423,7 @@
         }
       },
       "campaign": {
-        "cluster_id": "campaign-7eca8d6b",
+        "cluster_id": "campaign-9ea502c0",
         "linkage_confidence": "medium",
         "signals": [
           "same_author_burst",
@@ -765,7 +1431,8 @@
           "shared_outbound_fingerprint"
         ],
         "related_candidate_ids": [
-          "reddit-1ww89mj"
+          "reddit-1ww89mj",
+          "reddit-1wy0409"
         ],
         "text_fingerprint": "76307b7d",
         "media_fingerprints": [
@@ -846,7 +1513,7 @@
         }
       },
       "campaign": {
-        "cluster_id": "campaign-7eca8d6b",
+        "cluster_id": "campaign-9ea502c0",
         "linkage_confidence": "medium",
         "signals": [
           "same_author_burst",
@@ -854,7 +1521,8 @@
           "shared_outbound_fingerprint"
         ],
         "related_candidate_ids": [
-          "reddit-1ww8upq"
+          "reddit-1ww8upq",
+          "reddit-1wy0409"
         ],
         "text_fingerprint": "9d61ccc6",
         "media_fingerprints": [],
@@ -1150,14 +1818,16 @@
         }
       },
       "campaign": {
-        "cluster_id": "campaign-c47aea30",
+        "cluster_id": "campaign-6fb72882",
         "linkage_confidence": "medium",
         "signals": [
           "same_author_burst",
           "shared_outbound_fingerprint"
         ],
         "related_candidate_ids": [
-          "reddit-1wwtsfr"
+          "reddit-1wwtsfr",
+          "reddit-1wzei5e",
+          "reddit-1wz8h1s"
         ],
         "text_fingerprint": "7a484d0e",
         "media_fingerprints": [
@@ -1239,14 +1909,15 @@
         }
       },
       "campaign": {
-        "cluster_id": "campaign-73dd418c",
+        "cluster_id": "campaign-8989614d",
         "linkage_confidence": "medium",
         "signals": [
           "shared_outbound_fingerprint"
         ],
         "related_candidate_ids": [
           "reddit-1wycxwx",
-          "reddit-1wxgz7q"
+          "reddit-1wxgz7q",
+          "reddit-1wyhqcq"
         ],
         "text_fingerprint": "752fdcb0",
         "media_fingerprints": [
@@ -4175,10 +4846,14 @@
         }
       },
       "campaign": {
-        "cluster_id": null,
-        "linkage_confidence": "none",
-        "signals": [],
-        "related_candidate_ids": [],
+        "cluster_id": "campaign-2b41f976",
+        "linkage_confidence": "medium",
+        "signals": [
+          "shared_outbound_fingerprint"
+        ],
+        "related_candidate_ids": [
+          "reddit-1wzdh5y"
+        ],
         "text_fingerprint": "1bcf5943",
         "media_fingerprints": [
           "preview.redd.it/h4r25gnddiqh1.png",
