@@ -1,8 +1,187 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-06T14:13:10.190Z",
+  "generated_at": "2026-10-06T18:56:33.218Z",
   "source": "r/vitahacks + r/VitaPiracy + r/PSVitaHomebrew RSS",
   "items": [
+    {
+      "schema_version": 2,
+      "id": "reddit-1wz99f0",
+      "external_id": "1wz99f0",
+      "state": "QUARANTINED",
+      "state_history": [
+        {
+          "state": "DETECTED",
+          "at": "2026-10-06T18:56:33.218Z",
+          "actor": "reddit-scanner",
+          "reason": "Canonical Reddit RSS entry accepted at the ingestion boundary"
+        },
+        {
+          "state": "QUARANTINED",
+          "at": "2026-10-06T18:56:33.218Z",
+          "actor": "reddit-scanner",
+          "reason": "Scanner result is unverified and cannot enter the curated ledger"
+        }
+      ],
+      "source": {
+        "platform": "reddit",
+        "subreddit": "vitahacks",
+        "canonical_url": "https://www.reddit.com/r/vitahacks/comments/1wz99f0/wip_port_nativo_de_dragon_ball_z_budokai/",
+        "author": "AngelZINxL_BG",
+        "title": "[WIP] Port nativo de Dragon Ball Z: Budokai Tenkaichi 3 para PS Vita — novo progresso técnico",
+        "body": "Olá! Estou desenvolvendo um port nativo experimental de Dragon Ball Z: Budokai Tenkaichi 3 para PS Vita. A base vem do trabalho de recompilação já existente para BT3. Em vez de emular um PS2 inteiro, a proposta é adaptar essa base para rodar diretamente no hardware ARM do Vita. Experimentos anteriores com ARM/Mac também ajudaram a tornar esse caminho mais viável. O projeto ainda não roda o jogo nem tem download disponível, mas os testes técnicos no Vita real avançaram bastante. O que já foi validado no hardware: execução nativa em ARM; memória, threads, VSync e encerramento controlado; backend",
+        "published_at": "2026-10-06T17:52:19.000Z"
+      },
+      "classification": {
+        "confidence": "medium",
+        "reason": "2 dev signal(s), 2 passive term(s), category=project_update",
+        "candidate_type": "port",
+        "category": "project_update",
+        "question": false,
+        "spam": false
+      },
+      "provenance": {
+        "repository_url": null,
+        "release_url": null,
+        "evidence_urls": [],
+        "evidence_bundle_id": null,
+        "repository_identity": null,
+        "repository_created_at": null,
+        "repository_last_activity_at": null,
+        "release_facts": [],
+        "vita_evidence": [],
+        "author_linkage": null,
+        "corroboration": [],
+        "duplicate_relation": {
+          "content_hash": "f733dbd0d37aeb811a66df81009cd4fc5839c9172cd1e60d2008fd0a378aedff",
+          "related_candidate_ids": []
+        }
+      },
+      "campaign": {
+        "cluster_id": null,
+        "linkage_confidence": "none",
+        "signals": [],
+        "related_candidate_ids": [],
+        "text_fingerprint": "65a00565",
+        "media_fingerprints": [
+          "preview.redd.it/1ck6pkqkxvth1.png",
+          "preview.redd.it/q7vtvwhjxvth1.png",
+          "preview.redd.it/3s1d6xhjxvth1.png",
+          "i.redd.it/1ck6pkqkxvth1.png"
+        ],
+        "outbound_fingerprints": [
+          "www.reddit.com/r/vitahacks/comments/1wz99f0/wip_port_nativo_de_dragon_ball_z_budokai",
+          "preview.redd.it/1ck6pkqkxvth1.png",
+          "github.com/angelzinxl/bt3-vita-port/issues/1",
+          "preview.redd.it/q7vtvwhjxvth1.png",
+          "preview.redd.it/3s1d6xhjxvth1.png",
+          "www.reddit.com/user/angelzinxl_bg",
+          "i.redd.it/1ck6pkqkxvth1.png"
+        ],
+        "direct_intent": false,
+        "explicit_campaign_reference": false,
+        "incident_id": null
+      },
+      "risk_signals": [
+        "no_project_evidence_in_post"
+      ],
+      "evidence_gaps": [
+        "exact project repository",
+        "repository identity and activity facts",
+        "release or build evidence",
+        "Vita-specific hardware evidence",
+        "author/developer linkage and independent corroboration"
+      ],
+      "content_hash": "f733dbd0d37aeb811a66df81009cd4fc5839c9172cd1e60d2008fd0a378aedff",
+      "review": null,
+      "incident": null
+    },
+    {
+      "schema_version": 2,
+      "id": "reddit-1wz3ow3",
+      "external_id": "1wz3ow3",
+      "state": "QUARANTINED",
+      "state_history": [
+        {
+          "state": "DETECTED",
+          "at": "2026-10-06T18:56:33.218Z",
+          "actor": "reddit-scanner",
+          "reason": "Canonical Reddit RSS entry accepted at the ingestion boundary"
+        },
+        {
+          "state": "QUARANTINED",
+          "at": "2026-10-06T18:56:33.218Z",
+          "actor": "reddit-scanner",
+          "reason": "Scanner result is unverified and cannot enter the curated ledger"
+        }
+      ],
+      "source": {
+        "platform": "reddit",
+        "subreddit": "vitahacks",
+        "canonical_url": "https://www.reddit.com/r/vitahacks/comments/1wz3ow3/release_umineko_project_vita_port_v10/",
+        "author": "stoicpingu",
+        "title": "[Release] Umineko Project - Vita Port v1.0",
+        "body": "For those who don't know, this is a visual novel, considered one of the best in the medium. 100+ hours of content. For that reason, I didn't fully test all chapters, so let me know if you run into any issues. The port is based on Umineko Project (PS3 assets, fully voiced). The engine (ONScripter-RU) was heavily modified to make it run on Vita, and all assets were optimized. Heads-up: the game is enormous (>100k files), unzipping and transferring files to Vita will take a long time. For the ones who care, yes, this was made with AI, but there's no way in hell this would be possib",
+        "published_at": "2026-10-06T14:14:03.000Z"
+      },
+      "classification": {
+        "confidence": "high",
+        "reason": "3 dev signals: \\[release\\], \\brelease\\b, \\bv\\d+\\.\\d+\\b · category=project_update",
+        "candidate_type": "engine",
+        "category": "project_update",
+        "question": false,
+        "spam": false
+      },
+      "provenance": {
+        "repository_url": null,
+        "release_url": null,
+        "evidence_urls": [],
+        "evidence_bundle_id": null,
+        "repository_identity": null,
+        "repository_created_at": null,
+        "repository_last_activity_at": null,
+        "release_facts": [],
+        "vita_evidence": [],
+        "author_linkage": null,
+        "corroboration": [],
+        "duplicate_relation": {
+          "content_hash": "2012181caea87e2ac92262f53568d34396c160a7b7e719ea462e828d595d1bfb",
+          "related_candidate_ids": []
+        }
+      },
+      "campaign": {
+        "cluster_id": null,
+        "linkage_confidence": "none",
+        "signals": [],
+        "related_candidate_ids": [],
+        "text_fingerprint": "096f333d",
+        "media_fingerprints": [
+          "preview.redd.it/xuyjg9jkuuth1.jpeg",
+          "i.redd.it/xuyjg9jkuuth1.jpeg"
+        ],
+        "outbound_fingerprints": [
+          "www.reddit.com/r/vitahacks/comments/1wz3ow3/release_umineko_project_vita_port_v10",
+          "preview.redd.it/xuyjg9jkuuth1.jpeg",
+          "www.umineko-project.org/en/project-info",
+          "vndb.org/v24",
+          "github.com/stoicpingu/umineko-vita",
+          "www.reddit.com/user/stoicpingu",
+          "i.redd.it/xuyjg9jkuuth1.jpeg"
+        ],
+        "direct_intent": false,
+        "explicit_campaign_reference": false,
+        "incident_id": null
+      },
+      "risk_signals": [],
+      "evidence_gaps": [
+        "exact project repository",
+        "repository identity and activity facts",
+        "Vita-specific hardware evidence",
+        "author/developer linkage and independent corroboration"
+      ],
+      "content_hash": "2012181caea87e2ac92262f53568d34396c160a7b7e719ea462e828d595d1bfb",
+      "review": null,
+      "incident": null
+    },
     {
       "schema_version": 2,
       "id": "reddit-1wyjges",
