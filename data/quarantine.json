@@ -1,8 +1,183 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-05T16:03:01.874Z",
+  "generated_at": "2026-10-06T00:52:35.067Z",
   "source": "r/vitahacks + r/VitaPiracy + r/PSVitaHomebrew RSS",
   "items": [
+    {
+      "schema_version": 2,
+      "id": "reddit-1wyjges",
+      "external_id": "1wyjges",
+      "state": "QUARANTINED",
+      "state_history": [
+        {
+          "state": "DETECTED",
+          "at": "2026-10-06T00:52:35.067Z",
+          "actor": "reddit-scanner",
+          "reason": "Canonical Reddit RSS entry accepted at the ingestion boundary"
+        },
+        {
+          "state": "QUARANTINED",
+          "at": "2026-10-06T00:52:35.067Z",
+          "actor": "reddit-scanner",
+          "reason": "Scanner result is unverified and cannot enter the curated ledger"
+        }
+      ],
+      "source": {
+        "platform": "reddit",
+        "subreddit": "vitahacks",
+        "canonical_url": "https://www.reddit.com/r/vitahacks/comments/1wyjges/release_vitasdr_a_kiwisdr_streaming_client_listen/",
+        "author": "roboplegicwrongcock",
+        "title": "[RELEASE] VitaSDR - A KiwiSDR streaming client - Listen to ham, shortwave etc on the go",
+        "body": "A PS Vita homebrew client for web SDR receivers. Point it at a KiwiSDR and it streams the audio, tunes it, and shows a live RF waterfall — a shortwave/HF radio in your hands, using someone else's antenna over the internet. KiwiSDR audio: IMA-ADPCM decode, windowed-sinc resampler, jitter-buffered playback via sceAudioOut (double-buffered); per-mode make-up gain On-startup server picker with the live public KiwiSDR directory, plus a user favourites list and manual add via the on-screen keyboard Band-jump selector (HF amateur/broadcast bands; VHF entries for later) Tuning (D-pad step + accele",
+        "published_at": "2026-10-05T20:32:23.000Z"
+      },
+      "classification": {
+        "confidence": "high",
+        "reason": "3 dev signals: \\[release\\], \\brelease\\b, \\bhomebrew\\b · category=new_project",
+        "candidate_type": "port",
+        "category": "new_project",
+        "question": false,
+        "spam": false
+      },
+      "provenance": {
+        "repository_url": null,
+        "release_url": null,
+        "evidence_urls": [],
+        "evidence_bundle_id": null,
+        "repository_identity": null,
+        "repository_created_at": null,
+        "repository_last_activity_at": null,
+        "release_facts": [],
+        "vita_evidence": [],
+        "author_linkage": null,
+        "corroboration": [],
+        "duplicate_relation": {
+          "content_hash": "7523e446ccb20c72601690e49206e7a9831dc9bca758075d5da9e41ab1b74ae7",
+          "related_candidate_ids": []
+        }
+      },
+      "campaign": {
+        "cluster_id": null,
+        "linkage_confidence": "none",
+        "signals": [],
+        "related_candidate_ids": [],
+        "text_fingerprint": "00ca9e36",
+        "media_fingerprints": [
+          "external-preview.redd.it/nl_99eifljrtmytc1duggbkvumdrmwjqk42drquvzlc.png"
+        ],
+        "outbound_fingerprints": [
+          "www.reddit.com/r/vitahacks/comments/1wyjges/release_vitasdr_a_kiwisdr_streaming_client_listen",
+          "external-preview.redd.it/nl_99eifljrtmytc1duggbkvumdrmwjqk42drquvzlc.png",
+          "www.reddit.com/user/roboplegicwrongcock",
+          "github.com/hiraethclub/vitasdr"
+        ],
+        "direct_intent": false,
+        "explicit_campaign_reference": false,
+        "incident_id": null
+      },
+      "risk_signals": [],
+      "evidence_gaps": [
+        "exact project repository",
+        "repository identity and activity facts",
+        "Vita-specific hardware evidence",
+        "author/developer linkage and independent corroboration"
+      ],
+      "content_hash": "7523e446ccb20c72601690e49206e7a9831dc9bca758075d5da9e41ab1b74ae7",
+      "review": null,
+      "incident": null
+    },
+    {
+      "schema_version": 2,
+      "id": "reddit-1wycxwx",
+      "external_id": "1wycxwx",
+      "state": "QUARANTINED",
+      "state_history": [
+        {
+          "state": "DETECTED",
+          "at": "2026-10-06T00:52:35.067Z",
+          "actor": "reddit-scanner",
+          "reason": "Canonical Reddit RSS entry accepted at the ingestion boundary"
+        },
+        {
+          "state": "QUARANTINED",
+          "at": "2026-10-06T00:52:35.067Z",
+          "actor": "reddit-scanner",
+          "reason": "Scanner result is unverified and cannot enter the curated ledger"
+        }
+      ],
+      "source": {
+        "platform": "reddit",
+        "subreddit": "vitahacks",
+        "canonical_url": "https://www.reddit.com/r/vitahacks/comments/1wycxwx/i_ported_tony_hawks_underground_natively_to_the/",
+        "author": "grignylagrandeborn",
+        "title": "I ported Tony Hawk's Underground natively to the PS Vita",
+        "body": "This is THUG running natively on the Vita. It's not an emulator or a wrapper, the whole engine was rebuilt for the console with its own graphics backend, and what you see in the trailer is captured straight from the hardware. You get the full game: Story mode, every level, Create-a-Skater, the soundtrack and your saves. Most levels run at or near 60 fps. The only thing missing is the FMV videos, which get skipped. The controls were reworked for the Vita, so L and R handle nollie and switch, the bottom corners of the touchscreen do the spins, and the rear touchpad stays out of your way. THU",
+        "published_at": "2026-10-05T16:23:20.000Z"
+      },
+      "classification": {
+        "confidence": "medium",
+        "reason": "2 dev signal(s), 3 passive term(s), category=project_update",
+        "candidate_type": "wrapper",
+        "category": "project_update",
+        "question": false,
+        "spam": false
+      },
+      "provenance": {
+        "repository_url": null,
+        "release_url": null,
+        "evidence_urls": [],
+        "evidence_bundle_id": null,
+        "repository_identity": null,
+        "repository_created_at": null,
+        "repository_last_activity_at": null,
+        "release_facts": [],
+        "vita_evidence": [],
+        "author_linkage": null,
+        "corroboration": [],
+        "duplicate_relation": {
+          "content_hash": "88d8f9d7101b732e941f4dde2753e7f918c04488ee09c16784e9ea099e72fd46",
+          "related_candidate_ids": []
+        }
+      },
+      "campaign": {
+        "cluster_id": "campaign-73dd418c",
+        "linkage_confidence": "medium",
+        "signals": [
+          "shared_outbound_fingerprint"
+        ],
+        "related_candidate_ids": [
+          "reddit-1wxgz7q",
+          "reddit-1wukxc7"
+        ],
+        "text_fingerprint": "b26a9692",
+        "media_fingerprints": [
+          "external-preview.redd.it/gs0qxxjgoxiu6agqj_lcs1hddvkyowskhkfgivwo_5o.jpeg"
+        ],
+        "outbound_fingerprints": [
+          "www.reddit.com/r/vitahacks/comments/1wycxwx/i_ported_tony_hawks_underground_natively_to_the",
+          "external-preview.redd.it/gs0qxxjgoxiu6agqj_lcs1hddvkyowskhkfgivwo_5o.jpeg",
+          "github.com/iwannagooutside/thug-vita-port",
+          "www.reddit.com/user/grignylagrandeborn",
+          "www.youtube.com/watch"
+        ],
+        "direct_intent": false,
+        "explicit_campaign_reference": false,
+        "incident_id": null
+      },
+      "risk_signals": [
+        "no_project_evidence_in_post"
+      ],
+      "evidence_gaps": [
+        "exact project repository",
+        "repository identity and activity facts",
+        "release or build evidence",
+        "Vita-specific hardware evidence",
+        "author/developer linkage and independent corroboration"
+      ],
+      "content_hash": "88d8f9d7101b732e941f4dde2753e7f918c04488ee09c16784e9ea099e72fd46",
+      "review": null,
+      "incident": null
+    },
     {
       "schema_version": 2,
       "id": "reddit-1wy8t7x",
@@ -224,13 +399,14 @@
         }
       },
       "campaign": {
-        "cluster_id": "campaign-357805fa",
+        "cluster_id": "campaign-73dd418c",
         "linkage_confidence": "medium",
         "signals": [
           "shared_outbound_fingerprint"
         ],
         "related_candidate_ids": [
-          "reddit-1wukxc7"
+          "reddit-1wukxc7",
+          "reddit-1wycxwx"
         ],
         "text_fingerprint": "9275c509",
         "media_fingerprints": [
@@ -884,13 +1060,14 @@
         }
       },
       "campaign": {
-        "cluster_id": "campaign-357805fa",
+        "cluster_id": "campaign-73dd418c",
         "linkage_confidence": "medium",
         "signals": [
           "shared_outbound_fingerprint"
         ],
         "related_candidate_ids": [
-          "reddit-1wxgz7q"
+          "reddit-1wxgz7q",
+          "reddit-1wycxwx"
         ],
         "text_fingerprint": "752fdcb0",
         "media_fingerprints": [
