@@ -1,6 +1,16 @@
 # VitaHarbor project state
 
-Updated: 2026-10-02
+Updated: 2026-10-07
+
+## Current state: VH-UI-DATA-INTEGRATION-044 Data Worker Integration & UI Correctness (2026-10-07)
+
+- Data and UI audit integrated:
+  - Canonical Halo CE Vita port active (`halo-ce-vita`, BirchWoodGod v1.0.3).
+  - Screenshot provenance corrected: only verified screenshots (RC Cars, Halo CE) mapped with explicit source URLs; unverified media gracefully fall back to clean title card.
+  - Bento card repository CTA updated from 'Get VPK' to 'Source'.
+  - Unverified generic 3D OLED text removed (no generic 60 FPS / hardware build claims).
+  - Tactile Game Dock & Camera View Presets active in ConsoleStage.
+- Verification: npm run verify passed (tsc clean, 134/134 unit tests, 7/7 integration tests, 28 prerendered project pages, 31 sitemap URLs).
 
 ## Current state: VH-PERF-UI-043 3D Interactive Dock & Performance Optimizations (2026-10-02)
 

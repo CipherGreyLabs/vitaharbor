@@ -493,7 +493,7 @@ export const DirectoryTable: React.FC<DirectoryTableProps> = ({
                               rel="noopener noreferrer"
                               className="inline-flex min-h-[34px] items-center gap-1.5 rounded-md bg-white px-2.5 py-1 text-[11px] font-semibold text-black hover:bg-zinc-200 transition-colors"
                             >
-                              <span>Get VPK</span>
+                              <span>Source</span>
                               <ExternalLink className="h-3 w-3" />
                             </a>
                           )}

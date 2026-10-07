@@ -1,5 +1,5 @@
 const KNOWN_DEVELOPER_USERNAMES = new Set([
-  "rinnegatamante", "chuta7x", "karat46", "sonicmastr", "northfear",
+  "rinnegatamante", "chuta7x", "sonicmastr", "northfear",
   "patnosdd", "danielsant0s", "zeno99", "hatoving", "alexbatalov",
   "fgsfds", "mylegguy", "rob1n994", "zm2283145", "withlogic",
   "ndrwhun", "brendonm17", "thespasticgamer", "devwithzachary",
@@ -84,7 +84,8 @@ const STRONG_DEVELOPMENT_SIGNALS = [
   /\b(?:source code|pull.?request|release build|demo build)\b/i,
   /\[release\]/i,
   /\b(?:initial|public|port)\s+release\b/i,
-  /\b(?:data\s+files|vpk\s+release)\b/i,
+  /\b(?:first|initial)\s+(?:public\s+)?(?:alpha|beta)\s+release\b/i,
+  /\bvpk\s+release\b/i,
   /\b(?:static\s+recompil(?:ation|e|er)|dynarec|dynamic\s+recompilation|soloader|kubridge|vitagl)\b/i,
   /\b(?:n64recomp|zelda64recomp|custom\s+engine|engine\s+rewrite|decompilation\s+progress)\b/i,
   /\b(?:reverse\s+engineering\s+progress|c\+\+\s+rewrite|openbor|openmw|scummvm)\b/i,
@@ -197,6 +198,8 @@ export function classify(entry) {
     projectIdentity,
     developmentEvidence: developmentEvidence.length > 0
   });
+  // Keep generic upstream references available for internal quarantine and
+  // risk review, but never relabel them as Vita project updates.
   const genericEvidenceRecord = category === "out_of_scope"
     && /\b(?:github(?:\.com)?|gitlab(?:\.com)?|codeberg(?:\.org)?)\b/i.test(full)
     && /\b(?:engine|repository|update)\b/i.test(full);
@@ -205,8 +208,8 @@ export function classify(entry) {
     const sample = devHits.slice(0, 3).map((re) => re.source).join(", ");
     return { accept: accepted, confidence: "high", question: substantiveQuestion, spam: false, category, project_identity: projectIdentity, development_evidence: developmentEvidence.length, reason: devHits.length + " dev signals: " + sample + " · category=" + category };
   }
-  if (isKnownDev && (devHits.length >= 1 || developmentEvidence.length >= 1)) {
-    return { accept: true, confidence: "high", question: false, spam: false, category: category === "out_of_scope" ? "project_update" : category, project_identity: true, development_evidence: Math.max(developmentEvidence.length, 1), reason: "known developer (" + authorLower + ") activity · category=" + category };
+  if (isKnownDev && accepted && isTrackableCandidateCategory(category) && developmentEvidence.length >= 1) {
+    return { accept: true, confidence: "high", question: substantiveQuestion, spam: false, category, project_identity: projectIdentity, development_evidence: developmentEvidence.length, reason: "known developer (" + authorLower + ") activity · category=" + category };
   }
   if (devHits.length >= 1 && qHits.length === 0 && passiveHits.length >= 1) {
     return { accept: accepted, confidence: "medium", question: false, spam: false, category, project_identity: projectIdentity, development_evidence: developmentEvidence.length, reason: devHits.length + " dev signal(s), " + passiveHits.length + " passive term(s), category=" + category };

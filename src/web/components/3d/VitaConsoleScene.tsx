@@ -290,14 +290,14 @@ export const VitaConsoleScene: React.FC<VitaConsoleSceneProps> = ({
 
       if (!current) {
         const idle = g.createLinearGradient(0, 0, 0, 544);
-        idle.addColorStop(0, '#101320');
-        idle.addColorStop(1, '#05060a');
+        idle.addColorStop(0, "#101320");
+        idle.addColorStop(1, "#05060a");
         g.fillStyle = idle;
         g.fillRect(0, 0, 960, 544);
-        g.fillStyle = 'rgba(255,255,255,0.28)';
-        g.font = '500 17px -apple-system, Helvetica, Arial, sans-serif';
-        g.textAlign = 'center';
-        g.fillText('SELECT A PORT', 480, 272);
+        g.fillStyle = "rgba(255,255,255,0.28)";
+        g.font = "500 17px -apple-system, Helvetica, Arial, sans-serif";
+        g.textAlign = "center";
+        g.fillText("SELECT A PORT", 480, 272);
         screenTexture.needsUpdate = true;
         return;
       }
@@ -307,133 +307,84 @@ export const VitaConsoleScene: React.FC<VitaConsoleSceneProps> = ({
         const scale = Math.max(960 / sourceImage.naturalWidth, 544 / sourceImage.naturalHeight);
         const width = sourceImage.naturalWidth * scale;
         const height = sourceImage.naturalHeight * scale;
-        g.fillStyle = '#05060a';
+        g.fillStyle = "#05060a";
         g.fillRect(0, 0, 960, 544);
         g.drawImage(sourceImage, (960 - width) / 2, (544 - height) / 2, width, height);
         const shade = g.createLinearGradient(0, 0, 0, 544);
-        shade.addColorStop(0, 'rgba(0,0,0,0.12)');
-        shade.addColorStop(0.78, 'rgba(0,0,0,0.02)');
-        shade.addColorStop(1, 'rgba(0,0,0,0.38)');
+        shade.addColorStop(0, "rgba(0,0,0,0.08)");
+        shade.addColorStop(0.78, "rgba(0,0,0,0.01)");
+        shade.addColorStop(1, "rgba(0,0,0,0.2)");
         g.fillStyle = shade;
         g.fillRect(0, 0, 960, 544);
-        g.fillStyle = 'rgba(255,255,255,0.62)';
-        g.font = '500 15px -apple-system, Helvetica, Arial, sans-serif';
-        g.textAlign = 'left';
-        g.fillText('VITAHARBOR · SOURCE FRAME', 34, 42);
         screenTexture.needsUpdate = true;
         return;
       }
 
-      const rawTitle = String(current.game_title || current.display_name || 'Homebrew');
-      const title = rawTitle.split('(')[0].trim();
-      const platform = String(current.original_platform || 'PlayStation Vita');
-      const stage = String(current.current_stage || 'wip').replace(/_/g, ' ').toUpperCase();
+      const rawTitle = String(current.game_title || current.display_name || "Homebrew");
+      const title = rawTitle.split("(")[0].trim();
+      const platform = String(current.original_platform || "PlayStation Vita");
+      const stage = String(current.current_stage || "wip").replace(/_/g, " ").toUpperCase();
 
-      // Cinematic key art: deep base, one soft light source, faint screen texture.
-      const base = g.createLinearGradient(0, 0, 960, 544);
-      base.addColorStop(0, '#00081a');
-      base.addColorStop(0.55, '#0a0c14');
-      base.addColorStop(1, '#05060a');
-      g.fillStyle = base;
+      g.fillStyle = "#020204";
       g.fillRect(0, 0, 960, 544);
 
-      const accent = '#4d7cfe';
-      const glow = g.createRadialGradient(720, 110, 10, 720, 110, 640);
-      glow.addColorStop(0, 'rgba(0, 230, 255, 0.32)');
-      glow.addColorStop(0.34, 'rgba(77, 124, 254, 0.2)');
-      glow.addColorStop(1, 'rgba(0,0,0,0)');
+      const glow = g.createRadialGradient(480, 272, 10, 480, 272, 450);
+      glow.addColorStop(0, "rgba(255, 255, 255, 0.04)");
+      glow.addColorStop(1, "rgba(0, 0, 0, 0)");
       g.fillStyle = glow;
       g.fillRect(0, 0, 960, 544);
 
-      const vignette = g.createRadialGradient(480, 280, 200, 480, 280, 640);
-      vignette.addColorStop(0, 'rgba(0,0,0,0)');
-      vignette.addColorStop(1, 'rgba(0,0,0,0.72)');
-      g.fillStyle = vignette;
-      g.fillRect(0, 0, 960, 544);
+      g.fillStyle = "rgba(255, 255, 255, 0.012)";
+      for (let scan = 0; scan < 544; scan += 2) g.fillRect(0, scan, 960, 1);
 
-      g.strokeStyle = 'rgba(122, 159, 255, 0.09)';
-      g.lineWidth = 1;
-      for (let x = 40; x < 960; x += 48) {
-        g.beginPath();
-        g.moveTo(x, 0);
-        g.lineTo(x, 544);
-        g.stroke();
-      }
-      g.fillStyle = 'rgba(255,255,255,0.025)';
-      for (let scan = 0; scan < 544; scan += 3) g.fillRect(0, scan, 960, 1);
+      g.textAlign = "center";
+      g.textBaseline = "middle";
 
-      // Authentic PS Vita LiveArea Game Title Card
-      g.textAlign = 'left';
-      g.textBaseline = 'alphabetic';
-
-      // Top status pill (LiveArea style)
-      g.fillStyle = 'rgba(0, 230, 255, 0.15)';
+      // Stage Pill
+      g.fillStyle = "rgba(255, 255, 255, 0.08)";
       g.beginPath();
-      g.roundRect(56, 44, 210, 32, 16);
+      g.roundRect(380, 90, 200, 28, 14);
       g.fill();
-      g.strokeStyle = 'rgba(0, 230, 255, 0.4)';
+      g.strokeStyle = "rgba(255, 255, 255, 0.12)";
       g.lineWidth = 1;
       g.stroke();
 
-      g.fillStyle = '#00e6ff';
-      g.beginPath();
-      g.arc(74, 60, 4, 0, Math.PI * 2);
-      g.fill();
-
-      g.fillStyle = '#ffffff';
-      g.font = '700 12px ui-monospace, SFMono-Regular, Menlo, monospace';
-      g.fillText(stage.toUpperCase(), 86, 64);
+      g.fillStyle = "#e4e4e7";
+      g.font = "600 11px ui-monospace, SFMono-Regular, Menlo, monospace";
+      g.fillText(stage, 480, 104);
 
       // Game Title
-      const words = title.split(' ').filter(Boolean);
-      const longest = words.reduce((a, b) => (b.length > a.length ? b : a), '');
-      let size = 80;
-      g.font = '700 ' + size + 'px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
-      while (g.measureText(longest).width > 800 && size > 32) {
+      const words = title.split(" ").filter(Boolean);
+      const longest = words.reduce((a, b) => (b.length > a.length ? b : a), "");
+      let size = 64;
+      g.font = "600 " + size + "px -apple-system, BlinkMacSystemFont, \"SF Pro Display\", \"Inter\", sans-serif";
+      while (g.measureText(longest).width > 760 && size > 28) {
         size -= 4;
-        g.font = '700 ' + size + 'px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
+        g.font = "600 " + size + "px -apple-system, BlinkMacSystemFont, \"SF Pro Display\", \"Inter\", sans-serif";
       }
 
-      g.fillStyle = '#ffffff';
-      g.shadowColor = 'rgba(0, 0, 0, 0.8)';
-      g.shadowBlur = 16;
-      let line = '';
-      let cursorY = words.length > 2 ? 220 : 250;
+      g.fillStyle = "#ffffff";
+      let line = "";
+      let cursorY = 240;
       for (const word of words) {
-        const next = line ? line + ' ' + word : word;
-        if (g.measureText(next).width > 820 && line) {
-          g.fillText(line, 56, cursorY);
-          cursorY += size * 1.05;
+        const next = line ? line + " " + word : word;
+        if (g.measureText(next).width > 780 && line) {
+          g.fillText(line, 480, cursorY);
+          cursorY += size * 1.08;
           line = word;
         } else {
           line = next;
         }
       }
-      g.fillText(line, 56, cursorY);
-      g.shadowBlur = 0;
+      g.fillText(line, 480, cursorY);
 
-      // Platform & Tech subtitle
-      const techs = (current.technologies || []).slice(0, 2).join(' · ');
-      const techLabel = techs ? (platform + ' · ' + techs) : (platform + ' · Native Port');
-      g.fillStyle = 'rgba(215, 230, 255, 0.78)';
-      g.font = '500 18px ui-monospace, SFMono-Regular, Menlo, monospace';
-      g.fillText(techLabel, 56, cursorY + 44);
-
-      // Bottom PlayStation bar
-      g.fillStyle = 'rgba(255, 255, 255, 0.12)';
-      g.fillRect(56, 475, 848, 1);
-
-      g.fillStyle = 'rgba(255, 255, 255, 0.45)';
-      g.font = '600 12px ui-monospace, SFMono-Regular, Menlo, monospace';
-      g.fillText('PLAYSTATION®VITA HARDWARE BUILD', 56, 502);
-
-      g.textAlign = 'right';
-      g.fillText('60 FPS TARGET', 904, 502);
+      // Platform Subtitle
+      g.fillStyle = "#71717a";
+      g.font = "400 16px -apple-system, BlinkMacSystemFont, \"SF Pro Display\", \"Inter\", sans-serif";
+      g.fillText(platform, 480, cursorY + 42);
 
       screenTexture.needsUpdate = true;
     }
-
-
 const recessMat = new THREE.MeshStandardMaterial({color:'#14161a',roughness:0.52,metalness:0.12});
     const rimMat = new THREE.MeshStandardMaterial({color:'#1f2125',roughness:0.62,metalness:0.06});
 

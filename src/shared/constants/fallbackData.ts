@@ -32,7 +32,7 @@ export const FALLBACK_GAMES: Game[] = [
 ,
   { id: 41, slug: "test-drive-ii-vita", title: "Test Drive II", normalized_title: "test drive ii", original_release_year: null, original_platform: "Various", created_at: new Date('2026-09-30T14:36:07.000Z'), updated_at: new Date('2026-09-30T19:17:30.541Z') }
 ,
-  { id: 42, slug: "halo-ce-decomp-pc-and-android-vita", title: "Halo CE Decomp - Pc and Android", normalized_title: "halo ce decomp - pc and android", original_release_year: null, original_platform: "Various", created_at: new Date('2026-09-30T19:19:17.427Z'), updated_at: new Date('2026-09-30T19:19:17.427Z') }
+  { id: 42, slug: "halo-combat-evolved", title: "Halo: Combat Evolved", normalized_title: "halo combat evolved", original_release_year: null, original_platform: "Xbox", created_at: new Date('2026-10-02T01:36:54.000Z'), updated_at: new Date('2026-10-06T22:49:53.000Z') }
 ];
 
 export const FALLBACK_PROJECTS: any[] = [
@@ -55,8 +55,6 @@ export const FALLBACK_PROJECTS: any[] = [
     game_title: "Medal of Honor: Allied Assault (OpenMoHAA)",
     original_platform: "PC",
     original_release_year: 2002,
-    screenshot_url: "/screenshots/openmohaa.jpg",
-    screenshot_alt: "Medal of Honor: Allied Assault OpenMoHAA gameplay screenshot",
     technologies: ["OpenMoHAA", "Native C++", "vitaGL"],
     developers: [{ id: 1, role: "lead", display_name: "OpenMoHAA Team", slug: "openmohaa-team" }]
   },
@@ -78,9 +76,7 @@ export const FALLBACK_PROJECTS: any[] = [
     is_archived: false,
     game_title: "Super Smash Bros. Melee",
     original_platform: "GameCube / Decomp",
-    original_release_year: 2001,
-    screenshot_url: "/screenshots/smash-melee.jpg",
-    screenshot_alt: "Super Smash Bros. Melee gameplay artwork",
+    original_release_year: null,
     technologies: ["Aurora", "SceGXM", "vitaGL", "Decompilation", "Native C++"],
     developers: [
       { id: 13, role: "lead", display_name: "rob1n994", slug: "rob1n994" },
@@ -106,8 +102,6 @@ export const FALLBACK_PROJECTS: any[] = [
     game_title: "Hollow Knight",
     original_platform: "PC / Unity",
     original_release_year: 2017,
-    screenshot_url: "/screenshots/hollow-knight.jpg",
-    screenshot_alt: "Hollow Knight gameplay screenshot",
     technologies: ["Unity C# Decomp", "Native ARM"],
     developers: [{ id: 3, role: "lead", display_name: "patnosDD", slug: "patnosdd" }]
   },
@@ -130,8 +124,6 @@ export const FALLBACK_PROJECTS: any[] = [
     game_title: "The Legend of Zelda: Twilight Princess",
     original_platform: "GameCube / Wii Decomp",
     original_release_year: 2006,
-    screenshot_url: "/screenshots/zelda-twilight-princess.jpg",
-    screenshot_alt: "The Legend of Zelda: Twilight Princess gameplay",
     technologies: ["Decompilation", "vitaGL"],
     developers: [{ id: 2, role: "lead", display_name: "Community Decomp Team", slug: "community-decomp" }]
   },
@@ -153,8 +145,6 @@ export const FALLBACK_PROJECTS: any[] = [
     game_title: "Portal (Source Engine / N64 Decomp)",
     original_platform: "PC",
     original_release_year: 2007,
-    screenshot_url: "/screenshots/portal.jpg",
-    screenshot_alt: "Portal gameplay screenshot",
     technologies: ["Native C++", "OpenGL ES"],
     developers: [{ id: 4, role: "lead", display_name: "DanielSant0s", slug: "danielsant0s" }]
   },
@@ -176,8 +166,6 @@ export const FALLBACK_PROJECTS: any[] = [
     game_title: "Spider-Man: Total Mayhem",
     original_platform: "Android ARMv7",
     original_release_year: 2010,
-    screenshot_url: "/screenshots/spider-man-total-mayhem.jpg",
-    screenshot_alt: "Spider-Man: Total Mayhem gameplay",
     technologies: ["ARMv7 Wrapper", "vitaGL"],
     developers: [{ id: 5, role: "lead", display_name: "Rinnegatamante", slug: "rinnegatamante" }]
   },
@@ -199,8 +187,6 @@ export const FALLBACK_PROJECTS: any[] = [
     game_title: "The Simpsons: Hit & Run",
     original_platform: "PS2 / GameCube",
     original_release_year: 2003,
-    screenshot_url: "/screenshots/simpsons-hit-and-run.jpg",
-    screenshot_alt: "The Simpsons: Hit & Run gameplay",
     technologies: ["Reverse-Engineered Engine"],
     developers: [{ id: 6, role: "lead", display_name: "Zeno99", slug: "zeno99" }]
   },
@@ -222,8 +208,6 @@ export const FALLBACK_PROJECTS: any[] = [
     game_title: "Star Wars: Knights of the Old Republic",
     original_platform: "Xbox / PC / Android",
     original_release_year: 2003,
-    screenshot_url: "/screenshots/kotor.jpg",
-    screenshot_alt: "Star Wars: Knights of the Old Republic gameplay",
     technologies: ["ARMv7 Wrapper"],
     developers: [{ id: 5, role: "lead", display_name: "Rinnegatamante", slug: "rinnegatamante" }]
   },
@@ -245,8 +229,6 @@ export const FALLBACK_PROJECTS: any[] = [
     game_title: "Need for Speed: Hot Pursuit",
     original_platform: "Android",
     original_release_year: 2010,
-    screenshot_url: "/screenshots/nfs-hot-pursuit.jpg",
-    screenshot_alt: "Need for Speed: Hot Pursuit gameplay",
     technologies: ["ARMv7 Wrapper", "vitaGL"],
     developers: [{ id: 7, role: "lead", display_name: "hatoving", slug: "hatoving" }]
   },
@@ -270,8 +252,6 @@ export const FALLBACK_PROJECTS: any[] = [
     game_title: "Ren'Py 8 Runtime (Python 3.11)",
     original_platform: "Multiplatform Engine",
     original_release_year: 2024,
-    screenshot_url: "/screenshots/cave-story.jpg",
-    screenshot_alt: "Ren'Py visual novel runtime",
     technologies: ["Python 3.11", "SDL2", "vitaGL"],
     developers: [{ id: 8, role: "lead", display_name: "SonicMastr", slug: "sonicmastr" }]
   },
@@ -294,8 +274,6 @@ export const FALLBACK_PROJECTS: any[] = [
     game_title: "Zelda: Ship of Harkinian (Ocarina of Time)",
     original_platform: "N64 / PC Decomp",
     original_release_year: 1998,
-    screenshot_url: "/screenshots/zelda-oot.jpg",
-    screenshot_alt: "Zelda: Ship of Harkinian Ocarina of Time gameplay",
     technologies: ["Native C++", "libultraship", "vitaGL"],
     developers: [{ id: 9, role: "lead", display_name: "Northfear", slug: "northfear" }]
   },
@@ -317,8 +295,6 @@ export const FALLBACK_PROJECTS: any[] = [
     game_title: "Slingshot Racing",
     original_platform: "Android / iOS",
     original_release_year: 2012,
-    screenshot_url: "/screenshots/slingshot-racing.jpg",
-    screenshot_alt: "Slingshot Racing gameplay",
     technologies: ["ARMv7 Wrapper", "vitaGL"],
     developers: [{ id: 5, role: "lead", display_name: "Rinnegatamante", slug: "rinnegatamante" }]
   },
@@ -340,8 +316,6 @@ export const FALLBACK_PROJECTS: any[] = [
     game_title: "Fallout 2 Community Edition",
     original_platform: "PC",
     original_release_year: 1998,
-    screenshot_url: "/screenshots/fallout-2.jpg",
-    screenshot_alt: "Fallout 2 Community Edition gameplay",
     technologies: ["Native C++"],
     developers: [{ id: 10, role: "lead", display_name: "alexbatalov", slug: "alexbatalov" }]
   },
@@ -363,8 +337,6 @@ export const FALLBACK_PROJECTS: any[] = [
     game_title: "Render96 HD SM64 Vita",
     original_platform: "PC Decomp",
     original_release_year: 2020,
-    screenshot_url: "/screenshots/smash-melee.jpg",
-    screenshot_alt: "Render96 HD Super Mario 64",
     technologies: ["Native C++", "OpenGL"],
     developers: [{ id: 11, role: "lead", display_name: "fgsfds", slug: "fgsfds" }]
   },
@@ -386,8 +358,6 @@ export const FALLBACK_PROJECTS: any[] = [
     game_title: "Celeste Classic Vita",
     original_platform: "PICO-8 / C",
     original_release_year: 2016,
-    screenshot_url: "/screenshots/celeste.jpg",
-    screenshot_alt: "Celeste Classic gameplay",
     technologies: ["Native C", "SDL2"],
     developers: [{ id: 12, role: "lead", display_name: "MyLegGuy", slug: "mylegguy" }]
   },
@@ -411,8 +381,6 @@ export const FALLBACK_PROJECTS: any[] = [
     game_title: "Renegade Vita - Demo Release",
     original_platform: "Unknown",
     original_release_year: null,
-    screenshot_url: "/screenshots/cnc-renegade.png",
-    screenshot_alt: "Renegade Vita demo release hardware capture",
     technologies: [],
     developers: []
   },
@@ -462,8 +430,6 @@ export const FALLBACK_PROJECTS: any[] = [
     game_title: "Call of Duty: Zombies",
     original_platform: "iOS",
     original_release_year: 2009,
-    screenshot_url: "/screenshots/cod-zombies.png",
-    screenshot_alt: "Call of Duty: Zombies hardware gameplay capture",
     technologies: ["iOS loader"],
     developers: []
   },
@@ -471,8 +437,6 @@ export const FALLBACK_PROJECTS: any[] = [
     id: 27,
     game_id: 27,
     slug: "call-of-duty-4-vita",
-    screenshot_url: "/screenshots/call-of-duty-4.webp",
-    screenshot_alt: "Call of Duty 4 gameplay photographed on a PS Vita",
     display_name: "Call of Duty 4: Modern Warfare Vita",
     current_stage: "in_game",
     lifecycle: "active",
@@ -513,8 +477,6 @@ export const FALLBACK_PROJECTS: any[] = [
     game_title: "C-Dogs SDL",
     original_platform: "DOS / SDL",
     original_release_year: null,
-    screenshot_url: "/screenshots/c-dogs-sdl.png",
-    screenshot_alt: "C-Dogs SDL gameplay screenshot",
     technologies: ["Native Vita build", "SDL"],
     developers: []
   },
@@ -539,8 +501,6 @@ export const FALLBACK_PROJECTS: any[] = [
     game_title: "Resident Evil 4",
     original_platform: "GameCube / PS2 / Android",
     original_release_year: 2005,
-    screenshot_url: "/screenshots/resident-evil-4.jpg",
-    screenshot_alt: "Resident Evil 4 gameplay",
     technologies: ["ARMv7 Wrapper / Soloader", "vitaGL"],
     developers: [{ id: 5, role: "lead", display_name: "Rinnegatamante", slug: "rinnegatamante" }]
   }
@@ -566,8 +526,6 @@ export const FALLBACK_PROJECTS: any[] = [
     game_title: "Real Racing 2",
     original_platform: "iOS / Android",
     original_release_year: 2010,
-    screenshot_url: "/screenshots/real-racing-2.png",
-    screenshot_alt: "Real Racing 2 PS Vita beta gameplay",
     technologies: ["ARMv7 Wrapper", "vitaGL", "OpenGLES"],
     developers: [{ id: 23, role: "lead", display_name: "chutA7X", slug: "chuta7x" }],
     stage_history: [
@@ -596,8 +554,6 @@ export const FALLBACK_PROJECTS: any[] = [
     game_title: "Diddy Kong Racing (Golden Balloon)",
     original_platform: "N64 / Decomp",
     original_release_year: 1997,
-    screenshot_url: "/screenshots/diddy-kong-racing.jpg",
-    screenshot_alt: "Diddy Kong Racing Golden Balloon hero screenshot",
     technologies: ["Native C", "N64 Decompilation", "vitaGL", "Restored Visuals"],
     developers: [{ id: 14, role: "lead", display_name: "zm2283145", slug: "zm2283145" }],
     stage_history: [
@@ -626,8 +582,6 @@ export const FALLBACK_PROJECTS: any[] = [
     game_title: "Command & Conquer: Renegade",
     original_platform: "PC",
     original_release_year: 2002,
-    screenshot_url: "/screenshots/cnc-renegade.png",
-    screenshot_alt: "Command & Conquer: Renegade native Vita port",
     technologies: ["Native C++", "Open-Source Engine", "vitaGL"],
     developers: [{ id: 24, role: "lead", display_name: "Renegade Team", slug: "renegade-team" }],
     stage_history: [
@@ -656,8 +610,6 @@ export const FALLBACK_PROJECTS: any[] = [
     game_title: "GTA: Liberty City Stories (reStories)",
     original_platform: "PSP / PS2",
     original_release_year: 2005,
-    screenshot_url: "/screenshots/gta-lcs.png",
-    screenshot_alt: "GTA: Liberty City Stories reStories LiveArea artwork",
     technologies: ["Native C++", "reStories Decompilation", "vitaGL", "Hardware Shaders"],
     developers: [{ id: 26, role: "lead", display_name: "fauxrouge", slug: "fauxrouge" }],
     stage_history: [
@@ -687,8 +639,6 @@ export const FALLBACK_PROJECTS: any[] = [
     game_title: "Test Drive III",
     original_platform: "Various",
     original_release_year: null,
-    screenshot_url: "/screenshots/test-drive-iii-bg.png",
-    screenshot_alt: "Test Drive III Vita port LiveArea background",
     technologies: ["VitaSDK"],
     developers: [{ id: 40, role: "lead", display_name: "gainusha", slug: "gainusha" }],
     stage_history: [
@@ -717,8 +667,6 @@ export const FALLBACK_PROJECTS: any[] = [
     game_title: "Test Drive II",
     original_platform: "Various",
     original_release_year: null,
-    screenshot_url: "/screenshots/test-drive-ii-bg.png",
-    screenshot_alt: "Test Drive II Vita port LiveArea background",
     technologies: ["VitaSDK"],
     developers: [{ id: 41, role: "lead", display_name: "gainusha", slug: "gainusha" }],
     stage_history: [
@@ -727,33 +675,33 @@ export const FALLBACK_PROJECTS: any[] = [
   }
 ,
   {
-    id: 42,
+    id: 43,
     game_id: 42,
-    slug: "halo-ce-decomp-pc-and-android-vita",
-    reddit_url: "https://www.reddit.com/r/PSVitaHomebrew/comments/1wtm0y6/halo_ce_decomp_pc_and_android/",
-    repo_url: "https://github.com/cybersecurity/halo-ce-universal",
+    slug: "halo-ce-vita",
+    reddit_url: "https://www.reddit.com/r/VitaPiracy/comments/1wvhkaf/halo_ce_port_release/",
+    repo_url: "https://github.com/BirchWoodGod/halo-ce-vita",
     display_name: "Halo: Combat Evolved Vita",
-    current_stage: "playable",
+    current_stage: "released",
     lifecycle: "active",
-    summary: "PlayStation Vita port of Halo: Combat Evolved based on the universal decompilation project. Initial playable release build and data files surfaced on October 2, 2026.",
-    playability_notes: "Initial community release build boots campaign missions on Vita hardware with controller bindings and audio. Data files and language assets circulating in community releases.",
-    performance_notes: "Targeting native hardware performance.",
-    first_seen_at: new Date('2026-09-30T19:19:17.427Z'),
-    last_activity_at: new Date('2026-10-02T02:00:00.000Z'),
-    released_at: new Date('2026-10-02T02:00:00.000Z'),
+    summary: "Native PlayStation Vita port built from the Xbox decompilation. The official repository publishes the VPK and states that game data is not included.",
+    playability_notes: "The maintainer reports the campaign playable. System-link multiplayer is still being tested; users need their own Xbox copy of Halo: Combat Evolved.",
+    performance_notes: "The maintainer reports up to 30 FPS; large fights can run slower, depending on scene and graphics settings.",
+    first_seen_at: new Date('2026-10-02T01:36:54.000Z'),
+    last_activity_at: new Date('2026-10-06T22:49:53.000Z'),
+    released_at: new Date('2026-10-02T01:36:54.000Z'),
     is_featured: false,
     is_archived: false,
     verification: "developer_direct",
-    game_title: "Halo CE Decomp - Pc and Android",
-    original_platform: "Various",
-    original_release_year: null,
-    screenshot_url: "/screenshots/halo-ce.jpg",
-    screenshot_alt: "Halo: Combat Evolved Vita release gameplay",
-    technologies: ["Decompilation","ARMv7 Wrapper"],
-    developers: [{ id: 42, role: "lead", display_name: "karat46", slug: "karat46" }],
+    game_title: "Halo: Combat Evolved",
+    original_platform: "Xbox",
+    original_release_year: 2001,
+    screenshot_url: "https://raw.githubusercontent.com/BirchWoodGod/halo-ce-vita/main/docs/screenshots/warthog-beach.png",
+    screenshot_source_url: "https://github.com/BirchWoodGod/halo-ce-vita/blob/main/README.md",
+    screenshot_alt: "Warthog on The Silent Cartographer beach in Halo CE on PS Vita",
+    technologies: ["Xbox decompilation", "Native PS Vita port", "VitaSDK"],
+    developers: [{ id: 43, role: "lead", display_name: "BirchWoodGod", slug: "birchwoodgod" }],
     stage_history: [
-      { id: 420, stage: "announced", effective_at: new Date('2026-09-30T19:19:17.427Z'), reason: "Port development surfaced on GitHub" },
-      { id: 421, stage: "playable", effective_at: new Date('2026-10-02T02:00:00.000Z'), reason: "Initial community release build and data files published" }
+      { id: 431, stage: "released", effective_at: new Date('2026-10-02T01:36:54.000Z'), reason: "Official GitHub release v1.0 published" }
     ]
   }
 ];
@@ -834,13 +782,13 @@ export const FALLBACK_DEVELOPERS: any[] = [
   }
 ,
   {
-    id: 42,
-    slug: "karat46",
-    display_name: "karat46",
-    description: "Developer of Halo CE Decomp - Pc and Android for PlayStation Vita.",
+    id: 43,
+    slug: "birchwoodgod",
+    display_name: "BirchWoodGod",
+    description: "Maintainer credited for the native Halo: Combat Evolved PlayStation Vita port.",
     is_known_developer: true,
     identities: [
-      { provider: "reddit", username: "karat46" }
+      { provider: "github", username: "BirchWoodGod" }
     ],
     projects: []
   }
@@ -1159,18 +1107,17 @@ export const FALLBACK_UPDATES: any[] = [
 ,
   {
     id: "upd_halo_ce_decomp_pc_and_android_vita",
-    port_project_id: 42,
-    project_slug: "halo-ce-decomp-pc-and-android-vita",
-    project_display_name: "Halo CE Decomp - Pc and Android",
-    developer_display_name: "karat46",
-    developer_slug: "karat46",
-    event_type: "project_announced",
-    title: "Halo CE Decomp - Pc and Android PS Vita port surfaced with repository",
-    summary: "Automated verification confirmed active repository and code evidence for Halo CE Decomp - Pc and Android.",
+    port_project_id: 43,
+    project_slug: "halo-ce-vita",
+    project_display_name: "Halo: Combat Evolved Vita",
+    event_type: "technical_progress",
+    title: "The Vita port identifies its PC/Android upstream project",
+    summary: "The official Vita-port README credits cybersecurity/halo-ce-universal as the native Linux, Windows and Android port this repository builds on. The earlier Reddit post discusses that upstream project; it is not evidence of a Vita build or release.",
     event_at: new Date('2026-09-30T19:19:17.427Z'),
-    verification_level: "developer_direct",
+    verification_level: "community_report",
     sources: [
-      { source_item_id: "src_upd_halo_ce_decomp_pc_and_android_vita_repo", relationship: "primary", canonical_url: "https://github.com/cybersecurity/halo-ce-universal" },
+      { source_item_id: "src_halo_ce_vita_repo", relationship: "primary", canonical_url: "https://github.com/BirchWoodGod/halo-ce-vita" },
+      { source_item_id: "src_upd_halo_ce_decomp_pc_and_android_vita_repo", relationship: "community", canonical_url: "https://github.com/cybersecurity/halo-ce-universal" },
       { source_item_id: "src_upd_halo_ce_decomp_pc_and_android_vita_reddit", relationship: "community", canonical_url: "https://www.reddit.com/r/PSVitaHomebrew/comments/1wtm0y6/halo_ce_decomp_pc_and_android/" }
     ]
   },
@@ -1192,19 +1139,33 @@ export const FALLBACK_UPDATES: any[] = [
   },
   {
     id: "upd_halo_ce_vita_release",
-    port_project_id: 42,
-    project_slug: "halo-ce-decomp-pc-and-android-vita",
+    port_project_id: 43,
+    project_slug: "halo-ce-vita",
     project_display_name: "Halo: Combat Evolved Vita",
-    developer_display_name: "karat46",
-    developer_slug: "karat46",
     event_type: "release",
-    title: "Halo: Combat Evolved Vita port release build and data files published",
-    summary: "The first playable community release of the Halo: Combat Evolved Vita port arrived overnight on October 2, 2026, accompanied by data file installation packages and performance updates.",
-    event_at: new Date('2026-10-02T02:00:00.000Z'),
-    verification_level: "community_report",
+    title: "Halo: Combat Evolved Vita v1.0 released",
+    summary: "The official GitHub v1.0 release publishes the PS Vita build. The maintainer says the release contains no game data; users need their own Xbox copy.",
+    event_at: new Date('2026-10-02T01:36:54.000Z'),
+    verification_level: "developer_direct",
     sources: [
       { source_item_id: "src_halo_ce_release_reddit", relationship: "primary", canonical_url: "https://www.reddit.com/r/VitaPiracy/comments/1wvhkaf/halo_ce_port_release/" },
-      { source_item_id: "src_halo_ce_repo", relationship: "community", canonical_url: "https://github.com/cybersecurity/halo-ce-universal" }
+      { source_item_id: "src_halo_ce_release_v1_0", relationship: "release", canonical_url: "https://github.com/BirchWoodGod/halo-ce-vita/releases/tag/v1.0" }
+    ]
+  },
+  {
+    id: "upd_halo_ce_vita_103",
+    port_project_id: 43,
+    project_slug: "halo-ce-vita",
+    project_display_name: "Halo: Combat Evolved Vita",
+    developer_display_name: "BirchWoodGod",
+    developer_slug: "birchwoodgod",
+    event_type: "technical_progress",
+    title: "Halo CE Vita v1.0.3 improves large fights and adds graphics profiles",
+    summary: "The maintainer's v1.0.3 release notes report smoother large fights, graphics profiles, precompiled shaders and fixes for player-reported issues.",
+    event_at: new Date('2026-10-06T22:49:53.000Z'),
+    verification_level: "developer_direct",
+    sources: [
+      { source_item_id: "src_halo_ce_release_v1_0_3", relationship: "release", canonical_url: "https://github.com/BirchWoodGod/halo-ce-vita/releases/tag/v1.0.3" }
     ]
   }
 ];
