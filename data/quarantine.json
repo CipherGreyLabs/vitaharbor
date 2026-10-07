@@ -1,8 +1,92 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-07T19:22:46.729Z",
+  "generated_at": "2026-10-07T23:37:35.103Z",
   "source": "r/vitahacks + r/VitaPiracy + r/PSVitaHomebrew RSS",
   "items": [
+    {
+      "schema_version": 2,
+      "id": "reddit-1x0brhk",
+      "external_id": "1x0brhk",
+      "state": "QUARANTINED",
+      "state_history": [
+        {
+          "state": "DETECTED",
+          "at": "2026-10-07T23:37:35.103Z",
+          "actor": "reddit-scanner",
+          "reason": "Canonical Reddit RSS entry accepted at the ingestion boundary"
+        },
+        {
+          "state": "QUARANTINED",
+          "at": "2026-10-07T23:37:35.103Z",
+          "actor": "reddit-scanner",
+          "reason": "Scanner result is unverified and cannot enter the curated ledger"
+        }
+      ],
+      "source": {
+        "platform": "reddit",
+        "subreddit": "vitahacks",
+        "canonical_url": "https://www.reddit.com/r/vitahacks/comments/1x0brhk/release_vita_iptv_v01_a_native_iptv_player_for_ps/",
+        "author": "mrhkyy",
+        "title": "[Release] Vita IPTV v0.1 – a native IPTV player for PS Vita / PS TV (M3U, Xtream, HLS, HTTPS)",
+        "body": "Hi everyone! I've been working on a native IPTV player for the Vita and it's finally in a shape I'm happy to share. This is v0.1, a hobby project shared as is – no support or roadmap promised. It was developed with the help of AI and tested on my own Vita.\" **What it does** - Plays live TV and radio from your own M3U/M3U8 playlists, Xtream Codes accounts (server + user + password) or single stream links - Video through the Vita's hardware H.264 decoder (up to 720p), with A/V sync - HLS (.m3u8) live streams, MPEG-TS, MKV and MP4 - Built-in modern TLS, so https playlists, sh",
+        "published_at": "2026-10-07T23:31:12.000Z"
+      },
+      "classification": {
+        "confidence": "high",
+        "reason": "4 dev signals: \\[release\\], \\brelease\\b, \\bv\\d+\\.\\d+\\b · category=new_project",
+        "candidate_type": "port",
+        "category": "new_project",
+        "question": false,
+        "spam": false
+      },
+      "provenance": {
+        "repository_url": null,
+        "release_url": null,
+        "evidence_urls": [],
+        "evidence_bundle_id": null,
+        "repository_identity": null,
+        "repository_created_at": null,
+        "repository_last_activity_at": null,
+        "release_facts": [],
+        "vita_evidence": [],
+        "author_linkage": null,
+        "corroboration": [],
+        "duplicate_relation": {
+          "content_hash": "ea8aaf5f9484fa541f77249065b93134de65a71beccb14c60c535e5748172650",
+          "related_candidate_ids": []
+        }
+      },
+      "campaign": {
+        "cluster_id": null,
+        "linkage_confidence": "none",
+        "signals": [],
+        "related_candidate_ids": [],
+        "text_fingerprint": "d3e51a65",
+        "media_fingerprints": [
+          "preview.redd.it/bfbg6vsbq4uh1.png",
+          "i.redd.it/bfbg6vsbq4uh1.png"
+        ],
+        "outbound_fingerprints": [
+          "www.reddit.com/r/vitahacks/comments/1x0brhk/release_vita_iptv_v01_a_native_iptv_player_for_ps",
+          "preview.redd.it/bfbg6vsbq4uh1.png",
+          "github.com/emrhky/vitaiptv",
+          "www.reddit.com/user/mrhkyy",
+          "i.redd.it/bfbg6vsbq4uh1.png"
+        ],
+        "direct_intent": false,
+        "explicit_campaign_reference": false,
+        "incident_id": null
+      },
+      "risk_signals": [],
+      "evidence_gaps": [
+        "exact project repository",
+        "repository identity and activity facts",
+        "author/developer linkage and independent corroboration"
+      ],
+      "content_hash": "ea8aaf5f9484fa541f77249065b93134de65a71beccb14c60c535e5748172650",
+      "review": null,
+      "incident": null
+    },
     {
       "schema_version": 2,
       "id": "reddit-1x005eq",
