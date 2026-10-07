@@ -1,3 +1,25 @@
+# Handoff - VitaHarbor data worker handoff
+
+- Gegenereerd: 2026-10-07T04:26:17Z
+- Actor: codex
+- Model: GPT-6 (variant unrecorded)
+- ProjectRoot: C:\Users\suloW\.codex\worktrees\vh-data-acceptance-20261007\VitaPort
+- Bronnen: 7
+
+## Bronintegriteit
+
+| Bestand | Bytes | SHA-256 |
+|---|---|---|
+| docs\DATA_WORKER_ACCEPTANCE_2026-10-07.md | 7819 | C41930391AA0D961FF82580ECE77B1DEE694C9FABA26EA0C2CB9A696F52C0DB7 |
+| src\shared\constants\fallbackData.ts | 69507 | 41949DBD7FA8E3DA9E47386212B8D2AA3EF9AD3C0C9044B3CAC8735A14C50FD4 |
+| scripts\reddit-classifier.mjs | 14066 | 8A258E2CCA235D90EB06F6C0F6D5304AC29765543B1D75828726392B61807F36 |
+| tests\unit\reddit-scanner.test.mjs | 16113 | 8CAB3E2A4FC779FFC37A1DDAF760BF842239F48CAF75498B49B6DE3EC40FBBBC |
+| tests\unit\project-media.test.ts | 1658 | 56465108CDF033405A7DDFD503180F81B8BAD25B4AC5D74C2D9C7046A5538AC1 |
+| data\scanner-health.json | 4240 | A82BC9C67C5941D5C4D6B51041A53E960492FA292A5AB16A31955CFFF45D3179 |
+| .github\workflows\reddit-scanner.yml | 3826 | 4D25F3D6605CEAEE542522230A31B72D3961ED4F1953D309D5BCF14288896A94 |
+
+## Samenvatting
+
 # VitaHarbor data-worker acceptance — 2026-10-07
 
 This file is the data-worker handoff evidence for the master/UI worker. It is intentionally separate from `docs/WORKLOG.md`, `PROJECT_STATE.md`, and the shared `HANDOFF.md` so concurrent UI work can be integrated first.
@@ -70,3 +92,12 @@ The separate Call of Duty 4 image visually depicts a Vita, but the curated recor
 - The build regenerated tracked `public/og.png` from the corrected ledger. The Halo deep link is present in the prerendered 28-project output; production/live acceptance still belongs to the integrating master/UI worker.
 - Integration with concurrent UI edits and deployment remain pending; do not report them as passed.
 - No Reddit scan was manually triggered and no production changes were made.
+
+
+## Verificatie
+
+Controleer de hashes voordat je deze samenvatting vertrouwt:
+
+    powershell -NoProfile -ExecutionPolicy Bypass -File %USERPROFILE%\.codex\workflow\NEW-HANDOFF.ps1 -Verify "docs\DATA_WORKER_HANDOFF_2026-10-07.md"
+
+Een handoff is context, geen bron van waarheid. Workspace en Git zijn leidend.
