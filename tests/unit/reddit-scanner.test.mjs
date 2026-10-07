@@ -142,6 +142,46 @@ describe("Reddit candidate classifier", () => {
     expect(classifyCandidateType({ title: "Halo CE Recompiled for the PS Vita", body: "early Vita build" })).toBe("port");
   });
 
+  it("accepts a concrete alpha release based on its Vita and release signals", () => {
+    const flashVita = classify({
+      title: "FlashVita - First Alpha Release | Flash Player for PS Vita powered by Ruffle",
+      body: "The first alpha release is available from the project's GitHub repository."
+    });
+    expect(flashVita.accept).toBe(true);
+    expect(flashVita.category).toBe("new_project");
+  });
+
+  it("does not let a known developer author override out-of-scope content", () => {
+    const desktopTool = classify({
+      author: "rinnegatamante",
+      subreddit: "vitahacks",
+      title: "Desktop companion app for Windows",
+      body: "Source code: https://github.com/example/desktop-companion"
+    });
+    expect(desktopTool.category).toBe("out_of_scope");
+    expect(desktopTool.accept).toBe(false);
+  });
+
+  it("does not treat a request for game data files as port development evidence", () => {
+    const dataRequest = classify({
+      author: "rinnegatamante",
+      subreddit: "VitaPiracy",
+      title: "Looking for Halo CE game data files",
+      body: "Does anyone have these files?"
+    });
+    expect(dataRequest.category).toBe("question");
+    expect(dataRequest.accept).toBe(false);
+  });
+
+  it("still accepts a source-backed Halo Vita release without promoting its game data", () => {
+    const haloRelease = classify({
+      title: "Halo CE Vita port release v1.0",
+      body: "Native Vita release build published: https://github.com/BirchWoodGod/halo-ce-vita/releases. Users need their own Xbox copy; game data is not included."
+    });
+    expect(haloRelease.accept).toBe(true);
+    expect(haloRelease.category).toBe("new_project");
+  });
+
   it("decodes Reddit RSS HTML before classification and URL extraction", () => {
     const xml = `<feed><entry><title>Gameplay: World at War Zombies ported to the PS Vita</title><link href="https://www.reddit.com/r/vitahacks/comments/rss123/example/"/><name>/u/dev</name><updated>2026-09-21T12:00:00Z</updated><content type="html">&lt;table&gt;&lt;tr&gt;&lt;td&gt;&lt;a href=&quot;https://example.com/image&quot;&gt;preview&lt;/a&gt;&lt;/td&gt;&lt;td&gt;&lt;div class=&quot;md&quot;&gt;&lt;p&gt;Native Vita gameplay build is now ported and playable.&lt;/p&gt;&lt;a href=&quot;https://github.com/example/vita-port&quot;&gt;source&lt;/a&gt;&lt;/div&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</content></entry></feed>`;
     const [entry] = parseEntries(xml);
