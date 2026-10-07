@@ -364,10 +364,21 @@ export const ConsoleStage: React.FC<ConsoleStageProps> = ({
           <div aria-hidden="true" className="vh-floor mx-auto h-px w-[84%]" />
         </div>
 
-        {/* Tactile Interactive Game Dock (Shelf) */}
+        {/* Featured Ports Dock (Shelf) */}
         <div className="mt-5 px-2 sm:px-6">
-          <div className="no-scrollbar flex max-w-full gap-2.5 overflow-x-auto p-1 py-2" aria-label="Featured Ports">
-            {projects.map((project) => {
+          <div className="flex items-center justify-between gap-2 px-1">
+            <span className="text-micro font-semibold uppercase tracking-[0.12em] text-ink-muted">Featured</span>
+            <a
+              href="/#directory"
+              className="inline-flex min-h-[38px] items-center gap-1.5 rounded-lg px-3 text-caption font-semibold text-accent hover:underline"
+              aria-label="View all ports"
+            >
+              <span>Bekijk alle</span>
+              <ExternalLink className="h-3.5 w-3.5" aria-hidden="true" />
+            </a>
+          </div>
+          <div className="no-scrollbar mt-1.5 flex max-w-full gap-2.5 overflow-x-auto p-1 py-2" aria-label="Featured Ports">
+            {projects.filter((project) => project.is_featured).map((project) => {
               const active = selectedId === project.id;
               const title = splitTitle(project.game_title || project.display_name);
               return (
@@ -394,7 +405,6 @@ export const ConsoleStage: React.FC<ConsoleStageProps> = ({
             })}
           </div>
         </div>
-
         {/* Minimalist Active Display Status Card */}
         <div className="relative mx-auto max-w-xl px-4 pt-4 pb-2">
           {preview && (

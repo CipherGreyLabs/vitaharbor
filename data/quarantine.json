@@ -1,8 +1,93 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-06T23:06:53.686Z",
+  "generated_at": "2026-10-07T14:32:44.596Z",
   "source": "r/vitahacks + r/VitaPiracy + r/PSVitaHomebrew RSS",
   "items": [
+    {
+      "schema_version": 2,
+      "id": "reddit-1wzrt36",
+      "external_id": "1wzrt36",
+      "state": "QUARANTINED",
+      "state_history": [
+        {
+          "state": "DETECTED",
+          "at": "2026-10-07T14:32:44.596Z",
+          "actor": "reddit-scanner",
+          "reason": "Canonical Reddit RSS entry accepted at the ingestion boundary"
+        },
+        {
+          "state": "QUARANTINED",
+          "at": "2026-10-07T14:32:44.596Z",
+          "actor": "reddit-scanner",
+          "reason": "Scanner result is unverified and cannot enter the curated ledger"
+        }
+      ],
+      "source": {
+        "platform": "reddit",
+        "subreddit": "vitahacks",
+        "canonical_url": "https://www.reddit.com/r/vitahacks/comments/1wzrt36/release_insaniquarium_deluxe_v100/",
+        "author": "KartingSackboy06",
+        "title": "[Release] Insaniquarium! Deluxe v1.00",
+        "body": "Hi guys! I'm happy to announce the release of my Insaniquarium! Deluxe port for the PS Vita. The past few days have been lots of fun putting this all together and I hope you’ll have as much fun playing it as I did. The loading screen is a little slow, but I got the loading time down from 9 minutes to about 30 seconds as is. This is also the only part of the game where there are any framerate drops or audio stutters. After getting past the title screen, the game runs at a locked 36 fps almost 100% of the time. I've posted a video with gameplay footage on r/insaniquarium . THERE ARE NO G",
+        "published_at": "2026-10-07T09:10:23.000Z"
+      },
+      "classification": {
+        "confidence": "high",
+        "reason": "5 dev signals: \\[release\\], \\brelease\\b, \\bfps\\b · category=project_update",
+        "candidate_type": "port",
+        "category": "project_update",
+        "question": false,
+        "spam": false
+      },
+      "provenance": {
+        "repository_url": null,
+        "release_url": null,
+        "evidence_urls": [],
+        "evidence_bundle_id": null,
+        "repository_identity": null,
+        "repository_created_at": null,
+        "repository_last_activity_at": null,
+        "release_facts": [],
+        "vita_evidence": [],
+        "author_linkage": null,
+        "corroboration": [],
+        "duplicate_relation": {
+          "content_hash": "dec73a49965d64bf3ef570863d353303f0f70c15c22f998e26ada6ea6d4c4687",
+          "related_candidate_ids": []
+        }
+      },
+      "campaign": {
+        "cluster_id": null,
+        "linkage_confidence": "none",
+        "signals": [],
+        "related_candidate_ids": [],
+        "text_fingerprint": "cd713839",
+        "media_fingerprints": [
+          "preview.redd.it/yy9wlii3g0uh1.png",
+          "i.redd.it/yy9wlii3g0uh1.png"
+        ],
+        "outbound_fingerprints": [
+          "www.reddit.com/r/vitahacks/comments/1wzrt36/release_insaniquarium_deluxe_v100",
+          "preview.redd.it/yy9wlii3g0uh1.png",
+          "github.com/kartingsackboy06/insaniquarium-vita",
+          "www.reddit.com/user/kartingsackboy06",
+          "i.redd.it/yy9wlii3g0uh1.png"
+        ],
+        "direct_intent": false,
+        "explicit_campaign_reference": false,
+        "incident_id": null
+      },
+      "risk_signals": [],
+      "evidence_gaps": [
+        "exact project repository",
+        "repository identity and activity facts",
+        "Vita-specific hardware evidence",
+        "author/developer linkage and independent corroboration"
+      ],
+      "content_hash": "dec73a49965d64bf3ef570863d353303f0f70c15c22f998e26ada6ea6d4c4687",
+      "review": null,
+      "incident": null
+    },
     {
       "schema_version": 2,
       "id": "reddit-1wzei5e",
@@ -62,15 +147,15 @@
         "cluster_id": "campaign-6fb72882",
         "linkage_confidence": "high",
         "signals": [
-          "shared_outbound_fingerprint",
           "same_author_burst",
           "near_duplicate_wording",
-          "shared_media_fingerprint"
+          "shared_media_fingerprint",
+          "shared_outbound_fingerprint"
         ],
         "related_candidate_ids": [
+          "reddit-1wz8h1s",
           "reddit-1wwtsfr",
-          "reddit-1wvfy93",
-          "reddit-1wz8h1s"
+          "reddit-1wvfy93"
         ],
         "text_fingerprint": "b23d219e",
         "media_fingerprints": [
@@ -441,14 +526,14 @@
         "linkage_confidence": "high",
         "signals": [
           "same_author_burst",
-          "shared_outbound_fingerprint",
           "near_duplicate_wording",
-          "shared_media_fingerprint"
+          "shared_media_fingerprint",
+          "shared_outbound_fingerprint"
         ],
         "related_candidate_ids": [
+          "reddit-1wzei5e",
           "reddit-1wwtsfr",
-          "reddit-1wvfy93",
-          "reddit-1wzei5e"
+          "reddit-1wvfy93"
         ],
         "text_fingerprint": "0b0485b3",
         "media_fingerprints": [
@@ -888,15 +973,15 @@
         "cluster_id": "campaign-8989614d",
         "linkage_confidence": "high",
         "signals": [
-          "shared_outbound_fingerprint",
           "same_author_burst",
           "same_wording_fingerprint",
-          "shared_media_fingerprint"
+          "shared_media_fingerprint",
+          "shared_outbound_fingerprint"
         ],
         "related_candidate_ids": [
+          "reddit-1wyhqcq",
           "reddit-1wxgz7q",
-          "reddit-1wukxc7",
-          "reddit-1wyhqcq"
+          "reddit-1wukxc7"
         ],
         "text_fingerprint": "b26a9692",
         "media_fingerprints": [
@@ -1247,9 +1332,9 @@
           "shared_outbound_fingerprint"
         ],
         "related_candidate_ids": [
+          "reddit-1wyhqcq",
           "reddit-1wycxwx",
-          "reddit-1wukxc7",
-          "reddit-1wyhqcq"
+          "reddit-1wukxc7"
         ],
         "text_fingerprint": "9275c509",
         "media_fingerprints": [
@@ -1335,13 +1420,13 @@
         "cluster_id": "campaign-6fb72882",
         "linkage_confidence": "medium",
         "signals": [
-          "same_author_burst",
-          "shared_outbound_fingerprint"
+          "shared_outbound_fingerprint",
+          "same_author_burst"
         ],
         "related_candidate_ids": [
-          "reddit-1wvfy93",
           "reddit-1wzei5e",
-          "reddit-1wz8h1s"
+          "reddit-1wz8h1s",
+          "reddit-1wvfy93"
         ],
         "text_fingerprint": "5e35c303",
         "media_fingerprints": [
@@ -1427,12 +1512,12 @@
         "linkage_confidence": "medium",
         "signals": [
           "same_author_burst",
-          "near_duplicate_wording",
-          "shared_outbound_fingerprint"
+          "shared_outbound_fingerprint",
+          "near_duplicate_wording"
         ],
         "related_candidate_ids": [
-          "reddit-1ww89mj",
-          "reddit-1wy0409"
+          "reddit-1wy0409",
+          "reddit-1ww89mj"
         ],
         "text_fingerprint": "76307b7d",
         "media_fingerprints": [
@@ -1517,12 +1602,12 @@
         "linkage_confidence": "medium",
         "signals": [
           "same_author_burst",
-          "near_duplicate_wording",
-          "shared_outbound_fingerprint"
+          "shared_outbound_fingerprint",
+          "near_duplicate_wording"
         ],
         "related_candidate_ids": [
-          "reddit-1ww8upq",
-          "reddit-1wy0409"
+          "reddit-1wy0409",
+          "reddit-1ww8upq"
         ],
         "text_fingerprint": "9d61ccc6",
         "media_fingerprints": [],
@@ -1821,13 +1906,13 @@
         "cluster_id": "campaign-6fb72882",
         "linkage_confidence": "medium",
         "signals": [
-          "same_author_burst",
-          "shared_outbound_fingerprint"
+          "shared_outbound_fingerprint",
+          "same_author_burst"
         ],
         "related_candidate_ids": [
-          "reddit-1wwtsfr",
           "reddit-1wzei5e",
-          "reddit-1wz8h1s"
+          "reddit-1wz8h1s",
+          "reddit-1wwtsfr"
         ],
         "text_fingerprint": "7a484d0e",
         "media_fingerprints": [
@@ -1915,9 +2000,9 @@
           "shared_outbound_fingerprint"
         ],
         "related_candidate_ids": [
+          "reddit-1wyhqcq",
           "reddit-1wycxwx",
-          "reddit-1wxgz7q",
-          "reddit-1wyhqcq"
+          "reddit-1wxgz7q"
         ],
         "text_fingerprint": "752fdcb0",
         "media_fingerprints": [
