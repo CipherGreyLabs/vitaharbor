@@ -5,7 +5,7 @@
     <link>https://vitaharbor.vercel.app/</link>
     <description>Community PlayStation Vita ports tracked from r/vitahacks + r/VitaPiracy + r/PSVitaHomebrew</description>
     <language>en-us</language>
-    <lastBuildDate>Tue, 06 Oct 2026 23:07:07 GMT</lastBuildDate>
+    <lastBuildDate>Wed, 07 Oct 2026 14:33:09 GMT</lastBuildDate>
     <item>
       <title><![CDATA[Medal of Honor: Allied Assault (OpenMoHAA) - IN_GAME]]></title>
       <link>https://www.reddit.com/r/vitahacks/comments/1tapf2b/wip_openmohaa_on_ps_vita_medal_of_honor_allied/</link>
@@ -196,11 +196,11 @@
       <description><![CDATA[Community PlayStation Vita port of Test Drive II with source repository on GitHub. Hardware Status: Targeting native hardware performance.]]></description>
     </item>
     <item>
-      <title><![CDATA[Halo: Combat Evolved Vita - PLAYABLE]]></title>
-      <link>https://www.reddit.com/r/PSVitaHomebrew/comments/1wtm0y6/halo_ce_decomp_pc_and_android/</link>
-      <guid isPermaLink="false">halo-ce-decomp-pc-and-android-vita</guid>
-      <pubDate>Fri, 02 Oct 2026 02:00:00 GMT</pubDate>
-      <description><![CDATA[PlayStation Vita port of Halo: Combat Evolved based on the universal decompilation project. Initial playable release build and data files surfaced on October 2, 2026. Hardware Status: Targeting native hardware performance.]]></description>
+      <title><![CDATA[Halo: Combat Evolved Vita - RELEASED]]></title>
+      <link>https://www.reddit.com/r/VitaPiracy/comments/1wvhkaf/halo_ce_port_release/</link>
+      <guid isPermaLink="false">halo-ce-vita</guid>
+      <pubDate>Tue, 06 Oct 2026 22:49:53 GMT</pubDate>
+      <description><![CDATA[Native PlayStation Vita port built from the Xbox decompilation. The official repository publishes the VPK and states that game data is not included. Hardware Status: The maintainer reports up to 30 FPS; large fights can run slower, depending on scene and graphics settings.]]></description>
     </item>
   </channel>
 </rss>
