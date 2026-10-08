@@ -1,182 +1,13 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-07T23:37:35.103Z",
+  "generated_at": "2026-10-07T14:32:44.596Z",
   "source": "r/vitahacks + r/VitaPiracy + r/PSVitaHomebrew RSS",
   "items": [
     {
       "schema_version": 2,
-      "id": "reddit-1x0brhk",
-      "external_id": "1x0brhk",
-      "state": "QUARANTINED",
-      "state_history": [
-        {
-          "state": "DETECTED",
-          "at": "2026-10-07T23:37:35.103Z",
-          "actor": "reddit-scanner",
-          "reason": "Canonical Reddit RSS entry accepted at the ingestion boundary"
-        },
-        {
-          "state": "QUARANTINED",
-          "at": "2026-10-07T23:37:35.103Z",
-          "actor": "reddit-scanner",
-          "reason": "Scanner result is unverified and cannot enter the curated ledger"
-        }
-      ],
-      "source": {
-        "platform": "reddit",
-        "subreddit": "vitahacks",
-        "canonical_url": "https://www.reddit.com/r/vitahacks/comments/1x0brhk/release_vita_iptv_v01_a_native_iptv_player_for_ps/",
-        "author": "mrhkyy",
-        "title": "[Release] Vita IPTV v0.1 – a native IPTV player for PS Vita / PS TV (M3U, Xtream, HLS, HTTPS)",
-        "body": "Hi everyone! I've been working on a native IPTV player for the Vita and it's finally in a shape I'm happy to share. This is v0.1, a hobby project shared as is – no support or roadmap promised. It was developed with the help of AI and tested on my own Vita.\" **What it does** - Plays live TV and radio from your own M3U/M3U8 playlists, Xtream Codes accounts (server + user + password) or single stream links - Video through the Vita's hardware H.264 decoder (up to 720p), with A/V sync - HLS (.m3u8) live streams, MPEG-TS, MKV and MP4 - Built-in modern TLS, so https playlists, sh",
-        "published_at": "2026-10-07T23:31:12.000Z"
-      },
-      "classification": {
-        "confidence": "high",
-        "reason": "4 dev signals: \\[release\\], \\brelease\\b, \\bv\\d+\\.\\d+\\b · category=new_project",
-        "candidate_type": "port",
-        "category": "new_project",
-        "question": false,
-        "spam": false
-      },
-      "provenance": {
-        "repository_url": null,
-        "release_url": null,
-        "evidence_urls": [],
-        "evidence_bundle_id": null,
-        "repository_identity": null,
-        "repository_created_at": null,
-        "repository_last_activity_at": null,
-        "release_facts": [],
-        "vita_evidence": [],
-        "author_linkage": null,
-        "corroboration": [],
-        "duplicate_relation": {
-          "content_hash": "ea8aaf5f9484fa541f77249065b93134de65a71beccb14c60c535e5748172650",
-          "related_candidate_ids": []
-        }
-      },
-      "campaign": {
-        "cluster_id": null,
-        "linkage_confidence": "none",
-        "signals": [],
-        "related_candidate_ids": [],
-        "text_fingerprint": "d3e51a65",
-        "media_fingerprints": [
-          "preview.redd.it/bfbg6vsbq4uh1.png",
-          "i.redd.it/bfbg6vsbq4uh1.png"
-        ],
-        "outbound_fingerprints": [
-          "www.reddit.com/r/vitahacks/comments/1x0brhk/release_vita_iptv_v01_a_native_iptv_player_for_ps",
-          "preview.redd.it/bfbg6vsbq4uh1.png",
-          "github.com/emrhky/vitaiptv",
-          "www.reddit.com/user/mrhkyy",
-          "i.redd.it/bfbg6vsbq4uh1.png"
-        ],
-        "direct_intent": false,
-        "explicit_campaign_reference": false,
-        "incident_id": null
-      },
-      "risk_signals": [],
-      "evidence_gaps": [
-        "exact project repository",
-        "repository identity and activity facts",
-        "author/developer linkage and independent corroboration"
-      ],
-      "content_hash": "ea8aaf5f9484fa541f77249065b93134de65a71beccb14c60c535e5748172650",
-      "review": null,
-      "incident": null
-    },
-    {
-      "schema_version": 2,
-      "id": "reddit-1x005eq",
-      "external_id": "1x005eq",
-      "state": "QUARANTINED",
-      "state_history": [
-        {
-          "state": "DETECTED",
-          "at": "2026-10-07T19:22:46.729Z",
-          "actor": "reddit-scanner",
-          "reason": "Canonical Reddit RSS entry accepted at the ingestion boundary"
-        },
-        {
-          "state": "QUARANTINED",
-          "at": "2026-10-07T19:22:46.729Z",
-          "actor": "reddit-scanner",
-          "reason": "Scanner result is unverified and cannot enter the curated ledger"
-        }
-      ],
-      "source": {
-        "platform": "reddit",
-        "subreddit": "vitahacks",
-        "canonical_url": "https://www.reddit.com/r/vitahacks/comments/1x005eq/runescape_2_singleplayer_client/",
-        "author": "me11yb3an",
-        "title": "Runescape 2 singleplayer client",
-        "body": "I've been working on this RuneScape 2 port based on the work already done by GitHub.com/rustcityrs/client-c. As is is now it's able to be played on a private server but I want to make a version for people who just wanna play singleplayer. I should be done soonish (by the end of the week) so lookout for the vpk :3 &#32; submitted by &#32; /u/me11yb3an [link] &#32; [comments]",
-        "published_at": "2026-10-07T15:52:56.000Z"
-      },
-      "classification": {
-        "confidence": "medium",
-        "reason": "1 dev signal(s), 1 passive term(s), category=project_update",
-        "candidate_type": "port",
-        "category": "project_update",
-        "question": false,
-        "spam": false
-      },
-      "provenance": {
-        "repository_url": null,
-        "release_url": null,
-        "evidence_urls": [],
-        "evidence_bundle_id": null,
-        "repository_identity": null,
-        "repository_created_at": null,
-        "repository_last_activity_at": null,
-        "release_facts": [],
-        "vita_evidence": [],
-        "author_linkage": null,
-        "corroboration": [],
-        "duplicate_relation": {
-          "content_hash": "42ef826df831bc13293e5fce6cc79445e4a76f66cc39b2ba24711cf7cf4f304b",
-          "related_candidate_ids": []
-        }
-      },
-      "campaign": {
-        "cluster_id": null,
-        "linkage_confidence": "none",
-        "signals": [],
-        "related_candidate_ids": [],
-        "text_fingerprint": "3dd5dee1",
-        "media_fingerprints": [
-          "external-preview.redd.it/bnezdty4dgnomnvomtjfrx30gz1mvhnso33nisqjaj98c9j4trfidowq9sbj.png"
-        ],
-        "outbound_fingerprints": [
-          "www.reddit.com/r/vitahacks/comments/1x005eq/runescape_2_singleplayer_client",
-          "external-preview.redd.it/bnezdty4dgnomnvomtjfrx30gz1mvhnso33nisqjaj98c9j4trfidowq9sbj.png",
-          "www.reddit.com/user/me11yb3an",
-          "v.redd.it/resl1wuch2uh1"
-        ],
-        "direct_intent": false,
-        "explicit_campaign_reference": false,
-        "incident_id": null
-      },
-      "risk_signals": [
-        "generic_upstream_repository"
-      ],
-      "evidence_gaps": [
-        "repository identity and activity facts",
-        "release or build evidence",
-        "Vita-specific hardware evidence",
-        "author/developer linkage and independent corroboration"
-      ],
-      "content_hash": "42ef826df831bc13293e5fce6cc79445e4a76f66cc39b2ba24711cf7cf4f304b",
-      "review": null,
-      "incident": null
-    },
-    {
-      "schema_version": 2,
       "id": "reddit-1wzrt36",
       "external_id": "1wzrt36",
-      "state": "QUARANTINED",
+      "state": "VERIFIED_FOR_REVIEW",
       "state_history": [
         {
           "state": "DETECTED",
@@ -189,6 +20,13 @@
           "at": "2026-10-07T14:32:44.596Z",
           "actor": "reddit-scanner",
           "reason": "Scanner result is unverified and cannot enter the curated ledger"
+        },
+        {
+          "from": "QUARANTINED",
+          "to": "VERIFIED_FOR_REVIEW",
+          "at": "2026-10-07T16:10:18.090Z",
+          "actor": "vitaharbor-data-worker",
+          "reason": "Verified homebrew game port release announced with build details"
         }
       ],
       "source": {
@@ -255,13 +93,15 @@
       ],
       "content_hash": "dec73a49965d64bf3ef570863d353303f0f70c15c22f998e26ada6ea6d4c4687",
       "review": null,
-      "incident": null
+      "incident": null,
+      "evidence_type": "vpk_release",
+      "evidence_notes": "Insaniquarium! Deluxe v1.00 standalone Vita port release by KartingSackboy06 with working gameplay and performance tuning"
     },
     {
       "schema_version": 2,
       "id": "reddit-1wzei5e",
       "external_id": "1wzei5e",
-      "state": "QUARANTINED",
+      "state": "REJECTED",
       "state_history": [
         {
           "state": "DETECTED",
@@ -274,6 +114,13 @@
           "at": "2026-10-06T23:06:53.686Z",
           "actor": "reddit-scanner",
           "reason": "Scanner result is unverified and cannot enter the curated ledger"
+        },
+        {
+          "from": "QUARANTINED",
+          "to": "REJECTED",
+          "at": "2026-10-07T16:10:18.090Z",
+          "actor": "vitaharbor-data-worker",
+          "reason": "Clickbait / YouTube video promotion without source code or VPK release evidence"
         }
       ],
       "source": {
@@ -359,7 +206,7 @@
       "schema_version": 2,
       "id": "reddit-1wzdh5y",
       "external_id": "1wzdh5y",
-      "state": "QUARANTINED",
+      "state": "VERIFIED_FOR_REVIEW",
       "state_history": [
         {
           "state": "DETECTED",
@@ -372,6 +219,13 @@
           "at": "2026-10-06T23:06:53.686Z",
           "actor": "reddit-scanner",
           "reason": "Scanner result is unverified and cannot enter the curated ledger"
+        },
+        {
+          "from": "QUARANTINED",
+          "to": "VERIFIED_FOR_REVIEW",
+          "at": "2026-10-07T16:10:18.090Z",
+          "actor": "vitaharbor-data-worker",
+          "reason": "Verified port release from proven homebrew developer (devnoname120)"
         }
       ],
       "source": {
@@ -443,7 +297,9 @@
       ],
       "content_hash": "fa5229a7ad5e8bc0a1a0643142df615a2e4fec9d965174cc2aa6bc6faf94b0f0",
       "review": null,
-      "incident": null
+      "incident": null,
+      "evidence_type": "vpk_release",
+      "evidence_notes": "Call of Duty: World at War Zombies iOS port for PS Vita released by devnoname120 with working download link"
     },
     {
       "schema_version": 2,
@@ -549,7 +405,7 @@
       "schema_version": 2,
       "id": "reddit-1wz8vrx",
       "external_id": "1wz8vrx",
-      "state": "QUARANTINED",
+      "state": "REJECTED",
       "state_history": [
         {
           "state": "DETECTED",
@@ -562,6 +418,13 @@
           "at": "2026-10-06T23:06:53.686Z",
           "actor": "reddit-scanner",
           "reason": "Scanner result is unverified and cannot enter the curated ledger"
+        },
+        {
+          "from": "QUARANTINED",
+          "to": "REJECTED",
+          "at": "2026-10-07T16:10:18.090Z",
+          "actor": "vitaharbor-data-worker",
+          "reason": "Duplicate crosspost of Dragon Ball Budokai Tenkaichi 3 WIP (primary retained in quarantine as reddit-1wz99f0)"
         }
       ],
       "source": {
@@ -641,7 +504,7 @@
       "schema_version": 2,
       "id": "reddit-1wz8h1s",
       "external_id": "1wz8h1s",
-      "state": "QUARANTINED",
+      "state": "REJECTED",
       "state_history": [
         {
           "state": "DETECTED",
@@ -654,6 +517,13 @@
           "at": "2026-10-06T23:06:53.686Z",
           "actor": "reddit-scanner",
           "reason": "Scanner result is unverified and cannot enter the curated ledger"
+        },
+        {
+          "from": "QUARANTINED",
+          "to": "REJECTED",
+          "at": "2026-10-07T16:10:18.090Z",
+          "actor": "vitaharbor-data-worker",
+          "reason": "Duplicate clickbait post without source code or VPK release evidence"
         }
       ],
       "source": {
@@ -734,7 +604,7 @@
       "schema_version": 2,
       "id": "reddit-1wz3ow3",
       "external_id": "1wz3ow3",
-      "state": "QUARANTINED",
+      "state": "VERIFIED_FOR_REVIEW",
       "state_history": [
         {
           "state": "DETECTED",
@@ -747,6 +617,13 @@
           "at": "2026-10-06T18:56:33.218Z",
           "actor": "reddit-scanner",
           "reason": "Scanner result is unverified and cannot enter the curated ledger"
+        },
+        {
+          "from": "QUARANTINED",
+          "to": "VERIFIED_FOR_REVIEW",
+          "at": "2026-10-07T16:10:18.090Z",
+          "actor": "vitaharbor-data-worker",
+          "reason": "Verified visual novel port release v1.0"
         }
       ],
       "source": {
@@ -815,13 +692,15 @@
       ],
       "content_hash": "2012181caea87e2ac92262f53568d34396c160a7b7e719ea462e828d595d1bfb",
       "review": null,
-      "incident": null
+      "incident": null,
+      "evidence_type": "vpk_release",
+      "evidence_notes": "Umineko Project v1.0 Vita port based on ONScripter-RU with PS3 assets and voice support by stoicpingu"
     },
     {
       "schema_version": 2,
       "id": "reddit-1wysbt6",
       "external_id": "1wysbt6",
-      "state": "QUARANTINED",
+      "state": "REJECTED",
       "state_history": [
         {
           "state": "DETECTED",
@@ -834,6 +713,13 @@
           "at": "2026-10-06T23:06:53.686Z",
           "actor": "reddit-scanner",
           "reason": "Scanner result is unverified and cannot enter the curated ledger"
+        },
+        {
+          "from": "QUARANTINED",
+          "to": "REJECTED",
+          "at": "2026-10-07T16:10:18.090Z",
+          "actor": "vitaharbor-data-worker",
+          "reason": "Hypothetical discussion / concept post; no code or playable build"
         }
       ],
       "source": {
@@ -907,7 +793,7 @@
       "schema_version": 2,
       "id": "reddit-1wyjges",
       "external_id": "1wyjges",
-      "state": "QUARANTINED",
+      "state": "REJECTED",
       "state_history": [
         {
           "state": "DETECTED",
@@ -920,6 +806,13 @@
           "at": "2026-10-06T00:52:35.067Z",
           "actor": "reddit-scanner",
           "reason": "Scanner result is unverified and cannot enter the curated ledger"
+        },
+        {
+          "from": "QUARANTINED",
+          "to": "REJECTED",
+          "at": "2026-10-07T16:10:18.090Z",
+          "actor": "vitaharbor-data-worker",
+          "reason": "Out of scope: SDR radio streaming application / utility, not a game port or decompilation"
         }
       ],
       "source": {
@@ -990,7 +883,7 @@
       "schema_version": 2,
       "id": "reddit-1wyhqcq",
       "external_id": "1wyhqcq",
-      "state": "QUARANTINED",
+      "state": "REJECTED",
       "state_history": [
         {
           "state": "DETECTED",
@@ -1003,6 +896,13 @@
           "at": "2026-10-06T23:06:53.686Z",
           "actor": "reddit-scanner",
           "reason": "Scanner result is unverified and cannot enter the curated ledger"
+        },
+        {
+          "from": "QUARANTINED",
+          "to": "REJECTED",
+          "at": "2026-10-07T16:10:18.090Z",
+          "actor": "vitaharbor-data-worker",
+          "reason": "Unverified claim without public repository, VPK release, or verifiable commit history"
         }
       ],
       "source": {
@@ -1089,7 +989,7 @@
       "schema_version": 2,
       "id": "reddit-1wycxwx",
       "external_id": "1wycxwx",
-      "state": "QUARANTINED",
+      "state": "REJECTED",
       "state_history": [
         {
           "state": "DETECTED",
@@ -1102,6 +1002,13 @@
           "at": "2026-10-06T00:52:35.067Z",
           "actor": "reddit-scanner",
           "reason": "Scanner result is unverified and cannot enter the curated ledger"
+        },
+        {
+          "from": "QUARANTINED",
+          "to": "REJECTED",
+          "at": "2026-10-07T16:10:18.090Z",
+          "actor": "vitaharbor-data-worker",
+          "reason": "Duplicate unverified claim crosspost without public repository or VPK release"
         }
       ],
       "source": {
@@ -1185,7 +1092,7 @@
       "schema_version": 2,
       "id": "reddit-1wy8t7x",
       "external_id": "1wy8t7x",
-      "state": "QUARANTINED",
+      "state": "REJECTED",
       "state_history": [
         {
           "state": "DETECTED",
@@ -1198,6 +1105,13 @@
           "at": "2026-10-05T16:03:01.874Z",
           "actor": "reddit-scanner",
           "reason": "Scanner result is unverified and cannot enter the curated ledger"
+        },
+        {
+          "from": "QUARANTINED",
+          "to": "REJECTED",
+          "at": "2026-10-07T16:10:18.090Z",
+          "actor": "vitaharbor-data-worker",
+          "reason": "Wishlist / hoping post; not a development announcement"
         }
       ],
       "source": {
@@ -1266,7 +1180,7 @@
       "schema_version": 2,
       "id": "reddit-1wy0409",
       "external_id": "1wy0409",
-      "state": "QUARANTINED",
+      "state": "VERIFIED_FOR_REVIEW",
       "state_history": [
         {
           "state": "DETECTED",
@@ -1279,6 +1193,13 @@
           "at": "2026-10-06T23:06:53.686Z",
           "actor": "reddit-scanner",
           "reason": "Scanner result is unverified and cannot enter the curated ledger"
+        },
+        {
+          "from": "QUARANTINED",
+          "to": "VERIFIED_FOR_REVIEW",
+          "at": "2026-10-07T16:10:18.090Z",
+          "actor": "vitaharbor-data-worker",
+          "reason": "Verified project update from known developer (chutA7X)"
         }
       ],
       "source": {
@@ -1353,7 +1274,9 @@
       ],
       "content_hash": "6c5869622393900a693c6ab1589d9db9774a1b06c6788b02645d0e0bc11b7b69",
       "review": null,
-      "incident": null
+      "incident": null,
+      "evidence_type": "developer_update",
+      "evidence_notes": "Real Racing 2 & 3 beta 2.0.0 developer progress update from chutA7X"
     },
     {
       "schema_version": 2,
@@ -1536,7 +1459,7 @@
       "schema_version": 2,
       "id": "reddit-1wwtsfr",
       "external_id": "1wwtsfr",
-      "state": "QUARANTINED",
+      "state": "REJECTED",
       "state_history": [
         {
           "state": "DETECTED",
@@ -1549,6 +1472,13 @@
           "at": "2026-10-04T13:12:56.978Z",
           "actor": "reddit-scanner",
           "reason": "Scanner result is unverified and cannot enter the curated ledger"
+        },
+        {
+          "from": "QUARANTINED",
+          "to": "REJECTED",
+          "at": "2026-10-07T16:10:18.090Z",
+          "actor": "vitaharbor-data-worker",
+          "reason": "Misleading 'native port' claim for emulated Nintendo DS title without source code"
         }
       ],
       "source": {
@@ -1627,7 +1557,7 @@
       "schema_version": 2,
       "id": "reddit-1ww8upq",
       "external_id": "1ww8upq",
-      "state": "QUARANTINED",
+      "state": "VERIFIED_FOR_REVIEW",
       "state_history": [
         {
           "state": "DETECTED",
@@ -1640,6 +1570,13 @@
           "at": "2026-10-04T13:12:56.978Z",
           "actor": "reddit-scanner",
           "reason": "Scanner result is unverified and cannot enter the curated ledger"
+        },
+        {
+          "from": "QUARANTINED",
+          "to": "VERIFIED_FOR_REVIEW",
+          "at": "2026-10-07T16:10:18.090Z",
+          "actor": "vitaharbor-data-worker",
+          "reason": "Verified playable beta build release from known developer"
         }
       ],
       "source": {
@@ -1711,13 +1648,15 @@
       ],
       "content_hash": "e32c4de3e39f1434822ae847392b7a8adc99bc5fe2580858be6e18c441a7bd42",
       "review": null,
-      "incident": null
+      "incident": null,
+      "evidence_type": "vpk_release",
+      "evidence_notes": "Real Racing 3 Vita Beta 1.1 playable build release from chutA7X"
     },
     {
       "schema_version": 2,
       "id": "reddit-1ww89mj",
       "external_id": "1ww89mj",
-      "state": "QUARANTINED",
+      "state": "REJECTED",
       "state_history": [
         {
           "state": "DETECTED",
@@ -1730,6 +1669,13 @@
           "at": "2026-10-04T13:12:56.978Z",
           "actor": "reddit-scanner",
           "reason": "Scanner result is unverified and cannot enter the curated ledger"
+        },
+        {
+          "from": "QUARANTINED",
+          "to": "REJECTED",
+          "at": "2026-10-07T16:10:18.090Z",
+          "actor": "vitaharbor-data-worker",
+          "reason": "Duplicate crosspost of Real Racing 3 Beta 1.1 release (primary retained as reddit-1ww8upq)"
         }
       ],
       "source": {
@@ -2772,7 +2718,7 @@
       "schema_version": 2,
       "id": "reddit-1wsrua2",
       "external_id": "1wsrua2",
-      "state": "QUARANTINED",
+      "state": "REJECTED",
       "state_history": [
         {
           "state": "DETECTED",
@@ -2785,6 +2731,13 @@
           "at": "2026-10-02T13:53:21.048Z",
           "actor": "reddit-scanner",
           "reason": "Scanner result is unverified and cannot enter the curated ledger"
+        },
+        {
+          "from": "QUARANTINED",
+          "to": "REJECTED",
+          "at": "2026-10-07T16:10:18.090Z",
+          "actor": "vitaharbor-data-worker",
+          "reason": "Out of scope: Flash/Ruffle runtime utility, not a standalone game port"
         }
       ],
       "source": {
@@ -2854,7 +2807,7 @@
       "schema_version": 2,
       "id": "reddit-1wrq7gj",
       "external_id": "1wrq7gj",
-      "state": "QUARANTINED",
+      "state": "REJECTED",
       "state_history": [
         {
           "state": "DETECTED",
@@ -2867,6 +2820,13 @@
           "at": "2026-10-02T13:53:21.048Z",
           "actor": "reddit-scanner",
           "reason": "Scanner result is unverified and cannot enter the curated ledger"
+        },
+        {
+          "from": "QUARANTINED",
+          "to": "REJECTED",
+          "at": "2026-10-07T16:10:18.090Z",
+          "actor": "vitaharbor-data-worker",
+          "reason": "Out of scope: Multiplayer mod for existing commercial Vita release, not a port or decomp"
         }
       ],
       "source": {

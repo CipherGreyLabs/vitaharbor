@@ -1,3 +1,4 @@
+import mediaManifest from "../../../../data/media-manifest.json";
 import { GameCardBanner } from "../projects/GameCardBanner";
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { createPortal } from "react-dom";
@@ -70,6 +71,8 @@ interface DirectoryTableProps {
   directoryRef: React.RefObject<HTMLElement | null>;
   latestSignal?: LatestSignal;
 }
+
+const manifestBySlug = new Map<string, any>(((mediaManifest as any)?.items || []).map((item: any) => [item.slug, item]));
 
 export const DirectoryTable: React.FC<DirectoryTableProps> = ({
   projects,
@@ -409,8 +412,8 @@ export const DirectoryTable: React.FC<DirectoryTableProps> = ({
                 <div
                   key={project.id}
                   id={"card-" + project.slug}
-                  onMouseEnter={() => onSelectProject(project, false)}
-                  onFocus={() => onSelectProject(project, false)}
+                  
+                  
                   className={
                     "group relative flex flex-col justify-between overflow-hidden rounded-2xl border transition-all duration-200 " +
                     (selected
@@ -419,40 +422,52 @@ export const DirectoryTable: React.FC<DirectoryTableProps> = ({
                   }
                 >
                   {/* Card Media Banner */}
-                  <div className="relative aspect-[16/9] w-full overflow-hidden bg-black/60 border-b border-white/[0.06]">
-                    {project.screenshot_url ? (
-                      <img
-                        src={project.screenshot_url}
-                        alt={project.screenshot_alt || title.name}
-                        loading="lazy"
-                        className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
-                      />
-                    ) : (
-                      <GameCardBanner
-                        project={project}
-                        titleName={title.name}
-                        engineLabel={title.engine}
-                      />
-                    )}
-                    
-                    {/* Stage Badge on top of image */}
-                    <div className="absolute left-3 top-3 flex items-center gap-1.5">
-                      <span className={"rounded-md px-2 py-0.5 font-mono text-[10px] font-semibold uppercase backdrop-blur-md " + (STAGE_CHIP[String(project.current_stage)] || "bg-black/70 text-zinc-300")}>
-                        {prettyStage(project.current_stage)}
-                      </span>
-                      {isNew && <span className="rounded bg-blue-500/20 border border-blue-500/40 px-1.5 py-0.5 font-mono text-[9px] font-semibold uppercase text-blue-400">New</span>}
-                    </div>
+                  {(() => {
+                    const manifestItem = manifestBySlug.get(project.slug);
+                    const mediaUrl = project.screenshot_url || manifestItem?.media_local_path;
+                    const mediaLabel = manifestItem?.media_label || (manifestItem?.is_vita_gameplay ? 'Vita Capture' : 'Official Art');
+                    return (
+                      <div className="relative aspect-[16/9] w-full overflow-hidden bg-black/60 border-b border-white/[0.06]">
+                        {mediaUrl ? (
+                          <img
+                            src={mediaUrl}
+                            alt={project.screenshot_alt || title.name}
+                            loading="lazy"
+                            className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                          />
+                        ) : (
+                          <GameCardBanner
+                            project={project}
+                            titleName={title.name}
+                            engineLabel={title.engine}
+                          />
+                        )}
+                        
+                        {/* Stage Badge & Media Provenance Label on top of image */}
+                        <div className="absolute left-3 top-3 flex items-center gap-1.5 flex-wrap">
+                          <span className={"rounded-md px-2 py-0.5 font-mono text-[10px] font-semibold uppercase backdrop-blur-md " + (STAGE_CHIP[String(project.current_stage)] || "bg-black/70 text-zinc-300")}>
+                            {prettyStage(project.current_stage)}
+                          </span>
+                          {isNew && <span className="rounded bg-blue-500/20 border border-blue-500/40 px-1.5 py-0.5 font-mono text-[9px] font-semibold uppercase text-blue-400">New</span>}
+                          {mediaUrl && (
+                            <span className="rounded-md bg-black/75 border border-white/15 px-1.5 py-0.5 font-mono text-[9px] font-medium text-zinc-300 backdrop-blur-md">
+                              {mediaLabel}
+                            </span>
+                          )}
+                        </div>
 
-                    {/* Show on 3D Vita Quick Trigger */}
-                    <button
-                      type="button"
-                      onClick={() => onSelectProject(project, true)}
-                      title="Show on 3D Vita"
-                      className="absolute right-3 top-3 inline-flex min-h-[44px] items-center rounded-lg border border-white/20 bg-black/70 px-3 py-1.5 font-mono text-[11px] font-medium text-white opacity-0 backdrop-blur-md transition-all group-hover:opacity-100 hover:bg-black"
-                    >
-                      Show on Vita
-                    </button>
-                  </div>
+                        {/* Show on 3D Vita Quick Trigger */}
+                        <button
+                          type="button"
+                          onClick={() => onSelectProject(project, true)}
+                          title="Show on 3D Vita"
+                          className="absolute right-3 top-3 inline-flex min-h-[44px] items-center rounded-lg border border-white/20 bg-black/70 px-3 py-1.5 font-mono text-[11px] font-medium text-white opacity-0 backdrop-blur-md transition-all group-hover:opacity-100 hover:bg-black"
+                        >
+                          Show on Vita
+                        </button>
+                      </div>
+                    );
+                  })()}
 
                   {/* Card Content */}
                   <div className="flex flex-1 flex-col justify-between p-4">
@@ -547,8 +562,8 @@ export const DirectoryTable: React.FC<DirectoryTableProps> = ({
                   <li
                     key={project.id}
                     id={"entry-" + project.slug}
-                    onMouseEnter={() => onSelectProject(project, false)}
-                    onFocus={() => onSelectProject(project, false)}
+                    
+                    
                     className={"group relative rounded-lg transition-all vh-row-glass " + (selected ? "bg-accent/[0.055] border-l-2 border-l-accent" : "hover:bg-[#0f172a]")}
                   >
                     <div className="grid grid-cols-[minmax(0,1fr)_auto] items-center">
