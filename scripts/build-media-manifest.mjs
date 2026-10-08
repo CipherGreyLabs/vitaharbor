@@ -194,6 +194,34 @@ const projectMediaDefs = {
     media_label: "Official Key Artwork",
     provenance_notes: "Resident Evil 4 key artwork; port repository recently established by Rinnegatamante."
   },
+  "buckshot-roulette-vita": {
+    media_type: "title_card_fallback",
+    is_vita_gameplay: false,
+    media_source_url: "https://www.reddit.com/r/vitahacks/comments/1wn46c9/wip_buckshotrouletteportable_a_c_rewrite_of/",
+    media_label: "Dynamic Title Card",
+    provenance_notes: "Buckshot Roulette C++ rewrite in active development; uses dynamic title card."
+  },
+  "the-force-engine-dark-forces-vita": {
+    media_type: "title_card_fallback",
+    is_vita_gameplay: false,
+    media_source_url: "https://www.reddit.com/r/vitahacks/comments/1wlrv6x/theforceenginevita_successfully_booting_into_the/",
+    media_label: "Dynamic Title Card",
+    provenance_notes: "The Force Engine (Star Wars Dark Forces) port menu boot in active development; uses dynamic title card."
+  },
+  "supertuxkart-vulkan-vita": {
+    media_type: "title_card_fallback",
+    is_vita_gameplay: false,
+    media_source_url: "https://www.reddit.com/r/vitahacks/comments/1wkf9m5/supertuxkart_wip_port_for_playstation_vita_with/",
+    media_label: "Dynamic Title Card",
+    provenance_notes: "SuperTuxKart Vulkan 1.1 native driver WIP in development; uses dynamic title card."
+  },
+  "insurgency-vita": {
+    media_type: "title_card_fallback",
+    is_vita_gameplay: false,
+    media_source_url: "https://www.reddit.com/r/vitahacks/comments/1wvob17/insurgency_vita_gameplay_showcase_information/",
+    media_label: "Dynamic Title Card",
+    provenance_notes: "Insurgency tactical FPS Vita recreation in development; uses dynamic title card."
+  },
   "real-racing-3-vita": {
     media_type: "official_promotional_artwork",
     is_vita_gameplay: false,

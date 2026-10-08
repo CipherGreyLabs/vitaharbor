@@ -227,6 +227,62 @@
         "vitaGL",
         "Native C++"
       ]
+    },
+    {
+      "id": "buckshot-roulette-vita",
+      "url": "https://www.reddit.com/r/vitahacks/comments/1wn46c9/wip_buckshotrouletteportable_a_c_rewrite_of/",
+      "title": "Buckshot Roulette (BuckshotRoulettePortable)",
+      "content_text": "Stage: early_wip | Platform: PC / Godot | Summary: Native C++ rewrite of Buckshot Roulette built on a custom lightweight engine targeting 60 FPS and vitaGL on PS Vita by JustAverage456. | Hardware: Targeting smooth 60 FPS by bypassing Godot overhead via direct C++ implementation.",
+      "date_modified": "2026-09-22T08:58:38.000Z",
+      "tags": [
+        "early_wip",
+        "PC / Godot",
+        "Native C++",
+        "Custom Engine",
+        "vitaGL"
+      ]
+    },
+    {
+      "id": "the-force-engine-dark-forces-vita",
+      "url": "https://www.reddit.com/r/vitahacks/comments/1wlrv6x/theforceenginevita_successfully_booting_into_the//",
+      "title": "Star Wars: Dark Forces (TheForceEngine-VITA)",
+      "content_text": "Stage: booting | Platform: PC / DOS | Summary: Native PlayStation Vita port of The Force Engine, bringing LucasArts' classic Star Wars: Dark Forces Jedi engine to handheld by SnooLobsters311. | Hardware: Menu runs at stable framerates; renderer optimization for 3D room sectors underway.",
+      "date_modified": "2026-09-20T20:24:59.000Z",
+      "tags": [
+        "booting",
+        "PC / DOS",
+        "The Force Engine",
+        "Native C++",
+        "vitaGL"
+      ]
+    },
+    {
+      "id": "supertuxkart-vulkan-vita",
+      "url": "https://www.reddit.com/r/vitahacks/comments/1wkf9m5/supertuxkart_wip_port_for_playstation_vita_with/",
+      "title": "SuperTuxKart (Vulkan 1.1 Native)",
+      "content_text": "Stage: in_game | Platform: PC / Linux | Summary: Experimental native SuperTuxKart port for PlayStation Vita powered by a true low-level Vulkan 1.1 graphics driver by nyabsi. | Hardware: Early driver pipeline testing; averaging 20–35 FPS with work ongoing on pipeline caching and vertex throughput.",
+      "date_modified": "2026-09-19T07:09:39.000Z",
+      "tags": [
+        "in_game",
+        "PC / Linux",
+        "Vulkan 1.1",
+        "Native C++",
+        "SceGXM"
+      ]
+    },
+    {
+      "id": "insurgency-vita",
+      "url": "https://www.reddit.com/r/vitahacks/comments/1wvob17/insurgency_vita_gameplay_showcase_information/",
+      "title": "Insurgency Vita (Tactical FPS)",
+      "content_text": "Stage: in_game | Platform: PC / Source Engine | Summary: Handheld recreation of the tactical FPS Insurgency (2014) on PlayStation Vita featuring weapons, attachments, maps, and audio by OneDumbFox. | Hardware: Runs between 20–35 FPS; shader pipeline and geometry culling optimizations actively in progress.",
+      "date_modified": "2026-10-02T08:20:55.000Z",
+      "tags": [
+        "in_game",
+        "PC / Source Engine",
+        "Custom Engine",
+        "Native C++",
+        "vitaGL"
+      ]
     }
   ]
 }
