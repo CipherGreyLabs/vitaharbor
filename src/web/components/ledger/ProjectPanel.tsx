@@ -450,6 +450,50 @@ export const ProjectPanel: React.FC<ProjectPanelProps> = ({
           </span>
         )}
       </div>
+
+      {/* Similar Ongoing Ports Recommendations */}
+      {similarProjects.length > 0 && (
+        <div className="mt-8 border-t border-white/[0.06] pt-6">
+          <h3 className="text-micro font-semibold uppercase text-zinc-400 mb-3 flex items-center gap-1.5">
+            <span>Similar Ongoing Ports</span>
+          </h3>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            {similarProjects.map((similar) => {
+              const sTitle = splitTitle(similar.game_title || similar.display_name);
+              return (
+                <button
+                  key={similar.id}
+                  type="button"
+                  onClick={() => onSelectProject(similar)}
+                  className="group flex flex-col justify-between rounded-xl border border-white/10 bg-zinc-950/60 p-3 text-left transition-all hover:border-white/20 hover:bg-zinc-900/60 min-h-[44px]"
+                >
+                  <div>
+                    <div className="flex items-center justify-between gap-1 mb-2">
+                      <span className={"rounded px-1.5 py-0.5 font-mono text-[9px] font-semibold uppercase " + (STAGE_CHIP[String(similar.current_stage)] || "bg-zinc-800 text-zinc-300")}>
+                        {prettyStage(similar.current_stage)}
+                      </span>
+                      <span className="font-mono text-[9px] uppercase text-zinc-500">
+                        {similar.original_platform || "Port"}
+                      </span>
+                    </div>
+                    <p className="truncate text-caption font-semibold text-white group-hover:text-blue-400 transition-colors">
+                      {sTitle.name}
+                    </p>
+                  </div>
+                  {similar.technologies && similar.technologies.length > 0 && (
+                    <div className="mt-2.5 flex flex-wrap gap-1">
+                      {similar.technologies.slice(0, 2).map((t: string) => (
+                        <span key={t} className="vh-tech-badge text-[9px] py-0 px-1">[{t}]</span>
+                      ))}
+                    </div>
+                  )}
+                </button>
+              );
+            })}
+          </div>
+        </div>
+      )}
     </div>
   );
 };
+
