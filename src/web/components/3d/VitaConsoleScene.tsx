@@ -807,10 +807,26 @@ const recessMat = new THREE.MeshStandardMaterial({color:'#14161a',roughness:0.52
     ro.observe(el);
     resize();
 
-    const io = typeof IntersectionObserver !== 'undefined' ? new IntersectionObserver(([entry]) => { visible = entry.isIntersecting; }) : null;
+    const handleVisibilityChange = () => {
+      if (!document.hidden && visible && !raf) {
+        tick();
+      }
+    };
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+
+    const io = typeof IntersectionObserver !== "undefined" ? new IntersectionObserver(([entry]) => {
+      visible = entry.isIntersecting;
+      if (visible && !document.hidden && !raf) {
+        tick();
+      }
+    }) : null;
     io?.observe(el);
 
     function tick() {
+      if (!visible || document.hidden) {
+        raf = 0;
+        return;
+      }
       raf = requestAnimationFrame(tick);
       if (reduced) {
         scene.rotation.set(0, 0, 0);
@@ -930,7 +946,11 @@ const recessMat = new THREE.MeshStandardMaterial({color:'#14161a',roughness:0.52
       el.removeEventListener("pointerdown", pressDown);
       window.removeEventListener("pointerup", releaseButton);
       window.removeEventListener("pointercancel", releaseButton);
-      cancelAnimationFrame(raf);
+      if (raf) {
+        cancelAnimationFrame(raf);
+        raf = 0;
+      }
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
       ro.disconnect();
       io?.disconnect();
       el.removeEventListener('pointerdown', onPointerDown);

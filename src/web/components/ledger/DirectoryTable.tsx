@@ -1,3 +1,4 @@
+import { GRADUATED_PROJECTS, type GraduatedProject } from "../../../shared/constants/graduatedData";
 import mediaManifest from "../../../../data/media-manifest.json";
 import { GameCardBanner } from "../projects/GameCardBanner";
 import React, { useEffect, useMemo, useRef, useState } from "react";
@@ -23,7 +24,8 @@ const STAGE_FILTERS = [
   { key: "playable", label: "Playable" },
   { key: "booting", label: "Early boot" },
   { key: "released", label: "Released" },
-  { key: "recent", label: "Recently updated" }
+  { key: "recent", label: "Recently updated" },
+  { key: "graduated", label: "Graduated to VitaDB" }
 ];
 
 const CATEGORY_FILTERS = [
@@ -100,7 +102,7 @@ export const DirectoryTable: React.FC<DirectoryTableProps> = ({
   latestSignal
 }) => {
   const stageCounts = useMemo(() => {
-    const counts: Record<string, number> = { all: projects.length, wip: 0, playable: 0, booting: 0, released: 0, recent: 0 };
+    const counts: Record<string, number> = { all: projects.length, wip: 0, playable: 0, booting: 0, released: 0, recent: 0, graduated: GRADUATED_PROJECTS.length };
     for (const p of projects) {
       const st = String(p.current_stage);
       if (["in_game", "booting", "early_wip", "research"].includes(st)) counts.wip++;
@@ -133,6 +135,20 @@ export const DirectoryTable: React.FC<DirectoryTableProps> = ({
   }, [projects]);
 
   const [viewMode, setViewMode] = useState<"bento" | "list">("bento");
+  const visibleGraduated = useMemo(() => {
+    if (activeFilter !== "graduated") return [];
+    const term = searchTerm.trim().toLowerCase();
+    if (!term) return GRADUATED_PROJECTS;
+    return GRADUATED_PROJECTS.filter(
+      (p) =>
+        p.title.toLowerCase().includes(term) ||
+        p.developer.toLowerCase().includes(term) ||
+        p.original_platform.toLowerCase().includes(term) ||
+        p.technologies.some((t) => t.toLowerCase().includes(term)) ||
+        p.summary.toLowerCase().includes(term)
+    );
+  }, [activeFilter, searchTerm]);
+
   const openProject = projects.find((project) => project.id === expandedId) || null;
   const drawerOpen = openProject !== null;
   const drawerRef = useRef<HTMLElement | null>(null);
@@ -388,7 +404,7 @@ export const DirectoryTable: React.FC<DirectoryTableProps> = ({
               </div>
             ))}
           </div>
-        ) : visible.length === 0 ? (
+        ) : visible.length === 0 && activeFilter !== "graduated" ? (
           <div className="px-6 py-16 text-center">
             <p className="text-body text-ink-medium">Nothing matches that search.</p>
             <button
@@ -398,6 +414,113 @@ export const DirectoryTable: React.FC<DirectoryTableProps> = ({
             >
               Reset filters
             </button>
+          </div>
+        ) : activeFilter === "graduated" ? (
+          <div>
+            <div className="mb-4 rounded-xl border border-emerald-500/20 bg-emerald-950/20 p-4 text-emerald-300">
+              <div className="flex items-center gap-2 font-mono text-[11px] font-semibold uppercase tracking-wider text-emerald-400">
+                <Check className="h-4 w-4 text-emerald-400" />
+                <span>Graduated to VitaDB</span>
+              </div>
+              <p className="mt-1 text-caption text-zinc-300">
+                These ports have successfully reached full public release and are officially available directly on VitaDB / Vita Homebrew Browser.
+              </p>
+            </div>
+
+            {visibleGraduated.length === 0 ? (
+              <div className="px-6 py-12 text-center">
+                <p className="text-body text-ink-medium">No graduated projects match that search.</p>
+                <button
+                  type="button"
+                  onClick={onResetFilters}
+                  className="mt-3 inline-flex min-h-[44px] items-center text-body font-semibold text-accent underline underline-offset-4 focus-visible:outline focus-visible:outline-2 focus-visible:outline-accent"
+                >
+                  Reset filters
+                </button>
+              </div>
+            ) : viewMode === "bento" ? (
+              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                {visibleGraduated.map((project) => (
+                  <div
+                    key={project.slug}
+                    id={"graduated-" + project.slug}
+                    className="group relative flex flex-col justify-between overflow-hidden rounded-2xl border border-white/10 bg-zinc-950/80 p-5 transition-all hover:border-emerald-500/40 hover:bg-zinc-900/60"
+                  >
+                    <div>
+                      <div className="flex items-center justify-between gap-2 mb-3">
+                        <span className="rounded-md border border-emerald-500/30 bg-emerald-950/60 px-2 py-0.5 font-mono text-[10px] font-semibold uppercase text-emerald-400">
+                          Released on VitaDB
+                        </span>
+                        <span className="font-mono text-micro uppercase text-ink-muted">VitaDB #{project.vitadb_id}</span>
+                      </div>
+
+                      <div className="flex items-start gap-3 mb-2">
+                        <ProjectMark seed={project.title} size={42} className="shrink-0 rounded-xl" />
+                        <div className="min-w-0 flex-1">
+                          <h3 className="truncate text-subtitle font-semibold text-white group-hover:text-emerald-300 transition-colors">{project.title}</h3>
+                          <p className="font-mono text-micro text-ink-muted uppercase">{project.original_platform} · by {project.developer}</p>
+                        </div>
+                      </div>
+
+                      <p className="text-caption text-ink-medium leading-relaxed mb-3 line-clamp-3">
+                        {project.summary}
+                      </p>
+
+                      <div className="flex flex-wrap gap-1 mb-4">
+                        {project.technologies.map((tech) => (
+                          <span key={tech} className="vh-tech-badge">[{tech}]</span>
+                        ))}
+                      </div>
+                    </div>
+
+                    <div className="flex items-center justify-between gap-2 border-t border-white/[0.06] pt-3 mt-auto">
+                      <span className="text-micro text-ink-muted font-mono">{project.released_year || "Released"}</span>
+                      <a
+                        href={project.vitadb_url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex min-h-[34px] items-center gap-1.5 rounded-lg border border-emerald-500/40 bg-emerald-950/40 px-3 py-1 font-mono text-micro font-semibold text-emerald-300 hover:bg-emerald-900/50 hover:border-emerald-400 transition-colors"
+                      >
+                        <span>View on VitaDB</span>
+                        <ExternalLink className="h-3 w-3" />
+                      </a>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <div className="overflow-hidden rounded-2xl border border-[#334155] bg-black">
+                <div className="hidden grid-cols-[minmax(0,1.8fr)_minmax(8.5rem,0.9fr)_minmax(6rem,0.65fr)_7rem_auto] items-center gap-3 border-b border-hairline bg-white/[0.025] px-4 py-2 font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-ink-muted lg:grid">
+                  <span>Project</span><span>Developer</span><span>Platform</span><span>Status</span><span>VitaDB Link</span>
+                </div>
+                <ul className="divide-y divide-white/[0.055]">
+                  {visibleGraduated.map((project) => (
+                    <li key={project.slug} className="grid grid-cols-[minmax(0,1fr)_auto] items-center px-4 py-3 hover:bg-zinc-950 lg:grid-cols-[minmax(0,1.8fr)_minmax(8.5rem,0.9fr)_minmax(6rem,0.65fr)_7rem_auto] gap-3">
+                      <div className="min-w-0">
+                        <span className="truncate text-body font-semibold text-white">{project.title}</span>
+                        <span className="block text-caption text-zinc-400 line-clamp-1">{project.summary}</span>
+                      </div>
+                      <span className="hidden font-mono text-caption text-zinc-300 lg:block">{project.developer}</span>
+                      <span className="hidden font-mono text-micro uppercase text-zinc-400 lg:block">{project.original_platform}</span>
+                      <span className="hidden lg:block">
+                        <span className="rounded px-2 py-0.5 font-mono text-[10px] font-semibold uppercase bg-emerald-950/60 text-emerald-400 border border-emerald-500/30">
+                          Released
+                        </span>
+                      </span>
+                      <a
+                        href={project.vitadb_url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex min-h-[34px] items-center gap-1 text-caption font-semibold text-emerald-400 hover:underline"
+                      >
+                        <span>VitaDB</span>
+                        <ExternalLink className="h-3.5 w-3.5" />
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
           </div>
         ) : viewMode === "bento" ? (
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">

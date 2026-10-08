@@ -1,6 +1,14 @@
 # VitaHarbor project state
 
-Updated: 2026-10-07
+Updated: 2026-10-08
+
+## Current state: VH-UI-IMPROVEMENTS-045 3D Viewport Pause, Graduated VitaDB Archive & Build Feed Linkage (2026-10-08)
+
+- Master Improvements 3, 4 & 5 active:
+  - 3D Console Performance: Render loop strictly pauses via IntersectionObserver and visibilitychange when out of view, cutting GPU/CPU idle load.
+  - Graduated to VitaDB View: Dedicated archive mode in DirectoryTable displaying 13 completed ports on VitaDB with direct info links.
+  - Build Feed Linkage: `npm run data:feeds` automatically executes during `npm run build`.
+- Verification: npm run verify passed (tsc clean, 135/135 unit tests, 7/7 integration tests, 15 prerendered project pages, 18 sitemap URLs).
 
 ## Current state: VH-UI-DATA-INTEGRATION-044 Data Worker Integration & UI Correctness (2026-10-07)
 

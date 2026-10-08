@@ -6,49 +6,6 @@
   "description": "Automated index tracking community PlayStation Vita ports, ARM wrappers, and decompilations from r/vitahacks + r/VitaPiracy + r/PSVitaHomebrew.",
   "items": [
     {
-      "id": "openmohaa-vita",
-      "url": "https://www.reddit.com/r/vitahacks/comments/1tapf2b/wip_openmohaa_on_ps_vita_medal_of_honor_allied/",
-      "title": "Medal of Honor: Allied Assault (OpenMoHAA)",
-      "content_text": "Stage: in_game | Platform: PC | Summary: Native PlayStation Vita port of OpenMoHAA. Geometry, sound engine, mission scripts, and player controls functioning. | Hardware: 5–15 FPS in heavy outdoor combat scenes. Memory allocation optimization and shader pipeline tuning in progress.",
-      "date_modified": "2026-09-16T15:34:00.000Z",
-      "tags": [
-        "in_game",
-        "PC",
-        "OpenMoHAA",
-        "Native C++",
-        "vitaGL"
-      ]
-    },
-    {
-      "id": "smash-melee-vita",
-      "url": "https://www.reddit.com/r/vitahacks/comments/1wivnp0/super_smash_melee/",
-      "title": "Super Smash Bros. Melee Vita",
-      "content_text": "Stage: in_game | Platform: GameCube / Decomp | Summary: Two independent experimental Melee ports are active: rob1n994 is moving Aurora to native SceGXM/vitaGL, while zm2283145 has an early decompilation-based build running in gameplay. | Hardware: Both builds remain work in progress. Rendering, textures, framebuffer effects, particles, stability, and substantial performance optimization are still required.",
-      "date_modified": "2026-09-17T14:31:58.000Z",
-      "tags": [
-        "in_game",
-        "GameCube / Decomp",
-        "Aurora",
-        "SceGXM",
-        "vitaGL",
-        "Decompilation",
-        "Native C++"
-      ]
-    },
-    {
-      "id": "hollow-knight-vita",
-      "url": "https://www.reddit.com/r/vitahacks/comments/17eneu2/upcoming_hollow_knight_ps_vita_port_wip/",
-      "title": "Hollow Knight Vita Port",
-      "content_text": "Stage: booting | Platform: PC / Unity | Summary: Complete C# / Unity decompilation translated into native ARM bytecode for the PS Vita. | Hardware: Memory exhaustion crashes during room transitions. Asset cache streaming currently being rewritten.",
-      "date_modified": "2026-09-14T15:34:00.000Z",
-      "tags": [
-        "booting",
-        "PC / Unity",
-        "Unity C# Decomp",
-        "Native ARM"
-      ]
-    },
-    {
       "id": "zelda-twilight-princess-vita",
       "url": "https://www.reddit.com/r/vitahacks/comments/1w9ys9f/the_new_psvita_ports/",
       "title": "Zelda: Twilight Princess Vita",
@@ -100,18 +57,6 @@
       ]
     },
     {
-      "id": "kotor-vita",
-      "url": "https://vitaharbor.vercel.app/projects/kotor-vita",
-      "title": "Star Wars: KOTOR Vita",
-      "content_text": "Stage: early_wip | Platform: Xbox / PC / Android | Summary: Community reverse-engineering and ARM wrapper research for Knights of the Old Republic. | Hardware: Early technical research stage.",
-      "date_modified": "2026-09-15T15:34:00.000Z",
-      "tags": [
-        "early_wip",
-        "Xbox / PC / Android",
-        "ARMv7 Wrapper"
-      ]
-    },
-    {
       "id": "nfs-hot-pursuit-vita",
       "url": "https://vitaharbor.vercel.app/projects/nfs-hot-pursuit-vita",
       "title": "Need for Speed: Hot Pursuit Vita",
@@ -139,20 +84,6 @@
       ]
     },
     {
-      "id": "zelda-ship-of-harkinian-vita",
-      "url": "https://www.reddit.com/r/VitaPiracy/comments/1leugn2/ocarina_of_time_ship_of_harkinian_is_out_now_baby/",
-      "title": "Zelda: Ship of Harkinian (OOT)",
-      "content_text": "Stage: playable | Platform: N64 / PC Decomp | Summary: Direct native Vita build of the Harbour Masters reverse-engineered Ocarina of Time decompilation. | Hardware: Solid 30-60 FPS depending on enhancement settings.",
-      "date_modified": "2026-09-13T15:34:00.000Z",
-      "tags": [
-        "playable",
-        "N64 / PC Decomp",
-        "Native C++",
-        "libultraship",
-        "vitaGL"
-      ]
-    },
-    {
       "id": "slingshot-racing-vita",
       "url": "https://vitaharbor.vercel.app/projects/slingshot-racing-vita",
       "title": "Slingshot Racing Vita",
@@ -163,18 +94,6 @@
         "Android / iOS",
         "ARMv7 Wrapper",
         "vitaGL"
-      ]
-    },
-    {
-      "id": "fallout-2-ce-vita",
-      "url": "https://vitaharbor.vercel.app/projects/fallout-2-ce-vita",
-      "title": "Fallout 2 Community Edition",
-      "content_text": "Stage: playable | Platform: PC | Summary: Open-source recreation of Fallout 2 engine compiled natively for PlayStation Vita. | Hardware: Smooth 60 FPS in exploration and combat.",
-      "date_modified": "2026-09-12T15:34:00.000Z",
-      "tags": [
-        "playable",
-        "PC",
-        "Native C++"
       ]
     },
     {
@@ -201,17 +120,6 @@
         "PICO-8 / C",
         "Native C",
         "SDL2"
-      ]
-    },
-    {
-      "id": "renegade-vita-demo-release",
-      "url": "https://www.reddit.com/r/vitahacks/comments/1wgp613/renegade_vita_demo_release/",
-      "title": "Renegade Vita - Demo Release",
-      "content_text": "Stage: announced | Platform: Unknown | Summary: A Reddit post announced a Renegade Vita demo. VitaHarbor has not independently tested it on hardware. | Hardware: Hardware result not recorded.",
-      "date_modified": "2026-09-17T15:34:20.988Z",
-      "tags": [
-        "announced",
-        "Unknown"
       ]
     },
     {
@@ -249,19 +157,6 @@
       ]
     },
     {
-      "id": "c-dogs-sdl-vita",
-      "url": "https://www.reddit.com/r/vitahacks/comments/1wkw14c/prerelease_cdogs_sdl_port_for_ps_vita_pstv/",
-      "title": "C-Dogs SDL Vita",
-      "content_text": "Stage: early_wip | Platform: DOS / SDL | Summary: Public C-Dogs SDL Vita/PSTV pre-release posted by abby_6112. The source thread reports a native build tested on Vita/PSTV hardware and links a GitHub preview release; LAN multiplayer work is still in progress. | Hardware: The author reports a native Vita/PSTV build and requests real-hardware testing; no independent hardware report is recorded in this ledger.",
-      "date_modified": "2026-09-19T20:01:51.653Z",
-      "tags": [
-        "early_wip",
-        "DOS / SDL",
-        "Native Vita build",
-        "SDL"
-      ]
-    },
-    {
       "id": "resident-evil-4-vita",
       "url": "https://www.reddit.com/r/VitaPiracy/comments/1wmax82/guess_it_is_happening/",
       "title": "Resident Evil 4 Vita (re4-vita)",
@@ -289,35 +184,6 @@
       ]
     },
     {
-      "id": "diddy-kong-racing-golden-balloon",
-      "url": "https://www.reddit.com/r/vitahacks/comments/1wcx3o6/golden_balloon_v169_diddy_kong_racing_source_port/",
-      "title": "Diddy Kong Racing 64 (Golden Balloon)",
-      "content_text": "Stage: playable | Platform: N64 / Decomp | Summary: Native source port based on the Diddy Kong Racing decompilation running full Adventure playthrough with custom visuals and Vita trophies. | Hardware: Fluid framerate via native C and vitaGL renderer.",
-      "date_modified": "2026-09-10T21:54:04.000Z",
-      "tags": [
-        "playable",
-        "N64 / Decomp",
-        "Native C",
-        "N64 Decompilation",
-        "vitaGL",
-        "Restored Visuals"
-      ]
-    },
-    {
-      "id": "cnc-renegade-vita",
-      "url": "https://www.reddit.com/r/vitahacks/comments/1waninh/cnc_renegade_native_ps_vita_port/",
-      "title": "Command & Conquer: Renegade",
-      "content_text": "Stage: early_wip | Platform: PC | Summary: Native PlayStation Vita port of Command & Conquer: Renegade, bringing the classic C&C FPS to handheld. | Hardware: Work in progress targeting playable framerates on native Vita hardware.",
-      "date_modified": "2026-09-08T12:49:38.000Z",
-      "tags": [
-        "early_wip",
-        "PC",
-        "Native C++",
-        "Open-Source Engine",
-        "vitaGL"
-      ]
-    },
-    {
       "id": "gta-lcs-vita",
       "url": "https://www.reddit.com/r/vitahacks/comments/1wte7gf/gta_liberty_city_stories_my_ps_vita_port_is_now/",
       "title": "GTA: Liberty City Stories (reStories)",
@@ -330,44 +196,6 @@
         "reStories Decompilation",
         "vitaGL",
         "Hardware Shaders"
-      ]
-    },
-    {
-      "id": "test-drive-iii-vita",
-      "url": "https://www.reddit.com/r/vitahacks/comments/1wudlni/test_drive_iii_vita_port/",
-      "title": "Test Drive III",
-      "content_text": "Stage: playable | Platform: Various | Summary: Community PlayStation Vita port of Test Drive III with source repository on GitHub. | Hardware: Targeting native hardware performance.",
-      "date_modified": "2026-09-30T19:00:45.000Z",
-      "tags": [
-        "playable",
-        "Various",
-        "VitaSDK"
-      ]
-    },
-    {
-      "id": "test-drive-ii-vita",
-      "url": "https://www.reddit.com/r/vitahacks/comments/1wu6lsx/test_drive_ii_vita_port/",
-      "title": "Test Drive II",
-      "content_text": "Stage: playable | Platform: Various | Summary: Community PlayStation Vita port of Test Drive II with source repository on GitHub. | Hardware: Targeting native hardware performance.",
-      "date_modified": "2026-09-30T14:36:07.000Z",
-      "tags": [
-        "playable",
-        "Various",
-        "VitaSDK"
-      ]
-    },
-    {
-      "id": "halo-ce-vita",
-      "url": "https://www.reddit.com/r/VitaPiracy/comments/1wvhkaf/halo_ce_port_release/",
-      "title": "Halo: Combat Evolved Vita",
-      "content_text": "Stage: released | Platform: Xbox | Summary: Native PlayStation Vita port built from the Xbox decompilation. The official repository publishes the VPK and states that game data is not included. | Hardware: The maintainer reports up to 30 FPS; large fights can run slower, depending on scene and graphics settings.",
-      "date_modified": "2026-10-06T22:49:53.000Z",
-      "tags": [
-        "released",
-        "Xbox",
-        "Xbox decompilation",
-        "Native PS Vita port",
-        "VitaSDK"
       ]
     }
   ]
