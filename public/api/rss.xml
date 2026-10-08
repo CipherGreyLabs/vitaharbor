@@ -5,28 +5,7 @@
     <link>https://vitaharbor.vercel.app/</link>
     <description>Community PlayStation Vita ports tracked from r/vitahacks + r/VitaPiracy + r/PSVitaHomebrew</description>
     <language>en-us</language>
-    <lastBuildDate>Wed, 07 Oct 2026 14:33:09 GMT</lastBuildDate>
-    <item>
-      <title><![CDATA[Medal of Honor: Allied Assault (OpenMoHAA) - IN_GAME]]></title>
-      <link>https://www.reddit.com/r/vitahacks/comments/1tapf2b/wip_openmohaa_on_ps_vita_medal_of_honor_allied/</link>
-      <guid isPermaLink="false">openmohaa-vita</guid>
-      <pubDate>Wed, 16 Sep 2026 15:34:00 GMT</pubDate>
-      <description><![CDATA[Native PlayStation Vita port of OpenMoHAA. Geometry, sound engine, mission scripts, and player controls functioning. Hardware Status: 5–15 FPS in heavy outdoor combat scenes. Memory allocation optimization and shader pipeline tuning in progress.]]></description>
-    </item>
-    <item>
-      <title><![CDATA[Super Smash Bros. Melee Vita - IN_GAME]]></title>
-      <link>https://www.reddit.com/r/vitahacks/comments/1wivnp0/super_smash_melee/</link>
-      <guid isPermaLink="false">smash-melee-vita</guid>
-      <pubDate>Thu, 17 Sep 2026 14:31:58 GMT</pubDate>
-      <description><![CDATA[Two independent experimental Melee ports are active: rob1n994 is moving Aurora to native SceGXM/vitaGL, while zm2283145 has an early decompilation-based build running in gameplay. Hardware Status: Both builds remain work in progress. Rendering, textures, framebuffer effects, particles, stability, and substantial performance optimization are still required.]]></description>
-    </item>
-    <item>
-      <title><![CDATA[Hollow Knight Vita Port - BOOTING]]></title>
-      <link>https://www.reddit.com/r/vitahacks/comments/17eneu2/upcoming_hollow_knight_ps_vita_port_wip/</link>
-      <guid isPermaLink="false">hollow-knight-vita</guid>
-      <pubDate>Mon, 14 Sep 2026 15:34:00 GMT</pubDate>
-      <description><![CDATA[Complete C# / Unity decompilation translated into native ARM bytecode for the PS Vita. Hardware Status: Memory exhaustion crashes during room transitions. Asset cache streaming currently being rewritten.]]></description>
-    </item>
+    <lastBuildDate>Thu, 08 Oct 2026 02:32:20 GMT</lastBuildDate>
     <item>
       <title><![CDATA[Zelda: Twilight Princess Vita - EARLY_WIP]]></title>
       <link>https://www.reddit.com/r/vitahacks/comments/1w9ys9f/the_new_psvita_ports/</link>
@@ -56,13 +35,6 @@
       <description><![CDATA[Reverse-engineered port of Simpsons Hit and Run compiled for PlayStation Vita. Hardware Status: Targeting 30 FPS. Stuttering observed during rapid vehicular streaming.]]></description>
     </item>
     <item>
-      <title><![CDATA[Star Wars: KOTOR Vita - EARLY_WIP]]></title>
-      <link>https://vitaharbor.vercel.app/projects/kotor-vita</link>
-      <guid isPermaLink="false">kotor-vita</guid>
-      <pubDate>Tue, 15 Sep 2026 15:34:00 GMT</pubDate>
-      <description><![CDATA[Community reverse-engineering and ARM wrapper research for Knights of the Old Republic. Hardware Status: Early technical research stage.]]></description>
-    </item>
-    <item>
       <title><![CDATA[Need for Speed: Hot Pursuit Vita - PLAYABLE]]></title>
       <link>https://vitaharbor.vercel.app/projects/nfs-hot-pursuit-vita</link>
       <guid isPermaLink="false">nfs-hot-pursuit-vita</guid>
@@ -77,25 +49,11 @@
       <description><![CDATA[Major architectural breakthrough bringing Python 3.11 and modern Ren'Py 8.x games natively to Vita. Hardware Status: Significantly lower memory usage and accelerated text rendering.]]></description>
     </item>
     <item>
-      <title><![CDATA[Zelda: Ship of Harkinian (OOT) - PLAYABLE]]></title>
-      <link>https://www.reddit.com/r/VitaPiracy/comments/1leugn2/ocarina_of_time_ship_of_harkinian_is_out_now_baby/</link>
-      <guid isPermaLink="false">zelda-ship-of-harkinian-vita</guid>
-      <pubDate>Sun, 13 Sep 2026 15:34:00 GMT</pubDate>
-      <description><![CDATA[Direct native Vita build of the Harbour Masters reverse-engineered Ocarina of Time decompilation. Hardware Status: Solid 30-60 FPS depending on enhancement settings.]]></description>
-    </item>
-    <item>
       <title><![CDATA[Slingshot Racing Vita - RELEASED]]></title>
       <link>https://vitaharbor.vercel.app/projects/slingshot-racing-vita</link>
       <guid isPermaLink="false">slingshot-racing-vita</guid>
       <pubDate>Tue, 15 Sep 2026 15:34:00 GMT</pubDate>
       <description><![CDATA[One-touch steampunk racer ported via ARMv7 wrapper with full physical trigger integration. Hardware Status: Locked 60 FPS at native OLED resolution.]]></description>
-    </item>
-    <item>
-      <title><![CDATA[Fallout 2 Community Edition - PLAYABLE]]></title>
-      <link>https://vitaharbor.vercel.app/projects/fallout-2-ce-vita</link>
-      <guid isPermaLink="false">fallout-2-ce-vita</guid>
-      <pubDate>Sat, 12 Sep 2026 15:34:00 GMT</pubDate>
-      <description><![CDATA[Open-source recreation of Fallout 2 engine compiled natively for PlayStation Vita. Hardware Status: Smooth 60 FPS in exploration and combat.]]></description>
     </item>
     <item>
       <title><![CDATA[Render96 HD SM64 Vita - RELEASED]]></title>
@@ -110,13 +68,6 @@
       <guid isPermaLink="false">celeste-classic-vita</guid>
       <pubDate>Tue, 18 Aug 2026 15:34:00 GMT</pubDate>
       <description><![CDATA[C-rewrite of the original PICO-8 Celeste prototype compiled directly for PlayStation Vita. Hardware Status: Locked 60 FPS with pixel-perfect integer scaling.]]></description>
-    </item>
-    <item>
-      <title><![CDATA[Renegade Vita - Demo Release - ANNOUNCED]]></title>
-      <link>https://www.reddit.com/r/vitahacks/comments/1wgp613/renegade_vita_demo_release/</link>
-      <guid isPermaLink="false">renegade-vita-demo-release</guid>
-      <pubDate>Thu, 17 Sep 2026 15:34:20 GMT</pubDate>
-      <description><![CDATA[A Reddit post announced a Renegade Vita demo. VitaHarbor has not independently tested it on hardware. Hardware Status: Hardware result not recorded.]]></description>
     </item>
     <item>
       <title><![CDATA[RC Cars - PLAYABLE]]></title>
@@ -140,13 +91,6 @@
       <description><![CDATA[A September development thread reports Call of Duty 4 running in-game on Vita, with campaign and multiplayer work progressing separately. The edited update reports roughly 5–10 FPS, so this remains an early work-in-progress record. Hardware Status: The source thread reports approximately 5–10 FPS during the update.]]></description>
     </item>
     <item>
-      <title><![CDATA[C-Dogs SDL Vita - EARLY_WIP]]></title>
-      <link>https://www.reddit.com/r/vitahacks/comments/1wkw14c/prerelease_cdogs_sdl_port_for_ps_vita_pstv/</link>
-      <guid isPermaLink="false">c-dogs-sdl-vita</guid>
-      <pubDate>Sat, 19 Sep 2026 20:01:51 GMT</pubDate>
-      <description><![CDATA[Public C-Dogs SDL Vita/PSTV pre-release posted by abby_6112. The source thread reports a native build tested on Vita/PSTV hardware and links a GitHub preview release; LAN multiplayer work is still in progress. Hardware Status: The author reports a native Vita/PSTV build and requests real-hardware testing; no independent hardware report is recorded in this ledger.]]></description>
-    </item>
-    <item>
       <title><![CDATA[Resident Evil 4 Vita (re4-vita) - RESEARCH]]></title>
       <link>https://www.reddit.com/r/VitaPiracy/comments/1wmax82/guess_it_is_happening/</link>
       <guid isPermaLink="false">resident-evil-4-vita</guid>
@@ -161,20 +105,6 @@
       <description><![CDATA[Playable public beta release of Real Racing 2 ported to PS Vita via ARMv7 Android soloader wrapper. Hardware Status: Stable performance targeting 30-60 FPS with vitaGL and OpenGLES shader pipeline.]]></description>
     </item>
     <item>
-      <title><![CDATA[Diddy Kong Racing 64 (Golden Balloon) - PLAYABLE]]></title>
-      <link>https://www.reddit.com/r/vitahacks/comments/1wcx3o6/golden_balloon_v169_diddy_kong_racing_source_port/</link>
-      <guid isPermaLink="false">diddy-kong-racing-golden-balloon</guid>
-      <pubDate>Thu, 10 Sep 2026 21:54:04 GMT</pubDate>
-      <description><![CDATA[Native source port based on the Diddy Kong Racing decompilation running full Adventure playthrough with custom visuals and Vita trophies. Hardware Status: Fluid framerate via native C and vitaGL renderer.]]></description>
-    </item>
-    <item>
-      <title><![CDATA[Command & Conquer: Renegade - EARLY_WIP]]></title>
-      <link>https://www.reddit.com/r/vitahacks/comments/1waninh/cnc_renegade_native_ps_vita_port/</link>
-      <guid isPermaLink="false">cnc-renegade-vita</guid>
-      <pubDate>Tue, 08 Sep 2026 12:49:38 GMT</pubDate>
-      <description><![CDATA[Native PlayStation Vita port of Command & Conquer: Renegade, bringing the classic C&C FPS to handheld. Hardware Status: Work in progress targeting playable framerates on native Vita hardware.]]></description>
-    </item>
-    <item>
       <title><![CDATA[GTA: Liberty City Stories (reStories) - PLAYABLE]]></title>
       <link>https://www.reddit.com/r/vitahacks/comments/1wte7gf/gta_liberty_city_stories_my_ps_vita_port_is_now/</link>
       <guid isPermaLink="false">gta-lcs-vita</guid>
@@ -182,25 +112,18 @@
       <description><![CDATA[Native PlayStation Vita port of GTA: Liberty City Stories based on the reStories decompilation project, running with hardware audio, controls, and custom LiveArea. Hardware Status: Hardware accelerated rendering via vitaGL with variable scene framerates.]]></description>
     </item>
     <item>
-      <title><![CDATA[Test Drive III - PLAYABLE]]></title>
-      <link>https://www.reddit.com/r/vitahacks/comments/1wudlni/test_drive_iii_vita_port/</link>
-      <guid isPermaLink="false">test-drive-iii-vita</guid>
-      <pubDate>Wed, 30 Sep 2026 19:00:45 GMT</pubDate>
-      <description><![CDATA[Community PlayStation Vita port of Test Drive III with source repository on GitHub. Hardware Status: Targeting native hardware performance.]]></description>
+      <title><![CDATA[Real Racing 3 (RR3 Vita Port) - PLAYABLE]]></title>
+      <link>https://www.reddit.com/r/PSVitaHomebrew/comments/1ww8upq/release_real_racing_3_vita_beta_11/</link>
+      <guid isPermaLink="false">real-racing-3-vita</guid>
+      <pubDate>Tue, 06 Oct 2026 12:00:00 GMT</pubDate>
+      <description><![CDATA[Playable public beta release of Real Racing 3 ported to PS Vita via ARMv7 Android soloader wrapper by chutA7X. Hardware Status: Averaging 25–40 FPS with ongoing shader compilation and memory tuning.]]></description>
     </item>
     <item>
-      <title><![CDATA[Test Drive II - PLAYABLE]]></title>
-      <link>https://www.reddit.com/r/vitahacks/comments/1wu6lsx/test_drive_ii_vita_port/</link>
-      <guid isPermaLink="false">test-drive-ii-vita</guid>
-      <pubDate>Wed, 30 Sep 2026 14:36:07 GMT</pubDate>
-      <description><![CDATA[Community PlayStation Vita port of Test Drive II with source repository on GitHub. Hardware Status: Targeting native hardware performance.]]></description>
-    </item>
-    <item>
-      <title><![CDATA[Halo: Combat Evolved Vita - RELEASED]]></title>
-      <link>https://www.reddit.com/r/VitaPiracy/comments/1wvhkaf/halo_ce_port_release/</link>
-      <guid isPermaLink="false">halo-ce-vita</guid>
-      <pubDate>Tue, 06 Oct 2026 22:49:53 GMT</pubDate>
-      <description><![CDATA[Native PlayStation Vita port built from the Xbox decompilation. The official repository publishes the VPK and states that game data is not included. Hardware Status: The maintainer reports up to 30 FPS; large fights can run slower, depending on scene and graphics settings.]]></description>
+      <title><![CDATA[Call of Duty: World at War Zombies (iOS) - PLAYABLE]]></title>
+      <link>https://www.reddit.com/r/vitahacks/comments/1wzdh5y/release_call_of_duty_world_at_war_zombies_port/</link>
+      <guid isPermaLink="false">cod-waw-zombies-vita</guid>
+      <pubDate>Wed, 07 Oct 2026 08:00:00 GMT</pubDate>
+      <description><![CDATA[Native PlayStation Vita port of Call of Duty: World at War Zombies based on the iOS release, developed and published by devnoname120. Hardware Status: Smooth 30–60 FPS on PlayStation Vita hardware.]]></description>
     </item>
   </channel>
 </rss>

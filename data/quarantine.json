@@ -206,7 +206,7 @@
       "schema_version": 2,
       "id": "reddit-1wzdh5y",
       "external_id": "1wzdh5y",
-      "state": "VERIFIED_FOR_REVIEW",
+      "state": "PROMOTED",
       "state_history": [
         {
           "state": "DETECTED",
@@ -226,6 +226,13 @@
           "at": "2026-10-07T16:10:18.090Z",
           "actor": "vitaharbor-data-worker",
           "reason": "Verified port release from proven homebrew developer (devnoname120)"
+        },
+        {
+          "from": "VERIFIED_FOR_REVIEW",
+          "to": "PROMOTED",
+          "at": "2026-10-08T02:33:01.104Z",
+          "actor": "vitaharbor-data-worker",
+          "reason": "Promoted to curated fallbackData.ts as verified non-VitaDB playable port release"
         }
       ],
       "source": {
@@ -1557,7 +1564,7 @@
       "schema_version": 2,
       "id": "reddit-1ww8upq",
       "external_id": "1ww8upq",
-      "state": "VERIFIED_FOR_REVIEW",
+      "state": "PROMOTED",
       "state_history": [
         {
           "state": "DETECTED",
@@ -1577,6 +1584,13 @@
           "at": "2026-10-07T16:10:18.090Z",
           "actor": "vitaharbor-data-worker",
           "reason": "Verified playable beta build release from known developer"
+        },
+        {
+          "from": "VERIFIED_FOR_REVIEW",
+          "to": "PROMOTED",
+          "at": "2026-10-08T02:33:01.104Z",
+          "actor": "vitaharbor-data-worker",
+          "reason": "Promoted to curated fallbackData.ts as verified non-VitaDB playable port release"
         }
       ],
       "source": {

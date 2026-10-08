@@ -168,7 +168,7 @@ describe("provenance boundary", () => {
     expect(scanner).not.toMatch(/writeFileSync\(\s*LEDGER/);
     expect(scanner).toContain("data/quarantine.json");
     expect(scanner).toContain('data/scanner-health.json');
-    expect(workflow).toContain("git add data/quarantine.json data/scanner-health.json public/data public/api");
+    expect(workflow).toContain("git add data/quarantine.json data/scanner-health.json data/vitadb-cache.json public/data public/api");
     expect(fs.existsSync(path.join(root, "public/data/scanner-health.json"))).toBe(false);
     expect(workflow).not.toContain("fallbackData.ts");
   });

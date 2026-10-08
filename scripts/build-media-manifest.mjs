@@ -194,6 +194,22 @@ const projectMediaDefs = {
     media_label: "Official Key Artwork",
     provenance_notes: "Resident Evil 4 key artwork; port repository recently established by Rinnegatamante."
   },
+  "real-racing-3-vita": {
+    media_type: "official_promotional_artwork",
+    is_vita_gameplay: false,
+    media_local_path: "/screenshots/real-racing-2.png",
+    media_source_url: "https://www.reddit.com/r/PSVitaHomebrew/comments/1ww8upq/release_real_racing_3_vita_beta_11/",
+    media_label: "Official Artwork Banner",
+    provenance_notes: "Real Racing 3 mobile artwork banner; playable beta release on Vita."
+  },
+  "cod-waw-zombies-vita": {
+    media_type: "official_promotional_artwork",
+    is_vita_gameplay: false,
+    media_local_path: "/screenshots/cod-zombies.png",
+    media_source_url: "https://www.reddit.com/r/vitahacks/comments/1wzdh5y/release_call_of_duty_world_at_war_zombies_port/",
+    media_label: "Official Title Artwork",
+    provenance_notes: "World at War Zombies official artwork; playable v1.0 release by devnoname120 on Vita."
+  },
   "real-racing-2-vita": {
     media_type: "official_promotional_artwork",
     is_vita_gameplay: false,

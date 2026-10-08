@@ -15,7 +15,9 @@ export const FALLBACK_GAMES: Game[] = [
   { id: 27, slug: "call-of-duty-4-modern-warfare", title: "Call of Duty 4: Modern Warfare", normalized_title: "call of duty 4 modern warfare", original_release_year: 2007, original_platform: "PS3", created_at: new Date('2026-09-12T00:00:00.000Z'), updated_at: new Date('2026-09-12T00:00:00.000Z') },
   { id: 34, slug: "resident-evil-4-vita", title: "Resident Evil 4", normalized_title: "resident evil 4", original_release_year: 2005, original_platform: "GameCube / PS2 / Android", created_at: new Date('2026-09-21T00:00:00.000Z'), updated_at: new Date('2026-09-25T17:04:11.000Z') },
   { id: 35, slug: "real-racing-2", title: "Real Racing 2", normalized_title: "real racing 2", original_release_year: 2010, original_platform: "iOS / Android", created_at: new Date('2026-09-21T11:39:44.312Z'), updated_at: new Date('2026-09-21T11:39:44.312Z') },
-  { id: 39, slug: "gta-liberty-city-stories", title: "GTA: Liberty City Stories (reStories)", normalized_title: "gta: liberty city stories (restories)", original_release_year: 2005, original_platform: "PSP / PS2", created_at: new Date('2026-09-29T16:07:11.000Z'), updated_at: new Date('2026-09-29T16:07:11.000Z') }
+  { id: 39, slug: "gta-liberty-city-stories", title: "GTA: Liberty City Stories (reStories)", normalized_title: "gta: liberty city stories (restories)", original_release_year: 2005, original_platform: "PSP / PS2", created_at: new Date('2026-09-29T16:07:11.000Z'), updated_at: new Date('2026-09-29T16:07:11.000Z') },
+  { id: 44, slug: "real-racing-3", title: "Real Racing 3", normalized_title: "real racing 3", original_release_year: 2013, original_platform: "iOS / Android", created_at: new Date('2026-10-06T12:00:00.000Z'), updated_at: new Date('2026-10-06T12:00:00.000Z') },
+  { id: 45, slug: "call-of-duty-world-at-war-zombies", title: "Call of Duty: World at War Zombies", normalized_title: "call of duty: world at war zombies", original_release_year: 2009, original_platform: "iOS", created_at: new Date('2026-10-07T08:00:00.000Z'), updated_at: new Date('2026-10-07T08:00:00.000Z') }
 ];
 
 export const FALLBACK_PROJECTS: any[] = [
@@ -953,6 +955,102 @@ export const FALLBACK_PROJECTS: any[] = [
         reason: "v01.15 release published with full intro, sound, and installable VPK"
       }
     ]
+  },
+  {
+    id: 44,
+    game_id: 44,
+    slug: "real-racing-3-vita",
+    reddit_url: "https://www.reddit.com/r/PSVitaHomebrew/comments/1ww8upq/release_real_racing_3_vita_beta_11/",
+    display_name: "Real Racing 3 (RR3 Vita Port)",
+    current_stage: "playable",
+    lifecycle: "active",
+    summary: "Playable public beta release of Real Racing 3 ported to PS Vita via ARMv7 Android soloader wrapper by chutA7X.",
+    playability_notes: "Beta 1.1 release boots races and renders 3D car models with touchscreen and analog controls.",
+    performance_notes: "Averaging 25–40 FPS with ongoing shader compilation and memory tuning.",
+    first_seen_at: new Date('2026-10-04T12:00:00.000Z'),
+    last_activity_at: new Date('2026-10-06T12:00:00.000Z'),
+    released_at: new Date('2026-10-06T12:00:00.000Z'),
+    is_featured: false,
+    is_archived: false,
+    game_title: "Real Racing 3",
+    original_platform: "iOS / Android",
+    original_release_year: 2013,
+    technologies: [
+      "ARMv7 Wrapper",
+      "soloader",
+      "Android",
+      "vitaGL"
+    ],
+    developers: [
+      {
+        id: 23,
+        role: "lead",
+        display_name: "chutA7X",
+        slug: "chuta7x"
+      }
+    ],
+    stage_history: [
+      {
+        id: 440,
+        stage: "announced",
+        effective_at: new Date('2026-10-04T12:00:00.000Z'),
+        reason: "Port development surfaced by chutA7X"
+      },
+      {
+        id: 441,
+        stage: "playable",
+        effective_at: new Date('2026-10-06T12:00:00.000Z'),
+        reason: "Beta 1.1 playable build release published on r/PSVitaHomebrew"
+      }
+    ]
+  },
+  {
+    id: 45,
+    game_id: 45,
+    slug: "cod-waw-zombies-vita",
+    reddit_url: "https://www.reddit.com/r/vitahacks/comments/1wzdh5y/release_call_of_duty_world_at_war_zombies_port/",
+    display_name: "Call of Duty: World at War Zombies (iOS)",
+    current_stage: "playable",
+    lifecycle: "active",
+    summary: "Native PlayStation Vita port of Call of Duty: World at War Zombies based on the iOS release, developed and published by devnoname120.",
+    playability_notes: "Playable v1.0 release includes Nacht der Untoten with full dual-analog controls, sound, and weapon mechanics.",
+    performance_notes: "Smooth 30–60 FPS on PlayStation Vita hardware.",
+    first_seen_at: new Date('2026-10-07T08:00:00.000Z'),
+    last_activity_at: new Date('2026-10-07T08:00:00.000Z'),
+    released_at: new Date('2026-10-07T08:00:00.000Z'),
+    is_featured: true,
+    is_archived: false,
+    game_title: "Call of Duty: World at War Zombies",
+    original_platform: "iOS",
+    original_release_year: 2009,
+    technologies: [
+      "ARMv7 Wrapper",
+      "iOS Loader",
+      "vitaGL",
+      "Native C++"
+    ],
+    developers: [
+      {
+        id: 27,
+        role: "lead",
+        display_name: "devnoname120",
+        slug: "devnoname120"
+      }
+    ],
+    stage_history: [
+      {
+        id: 450,
+        stage: "announced",
+        effective_at: new Date('2026-10-07T08:00:00.000Z'),
+        reason: "Port release announced by devnoname120"
+      },
+      {
+        id: 451,
+        stage: "playable",
+        effective_at: new Date('2026-10-07T08:00:00.000Z'),
+        reason: "Playable v1.0 release available"
+      }
+    ]
   }
 ];
 
@@ -1101,6 +1199,20 @@ export const FALLBACK_DEVELOPERS: any[] = [
       {
         provider: "reddit",
         username: "amplieboy"
+      }
+    ],
+    projects: []
+  },
+  {
+    id: 27,
+    slug: "devnoname120",
+    display_name: "devnoname120",
+    description: "Prominent PlayStation Vita homebrew engineer behind ARM wrappers, iOS loaders, and Call of Duty ports.",
+    is_known_developer: true,
+    identities: [
+      {
+        provider: "reddit",
+        username: "devnoname120"
       }
     ],
     projects: []
@@ -1356,6 +1468,46 @@ export const FALLBACK_UPDATES: any[] = [
         source_item_id: "src_rr2_beta2_reddit",
         relationship: "community",
         canonical_url: "https://www.reddit.com/r/VitaPiracy/comments/1wvfxzk/real_racing_2_new_update_psvita_beta_2_3060_fps/"
+      }
+    ]
+  },
+  {
+    id: "upd_rr3_beta1",
+    port_project_id: 44,
+    project_slug: "real-racing-3-vita",
+    project_display_name: "Real Racing 3 (RR3 Vita Port)",
+    developer_display_name: "chutA7X",
+    developer_slug: "chuta7x",
+    event_type: "playable_release",
+    title: "[Release] Real Racing 3 Vita Beta 1.1",
+    summary: "Playable public beta 1.1 build released for PS Vita by chutA7X featuring 3D vehicle physics and analog controls.",
+    event_at: new Date('2026-10-06T12:00:00.000Z'),
+    verification_level: "developer_direct",
+    sources: [
+      {
+        source_item_id: "src_rr3_beta1",
+        relationship: "primary",
+        canonical_url: "https://www.reddit.com/r/PSVitaHomebrew/comments/1ww8upq/release_real_racing_3_vita_beta_11/"
+      }
+    ]
+  },
+  {
+    id: "upd_waw_zombies_v1",
+    port_project_id: 45,
+    project_slug: "cod-waw-zombies-vita",
+    project_display_name: "Call of Duty: World at War Zombies (iOS)",
+    developer_display_name: "devnoname120",
+    developer_slug: "devnoname120",
+    event_type: "playable_release",
+    title: "[Release] Call of Duty World at War Zombies port for the PS Vita",
+    summary: "devnoname120 released the playable v1.0 port of World at War Zombies iOS for PS Vita with Nacht der Untoten map and dual-analog support.",
+    event_at: new Date('2026-10-07T08:00:00.000Z'),
+    verification_level: "developer_direct",
+    sources: [
+      {
+        source_item_id: "src_waw_zombies_v1",
+        relationship: "primary",
+        canonical_url: "https://www.reddit.com/r/vitahacks/comments/1wzdh5y/release_call_of_duty_world_at_war_zombies_port/"
       }
     ]
   }
