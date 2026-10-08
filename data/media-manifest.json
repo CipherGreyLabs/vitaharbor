@@ -1,13 +1,13 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-08T02:04:56.212Z",
+  "generated_at": "2026-10-08T02:32:15.161Z",
   "curator": "vitaharbor-data-worker",
   "notes": "Source-verified media manifest distinguishing verified PS Vita hardware captures, official repository media, and promotional artwork. Artwork is explicitly labeled and never represented as Vita gameplay.",
-  "total_projects": 15,
+  "total_projects": 17,
   "media_counts": {
     "vita_hardware_capture": 2,
     "official_repository_screenshot": 0,
-    "official_promotional_artwork": 11,
+    "official_promotional_artwork": 13,
     "title_card_fallback": 2
   },
   "items": [
@@ -205,6 +205,32 @@
       "media_source_url": "https://www.reddit.com/r/vitahacks/comments/1wte7gf/gta_liberty_city_stories_my_ps_vita_port_is_now/",
       "media_label": "Official Key Artwork",
       "provenance_notes": "GTA Liberty City Stories reStories key artwork."
+    },
+    {
+      "id": 44,
+      "slug": "real-racing-3-vita",
+      "display_name": "Real Racing 3 (RR3 Vita Port)",
+      "game_title": "Real Racing 3",
+      "media_type": "official_promotional_artwork",
+      "is_vita_gameplay": false,
+      "media_local_path": "/screenshots/real-racing-2.png",
+      "media_remote_url": null,
+      "media_source_url": "https://www.reddit.com/r/PSVitaHomebrew/comments/1ww8upq/release_real_racing_3_vita_beta_11/",
+      "media_label": "Official Artwork Banner",
+      "provenance_notes": "Real Racing 3 mobile artwork banner; playable beta release on Vita."
+    },
+    {
+      "id": 45,
+      "slug": "cod-waw-zombies-vita",
+      "display_name": "Call of Duty: World at War Zombies (iOS)",
+      "game_title": "Call of Duty: World at War Zombies",
+      "media_type": "official_promotional_artwork",
+      "is_vita_gameplay": false,
+      "media_local_path": "/screenshots/cod-zombies.png",
+      "media_remote_url": null,
+      "media_source_url": "https://www.reddit.com/r/vitahacks/comments/1wzdh5y/release_call_of_duty_world_at_war_zombies_port/",
+      "media_label": "Official Title Artwork",
+      "provenance_notes": "World at War Zombies official artwork; playable v1.0 release by devnoname120 on Vita."
     }
   ]
 }

@@ -197,6 +197,36 @@
         "vitaGL",
         "Hardware Shaders"
       ]
+    },
+    {
+      "id": "real-racing-3-vita",
+      "url": "https://www.reddit.com/r/PSVitaHomebrew/comments/1ww8upq/release_real_racing_3_vita_beta_11/",
+      "title": "Real Racing 3 (RR3 Vita Port)",
+      "content_text": "Stage: playable | Platform: iOS / Android | Summary: Playable public beta release of Real Racing 3 ported to PS Vita via ARMv7 Android soloader wrapper by chutA7X. | Hardware: Averaging 25–40 FPS with ongoing shader compilation and memory tuning.",
+      "date_modified": "2026-10-06T12:00:00.000Z",
+      "tags": [
+        "playable",
+        "iOS / Android",
+        "ARMv7 Wrapper",
+        "soloader",
+        "Android",
+        "vitaGL"
+      ]
+    },
+    {
+      "id": "cod-waw-zombies-vita",
+      "url": "https://www.reddit.com/r/vitahacks/comments/1wzdh5y/release_call_of_duty_world_at_war_zombies_port/",
+      "title": "Call of Duty: World at War Zombies (iOS)",
+      "content_text": "Stage: playable | Platform: iOS | Summary: Native PlayStation Vita port of Call of Duty: World at War Zombies based on the iOS release, developed and published by devnoname120. | Hardware: Smooth 30–60 FPS on PlayStation Vita hardware.",
+      "date_modified": "2026-10-07T08:00:00.000Z",
+      "tags": [
+        "playable",
+        "iOS",
+        "ARMv7 Wrapper",
+        "iOS Loader",
+        "vitaGL",
+        "Native C++"
+      ]
     }
   ]
 }
