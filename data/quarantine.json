@@ -1,8 +1,177 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-07T14:32:44.596Z",
+  "generated_at": "2026-10-08T14:36:48.872Z",
   "source": "r/vitahacks + r/VitaPiracy + r/PSVitaHomebrew RSS",
   "items": [
+    {
+      "schema_version": 2,
+      "id": "reddit-1x0brhk",
+      "external_id": "1x0brhk",
+      "state": "QUARANTINED",
+      "state_history": [
+        {
+          "state": "DETECTED",
+          "at": "2026-10-08T14:36:48.872Z",
+          "actor": "reddit-scanner",
+          "reason": "Canonical Reddit RSS entry accepted at the ingestion boundary"
+        },
+        {
+          "state": "QUARANTINED",
+          "at": "2026-10-08T14:36:48.872Z",
+          "actor": "reddit-scanner",
+          "reason": "Scanner result is unverified and cannot enter the curated ledger"
+        }
+      ],
+      "source": {
+        "platform": "reddit",
+        "subreddit": "vitahacks",
+        "canonical_url": "https://www.reddit.com/r/vitahacks/comments/1x0brhk/release_vita_iptv_v01_a_native_iptv_player_for_ps/",
+        "author": "mrhkyy",
+        "title": "[Release] Vita IPTV v0.1 – a native IPTV player for PS Vita / PS TV (M3U, Xtream, HLS, HTTPS)",
+        "body": "Hi everyone! I've been working on a native IPTV player for the Vita and it's finally in a shape I'm happy to share. This is v0.1, a hobby project shared as is – no support or roadmap promised. It was developed with the help of AI and tested on my own Vita.\" **What it does** - Plays live TV and radio from your own M3U/M3U8 playlists, Xtream Codes accounts (server + user + password) or single stream links - Video through the Vita's hardware H.264 decoder (up to 720p), with A/V sync - HLS (.m3u8) live streams, MPEG-TS, MKV and MP4 - Built-in modern TLS, so https playlists, sh",
+        "published_at": "2026-10-07T23:31:12.000Z"
+      },
+      "classification": {
+        "confidence": "high",
+        "reason": "4 dev signals: \\[release\\], \\brelease\\b, \\bv\\d+\\.\\d+\\b · category=new_project",
+        "candidate_type": "port",
+        "category": "new_project",
+        "question": false,
+        "spam": false
+      },
+      "provenance": {
+        "repository_url": null,
+        "release_url": null,
+        "evidence_urls": [],
+        "evidence_bundle_id": null,
+        "repository_identity": null,
+        "repository_created_at": null,
+        "repository_last_activity_at": null,
+        "release_facts": [],
+        "vita_evidence": [],
+        "author_linkage": null,
+        "corroboration": [],
+        "duplicate_relation": {
+          "content_hash": "ea8aaf5f9484fa541f77249065b93134de65a71beccb14c60c535e5748172650",
+          "related_candidate_ids": []
+        }
+      },
+      "campaign": {
+        "cluster_id": null,
+        "linkage_confidence": "none",
+        "signals": [],
+        "related_candidate_ids": [],
+        "text_fingerprint": "d3e51a65",
+        "media_fingerprints": [
+          "preview.redd.it/bfbg6vsbq4uh1.png",
+          "i.redd.it/bfbg6vsbq4uh1.png"
+        ],
+        "outbound_fingerprints": [
+          "www.reddit.com/r/vitahacks/comments/1x0brhk/release_vita_iptv_v01_a_native_iptv_player_for_ps",
+          "preview.redd.it/bfbg6vsbq4uh1.png",
+          "github.com/emrhky/vitaiptv",
+          "www.reddit.com/user/mrhkyy",
+          "i.redd.it/bfbg6vsbq4uh1.png"
+        ],
+        "direct_intent": false,
+        "explicit_campaign_reference": false,
+        "incident_id": null
+      },
+      "risk_signals": [],
+      "evidence_gaps": [
+        "exact project repository",
+        "repository identity and activity facts",
+        "author/developer linkage and independent corroboration"
+      ],
+      "content_hash": "ea8aaf5f9484fa541f77249065b93134de65a71beccb14c60c535e5748172650",
+      "review": null,
+      "incident": null
+    },
+    {
+      "schema_version": 2,
+      "id": "reddit-1x005eq",
+      "external_id": "1x005eq",
+      "state": "QUARANTINED",
+      "state_history": [
+        {
+          "state": "DETECTED",
+          "at": "2026-10-08T14:36:48.872Z",
+          "actor": "reddit-scanner",
+          "reason": "Canonical Reddit RSS entry accepted at the ingestion boundary"
+        },
+        {
+          "state": "QUARANTINED",
+          "at": "2026-10-08T14:36:48.872Z",
+          "actor": "reddit-scanner",
+          "reason": "Scanner result is unverified and cannot enter the curated ledger"
+        }
+      ],
+      "source": {
+        "platform": "reddit",
+        "subreddit": "vitahacks",
+        "canonical_url": "https://www.reddit.com/r/vitahacks/comments/1x005eq/runescape_2_singleplayer_client/",
+        "author": "me11yb3an",
+        "title": "Runescape 2 singleplayer client",
+        "body": "I've been working on this RuneScape 2 port based on the work already done by GitHub.com/rustcityrs/client-c. As is is now it's able to be played on a private server but I want to make a version for people who just wanna play singleplayer. I should be done soonish (by the end of the week) so lookout for the vpk :3 &#32; submitted by &#32; /u/me11yb3an [link] &#32; [comments]",
+        "published_at": "2026-10-07T15:52:56.000Z"
+      },
+      "classification": {
+        "confidence": "medium",
+        "reason": "1 dev signal(s), 1 passive term(s), category=project_update",
+        "candidate_type": "port",
+        "category": "project_update",
+        "question": false,
+        "spam": false
+      },
+      "provenance": {
+        "repository_url": null,
+        "release_url": null,
+        "evidence_urls": [],
+        "evidence_bundle_id": null,
+        "repository_identity": null,
+        "repository_created_at": null,
+        "repository_last_activity_at": null,
+        "release_facts": [],
+        "vita_evidence": [],
+        "author_linkage": null,
+        "corroboration": [],
+        "duplicate_relation": {
+          "content_hash": "42ef826df831bc13293e5fce6cc79445e4a76f66cc39b2ba24711cf7cf4f304b",
+          "related_candidate_ids": []
+        }
+      },
+      "campaign": {
+        "cluster_id": null,
+        "linkage_confidence": "none",
+        "signals": [],
+        "related_candidate_ids": [],
+        "text_fingerprint": "3dd5dee1",
+        "media_fingerprints": [
+          "external-preview.redd.it/bnezdty4dgnomnvomtjfrx30gz1mvhnso33nisqjaj98c9j4trfidowq9sbj.png"
+        ],
+        "outbound_fingerprints": [
+          "www.reddit.com/r/vitahacks/comments/1x005eq/runescape_2_singleplayer_client",
+          "external-preview.redd.it/bnezdty4dgnomnvomtjfrx30gz1mvhnso33nisqjaj98c9j4trfidowq9sbj.png",
+          "www.reddit.com/user/me11yb3an",
+          "v.redd.it/resl1wuch2uh1"
+        ],
+        "direct_intent": false,
+        "explicit_campaign_reference": false,
+        "incident_id": null
+      },
+      "risk_signals": [
+        "generic_upstream_repository"
+      ],
+      "evidence_gaps": [
+        "repository identity and activity facts",
+        "release or build evidence",
+        "Vita-specific hardware evidence",
+        "author/developer linkage and independent corroboration"
+      ],
+      "content_hash": "42ef826df831bc13293e5fce6cc79445e4a76f66cc39b2ba24711cf7cf4f304b",
+      "review": null,
+      "incident": null
+    },
     {
       "schema_version": 2,
       "id": "reddit-1wzrt36",

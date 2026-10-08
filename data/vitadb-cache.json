@@ -1,8 +1,80 @@
 {
   "schema_version": 1,
-  "synced_at": "2026-10-08T02:31:35.234Z",
-  "total_items": 1146,
+  "synced_at": "2026-10-08T14:36:48.355Z",
+  "total_items": 1150,
   "items": [
+    {
+      "id": "1590",
+      "name": "LISA Vita",
+      "author": "Pinol0",
+      "version": "v.0.1.0-alpha1",
+      "date": "2026-10-08",
+      "type": "2",
+      "description": "Port of LISA: The Painful for PSVita.",
+      "source": "https://github.com/Pinol0/LISA-Vita",
+      "release_page": "https://github.com/Pinol0/LISA-Vita/releases",
+      "url": "https://www.rinnegatamante.eu/vitadb/get_hb_url.php?id=1590"
+    },
+    {
+      "id": "1589",
+      "name": "VitaChess",
+      "author": "shoshkabob99",
+      "version": "v.1.0",
+      "date": "2026-10-08",
+      "type": "1",
+      "description": "Chess game for PSVita.",
+      "source": "https://github.com/shoshkabob99/VitaChess",
+      "release_page": "https://github.com/shoshkabob99/VitaChess/releases",
+      "url": "https://www.rinnegatamante.eu/vitadb/get_hb_url.php?id=1589"
+    },
+    {
+      "id": "1588",
+      "name": "RALA:/:sutura",
+      "author": "solmare",
+      "version": "v.1.0",
+      "date": "2026-10-08",
+      "type": "1",
+      "description": "Turb-based bullet hell roguelike game for PSVita.",
+      "source": "",
+      "release_page": "https://solmare.itch.io/ralasutura",
+      "url": "https://www.rinnegatamante.eu/vitadb/get_hb_url.php?id=1588"
+    },
+    {
+      "id": "1028",
+      "name": "Nazi Zombies Portable",
+      "author": "NZ:P Team",
+      "version": "Nightly",
+      "date": "2026-10-08",
+      "type": "1",
+      "description": "Port of Nazi Zombies Portable for PSVITA.",
+      "source": "https://github.com/nzp-team/nzportable",
+      "release_page": "https://github.com/nzp-team/nzportable/releases",
+      "url": "https://www.rinnegatamante.eu/vitadb/get_hb_url.php?id=1028"
+    },
+    {
+      "id": "553",
+      "name": "Daedalus X64",
+      "author": "Rinnegatamante",
+      "version": "Nightly",
+      "date": "2026-10-07",
+      "type": "5",
+      "description": "N64 Emulator for PSVITA.",
+      "source": "https://github.com/Rinnegatamante/DaedalusX64-vitaGL",
+      "release_page": "https://github.com/Rinnegatamante/DaedalusX64-vitaGL/releases",
+      "url": "https://www.rinnegatamante.eu/vitadb/get_hb_url.php?id=553"
+    },
+    {
+      "id": "1591",
+      "name": "Snail Mail Vita",
+      "author": "MetalSyntax",
+      "version": "v.01.00",
+      "date": "2026-10-07",
+      "type": "2",
+      "description": "Port of Snail Mail for PSVita.",
+      "source": "https://github.com/MetalSyntax/Snail-Mail-vita",
+      "release_page": "https://github.com/MetalSyntax/Snail-Mail-vita/releases",
+      "url": "https://www.rinnegatamante.eu/vitadb/get_hb_url.php?id=1591"
+    },
     {
       "id": "1585",
       "name": "Insaniquarium Vita",
@@ -100,42 +172,6 @@
       "url": "https://www.rinnegatamante.eu/vitadb/get_hb_url.php?id=1533"
     },
     {
-      "id": "553",
-      "name": "Daedalus X64",
-      "author": "Rinnegatamante",
-      "version": "Nightly",
-      "date": "2026-10-07",
-      "type": "5",
-      "description": "N64 Emulator for PSVITA.",
-      "source": "https://github.com/Rinnegatamante/DaedalusX64-vitaGL",
-      "release_page": "https://github.com/Rinnegatamante/DaedalusX64-vitaGL/releases",
-      "url": "https://www.rinnegatamante.eu/vitadb/get_hb_url.php?id=553"
-    },
-    {
-      "id": "1028",
-      "name": "Nazi Zombies Portable",
-      "author": "NZ:P Team",
-      "version": "Nightly",
-      "date": "2026-10-07",
-      "type": "1",
-      "description": "Port of Nazi Zombies Portable for PSVITA.",
-      "source": "https://github.com/nzp-team/nzportable",
-      "release_page": "https://github.com/nzp-team/nzportable/releases",
-      "url": "https://www.rinnegatamante.eu/vitadb/get_hb_url.php?id=1028"
-    },
-    {
-      "id": "1273",
-      "name": "Perfect Dark Vita",
-      "author": "Rinnegatamante & fgsfds",
-      "version": "v.1.4",
-      "date": "2026-10-06",
-      "type": "2",
-      "description": "Port of Perfect Dark for PSVITA.",
-      "source": "https://github.com/Rinnegatamante/perfect_dark",
-      "release_page": "https://www.psx-place.com/threads/release-perfect-dark-vita.47561/",
-      "url": "https://www.rinnegatamante.eu/vitadb/get_hb_url.php?id=1273"
-    },
-    {
       "id": "1496",
       "name": "OpenMoHAA Vita",
       "author": "HenryKun55",
@@ -172,6 +208,18 @@
       "url": "https://www.rinnegatamante.eu/vitadb/get_hb_url.php?id=1554"
     },
     {
+      "id": "1273",
+      "name": "Perfect Dark Vita",
+      "author": "Rinnegatamante & fgsfds",
+      "version": "v.1.4",
+      "date": "2026-10-06",
+      "type": "2",
+      "description": "Port of Perfect Dark for PSVITA.",
+      "source": "https://github.com/Rinnegatamante/perfect_dark",
+      "release_page": "https://www.psx-place.com/threads/release-perfect-dark-vita.47561/",
+      "url": "https://www.rinnegatamante.eu/vitadb/get_hb_url.php?id=1273"
+    },
+    {
       "id": "1579",
       "name": "Solarus Vita",
       "author": "LAB0ULANGE",
@@ -182,30 +230,6 @@
       "source": "https://github.com/LAB0ULANGE/solarus-vita",
       "release_page": "https://github.com/LAB0ULANGE/solarus-vita/releases",
       "url": "https://www.rinnegatamante.eu/vitadb/get_hb_url.php?id=1579"
-    },
-    {
-      "id": "1586",
-      "name": "PSVITAMAN",
-      "author": "ObsoleteSony",
-      "version": "Alpha 2",
-      "date": "2026-10-05",
-      "type": "4",
-      "description": "FLAC and MP3 player for PSVita.",
-      "source": "",
-      "release_page": "https://www.obsoletesony.com/jp/psvitaman/",
-      "url": "https://www.rinnegatamante.eu/vitadb/get_hb_url.php?id=1586"
-    },
-    {
-      "id": "1576",
-      "name": "Art3m1sPSV",
-      "author": "DeQxJ00",
-      "version": "v.1.3.9",
-      "date": "2026-10-05",
-      "type": "5",
-      "description": "Artemis Engine Game Runner for PSVita.",
-      "source": "https://github.com/DeQxJ00/Art3m1sPSV",
-      "release_page": "https://github.com/DeQxJ00/Art3m1sPSV/releases",
-      "url": "https://www.rinnegatamante.eu/vitadb/get_hb_url.php?id=1576"
     },
     {
       "id": "1577",
@@ -220,52 +244,28 @@
       "url": "https://www.rinnegatamante.eu/vitadb/get_hb_url.php?id=1577"
     },
     {
-      "id": "1584",
-      "name": "Azahar Vita",
-      "author": "TutuiFC",
-      "version": "v.0.1B",
-      "date": "2026-10-04",
+      "id": "1576",
+      "name": "Art3m1sPSV",
+      "author": "DeQxJ00",
+      "version": "v.1.3.9",
+      "date": "2026-10-05",
       "type": "5",
-      "description": "3DS emulator for PSVita.",
-      "source": "https://github.com/TutuiFC/azaharvita",
-      "release_page": "https://github.com/TutuiFC/azaharvita/releases",
-      "url": "https://www.rinnegatamante.eu/vitadb/get_hb_url.php?id=1584"
+      "description": "Artemis Engine Game Runner for PSVita.",
+      "source": "https://github.com/DeQxJ00/Art3m1sPSV",
+      "release_page": "https://github.com/DeQxJ00/Art3m1sPSV/releases",
+      "url": "https://www.rinnegatamante.eu/vitadb/get_hb_url.php?id=1576"
     },
     {
-      "id": "1567",
-      "name": "Chex Quest Collection",
-      "author": "SancioPanza88",
-      "version": "v.1.0.0",
-      "date": "2026-10-04",
-      "type": "2",
-      "description": "Chex Quest 1,2,3 port for PSVita.",
-      "source": "https://github.com/SancioPanza88/chex-quest-collection",
-      "release_page": "https://github.com/SancioPanza88/chex-quest-collection/releases",
-      "url": "https://www.rinnegatamante.eu/vitadb/get_hb_url.php?id=1567"
-    },
-    {
-      "id": "1570",
-      "name": "Happy Wheels Vita",
-      "author": "teedoofgames",
-      "version": "v.0.1.3",
-      "date": "2026-10-04",
-      "type": "2",
-      "description": "Port of Happy Wheels for PSVita.",
-      "source": "",
-      "release_page": "https://teedoofgames.itch.io/happy-wheels-psvita",
-      "url": "https://www.rinnegatamante.eu/vitadb/get_hb_url.php?id=1570"
-    },
-    {
-      "id": "1572",
-      "name": "VitaFlightRadar",
-      "author": "ULTRA DESIGN",
-      "version": "v.2.5",
-      "date": "2026-10-04",
+      "id": "1586",
+      "name": "PSVITAMAN",
+      "author": "ObsoleteSony",
+      "version": "Alpha 2",
+      "date": "2026-10-05",
       "type": "4",
-      "description": "Live aircraft tracking on PlayStation Vita.",
-      "source": "https://github.com/1000660928-design/VitaFlightRadar",
-      "release_page": "",
-      "url": "https://www.rinnegatamante.eu/vitadb/get_hb_url.php?id=1572"
+      "description": "FLAC and MP3 player for PSVita.",
+      "source": "",
+      "release_page": "https://www.obsoletesony.com/jp/psvitaman/",
+      "url": "https://www.rinnegatamante.eu/vitadb/get_hb_url.php?id=1586"
     },
     {
       "id": "1549",
@@ -280,16 +280,40 @@
       "url": "https://www.rinnegatamante.eu/vitadb/get_hb_url.php?id=1549"
     },
     {
-      "id": "1574",
-      "name": "Plants vs Zombies 2 Vita",
-      "author": "LeZergan",
-      "version": "v.1.1",
+      "id": "1572",
+      "name": "VitaFlightRadar",
+      "author": "ULTRA DESIGN",
+      "version": "v.2.5",
+      "date": "2026-10-04",
+      "type": "4",
+      "description": "Live aircraft tracking on PlayStation Vita.",
+      "source": "https://github.com/1000660928-design/VitaFlightRadar",
+      "release_page": "",
+      "url": "https://www.rinnegatamante.eu/vitadb/get_hb_url.php?id=1572"
+    },
+    {
+      "id": "1570",
+      "name": "Happy Wheels Vita",
+      "author": "teedoofgames",
+      "version": "v.0.1.3",
       "date": "2026-10-04",
       "type": "2",
-      "description": "Port of Plants vs Zombies 2 for PSVita.",
-      "source": "https://github.com/LeZergan/pvz2vita",
-      "release_page": "https://github.com/LeZergan/pvz2vita/releases",
-      "url": "https://www.rinnegatamante.eu/vitadb/get_hb_url.php?id=1574"
+      "description": "Port of Happy Wheels for PSVita.",
+      "source": "",
+      "release_page": "https://teedoofgames.itch.io/happy-wheels-psvita",
+      "url": "https://www.rinnegatamante.eu/vitadb/get_hb_url.php?id=1570"
+    },
+    {
+      "id": "1567",
+      "name": "Chex Quest Collection",
+      "author": "SancioPanza88",
+      "version": "v.1.0.0",
+      "date": "2026-10-04",
+      "type": "2",
+      "description": "Chex Quest 1,2,3 port for PSVita.",
+      "source": "https://github.com/SancioPanza88/chex-quest-collection",
+      "release_page": "https://github.com/SancioPanza88/chex-quest-collection/releases",
+      "url": "https://www.rinnegatamante.eu/vitadb/get_hb_url.php?id=1567"
     },
     {
       "id": "1515",
@@ -304,6 +328,18 @@
       "url": "https://www.rinnegatamante.eu/vitadb/get_hb_url.php?id=1515"
     },
     {
+      "id": "1574",
+      "name": "Plants vs Zombies 2 Vita",
+      "author": "LeZergan",
+      "version": "v.1.1",
+      "date": "2026-10-04",
+      "type": "2",
+      "description": "Port of Plants vs Zombies 2 for PSVita.",
+      "source": "https://github.com/LeZergan/pvz2vita",
+      "release_page": "https://github.com/LeZergan/pvz2vita/releases",
+      "url": "https://www.rinnegatamante.eu/vitadb/get_hb_url.php?id=1574"
+    },
+    {
       "id": "1575",
       "name": "Palm Heroes Vita",
       "author": "Cardas26",
@@ -316,16 +352,16 @@
       "url": "https://www.rinnegatamante.eu/vitadb/get_hb_url.php?id=1575"
     },
     {
-      "id": "1568",
-      "name": "Heavy Weapon Deluxe Vita",
-      "author": "Chillaxhson",
-      "version": "v.1.1.0",
-      "date": "2026-10-03",
-      "type": "2",
-      "description": "Port of Heavy Weapon Deluxe for PSVita.",
-      "source": "https://github.com/Chillaxhson/heavy-weapon-deluxe-vita",
-      "release_page": "https://github.com/Chillaxhson/heavy-weapon-deluxe-vita/releases",
-      "url": "https://www.rinnegatamante.eu/vitadb/get_hb_url.php?id=1568"
+      "id": "1584",
+      "name": "Azahar Vita",
+      "author": "TutuiFC",
+      "version": "v.0.1B",
+      "date": "2026-10-04",
+      "type": "5",
+      "description": "3DS emulator for PSVita.",
+      "source": "https://github.com/TutuiFC/azaharvita",
+      "release_page": "https://github.com/TutuiFC/azaharvita/releases",
+      "url": "https://www.rinnegatamante.eu/vitadb/get_hb_url.php?id=1584"
     },
     {
       "id": "1573",
@@ -352,6 +388,18 @@
       "url": "https://www.rinnegatamante.eu/vitadb/get_hb_url.php?id=1569"
     },
     {
+      "id": "1568",
+      "name": "Heavy Weapon Deluxe Vita",
+      "author": "Chillaxhson",
+      "version": "v.1.1.0",
+      "date": "2026-10-03",
+      "type": "2",
+      "description": "Port of Heavy Weapon Deluxe for PSVita.",
+      "source": "https://github.com/Chillaxhson/heavy-weapon-deluxe-vita",
+      "release_page": "https://github.com/Chillaxhson/heavy-weapon-deluxe-vita/releases",
+      "url": "https://www.rinnegatamante.eu/vitadb/get_hb_url.php?id=1568"
+    },
+    {
       "id": "1523",
       "name": "D2Vita",
       "author": "Franckrst",
@@ -362,6 +410,30 @@
       "source": "https://github.com/Franckrst/D2Vita",
       "release_page": "https://github.com/Franckrst/D2Vita/releases",
       "url": "https://www.rinnegatamante.eu/vitadb/get_hb_url.php?id=1523"
+    },
+    {
+      "id": "1552",
+      "name": "Ecstatica Vita",
+      "author": "xesf",
+      "version": "Nightly",
+      "date": "2026-10-02",
+      "type": "2",
+      "description": "Port of Ecstatica for PSVita.",
+      "source": "https://github.com/ecstatica-game/ecstatica",
+      "release_page": "https://github.com/ecstatica-game/ecstatica/releases",
+      "url": "https://www.rinnegatamante.eu/vitadb/get_hb_url.php?id=1552"
+    },
+    {
+      "id": "1553",
+      "name": "Ecstatica 2 Vita",
+      "author": "xesf",
+      "version": "Nightly",
+      "date": "2026-10-02",
+      "type": "2",
+      "description": "Port of Ecstatica 2 for PSVita.",
+      "source": "https://github.com/ecstatica-game/ecstatica",
+      "release_page": "https://github.com/ecstatica-game/ecstatica/releases",
+      "url": "https://www.rinnegatamante.eu/vitadb/get_hb_url.php?id=1553"
     },
     {
       "id": "1559",
@@ -388,42 +460,6 @@
       "url": "https://www.rinnegatamante.eu/vitadb/get_hb_url.php?id=1566"
     },
     {
-      "id": "1553",
-      "name": "Ecstatica 2 Vita",
-      "author": "xesf",
-      "version": "Nightly",
-      "date": "2026-10-02",
-      "type": "2",
-      "description": "Port of Ecstatica 2 for PSVita.",
-      "source": "https://github.com/ecstatica-game/ecstatica",
-      "release_page": "https://github.com/ecstatica-game/ecstatica/releases",
-      "url": "https://www.rinnegatamante.eu/vitadb/get_hb_url.php?id=1553"
-    },
-    {
-      "id": "1552",
-      "name": "Ecstatica Vita",
-      "author": "xesf",
-      "version": "Nightly",
-      "date": "2026-10-02",
-      "type": "2",
-      "description": "Port of Ecstatica for PSVita.",
-      "source": "https://github.com/ecstatica-game/ecstatica",
-      "release_page": "https://github.com/ecstatica-game/ecstatica/releases",
-      "url": "https://www.rinnegatamante.eu/vitadb/get_hb_url.php?id=1552"
-    },
-    {
-      "id": "1560",
-      "name": "Carnivores: Dinosaur Hunter Vita",
-      "author": "MetalSyntax",
-      "version": "v.1.0.0",
-      "date": "2026-10-01",
-      "type": "2",
-      "description": "Port of Carnivores: Dinosaur Hunter for PSVita.",
-      "source": "https://github.com/MetalSyntax/Carnivores-Dinosaur-Hunter-vita",
-      "release_page": "https://github.com/MetalSyntax/Carnivores-Dinosaur-Hunter-vita/releases",
-      "url": "https://www.rinnegatamante.eu/vitadb/get_hb_url.php?id=1560"
-    },
-    {
       "id": "1561",
       "name": "Carnivores: Ice Age Vita",
       "author": "MetalSyntax",
@@ -434,42 +470,6 @@
       "source": "https://github.com/MetalSyntax/Carnivores-Ice-Age-vita",
       "release_page": "https://github.com/MetalSyntax/Carnivores-Ice-Age-vita/releases",
       "url": "https://www.rinnegatamante.eu/vitadb/get_hb_url.php?id=1561"
-    },
-    {
-      "id": "1562",
-      "name": "Riptide GP Vita",
-      "author": "MetalSyntax",
-      "version": "v.1.0.0",
-      "date": "2026-10-01",
-      "type": "2",
-      "description": "Port of Riptide GP for PSVita.",
-      "source": "https://github.com/MetalSyntax/Riptide-GP-vita",
-      "release_page": "https://github.com/MetalSyntax/Riptide-GP-vita/releases",
-      "url": "https://www.rinnegatamante.eu/vitadb/get_hb_url.php?id=1562"
-    },
-    {
-      "id": "1557",
-      "name": "Pokeemerald Rogue Vita",
-      "author": "MinZe25",
-      "version": "v.1.4",
-      "date": "2026-10-01",
-      "type": "2",
-      "description": "Port of Pokemon Emerald Rogue for PSVita.",
-      "source": "https://github.com/MinZe25/pokeemerald-rogue-vita",
-      "release_page": "https://github.com/MinZe25/pokeemerald-rogue-vita/releases",
-      "url": "https://www.rinnegatamante.eu/vitadb/get_hb_url.php?id=1557"
-    },
-    {
-      "id": "1563",
-      "name": "Raging Thunder 2 Vita",
-      "author": "MetalSyntax",
-      "version": "v.1.1.0",
-      "date": "2026-10-01",
-      "type": "2",
-      "description": "Port of Raging Thunder 2 for PSVita.",
-      "source": "https://github.com/MetalSyntax/Raging-Thunder-2-vita",
-      "release_page": "https://github.com/MetalSyntax/Raging-Thunder-2-vita/releases",
-      "url": "https://www.rinnegatamante.eu/vitadb/get_hb_url.php?id=1563"
     },
     {
       "id": "1542",
@@ -496,16 +496,52 @@
       "url": "https://www.rinnegatamante.eu/vitadb/get_hb_url.php?id=1565"
     },
     {
-      "id": "1555",
-      "name": "Test Drive II Vita",
-      "author": "smart-pickle",
-      "version": "v.0.2",
-      "date": "2026-09-30",
+      "id": "1557",
+      "name": "Pokeemerald Rogue Vita",
+      "author": "MinZe25",
+      "version": "v.1.4",
+      "date": "2026-10-01",
       "type": "2",
-      "description": "Port of Test Drive II for PSVita.",
-      "source": "https://github.com/smart-pickle/TestDriveII-Vita",
-      "release_page": "https://github.com/smart-pickle/TestDriveII-Vita/releases",
-      "url": "https://www.rinnegatamante.eu/vitadb/get_hb_url.php?id=1555"
+      "description": "Port of Pokemon Emerald Rogue for PSVita.",
+      "source": "https://github.com/MinZe25/pokeemerald-rogue-vita",
+      "release_page": "https://github.com/MinZe25/pokeemerald-rogue-vita/releases",
+      "url": "https://www.rinnegatamante.eu/vitadb/get_hb_url.php?id=1557"
+    },
+    {
+      "id": "1563",
+      "name": "Raging Thunder 2 Vita",
+      "author": "MetalSyntax",
+      "version": "v.1.1.0",
+      "date": "2026-10-01",
+      "type": "2",
+      "description": "Port of Raging Thunder 2 for PSVita.",
+      "source": "https://github.com/MetalSyntax/Raging-Thunder-2-vita",
+      "release_page": "https://github.com/MetalSyntax/Raging-Thunder-2-vita/releases",
+      "url": "https://www.rinnegatamante.eu/vitadb/get_hb_url.php?id=1563"
+    },
+    {
+      "id": "1560",
+      "name": "Carnivores: Dinosaur Hunter Vita",
+      "author": "MetalSyntax",
+      "version": "v.1.0.0",
+      "date": "2026-10-01",
+      "type": "2",
+      "description": "Port of Carnivores: Dinosaur Hunter for PSVita.",
+      "source": "https://github.com/MetalSyntax/Carnivores-Dinosaur-Hunter-vita",
+      "release_page": "https://github.com/MetalSyntax/Carnivores-Dinosaur-Hunter-vita/releases",
+      "url": "https://www.rinnegatamante.eu/vitadb/get_hb_url.php?id=1560"
+    },
+    {
+      "id": "1562",
+      "name": "Riptide GP Vita",
+      "author": "MetalSyntax",
+      "version": "v.1.0.0",
+      "date": "2026-10-01",
+      "type": "2",
+      "description": "Port of Riptide GP for PSVita.",
+      "source": "https://github.com/MetalSyntax/Riptide-GP-vita",
+      "release_page": "https://github.com/MetalSyntax/Riptide-GP-vita/releases",
+      "url": "https://www.rinnegatamante.eu/vitadb/get_hb_url.php?id=1562"
     },
     {
       "id": "1556",
@@ -518,6 +554,18 @@
       "source": "https://github.com/smart-pickle/TestDriveIII-Vita",
       "release_page": "https://github.com/smart-pickle/TestDriveIII-Vita/releases",
       "url": "https://www.rinnegatamante.eu/vitadb/get_hb_url.php?id=1556"
+    },
+    {
+      "id": "1555",
+      "name": "Test Drive II Vita",
+      "author": "smart-pickle",
+      "version": "v.0.2",
+      "date": "2026-09-30",
+      "type": "2",
+      "description": "Port of Test Drive II for PSVita.",
+      "source": "https://github.com/smart-pickle/TestDriveII-Vita",
+      "release_page": "https://github.com/smart-pickle/TestDriveII-Vita/releases",
+      "url": "https://www.rinnegatamante.eu/vitadb/get_hb_url.php?id=1555"
     },
     {
       "id": "1587",
@@ -568,18 +616,6 @@
       "url": "https://www.rinnegatamante.eu/vitadb/get_hb_url.php?id=1551"
     },
     {
-      "id": "1550",
-      "name": "FlashVita",
-      "author": "robin994",
-      "version": "v.0.15.3.1 alpha 1",
-      "date": "2026-09-28",
-      "type": "5",
-      "description": "Flash player for PSVita.",
-      "source": "https://github.com/robin994/FlashVita",
-      "release_page": "https://github.com/robin994/FlashVita/releases",
-      "url": "https://www.rinnegatamante.eu/vitadb/get_hb_url.php?id=1550"
-    },
-    {
       "id": "1548",
       "name": "Army of Darkness Defense Vita",
       "author": "PiSCES",
@@ -592,16 +628,16 @@
       "url": "https://www.rinnegatamante.eu/vitadb/get_hb_url.php?id=1548"
     },
     {
-      "id": "1544",
-      "name": "Pixel Acres",
-      "author": "ETX Vantage",
-      "version": "v.0.8.1",
-      "date": "2026-09-27",
-      "type": "1",
-      "description": "Cozy farming game for PSVita.",
-      "source": "",
-      "release_page": "https://etxvantage.com/products/pixel-acres",
-      "url": "https://www.rinnegatamante.eu/vitadb/get_hb_url.php?id=1544"
+      "id": "1550",
+      "name": "FlashVita",
+      "author": "robin994",
+      "version": "v.0.15.3.1 alpha 1",
+      "date": "2026-09-28",
+      "type": "5",
+      "description": "Flash player for PSVita.",
+      "source": "https://github.com/robin994/FlashVita",
+      "release_page": "https://github.com/robin994/FlashVita/releases",
+      "url": "https://www.rinnegatamante.eu/vitadb/get_hb_url.php?id=1550"
     },
     {
       "id": "1528",
@@ -616,16 +652,16 @@
       "url": "https://www.rinnegatamante.eu/vitadb/get_hb_url.php?id=1528"
     },
     {
-      "id": "1547",
-      "name": "Bike Race Vita",
-      "author": "franciscoclou",
-      "version": "v.1.1",
+      "id": "1544",
+      "name": "Pixel Acres",
+      "author": "ETX Vantage",
+      "version": "v.0.8.1",
       "date": "2026-09-27",
-      "type": "2",
-      "description": "Port of Bike Race for PSVita.",
-      "source": "https://github.com/franciscoclou/bikerace-vita",
-      "release_page": "https://github.com/franciscoclou/bikerace-vita/releases",
-      "url": "https://www.rinnegatamante.eu/vitadb/get_hb_url.php?id=1547"
+      "type": "1",
+      "description": "Cozy farming game for PSVita.",
+      "source": "",
+      "release_page": "https://etxvantage.com/products/pixel-acres",
+      "url": "https://www.rinnegatamante.eu/vitadb/get_hb_url.php?id=1544"
     },
     {
       "id": "1546",
@@ -638,6 +674,18 @@
       "source": "https://github.com/mvizensk/VitaOS",
       "release_page": "https://github.com/mvizensk/VitaOS/releases",
       "url": "https://www.rinnegatamante.eu/vitadb/get_hb_url.php?id=1546"
+    },
+    {
+      "id": "1547",
+      "name": "Bike Race Vita",
+      "author": "franciscoclou",
+      "version": "v.1.1",
+      "date": "2026-09-27",
+      "type": "2",
+      "description": "Port of Bike Race for PSVita.",
+      "source": "https://github.com/franciscoclou/bikerace-vita",
+      "release_page": "https://github.com/franciscoclou/bikerace-vita/releases",
+      "url": "https://www.rinnegatamante.eu/vitadb/get_hb_url.php?id=1547"
     },
     {
       "id": "1543",
@@ -832,16 +880,16 @@
       "url": "https://www.rinnegatamante.eu/vitadb/get_hb_url.php?id=745"
     },
     {
-      "id": "1529",
-      "name": "FTP for Vita",
-      "author": "M-Essa11",
-      "version": "v.1.0.0",
+      "id": "1531",
+      "name": "Vita PrBoom++",
+      "author": "Tony Fideo & fgsfds",
+      "version": "v.2.6.66-1.1",
       "date": "2026-09-20",
-      "type": "4",
-      "description": "Persistent FTP server for PSVita.",
-      "source": "https://github.com/M-Essa11/FTP-for-Vita",
-      "release_page": "https://github.com/M-Essa11/FTP-for-Vita/releases",
-      "url": "https://www.rinnegatamante.eu/vitadb/get_hb_url.php?id=1529"
+      "type": "2",
+      "description": "Port of PrBoom+ for PSVita.",
+      "source": "https://github.com/TonyFideo/Vita-PrBoom-PlusPlus",
+      "release_page": "https://github.com/TonyFideo/Vita-PrBoom-PlusPlus/releases",
+      "url": "https://www.rinnegatamante.eu/vitadb/get_hb_url.php?id=1531"
     },
     {
       "id": "1530",
@@ -856,16 +904,16 @@
       "url": "https://www.rinnegatamante.eu/vitadb/get_hb_url.php?id=1530"
     },
     {
-      "id": "1531",
-      "name": "Vita PrBoom++",
-      "author": "Tony Fideo & fgsfds",
-      "version": "v.2.6.66-1.1",
+      "id": "1529",
+      "name": "FTP for Vita",
+      "author": "M-Essa11",
+      "version": "v.1.0.0",
       "date": "2026-09-20",
-      "type": "2",
-      "description": "Port of PrBoom+ for PSVita.",
-      "source": "https://github.com/TonyFideo/Vita-PrBoom-PlusPlus",
-      "release_page": "https://github.com/TonyFideo/Vita-PrBoom-PlusPlus/releases",
-      "url": "https://www.rinnegatamante.eu/vitadb/get_hb_url.php?id=1531"
+      "type": "4",
+      "description": "Persistent FTP server for PSVita.",
+      "source": "https://github.com/M-Essa11/FTP-for-Vita",
+      "release_page": "https://github.com/M-Essa11/FTP-for-Vita/releases",
+      "url": "https://www.rinnegatamante.eu/vitadb/get_hb_url.php?id=1529"
     },
     {
       "id": "1527",
@@ -940,18 +988,6 @@
       "url": "https://www.rinnegatamante.eu/vitadb/get_hb_url.php?id=1520"
     },
     {
-      "id": "1505",
-      "name": "ViTube",
-      "author": "shorelight82",
-      "version": "v.2.0",
-      "date": "2026-09-15",
-      "type": "4",
-      "description": "YouTube client for PSVita.",
-      "source": "https://github.com/shorelight82/vitube-vpk",
-      "release_page": "https://github.com/shorelight82/vitube-vpk/releases",
-      "url": "https://www.rinnegatamante.eu/vitadb/get_hb_url.php?id=1505"
-    },
-    {
       "id": "1518",
       "name": "Mystery House",
       "author": "Artem Isaiev",
@@ -962,6 +998,18 @@
       "source": "",
       "release_page": "https://aisaiev.itch.io/mystery-house",
       "url": "https://www.rinnegatamante.eu/vitadb/get_hb_url.php?id=1518"
+    },
+    {
+      "id": "1505",
+      "name": "ViTube",
+      "author": "shorelight82",
+      "version": "v.2.0",
+      "date": "2026-09-15",
+      "type": "4",
+      "description": "YouTube client for PSVita.",
+      "source": "https://github.com/shorelight82/vitube-vpk",
+      "release_page": "https://github.com/shorelight82/vitube-vpk/releases",
+      "url": "https://www.rinnegatamante.eu/vitadb/get_hb_url.php?id=1505"
     },
     {
       "id": "1488",
@@ -988,18 +1036,6 @@
       "url": "https://www.rinnegatamante.eu/vitadb/get_hb_url.php?id=1052"
     },
     {
-      "id": "1516",
-      "name": "KeeperFX Vita",
-      "author": "DannyDLux90",
-      "version": "v.1.02",
-      "date": "2026-09-14",
-      "type": "2",
-      "description": "Port of KeeperFX for PSVita.",
-      "source": "https://github.com/DannyDLux90/KeeperFX-Vita",
-      "release_page": "https://github.com/DannyDLux90/KeeperFX-Vita/releases",
-      "url": "https://www.rinnegatamante.eu/vitadb/get_hb_url.php?id=1516"
-    },
-    {
       "id": "1519",
       "name": "Spelunky Vita Configurator",
       "author": "r3au",
@@ -1010,6 +1046,18 @@
       "source": "",
       "release_page": "",
       "url": "https://www.rinnegatamante.eu/vitadb/get_hb_url.php?id=1519"
+    },
+    {
+      "id": "1516",
+      "name": "KeeperFX Vita",
+      "author": "DannyDLux90",
+      "version": "v.1.02",
+      "date": "2026-09-14",
+      "type": "2",
+      "description": "Port of KeeperFX for PSVita.",
+      "source": "https://github.com/DannyDLux90/KeeperFX-Vita",
+      "release_page": "https://github.com/DannyDLux90/KeeperFX-Vita/releases",
+      "url": "https://www.rinnegatamante.eu/vitadb/get_hb_url.php?id=1516"
     },
     {
       "id": "1514",
@@ -1204,18 +1252,6 @@
       "url": "https://www.rinnegatamante.eu/vitadb/get_hb_url.php?id=1511"
     },
     {
-      "id": "1506",
-      "name": "ILLUSIA 2 Vita",
-      "author": "MetalSyntax",
-      "version": "v.1.0.0",
-      "date": "2026-09-02",
-      "type": "2",
-      "description": "Port of Illusia 2 for PSVita.",
-      "source": "https://github.com/MetalSyntax/ILLUSIA-2-Vita",
-      "release_page": "https://github.com/MetalSyntax/ILLUSIA-2-Vita/releases",
-      "url": "https://www.rinnegatamante.eu/vitadb/get_hb_url.php?id=1506"
-    },
-    {
       "id": "1507",
       "name": "ILLUSIA Vita",
       "author": "MetalSyntax",
@@ -1226,6 +1262,18 @@
       "source": "https://github.com/MetalSyntax/ILLUSIA-vita",
       "release_page": "https://github.com/MetalSyntax/ILLUSIA-vita/releases",
       "url": "https://www.rinnegatamante.eu/vitadb/get_hb_url.php?id=1507"
+    },
+    {
+      "id": "1506",
+      "name": "ILLUSIA 2 Vita",
+      "author": "MetalSyntax",
+      "version": "v.1.0.0",
+      "date": "2026-09-02",
+      "type": "2",
+      "description": "Port of Illusia 2 for PSVita.",
+      "source": "https://github.com/MetalSyntax/ILLUSIA-2-Vita",
+      "release_page": "https://github.com/MetalSyntax/ILLUSIA-2-Vita/releases",
+      "url": "https://www.rinnegatamante.eu/vitadb/get_hb_url.php?id=1506"
     },
     {
       "id": "1491",
@@ -1276,18 +1324,6 @@
       "url": "https://www.rinnegatamante.eu/vitadb/get_hb_url.php?id=1498"
     },
     {
-      "id": "1500",
-      "name": "Illusia Vita",
-      "author": "withLogic",
-      "version": "v.1.0.0",
-      "date": "2026-08-31",
-      "type": "2",
-      "description": "Illusia port for the PSVita.",
-      "source": "https://github.com/withLogic/illusia-vita",
-      "release_page": "https://github.com/withLogic/illusia-vita/releases",
-      "url": "https://www.rinnegatamante.eu/vitadb/get_hb_url.php?id=1500"
-    },
-    {
       "id": "1508",
       "name": "Advena Vita",
       "author": "MetalSyntax",
@@ -1298,6 +1334,18 @@
       "source": "https://github.com/MetalSyntax/Advena-Vita",
       "release_page": "https://github.com/MetalSyntax/Advena-Vita/releases",
       "url": "https://www.rinnegatamante.eu/vitadb/get_hb_url.php?id=1508"
+    },
+    {
+      "id": "1500",
+      "name": "Illusia Vita",
+      "author": "withLogic",
+      "version": "v.1.0.0",
+      "date": "2026-08-31",
+      "type": "2",
+      "description": "Illusia port for the PSVita.",
+      "source": "https://github.com/withLogic/illusia-vita",
+      "release_page": "https://github.com/withLogic/illusia-vita/releases",
+      "url": "https://www.rinnegatamante.eu/vitadb/get_hb_url.php?id=1500"
     },
     {
       "id": "1497",
