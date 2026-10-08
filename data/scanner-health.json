@@ -1,18 +1,28 @@
 {
   "schema_version": 3,
-  "attempted_at": "2026-10-08T19:18:52.056Z",
-  "state": "partial",
-  "successful_sources": 2,
+  "attempted_at": "2026-10-08T23:47:39.148Z",
+  "state": "failed",
+  "successful_sources": 0,
   "total_sources": 3,
   "github_action": {
     "provider": "github-actions",
     "status": "unknown",
-    "run_id": "37830846141",
+    "run_id": "37861288166",
     "event": "schedule",
-    "sha": "840e03e1d5f8a4c6672001f0148668b1042a77bb"
+    "sha": "3dcadb2f8d2d5691d53975582aa7d9a5c4819366"
   },
   "consecutive_degraded_runs": 12,
   "recent_runs": [
+    {
+      "attempted_at": "2026-10-08T23:47:39.148Z",
+      "state": "failed",
+      "successful_sources": 0,
+      "source_statuses": {
+        "vitahacks": "unavailable",
+        "VitaPiracy": "rate_limited",
+        "PSVitaHomebrew": "rate_limited"
+      }
+    },
     {
       "attempted_at": "2026-10-08T19:18:52.056Z",
       "state": "partial",
@@ -122,38 +132,28 @@
         "VitaPiracy": "rate_limited",
         "PSVitaHomebrew": "rate_limited"
       }
-    },
-    {
-      "attempted_at": "2026-10-04T17:37:28.590Z",
-      "state": "partial",
-      "successful_sources": 1,
-      "source_statuses": {
-        "vitahacks": "available",
-        "VitaPiracy": "rate_limited",
-        "PSVitaHomebrew": "rate_limited"
-      }
     }
   ],
   "sources": [
     {
       "subreddit": "vitahacks",
-      "status": "available",
+      "status": "unavailable",
       "last_successful_scan_at": "2026-10-08T19:18:52.056Z",
-      "consecutive_failures": 0,
+      "consecutive_failures": 1,
       "retry_after_seconds": null
     },
     {
       "subreddit": "VitaPiracy",
       "status": "rate_limited",
       "last_successful_scan_at": "2026-09-30T19:19:05.523Z",
-      "consecutive_failures": 22,
+      "consecutive_failures": 23,
       "retry_after_seconds": null
     },
     {
       "subreddit": "PSVitaHomebrew",
-      "status": "available",
+      "status": "rate_limited",
       "last_successful_scan_at": "2026-10-08T19:18:52.056Z",
-      "consecutive_failures": 0,
+      "consecutive_failures": 1,
       "retry_after_seconds": null
     }
   ]
