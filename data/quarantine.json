@@ -1,8 +1,178 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-08T14:36:48.872Z",
+  "generated_at": "2026-10-08T19:18:52.056Z",
   "source": "r/vitahacks + r/VitaPiracy + r/PSVitaHomebrew RSS",
   "items": [
+    {
+      "schema_version": 2,
+      "id": "reddit-1x0ymt9",
+      "external_id": "1x0ymt9",
+      "state": "QUARANTINED",
+      "state_history": [
+        {
+          "state": "DETECTED",
+          "at": "2026-10-08T19:18:52.056Z",
+          "actor": "reddit-scanner",
+          "reason": "Canonical Reddit RSS entry accepted at the ingestion boundary"
+        },
+        {
+          "state": "QUARANTINED",
+          "at": "2026-10-08T19:18:52.056Z",
+          "actor": "reddit-scanner",
+          "reason": "Scanner result is unverified and cannot enter the curated ledger"
+        }
+      ],
+      "source": {
+        "platform": "reddit",
+        "subreddit": "PSVitaHomebrew",
+        "canonical_url": "https://www.reddit.com/r/PSVitaHomebrew/comments/1x0ymt9/release_vita_chess_v10_a_full_2d_chess_game_with/",
+        "author": "kygenbagels",
+        "title": "[Release] Vita Chess v1.0: A full 2D chess game, with puzzles, lessons, and 8 difficulty levels",
+        "body": "&#32; submitted by &#32; /u/kygenbagels [link] &#32; [comments]",
+        "published_at": "2026-10-08T18:27:13.000Z"
+      },
+      "classification": {
+        "confidence": "high",
+        "reason": "3 dev signals: \\[release\\], \\brelease\\b, \\bv\\d+\\.\\d+\\b · category=new_project",
+        "candidate_type": "port",
+        "category": "new_project",
+        "question": false,
+        "spam": false
+      },
+      "provenance": {
+        "repository_url": null,
+        "release_url": null,
+        "evidence_urls": [],
+        "evidence_bundle_id": null,
+        "repository_identity": null,
+        "repository_created_at": null,
+        "repository_last_activity_at": null,
+        "release_facts": [],
+        "vita_evidence": [],
+        "author_linkage": null,
+        "corroboration": [],
+        "duplicate_relation": {
+          "content_hash": "b84115d82a65684686fa27512884a8a2a8acdb299096cc30dbe0af0384f4fc33",
+          "related_candidate_ids": []
+        }
+      },
+      "campaign": {
+        "cluster_id": null,
+        "linkage_confidence": "none",
+        "signals": [],
+        "related_candidate_ids": [],
+        "text_fingerprint": "6c8161c8",
+        "media_fingerprints": [
+          "external-preview.redd.it/kh3bg0u8bh4e4bu2cxo7fkqrdhszg28evtnpqodyqfu.png"
+        ],
+        "outbound_fingerprints": [
+          "www.reddit.com/r/psvitahomebrew/comments/1x0ymt9/release_vita_chess_v10_a_full_2d_chess_game_with",
+          "external-preview.redd.it/kh3bg0u8bh4e4bu2cxo7fkqrdhszg28evtnpqodyqfu.png",
+          "www.reddit.com/user/kygenbagels"
+        ],
+        "direct_intent": false,
+        "explicit_campaign_reference": false,
+        "incident_id": null
+      },
+      "risk_signals": [],
+      "evidence_gaps": [
+        "exact project repository",
+        "repository identity and activity facts",
+        "Vita-specific hardware evidence",
+        "author/developer linkage and independent corroboration"
+      ],
+      "content_hash": "b84115d82a65684686fa27512884a8a2a8acdb299096cc30dbe0af0384f4fc33",
+      "review": null,
+      "incident": null
+    },
+    {
+      "schema_version": 2,
+      "id": "reddit-1x0mn3f",
+      "external_id": "1x0mn3f",
+      "state": "QUARANTINED",
+      "state_history": [
+        {
+          "state": "DETECTED",
+          "at": "2026-10-08T19:18:52.056Z",
+          "actor": "reddit-scanner",
+          "reason": "Canonical Reddit RSS entry accepted at the ingestion boundary"
+        },
+        {
+          "state": "QUARANTINED",
+          "at": "2026-10-08T19:18:52.056Z",
+          "actor": "reddit-scanner",
+          "reason": "Scanner result is unverified and cannot enter the curated ledger"
+        }
+      ],
+      "source": {
+        "platform": "reddit",
+        "subreddit": "PSVitaHomebrew",
+        "canonical_url": "https://www.reddit.com/r/PSVitaHomebrew/comments/1x0mn3f/strikers_port_wip/",
+        "author": "rob1n994",
+        "title": "Strikers port wip",
+        "body": "Hi guys, i saw a port of strikers, so i wanna show my status . I’m working on strikers since it went out. Actually there is no frameskip in my build because i’m trying to reach 60fps before releasing it. but if you want i can release this build that goes 25-30fps in game… I don’t have a devkit optimizing it requieres so much time. If you wanna follow the project on my github there is the repo https://github.com/robin994/strikersVita the game is powered by a porting i'm mading of Aurora https://github.com/robin994/aurora-vita , actually it renders perfectly in native vita gxm. But it is sti",
+        "published_at": "2026-10-08T09:40:22.000Z"
+      },
+      "classification": {
+        "confidence": "high",
+        "reason": "7 dev signals: \\bw\\.?i\\.?p\\.?\\b, \\brelease\\b, \\bin.?game\\b · category=project_update",
+        "candidate_type": "port",
+        "category": "project_update",
+        "question": false,
+        "spam": false
+      },
+      "provenance": {
+        "repository_url": null,
+        "release_url": null,
+        "evidence_urls": [],
+        "evidence_bundle_id": null,
+        "repository_identity": null,
+        "repository_created_at": null,
+        "repository_last_activity_at": null,
+        "release_facts": [],
+        "vita_evidence": [],
+        "author_linkage": null,
+        "corroboration": [],
+        "duplicate_relation": {
+          "content_hash": "dcab26a5994fd9d0e868c9eff8f6ce0c8620617c30b1570f345737dff7fc7bc6",
+          "related_candidate_ids": []
+        }
+      },
+      "campaign": {
+        "cluster_id": "campaign-686d6191",
+        "linkage_confidence": "medium",
+        "signals": [
+          "shared_outbound_fingerprint"
+        ],
+        "related_candidate_ids": [
+          "reddit-1wsrua2"
+        ],
+        "text_fingerprint": "7ad3072a",
+        "media_fingerprints": [
+          "external-preview.redd.it/yzvunnfkennyn3vomxaq4nkbs0shbjereemyi8d5kkrrotjrtc-y9lk_lvsg.jpeg"
+        ],
+        "outbound_fingerprints": [
+          "github.com/robin994/strikersvita",
+          "github.com/robin994/aurora-vita",
+          "www.reddit.com/r/psvitahomebrew/comments/1x0mn3f/strikers_port_wip",
+          "external-preview.redd.it/yzvunnfkennyn3vomxaq4nkbs0shbjereemyi8d5kkrrotjrtc-y9lk_lvsg.jpeg",
+          "zealouschuck.com/dev-bounty",
+          "www.reddit.com/user/rob1n994",
+          "v.redd.it/ygitgt1tr7uh1"
+        ],
+        "direct_intent": false,
+        "explicit_campaign_reference": false,
+        "incident_id": null
+      },
+      "risk_signals": [],
+      "evidence_gaps": [
+        "repository identity and activity facts",
+        "author/developer linkage and independent corroboration"
+      ],
+      "content_hash": "dcab26a5994fd9d0e868c9eff8f6ce0c8620617c30b1570f345737dff7fc7bc6",
+      "review": null,
+      "incident": null
+    },
     {
       "schema_version": 2,
       "id": "reddit-1x0brhk",
@@ -169,6 +339,90 @@
         "author/developer linkage and independent corroboration"
       ],
       "content_hash": "42ef826df831bc13293e5fce6cc79445e4a76f66cc39b2ba24711cf7cf4f304b",
+      "review": null,
+      "incident": null
+    },
+    {
+      "schema_version": 2,
+      "id": "reddit-1wzzhv8",
+      "external_id": "1wzzhv8",
+      "state": "QUARANTINED",
+      "state_history": [
+        {
+          "state": "DETECTED",
+          "at": "2026-10-08T19:18:52.056Z",
+          "actor": "reddit-scanner",
+          "reason": "Canonical Reddit RSS entry accepted at the ingestion boundary"
+        },
+        {
+          "state": "QUARANTINED",
+          "at": "2026-10-08T19:18:52.056Z",
+          "actor": "reddit-scanner",
+          "reason": "Scanner result is unverified and cannot enter the curated ledger"
+        }
+      ],
+      "source": {
+        "platform": "reddit",
+        "subreddit": "PSVitaHomebrew",
+        "canonical_url": "https://www.reddit.com/r/PSVitaHomebrew/comments/1wzzhv8/3ds_emu_on_psvita/",
+        "author": "TutuiRl",
+        "title": "3DS emu on PSVita",
+        "body": "Hi! I’ve been working independently on a 3DS emulator for the PS Vita. If anyone is interested in giving it a try and providing some feedback to help me improve it, I’d really appreciate it! At the moment, it’s a really early beta let’s say something like version 0.0.5. It can already render images in several titles, but the performance is extremely slow, so it’s nowhere near playable or enjoyable yet. There’s still a lot of work to do! Emulator Link: https://github.com/TutuiFC/azaharvita &#32; submitted by &#32; /u/TutuiRl [link] &#32; [comments]",
+        "published_at": "2026-10-07T15:27:38.000Z"
+      },
+      "classification": {
+        "confidence": "high",
+        "reason": "4 dev signals: \\bplayable\\b, \\brender(?:s|ed|ing)?\\b, \\bbeta\\b · category=project_update",
+        "candidate_type": "port",
+        "category": "project_update",
+        "question": false,
+        "spam": false
+      },
+      "provenance": {
+        "repository_url": null,
+        "release_url": null,
+        "evidence_urls": [],
+        "evidence_bundle_id": null,
+        "repository_identity": null,
+        "repository_created_at": null,
+        "repository_last_activity_at": null,
+        "release_facts": [],
+        "vita_evidence": [],
+        "author_linkage": null,
+        "corroboration": [],
+        "duplicate_relation": {
+          "content_hash": "a02f7b511e1f5bf0bdfc75d8aa4ab1ca969d06e24fc9257fdffd4921e25052cc",
+          "related_candidate_ids": []
+        }
+      },
+      "campaign": {
+        "cluster_id": null,
+        "linkage_confidence": "none",
+        "signals": [],
+        "related_candidate_ids": [],
+        "text_fingerprint": "8f028141",
+        "media_fingerprints": [
+          "preview.redd.it/8ru3y87tc2uh1.png",
+          "i.redd.it/8ru3y87tc2uh1.png"
+        ],
+        "outbound_fingerprints": [
+          "github.com/tutuifc/azaharvita",
+          "www.reddit.com/r/psvitahomebrew/comments/1wzzhv8/3ds_emu_on_psvita",
+          "preview.redd.it/8ru3y87tc2uh1.png",
+          "www.reddit.com/user/tutuirl",
+          "i.redd.it/8ru3y87tc2uh1.png"
+        ],
+        "direct_intent": false,
+        "explicit_campaign_reference": false,
+        "incident_id": null
+      },
+      "risk_signals": [],
+      "evidence_gaps": [
+        "repository identity and activity facts",
+        "release or build evidence",
+        "author/developer linkage and independent corroboration"
+      ],
+      "content_hash": "a02f7b511e1f5bf0bdfc75d8aa4ab1ca969d06e24fc9257fdffd4921e25052cc",
       "review": null,
       "incident": null
     },
@@ -2997,10 +3251,14 @@
         }
       },
       "campaign": {
-        "cluster_id": null,
-        "linkage_confidence": "none",
-        "signals": [],
-        "related_candidate_ids": [],
+        "cluster_id": "campaign-686d6191",
+        "linkage_confidence": "medium",
+        "signals": [
+          "shared_outbound_fingerprint"
+        ],
+        "related_candidate_ids": [
+          "reddit-1x0mn3f"
+        ],
         "text_fingerprint": "22a8bfcb",
         "media_fingerprints": [],
         "outbound_fingerprints": [
