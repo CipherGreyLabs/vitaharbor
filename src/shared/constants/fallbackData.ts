@@ -138,7 +138,17 @@ export const FALLBACK_PROJECTS: any[] = [
         effective_at: new Date('2026-09-05T23:14:48.000Z'),
         reason: "Reached interactive in-game state on real hardware"
       }
-    ]
+    ],
+    setup_evidence: {
+      categoryLabel: "Engine Recreation Setup",
+      plugins: [
+        "libshacccg.suprx"
+      ],
+      overclock: "444 MHz",
+      assetPath: "ux0:data/portal/",
+      instructions: "Copy Portal chamber map assets to ux0:data/portal/ and install the standalone VPK.",
+      verifiedOnHardware: true
+    }
   },
   {
     id: 6,
@@ -201,7 +211,19 @@ export const FALLBACK_PROJECTS: any[] = [
         effective_at: new Date('2026-09-11T12:41:12.000Z'),
         reason: "Reached interactive in-game state on real hardware"
       }
-    ]
+    ],
+    setup_evidence: {
+      categoryLabel: "Gameloft Android Wrapper Setup",
+      plugins: [
+        "kubridge.skprx",
+        "fd_fix.skprx",
+        "libshacccg.suprx"
+      ],
+      overclock: "444 MHz",
+      assetPath: "ux0:data/spiderman/",
+      instructions: "Extract Spider-Man: Total Mayhem Android data files into ux0:data/spiderman/ and install VPK.",
+      verifiedOnHardware: true
+    }
   },
   {
     id: 7,
@@ -263,7 +285,18 @@ export const FALLBACK_PROJECTS: any[] = [
         effective_at: new Date('2026-09-06T02:07:36.000Z'),
         reason: "Reached interactive in-game state on real hardware"
       }
-    ]
+    ],
+    setup_evidence: {
+      categoryLabel: "Custom Native Engine Setup",
+      plugins: [
+        "kubridge.skprx",
+        "libshacccg.suprx"
+      ],
+      overclock: "500 MHz recommended",
+      assetPath: "ux0:data/shar/",
+      instructions: "Copy legitimate PC Simpsons Hit & Run game data files to ux0:data/shar/ and install the Vita build.",
+      verifiedOnHardware: true
+    }
   },
   {
     id: 10,
@@ -332,7 +365,19 @@ export const FALLBACK_PROJECTS: any[] = [
         effective_at: new Date('2026-08-12T06:55:36.000Z'),
         reason: "Playable end to end with working controls and audio"
       }
-    ]
+    ],
+    setup_evidence: {
+      categoryLabel: "Android ARMv7 Soloader Setup",
+      plugins: [
+        "kubridge.skprx",
+        "fd_fix.skprx",
+        "libshacccg.suprx"
+      ],
+      overclock: "500 MHz recommended",
+      assetPath: "ux0:data/nfshp/",
+      instructions: "Extract Android NFS Hot Pursuit v1.0.62 apk assets and libmain.so into ux0:data/nfshp/ and install VPK.",
+      verifiedOnHardware: true
+    }
   },
   {
     id: 12,
@@ -497,7 +542,19 @@ export const FALLBACK_PROJECTS: any[] = [
         effective_at: new Date('2026-09-08T05:00:24.000Z'),
         reason: "Public release build published"
       }
-    ]
+    ],
+    setup_evidence: {
+      categoryLabel: "ARMv7 Wrapper Setup",
+      plugins: [
+        "kubridge.skprx",
+        "fd_fix.skprx",
+        "libshacccg.suprx"
+      ],
+      overclock: "444 MHz",
+      assetPath: "ux0:data/slingshot/",
+      instructions: "Extract Slingshot Racing Android apk assets to ux0:data/slingshot/ and install VPK.",
+      verifiedOnHardware: true
+    }
   },
   {
     id: 16,
@@ -659,7 +716,17 @@ export const FALLBACK_PROJECTS: any[] = [
         effective_at: new Date('2026-07-20T20:22:00.000Z'),
         reason: "Public release build published"
       }
-    ]
+    ],
+    setup_evidence: {
+      categoryLabel: "Standalone C-Rewrite Setup",
+      plugins: [],
+      overclock: "333 MHz (stock)",
+      assetPath: "ux0:app/CELESTE01/",
+      instructions: "Install the standalone VPK directly; all assets are compiled into the binary.",
+      verifiedOnHardware: true,
+      sourceUrl: "https://github.com/lemon32767/c-celeste"
+    },
+    repo_url: "https://github.com/lemon32767/c-celeste"
   },
   {
     id: 20,
@@ -723,7 +790,19 @@ export const FALLBACK_PROJECTS: any[] = [
         effective_at: new Date('2026-09-18T11:09:43.000Z'),
         reason: "Playable end to end with working controls and audio"
       }
-    ]
+    ],
+    setup_evidence: {
+      categoryLabel: "Native C++ Port Setup",
+      plugins: [
+        "libshacccg.suprx"
+      ],
+      overclock: "444 MHz",
+      assetPath: "ux0:data/rccars/",
+      instructions: "Copy original PC RC Cars game data files into ux0:data/rccars/ and install VPK.",
+      verifiedOnHardware: true,
+      sourceUrl: "https://github.com/antoxa2584x/rc_cars_vita"
+    },
+    repo_url: "https://github.com/antoxa2584x/rc_cars_vita"
   },
   {
     id: 22,
@@ -811,7 +890,18 @@ export const FALLBACK_PROJECTS: any[] = [
         effective_at: new Date('2026-09-12T00:00:00.000Z'),
         reason: "Reached interactive in-game state on real hardware"
       }
-    ]
+    ],
+    setup_evidence: {
+      categoryLabel: "Native Hardware WIP Setup",
+      plugins: [
+        "kubridge.skprx",
+        "libshacccg.suprx"
+      ],
+      overclock: "500 MHz recommended",
+      assetPath: "ux0:data/cod4/",
+      instructions: "Early WIP test build. Extracts mission shader assets to ux0:data/cod4/.",
+      verifiedOnHardware: true
+    }
   },
   {
     id: 34,
@@ -908,7 +998,20 @@ export const FALLBACK_PROJECTS: any[] = [
         effective_at: new Date('2026-09-21T11:39:44.312Z'),
         reason: "Public beta build playable on hardware"
       }
-    ]
+    ],
+    setup_evidence: {
+      categoryLabel: "Android ARMv7 Soloader Setup",
+      plugins: [
+        "kubridge.skprx",
+        "fd_fix.skprx",
+        "libshacccg.suprx"
+      ],
+      overclock: "500 MHz recommended",
+      assetPath: "ux0:data/rr2/",
+      instructions: "Extract Android Real Racing 2 apk data files and library to ux0:data/rr2/ and install Beta 2 VPK.",
+      verifiedOnHardware: true,
+      sourceUrl: "https://github.com/CHUTA7X/Real-Racing-2-Vita-Port-Release"
+    }
   },
   {
     id: 39,
@@ -958,7 +1061,20 @@ export const FALLBACK_PROJECTS: any[] = [
         effective_at: new Date('2026-09-29T16:07:11.000Z'),
         reason: "v01.15 release published with full intro, sound, and installable VPK"
       }
-    ]
+    ],
+    setup_evidence: {
+      categoryLabel: "reStories Decompilation Setup",
+      plugins: [
+        "kubridge.skprx",
+        "fd_fix.skprx",
+        "libshacccg.suprx"
+      ],
+      overclock: "444 MHz or 500 MHz",
+      assetPath: "ux0:data/gtalcs/",
+      instructions: "Extract game assets from legitimate PSP/PS2 GTA: Liberty City Stories ISO using reStories PC extractor, copy output to ux0:data/gtalcs/, and install VPK.",
+      verifiedOnHardware: true,
+      sourceUrl: "https://www.reddit.com/r/vitahacks/comments/1wte7gf/gta_liberty_city_stories_my_ps_vita_port_is_now/"
+    }
   },
   {
     id: 44,
@@ -1174,7 +1290,18 @@ export const FALLBACK_PROJECTS: any[] = [
         effective_at: new Date('2026-09-20T20:24:59.000Z'),
         reason: "Main menu booting on Vita hardware"
       }
-    ]
+    ],
+    setup_evidence: {
+      categoryLabel: "The Force Engine Setup",
+      plugins: [
+        "libshacccg.suprx"
+      ],
+      overclock: "444 MHz",
+      assetPath: "ux0:data/tfe/",
+      instructions: "Copy legitimate Star Wars: Dark Forces PC game data (DARK.GOB / SOUNDS.GOB) into ux0:data/tfe/.",
+      verifiedOnHardware: true,
+      sourceUrl: "https://www.reddit.com/r/vitahacks/comments/1wlrv6x/theforceenginevita_successfully_booting_into_the/"
+    }
   },
   {
     id: 48,
@@ -1221,7 +1348,18 @@ export const FALLBACK_PROJECTS: any[] = [
         effective_at: new Date('2026-09-19T07:09:39.000Z'),
         reason: "Rendering in-game on Vita hardware"
       }
-    ]
+    ],
+    setup_evidence: {
+      categoryLabel: "Vulkan 1.1 Driver Setup",
+      plugins: [
+        "libshacccg.suprx"
+      ],
+      overclock: "500 MHz recommended",
+      assetPath: "ux0:data/stk/",
+      instructions: "Requires native Vulkan 1.1 driver runtime and SuperTuxKart data files in ux0:data/stk/.",
+      verifiedOnHardware: true,
+      sourceUrl: "https://www.reddit.com/r/vitahacks/comments/1wkf9m5/supertuxkart_wip_port_for_playstation_vita_with/"
+    }
   },
   {
     id: 49,
@@ -1268,7 +1406,19 @@ export const FALLBACK_PROJECTS: any[] = [
         effective_at: new Date('2026-10-02T08:20:55.000Z'),
         reason: "In-game gameplay showcase on Vita"
       }
-    ]
+    ],
+    setup_evidence: {
+      categoryLabel: "Tactical FPS Recreation Setup",
+      plugins: [
+        "kubridge.skprx",
+        "libshacccg.suprx"
+      ],
+      overclock: "500 MHz recommended",
+      assetPath: "ux0:data/insurgency/",
+      instructions: "Copy Insurgency PC map and audio assets to ux0:data/insurgency/ and install VPK.",
+      verifiedOnHardware: true,
+      sourceUrl: "https://www.reddit.com/r/vitahacks/comments/1wvob17/insurgency_vita_gameplay_showcase_information/"
+    }
   }
 ];
 
