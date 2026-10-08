@@ -7,7 +7,7 @@
       "schema_version": 2,
       "id": "reddit-1wzrt36",
       "external_id": "1wzrt36",
-      "state": "VERIFIED_FOR_REVIEW",
+      "state": "GRADUATED_TO_VITADB",
       "state_history": [
         {
           "state": "DETECTED",
@@ -27,6 +27,13 @@
           "at": "2026-10-07T16:10:18.090Z",
           "actor": "vitaharbor-data-worker",
           "reason": "Verified homebrew game port release announced with build details"
+        },
+        {
+          "from": "VERIFIED_FOR_REVIEW",
+          "to": "GRADUATED_TO_VITADB",
+          "at": "2026-10-08T12:45:20.752Z",
+          "actor": "vitaharbor-data-worker",
+          "reason": "Graduated to official VitaDB release (excluded from VitaHarbor in-development tracker)"
         }
       ],
       "source": {
@@ -94,8 +101,8 @@
       "content_hash": "dec73a49965d64bf3ef570863d353303f0f70c15c22f998e26ada6ea6d4c4687",
       "review": null,
       "incident": null,
-      "evidence_type": "vpk_release",
-      "evidence_notes": "Insaniquarium! Deluxe v1.00 standalone Vita port release by KartingSackboy06 with working gameplay and performance tuning"
+      "evidence_type": "vitadb_release",
+      "evidence_notes": "Released on official VitaDB catalog (ID 1585 on 2026-10-07 by KartingSackboy06)"
     },
     {
       "schema_version": 2,
@@ -611,7 +618,7 @@
       "schema_version": 2,
       "id": "reddit-1wz3ow3",
       "external_id": "1wz3ow3",
-      "state": "VERIFIED_FOR_REVIEW",
+      "state": "GRADUATED_TO_VITADB",
       "state_history": [
         {
           "state": "DETECTED",
@@ -631,6 +638,13 @@
           "at": "2026-10-07T16:10:18.090Z",
           "actor": "vitaharbor-data-worker",
           "reason": "Verified visual novel port release v1.0"
+        },
+        {
+          "from": "VERIFIED_FOR_REVIEW",
+          "to": "GRADUATED_TO_VITADB",
+          "at": "2026-10-08T12:45:20.752Z",
+          "actor": "vitaharbor-data-worker",
+          "reason": "Graduated to official VitaDB release (excluded from VitaHarbor in-development tracker)"
         }
       ],
       "source": {
@@ -700,8 +714,8 @@
       "content_hash": "2012181caea87e2ac92262f53568d34396c160a7b7e719ea462e828d595d1bfb",
       "review": null,
       "incident": null,
-      "evidence_type": "vpk_release",
-      "evidence_notes": "Umineko Project v1.0 Vita port based on ONScripter-RU with PS3 assets and voice support by stoicpingu"
+      "evidence_type": "vitadb_release",
+      "evidence_notes": "Released on official VitaDB catalog (ID 1581 on 2026-10-06 by stoicpingu)"
     },
     {
       "schema_version": 2,
@@ -1187,7 +1201,7 @@
       "schema_version": 2,
       "id": "reddit-1wy0409",
       "external_id": "1wy0409",
-      "state": "VERIFIED_FOR_REVIEW",
+      "state": "PROMOTED",
       "state_history": [
         {
           "state": "DETECTED",
@@ -1207,6 +1221,13 @@
           "at": "2026-10-07T16:10:18.090Z",
           "actor": "vitaharbor-data-worker",
           "reason": "Verified project update from known developer (chutA7X)"
+        },
+        {
+          "from": "VERIFIED_FOR_REVIEW",
+          "to": "PROMOTED",
+          "at": "2026-10-08T12:45:20.752Z",
+          "actor": "vitaharbor-data-worker",
+          "reason": "Promoted to curated ledger"
         }
       ],
       "source": {
@@ -1282,8 +1303,8 @@
       "content_hash": "6c5869622393900a693c6ab1589d9db9774a1b06c6788b02645d0e0bc11b7b69",
       "review": null,
       "incident": null,
-      "evidence_type": "developer_update",
-      "evidence_notes": "Real Racing 2 & 3 beta 2.0.0 developer progress update from chutA7X"
+      "evidence_type": "curated_in_ledger",
+      "evidence_notes": "Curated into fallbackData.ts as part of real-racing-3-vita"
     },
     {
       "schema_version": 2,
@@ -1783,6 +1804,13 @@
           "at": "2026-10-02T10:57:49.300Z",
           "actor": "codex",
           "reason": "Verified genuine Insurgency (2014) tactical FPS port gameplay by OneDumbFox (40-60 FPS bot matches); repo still private"
+        },
+        {
+          "from": "VERIFIED_FOR_REVIEW",
+          "to": "VERIFIED_FOR_REVIEW",
+          "at": "2026-10-08T12:45:20.752Z",
+          "actor": "vitaharbor-data-worker",
+          "reason": "Verified active homebrew showcase"
         }
       ],
       "source": {
@@ -1884,7 +1912,9 @@
           "risk_disposition": "No risk signals fired; legitimate WIP showcase."
         }
       },
-      "incident": null
+      "incident": null,
+      "evidence_type": "showcase_wip",
+      "evidence_notes": "Insurgency Vita gameplay showcase and map geometry rendering by OneDumbFox"
     },
     {
       "schema_version": 2,
@@ -2165,7 +2195,7 @@
       "schema_version": 2,
       "id": "reddit-1wsh59n",
       "external_id": "1wsh59n",
-      "state": "VERIFIED_FOR_REVIEW",
+      "state": "PROMOTED",
       "state_history": [
         {
           "state": "DETECTED",
@@ -2184,6 +2214,13 @@
           "at": "2026-10-02T04:04:27.110Z",
           "actor": "codex",
           "reason": "Re-verified Oct 2 scan: Real Racing 3 announced by chutA7X (RR2 Vita dev); repo private, public beta pending"
+        },
+        {
+          "from": "VERIFIED_FOR_REVIEW",
+          "to": "PROMOTED",
+          "at": "2026-10-08T12:45:20.752Z",
+          "actor": "vitaharbor-data-worker",
+          "reason": "Promoted to curated ledger"
         }
       ],
       "source": {
@@ -2276,7 +2313,9 @@
           "risk_disposition": "No risk signals fired. Strong author linkage exists but no public repository or release evidence, so no promotion."
         }
       },
-      "incident": null
+      "incident": null,
+      "evidence_type": "curated_in_ledger",
+      "evidence_notes": "Curated into fallbackData.ts as part of real-racing-3-vita"
     },
     {
       "schema_version": 2,
@@ -3664,7 +3703,7 @@
       "schema_version": 2,
       "id": "reddit-1wn46c9",
       "external_id": "1wn46c9",
-      "state": "QUARANTINED",
+      "state": "VERIFIED_FOR_REVIEW",
       "state_history": [
         {
           "state": "DETECTED",
@@ -3677,6 +3716,13 @@
           "at": "2026-09-22T12:16:16.397Z",
           "actor": "reddit-scanner",
           "reason": "Scanner result is unverified and cannot enter the curated ledger"
+        },
+        {
+          "from": "QUARANTINED",
+          "to": "VERIFIED_FOR_REVIEW",
+          "at": "2026-10-08T12:45:20.752Z",
+          "actor": "vitaharbor-data-worker",
+          "reason": "Verified active C++ rewrite and engine development targeting Vita"
         }
       ],
       "source": {
@@ -3746,7 +3792,9 @@
       ],
       "content_hash": "c47d173ae587b5fbb25fa06b960ae28ef45f1f162a1360225504c57e93ec7813",
       "review": null,
-      "incident": null
+      "incident": null,
+      "evidence_type": "cplusplus_rewrite_wip",
+      "evidence_notes": "Buckshot Roulette C++ custom engine rewrite targeting 60 FPS and vitaGL on PS Vita by JustAverage456"
     },
     {
       "schema_version": 2,
@@ -4342,6 +4390,13 @@
           "at": "2026-10-02T04:05:00.462Z",
           "actor": "codex",
           "reason": "Review bundle refreshed from the Oct 2 scan re-verification"
+        },
+        {
+          "from": "VERIFIED_FOR_REVIEW",
+          "to": "VERIFIED_FOR_REVIEW",
+          "at": "2026-10-08T12:45:20.752Z",
+          "actor": "vitaharbor-data-worker",
+          "reason": "Verified active engine source port progress on Vita"
         }
       ],
       "source": {
@@ -4437,7 +4492,9 @@
           "risk_disposition": "No risk signals fired; the post is a development progress report. Missing project evidence remains unresolved, so no promotion."
         }
       },
-      "incident": null
+      "incident": null,
+      "evidence_type": "reverse_engineering_wip",
+      "evidence_notes": "The Force Engine (Star Wars Dark Forces) source port menu boot on PS Vita by SnooLobsters311"
     },
     {
       "schema_version": 2,
@@ -5018,7 +5075,7 @@
       "schema_version": 2,
       "id": "reddit-1wkrhnp",
       "external_id": "1wkrhnp",
-      "state": "VERIFIED_FOR_REVIEW",
+      "state": "PROMOTED",
       "state_history": [
         {
           "state": "DETECTED",
@@ -5037,6 +5094,13 @@
           "at": "2026-10-02T11:46:47.232Z",
           "actor": "codex",
           "reason": "Verified genuine Call of Duty World at War Zombies hardware demonstration by devnoname120; repo not yet public"
+        },
+        {
+          "from": "VERIFIED_FOR_REVIEW",
+          "to": "PROMOTED",
+          "at": "2026-10-08T12:45:20.752Z",
+          "actor": "vitaharbor-data-worker",
+          "reason": "Promoted to curated ledger"
         }
       ],
       "source": {
@@ -5147,7 +5211,9 @@
           "risk_disposition": "Authentic developer demonstration."
         }
       },
-      "incident": null
+      "incident": null,
+      "evidence_type": "curated_in_ledger",
+      "evidence_notes": "Curated into fallbackData.ts as part of cod-waw-zombies-vita"
     },
     {
       "schema_version": 2,
@@ -5172,6 +5238,13 @@
           "at": "2026-10-02T11:46:46.715Z",
           "actor": "codex",
           "reason": "Verified authentic Vulkan 1.1 native driver demonstration running SuperTuxKart by nyabsi; driver still private"
+        },
+        {
+          "from": "VERIFIED_FOR_REVIEW",
+          "to": "VERIFIED_FOR_REVIEW",
+          "at": "2026-10-08T12:45:20.752Z",
+          "actor": "vitaharbor-data-worker",
+          "reason": "Verified active technical development on real hardware"
         }
       ],
       "source": {
@@ -5275,7 +5348,9 @@
           "risk_disposition": "Legitimate technological progress report."
         }
       },
-      "incident": null
+      "incident": null,
+      "evidence_type": "engine_wip",
+      "evidence_notes": "SuperTuxKart Vulkan/GL translation driver and renderer development on Vita hardware by nyabsi"
     },
     {
       "schema_version": 2,
