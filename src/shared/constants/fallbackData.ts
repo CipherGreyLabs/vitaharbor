@@ -965,8 +965,8 @@ export const FALLBACK_PROJECTS: any[] = [
     current_stage: "playable",
     lifecycle: "active",
     summary: "Playable public beta release of Real Racing 3 ported to PS Vita via ARMv7 Android soloader wrapper by chutA7X.",
-    playability_notes: "Beta 1.1 release boots races and renders 3D car models with touchscreen and analog controls.",
-    performance_notes: "Averaging 25–40 FPS with ongoing shader compilation and memory tuning.",
+    playability_notes: "Beta 1.1 release boots full 3D championship races. Features 30/60 FPS toggle, touch/analog stick steering, and requires Android v1.1.2 apk data files extracted to ux0:data/rr3.",
+    performance_notes: "25–40 FPS on stock clocks; reaches solid 45–60 FPS with 500MHz CPU overclocking via PSVshell. Dynamic shader compilation and texture streaming active.",
     first_seen_at: new Date('2026-10-04T12:00:00.000Z'),
     last_activity_at: new Date('2026-10-06T12:00:00.000Z'),
     released_at: new Date('2026-10-06T12:00:00.000Z'),
@@ -1002,7 +1002,20 @@ export const FALLBACK_PROJECTS: any[] = [
         effective_at: new Date('2026-10-06T12:00:00.000Z'),
         reason: "Beta 1.1 playable build release published on r/PSVitaHomebrew"
       }
-    ]
+    ],
+    setup_evidence: {
+      categoryLabel: "Android ARMv7 Soloader Setup",
+      plugins: [
+        "kubridge.skprx",
+        "fd_fix.skprx",
+        "libshacccg.suprx"
+      ],
+      overclock: "500 MHz recommended",
+      assetPath: "ux0:data/rr3/",
+      instructions: "Extract Android v1.1.2 apk lib/armeabi-v7a/libmain.so and game assets into ux0:data/rr3/ and install VPK.",
+      verifiedOnHardware: true,
+      sourceUrl: "https://www.reddit.com/r/PSVitaHomebrew/comments/1ww8upq/release_real_racing_3_vita_beta_11/"
+    }
   },
   {
     id: 45,
@@ -1013,8 +1026,8 @@ export const FALLBACK_PROJECTS: any[] = [
     current_stage: "playable",
     lifecycle: "active",
     summary: "Native PlayStation Vita port of Call of Duty: World at War Zombies based on the iOS release, developed and published by devnoname120.",
-    playability_notes: "Playable v1.0 release includes Nacht der Untoten with full dual-analog controls, sound, and weapon mechanics.",
-    performance_notes: "Smooth 30–60 FPS on PlayStation Vita hardware.",
+    playability_notes: "Playable v1.0 release includes Nacht der Untoten and Der Riese zombie maps. Full physical dual-analog stick controls with touchscreen weapon selection and box buy interactions.",
+    performance_notes: "Solid 30–60 FPS on Vita hardware. Custom vitaGL shader pipeline and memory allocation tuning active.",
     first_seen_at: new Date('2026-10-07T08:00:00.000Z'),
     last_activity_at: new Date('2026-10-07T08:00:00.000Z'),
     released_at: new Date('2026-10-07T08:00:00.000Z'),
@@ -1050,7 +1063,20 @@ export const FALLBACK_PROJECTS: any[] = [
         effective_at: new Date('2026-10-07T08:00:00.000Z'),
         reason: "Playable v1.0 release available"
       }
-    ]
+    ],
+    setup_evidence: {
+      categoryLabel: "iOS Soloader Wrapper Setup",
+      plugins: [
+        "kubridge.skprx",
+        "libshacccg.suprx",
+        "fd_fix.skprx"
+      ],
+      overclock: "444 MHz or 500 MHz",
+      assetPath: "ux0:data/codzombies/",
+      instructions: "Extract iOS Call of Duty: World at War Zombies payload and copy data assets to ux0:data/codzombies/.",
+      verifiedOnHardware: true,
+      sourceUrl: "https://www.reddit.com/r/vitahacks/comments/1wzdh5y/release_call_of_duty_world_at_war_zombies_port/"
+    }
   }
 ];
 
