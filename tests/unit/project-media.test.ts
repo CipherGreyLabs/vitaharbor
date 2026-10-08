@@ -21,7 +21,6 @@ describe("project screenshot evidence", () => {
   it("keeps an image only when its source URL is recorded", () => {
     const projectsWithImages = FALLBACK_PROJECTS.filter((project) => project.screenshot_url);
     expect(projectsWithImages.map((project) => project.slug).sort()).toEqual([
-      "halo-ce-vita",
       "rc-cars-vita"
     ]);
     for (const project of projectsWithImages) {
@@ -30,16 +29,13 @@ describe("project screenshot evidence", () => {
     }
   });
 
-  it("uses the official Vita project screenshot and release source for Halo", () => {
-    const halo = bySlug.get("halo-ce-vita");
-    expect(halo?.repo_url).toBe("https://github.com/BirchWoodGod/halo-ce-vita");
-    expect(halo?.screenshot_url).toContain("/docs/screenshots/warthog-beach.png");
-    expect(halo?.screenshot_source_url).toBe("https://github.com/BirchWoodGod/halo-ce-vita/blob/main/README.md");
-    expect(halo?.released_at?.toISOString()).toBe("2026-10-02T01:36:54.000Z");
-    expect(halo?.last_activity_at?.toISOString()).toBe("2026-10-06T22:49:53.000Z");
+  it("uses verified Vita hardware screenshot source for RC Cars", () => {
+    const rcCars = bySlug.get("rc-cars-vita");
+    expect(rcCars?.screenshot_url).toBe("/screenshots/rc-cars.webp");
+    expect(rcCars?.screenshot_source_url).toBe("https://www.reddit.com/r/vitahacks/comments/1wjn8zg/rc_cars_port_progress/");
   });
 
-  it("provides a verified standalone media manifest covering all 28 projects", () => {
+  it("provides a verified standalone media manifest covering all active projects", () => {
     const manifestPath = path.resolve(process.cwd(), "data/media-manifest.json");
     expect(fs.existsSync(manifestPath)).toBe(true);
     const manifest = JSON.parse(fs.readFileSync(manifestPath, "utf8"));

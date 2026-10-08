@@ -1,13 +1,13 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-08T01:47:26.028Z",
+  "generated_at": "2026-10-08T02:04:56.212Z",
   "curator": "vitaharbor-data-worker",
   "notes": "Source-verified media manifest distinguishing verified PS Vita hardware captures, official repository media, and promotional artwork. Artwork is explicitly labeled and never represented as Vita gameplay.",
-  "total_projects": 19,
+  "total_projects": 15,
   "media_counts": {
     "vita_hardware_capture": 2,
-    "official_repository_screenshot": 1,
-    "official_promotional_artwork": 14,
+    "official_repository_screenshot": 0,
+    "official_promotional_artwork": 11,
     "title_card_fallback": 2
   },
   "items": [
@@ -62,19 +62,6 @@
       "media_source_url": "https://github.com/",
       "media_label": "Official Key Artwork",
       "provenance_notes": "The Simpsons: Hit & Run key artwork."
-    },
-    {
-      "id": 8,
-      "slug": "kotor-vita",
-      "display_name": "Star Wars: KOTOR Vita",
-      "game_title": "Star Wars: Knights of the Old Republic",
-      "media_type": "official_promotional_artwork",
-      "is_vita_gameplay": false,
-      "media_local_path": "/screenshots/kotor.jpg",
-      "media_remote_url": null,
-      "media_source_url": "https://github.com/",
-      "media_label": "Official Key Artwork",
-      "provenance_notes": "Star Wars: Knights of the Old Republic key artwork."
     },
     {
       "id": 10,
@@ -218,45 +205,6 @@
       "media_source_url": "https://www.reddit.com/r/vitahacks/comments/1wte7gf/gta_liberty_city_stories_my_ps_vita_port_is_now/",
       "media_label": "Official Key Artwork",
       "provenance_notes": "GTA Liberty City Stories reStories key artwork."
-    },
-    {
-      "id": 40,
-      "slug": "test-drive-iii-vita",
-      "display_name": "Test Drive III",
-      "game_title": "Test Drive III",
-      "media_type": "official_promotional_artwork",
-      "is_vita_gameplay": false,
-      "media_local_path": "/screenshots/test-drive-iii-bg.png",
-      "media_remote_url": null,
-      "media_source_url": "https://www.reddit.com/r/vitahacks/comments/1wudlni/test_drive_iii_vita_port/",
-      "media_label": "Official Title Artwork",
-      "provenance_notes": "Test Drive III title / DOS artwork."
-    },
-    {
-      "id": 41,
-      "slug": "test-drive-ii-vita",
-      "display_name": "Test Drive II",
-      "game_title": "Test Drive II",
-      "media_type": "official_promotional_artwork",
-      "is_vita_gameplay": false,
-      "media_local_path": "/screenshots/test-drive-ii-bg.png",
-      "media_remote_url": null,
-      "media_source_url": "https://www.reddit.com/r/vitahacks/comments/1wu6lsx/test_drive_ii_vita_port/",
-      "media_label": "Official Title Artwork",
-      "provenance_notes": "Test Drive II title artwork."
-    },
-    {
-      "id": 43,
-      "slug": "halo-ce-vita",
-      "display_name": "Halo: Combat Evolved Vita",
-      "game_title": "Halo: Combat Evolved",
-      "media_type": "official_repository_screenshot",
-      "is_vita_gameplay": true,
-      "media_local_path": null,
-      "media_remote_url": "https://raw.githubusercontent.com/BirchWoodGod/halo-ce-vita/main/docs/screenshots/warthog-beach.png",
-      "media_source_url": "https://github.com/BirchWoodGod/halo-ce-vita/blob/main/README.md",
-      "media_label": "Official Repository Vita Capture",
-      "provenance_notes": "Official screenshot from BirchWoodGod repository README taken on PS Vita hardware (The Silent Cartographer beach)."
     }
   ]
 }

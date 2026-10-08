@@ -5,7 +5,6 @@ export const FALLBACK_GAMES: Game[] = [
   { id: 5, slug: "portal-vita", title: "Portal (Source Engine / N64 Decomp)", normalized_title: "portal (source engine / n64 decomp)", original_release_year: 2007, original_platform: "PC", created_at: new Date('2026-09-17T15:34:00.000Z'), updated_at: new Date('2026-09-17T15:34:00.000Z') },
   { id: 6, slug: "spider-man-total-mayhem", title: "Spider-Man: Total Mayhem", normalized_title: "spider-man: total mayhem", original_release_year: 2010, original_platform: "Android ARMv7", created_at: new Date('2026-09-17T15:34:00.000Z'), updated_at: new Date('2026-09-17T15:34:00.000Z') },
   { id: 7, slug: "the-simpsons-hit-and-run", title: "The Simpsons: Hit & Run", normalized_title: "the simpsons: hit & run", original_release_year: 2003, original_platform: "PS2 / GameCube", created_at: new Date('2026-09-17T15:34:00.000Z'), updated_at: new Date('2026-09-17T15:34:00.000Z') },
-  { id: 8, slug: "star-wars-kotor", title: "Star Wars: Knights of the Old Republic", normalized_title: "star wars: knights of the old republic", original_release_year: 2003, original_platform: "Xbox / PC / Android", created_at: new Date('2026-09-17T15:34:00.000Z'), updated_at: new Date('2026-09-17T15:34:00.000Z') },
   { id: 10, slug: "need-for-speed-hot-pursuit", title: "Need for Speed: Hot Pursuit", normalized_title: "need for speed: hot pursuit", original_release_year: 2010, original_platform: "Android", created_at: new Date('2026-09-17T15:34:00.000Z'), updated_at: new Date('2026-09-17T15:34:00.000Z') },
   { id: 12, slug: "renpy-8-runtime", title: "Ren'Py 8 Runtime (Python 3.11)", normalized_title: "ren'py 8 runtime (python 3.11)", original_release_year: 2024, original_platform: "Multiplatform Engine", created_at: new Date('2026-09-17T15:34:00.000Z'), updated_at: new Date('2026-09-17T15:34:00.000Z') },
   { id: 14, slug: "slingshot-racing", title: "Slingshot Racing", normalized_title: "slingshot racing", original_release_year: 2012, original_platform: "Android / iOS", created_at: new Date('2026-09-17T15:34:00.000Z'), updated_at: new Date('2026-09-17T15:34:00.000Z') },
@@ -16,10 +15,7 @@ export const FALLBACK_GAMES: Game[] = [
   { id: 27, slug: "call-of-duty-4-modern-warfare", title: "Call of Duty 4: Modern Warfare", normalized_title: "call of duty 4 modern warfare", original_release_year: 2007, original_platform: "PS3", created_at: new Date('2026-09-12T00:00:00.000Z'), updated_at: new Date('2026-09-12T00:00:00.000Z') },
   { id: 34, slug: "resident-evil-4-vita", title: "Resident Evil 4", normalized_title: "resident evil 4", original_release_year: 2005, original_platform: "GameCube / PS2 / Android", created_at: new Date('2026-09-21T00:00:00.000Z'), updated_at: new Date('2026-09-25T17:04:11.000Z') },
   { id: 35, slug: "real-racing-2", title: "Real Racing 2", normalized_title: "real racing 2", original_release_year: 2010, original_platform: "iOS / Android", created_at: new Date('2026-09-21T11:39:44.312Z'), updated_at: new Date('2026-09-21T11:39:44.312Z') },
-  { id: 39, slug: "gta-liberty-city-stories", title: "GTA: Liberty City Stories (reStories)", normalized_title: "gta: liberty city stories (restories)", original_release_year: 2005, original_platform: "PSP / PS2", created_at: new Date('2026-09-29T16:07:11.000Z'), updated_at: new Date('2026-09-29T16:07:11.000Z') },
-  { id: 40, slug: "test-drive-iii-vita", title: "Test Drive III", normalized_title: "test drive iii", original_release_year: null, original_platform: "Various", created_at: new Date('2026-09-30T19:00:45.000Z'), updated_at: new Date('2026-09-30T19:17:30.535Z') },
-  { id: 41, slug: "test-drive-ii-vita", title: "Test Drive II", normalized_title: "test drive ii", original_release_year: null, original_platform: "Various", created_at: new Date('2026-09-30T14:36:07.000Z'), updated_at: new Date('2026-09-30T19:17:30.541Z') },
-  { id: 42, slug: "halo-combat-evolved", title: "Halo: Combat Evolved", normalized_title: "halo combat evolved", original_release_year: null, original_platform: "Xbox", created_at: new Date('2026-10-02T01:36:54.000Z'), updated_at: new Date('2026-10-06T22:49:53.000Z') }
+  { id: 39, slug: "gta-liberty-city-stories", title: "GTA: Liberty City Stories (reStories)", normalized_title: "gta: liberty city stories (restories)", original_release_year: 2005, original_platform: "PSP / PS2", created_at: new Date('2026-09-29T16:07:11.000Z'), updated_at: new Date('2026-09-29T16:07:11.000Z') }
 ];
 
 export const FALLBACK_PROJECTS: any[] = [
@@ -260,56 +256,6 @@ export const FALLBACK_PROJECTS: any[] = [
         stage: "in_game",
         effective_at: new Date('2026-09-06T02:07:36.000Z'),
         reason: "Reached interactive in-game state on real hardware"
-      }
-    ]
-  },
-  {
-    id: 8,
-    game_id: 8,
-    slug: "kotor-vita",
-    display_name: "Star Wars: KOTOR Vita",
-    current_stage: "early_wip",
-    lifecycle: "active",
-    summary: "Community reverse-engineering and ARM wrapper research for Knights of the Old Republic.",
-    playability_notes: "Shader compilation and memory allocator mapping in progress.",
-    performance_notes: "Early technical research stage.",
-    first_seen_at: new Date('2026-06-29T15:34:00.000Z'),
-    last_activity_at: new Date('2026-09-15T15:34:00.000Z'),
-    released_at: null,
-    is_featured: true,
-    is_archived: false,
-    game_title: "Star Wars: Knights of the Old Republic",
-    original_platform: "Xbox / PC / Android",
-    original_release_year: 2003,
-    technologies: [
-      "ARMv7 Wrapper"
-    ],
-    developers: [
-      {
-        id: 5,
-        role: "lead",
-        display_name: "Rinnegatamante",
-        slug: "rinnegatamante"
-      }
-    ],
-    stage_history: [
-      {
-        id: 80,
-        stage: "announced",
-        effective_at: new Date('2026-06-29T15:34:00.000Z'),
-        reason: "Port publicly announced / surfaced in community discussion"
-      },
-      {
-        id: 81,
-        stage: "research",
-        effective_at: new Date('2026-08-04T12:41:12.000Z'),
-        reason: "Reverse-engineering and shader research started"
-      },
-      {
-        id: 82,
-        stage: "early_wip",
-        effective_at: new Date('2026-09-09T09:48:24.000Z'),
-        reason: "First work-in-progress build compiled for ARM"
       }
     ]
   },
@@ -1007,134 +953,6 @@ export const FALLBACK_PROJECTS: any[] = [
         reason: "v01.15 release published with full intro, sound, and installable VPK"
       }
     ]
-  },
-  {
-    id: 40,
-    game_id: 40,
-    slug: "test-drive-iii-vita",
-    reddit_url: "https://www.reddit.com/r/vitahacks/comments/1wudlni/test_drive_iii_vita_port/",
-    repo_url: "https://github.com/smart-pickle/TestDriveIII-Vita",
-    display_name: "Test Drive III",
-    current_stage: "playable",
-    lifecycle: "active",
-    summary: "Community PlayStation Vita port of Test Drive III with source repository on GitHub.",
-    playability_notes: "Automatically promoted from verified community source with repository and code evidence.",
-    performance_notes: "Targeting native hardware performance.",
-    first_seen_at: new Date('2026-09-30T19:00:45.000Z'),
-    last_activity_at: new Date('2026-09-30T19:00:45.000Z'),
-    released_at: new Date('2026-09-30T19:00:45.000Z'),
-    is_featured: false,
-    is_archived: false,
-    verification: "developer_direct",
-    game_title: "Test Drive III",
-    original_platform: "Various",
-    original_release_year: null,
-    technologies: [
-      "VitaSDK"
-    ],
-    developers: [
-      {
-        id: 40,
-        role: "lead",
-        display_name: "gainusha",
-        slug: "gainusha"
-      }
-    ],
-    stage_history: [
-      {
-        id: 400,
-        stage: "playable",
-        effective_at: new Date('2026-09-30T19:00:45.000Z'),
-        reason: "Verified source port release/development on GitHub"
-      }
-    ]
-  },
-  {
-    id: 41,
-    game_id: 41,
-    slug: "test-drive-ii-vita",
-    reddit_url: "https://www.reddit.com/r/vitahacks/comments/1wu6lsx/test_drive_ii_vita_port/",
-    repo_url: "https://github.com/smart-pickle/TestDriveII-Vita",
-    display_name: "Test Drive II",
-    current_stage: "playable",
-    lifecycle: "active",
-    summary: "Community PlayStation Vita port of Test Drive II with source repository on GitHub.",
-    playability_notes: "Automatically promoted from verified community source with repository and code evidence.",
-    performance_notes: "Targeting native hardware performance.",
-    first_seen_at: new Date('2026-09-30T14:36:07.000Z'),
-    last_activity_at: new Date('2026-09-30T14:36:07.000Z'),
-    released_at: new Date('2026-09-30T14:36:07.000Z'),
-    is_featured: false,
-    is_archived: false,
-    verification: "developer_direct",
-    game_title: "Test Drive II",
-    original_platform: "Various",
-    original_release_year: null,
-    technologies: [
-      "VitaSDK"
-    ],
-    developers: [
-      {
-        id: 41,
-        role: "lead",
-        display_name: "gainusha",
-        slug: "gainusha"
-      }
-    ],
-    stage_history: [
-      {
-        id: 410,
-        stage: "playable",
-        effective_at: new Date('2026-09-30T14:36:07.000Z'),
-        reason: "Verified source port release/development on GitHub"
-      }
-    ]
-  },
-  {
-    id: 43,
-    game_id: 42,
-    slug: "halo-ce-vita",
-    reddit_url: "https://www.reddit.com/r/VitaPiracy/comments/1wvhkaf/halo_ce_port_release/",
-    repo_url: "https://github.com/BirchWoodGod/halo-ce-vita",
-    display_name: "Halo: Combat Evolved Vita",
-    current_stage: "released",
-    lifecycle: "active",
-    summary: "Native PlayStation Vita port built from the Xbox decompilation. The official repository publishes the VPK and states that game data is not included.",
-    playability_notes: "The maintainer reports the campaign playable. System-link multiplayer is still being tested; users need their own Xbox copy of Halo: Combat Evolved.",
-    performance_notes: "The maintainer reports up to 30 FPS; large fights can run slower, depending on scene and graphics settings.",
-    first_seen_at: new Date('2026-10-02T01:36:54.000Z'),
-    last_activity_at: new Date('2026-10-06T22:49:53.000Z'),
-    released_at: new Date('2026-10-02T01:36:54.000Z'),
-    is_featured: false,
-    is_archived: false,
-    verification: "developer_direct",
-    game_title: "Halo: Combat Evolved",
-    original_platform: "Xbox",
-    original_release_year: 2001,
-    screenshot_url: "https://raw.githubusercontent.com/BirchWoodGod/halo-ce-vita/main/docs/screenshots/warthog-beach.png",
-    screenshot_source_url: "https://github.com/BirchWoodGod/halo-ce-vita/blob/main/README.md",
-    screenshot_alt: "Warthog on The Silent Cartographer beach in Halo CE on PS Vita",
-    technologies: [
-      "Xbox decompilation",
-      "Native PS Vita port",
-      "VitaSDK"
-    ],
-    developers: [
-      {
-        id: 43,
-        role: "lead",
-        display_name: "BirchWoodGod",
-        slug: "birchwoodgod"
-      }
-    ],
-    stage_history: [
-      {
-        id: 431,
-        stage: "released",
-        effective_at: new Date('2026-10-02T01:36:54.000Z'),
-        reason: "Official GitHub release v1.0 published"
-      }
-    ]
   }
 ];
 
@@ -1283,34 +1101,6 @@ export const FALLBACK_DEVELOPERS: any[] = [
       {
         provider: "reddit",
         username: "amplieboy"
-      }
-    ],
-    projects: []
-  },
-  {
-    id: 40,
-    slug: "gainusha",
-    display_name: "gainusha",
-    description: "Developer of Test Drive III for PlayStation Vita.",
-    is_known_developer: true,
-    identities: [
-      {
-        provider: "reddit",
-        username: "gainusha"
-      }
-    ],
-    projects: []
-  },
-  {
-    id: 43,
-    slug: "birchwoodgod",
-    display_name: "BirchWoodGod",
-    description: "Maintainer credited for the native Halo: Combat Evolved PlayStation Vita port.",
-    is_known_developer: true,
-    identities: [
-      {
-        provider: "github",
-        username: "BirchWoodGod"
       }
     ],
     projects: []
@@ -1550,84 +1340,6 @@ export const FALLBACK_UPDATES: any[] = [
     ]
   },
   {
-    id: "upd_test_drive_iii_vita",
-    port_project_id: 40,
-    project_slug: "test-drive-iii-vita",
-    project_display_name: "Test Drive III",
-    developer_display_name: "gainusha",
-    developer_slug: "gainusha",
-    event_type: "playable_demo",
-    title: "Test Drive III PS Vita port surfaced with repository",
-    summary: "Automated verification confirmed active repository and code evidence for Test Drive III.",
-    event_at: new Date('2026-09-30T19:00:45.000Z'),
-    verification_level: "developer_direct",
-    sources: [
-      {
-        source_item_id: "src_upd_test_drive_iii_vita_repo",
-        relationship: "primary",
-        canonical_url: "https://github.com/smart-pickle/TestDriveIII-Vita"
-      },
-      {
-        source_item_id: "src_upd_test_drive_iii_vita_reddit",
-        relationship: "community",
-        canonical_url: "https://www.reddit.com/r/vitahacks/comments/1wudlni/test_drive_iii_vita_port/"
-      }
-    ]
-  },
-  {
-    id: "upd_test_drive_ii_vita",
-    port_project_id: 41,
-    project_slug: "test-drive-ii-vita",
-    project_display_name: "Test Drive II",
-    developer_display_name: "gainusha",
-    developer_slug: "gainusha",
-    event_type: "playable_demo",
-    title: "Test Drive II PS Vita port surfaced with repository",
-    summary: "Automated verification confirmed active repository and code evidence for Test Drive II.",
-    event_at: new Date('2026-09-30T14:36:07.000Z'),
-    verification_level: "developer_direct",
-    sources: [
-      {
-        source_item_id: "src_upd_test_drive_ii_vita_repo",
-        relationship: "primary",
-        canonical_url: "https://github.com/smart-pickle/TestDriveII-Vita"
-      },
-      {
-        source_item_id: "src_upd_test_drive_ii_vita_reddit",
-        relationship: "community",
-        canonical_url: "https://www.reddit.com/r/vitahacks/comments/1wu6lsx/test_drive_ii_vita_port/"
-      }
-    ]
-  },
-  {
-    id: "upd_halo_ce_decomp_pc_and_android_vita",
-    port_project_id: 43,
-    project_slug: "halo-ce-vita",
-    project_display_name: "Halo: Combat Evolved Vita",
-    event_type: "technical_progress",
-    title: "The Vita port identifies its PC/Android upstream project",
-    summary: "The official Vita-port README credits cybersecurity/halo-ce-universal as the native Linux, Windows and Android port this repository builds on. The earlier Reddit post discusses that upstream project; it is not evidence of a Vita build or release.",
-    event_at: new Date('2026-09-30T19:19:17.427Z'),
-    verification_level: "community_report",
-    sources: [
-      {
-        source_item_id: "src_halo_ce_vita_repo",
-        relationship: "primary",
-        canonical_url: "https://github.com/BirchWoodGod/halo-ce-vita"
-      },
-      {
-        source_item_id: "src_upd_halo_ce_decomp_pc_and_android_vita_repo",
-        relationship: "community",
-        canonical_url: "https://github.com/cybersecurity/halo-ce-universal"
-      },
-      {
-        source_item_id: "src_upd_halo_ce_decomp_pc_and_android_vita_reddit",
-        relationship: "community",
-        canonical_url: "https://www.reddit.com/r/PSVitaHomebrew/comments/1wtm0y6/halo_ce_decomp_pc_and_android/"
-      }
-    ]
-  },
-  {
     id: "upd_rr2_vita_beta2",
     port_project_id: 35,
     project_slug: "real-racing-2-vita",
@@ -1644,49 +1356,6 @@ export const FALLBACK_UPDATES: any[] = [
         source_item_id: "src_rr2_beta2_reddit",
         relationship: "community",
         canonical_url: "https://www.reddit.com/r/VitaPiracy/comments/1wvfxzk/real_racing_2_new_update_psvita_beta_2_3060_fps/"
-      }
-    ]
-  },
-  {
-    id: "upd_halo_ce_vita_release",
-    port_project_id: 43,
-    project_slug: "halo-ce-vita",
-    project_display_name: "Halo: Combat Evolved Vita",
-    event_type: "release",
-    title: "Halo: Combat Evolved Vita v1.0 released",
-    summary: "The official GitHub v1.0 release publishes the PS Vita build. The maintainer says the release contains no game data; users need their own Xbox copy.",
-    event_at: new Date('2026-10-02T01:36:54.000Z'),
-    verification_level: "developer_direct",
-    sources: [
-      {
-        source_item_id: "src_halo_ce_release_reddit",
-        relationship: "primary",
-        canonical_url: "https://www.reddit.com/r/VitaPiracy/comments/1wvhkaf/halo_ce_port_release/"
-      },
-      {
-        source_item_id: "src_halo_ce_release_v1_0",
-        relationship: "release",
-        canonical_url: "https://github.com/BirchWoodGod/halo-ce-vita/releases/tag/v1.0"
-      }
-    ]
-  },
-  {
-    id: "upd_halo_ce_vita_103",
-    port_project_id: 43,
-    project_slug: "halo-ce-vita",
-    project_display_name: "Halo: Combat Evolved Vita",
-    developer_display_name: "BirchWoodGod",
-    developer_slug: "birchwoodgod",
-    event_type: "technical_progress",
-    title: "Halo CE Vita v1.0.3 improves large fights and adds graphics profiles",
-    summary: "The maintainer's v1.0.3 release notes report smoother large fights, graphics profiles, precompiled shaders and fixes for player-reported issues.",
-    event_at: new Date('2026-10-06T22:49:53.000Z'),
-    verification_level: "developer_direct",
-    sources: [
-      {
-        source_item_id: "src_halo_ce_release_v1_0_3",
-        relationship: "release",
-        canonical_url: "https://github.com/BirchWoodGod/halo-ce-vita/releases/tag/v1.0.3"
       }
     ]
   }
