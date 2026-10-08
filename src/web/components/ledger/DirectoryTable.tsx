@@ -405,16 +405,67 @@ export const DirectoryTable: React.FC<DirectoryTableProps> = ({
             ))}
           </div>
         ) : visible.length === 0 && activeFilter !== "graduated" ? (
-          <div className="px-6 py-16 text-center">
-            <p className="text-body text-ink-medium">Nothing matches that search.</p>
-            <button
-              type="button"
-              onClick={onResetFilters}
-              className="mt-3 inline-flex min-h-[44px] items-center text-body font-semibold text-accent underline underline-offset-4 focus-visible:outline focus-visible:outline-2 focus-visible:outline-accent"
-            >
-              Reset filters
-            </button>
-          </div>
+          (() => {
+            const term = searchTerm.trim().toLowerCase();
+            const matchingGraduated = term
+              ? GRADUATED_PROJECTS.filter(
+                  (p) =>
+                    p.title.toLowerCase().includes(term) ||
+                    p.developer.toLowerCase().includes(term) ||
+                    p.original_platform.toLowerCase().includes(term) ||
+                    p.technologies.some((t) => t.toLowerCase().includes(term)) ||
+                    p.summary.toLowerCase().includes(term)
+                )
+              : [];
+
+            if (matchingGraduated.length > 0) {
+              return (
+                <div className="mx-auto max-w-2xl px-4 py-12 text-center">
+                  <div className="rounded-2xl border border-emerald-500/30 bg-emerald-950/20 p-6 text-emerald-300 shadow-lg backdrop-blur-md">
+                    <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-emerald-500/20 text-emerald-400">
+                      <Check className="h-6 w-6" />
+                    </div>
+                    <h3 className="mt-4 font-display text-subtitle font-semibold text-white">
+                      Geen actieve WIP-ports gevonden voor &lsquo;{searchTerm}&rsquo;
+                    </h3>
+                    <p className="mt-2 text-caption text-zinc-300 leading-relaxed">
+                      Er {matchingGraduated.length === 1 ? "is" : "zijn"} <strong className="text-emerald-400 font-semibold">{matchingGraduated.length} afgerond{matchingGraduated.length === 1 ? " project" : "e projecten"}</strong> beschikbaar in <strong className="text-white">Graduated to VitaDB</strong> ({matchingGraduated.map(p => p.title).slice(0, 3).join(", ")}{matchingGraduated.length > 3 ? "..." : ""}).
+                    </p>
+                    <div className="mt-5 flex flex-wrap items-center justify-center gap-3">
+                      <button
+                        type="button"
+                        onClick={() => onFilterChange("graduated")}
+                        className="inline-flex min-h-[44px] items-center gap-2 rounded-xl bg-emerald-600 px-5 py-2 font-mono text-[12px] font-semibold text-white shadow-md transition-all hover:bg-emerald-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-emerald-400"
+                      >
+                        <span>Bekijk in VitaDB Releases</span>
+                        <ExternalLink className="h-4 w-4" />
+                      </button>
+                      <button
+                        type="button"
+                        onClick={onResetFilters}
+                        className="inline-flex min-h-[44px] items-center rounded-xl border border-white/10 bg-white/5 px-4 py-2 text-caption font-medium text-zinc-300 hover:bg-white/10 hover:text-white transition-colors"
+                      >
+                        Reset filters
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              );
+            }
+
+            return (
+              <div className="px-6 py-16 text-center">
+                <p className="text-body text-ink-medium">Nothing matches that search.</p>
+                <button
+                  type="button"
+                  onClick={onResetFilters}
+                  className="mt-3 inline-flex min-h-[44px] items-center text-body font-semibold text-accent underline underline-offset-4 focus-visible:outline focus-visible:outline-2 focus-visible:outline-accent"
+                >
+                  Reset filters
+                </button>
+              </div>
+            );
+          })()
         ) : activeFilter === "graduated" ? (
           <div>
             <div className="mb-4 rounded-xl border border-emerald-500/20 bg-emerald-950/20 p-4 text-emerald-300">

@@ -2,6 +2,13 @@
 
 Updated: 2026-10-08
 
+## Current state: VH-SEARCH-GRADUATED-047 Direct Search Connection to Graduated VitaDB Releases (2026-10-08)
+
+- Smart Search Connection active:
+  - When a search query yields 0 active WIP ports, `DirectoryTable.tsx` automatically checks `GRADUATED_PROJECTS` and shows an intelligent callout banner with a direct 'Bekijk in VitaDB Releases' action.
+  - Seamless navigation prevents dead ends for users searching for completed ports published on VitaDB.
+- Verification: npm run verify passed (tsc clean, 135/135 unit tests, 7/7 integration tests, 21 prerendered project pages, 24 sitemap URLs).
+
 ## Current state: VH-MOBILE-SEO-046 Mobile Layout Audit, Touch Target Tuning & SEO OpenGraph Verification (2026-10-08)
 
 - Master Options B & C verified:

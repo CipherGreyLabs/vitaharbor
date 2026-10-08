@@ -885,3 +885,9 @@ pm run verify passed (tsc clean, 127/127 unit tests, 30 project pages, 33 sitema
 | Time | Commit / state | Change | Why | Model | Verified |
 |---|---|---|---|---|---|
 | 14:50 UTC | working tree | Completed Master Options B & C: 1) Verified mobile responsiveness and touch targets via `mobile-audit.mjs` and `mobile-measure.mjs` at 375px, 390px, 412px and 768px (0 horizontal overflow, 0 small touch targets < 44px, smooth horizontal scrolling on stage filter pills); 2) Verified SEO & OpenGraph cards (`make-og.mjs` and `prerender.mjs`) with individual social share images and metadata for all active projects. | Fulfill master delegation for mobile layout fine-tuning and complete SEO card coverage. | gemini-3.7-flash | `npm run verify` passed (tsc clean, 135/135 unit tests, 7/7 integration tests, 17 project pages, 20 sitemap URLs); `mobile-audit.mjs` reported 0 overflow and 0 small targets. |
+
+### VH-SEARCH-GRADUATED-047 Direct search connection to Graduated VitaDB releases (2026-10-08)
+
+| Time | Commit / state | Change | Why | Model | Verified |
+|---|---|---|---|---|---|
+| 23:05 UTC | working tree | Added smart search fallback connection in `DirectoryTable.tsx`: when 0 active WIP ports match a search query but completed releases exist in `GRADUATED_PROJECTS`, render a helpful banner highlighting the matching VitaDB ports with a one-click 'Bekijk in VitaDB Releases' button that switches to `graduated` filter while preserving the search query. | Fulfill master delegation: guide visitors looking for completed ports (e.g. Diablo, Jedi, Barony, Aleph One, Apotris) seamlessly to their VitaDB releases. | gemini-3.7-flash | `npm run verify` passed (tsc clean, 135/135 unit tests, 7/7 integration tests, 21 project pages, 24 sitemap URLs); contrast audit passed 58/58 styles with 0 failures. |
