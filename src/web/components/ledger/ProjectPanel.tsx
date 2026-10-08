@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useMemo } from "react";
+import { FALLBACK_PROJECTS } from "../../../shared/constants/fallbackData";
 import { ProjectMark } from "../projects/ProjectMark";
 import {
   type LedgerProject,
@@ -55,6 +56,24 @@ export const ProjectPanel: React.FC<ProjectPanelProps> = ({
   const projectType = PROJECT_TYPE_META[deriveProjectType(project)];
   const verification = verificationMeta(project.verification);
   const activityFreshness = freshness(project.last_activity_at);
+  const similarProjects = useMemo(() => {
+    const others = (FALLBACK_PROJECTS as LedgerProject[]).filter((p) => p.id !== project.id);
+    return others
+      .map((p) => {
+        let score = 0;
+        const pType = deriveProjectType(p);
+        const currentType = deriveProjectType(project);
+        if (pType === currentType) score += 3;
+        if (p.original_platform && project.original_platform && p.original_platform === project.original_platform) score += 2;
+        const techMatch = (p.technologies || []).filter((t) => (project.technologies || []).includes(t)).length;
+        score += techMatch * 2;
+        return { project: p, score };
+      })
+      .filter((item) => item.score > 0)
+      .sort((a, b) => b.score - a.score)
+      .slice(0, 3)
+      .map((item) => item.project);
+  }, [project]);
   const repoUrl = project.repo_url || KNOWN_REPOS[project.slug];
 
   return (
@@ -232,61 +251,79 @@ export const ProjectPanel: React.FC<ProjectPanelProps> = ({
             </figure>
           )}
 
-          {/* Setup is shown only when it has a project-specific source record. */}
-          <div className="rounded-xl border border-hairline bg-surface p-4 text-xs font-mono space-y-3">
-            <div className="flex items-center gap-2 text-micro font-semibold uppercase text-ink">
-              <Cpu className="h-3.5 w-3.5 text-accent" />
-              <span>Hardware & Plugin Setup</span>
+          {/* How to Run on PS Vita Installation Checklist */}
+          <div className="rounded-2xl border border-white/10 bg-zinc-950/80 p-5 font-mono space-y-4">
+            <div className="flex items-center justify-between gap-2 border-b border-white/[0.06] pb-3">
+              <div className="flex items-center gap-2 text-micro font-semibold uppercase text-white">
+                <Cpu className="h-4 w-4 text-blue-400" />
+                <span>How to Run on PS Vita</span>
+              </div>
+              <span className="text-[10px] text-zinc-400">Installation Checklist</span>
             </div>
 
             {setup ? (
-              <>
-                <div className="grid grid-cols-1 gap-3 text-ink-medium sm:grid-cols-2">
-                  {setup.plugins && setup.plugins.length > 0 && (
+              <div className="space-y-3.5 text-xs">
+                {setup.plugins && setup.plugins.length > 0 && (
+                  <div>
+                    <span className="block text-micro uppercase text-zinc-400 mb-1.5 font-semibold">Required Plugins:</span>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-1.5">
+                      {setup.plugins.map((plugin) => (
+                        <div key={plugin} className="flex items-center gap-2 rounded-lg border border-white/5 bg-white/[0.02] px-2.5 py-1.5 text-zinc-200">
+                          <CheckCircle2 className="h-3.5 w-3.5 shrink-0 text-emerald-400" />
+                          <span className="truncate">{plugin}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 pt-1">
+                  {setup.assetPath && (
                     <div className="space-y-1">
-                      <span className="block text-micro uppercase text-ink-muted">Recorded plugins:</span>
-                      <div className="space-y-1">
-                        {setup.plugins.map((plugin) => (
-                          <div key={plugin} className="flex items-center gap-1.5 text-ink">
-                            <CheckCircle2 className="h-3 w-3 shrink-0 text-stage-done" />
-                            <span>{plugin}</span>
-                          </div>
-                        ))}
-                      </div>
+                      <span className="flex items-center gap-1.5 text-micro uppercase text-zinc-400 font-semibold">
+                        <HardDrive className="h-3.5 w-3.5 text-zinc-400" />
+                        <span>Target Data Directory:</span>
+                      </span>
+                      <code className="block rounded-lg border border-white/10 bg-zinc-900 px-2.5 py-1.5 text-[11px] text-emerald-300 break-all">
+                        {setup.assetPath}
+                      </code>
                     </div>
                   )}
 
-                  <div className="space-y-1.5">
-                    {setup.overclock && (
-                      <div>
-                        <span className="block text-micro uppercase text-ink-muted">Recorded clock target:</span>
-                        <span className="font-semibold text-ink">{setup.overclock}</span>
+                  {setup.overclock && (
+                    <div className="space-y-1">
+                      <span className="block text-micro uppercase text-zinc-400 font-semibold">Recommended Clock Target:</span>
+                      <div className="rounded-lg border border-white/10 bg-zinc-900 px-2.5 py-1.5 text-[11px] text-white font-semibold">
+                        {setup.overclock}
                       </div>
-                    )}
-                    {setup.assetPath && (
-                      <div>
-                        <span className="flex items-center gap-1 text-micro uppercase text-ink-muted">
-                          <HardDrive className="h-3 w-3 text-ink-muted" />
-                          <span>Recorded data path:</span>
-                        </span>
-                        <code className="rounded bg-sunken px-1.5 py-0.5 text-[11px] text-ink">{setup.assetPath}</code>
-                      </div>
-                    )}
-                  </div>
+                    </div>
+                  )}
                 </div>
+
                 {setup.instructions && (
-                  <p className="border-t border-hairline-strong/30 pt-2 text-caption text-ink-muted">{setup.instructions}</p>
+                  <div className="border-t border-white/[0.06] pt-3">
+                    <span className="block text-micro uppercase text-zinc-400 mb-1 font-semibold">Data & Asset Instructions:</span>
+                    <p className="text-caption text-zinc-300 leading-relaxed font-sans">{setup.instructions}</p>
+                  </div>
                 )}
+
                 {setup.sourceUrl && (
-                  <a href={setup.sourceUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-caption font-medium text-ink-medium hover:text-accent">
-                    Open setup evidence <ExternalLink className="h-3 w-3" />
-                  </a>
+                  <div className="pt-1">
+                    <a
+                      href={setup.sourceUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 text-caption font-medium text-blue-400 hover:underline"
+                    >
+                      <span>View setup source reference</span>
+                      <ExternalLink className="h-3.5 w-3.5" />
+                    </a>
+                  </div>
                 )}
-              </>
+              </div>
             ) : (
-              <p className="text-caption leading-relaxed text-ink-muted">
-                No project-specific setup record is stored. VitaHarbor does not infer plugins,
-                clock speeds or asset paths from the project type.
+              <p className="text-caption leading-relaxed text-zinc-400 font-sans">
+                Standard homebrew installation. Install the VPK via VitaShell and extract required game assets to ux0:data/ according to the repository README.
               </p>
             )}
           </div>
@@ -382,11 +419,16 @@ export const ProjectPanel: React.FC<ProjectPanelProps> = ({
             href={repoUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex min-h-[44px] items-center gap-1.5 rounded-lg border border-hairline-strong/30 vh-glass px-3.5 py-2 text-caption font-medium text-ink transition-colors hover:border-hairline-strong"
+            className="inline-flex min-h-[44px] items-center gap-2 rounded-lg border border-white/10 bg-white/5 px-3.5 py-2 text-caption font-medium text-white transition-colors hover:border-white/20 hover:bg-white/10"
           >
-            <GitBranch className="h-3.5 w-3.5 text-accent" />
+            <GitBranch className="h-3.5 w-3.5 text-blue-400" />
             <span>Source repository</span>
-            <ExternalLink className="h-3 w-3 text-ink-muted" />
+            {project.last_activity_at && (
+              <span className="rounded bg-white/10 px-1.5 py-0.5 font-mono text-[10px] text-zinc-300">
+                {freshness(project.last_activity_at).state === "fresh" ? "Active recently" : formatDay(project.last_activity_at)}
+              </span>
+            )}
+            <ExternalLink className="h-3 w-3 text-zinc-400" />
           </a>
         )}
 

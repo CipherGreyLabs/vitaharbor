@@ -2,6 +2,15 @@
 
 Updated: 2026-10-08
 
+## Current state: VH-FEATURES-AUDIO-RUN-048 How to Run Checklist, Similar Ports & Web Audio Effects (2026-10-08)
+
+- Master Improvements 1, 2, 3 & 4 active:
+  - How to Run Checklist: Dedicated hardware & plugin requirement checklist in ProjectPanel for data-backed ports.
+  - Similar Ongoing Ports: Intelligent recommendations in ProjectPanel suggesting 2-3 related ports by technology/platform.
+  - Web Audio Effects: Pure synthetic oscillator tactile sound effects (LiveArea blip / UI clicks) with top navbar audio toggle (default muted).
+  - Activity Indicators: Compact freshness badges on Source repository buttons.
+- Verification: npm run verify passed (tsc clean, 135/135 unit tests, 7/7 integration tests, 21 prerendered project pages, 24 sitemap URLs).
+
 ## Current state: VH-SEARCH-GRADUATED-047 Direct Search Connection to Graduated VitaDB Releases (2026-10-08)
 
 - Smart Search Connection active:

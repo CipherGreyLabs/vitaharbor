@@ -1,23 +1,24 @@
-# Handoff - VitaHarbor Master Improvement 1 Search Handoff
+# Handoff - VitaHarbor Master Improvements 1, 2, 3 & 4 Audio and Checklist Handoff
 
-- Gegenereerd: 2026-10-08T21:03:34Z
+- Gegenereerd: 2026-10-08T21:47:58Z
 - Actor: codex
 - Model: gemini-3.7-flash
 - ProjectRoot: C:\Users\suloW\Documents\ChatGPT\VitaPort
-- Bronnen: 4
+- Bronnen: 5
 
 ## Bronintegriteit
 
 | Bestand | Bytes | SHA-256 |
 |---|---|---|
-| src\web\components\ledger\DirectoryTable.tsx | 47772 | D9F4C9CEA0B226693EA4CD8686CE140A301D9FB336C2192E916F70BA888927C6 |
-| src\shared\constants\graduatedData.ts | 6015 | BADB17D93BF96A4C7A3638D7DD84542B4E408C2ABB54F003506564C43D24531A |
-| PROJECT_STATE.md | 69125 | 883AF5E657B3C38D72268B8FD6E7E2A39F8595BB0B324D094ED8819B31F8DC11 |
-| docs\WORKLOG.md | 153392 | 058696E8FF28FEFD4BF5368F64B31043A5CAFF91357803C381FEDB59774A64BA |
+| src\web\components\ledger\ProjectPanel.tsx | 20699 | 952788EA6BA5E15805548DA0363B042573AB5D223761C9D23369974EF49B29C4 |
+| src\web\routes\HomePage.tsx | 32952 | 0AB9F9061C95D9DBD5979D86712F96530B52F28BB02C92C6256EBF45D43A2C47 |
+| src\web\utils\audio.ts | 2503 | E3D27EF7CC0E4C3248EE7CC8CE4A3C688125AEEA6623F22CBD80A15AAC8FE7FA |
+| PROJECT_STATE.md | 69887 | 4922212FB538D5EAD1E7DD1A72ED66DBD10746F9A3992390262768F29CE24D29 |
+| docs\WORKLOG.md | 154593 | B08731CBDA1AEE178EB767B9C9C7890B8626576D9B2FD53E9DBF926B29FF51D6 |
 
 ## Samenvatting
 
-Consolidated handoff for direct search connection to Graduated to VitaDB releases when 0 active WIP ports match.
+Consolidated handoff for How to Run installation checklist, Similar Ongoing Ports recommendations, Web Audio API sound synthesizer, and repository activity indicators.
 
 ## Verificatie
 
