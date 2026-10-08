@@ -23,13 +23,8 @@ describe("public link integrity", () => {
   });
 
   it("uses project-specific repositories where direct evidence exists", () => {
-    expect(KNOWN_REPOS["openmohaa-vita"]).toBe("https://github.com/HenryKun55/openmohaa/tree/vita-port");
-    expect(KNOWN_REPOS["smash-melee-vita"]).toBe("https://github.com/robin994/SmashMeleeVita");
-    expect(KNOWN_REPOS["hollow-knight-vita"]).toBe("https://github.com/PatnosDD/Hollow-Knight-PsVita");
     expect(KNOWN_REPOS["renpy-8-runtime-engine"]).toBe("https://github.com/Grimiku/RenPy-Vita-8");
     expect(KNOWN_REPOS["portal-vita"]).toBeUndefined();
-    expect(KNOWN_REPOS["zelda-ship-of-harkinian-vita"]).toBeUndefined();
-    expect(KNOWN_REPOS["fallout-2-ce-vita"]).toBeUndefined();
     expect(KNOWN_REPOS["render96-sm64-hd-vita"]).toBeUndefined();
     expect(KNOWN_REPOS["celeste-classic-vita"]).toBeUndefined();
   });

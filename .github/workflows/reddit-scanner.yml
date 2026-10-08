@@ -60,7 +60,7 @@ jobs:
 
       - name: Install Playwright browser for browser scan fallback
         if: ${{ github.event_name == 'schedule' || github.event_name == 'workflow_dispatch' }}
-        run: npx playwright install chromium
+        run: npx playwright install --with-deps chromium
 
       - name: Scan Reddit for new port threads
         if: ${{ github.event_name == 'schedule' || github.event_name == 'workflow_dispatch' }}
