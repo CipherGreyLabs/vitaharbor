@@ -17,7 +17,11 @@ export const FALLBACK_GAMES: Game[] = [
   { id: 35, slug: "real-racing-2", title: "Real Racing 2", normalized_title: "real racing 2", original_release_year: 2010, original_platform: "iOS / Android", created_at: new Date('2026-09-21T11:39:44.312Z'), updated_at: new Date('2026-09-21T11:39:44.312Z') },
   { id: 39, slug: "gta-liberty-city-stories", title: "GTA: Liberty City Stories (reStories)", normalized_title: "gta: liberty city stories (restories)", original_release_year: 2005, original_platform: "PSP / PS2", created_at: new Date('2026-09-29T16:07:11.000Z'), updated_at: new Date('2026-09-29T16:07:11.000Z') },
   { id: 44, slug: "real-racing-3", title: "Real Racing 3", normalized_title: "real racing 3", original_release_year: 2013, original_platform: "iOS / Android", created_at: new Date('2026-10-06T12:00:00.000Z'), updated_at: new Date('2026-10-06T12:00:00.000Z') },
-  { id: 45, slug: "call-of-duty-world-at-war-zombies", title: "Call of Duty: World at War Zombies", normalized_title: "call of duty: world at war zombies", original_release_year: 2009, original_platform: "iOS", created_at: new Date('2026-10-07T08:00:00.000Z'), updated_at: new Date('2026-10-07T08:00:00.000Z') }
+  { id: 45, slug: "call-of-duty-world-at-war-zombies", title: "Call of Duty: World at War Zombies", normalized_title: "call of duty: world at war zombies", original_release_year: 2009, original_platform: "iOS", created_at: new Date('2026-10-07T08:00:00.000Z'), updated_at: new Date('2026-10-07T08:00:00.000Z') },
+  { id: 46, slug: "buckshot-roulette", title: "Buckshot Roulette", normalized_title: "buckshot roulette", original_release_year: 2023, original_platform: "PC / Godot", created_at: new Date('2026-09-22T08:58:38.000Z'), updated_at: new Date('2026-09-22T08:58:38.000Z') },
+  { id: 47, slug: "star-wars-dark-forces", title: "Star Wars: Dark Forces", normalized_title: "star wars: dark forces", original_release_year: 1995, original_platform: "PC / DOS", created_at: new Date('2026-09-20T20:24:59.000Z'), updated_at: new Date('2026-09-20T20:24:59.000Z') },
+  { id: 48, slug: "supertuxkart", title: "SuperTuxKart", normalized_title: "supertuxkart", original_release_year: 2006, original_platform: "PC / Linux", created_at: new Date('2026-09-19T07:09:39.000Z'), updated_at: new Date('2026-09-19T07:09:39.000Z') },
+  { id: 49, slug: "insurgency", title: "Insurgency", normalized_title: "insurgency", original_release_year: 2014, original_platform: "PC / Source Engine", created_at: new Date('2026-10-02T08:20:55.000Z'), updated_at: new Date('2026-10-02T08:20:55.000Z') }
 ];
 
 export const FALLBACK_PROJECTS: any[] = [
@@ -1077,6 +1081,194 @@ export const FALLBACK_PROJECTS: any[] = [
       verifiedOnHardware: true,
       sourceUrl: "https://www.reddit.com/r/vitahacks/comments/1wzdh5y/release_call_of_duty_world_at_war_zombies_port/"
     }
+  },
+  {
+    id: 46,
+    game_id: 46,
+    slug: "buckshot-roulette-vita",
+    reddit_url: "https://www.reddit.com/r/vitahacks/comments/1wn46c9/wip_buckshotrouletteportable_a_c_rewrite_of/",
+    display_name: "Buckshot Roulette (BuckshotRoulettePortable)",
+    current_stage: "early_wip",
+    lifecycle: "active",
+    summary: "Native C++ rewrite of Buckshot Roulette built on a custom lightweight engine targeting 60 FPS and vitaGL on PS Vita by JustAverage456.",
+    playability_notes: "Under active development. Core game logic and dealer sequence implemented in C++; rendering pipeline being wired to vitaGL.",
+    performance_notes: "Targeting smooth 60 FPS by bypassing Godot overhead via direct C++ implementation.",
+    first_seen_at: new Date('2026-09-22T08:58:38.000Z'),
+    last_activity_at: new Date('2026-09-22T08:58:38.000Z'),
+    released_at: null,
+    is_featured: false,
+    is_archived: false,
+    game_title: "Buckshot Roulette",
+    original_platform: "PC / Godot",
+    original_release_year: 2023,
+    technologies: [
+      "Native C++",
+      "Custom Engine",
+      "vitaGL"
+    ],
+    developers: [
+      {
+        id: 28,
+        role: "lead",
+        display_name: "JustAverage456",
+        slug: "justaverage456"
+      }
+    ],
+    stage_history: [
+      {
+        id: 460,
+        stage: "announced",
+        effective_at: new Date('2026-09-22T08:58:38.000Z'),
+        reason: "C++ rewrite announced on r/vitahacks"
+      },
+      {
+        id: 461,
+        stage: "early_wip",
+        effective_at: new Date('2026-09-22T08:58:38.000Z'),
+        reason: "Custom engine and logic implemented"
+      }
+    ]
+  },
+  {
+    id: 47,
+    game_id: 47,
+    slug: "the-force-engine-dark-forces-vita",
+    reddit_url: "https://www.reddit.com/r/vitahacks/comments/1wlrv6x/theforceenginevita_successfully_booting_into_the//",
+    display_name: "Star Wars: Dark Forces (TheForceEngine-VITA)",
+    current_stage: "booting",
+    lifecycle: "active",
+    summary: "Native PlayStation Vita port of The Force Engine, bringing LucasArts' classic Star Wars: Dark Forces Jedi engine to handheld by SnooLobsters311.",
+    playability_notes: "Successfully boots into interactive main menu with working inputs and UI rendering. Mission level rendering in development.",
+    performance_notes: "Menu runs at stable framerates; renderer optimization for 3D room sectors underway.",
+    first_seen_at: new Date('2026-09-20T20:24:59.000Z'),
+    last_activity_at: new Date('2026-09-20T20:24:59.000Z'),
+    released_at: null,
+    is_featured: false,
+    is_archived: false,
+    game_title: "Star Wars: Dark Forces",
+    original_platform: "PC / DOS",
+    original_release_year: 1995,
+    technologies: [
+      "The Force Engine",
+      "Native C++",
+      "vitaGL"
+    ],
+    developers: [
+      {
+        id: 29,
+        role: "lead",
+        display_name: "SnooLobsters311",
+        slug: "snoolobsters311"
+      }
+    ],
+    stage_history: [
+      {
+        id: 470,
+        stage: "announced",
+        effective_at: new Date('2026-09-20T20:24:59.000Z'),
+        reason: "Port development announced"
+      },
+      {
+        id: 471,
+        stage: "booting",
+        effective_at: new Date('2026-09-20T20:24:59.000Z'),
+        reason: "Main menu booting on Vita hardware"
+      }
+    ]
+  },
+  {
+    id: 48,
+    game_id: 48,
+    slug: "supertuxkart-vulkan-vita",
+    reddit_url: "https://www.reddit.com/r/vitahacks/comments/1wkf9m5/supertuxkart_wip_port_for_playstation_vita_with/",
+    display_name: "SuperTuxKart (Vulkan 1.1 Native)",
+    current_stage: "in_game",
+    lifecycle: "active",
+    summary: "Experimental native SuperTuxKart port for PlayStation Vita powered by a true low-level Vulkan 1.1 graphics driver by nyabsi.",
+    playability_notes: "Renders 3D tracks, kart models, and shaders through the new native Vulkan 1.1 driver.",
+    performance_notes: "Early driver pipeline testing; averaging 20–35 FPS with work ongoing on pipeline caching and vertex throughput.",
+    first_seen_at: new Date('2026-09-19T07:09:39.000Z'),
+    last_activity_at: new Date('2026-09-19T07:09:39.000Z'),
+    released_at: null,
+    is_featured: false,
+    is_archived: false,
+    game_title: "SuperTuxKart",
+    original_platform: "PC / Linux",
+    original_release_year: 2006,
+    technologies: [
+      "Vulkan 1.1",
+      "Native C++",
+      "SceGXM"
+    ],
+    developers: [
+      {
+        id: 30,
+        role: "lead",
+        display_name: "nyabsi",
+        slug: "nyabsi"
+      }
+    ],
+    stage_history: [
+      {
+        id: 480,
+        stage: "announced",
+        effective_at: new Date('2026-09-19T07:09:39.000Z'),
+        reason: "Vulkan driver and SuperTuxKart port announced"
+      },
+      {
+        id: 481,
+        stage: "in_game",
+        effective_at: new Date('2026-09-19T07:09:39.000Z'),
+        reason: "Rendering in-game on Vita hardware"
+      }
+    ]
+  },
+  {
+    id: 49,
+    game_id: 49,
+    slug: "insurgency-vita",
+    reddit_url: "https://www.reddit.com/r/vitahacks/comments/1wvob17/insurgency_vita_gameplay_showcase_information/",
+    display_name: "Insurgency Vita (Tactical FPS)",
+    current_stage: "in_game",
+    lifecycle: "active",
+    summary: "Handheld recreation of the tactical FPS Insurgency (2014) on PlayStation Vita featuring weapons, attachments, maps, and audio by OneDumbFox.",
+    playability_notes: "Map geometry, weapon handling, aiming down sights (ADS), and audio functioning on hardware.",
+    performance_notes: "Runs between 20–35 FPS; shader pipeline and geometry culling optimizations actively in progress.",
+    first_seen_at: new Date('2026-10-02T08:20:55.000Z'),
+    last_activity_at: new Date('2026-10-02T08:20:55.000Z'),
+    released_at: null,
+    is_featured: false,
+    is_archived: false,
+    game_title: "Insurgency",
+    original_platform: "PC / Source Engine",
+    original_release_year: 2014,
+    technologies: [
+      "Custom Engine",
+      "Native C++",
+      "vitaGL"
+    ],
+    developers: [
+      {
+        id: 31,
+        role: "lead",
+        display_name: "OneDumbFox",
+        slug: "onedumbfox"
+      }
+    ],
+    stage_history: [
+      {
+        id: 490,
+        stage: "announced",
+        effective_at: new Date('2026-10-02T08:20:55.000Z'),
+        reason: "Port development showcase announced"
+      },
+      {
+        id: 491,
+        stage: "in_game",
+        effective_at: new Date('2026-10-02T08:20:55.000Z'),
+        reason: "In-game gameplay showcase on Vita"
+      }
+    ]
   }
 ];
 
@@ -1239,6 +1431,62 @@ export const FALLBACK_DEVELOPERS: any[] = [
       {
         provider: "reddit",
         username: "devnoname120"
+      }
+    ],
+    projects: []
+  },
+  {
+    id: 28,
+    slug: "justaverage456",
+    display_name: "JustAverage456",
+    description: "Homebrew developer porting games to Vita via custom C++ rewrites.",
+    is_known_developer: true,
+    identities: [
+      {
+        provider: "reddit",
+        username: "JustAverage456"
+      }
+    ],
+    projects: []
+  },
+  {
+    id: 29,
+    slug: "snoolobsters311",
+    display_name: "SnooLobsters311",
+    description: "Homebrew engineer working on The Force Engine (Dark Forces) Vita port.",
+    is_known_developer: true,
+    identities: [
+      {
+        provider: "reddit",
+        username: "SnooLobsters311"
+      }
+    ],
+    projects: []
+  },
+  {
+    id: 30,
+    slug: "nyabsi",
+    display_name: "nyabsi",
+    description: "Low-level Vita graphics engineer developing native Vulkan 1.1 drivers and 3D ports.",
+    is_known_developer: true,
+    identities: [
+      {
+        provider: "reddit",
+        username: "nyabsi"
+      }
+    ],
+    projects: []
+  },
+  {
+    id: 31,
+    slug: "onedumbfox",
+    display_name: "OneDumbFox",
+    description: "Homebrew creator developing the tactical FPS Insurgency for PS Vita.",
+    is_known_developer: true,
+    identities: [
+      {
+        provider: "reddit",
+        username: "OneDumbFox"
       }
     ],
     projects: []
@@ -1534,6 +1782,86 @@ export const FALLBACK_UPDATES: any[] = [
         source_item_id: "src_waw_zombies_v1",
         relationship: "primary",
         canonical_url: "https://www.reddit.com/r/vitahacks/comments/1wzdh5y/release_call_of_duty_world_at_war_zombies_port/"
+      }
+    ]
+  },
+  {
+    id: "upd_buckshot_roulette",
+    port_project_id: 46,
+    project_slug: "buckshot-roulette-vita",
+    project_display_name: "Buckshot Roulette (BuckshotRoulettePortable)",
+    developer_display_name: "JustAverage456",
+    developer_slug: "justaverage456",
+    event_type: "early_progress",
+    title: "[WIP] BuckshotRoulettePortable - A C++ rewrite of Buckshot Roulette for the PSVITA Targeting 60fps",
+    summary: "JustAverage456 announced BuckshotRoulettePortable, a native C++ rewrite of Buckshot Roulette targeting 60 FPS on PS Vita via vitaGL.",
+    event_at: new Date('2026-09-22T08:58:38.000Z'),
+    verification_level: "developer_direct",
+    sources: [
+      {
+        source_item_id: "src_buckshot_reddit",
+        relationship: "primary",
+        canonical_url: "https://www.reddit.com/r/vitahacks/comments/1wn46c9/wip_buckshotrouletteportable_a_c_rewrite_of/"
+      }
+    ]
+  },
+  {
+    id: "upd_theforceengine",
+    port_project_id: 47,
+    project_slug: "the-force-engine-dark-forces-vita",
+    project_display_name: "Star Wars: Dark Forces (TheForceEngine-VITA)",
+    developer_display_name: "SnooLobsters311",
+    developer_slug: "snoolobsters311",
+    event_type: "first_boot",
+    title: "TheForceEngine-VITA - Successfully booting into the menu",
+    summary: "SnooLobsters311 achieved menu boot on PlayStation Vita for The Force Engine port of Star Wars: Dark Forces.",
+    event_at: new Date('2026-09-20T20:24:59.000Z'),
+    verification_level: "developer_direct",
+    sources: [
+      {
+        source_item_id: "src_forceengine_reddit",
+        relationship: "primary",
+        canonical_url: "https://www.reddit.com/r/vitahacks/comments/1wlrv6x/theforceenginevita_successfully_booting_into_the/"
+      }
+    ]
+  },
+  {
+    id: "upd_supertuxkart_vulkan",
+    port_project_id: 48,
+    project_slug: "supertuxkart-vulkan-vita",
+    project_display_name: "SuperTuxKart (Vulkan 1.1 Native)",
+    developer_display_name: "nyabsi",
+    developer_slug: "nyabsi",
+    event_type: "first_in_game",
+    title: "SuperTuxKart W.I.P port for PlayStation Vita with Vulkan",
+    summary: "nyabsi demonstrated SuperTuxKart running in-game on PS Vita powered by a native low-level Vulkan 1.1 driver.",
+    event_at: new Date('2026-09-19T07:09:39.000Z'),
+    verification_level: "developer_direct",
+    sources: [
+      {
+        source_item_id: "src_supertuxkart_reddit",
+        relationship: "primary",
+        canonical_url: "https://www.reddit.com/r/vitahacks/comments/1wkf9m5/supertuxkart_wip_port_for_playstation_vita_with/"
+      }
+    ]
+  },
+  {
+    id: "upd_insurgency_vita",
+    port_project_id: 49,
+    project_slug: "insurgency-vita",
+    project_display_name: "Insurgency Vita (Tactical FPS)",
+    developer_display_name: "OneDumbFox",
+    developer_slug: "onedumbfox",
+    event_type: "first_in_game",
+    title: "INSURGENCY: Vita - Gameplay Showcase & Information",
+    summary: "OneDumbFox showcased in-game tactical FPS gameplay and map rendering for Insurgency Vita.",
+    event_at: new Date('2026-10-02T08:20:55.000Z'),
+    verification_level: "developer_direct",
+    sources: [
+      {
+        source_item_id: "src_insurgency_reddit",
+        relationship: "primary",
+        canonical_url: "https://www.reddit.com/r/vitahacks/comments/1wvob17/insurgency_vita_gameplay_showcase_information/"
       }
     ]
   }

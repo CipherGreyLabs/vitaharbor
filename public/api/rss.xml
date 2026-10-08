@@ -5,7 +5,7 @@
     <link>https://vitaharbor.vercel.app/</link>
     <description>Community PlayStation Vita ports tracked from r/vitahacks + r/VitaPiracy + r/PSVitaHomebrew</description>
     <language>en-us</language>
-    <lastBuildDate>Thu, 08 Oct 2026 12:45:35 GMT</lastBuildDate>
+    <lastBuildDate>Thu, 08 Oct 2026 20:50:23 GMT</lastBuildDate>
     <item>
       <title><![CDATA[Zelda: Twilight Princess Vita - EARLY_WIP]]></title>
       <link>https://www.reddit.com/r/vitahacks/comments/1w9ys9f/the_new_psvita_ports/</link>
@@ -124,6 +124,34 @@
       <guid isPermaLink="false">cod-waw-zombies-vita</guid>
       <pubDate>Wed, 07 Oct 2026 08:00:00 GMT</pubDate>
       <description><![CDATA[Native PlayStation Vita port of Call of Duty: World at War Zombies based on the iOS release, developed and published by devnoname120. Hardware Status: Solid 30–60 FPS on Vita hardware. Custom vitaGL shader pipeline and memory allocation tuning active.]]></description>
+    </item>
+    <item>
+      <title><![CDATA[Buckshot Roulette (BuckshotRoulettePortable) - EARLY_WIP]]></title>
+      <link>https://www.reddit.com/r/vitahacks/comments/1wn46c9/wip_buckshotrouletteportable_a_c_rewrite_of/</link>
+      <guid isPermaLink="false">buckshot-roulette-vita</guid>
+      <pubDate>Tue, 22 Sep 2026 08:58:38 GMT</pubDate>
+      <description><![CDATA[Native C++ rewrite of Buckshot Roulette built on a custom lightweight engine targeting 60 FPS and vitaGL on PS Vita by JustAverage456. Hardware Status: Targeting smooth 60 FPS by bypassing Godot overhead via direct C++ implementation.]]></description>
+    </item>
+    <item>
+      <title><![CDATA[Star Wars: Dark Forces (TheForceEngine-VITA) - BOOTING]]></title>
+      <link>https://www.reddit.com/r/vitahacks/comments/1wlrv6x/theforceenginevita_successfully_booting_into_the//</link>
+      <guid isPermaLink="false">the-force-engine-dark-forces-vita</guid>
+      <pubDate>Sun, 20 Sep 2026 20:24:59 GMT</pubDate>
+      <description><![CDATA[Native PlayStation Vita port of The Force Engine, bringing LucasArts' classic Star Wars: Dark Forces Jedi engine to handheld by SnooLobsters311. Hardware Status: Menu runs at stable framerates; renderer optimization for 3D room sectors underway.]]></description>
+    </item>
+    <item>
+      <title><![CDATA[SuperTuxKart (Vulkan 1.1 Native) - IN_GAME]]></title>
+      <link>https://www.reddit.com/r/vitahacks/comments/1wkf9m5/supertuxkart_wip_port_for_playstation_vita_with/</link>
+      <guid isPermaLink="false">supertuxkart-vulkan-vita</guid>
+      <pubDate>Sat, 19 Sep 2026 07:09:39 GMT</pubDate>
+      <description><![CDATA[Experimental native SuperTuxKart port for PlayStation Vita powered by a true low-level Vulkan 1.1 graphics driver by nyabsi. Hardware Status: Early driver pipeline testing; averaging 20–35 FPS with work ongoing on pipeline caching and vertex throughput.]]></description>
+    </item>
+    <item>
+      <title><![CDATA[Insurgency Vita (Tactical FPS) - IN_GAME]]></title>
+      <link>https://www.reddit.com/r/vitahacks/comments/1wvob17/insurgency_vita_gameplay_showcase_information/</link>
+      <guid isPermaLink="false">insurgency-vita</guid>
+      <pubDate>Fri, 02 Oct 2026 08:20:55 GMT</pubDate>
+      <description><![CDATA[Handheld recreation of the tactical FPS Insurgency (2014) on PlayStation Vita featuring weapons, attachments, maps, and audio by OneDumbFox. Hardware Status: Runs between 20–35 FPS; shader pipeline and geometry culling optimizations actively in progress.]]></description>
     </item>
   </channel>
 </rss>

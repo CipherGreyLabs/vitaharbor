@@ -1785,7 +1785,7 @@
       "schema_version": 2,
       "id": "reddit-1wvob17",
       "external_id": "1wvob17",
-      "state": "VERIFIED_FOR_REVIEW",
+      "state": "PROMOTED",
       "state_history": [
         {
           "state": "DETECTED",
@@ -1811,6 +1811,13 @@
           "at": "2026-10-08T12:45:20.752Z",
           "actor": "vitaharbor-data-worker",
           "reason": "Verified active homebrew showcase"
+        },
+        {
+          "from": "VERIFIED_FOR_REVIEW",
+          "to": "PROMOTED",
+          "at": "2026-10-08T20:50:11.830Z",
+          "actor": "vitaharbor-data-worker",
+          "reason": "Promoted to curated fallbackData.ts as verified active in-development WIP homebrew port"
         }
       ],
       "source": {
@@ -3703,7 +3710,7 @@
       "schema_version": 2,
       "id": "reddit-1wn46c9",
       "external_id": "1wn46c9",
-      "state": "VERIFIED_FOR_REVIEW",
+      "state": "PROMOTED",
       "state_history": [
         {
           "state": "DETECTED",
@@ -3723,6 +3730,13 @@
           "at": "2026-10-08T12:45:20.752Z",
           "actor": "vitaharbor-data-worker",
           "reason": "Verified active C++ rewrite and engine development targeting Vita"
+        },
+        {
+          "from": "VERIFIED_FOR_REVIEW",
+          "to": "PROMOTED",
+          "at": "2026-10-08T20:50:11.830Z",
+          "actor": "vitaharbor-data-worker",
+          "reason": "Promoted to curated fallbackData.ts as verified active in-development WIP homebrew port"
         }
       ],
       "source": {
@@ -4365,7 +4379,7 @@
       "schema_version": 2,
       "id": "reddit-1wlrv6x",
       "external_id": "1wlrv6x",
-      "state": "VERIFIED_FOR_REVIEW",
+      "state": "PROMOTED",
       "state_history": [
         {
           "state": "DETECTED",
@@ -4397,6 +4411,13 @@
           "at": "2026-10-08T12:45:20.752Z",
           "actor": "vitaharbor-data-worker",
           "reason": "Verified active engine source port progress on Vita"
+        },
+        {
+          "from": "VERIFIED_FOR_REVIEW",
+          "to": "PROMOTED",
+          "at": "2026-10-08T20:50:11.830Z",
+          "actor": "vitaharbor-data-worker",
+          "reason": "Promoted to curated fallbackData.ts as verified active in-development WIP homebrew port"
         }
       ],
       "source": {
@@ -5219,7 +5240,7 @@
       "schema_version": 2,
       "id": "reddit-1wkf9m5",
       "external_id": "1wkf9m5",
-      "state": "VERIFIED_FOR_REVIEW",
+      "state": "PROMOTED",
       "state_history": [
         {
           "state": "DETECTED",
@@ -5245,6 +5266,13 @@
           "at": "2026-10-08T12:45:20.752Z",
           "actor": "vitaharbor-data-worker",
           "reason": "Verified active technical development on real hardware"
+        },
+        {
+          "from": "VERIFIED_FOR_REVIEW",
+          "to": "PROMOTED",
+          "at": "2026-10-08T20:50:11.830Z",
+          "actor": "vitaharbor-data-worker",
+          "reason": "Promoted to curated fallbackData.ts as verified active in-development WIP homebrew port"
         }
       ],
       "source": {
