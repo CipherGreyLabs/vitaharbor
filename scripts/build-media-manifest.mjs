@@ -195,32 +195,36 @@ const projectMediaDefs = {
     provenance_notes: "Resident Evil 4 key artwork; port repository recently established by Rinnegatamante."
   },
   "buckshot-roulette-vita": {
-    media_type: "title_card_fallback",
+    media_type: "official_promotional_artwork",
     is_vita_gameplay: false,
+    media_local_path: "/screenshots/buckshot-roulette.webp",
     media_source_url: "https://www.reddit.com/r/vitahacks/comments/1wn46c9/wip_buckshotrouletteportable_a_c_rewrite_of/",
-    media_label: "Dynamic Title Card",
-    provenance_notes: "Buckshot Roulette C++ rewrite in active development; uses dynamic title card."
+    media_label: "Official Artwork Banner",
+    provenance_notes: "Buckshot Roulette C++ rewrite in active development by JustAverage456."
   },
   "the-force-engine-dark-forces-vita": {
-    media_type: "title_card_fallback",
+    media_type: "official_promotional_artwork",
     is_vita_gameplay: false,
+    media_local_path: "/screenshots/dark-forces.webp",
     media_source_url: "https://www.reddit.com/r/vitahacks/comments/1wlrv6x/theforceenginevita_successfully_booting_into_the/",
-    media_label: "Dynamic Title Card",
-    provenance_notes: "The Force Engine (Star Wars Dark Forces) port menu boot in active development; uses dynamic title card."
+    media_label: "Official Artwork Banner",
+    provenance_notes: "The Force Engine (Star Wars Dark Forces) port menu boot by SnooLobsters311."
   },
   "supertuxkart-vulkan-vita": {
-    media_type: "title_card_fallback",
+    media_type: "official_promotional_artwork",
     is_vita_gameplay: false,
+    media_local_path: "/screenshots/supertuxkart.webp",
     media_source_url: "https://www.reddit.com/r/vitahacks/comments/1wkf9m5/supertuxkart_wip_port_for_playstation_vita_with/",
-    media_label: "Dynamic Title Card",
-    provenance_notes: "SuperTuxKart Vulkan 1.1 native driver WIP in development; uses dynamic title card."
+    media_label: "Official Artwork Banner",
+    provenance_notes: "SuperTuxKart Vulkan 1.1 native driver WIP by nyabsi."
   },
   "insurgency-vita": {
-    media_type: "title_card_fallback",
+    media_type: "official_promotional_artwork",
     is_vita_gameplay: false,
+    media_local_path: "/screenshots/insurgency.webp",
     media_source_url: "https://www.reddit.com/r/vitahacks/comments/1wvob17/insurgency_vita_gameplay_showcase_information/",
-    media_label: "Dynamic Title Card",
-    provenance_notes: "Insurgency tactical FPS Vita recreation in development; uses dynamic title card."
+    media_label: "Official Artwork Banner",
+    provenance_notes: "Insurgency tactical FPS Vita recreation by OneDumbFox."
   },
   "real-racing-3-vita": {
     media_type: "official_promotional_artwork",

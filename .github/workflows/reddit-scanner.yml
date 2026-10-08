@@ -106,3 +106,11 @@ jobs:
           PUBLISHED_SHA="$(git ls-remote origin refs/heads/main | cut -f1)"
           test "$PUBLISHED_SHA" = "$EXPECTED_SHA"
           echo "Published scanner commit verified: $PUBLISHED_SHA"
+
+      - name: Generate discovery & triage step summary
+        if: ${{ always() && (github.event_name == 'schedule' || github.event_name == 'workflow_dispatch') }}
+        run: |
+          echo "### VitaHarbor Scanner & Triage Report" >> "$GITHUB_STEP_SUMMARY"
+          echo '```' >> "$GITHUB_STEP_SUMMARY"
+          node scripts/triage-summary.mjs >> "$GITHUB_STEP_SUMMARY"
+          echo '```' >> "$GITHUB_STEP_SUMMARY"
