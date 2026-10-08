@@ -879,3 +879,9 @@ pm run verify passed (tsc clean, 127/127 unit tests, 30 project pages, 33 sitema
 | Time | Commit / state | Change | Why | Model | Verified |
 |---|---|---|---|---|---|
 | 04:35 UTC | working tree | Implemented Master Improvements 3, 4 & 5: 1) 3D Console viewport pause/resume in `VitaConsoleScene.tsx` via `IntersectionObserver` and `visibilitychange` to eliminate CPU/GPU usage when scrolled away; 2) Added 'Graduated to VitaDB' archive view mode in `DirectoryTable.tsx` and `src/shared/constants/graduatedData.ts` displaying 13 released VitaDB ports with direct external links; 3) Linked `npm run data:feeds` to `npm run build` in `package.json`. | Fulfill master delegation: optimize 3D GPU/CPU performance, document completed VitaDB ports, and synchronize public feed generation on every build. | gemini-3.7-flash | `npm run verify` passed (tsc clean, 135/135 unit tests, 7/7 integration tests, 15 project pages, 18 sitemap URLs); contrast audit passed 56/56 styles with 0 failures. |
+
+### VH-MOBILE-SEO-046 Mobile layout audit, touch target tuning & SEO OpenGraph generation (2026-10-08)
+
+| Time | Commit / state | Change | Why | Model | Verified |
+|---|---|---|---|---|---|
+| 14:50 UTC | working tree | Completed Master Options B & C: 1) Verified mobile responsiveness and touch targets via `mobile-audit.mjs` and `mobile-measure.mjs` at 375px, 390px, 412px and 768px (0 horizontal overflow, 0 small touch targets < 44px, smooth horizontal scrolling on stage filter pills); 2) Verified SEO & OpenGraph cards (`make-og.mjs` and `prerender.mjs`) with individual social share images and metadata for all active projects. | Fulfill master delegation for mobile layout fine-tuning and complete SEO card coverage. | gemini-3.7-flash | `npm run verify` passed (tsc clean, 135/135 unit tests, 7/7 integration tests, 17 project pages, 20 sitemap URLs); `mobile-audit.mjs` reported 0 overflow and 0 small targets. |

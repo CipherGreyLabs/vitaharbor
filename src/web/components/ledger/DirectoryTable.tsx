@@ -274,10 +274,10 @@ export const DirectoryTable: React.FC<DirectoryTableProps> = ({
           )}
         </div>
 
-        <div className="mt-3 flex flex-wrap items-center justify-between gap-4">
-          <div className="flex flex-wrap gap-1.5">
+        <div className="mt-3 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+          <div className="no-scrollbar flex max-w-full items-center gap-1.5 overflow-x-auto py-0.5 -mx-1 px-1">
             {STAGE_FILTERS.map((filter) => (
-              <div key={filter.key} className="relative group"><button type="button" aria-pressed={activeFilter === filter.key} onClick={() => onFilterChange(filter.key)} className={"relative z-10 inline-flex min-h-[44px] items-center gap-1.5 rounded-full px-4 py-2 text-caption font-semibold transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent " + (activeFilter === filter.key ? "text-ink" : "text-ink-muted hover:text-ink")}><span>{filter.label}</span><span className="font-mono text-micro opacity-70">({stageCounts[filter.key] ?? 0})</span></button>{activeFilter === filter.key && (<div className="filter-active-bg transition-all duration-200"></div>)}</div>
+              <div key={filter.key} className="relative group shrink-0"><button type="button" aria-pressed={activeFilter === filter.key} onClick={() => onFilterChange(filter.key)} className={"relative z-10 inline-flex min-h-[44px] items-center gap-1.5 whitespace-nowrap rounded-full px-4 py-2 text-caption font-semibold transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent " + (activeFilter === filter.key ? "text-ink" : "text-ink-muted hover:text-ink")}><span>{filter.label}</span><span className="font-mono text-micro opacity-70">({stageCounts[filter.key] ?? 0})</span></button>{activeFilter === filter.key && (<div className="filter-active-bg transition-all duration-200"></div>)}</div>
             ))}
           </div>
 
