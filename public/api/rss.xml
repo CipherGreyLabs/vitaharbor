@@ -5,7 +5,7 @@
     <link>https://vitaharbor.vercel.app/</link>
     <description>Community PlayStation Vita ports tracked from r/vitahacks + r/VitaPiracy + r/PSVitaHomebrew</description>
     <language>en-us</language>
-    <lastBuildDate>Thu, 08 Oct 2026 02:32:20 GMT</lastBuildDate>
+    <lastBuildDate>Thu, 08 Oct 2026 12:45:35 GMT</lastBuildDate>
     <item>
       <title><![CDATA[Zelda: Twilight Princess Vita - EARLY_WIP]]></title>
       <link>https://www.reddit.com/r/vitahacks/comments/1w9ys9f/the_new_psvita_ports/</link>
@@ -116,14 +116,14 @@
       <link>https://www.reddit.com/r/PSVitaHomebrew/comments/1ww8upq/release_real_racing_3_vita_beta_11/</link>
       <guid isPermaLink="false">real-racing-3-vita</guid>
       <pubDate>Tue, 06 Oct 2026 12:00:00 GMT</pubDate>
-      <description><![CDATA[Playable public beta release of Real Racing 3 ported to PS Vita via ARMv7 Android soloader wrapper by chutA7X. Hardware Status: Averaging 25–40 FPS with ongoing shader compilation and memory tuning.]]></description>
+      <description><![CDATA[Playable public beta release of Real Racing 3 ported to PS Vita via ARMv7 Android soloader wrapper by chutA7X. Hardware Status: 25–40 FPS on stock clocks; reaches solid 45–60 FPS with 500MHz CPU overclocking via PSVshell. Dynamic shader compilation and texture streaming active.]]></description>
     </item>
     <item>
       <title><![CDATA[Call of Duty: World at War Zombies (iOS) - PLAYABLE]]></title>
       <link>https://www.reddit.com/r/vitahacks/comments/1wzdh5y/release_call_of_duty_world_at_war_zombies_port/</link>
       <guid isPermaLink="false">cod-waw-zombies-vita</guid>
       <pubDate>Wed, 07 Oct 2026 08:00:00 GMT</pubDate>
-      <description><![CDATA[Native PlayStation Vita port of Call of Duty: World at War Zombies based on the iOS release, developed and published by devnoname120. Hardware Status: Smooth 30–60 FPS on PlayStation Vita hardware.]]></description>
+      <description><![CDATA[Native PlayStation Vita port of Call of Duty: World at War Zombies based on the iOS release, developed and published by devnoname120. Hardware Status: Solid 30–60 FPS on Vita hardware. Custom vitaGL shader pipeline and memory allocation tuning active.]]></description>
     </item>
   </channel>
 </rss>

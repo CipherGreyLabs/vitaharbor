@@ -28,7 +28,8 @@ export function generateTriageSummary() {
     QUARANTINED: [],
     PROMOTED: [],
     REJECTED: [],
-    BLOCKED_UNVERIFIED: []
+    BLOCKED_UNVERIFIED: [],
+    GRADUATED_TO_VITADB: []
   };
 
   for (const item of items) {
@@ -56,6 +57,7 @@ export function generateTriageSummary() {
   console.log("  - PROMOTED (Curated)  : " + byState.PROMOTED.length);
   console.log("  - REJECTED            : " + byState.REJECTED.length);
   console.log("  - BLOCKED_UNVERIFIED  : " + byState.BLOCKED_UNVERIFIED.length);
+  console.log("  - GRADUATED_TO_VITADB : " + byState.GRADUATED_TO_VITADB.length);
   console.log("================================================================================");
 
   console.log("\n[1] VERIFIED FOR REVIEW (Actionable - Awaiting Curation):");

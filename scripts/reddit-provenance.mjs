@@ -11,10 +11,11 @@ export const CANDIDATE_STATES = Object.freeze([
   "VERIFIED_FOR_REVIEW",
   "PROMOTED",
   "REJECTED",
-  "BLOCKED_UNVERIFIED"
+  "BLOCKED_UNVERIFIED",
+  "GRADUATED_TO_VITADB"
 ]);
 
-export const TERMINAL_STATES = Object.freeze(["PROMOTED", "REJECTED", "BLOCKED_UNVERIFIED"]);
+export const TERMINAL_STATES = Object.freeze(["PROMOTED", "REJECTED", "BLOCKED_UNVERIFIED", "GRADUATED_TO_VITADB"]);
 
 export function shouldRetainInternalCandidate(item, knownUrls) {
   const key = keyOf(item?.source?.canonical_url || item?.url);
@@ -99,12 +100,13 @@ const FINGERPRINT_STOP_WORDS = new Set([
 ]);
 
 const TRANSITIONS = Object.freeze({
-  DETECTED: Object.freeze(["QUARANTINED", "BLOCKED_UNVERIFIED"]),
-  QUARANTINED: Object.freeze(["VERIFIED_FOR_REVIEW", "REJECTED", "BLOCKED_UNVERIFIED"]),
-  VERIFIED_FOR_REVIEW: Object.freeze(["PROMOTED", "REJECTED", "BLOCKED_UNVERIFIED"]),
-  PROMOTED: Object.freeze([]),
+  DETECTED: Object.freeze(["QUARANTINED", "BLOCKED_UNVERIFIED", "GRADUATED_TO_VITADB"]),
+  QUARANTINED: Object.freeze(["VERIFIED_FOR_REVIEW", "REJECTED", "BLOCKED_UNVERIFIED", "GRADUATED_TO_VITADB"]),
+  VERIFIED_FOR_REVIEW: Object.freeze(["PROMOTED", "REJECTED", "BLOCKED_UNVERIFIED", "GRADUATED_TO_VITADB"]),
+  PROMOTED: Object.freeze(["GRADUATED_TO_VITADB"]),
   REJECTED: Object.freeze([]),
-  BLOCKED_UNVERIFIED: Object.freeze([])
+  BLOCKED_UNVERIFIED: Object.freeze([]),
+  GRADUATED_TO_VITADB: Object.freeze([])
 });
 
 function cleanText(value) {
