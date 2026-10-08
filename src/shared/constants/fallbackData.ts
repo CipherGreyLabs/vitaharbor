@@ -1,9 +1,6 @@
 import type { Game } from "../types";
 
 export const FALLBACK_GAMES: Game[] = [
-  { id: 1, slug: "medal-of-honor-allied-assault", title: "Medal of Honor: Allied Assault (OpenMoHAA)", normalized_title: "medal of honor: allied assault (openmohaa)", original_release_year: 2002, original_platform: "PC", created_at: new Date('2026-09-17T15:34:00.000Z'), updated_at: new Date('2026-09-17T15:34:00.000Z') },
-  { id: 2, slug: "super-smash-bros-melee", title: "Super Smash Bros. Melee", normalized_title: "super smash bros. melee", original_release_year: 2001, original_platform: "GameCube / Decomp", created_at: new Date('2026-09-17T15:34:00.000Z'), updated_at: new Date('2026-09-17T15:34:00.000Z') },
-  { id: 3, slug: "hollow-knight", title: "Hollow Knight", normalized_title: "hollow knight", original_release_year: 2017, original_platform: "PC / Unity", created_at: new Date('2026-09-17T15:34:00.000Z'), updated_at: new Date('2026-09-17T15:34:00.000Z') },
   { id: 4, slug: "zelda-twilight-princess", title: "The Legend of Zelda: Twilight Princess", normalized_title: "the legend of zelda: twilight princess", original_release_year: 2006, original_platform: "GameCube / Wii Decomp", created_at: new Date('2026-09-17T15:34:00.000Z'), updated_at: new Date('2026-09-17T15:34:00.000Z') },
   { id: 5, slug: "portal-vita", title: "Portal (Source Engine / N64 Decomp)", normalized_title: "portal (source engine / n64 decomp)", original_release_year: 2007, original_platform: "PC", created_at: new Date('2026-09-17T15:34:00.000Z'), updated_at: new Date('2026-09-17T15:34:00.000Z') },
   { id: 6, slug: "spider-man-total-mayhem", title: "Spider-Man: Total Mayhem", normalized_title: "spider-man: total mayhem", original_release_year: 2010, original_platform: "Android ARMv7", created_at: new Date('2026-09-17T15:34:00.000Z'), updated_at: new Date('2026-09-17T15:34:00.000Z') },
@@ -11,100 +8,21 @@ export const FALLBACK_GAMES: Game[] = [
   { id: 8, slug: "star-wars-kotor", title: "Star Wars: Knights of the Old Republic", normalized_title: "star wars: knights of the old republic", original_release_year: 2003, original_platform: "Xbox / PC / Android", created_at: new Date('2026-09-17T15:34:00.000Z'), updated_at: new Date('2026-09-17T15:34:00.000Z') },
   { id: 10, slug: "need-for-speed-hot-pursuit", title: "Need for Speed: Hot Pursuit", normalized_title: "need for speed: hot pursuit", original_release_year: 2010, original_platform: "Android", created_at: new Date('2026-09-17T15:34:00.000Z'), updated_at: new Date('2026-09-17T15:34:00.000Z') },
   { id: 12, slug: "renpy-8-runtime", title: "Ren'Py 8 Runtime (Python 3.11)", normalized_title: "ren'py 8 runtime (python 3.11)", original_release_year: 2024, original_platform: "Multiplatform Engine", created_at: new Date('2026-09-17T15:34:00.000Z'), updated_at: new Date('2026-09-17T15:34:00.000Z') },
-  { id: 13, slug: "zelda-ship-of-harkinian", title: "Zelda: Ship of Harkinian (Ocarina of Time)", normalized_title: "zelda: ship of harkinian (ocarina of time)", original_release_year: 1998, original_platform: "N64 / PC Decomp", created_at: new Date('2026-09-17T15:34:00.000Z'), updated_at: new Date('2026-09-17T15:34:00.000Z') },
   { id: 14, slug: "slingshot-racing", title: "Slingshot Racing", normalized_title: "slingshot racing", original_release_year: 2012, original_platform: "Android / iOS", created_at: new Date('2026-09-17T15:34:00.000Z'), updated_at: new Date('2026-09-17T15:34:00.000Z') },
-  { id: 15, slug: "fallout-2", title: "Fallout 2 Community Edition", normalized_title: "fallout 2 community edition", original_release_year: 1998, original_platform: "PC", created_at: new Date('2026-09-17T15:34:00.000Z'), updated_at: new Date('2026-09-17T15:34:00.000Z') },
   { id: 16, slug: "render96-sm64", title: "Render96 HD SM64 Vita", normalized_title: "render96 hd sm64 vita", original_release_year: 2020, original_platform: "PC Decomp", created_at: new Date('2026-09-17T15:34:00.000Z'), updated_at: new Date('2026-09-17T15:34:00.000Z') },
   { id: 17, slug: "celeste-classic", title: "Celeste Classic Vita", normalized_title: "celeste classic vita", original_release_year: 2016, original_platform: "PICO-8 / C", created_at: new Date('2026-09-17T15:34:00.000Z'), updated_at: new Date('2026-09-17T15:34:00.000Z') },
-  { id: 19, slug: "renegade-vita-demo-release", title: "Renegade Vita - Demo Release", normalized_title: "renegade vita - demo release", original_release_year: null, original_platform: "Unknown", created_at: new Date('2026-09-15T03:40:12.000Z'), updated_at: new Date('2026-09-17T15:34:20.988Z') },
   { id: 20, slug: "rc-cars", title: "RC Cars", normalized_title: "rc cars", original_release_year: null, original_platform: "PC", created_at: new Date('2026-09-18T11:09:43.000Z'), updated_at: new Date('2026-09-18T15:20:00.000Z') },
   { id: 22, slug: "call-of-duty-zombies", title: "Call of Duty: Zombies", normalized_title: "call of duty: zombies", original_release_year: 2009, original_platform: "iOS", created_at: new Date('2026-09-18T07:54:45.000Z'), updated_at: new Date('2026-09-18T07:54:45.000Z') },
   { id: 27, slug: "call-of-duty-4-modern-warfare", title: "Call of Duty 4: Modern Warfare", normalized_title: "call of duty 4 modern warfare", original_release_year: 2007, original_platform: "PS3", created_at: new Date('2026-09-12T00:00:00.000Z'), updated_at: new Date('2026-09-12T00:00:00.000Z') },
-  { id: 28, slug: "c-dogs-sdl-vita", title: "C-Dogs SDL Vita", normalized_title: "c-dogs sdl vita", original_release_year: null, original_platform: "DOS / SDL", created_at: new Date('2026-09-19T20:01:51.653Z'), updated_at: new Date('2026-09-19T20:01:51.653Z') },
-  { id: 34, slug: "resident-evil-4-vita", title: "Resident Evil 4", normalized_title: "resident evil 4", original_release_year: 2005, original_platform: "GameCube / PS2 / Android", created_at: new Date('2026-09-21T00:00:00.000Z'), updated_at: new Date('2026-09-25T17:04:11.000Z') }
-,
+  { id: 34, slug: "resident-evil-4-vita", title: "Resident Evil 4", normalized_title: "resident evil 4", original_release_year: 2005, original_platform: "GameCube / PS2 / Android", created_at: new Date('2026-09-21T00:00:00.000Z'), updated_at: new Date('2026-09-25T17:04:11.000Z') },
   { id: 35, slug: "real-racing-2", title: "Real Racing 2", normalized_title: "real racing 2", original_release_year: 2010, original_platform: "iOS / Android", created_at: new Date('2026-09-21T11:39:44.312Z'), updated_at: new Date('2026-09-21T11:39:44.312Z') },
-  { id: 36, slug: "diddy-kong-racing-golden-balloon", title: "Diddy Kong Racing (Golden Balloon)", normalized_title: "diddy kong racing (golden balloon)", original_release_year: 1997, original_platform: "N64 / Decomp", created_at: new Date('2026-09-09T02:45:26.000Z'), updated_at: new Date('2026-09-10T21:54:04.000Z') },
-  { id: 37, slug: "command-and-conquer-renegade", title: "Command & Conquer: Renegade", normalized_title: "command & conquer: renegade", original_release_year: 2002, original_platform: "PC", created_at: new Date('2026-09-08T12:49:38.000Z'), updated_at: new Date('2026-09-08T12:49:38.000Z') },
-  { id: 39, slug: "gta-liberty-city-stories", title: "GTA: Liberty City Stories (reStories)", normalized_title: "gta: liberty city stories (restories)", original_release_year: 2005, original_platform: "PSP / PS2", created_at: new Date('2026-09-29T16:07:11.000Z'), updated_at: new Date('2026-09-29T16:07:11.000Z') }
-,
-  { id: 40, slug: "test-drive-iii-vita", title: "Test Drive III", normalized_title: "test drive iii", original_release_year: null, original_platform: "Various", created_at: new Date('2026-09-30T19:00:45.000Z'), updated_at: new Date('2026-09-30T19:17:30.535Z') }
-,
-  { id: 41, slug: "test-drive-ii-vita", title: "Test Drive II", normalized_title: "test drive ii", original_release_year: null, original_platform: "Various", created_at: new Date('2026-09-30T14:36:07.000Z'), updated_at: new Date('2026-09-30T19:17:30.541Z') }
-,
+  { id: 39, slug: "gta-liberty-city-stories", title: "GTA: Liberty City Stories (reStories)", normalized_title: "gta: liberty city stories (restories)", original_release_year: 2005, original_platform: "PSP / PS2", created_at: new Date('2026-09-29T16:07:11.000Z'), updated_at: new Date('2026-09-29T16:07:11.000Z') },
+  { id: 40, slug: "test-drive-iii-vita", title: "Test Drive III", normalized_title: "test drive iii", original_release_year: null, original_platform: "Various", created_at: new Date('2026-09-30T19:00:45.000Z'), updated_at: new Date('2026-09-30T19:17:30.535Z') },
+  { id: 41, slug: "test-drive-ii-vita", title: "Test Drive II", normalized_title: "test drive ii", original_release_year: null, original_platform: "Various", created_at: new Date('2026-09-30T14:36:07.000Z'), updated_at: new Date('2026-09-30T19:17:30.541Z') },
   { id: 42, slug: "halo-combat-evolved", title: "Halo: Combat Evolved", normalized_title: "halo combat evolved", original_release_year: null, original_platform: "Xbox", created_at: new Date('2026-10-02T01:36:54.000Z'), updated_at: new Date('2026-10-06T22:49:53.000Z') }
 ];
 
 export const FALLBACK_PROJECTS: any[] = [
-  {
-    id: 1,
-    game_id: 1,
-    slug: "openmohaa-vita",
-    reddit_url: "https://www.reddit.com/r/vitahacks/comments/1tapf2b/wip_openmohaa_on_ps_vita_medal_of_honor_allied/",
-    display_name: "Medal of Honor: Allied Assault (OpenMoHAA)",
-    current_stage: "in_game",
-    lifecycle: "active",
-    summary: "Native PlayStation Vita port of OpenMoHAA. Geometry, sound engine, mission scripts, and player controls functioning.",
-    playability_notes: "Boots straight into gameplay. Normandy and training grounds render properly. Collision and sound effects active.",
-    performance_notes: "5–15 FPS in heavy outdoor combat scenes. Memory allocation optimization and shader pipeline tuning in progress.",
-    first_seen_at: new Date('2026-06-19T15:34:00.000Z'),
-    last_activity_at: new Date('2026-09-16T15:34:00.000Z'),
-    released_at: null,
-    is_featured: true,
-    is_archived: false,
-    game_title: "Medal of Honor: Allied Assault (OpenMoHAA)",
-    original_platform: "PC",
-    original_release_year: 2002,
-    technologies: ["OpenMoHAA", "Native C++", "vitaGL"],
-    developers: [{ id: 1, role: "lead", display_name: "OpenMoHAA Team", slug: "openmohaa-team" }]
-  },
-  {
-    id: 2,
-    game_id: 2,
-    slug: "smash-melee-vita",
-    reddit_url: "https://www.reddit.com/r/vitahacks/comments/1wivnp0/super_smash_melee/",
-    display_name: "Super Smash Bros. Melee Vita",
-    current_stage: "in_game",
-    lifecycle: "active",
-    summary: "Two independent experimental Melee ports are active: rob1n994 is moving Aurora to native SceGXM/vitaGL, while zm2283145 has an early decompilation-based build running in gameplay.",
-    playability_notes: "The zm2283145 build reaches gameplay with models and animations loaded from the original game data. The rob1n994 build is demonstrated on Vita hardware and has a public source repository.",
-    performance_notes: "Both builds remain work in progress. Rendering, textures, framebuffer effects, particles, stability, and substantial performance optimization are still required.",
-    first_seen_at: new Date('2026-07-04T15:34:00.000Z'),
-    last_activity_at: new Date('2026-09-17T14:31:58.000Z'),
-    released_at: null,
-    is_featured: true,
-    is_archived: false,
-    game_title: "Super Smash Bros. Melee",
-    original_platform: "GameCube / Decomp",
-    original_release_year: null,
-    technologies: ["Aurora", "SceGXM", "vitaGL", "Decompilation", "Native C++"],
-    developers: [
-      { id: 13, role: "lead", display_name: "rob1n994", slug: "rob1n994" },
-      { id: 14, role: "lead", display_name: "zm2283145", slug: "zm2283145" }
-    ]
-  },
-  {
-    id: 3,
-    game_id: 3,
-    slug: "hollow-knight-vita",
-    reddit_url: "https://www.reddit.com/r/vitahacks/comments/17eneu2/upcoming_hollow_knight_ps_vita_port_wip/",
-    display_name: "Hollow Knight Vita Port",
-    current_stage: "booting",
-    lifecycle: "active",
-    summary: "Complete C# / Unity decompilation translated into native ARM bytecode for the PS Vita.",
-    playability_notes: "Boots into title screen and menu. Dirtmouth intro zone loads with audio and initial player animations.",
-    performance_notes: "Memory exhaustion crashes during room transitions. Asset cache streaming currently being rewritten.",
-    first_seen_at: new Date('2026-05-20T15:34:00.000Z'),
-    last_activity_at: new Date('2026-09-14T15:34:00.000Z'),
-    released_at: null,
-    is_featured: true,
-    is_archived: false,
-    game_title: "Hollow Knight",
-    original_platform: "PC / Unity",
-    original_release_year: 2017,
-    technologies: ["Unity C# Decomp", "Native ARM"],
-    developers: [{ id: 3, role: "lead", display_name: "patnosDD", slug: "patnosdd" }]
-  },
   {
     id: 4,
     game_id: 4,
@@ -124,8 +42,38 @@ export const FALLBACK_PROJECTS: any[] = [
     game_title: "The Legend of Zelda: Twilight Princess",
     original_platform: "GameCube / Wii Decomp",
     original_release_year: 2006,
-    technologies: ["Decompilation", "vitaGL"],
-    developers: [{ id: 2, role: "lead", display_name: "Community Decomp Team", slug: "community-decomp" }]
+    technologies: [
+      "Decompilation",
+      "vitaGL"
+    ],
+    developers: [
+      {
+        id: 2,
+        role: "lead",
+        display_name: "Community Decomp Team",
+        slug: "community-decomp"
+      }
+    ],
+    stage_history: [
+      {
+        id: 40,
+        stage: "announced",
+        effective_at: new Date('2026-07-19T15:34:00.000Z'),
+        reason: "Port publicly announced / surfaced in community discussion"
+      },
+      {
+        id: 41,
+        stage: "research",
+        effective_at: new Date('2026-08-15T07:53:12.000Z'),
+        reason: "Reverse-engineering and shader research started"
+      },
+      {
+        id: 42,
+        stage: "early_wip",
+        effective_at: new Date('2026-09-11T00:12:24.000Z'),
+        reason: "First work-in-progress build compiled for ARM"
+      }
+    ]
   },
   {
     id: 5,
@@ -145,8 +93,50 @@ export const FALLBACK_PROJECTS: any[] = [
     game_title: "Portal (Source Engine / N64 Decomp)",
     original_platform: "PC",
     original_release_year: 2007,
-    technologies: ["Native C++", "OpenGL ES"],
-    developers: [{ id: 4, role: "lead", display_name: "DanielSant0s", slug: "danielsant0s" }]
+    technologies: [
+      "Native C++",
+      "OpenGL ES"
+    ],
+    developers: [
+      {
+        id: 4,
+        role: "lead",
+        display_name: "DanielSant0s",
+        slug: "danielsant0s"
+      }
+    ],
+    stage_history: [
+      {
+        id: 50,
+        stage: "announced",
+        effective_at: new Date('2026-06-09T15:34:00.000Z'),
+        reason: "Port publicly announced / surfaced in community discussion"
+      },
+      {
+        id: 51,
+        stage: "research",
+        effective_at: new Date('2026-07-01T17:29:12.000Z'),
+        reason: "Reverse-engineering and shader research started"
+      },
+      {
+        id: 52,
+        stage: "early_wip",
+        effective_at: new Date('2026-07-23T19:24:24.000Z'),
+        reason: "First work-in-progress build compiled for ARM"
+      },
+      {
+        id: 53,
+        stage: "booting",
+        effective_at: new Date('2026-08-14T21:19:36.000Z'),
+        reason: "Binary boots to the point of rendering output"
+      },
+      {
+        id: 54,
+        stage: "in_game",
+        effective_at: new Date('2026-09-05T23:14:48.000Z'),
+        reason: "Reached interactive in-game state on real hardware"
+      }
+    ]
   },
   {
     id: 6,
@@ -166,8 +156,50 @@ export const FALLBACK_PROJECTS: any[] = [
     game_title: "Spider-Man: Total Mayhem",
     original_platform: "Android ARMv7",
     original_release_year: 2010,
-    technologies: ["ARMv7 Wrapper", "vitaGL"],
-    developers: [{ id: 5, role: "lead", display_name: "Rinnegatamante", slug: "rinnegatamante" }]
+    technologies: [
+      "ARMv7 Wrapper",
+      "vitaGL"
+    ],
+    developers: [
+      {
+        id: 5,
+        role: "lead",
+        display_name: "Rinnegatamante",
+        slug: "rinnegatamante"
+      }
+    ],
+    stage_history: [
+      {
+        id: 60,
+        stage: "announced",
+        effective_at: new Date('2026-07-14T15:34:00.000Z'),
+        reason: "Port publicly announced / surfaced in community discussion"
+      },
+      {
+        id: 61,
+        stage: "research",
+        effective_at: new Date('2026-07-29T08:50:48.000Z'),
+        reason: "Reverse-engineering and shader research started"
+      },
+      {
+        id: 62,
+        stage: "early_wip",
+        effective_at: new Date('2026-08-13T02:07:36.000Z'),
+        reason: "First work-in-progress build compiled for ARM"
+      },
+      {
+        id: 63,
+        stage: "booting",
+        effective_at: new Date('2026-08-27T19:24:24.000Z'),
+        reason: "Binary boots to the point of rendering output"
+      },
+      {
+        id: 64,
+        stage: "in_game",
+        effective_at: new Date('2026-09-11T12:41:12.000Z'),
+        reason: "Reached interactive in-game state on real hardware"
+      }
+    ]
   },
   {
     id: 7,
@@ -187,8 +219,49 @@ export const FALLBACK_PROJECTS: any[] = [
     game_title: "The Simpsons: Hit & Run",
     original_platform: "PS2 / GameCube",
     original_release_year: 2003,
-    technologies: ["Reverse-Engineered Engine"],
-    developers: [{ id: 6, role: "lead", display_name: "Zeno99", slug: "zeno99" }]
+    technologies: [
+      "Reverse-Engineered Engine"
+    ],
+    developers: [
+      {
+        id: 6,
+        role: "lead",
+        display_name: "Zeno99",
+        slug: "zeno99"
+      }
+    ],
+    stage_history: [
+      {
+        id: 70,
+        stage: "announced",
+        effective_at: new Date('2026-05-30T15:34:00.000Z'),
+        reason: "Port publicly announced / surfaced in community discussion"
+      },
+      {
+        id: 71,
+        stage: "research",
+        effective_at: new Date('2026-06-24T06:12:24.000Z'),
+        reason: "Reverse-engineering and shader research started"
+      },
+      {
+        id: 72,
+        stage: "early_wip",
+        effective_at: new Date('2026-07-18T20:50:48.000Z'),
+        reason: "First work-in-progress build compiled for ARM"
+      },
+      {
+        id: 73,
+        stage: "booting",
+        effective_at: new Date('2026-08-12T11:29:12.000Z'),
+        reason: "Binary boots to the point of rendering output"
+      },
+      {
+        id: 74,
+        stage: "in_game",
+        effective_at: new Date('2026-09-06T02:07:36.000Z'),
+        reason: "Reached interactive in-game state on real hardware"
+      }
+    ]
   },
   {
     id: 8,
@@ -208,8 +281,37 @@ export const FALLBACK_PROJECTS: any[] = [
     game_title: "Star Wars: Knights of the Old Republic",
     original_platform: "Xbox / PC / Android",
     original_release_year: 2003,
-    technologies: ["ARMv7 Wrapper"],
-    developers: [{ id: 5, role: "lead", display_name: "Rinnegatamante", slug: "rinnegatamante" }]
+    technologies: [
+      "ARMv7 Wrapper"
+    ],
+    developers: [
+      {
+        id: 5,
+        role: "lead",
+        display_name: "Rinnegatamante",
+        slug: "rinnegatamante"
+      }
+    ],
+    stage_history: [
+      {
+        id: 80,
+        stage: "announced",
+        effective_at: new Date('2026-06-29T15:34:00.000Z'),
+        reason: "Port publicly announced / surfaced in community discussion"
+      },
+      {
+        id: 81,
+        stage: "research",
+        effective_at: new Date('2026-08-04T12:41:12.000Z'),
+        reason: "Reverse-engineering and shader research started"
+      },
+      {
+        id: 82,
+        stage: "early_wip",
+        effective_at: new Date('2026-09-09T09:48:24.000Z'),
+        reason: "First work-in-progress build compiled for ARM"
+      }
+    ]
   },
   {
     id: 10,
@@ -229,8 +331,56 @@ export const FALLBACK_PROJECTS: any[] = [
     game_title: "Need for Speed: Hot Pursuit",
     original_platform: "Android",
     original_release_year: 2010,
-    technologies: ["ARMv7 Wrapper", "vitaGL"],
-    developers: [{ id: 7, role: "lead", display_name: "hatoving", slug: "hatoving" }]
+    technologies: [
+      "ARMv7 Wrapper",
+      "vitaGL"
+    ],
+    developers: [
+      {
+        id: 7,
+        role: "lead",
+        display_name: "hatoving",
+        slug: "hatoving"
+      }
+    ],
+    stage_history: [
+      {
+        id: 100,
+        stage: "announced",
+        effective_at: new Date('2025-07-24T15:34:00.000Z'),
+        reason: "Port publicly announced / surfaced in community discussion"
+      },
+      {
+        id: 101,
+        stage: "research",
+        effective_at: new Date('2025-10-09T09:02:19.200Z'),
+        reason: "Reverse-engineering and shader research started"
+      },
+      {
+        id: 102,
+        stage: "early_wip",
+        effective_at: new Date('2025-12-25T02:30:38.400Z'),
+        reason: "First work-in-progress build compiled for ARM"
+      },
+      {
+        id: 103,
+        stage: "booting",
+        effective_at: new Date('2026-03-11T19:58:57.600Z'),
+        reason: "Binary boots to the point of rendering output"
+      },
+      {
+        id: 104,
+        stage: "in_game",
+        effective_at: new Date('2026-05-27T13:27:16.800Z'),
+        reason: "Reached interactive in-game state on real hardware"
+      },
+      {
+        id: 105,
+        stage: "playable",
+        effective_at: new Date('2026-08-12T06:55:36.000Z'),
+        reason: "Playable end to end with working controls and audio"
+      }
+    ]
   },
   {
     id: 12,
@@ -252,30 +402,69 @@ export const FALLBACK_PROJECTS: any[] = [
     game_title: "Ren'Py 8 Runtime (Python 3.11)",
     original_platform: "Multiplatform Engine",
     original_release_year: 2024,
-    technologies: ["Python 3.11", "SDL2", "vitaGL"],
-    developers: [{ id: 8, role: "lead", display_name: "SonicMastr", slug: "sonicmastr" }]
-  },
-  {
-    id: 13,
-    game_id: 13,
-    slug: "zelda-ship-of-harkinian-vita",
-    reddit_url: "https://www.reddit.com/r/VitaPiracy/comments/1leugn2/ocarina_of_time_ship_of_harkinian_is_out_now_baby/",
-    display_name: "Zelda: Ship of Harkinian (OOT)",
-    current_stage: "playable",
-    lifecycle: "active",
-    summary: "Direct native Vita build of the Harbour Masters reverse-engineered Ocarina of Time decompilation.",
-    playability_notes: "Full campaign completable with high FPS, widescreen 16:9 viewport, and gyro aiming.",
-    performance_notes: "Solid 30-60 FPS depending on enhancement settings.",
-    first_seen_at: new Date('2025-09-22T15:34:00.000Z'),
-    last_activity_at: new Date('2026-09-13T15:34:00.000Z'),
-    released_at: new Date('2026-01-20T15:34:00.000Z'),
-    is_featured: false,
-    is_archived: false,
-    game_title: "Zelda: Ship of Harkinian (Ocarina of Time)",
-    original_platform: "N64 / PC Decomp",
-    original_release_year: 1998,
-    technologies: ["Native C++", "libultraship", "vitaGL"],
-    developers: [{ id: 9, role: "lead", display_name: "Northfear", slug: "northfear" }]
+    technologies: [
+      "Python 3.11",
+      "SDL2",
+      "vitaGL"
+    ],
+    developers: [
+      {
+        id: 8,
+        role: "lead",
+        display_name: "SonicMastr",
+        slug: "sonicmastr"
+      }
+    ],
+    stage_history: [
+      {
+        id: 120,
+        stage: "announced",
+        effective_at: new Date('2026-02-09T15:34:00.000Z'),
+        reason: "Port publicly announced / surfaced in community discussion"
+      },
+      {
+        id: 121,
+        stage: "research",
+        effective_at: new Date('2026-03-10T10:21:18.857Z'),
+        reason: "Reverse-engineering and shader research started"
+      },
+      {
+        id: 122,
+        stage: "early_wip",
+        effective_at: new Date('2026-04-08T05:08:37.714Z'),
+        reason: "First work-in-progress build compiled for ARM"
+      },
+      {
+        id: 123,
+        stage: "booting",
+        effective_at: new Date('2026-05-06T23:55:56.571Z'),
+        reason: "Binary boots to the point of rendering output"
+      },
+      {
+        id: 124,
+        stage: "in_game",
+        effective_at: new Date('2026-06-04T18:43:15.428Z'),
+        reason: "Reached interactive in-game state on real hardware"
+      },
+      {
+        id: 125,
+        stage: "playable",
+        effective_at: new Date('2026-07-03T13:30:34.285Z'),
+        reason: "Playable end to end with working controls and audio"
+      },
+      {
+        id: 126,
+        stage: "completable",
+        effective_at: new Date('2026-08-01T08:17:53.142Z'),
+        reason: "Completable: full progression verified by testers"
+      },
+      {
+        id: 127,
+        stage: "released",
+        effective_at: new Date('2026-08-30T03:05:12.000Z'),
+        reason: "Public release build published"
+      }
+    ]
   },
   {
     id: 14,
@@ -295,29 +484,68 @@ export const FALLBACK_PROJECTS: any[] = [
     game_title: "Slingshot Racing",
     original_platform: "Android / iOS",
     original_release_year: 2012,
-    technologies: ["ARMv7 Wrapper", "vitaGL"],
-    developers: [{ id: 5, role: "lead", display_name: "Rinnegatamante", slug: "rinnegatamante" }]
-  },
-  {
-    id: 15,
-    game_id: 15,
-    slug: "fallout-2-ce-vita",
-    display_name: "Fallout 2 Community Edition",
-    current_stage: "playable",
-    lifecycle: "active",
-    summary: "Open-source recreation of Fallout 2 engine compiled natively for PlayStation Vita.",
-    playability_notes: "Fully playable with touch controls for cursor emulation.",
-    performance_notes: "Smooth 60 FPS in exploration and combat.",
-    first_seen_at: new Date('2026-04-10T15:34:00.000Z'),
-    last_activity_at: new Date('2026-09-12T15:34:00.000Z'),
-    released_at: new Date('2026-06-09T15:34:00.000Z'),
-    is_featured: false,
-    is_archived: false,
-    game_title: "Fallout 2 Community Edition",
-    original_platform: "PC",
-    original_release_year: 1998,
-    technologies: ["Native C++"],
-    developers: [{ id: 10, role: "lead", display_name: "alexbatalov", slug: "alexbatalov" }]
+    technologies: [
+      "ARMv7 Wrapper",
+      "vitaGL"
+    ],
+    developers: [
+      {
+        id: 5,
+        role: "lead",
+        display_name: "Rinnegatamante",
+        slug: "rinnegatamante"
+      }
+    ],
+    stage_history: [
+      {
+        id: 140,
+        stage: "announced",
+        effective_at: new Date('2026-06-14T15:34:00.000Z'),
+        reason: "Port publicly announced / surfaced in community discussion"
+      },
+      {
+        id: 141,
+        stage: "research",
+        effective_at: new Date('2026-06-26T20:54:54.857Z'),
+        reason: "Reverse-engineering and shader research started"
+      },
+      {
+        id: 142,
+        stage: "early_wip",
+        effective_at: new Date('2026-07-09T02:15:49.714Z'),
+        reason: "First work-in-progress build compiled for ARM"
+      },
+      {
+        id: 143,
+        stage: "booting",
+        effective_at: new Date('2026-07-21T07:36:44.571Z'),
+        reason: "Binary boots to the point of rendering output"
+      },
+      {
+        id: 144,
+        stage: "in_game",
+        effective_at: new Date('2026-08-02T12:57:39.428Z'),
+        reason: "Reached interactive in-game state on real hardware"
+      },
+      {
+        id: 145,
+        stage: "playable",
+        effective_at: new Date('2026-08-14T18:18:34.285Z'),
+        reason: "Playable end to end with working controls and audio"
+      },
+      {
+        id: 146,
+        stage: "completable",
+        effective_at: new Date('2026-08-26T23:39:29.142Z'),
+        reason: "Completable: full progression verified by testers"
+      },
+      {
+        id: 147,
+        stage: "released",
+        effective_at: new Date('2026-09-08T05:00:24.000Z'),
+        reason: "Public release build published"
+      }
+    ]
   },
   {
     id: 16,
@@ -337,8 +565,68 @@ export const FALLBACK_PROJECTS: any[] = [
     game_title: "Render96 HD SM64 Vita",
     original_platform: "PC Decomp",
     original_release_year: 2020,
-    technologies: ["Native C++", "OpenGL"],
-    developers: [{ id: 11, role: "lead", display_name: "fgsfds", slug: "fgsfds" }]
+    technologies: [
+      "Native C++",
+      "OpenGL"
+    ],
+    developers: [
+      {
+        id: 11,
+        role: "lead",
+        display_name: "fgsfds",
+        slug: "fgsfds"
+      }
+    ],
+    stage_history: [
+      {
+        id: 160,
+        stage: "announced",
+        effective_at: new Date('2025-11-11T15:34:00.000Z'),
+        reason: "Port publicly announced / surfaced in community discussion"
+      },
+      {
+        id: 161,
+        stage: "research",
+        effective_at: new Date('2025-12-20T10:04:51.428Z'),
+        reason: "Reverse-engineering and shader research started"
+      },
+      {
+        id: 162,
+        stage: "early_wip",
+        effective_at: new Date('2026-01-28T04:35:42.857Z'),
+        reason: "First work-in-progress build compiled for ARM"
+      },
+      {
+        id: 163,
+        stage: "booting",
+        effective_at: new Date('2026-03-07T23:06:34.285Z'),
+        reason: "Binary boots to the point of rendering output"
+      },
+      {
+        id: 164,
+        stage: "in_game",
+        effective_at: new Date('2026-04-15T17:37:25.714Z'),
+        reason: "Reached interactive in-game state on real hardware"
+      },
+      {
+        id: 165,
+        stage: "playable",
+        effective_at: new Date('2026-05-24T12:08:17.142Z'),
+        reason: "Playable end to end with working controls and audio"
+      },
+      {
+        id: 166,
+        stage: "completable",
+        effective_at: new Date('2026-07-02T06:39:08.571Z'),
+        reason: "Completable: full progression verified by testers"
+      },
+      {
+        id: 167,
+        stage: "released",
+        effective_at: new Date('2026-08-10T01:10:00.000Z'),
+        reason: "Public release build published"
+      }
+    ]
   },
   {
     id: 17,
@@ -358,31 +646,68 @@ export const FALLBACK_PROJECTS: any[] = [
     game_title: "Celeste Classic Vita",
     original_platform: "PICO-8 / C",
     original_release_year: 2016,
-    technologies: ["Native C", "SDL2"],
-    developers: [{ id: 12, role: "lead", display_name: "MyLegGuy", slug: "mylegguy" }]
-  },
-  {
-    id: 19,
-    game_id: 19,
-    slug: "renegade-vita-demo-release",
-    reddit_url: "https://www.reddit.com/r/vitahacks/comments/1wgp613/renegade_vita_demo_release/",
-    display_name: "Renegade Vita - Demo Release",
-    current_stage: "announced",
-    lifecycle: "active",
-    summary: "A Reddit post announced a Renegade Vita demo. VitaHarbor has not independently tested it on hardware.",
-    playability_notes: null,
-    performance_notes: null,
-    first_seen_at: new Date('2026-09-15T03:40:12.000Z'),
-    last_activity_at: new Date('2026-09-17T15:34:20.988Z'),
-    released_at: null,
-    is_featured: false,
-    is_archived: false,
-    verification: "detected",
-    game_title: "Renegade Vita - Demo Release",
-    original_platform: "Unknown",
-    original_release_year: null,
-    technologies: [],
-    developers: []
+    technologies: [
+      "Native C",
+      "SDL2"
+    ],
+    developers: [
+      {
+        id: 12,
+        role: "lead",
+        display_name: "MyLegGuy",
+        slug: "mylegguy"
+      }
+    ],
+    stage_history: [
+      {
+        id: 170,
+        stage: "announced",
+        effective_at: new Date('2025-08-23T15:34:00.000Z'),
+        reason: "Port publicly announced / surfaced in community discussion"
+      },
+      {
+        id: 171,
+        stage: "research",
+        effective_at: new Date('2025-10-09T23:06:34.285Z'),
+        reason: "Reverse-engineering and shader research started"
+      },
+      {
+        id: 172,
+        stage: "early_wip",
+        effective_at: new Date('2025-11-26T06:39:08.571Z'),
+        reason: "First work-in-progress build compiled for ARM"
+      },
+      {
+        id: 173,
+        stage: "booting",
+        effective_at: new Date('2026-01-12T14:11:42.857Z'),
+        reason: "Binary boots to the point of rendering output"
+      },
+      {
+        id: 174,
+        stage: "in_game",
+        effective_at: new Date('2026-02-28T21:44:17.142Z'),
+        reason: "Reached interactive in-game state on real hardware"
+      },
+      {
+        id: 175,
+        stage: "playable",
+        effective_at: new Date('2026-04-17T05:16:51.428Z'),
+        reason: "Playable end to end with working controls and audio"
+      },
+      {
+        id: 176,
+        stage: "completable",
+        effective_at: new Date('2026-06-03T12:49:25.714Z'),
+        reason: "Completable: full progression verified by testers"
+      },
+      {
+        id: 177,
+        stage: "released",
+        effective_at: new Date('2026-07-20T20:22:00.000Z'),
+        reason: "Public release build published"
+      }
+    ]
   },
   {
     id: 20,
@@ -408,7 +733,45 @@ export const FALLBACK_PROJECTS: any[] = [
     original_platform: "PC",
     original_release_year: null,
     technologies: [],
-    developers: []
+    developers: [],
+    stage_history: [
+      {
+        id: 200,
+        stage: "announced",
+        effective_at: new Date('2026-09-18T11:09:43.000Z'),
+        reason: "Port publicly announced / surfaced in community discussion"
+      },
+      {
+        id: 201,
+        stage: "research",
+        effective_at: new Date('2026-09-18T11:09:43.000Z'),
+        reason: "Reverse-engineering and shader research started"
+      },
+      {
+        id: 202,
+        stage: "early_wip",
+        effective_at: new Date('2026-09-18T11:09:43.000Z'),
+        reason: "First work-in-progress build compiled for ARM"
+      },
+      {
+        id: 203,
+        stage: "booting",
+        effective_at: new Date('2026-09-18T11:09:43.000Z'),
+        reason: "Binary boots to the point of rendering output"
+      },
+      {
+        id: 204,
+        stage: "in_game",
+        effective_at: new Date('2026-09-18T11:09:43.000Z'),
+        reason: "Reached interactive in-game state on real hardware"
+      },
+      {
+        id: 205,
+        stage: "playable",
+        effective_at: new Date('2026-09-18T11:09:43.000Z'),
+        reason: "Playable end to end with working controls and audio"
+      }
+    ]
   },
   {
     id: 22,
@@ -430,8 +793,18 @@ export const FALLBACK_PROJECTS: any[] = [
     game_title: "Call of Duty: Zombies",
     original_platform: "iOS",
     original_release_year: 2009,
-    technologies: ["iOS loader"],
-    developers: []
+    technologies: [
+      "iOS loader"
+    ],
+    developers: [],
+    stage_history: [
+      {
+        id: 220,
+        stage: "announced",
+        effective_at: new Date('2026-09-18T07:54:45.000Z'),
+        reason: "Port publicly announced / surfaced in community discussion"
+      }
+    ]
   },
   {
     id: 27,
@@ -454,31 +827,39 @@ export const FALLBACK_PROJECTS: any[] = [
     original_platform: "PS3",
     original_release_year: 2007,
     technologies: [],
-    developers: []
-  },
-  {
-    id: 28,
-    game_id: 28,
-    slug: "c-dogs-sdl-vita",
-    reddit_url: "https://www.reddit.com/r/vitahacks/comments/1wkw14c/prerelease_cdogs_sdl_port_for_ps_vita_pstv/",
-    repo_url: "https://github.com/abduct/cdogs-sdl",
-    display_name: "C-Dogs SDL Vita",
-    current_stage: "early_wip",
-    lifecycle: "active",
-    summary: "Public C-Dogs SDL Vita/PSTV pre-release posted by abby_6112. The source thread reports a native build tested on Vita/PSTV hardware and links a GitHub preview release; LAN multiplayer work is still in progress.",
-    playability_notes: "The author reports a native Vita/PSTV build and requests real-hardware testing; no independent hardware report is recorded in this ledger.",
-    performance_notes: null,
-    first_seen_at: new Date('2026-09-19T20:01:51.653Z'),
-    last_activity_at: new Date('2026-09-19T20:01:51.653Z'),
-    released_at: null,
-    is_featured: false,
-    is_archived: false,
-    verification: "developer_direct",
-    game_title: "C-Dogs SDL",
-    original_platform: "DOS / SDL",
-    original_release_year: null,
-    technologies: ["Native Vita build", "SDL"],
-    developers: []
+    developers: [],
+    stage_history: [
+      {
+        id: 270,
+        stage: "announced",
+        effective_at: new Date('2026-09-12T00:00:00.000Z'),
+        reason: "Port publicly announced / surfaced in community discussion"
+      },
+      {
+        id: 271,
+        stage: "research",
+        effective_at: new Date('2026-09-12T00:00:00.000Z'),
+        reason: "Reverse-engineering and shader research started"
+      },
+      {
+        id: 272,
+        stage: "early_wip",
+        effective_at: new Date('2026-09-12T00:00:00.000Z'),
+        reason: "First work-in-progress build compiled for ARM"
+      },
+      {
+        id: 273,
+        stage: "booting",
+        effective_at: new Date('2026-09-12T00:00:00.000Z'),
+        reason: "Binary boots to the point of rendering output"
+      },
+      {
+        id: 274,
+        stage: "in_game",
+        effective_at: new Date('2026-09-12T00:00:00.000Z'),
+        reason: "Reached interactive in-game state on real hardware"
+      }
+    ]
   },
   {
     id: 34,
@@ -501,10 +882,33 @@ export const FALLBACK_PROJECTS: any[] = [
     game_title: "Resident Evil 4",
     original_platform: "GameCube / PS2 / Android",
     original_release_year: 2005,
-    technologies: ["ARMv7 Wrapper / Soloader", "vitaGL"],
-    developers: [{ id: 5, role: "lead", display_name: "Rinnegatamante", slug: "rinnegatamante" }]
-  }
-,
+    technologies: [
+      "ARMv7 Wrapper / Soloader",
+      "vitaGL"
+    ],
+    developers: [
+      {
+        id: 5,
+        role: "lead",
+        display_name: "Rinnegatamante",
+        slug: "rinnegatamante"
+      }
+    ],
+    stage_history: [
+      {
+        id: 340,
+        stage: "announced",
+        effective_at: new Date('2026-09-21T00:00:00.000Z'),
+        reason: "Port publicly announced / surfaced in community discussion"
+      },
+      {
+        id: 341,
+        stage: "research",
+        effective_at: new Date('2026-09-25T08:01:26.920Z'),
+        reason: "Reverse-engineering and shader research started"
+      }
+    ]
+  },
   {
     id: 35,
     game_id: 35,
@@ -526,67 +930,32 @@ export const FALLBACK_PROJECTS: any[] = [
     game_title: "Real Racing 2",
     original_platform: "iOS / Android",
     original_release_year: 2010,
-    technologies: ["ARMv7 Wrapper", "vitaGL", "OpenGLES"],
-    developers: [{ id: 23, role: "lead", display_name: "chutA7X", slug: "chuta7x" }],
+    technologies: [
+      "ARMv7 Wrapper",
+      "vitaGL",
+      "OpenGLES"
+    ],
+    developers: [
+      {
+        id: 23,
+        role: "lead",
+        display_name: "chutA7X",
+        slug: "chuta7x"
+      }
+    ],
     stage_history: [
-      { id: 350, stage: "announced", effective_at: new Date('2026-09-21T11:39:44.312Z'), reason: "Port development and public beta announced" },
-      { id: 351, stage: "playable", effective_at: new Date('2026-09-21T11:39:44.312Z'), reason: "Public beta build playable on hardware" }
-    ]
-  },
-  {
-    id: 36,
-    game_id: 36,
-    slug: "diddy-kong-racing-golden-balloon",
-    reddit_url: "https://www.reddit.com/r/vitahacks/comments/1wcx3o6/golden_balloon_v169_diddy_kong_racing_source_port/",
-    repo_url: "https://github.com/zm2283145/goldenballoon-vita-port",
-    display_name: "Diddy Kong Racing 64 (Golden Balloon)",
-    current_stage: "playable",
-    lifecycle: "active",
-    summary: "Native source port based on the Diddy Kong Racing decompilation running full Adventure playthrough with custom visuals and Vita trophies.",
-    playability_notes: "Adventure mode fully playable with 98 custom trophies, save editor, extra racers, and remappable controls.",
-    performance_notes: "Fluid framerate via native C and vitaGL renderer.",
-    first_seen_at: new Date('2026-09-09T02:45:26.000Z'),
-    last_activity_at: new Date('2026-09-10T21:54:04.000Z'),
-    released_at: null,
-    is_featured: true,
-    is_archived: false,
-    verification: "developer_direct",
-    game_title: "Diddy Kong Racing (Golden Balloon)",
-    original_platform: "N64 / Decomp",
-    original_release_year: 1997,
-    technologies: ["Native C", "N64 Decompilation", "vitaGL", "Restored Visuals"],
-    developers: [{ id: 14, role: "lead", display_name: "zm2283145", slug: "zm2283145" }],
-    stage_history: [
-      { id: 360, stage: "announced", effective_at: new Date('2026-09-09T02:45:26.000Z'), reason: "Initial GoldenBalloon Vita port release announced" },
-      { id: 361, stage: "playable", effective_at: new Date('2026-09-10T21:54:04.000Z'), reason: "v1.6.9 and v1.7.1 updates provide complete playable adventure" }
-    ]
-  },
-  {
-    id: 37,
-    game_id: 37,
-    slug: "cnc-renegade-vita",
-    reddit_url: "https://www.reddit.com/r/vitahacks/comments/1waninh/cnc_renegade_native_ps_vita_port/",
-    repo_url: null,
-    display_name: "Command & Conquer: Renegade",
-    current_stage: "early_wip",
-    lifecycle: "active",
-    summary: "Native PlayStation Vita port of Command & Conquer: Renegade, bringing the classic C&C FPS to handheld.",
-    playability_notes: "Early WIP development and engine bringup targeting native handheld controls and rendering.",
-    performance_notes: "Work in progress targeting playable framerates on native Vita hardware.",
-    first_seen_at: new Date('2026-09-08T12:49:38.000Z'),
-    last_activity_at: new Date('2026-09-08T12:49:38.000Z'),
-    released_at: null,
-    is_featured: false,
-    is_archived: false,
-    verification: "community_report",
-    game_title: "Command & Conquer: Renegade",
-    original_platform: "PC",
-    original_release_year: 2002,
-    technologies: ["Native C++", "Open-Source Engine", "vitaGL"],
-    developers: [{ id: 24, role: "lead", display_name: "Renegade Team", slug: "renegade-team" }],
-    stage_history: [
-      { id: 370, stage: "announced", effective_at: new Date('2026-09-08T12:49:38.000Z'), reason: "Community announcement of native PS Vita port development" },
-      { id: 371, stage: "early_wip", effective_at: new Date('2026-09-08T12:49:38.000Z'), reason: "Engine bringup and initial VitaSDK/vitaGL build tests" }
+      {
+        id: 350,
+        stage: "announced",
+        effective_at: new Date('2026-09-21T11:39:44.312Z'),
+        reason: "Port development and public beta announced"
+      },
+      {
+        id: 351,
+        stage: "playable",
+        effective_at: new Date('2026-09-21T11:39:44.312Z'),
+        reason: "Public beta build playable on hardware"
+      }
     ]
   },
   {
@@ -610,14 +979,35 @@ export const FALLBACK_PROJECTS: any[] = [
     game_title: "GTA: Liberty City Stories (reStories)",
     original_platform: "PSP / PS2",
     original_release_year: 2005,
-    technologies: ["Native C++", "reStories Decompilation", "vitaGL", "Hardware Shaders"],
-    developers: [{ id: 26, role: "lead", display_name: "fauxrouge", slug: "fauxrouge" }],
+    technologies: [
+      "Native C++",
+      "reStories Decompilation",
+      "vitaGL",
+      "Hardware Shaders"
+    ],
+    developers: [
+      {
+        id: 26,
+        role: "lead",
+        display_name: "fauxrouge",
+        slug: "fauxrouge"
+      }
+    ],
     stage_history: [
-      { id: 390, stage: "announced", effective_at: new Date('2026-09-29T16:07:11.000Z'), reason: "Port development announced by developer" },
-      { id: 391, stage: "playable", effective_at: new Date('2026-09-29T16:07:11.000Z'), reason: "v01.15 release published with full intro, sound, and installable VPK" }
+      {
+        id: 390,
+        stage: "announced",
+        effective_at: new Date('2026-09-29T16:07:11.000Z'),
+        reason: "Port development announced by developer"
+      },
+      {
+        id: 391,
+        stage: "playable",
+        effective_at: new Date('2026-09-29T16:07:11.000Z'),
+        reason: "v01.15 release published with full intro, sound, and installable VPK"
+      }
     ]
-  }
-,
+  },
   {
     id: 40,
     game_id: 40,
@@ -639,13 +1029,26 @@ export const FALLBACK_PROJECTS: any[] = [
     game_title: "Test Drive III",
     original_platform: "Various",
     original_release_year: null,
-    technologies: ["VitaSDK"],
-    developers: [{ id: 40, role: "lead", display_name: "gainusha", slug: "gainusha" }],
+    technologies: [
+      "VitaSDK"
+    ],
+    developers: [
+      {
+        id: 40,
+        role: "lead",
+        display_name: "gainusha",
+        slug: "gainusha"
+      }
+    ],
     stage_history: [
-      { id: 400, stage: "playable", effective_at: new Date('2026-09-30T19:00:45.000Z'), reason: "Verified source port release/development on GitHub" }
+      {
+        id: 400,
+        stage: "playable",
+        effective_at: new Date('2026-09-30T19:00:45.000Z'),
+        reason: "Verified source port release/development on GitHub"
+      }
     ]
-  }
-,
+  },
   {
     id: 41,
     game_id: 41,
@@ -667,13 +1070,26 @@ export const FALLBACK_PROJECTS: any[] = [
     game_title: "Test Drive II",
     original_platform: "Various",
     original_release_year: null,
-    technologies: ["VitaSDK"],
-    developers: [{ id: 41, role: "lead", display_name: "gainusha", slug: "gainusha" }],
+    technologies: [
+      "VitaSDK"
+    ],
+    developers: [
+      {
+        id: 41,
+        role: "lead",
+        display_name: "gainusha",
+        slug: "gainusha"
+      }
+    ],
     stage_history: [
-      { id: 410, stage: "playable", effective_at: new Date('2026-09-30T14:36:07.000Z'), reason: "Verified source port release/development on GitHub" }
+      {
+        id: 410,
+        stage: "playable",
+        effective_at: new Date('2026-09-30T14:36:07.000Z'),
+        reason: "Verified source port release/development on GitHub"
+      }
     ]
-  }
-,
+  },
   {
     id: 43,
     game_id: 42,
@@ -698,39 +1114,143 @@ export const FALLBACK_PROJECTS: any[] = [
     screenshot_url: "https://raw.githubusercontent.com/BirchWoodGod/halo-ce-vita/main/docs/screenshots/warthog-beach.png",
     screenshot_source_url: "https://github.com/BirchWoodGod/halo-ce-vita/blob/main/README.md",
     screenshot_alt: "Warthog on The Silent Cartographer beach in Halo CE on PS Vita",
-    technologies: ["Xbox decompilation", "Native PS Vita port", "VitaSDK"],
-    developers: [{ id: 43, role: "lead", display_name: "BirchWoodGod", slug: "birchwoodgod" }],
+    technologies: [
+      "Xbox decompilation",
+      "Native PS Vita port",
+      "VitaSDK"
+    ],
+    developers: [
+      {
+        id: 43,
+        role: "lead",
+        display_name: "BirchWoodGod",
+        slug: "birchwoodgod"
+      }
+    ],
     stage_history: [
-      { id: 431, stage: "released", effective_at: new Date('2026-10-02T01:36:54.000Z'), reason: "Official GitHub release v1.0 published" }
+      {
+        id: 431,
+        stage: "released",
+        effective_at: new Date('2026-10-02T01:36:54.000Z'),
+        reason: "Official GitHub release v1.0 published"
+      }
     ]
   }
 ];
 
 export const FALLBACK_DEVELOPERS: any[] = [
-  { id: 1, slug: "openmohaa-team", display_name: "OpenMoHAA Team", description: "Homebrew engineering group porting Medal of Honor Allied Assault natively to modern platforms and Vita.", is_known_developer: true, identities: [{ provider: "reddit", username: "OpenMoHAA" }], projects: [] },
-  { id: 2, slug: "community-decomp", display_name: "Community Decomp Team", description: "Collaborative decompilation contributors researching GameCube/Wii native execution on ARM Vita.", is_known_developer: true, identities: [{ provider: "reddit", username: "vitahacks" }], projects: [] },
-  { id: 3, slug: "patnosdd", display_name: "patnosDD", description: "Developer leading the C# / Unity decompilation native pipeline for Hollow Knight on Vita.", is_known_developer: true, identities: [{ provider: "reddit", username: "patnosDD" }], projects: [] },
-  { id: 4, slug: "danielsant0s", display_name: "DanielSant0s", description: "Port developer reverse engineering Portal physics and chamber rendering for handhelds.", is_known_developer: true, identities: [{ provider: "reddit", username: "DanielSant0s" }], projects: [] },
-  { id: 5, slug: "rinnegatamante", display_name: "Rinnegatamante", description: "Prolific Vita homebrew architect, vitaGL creator, and developer of numerous Android wrappers.", is_known_developer: true, identities: [{ provider: "reddit", username: "Rinnegatamante" }], projects: [] },
-  { id: 6, slug: "zeno99", display_name: "Zeno99", description: "Reverse engineering specialist working on The Simpsons: Hit & Run engine recreation.", is_known_developer: true, identities: [{ provider: "reddit", username: "Zeno99" }], projects: [] },
-  { id: 7, slug: "hatoving", display_name: "hatoving", description: "Homebrew porter who brought Need for Speed: Hot Pursuit to PlayStation Vita via ARM wrapper.", is_known_developer: true, identities: [{ provider: "reddit", username: "hatoving" }], projects: [] },
-  { id: 8, slug: "sonicmastr", display_name: "SonicMastr", description: "Engine architect behind Ren'Py 8 Vita runtime (Python 3.11) and Class of '09.", is_known_developer: true, identities: [{ provider: "reddit", username: "SonicMastr" }], projects: [] },
-  { id: 9, slug: "northfear", display_name: "Northfear", description: "Veteran homebrew developer behind native ports of Ship of Harkinian and NXEngine-evo.", is_known_developer: true, identities: [{ provider: "reddit", username: "Northfear" }], projects: [] },
-  { id: 10, slug: "alexbatalov", display_name: "alexbatalov", description: "Developer of Fallout 1 & 2 Community Edition engines.", is_known_developer: true, identities: [{ provider: "reddit", username: "alexbatalov" }], projects: [] },
-  { id: 11, slug: "fgsfds", display_name: "fgsfds", description: "Homebrew developer responsible for Render96 HD SM64 and numerous engine ports.", is_known_developer: true, identities: [{ provider: "reddit", username: "fgsfds" }], projects: [] },
-  { id: 12, slug: "mylegguy", display_name: "MyLegGuy", description: "Programmer who created the C-rewrite of Celeste Classic for handheld systems.", is_known_developer: true, identities: [{ provider: "reddit", username: "MyLegGuy" }], projects: [] },
-  { id: 13, slug: "rob1n994", display_name: "rob1n994", description: "Developer porting the Aurora-based Melee project to native SceGXM and vitaGL on PS Vita.", is_known_developer: true, identities: [{ provider: "reddit", username: "rob1n994" }, { provider: "github", username: "robin994" }], projects: [] },
-  { id: 14, slug: "zm2283145", display_name: "zm2283145", description: "Developer of an independent experimental Melee Vita port with in-game rendering.", is_known_developer: true, identities: [{ provider: "reddit", username: "zm2283145" }], projects: [] },
-  { id: 15, slug: "withlogic", display_name: "withLogic", description: "Developer of the Illusia Vita Android wrapper.", is_known_developer: true, identities: [{ provider: "reddit", username: "withlogic" }, { provider: "github", username: "withLogic" }], projects: [] },
-  { id: 16, slug: "ndrwhun", display_name: "NDRW", description: "Developer of the JAVITA and JK2VITA OpenJK-based Vita ports.", is_known_developer: true, identities: [{ provider: "reddit", username: "NDRW" }, { provider: "github", username: "NDRWhun" }], projects: [] },
-  { id: 17, slug: "brendonm17", display_name: "Brendonm17", description: "Developer of the Barony Vita port.", is_known_developer: true, identities: [{ provider: "reddit", username: "Brendonm17" }, { provider: "github", username: "Brendonm17" }], projects: [] },
-  { id: 18, slug: "thespasticgamer", display_name: "TheSpasticGamer", description: "Developer associated with the September 2026 Class of '09 Vita release.", is_known_developer: true, identities: [{ provider: "github", username: "TheSpasticGamer" }], projects: [] }
-,
-  { id: 19, slug: "devwithzachary", display_name: "DevWithZachary", description: "Developer of Linux on Vita (Alpine Linux distribution for PS Vita).", is_known_developer: true, identities: [{ provider: "reddit", username: "DevWithZachary" }, { provider: "github", username: "devwithzachary" }], projects: [] },
-  { id: 20, slug: "drdecki", display_name: "DrDecki", description: "Developer of the Aleph One PS Vita engine port for Marathon Trilogy.", is_known_developer: true, identities: [{ provider: "github", username: "DrDecki" }], projects: [] },
-  { id: 21, slug: "rocroverss", display_name: "Rocroverss", description: "Developer of the Apotris PS Vita native port.", is_known_developer: true, identities: [{ provider: "github", username: "Rocroverss" }], projects: [] },
-  { id: 22, slug: "metalsyntax", display_name: "MetalSyntax", description: "Developer of the Prince of Persia Classic Android ARMv7 Vita wrapper/port.", is_known_developer: true, identities: [{ provider: "github", username: "MetalSyntax" }], projects: [] }
-,
+  {
+    id: 2,
+    slug: "community-decomp",
+    display_name: "Community Decomp Team",
+    description: "Collaborative decompilation contributors researching GameCube/Wii native execution on ARM Vita.",
+    is_known_developer: true,
+    identities: [
+      {
+        provider: "reddit",
+        username: "vitahacks"
+      }
+    ],
+    projects: []
+  },
+  {
+    id: 4,
+    slug: "danielsant0s",
+    display_name: "DanielSant0s",
+    description: "Port developer reverse engineering Portal physics and chamber rendering for handhelds.",
+    is_known_developer: true,
+    identities: [
+      {
+        provider: "reddit",
+        username: "DanielSant0s"
+      }
+    ],
+    projects: []
+  },
+  {
+    id: 5,
+    slug: "rinnegatamante",
+    display_name: "Rinnegatamante",
+    description: "Prolific Vita homebrew architect, vitaGL creator, and developer of numerous Android wrappers.",
+    is_known_developer: true,
+    identities: [
+      {
+        provider: "reddit",
+        username: "Rinnegatamante"
+      }
+    ],
+    projects: []
+  },
+  {
+    id: 6,
+    slug: "zeno99",
+    display_name: "Zeno99",
+    description: "Reverse engineering specialist working on The Simpsons: Hit & Run engine recreation.",
+    is_known_developer: true,
+    identities: [
+      {
+        provider: "reddit",
+        username: "Zeno99"
+      }
+    ],
+    projects: []
+  },
+  {
+    id: 7,
+    slug: "hatoving",
+    display_name: "hatoving",
+    description: "Homebrew porter who brought Need for Speed: Hot Pursuit to PlayStation Vita via ARM wrapper.",
+    is_known_developer: true,
+    identities: [
+      {
+        provider: "reddit",
+        username: "hatoving"
+      }
+    ],
+    projects: []
+  },
+  {
+    id: 8,
+    slug: "sonicmastr",
+    display_name: "SonicMastr",
+    description: "Engine architect behind Ren'Py 8 Vita runtime (Python 3.11) and Class of '09.",
+    is_known_developer: true,
+    identities: [
+      {
+        provider: "reddit",
+        username: "SonicMastr"
+      }
+    ],
+    projects: []
+  },
+  {
+    id: 11,
+    slug: "fgsfds",
+    display_name: "fgsfds",
+    description: "Homebrew developer responsible for Render96 HD SM64 and numerous engine ports.",
+    is_known_developer: true,
+    identities: [
+      {
+        provider: "reddit",
+        username: "fgsfds"
+      }
+    ],
+    projects: []
+  },
+  {
+    id: 12,
+    slug: "mylegguy",
+    display_name: "MyLegGuy",
+    description: "Programmer who created the C-rewrite of Celeste Classic for handheld systems.",
+    is_known_developer: true,
+    identities: [
+      {
+        provider: "reddit",
+        username: "MyLegGuy"
+      }
+    ],
+    projects: []
+  },
   {
     id: 23,
     slug: "chuta7x",
@@ -738,24 +1258,17 @@ export const FALLBACK_DEVELOPERS: any[] = [
     description: "Developer of the Real Racing 2 ARMv7 Android soloader port for PS Vita.",
     is_known_developer: true,
     identities: [
-      { provider: "github", username: "CHUTA7X" },
-      { provider: "reddit", username: "chutA7X" }
+      {
+        provider: "github",
+        username: "CHUTA7X"
+      },
+      {
+        provider: "reddit",
+        username: "chutA7X"
+      }
     ],
     projects: []
   },
-  {
-    id: 24,
-    slug: "renegade-team",
-    display_name: "Renegade Team",
-    description: "Development team behind the native Command & Conquer: Renegade PlayStation Vita port.",
-    is_known_developer: true,
-    identities: [
-      { provider: "reddit", username: "Angrymilks" }
-    ],
-    projects: []
-  },
-  
-,
   {
     id: 26,
     slug: "fauxrouge",
@@ -763,12 +1276,17 @@ export const FALLBACK_DEVELOPERS: any[] = [
     description: "Developer behind the native GTA: Liberty City Stories PS Vita port based on reStories.",
     is_known_developer: true,
     identities: [
-      { provider: "github", username: "fauxrougee" },
-      { provider: "reddit", username: "amplieboy" }
+      {
+        provider: "github",
+        username: "fauxrougee"
+      },
+      {
+        provider: "reddit",
+        username: "amplieboy"
+      }
     ],
     projects: []
-  }
-,
+  },
   {
     id: 40,
     slug: "gainusha",
@@ -776,11 +1294,13 @@ export const FALLBACK_DEVELOPERS: any[] = [
     description: "Developer of Test Drive III for PlayStation Vita.",
     is_known_developer: true,
     identities: [
-      { provider: "reddit", username: "gainusha" }
+      {
+        provider: "reddit",
+        username: "gainusha"
+      }
     ],
     projects: []
-  }
-,
+  },
   {
     id: 43,
     slug: "birchwoodgod",
@@ -788,55 +1308,16 @@ export const FALLBACK_DEVELOPERS: any[] = [
     description: "Maintainer credited for the native Halo: Combat Evolved PlayStation Vita port.",
     is_known_developer: true,
     identities: [
-      { provider: "github", username: "BirchWoodGod" }
+      {
+        provider: "github",
+        username: "BirchWoodGod"
+      }
     ],
     projects: []
   }
 ];
 
 export const FALLBACK_UPDATES: any[] = [
-  {
-    id: "upd_mohaa",
-    port_project_id: 1,
-    project_slug: "openmohaa-vita",
-    project_display_name: "Medal of Honor: Allied Assault (OpenMoHAA)",
-    developer_display_name: "OpenMoHAA Team",
-    developer_slug: "openmohaa-team",
-    event_type: "first_in_game",
-    title: "[WIP] OpenMoHAA on PS Vita — Medal of Honor: Allied Assault in-game progress",
-    summary: "Normandy beach level boots on PS Vita Fat with functioning geometry, sound effects, and player movement. Currently averaging 5-15 FPS.",
-    event_at: new Date('2026-09-16T15:34:00.000Z'),
-    verification_level: "developer_direct",
-    sources: [{ source_item_id: "src_mohaa", relationship: "primary", canonical_url: "https://www.reddit.com/r/vitahacks/comments/1tapf2b/wip_openmohaa_on_ps_vita_medal_of_honor_allied/" }]
-  },
-  {
-    id: "upd_melee",
-    port_project_id: 2,
-    project_slug: "smash-melee-vita",
-    project_display_name: "Super Smash Bros. Melee Vita",
-    developer_display_name: "Community Decomp Team",
-    developer_slug: "community-decomp",
-    event_type: "first_boot",
-    title: "Smash Bros Melee Vita — Fighter selection screen boots on hardware",
-    summary: "Decompiled GameCube pipeline successfully renders character models and UI. In-game physics and RAM optimizations currently in development.",
-    event_at: new Date('2026-09-15T15:34:00.000Z'),
-    verification_level: "community_report",
-    sources: [{ source_item_id: "src_melee", relationship: "primary", canonical_url: "https://www.reddit.com/r/vitahacks/comments/1whm4hp/smash_bros_melee_vita/" }]
-  },
-  {
-    id: "upd_melee_robin994",
-    port_project_id: 2,
-    project_slug: "smash-melee-vita",
-    project_display_name: "Super Smash Bros. Melee Vita",
-    developer_display_name: "rob1n994",
-    developer_slug: "rob1n994",
-    event_type: "technical_progress",
-    title: "Super Smash Melee — second Vita port moves Aurora to SceGXM and vitaGL",
-    summary: "rob1n994 publicly demonstrated an independent Melee port and opened its source while native SceGXM/vitaGL performance and fidelity work continues.",
-    event_at: new Date('2026-09-17T14:31:58.000Z'),
-    verification_level: "developer_direct",
-    sources: [{ source_item_id: "src_melee_robin994", relationship: "primary", canonical_url: "https://www.reddit.com/r/vitahacks/comments/1wivnp0/super_smash_melee/" }]
-  },
   {
     id: "upd_zelda_tp",
     port_project_id: 4,
@@ -849,7 +1330,13 @@ export const FALLBACK_UPDATES: any[] = [
     summary: "Early rendering tests running at 15-20 FPS in Ordon Village. Investigating custom texture compression to fit within Vita's 512MB RAM.",
     event_at: new Date('2026-09-15T15:34:00.000Z'),
     verification_level: "community_report",
-    sources: [{ source_item_id: "src_tp", relationship: "primary", canonical_url: "https://www.reddit.com/r/vitahacks/comments/1w9ys9f/the_new_psvita_ports/" }]
+    sources: [
+      {
+        source_item_id: "src_tp",
+        relationship: "primary",
+        canonical_url: "https://www.reddit.com/r/vitahacks/comments/1w9ys9f/the_new_psvita_ports/"
+      }
+    ]
   },
   {
     id: "upd_spiderman",
@@ -891,7 +1378,13 @@ export const FALLBACK_UPDATES: any[] = [
     summary: "Enables modern visual novels previously impossible on older Python 2 Vita runtimes with optimized RAM utilization.",
     event_at: new Date('2026-09-11T15:34:00.000Z'),
     verification_level: "developer_direct",
-    sources: [{ source_item_id: "src_renpy8", relationship: "primary", canonical_url: "https://www.reddit.com/r/vitahacks/comments/1h4yhyi/release_renpy_vita_8_port/" }]
+    sources: [
+      {
+        source_item_id: "src_renpy8",
+        relationship: "primary",
+        canonical_url: "https://www.reddit.com/r/vitahacks/comments/1h4yhyi/release_renpy_vita_8_port/"
+      }
+    ]
   },
   {
     id: "upd_nfs",
@@ -919,7 +1412,13 @@ export const FALLBACK_UPDATES: any[] = [
     summary: "Developer reports PC save file support, implemented progression, local multiplayer and an in-game interface, with source published on GitHub.",
     event_at: new Date('2026-09-18T11:09:43.000Z'),
     verification_level: "developer_direct",
-    sources: [{ source_item_id: "src_rc_cars", relationship: "primary", canonical_url: "https://www.reddit.com/r/vitahacks/comments/1wjn8zg/rc_cars_port_progress/" }]
+    sources: [
+      {
+        source_item_id: "src_rc_cars",
+        relationship: "primary",
+        canonical_url: "https://www.reddit.com/r/vitahacks/comments/1wjn8zg/rc_cars_port_progress/"
+      }
+    ]
   },
   {
     id: "upd_cod_zombies",
@@ -933,7 +1432,13 @@ export const FALLBACK_UPDATES: any[] = [
     summary: "Community bounty funding work to bring the iOS build of Call of Duty: Zombies to Vita through the iOS loader devnoname120 is developing. Metal Gear Solid Touch is named as another candidate for the same loader.",
     event_at: new Date('2026-09-18T07:54:45.000Z'),
     verification_level: "community_report",
-    sources: [{ source_item_id: "src_cod_zombies", relationship: "primary", canonical_url: "https://www.reddit.com/r/vitahacks/comments/1wjjx7w/a_bounty_that_deserves_more_visibility/" }]
+    sources: [
+      {
+        source_item_id: "src_cod_zombies",
+        relationship: "primary",
+        canonical_url: "https://www.reddit.com/r/vitahacks/comments/1wjjx7w/a_bounty_that_deserves_more_visibility/"
+      }
+    ]
   },
   {
     id: "upd_cod4",
@@ -950,23 +1455,6 @@ export const FALLBACK_UPDATES: any[] = [
     sources: []
   },
   {
-    id: "upd_cdogs_vita",
-    port_project_id: 28,
-    project_slug: "c-dogs-sdl-vita",
-    project_display_name: "C-Dogs SDL Vita",
-    developer_display_name: "abby_6112",
-    developer_slug: "abby-6112",
-    event_type: "project_announced",
-    title: "C-Dogs SDL Vita/PSTV pre-release posted",
-    summary: "The pre-release thread reports a native Vita/PSTV build and links the Vita preview release on GitHub. LAN multiplayer support remains in development.",
-    event_at: new Date('2026-09-19T20:01:51.653Z'),
-    verification_level: "developer_direct",
-    sources: [
-      { source_item_id: "src_cdogs_vita_reddit", relationship: "primary", canonical_url: "https://www.reddit.com/r/vitahacks/comments/1wkw14c/prerelease_cdogs_sdl_port_for_ps_vita_pstv/" },
-      { source_item_id: "src_cdogs_vita_github", relationship: "release", canonical_url: "https://github.com/abduct/cdogs-sdl/releases/tag/vita-preview-1" }
-    ]
-  },
-  {
     id: "upd_re4_vita",
     port_project_id: 34,
     project_slug: "resident-evil-4-vita",
@@ -979,28 +1467,38 @@ export const FALLBACK_UPDATES: any[] = [
     event_at: new Date('2026-09-25T17:04:11.000Z'),
     verification_level: "developer_direct",
     sources: [
-      { source_item_id: "src_re4_vita_repo", relationship: "primary", canonical_url: "https://github.com/Rinnegatamante/re4-vita" },
-      { source_item_id: "src_re4_vita_reddit", relationship: "community", canonical_url: "https://www.reddit.com/r/VitaPiracy/comments/1wmax82/guess_it_is_happening/" }
-, 
-  {
-    id: "upd_re4_vita_livestream",
-    port_project_id: 34,
-    project_slug: "resident-evil-4-vita",
-    project_display_name: "Resident Evil 4 Vita (re4-vita)",
-    developer_display_name: "Rinnegatamante",
-    developer_slug: "rinnegatamante",
-    event_type: "technical_progress",
-    title: "Rinnegatamante live-streams Resident Evil 4 Vita CPU optimizations",
-    summary: "During a live-stream Rinnegatamante reported ongoing CPU optimizations for the re4-vita port, stating a 20 rendered FPS target with auto frameskip as the ideal v1.0 release candidate and that no release will happen until beta testers can finish the game start to finish.",
-    event_at: new Date("2026-09-30T21:29:28.000Z"),
-    verification_level: "community_report",
-    sources: [
-      { source_item_id: "src_upd_re4_vita_livestream_reddit", relationship: "community", canonical_url: "https://www.reddit.com/r/vitahacks/comments/1wuhe87/to_anyone_interested_rinnegatamante_is_streaming/" }
+      {
+        source_item_id: "src_re4_vita_repo",
+        relationship: "primary",
+        canonical_url: "https://github.com/Rinnegatamante/re4-vita"
+      },
+      {
+        source_item_id: "src_re4_vita_reddit",
+        relationship: "community",
+        canonical_url: "https://www.reddit.com/r/VitaPiracy/comments/1wmax82/guess_it_is_happening/"
+      },
+      {
+        id: "upd_re4_vita_livestream",
+        port_project_id: 34,
+        project_slug: "resident-evil-4-vita",
+        project_display_name: "Resident Evil 4 Vita (re4-vita)",
+        developer_display_name: "Rinnegatamante",
+        developer_slug: "rinnegatamante",
+        event_type: "technical_progress",
+        title: "Rinnegatamante live-streams Resident Evil 4 Vita CPU optimizations",
+        summary: "During a live-stream Rinnegatamante reported ongoing CPU optimizations for the re4-vita port, stating a 20 rendered FPS target with auto frameskip as the ideal v1.0 release candidate and that no release will happen until beta testers can finish the game start to finish.",
+        event_at: new Date('2026-09-30T21:29:28.000Z'),
+        verification_level: "community_report",
+        sources: [
+          {
+            source_item_id: "src_upd_re4_vita_livestream_reddit",
+            relationship: "community",
+            canonical_url: "https://www.reddit.com/r/vitahacks/comments/1wuhe87/to_anyone_interested_rinnegatamante_is_streaming/"
+          }
+        ]
+      }
     ]
-  }
-    ]
-  }
-,
+  },
   {
     id: "upd_rr2_vita",
     port_project_id: 35,
@@ -1014,41 +1512,16 @@ export const FALLBACK_UPDATES: any[] = [
     event_at: new Date('2026-09-21T11:39:44.312Z'),
     verification_level: "developer_direct",
     sources: [
-      { source_item_id: "src_rr2_repo", relationship: "primary", canonical_url: "https://github.com/CHUTA7X/Real-Racing-2-Vita-Port-Release" },
-      { source_item_id: "src_rr2_reddit", relationship: "community", canonical_url: "https://www.reddit.com/r/PSVitaHomebrew/comments/1wmabvz/updates_on_rr2_port/" }
-    ]
-  },
-  {
-    id: "upd_dkr_golden_balloon",
-    port_project_id: 36,
-    project_slug: "diddy-kong-racing-golden-balloon",
-    project_display_name: "Diddy Kong Racing 64 (Golden Balloon)",
-    developer_display_name: "zm2283145",
-    developer_slug: "zm2283145",
-    event_type: "playable_demo",
-    title: "Golden Balloon Diddy Kong Racing port v1.7.1 released with full trophy support",
-    summary: "zm2283145 published major updates to Golden Balloon featuring full Adventure completion, 98 Vita trophies, save editor, and custom visuals.",
-    event_at: new Date('2026-09-10T21:54:04.000Z'),
-    verification_level: "developer_direct",
-    sources: [
-      { source_item_id: "src_dkr_repo", relationship: "primary", canonical_url: "https://github.com/zm2283145/goldenballoon-vita-port" },
-      { source_item_id: "src_dkr_reddit", relationship: "community", canonical_url: "https://www.reddit.com/r/vitahacks/comments/1wcx3o6/golden_balloon_v169_diddy_kong_racing_source_port/" }
-    ]
-  },
-  {
-    id: "upd_cnc_renegade",
-    port_project_id: 37,
-    project_slug: "cnc-renegade-vita",
-    project_display_name: "Command & Conquer: Renegade",
-    developer_display_name: "Renegade Team",
-    developer_slug: "renegade-team",
-    event_type: "project_announced",
-    title: "Command & Conquer: Renegade native Vita port announced",
-    summary: "Development announced for bringing the classic C&C FPS to PS Vita with native controls and hardware rendering.",
-    event_at: new Date('2026-09-08T12:49:38.000Z'),
-    verification_level: "community_report",
-    sources: [
-      { source_item_id: "src_cnc_renegade_reddit", relationship: "primary", canonical_url: "https://www.reddit.com/r/vitahacks/comments/1waninh/cnc_renegade_native_ps_vita_port/" }
+      {
+        source_item_id: "src_rr2_repo",
+        relationship: "primary",
+        canonical_url: "https://github.com/CHUTA7X/Real-Racing-2-Vita-Port-Release"
+      },
+      {
+        source_item_id: "src_rr2_reddit",
+        relationship: "community",
+        canonical_url: "https://www.reddit.com/r/PSVitaHomebrew/comments/1wmabvz/updates_on_rr2_port/"
+      }
     ]
   },
   {
@@ -1064,11 +1537,18 @@ export const FALLBACK_UPDATES: any[] = [
     event_at: new Date('2026-09-29T16:07:11.000Z'),
     verification_level: "developer_direct",
     sources: [
-      { source_item_id: "src_gta_lcs_repo", relationship: "primary", canonical_url: "https://github.com/fauxrougee/GTALCS-psvita-port" },
-      { source_item_id: "src_gta_lcs_reddit", relationship: "community", canonical_url: "https://www.reddit.com/r/vitahacks/comments/1wte7gf/gta_liberty_city_stories_my_ps_vita_port_is_now/" }
+      {
+        source_item_id: "src_gta_lcs_repo",
+        relationship: "primary",
+        canonical_url: "https://github.com/fauxrougee/GTALCS-psvita-port"
+      },
+      {
+        source_item_id: "src_gta_lcs_reddit",
+        relationship: "community",
+        canonical_url: "https://www.reddit.com/r/vitahacks/comments/1wte7gf/gta_liberty_city_stories_my_ps_vita_port_is_now/"
+      }
     ]
-  }
-,
+  },
   {
     id: "upd_test_drive_iii_vita",
     port_project_id: 40,
@@ -1082,11 +1562,18 @@ export const FALLBACK_UPDATES: any[] = [
     event_at: new Date('2026-09-30T19:00:45.000Z'),
     verification_level: "developer_direct",
     sources: [
-      { source_item_id: "src_upd_test_drive_iii_vita_repo", relationship: "primary", canonical_url: "https://github.com/smart-pickle/TestDriveIII-Vita" },
-      { source_item_id: "src_upd_test_drive_iii_vita_reddit", relationship: "community", canonical_url: "https://www.reddit.com/r/vitahacks/comments/1wudlni/test_drive_iii_vita_port/" }
+      {
+        source_item_id: "src_upd_test_drive_iii_vita_repo",
+        relationship: "primary",
+        canonical_url: "https://github.com/smart-pickle/TestDriveIII-Vita"
+      },
+      {
+        source_item_id: "src_upd_test_drive_iii_vita_reddit",
+        relationship: "community",
+        canonical_url: "https://www.reddit.com/r/vitahacks/comments/1wudlni/test_drive_iii_vita_port/"
+      }
     ]
-  }
-,
+  },
   {
     id: "upd_test_drive_ii_vita",
     port_project_id: 41,
@@ -1100,11 +1587,18 @@ export const FALLBACK_UPDATES: any[] = [
     event_at: new Date('2026-09-30T14:36:07.000Z'),
     verification_level: "developer_direct",
     sources: [
-      { source_item_id: "src_upd_test_drive_ii_vita_repo", relationship: "primary", canonical_url: "https://github.com/smart-pickle/TestDriveII-Vita" },
-      { source_item_id: "src_upd_test_drive_ii_vita_reddit", relationship: "community", canonical_url: "https://www.reddit.com/r/vitahacks/comments/1wu6lsx/test_drive_ii_vita_port/" }
+      {
+        source_item_id: "src_upd_test_drive_ii_vita_repo",
+        relationship: "primary",
+        canonical_url: "https://github.com/smart-pickle/TestDriveII-Vita"
+      },
+      {
+        source_item_id: "src_upd_test_drive_ii_vita_reddit",
+        relationship: "community",
+        canonical_url: "https://www.reddit.com/r/vitahacks/comments/1wu6lsx/test_drive_ii_vita_port/"
+      }
     ]
-  }
-,
+  },
   {
     id: "upd_halo_ce_decomp_pc_and_android_vita",
     port_project_id: 43,
@@ -1116,9 +1610,21 @@ export const FALLBACK_UPDATES: any[] = [
     event_at: new Date('2026-09-30T19:19:17.427Z'),
     verification_level: "community_report",
     sources: [
-      { source_item_id: "src_halo_ce_vita_repo", relationship: "primary", canonical_url: "https://github.com/BirchWoodGod/halo-ce-vita" },
-      { source_item_id: "src_upd_halo_ce_decomp_pc_and_android_vita_repo", relationship: "community", canonical_url: "https://github.com/cybersecurity/halo-ce-universal" },
-      { source_item_id: "src_upd_halo_ce_decomp_pc_and_android_vita_reddit", relationship: "community", canonical_url: "https://www.reddit.com/r/PSVitaHomebrew/comments/1wtm0y6/halo_ce_decomp_pc_and_android/" }
+      {
+        source_item_id: "src_halo_ce_vita_repo",
+        relationship: "primary",
+        canonical_url: "https://github.com/BirchWoodGod/halo-ce-vita"
+      },
+      {
+        source_item_id: "src_upd_halo_ce_decomp_pc_and_android_vita_repo",
+        relationship: "community",
+        canonical_url: "https://github.com/cybersecurity/halo-ce-universal"
+      },
+      {
+        source_item_id: "src_upd_halo_ce_decomp_pc_and_android_vita_reddit",
+        relationship: "community",
+        canonical_url: "https://www.reddit.com/r/PSVitaHomebrew/comments/1wtm0y6/halo_ce_decomp_pc_and_android/"
+      }
     ]
   },
   {
@@ -1134,7 +1640,11 @@ export const FALLBACK_UPDATES: any[] = [
     event_at: new Date('2026-10-02T10:00:00.000Z'),
     verification_level: "community_report",
     sources: [
-      { source_item_id: "src_rr2_beta2_reddit", relationship: "community", canonical_url: "https://www.reddit.com/r/VitaPiracy/comments/1wvfxzk/real_racing_2_new_update_psvita_beta_2_3060_fps/" }
+      {
+        source_item_id: "src_rr2_beta2_reddit",
+        relationship: "community",
+        canonical_url: "https://www.reddit.com/r/VitaPiracy/comments/1wvfxzk/real_racing_2_new_update_psvita_beta_2_3060_fps/"
+      }
     ]
   },
   {
@@ -1148,8 +1658,16 @@ export const FALLBACK_UPDATES: any[] = [
     event_at: new Date('2026-10-02T01:36:54.000Z'),
     verification_level: "developer_direct",
     sources: [
-      { source_item_id: "src_halo_ce_release_reddit", relationship: "primary", canonical_url: "https://www.reddit.com/r/VitaPiracy/comments/1wvhkaf/halo_ce_port_release/" },
-      { source_item_id: "src_halo_ce_release_v1_0", relationship: "release", canonical_url: "https://github.com/BirchWoodGod/halo-ce-vita/releases/tag/v1.0" }
+      {
+        source_item_id: "src_halo_ce_release_reddit",
+        relationship: "primary",
+        canonical_url: "https://www.reddit.com/r/VitaPiracy/comments/1wvhkaf/halo_ce_port_release/"
+      },
+      {
+        source_item_id: "src_halo_ce_release_v1_0",
+        relationship: "release",
+        canonical_url: "https://github.com/BirchWoodGod/halo-ce-vita/releases/tag/v1.0"
+      }
     ]
   },
   {
@@ -1165,57 +1683,11 @@ export const FALLBACK_UPDATES: any[] = [
     event_at: new Date('2026-10-06T22:49:53.000Z'),
     verification_level: "developer_direct",
     sources: [
-      { source_item_id: "src_halo_ce_release_v1_0_3", relationship: "release", canonical_url: "https://github.com/BirchWoodGod/halo-ce-vita/releases/tag/v1.0.3" }
+      {
+        source_item_id: "src_halo_ce_release_v1_0_3",
+        relationship: "release",
+        canonical_url: "https://github.com/BirchWoodGod/halo-ce-vita/releases/tag/v1.0.3"
+      }
     ]
   }
 ];
-
-const MILESTONE_REASONS: Record<string, string> = {
-  announced: "Port publicly announced / surfaced in community discussion",
-  research: "Reverse-engineering and shader research started",
-  early_wip: "First work-in-progress build compiled for ARM",
-  booting: "Binary boots to the point of rendering output",
-  in_game: "Reached interactive in-game state on real hardware",
-  playable: "Playable end to end with working controls and audio",
-  completable: "Completable: full progression verified by testers",
-  released: "Public release build published"
-};
-
-const DERIVED_STAGE_SEQUENCE = [
-  "announced",
-  "research",
-  "early_wip",
-  "booting",
-  "in_game",
-  "playable",
-  "completable",
-  "released"
-];
-
-function deriveStageHistory(project: Record<string, unknown>) {
-  const current = String(project.current_stage || "announced");
-  const endIndex = DERIVED_STAGE_SEQUENCE.indexOf(current);
-  if (endIndex < 0) return [];
-
-  const start = new Date(project.first_seen_at as string | number | Date).getTime();
-  const end = new Date(project.last_activity_at as string | number | Date).getTime();
-  const span = Math.max(end - start, 0);
-  const steps = endIndex + 1;
-
-  return DERIVED_STAGE_SEQUENCE.slice(0, steps).map((stage, index) => {
-    const ratio = steps === 1 ? 0 : index / (steps - 1);
-    const effective = new Date(start + span * ratio * 0.92);
-    return {
-      id: Number(project.id) * 10 + index,
-      stage,
-      effective_at: effective,
-      reason: MILESTONE_REASONS[stage] || null
-    };
-  });
-}
-
-FALLBACK_PROJECTS.forEach((project) => {
-  if (!project.stage_history || project.stage_history.length === 0) {
-    project.stage_history = deriveStageHistory(project);
-  }
-});

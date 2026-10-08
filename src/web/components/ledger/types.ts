@@ -72,12 +72,8 @@ export const VERIFICATION_META: Record<string, { label: string; description: str
 };
 
 export const KNOWN_REPOS: Record<string, string> = {
-  "openmohaa-vita": "https://github.com/HenryKun55/openmohaa/tree/vita-port",
-  "smash-melee-vita": "https://github.com/robin994/SmashMeleeVita",
-  "hollow-knight-vita": "https://github.com/PatnosDD/Hollow-Knight-PsVita",
   "renpy-8-runtime-engine": "https://github.com/Grimiku/RenPy-Vita-8",
   "real-racing-2-vita": "https://github.com/CHUTA7X/Real-Racing-2-Vita-Port-Release",
-  "diddy-kong-racing-golden-balloon": "https://github.com/zm2283145/goldenballoon-vita-port",
   "gta-lcs-vita": "https://github.com/fauxrougee/GTALCS-psvita-port",
   "test-drive-iii-vita": "https://github.com/smart-pickle/TestDriveIII-Vita",
   "test-drive-ii-vita": "https://github.com/smart-pickle/TestDriveII-Vita",

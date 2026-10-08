@@ -94,15 +94,15 @@ test.describe("archive", () => {
   });
 
   test("a deep link opens and expands that entry", async ({ page }) => {
-    await page.goto("/#p=hollow-knight-vita", { waitUntil: "domcontentloaded" });
-    const panel = page.locator("div#panel-hollow-knight-vita");
+    await page.goto("/#p=zelda-twilight-princess-vita", { waitUntil: "domcontentloaded" });
+    const panel = page.locator("div#panel-zelda-twilight-princess-vita");
     await expect(panel).toBeVisible();
     await expect(panel).toContainText("Milestones");
   });
 
   test("expanded project details show an absolute project-activity date, not a relative age", async ({ page }) => {
-    await page.goto("/#p=hollow-knight-vita", { waitUntil: "domcontentloaded" });
-    const panel = page.locator("#panel-hollow-knight-vita");
+    await page.goto("/#p=zelda-twilight-princess-vita", { waitUntil: "domcontentloaded" });
+    const panel = page.locator("#panel-zelda-twilight-princess-vita");
     await expect(panel).toBeVisible();
     await expect(panel.getByText("Latest project activity", { exact: true })).toBeVisible();
     const activityField = panel.locator("dl > div").filter({ hasText: "Latest project activity" });

@@ -1,55 +1,16 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-07T14:23:27.074Z",
+  "generated_at": "2026-10-08T01:47:26.028Z",
   "curator": "vitaharbor-data-worker",
   "notes": "Source-verified media manifest distinguishing verified PS Vita hardware captures, official repository media, and promotional artwork. Artwork is explicitly labeled and never represented as Vita gameplay.",
-  "total_projects": 28,
+  "total_projects": 19,
   "media_counts": {
     "vita_hardware_capture": 2,
     "official_repository_screenshot": 1,
-    "official_promotional_artwork": 23,
+    "official_promotional_artwork": 14,
     "title_card_fallback": 2
   },
   "items": [
-    {
-      "id": 1,
-      "slug": "openmohaa-vita",
-      "display_name": "Medal of Honor: Allied Assault (OpenMoHAA)",
-      "game_title": "Medal of Honor: Allied Assault (OpenMoHAA)",
-      "media_type": "official_promotional_artwork",
-      "is_vita_gameplay": false,
-      "media_local_path": "/screenshots/openmohaa.jpg",
-      "media_remote_url": null,
-      "media_source_url": "https://www.reddit.com/r/vitahacks/comments/1tapf2b/wip_openmohaa_on_ps_vita_medal_of_honor_allied/",
-      "media_label": "Official Key Artwork",
-      "provenance_notes": "Original Medal of Honor: Allied Assault promotional artwork; port is early in-game (5-15 FPS), hardware screenshot not yet isolated."
-    },
-    {
-      "id": 2,
-      "slug": "smash-melee-vita",
-      "display_name": "Super Smash Bros. Melee Vita",
-      "game_title": "Super Smash Bros. Melee",
-      "media_type": "official_promotional_artwork",
-      "is_vita_gameplay": false,
-      "media_local_path": "/screenshots/smash-melee.jpg",
-      "media_remote_url": null,
-      "media_source_url": "https://www.reddit.com/r/vitahacks/comments/1wivnp0/super_smash_melee/",
-      "media_label": "Official Key Artwork",
-      "provenance_notes": "Super Smash Bros. Melee artwork; early fighter selection screen on hardware."
-    },
-    {
-      "id": 3,
-      "slug": "hollow-knight-vita",
-      "display_name": "Hollow Knight Vita Port",
-      "game_title": "Hollow Knight",
-      "media_type": "official_promotional_artwork",
-      "is_vita_gameplay": false,
-      "media_local_path": "/screenshots/hollow-knight.jpg",
-      "media_remote_url": null,
-      "media_source_url": "https://www.reddit.com/r/vitahacks/comments/17eneu2/upcoming_hollow_knight_ps_vita_port_wip/",
-      "media_label": "Official Key Artwork",
-      "provenance_notes": "Hollow Knight promotional art; native ARM decompilation in development."
-    },
     {
       "id": 4,
       "slug": "zelda-twilight-princess-vita",
@@ -142,19 +103,6 @@
       "provenance_notes": "Ren'Py 8 is an engine runtime rather than a single game; uses dynamic title card."
     },
     {
-      "id": 13,
-      "slug": "zelda-ship-of-harkinian-vita",
-      "display_name": "Zelda: Ship of Harkinian (OOT)",
-      "game_title": "Zelda: Ship of Harkinian (Ocarina of Time)",
-      "media_type": "official_promotional_artwork",
-      "is_vita_gameplay": false,
-      "media_local_path": "/screenshots/zelda-oot.jpg",
-      "media_remote_url": null,
-      "media_source_url": "https://www.reddit.com/r/VitaPiracy/comments/1leugn2/ocarina_of_time_ship_of_harkinian_is_out_now_baby/",
-      "media_label": "Official Key Artwork",
-      "provenance_notes": "Zelda: Ocarina of Time promotional art."
-    },
-    {
       "id": 14,
       "slug": "slingshot-racing-vita",
       "display_name": "Slingshot Racing Vita",
@@ -166,19 +114,6 @@
       "media_source_url": "https://github.com/",
       "media_label": "Official Key Artwork",
       "provenance_notes": "Slingshot Racing mobile key artwork."
-    },
-    {
-      "id": 15,
-      "slug": "fallout-2-ce-vita",
-      "display_name": "Fallout 2 Community Edition",
-      "game_title": "Fallout 2 Community Edition",
-      "media_type": "official_promotional_artwork",
-      "is_vita_gameplay": false,
-      "media_local_path": "/screenshots/fallout-2.jpg",
-      "media_remote_url": null,
-      "media_source_url": "https://github.com/alexbatalov/fallout2-ce",
-      "media_label": "Official Key Artwork",
-      "provenance_notes": "Fallout 2 Community Edition original artwork."
     },
     {
       "id": 16,
@@ -205,19 +140,6 @@
       "media_source_url": "https://github.com/lemon32767/c-celeste",
       "media_label": "Official Key Artwork",
       "provenance_notes": "Celeste Classic PICO-8 / C-rewrite key artwork."
-    },
-    {
-      "id": 19,
-      "slug": "renegade-vita-demo-release",
-      "display_name": "Renegade Vita - Demo Release",
-      "game_title": "Renegade Vita - Demo Release",
-      "media_type": "official_promotional_artwork",
-      "is_vita_gameplay": false,
-      "media_local_path": "/screenshots/cnc-renegade.png",
-      "media_remote_url": null,
-      "media_source_url": "https://www.reddit.com/r/vitahacks/comments/1wgp613/renegade_vita_demo_release/",
-      "media_label": "Official Key Artwork",
-      "provenance_notes": "Command & Conquer: Renegade promotional key artwork."
     },
     {
       "id": 20,
@@ -259,19 +181,6 @@
       "provenance_notes": "Early community work-in-progress photograph showing Call of Duty 4 compiled on a physical PS Vita handheld."
     },
     {
-      "id": 28,
-      "slug": "c-dogs-sdl-vita",
-      "display_name": "C-Dogs SDL Vita",
-      "game_title": "C-Dogs SDL",
-      "media_type": "official_promotional_artwork",
-      "is_vita_gameplay": false,
-      "media_local_path": "/screenshots/c-dogs-sdl.png",
-      "media_remote_url": null,
-      "media_source_url": "https://www.reddit.com/r/vitahacks/comments/1wkw14c/prerelease_cdogs_sdl_port_for_ps_vita_pstv/",
-      "media_label": "Official Logo Artwork",
-      "provenance_notes": "C-Dogs SDL open-source project artwork."
-    },
-    {
       "id": 34,
       "slug": "resident-evil-4-vita",
       "display_name": "Resident Evil 4 Vita (re4-vita)",
@@ -296,32 +205,6 @@
       "media_source_url": "https://www.reddit.com/r/PSVitaHomebrew/comments/1wmabvz/updates_on_rr2_port/",
       "media_label": "Official Logo / Banner",
       "provenance_notes": "Real Racing 2 mobile artwork banner."
-    },
-    {
-      "id": 36,
-      "slug": "diddy-kong-racing-golden-balloon",
-      "display_name": "Diddy Kong Racing 64 (Golden Balloon)",
-      "game_title": "Diddy Kong Racing (Golden Balloon)",
-      "media_type": "official_promotional_artwork",
-      "is_vita_gameplay": false,
-      "media_local_path": "/screenshots/diddy-kong-racing.jpg",
-      "media_remote_url": null,
-      "media_source_url": "https://www.reddit.com/r/vitahacks/comments/1wcx3o6/golden_balloon_v169_diddy_kong_racing_source_port/",
-      "media_label": "Official Key Artwork",
-      "provenance_notes": "Diddy Kong Racing Golden Balloon key artwork."
-    },
-    {
-      "id": 37,
-      "slug": "cnc-renegade-vita",
-      "display_name": "Command & Conquer: Renegade",
-      "game_title": "Command & Conquer: Renegade",
-      "media_type": "official_promotional_artwork",
-      "is_vita_gameplay": false,
-      "media_local_path": "/screenshots/cnc-renegade.png",
-      "media_remote_url": null,
-      "media_source_url": "https://www.reddit.com/r/vitahacks/comments/1waninh/cnc_renegade_native_ps_vita_port/",
-      "media_label": "Official Key Artwork",
-      "provenance_notes": "Command & Conquer: Renegade key artwork."
     },
     {
       "id": 39,
