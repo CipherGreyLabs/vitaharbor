@@ -1,8 +1,188 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-09T14:24:00.848Z",
+  "generated_at": "2026-10-09T18:51:41.853Z",
   "source": "r/vitahacks + r/VitaPiracy + r/PSVitaHomebrew RSS",
   "items": [
+    {
+      "schema_version": 2,
+      "id": "reddit-1x1pl2a",
+      "external_id": "1x1pl2a",
+      "state": "QUARANTINED",
+      "state_history": [
+        {
+          "state": "DETECTED",
+          "at": "2026-10-09T18:51:41.853Z",
+          "actor": "reddit-scanner",
+          "reason": "Canonical Reddit RSS entry accepted at the ingestion boundary"
+        },
+        {
+          "state": "QUARANTINED",
+          "at": "2026-10-09T18:51:41.853Z",
+          "actor": "reddit-scanner",
+          "reason": "Scanner result is unverified and cannot enter the curated ledger"
+        }
+      ],
+      "source": {
+        "platform": "reddit",
+        "subreddit": "vitahacks",
+        "canonical_url": "https://www.reddit.com/r/vitahacks/comments/1x1pl2a/resident_evil_code_veronica_x_port/",
+        "author": "ziobleed1",
+        "title": "Resident Evil Code Veronica X port - Rinnegatamante's First Showcase",
+        "body": "Rinnegatamante has published on youtube the first showcase of his work on porting Resident Evil Code Veronica X on PS Vita. It's the port based on the decompilation project of the PS2 game: https://github.com/AshfordFamily/recvx-decomp &#32; submitted by &#32; /u/ziobleed1 [link] &#32; [comments]",
+        "published_at": "2026-10-09T16:15:38.000Z"
+      },
+      "classification": {
+        "confidence": "medium",
+        "reason": "2 dev signal(s), 2 passive term(s), category=new_project",
+        "candidate_type": "decompilation",
+        "category": "new_project",
+        "question": false,
+        "spam": false
+      },
+      "provenance": {
+        "repository_url": null,
+        "release_url": null,
+        "evidence_urls": [],
+        "evidence_bundle_id": null,
+        "repository_identity": null,
+        "repository_created_at": null,
+        "repository_last_activity_at": null,
+        "release_facts": [],
+        "vita_evidence": [],
+        "author_linkage": null,
+        "corroboration": [],
+        "duplicate_relation": {
+          "content_hash": "1f0074b9cc935f86b8454b5121f5e528de7e800845eb25ad98361e28ea50045b",
+          "related_candidate_ids": []
+        }
+      },
+      "campaign": {
+        "cluster_id": "campaign-5a76ffd2",
+        "linkage_confidence": "medium",
+        "signals": [
+          "shared_outbound_fingerprint"
+        ],
+        "related_candidate_ids": [
+          "reddit-1x1hsq0",
+          "reddit-1wyhqcq",
+          "reddit-1wycxwx",
+          "reddit-1wxgz7q",
+          "reddit-1wukxc7"
+        ],
+        "text_fingerprint": "07c8454f",
+        "media_fingerprints": [
+          "external-preview.redd.it/ytf6ilnvfoogs8c2vnqhlznhh7jysxztbmcozjejxuy.jpeg"
+        ],
+        "outbound_fingerprints": [
+          "github.com/ashfordfamily/recvx-decomp",
+          "www.reddit.com/r/vitahacks/comments/1x1pl2a/resident_evil_code_veronica_x_port",
+          "external-preview.redd.it/ytf6ilnvfoogs8c2vnqhlznhh7jysxztbmcozjejxuy.jpeg",
+          "www.reddit.com/user/ziobleed1",
+          "www.youtube.com/watch"
+        ],
+        "direct_intent": false,
+        "explicit_campaign_reference": false,
+        "incident_id": null
+      },
+      "risk_signals": [],
+      "evidence_gaps": [
+        "repository identity and activity facts",
+        "release or build evidence",
+        "Vita-specific hardware evidence",
+        "author/developer linkage and independent corroboration"
+      ],
+      "content_hash": "1f0074b9cc935f86b8454b5121f5e528de7e800845eb25ad98361e28ea50045b",
+      "review": null,
+      "incident": null
+    },
+    {
+      "schema_version": 2,
+      "id": "reddit-1x1n63v",
+      "external_id": "1x1n63v",
+      "state": "QUARANTINED",
+      "state_history": [
+        {
+          "state": "DETECTED",
+          "at": "2026-10-09T18:51:41.853Z",
+          "actor": "reddit-scanner",
+          "reason": "Canonical Reddit RSS entry accepted at the ingestion boundary"
+        },
+        {
+          "state": "QUARANTINED",
+          "at": "2026-10-09T18:51:41.853Z",
+          "actor": "reddit-scanner",
+          "reason": "Scanner result is unverified and cannot enter the curated ledger"
+        }
+      ],
+      "source": {
+        "platform": "reddit",
+        "subreddit": "vitahacks",
+        "canonical_url": "https://www.reddit.com/r/vitahacks/comments/1x1n63v/old_list_of_androidtops_vita_ports_with/",
+        "author": "Verellion73",
+        "title": "Old list of Android-to-PS Vita ports with \"impossible\" status",
+        "body": "As you may recall, there used to be a site by u/realRinnegatamante listing Android games that were candidates for porting to the Vita. It is now fully archived and outdated, but here is the link: https://www.rinnegatamante.eu/android/# I was particularly interested in the \"Impossible\" list. It included \"Real Racing 3\", which was eventually ported thanks to u/chutA7X , as well as the Nintendo DS emulator we got thanks to u/Grarakk . Progress moves fast, and it’s fascinating to see what we’ve gained over time. The list itself is old and incomplete. Its status is outdated, too",
+        "published_at": "2026-10-09T14:41:24.000Z"
+      },
+      "classification": {
+        "confidence": "medium",
+        "reason": "2 dev signal(s), 2 passive term(s), category=project_update",
+        "candidate_type": "port",
+        "category": "project_update",
+        "question": false,
+        "spam": false
+      },
+      "provenance": {
+        "repository_url": null,
+        "release_url": null,
+        "evidence_urls": [],
+        "evidence_bundle_id": null,
+        "repository_identity": null,
+        "repository_created_at": null,
+        "repository_last_activity_at": null,
+        "release_facts": [],
+        "vita_evidence": [],
+        "author_linkage": null,
+        "corroboration": [],
+        "duplicate_relation": {
+          "content_hash": "3837bb8ccc475b796ea003827fabb58373433dedda1c7a1ea3d073487db103f2",
+          "related_candidate_ids": []
+        }
+      },
+      "campaign": {
+        "cluster_id": null,
+        "linkage_confidence": "none",
+        "signals": [],
+        "related_candidate_ids": [],
+        "text_fingerprint": "9f555729",
+        "media_fingerprints": [
+          "preview.redd.it/f097k3l3eguh1.png",
+          "i.redd.it/f097k3l3eguh1.png"
+        ],
+        "outbound_fingerprints": [
+          "www.rinnegatamante.eu/android",
+          "www.reddit.com/r/vitahacks/comments/1x1n63v/old_list_of_androidtops_vita_ports_with",
+          "preview.redd.it/f097k3l3eguh1.png",
+          "www.reddit.com/user/verellion73",
+          "i.redd.it/f097k3l3eguh1.png"
+        ],
+        "direct_intent": false,
+        "explicit_campaign_reference": false,
+        "incident_id": null
+      },
+      "risk_signals": [
+        "no_project_evidence_in_post"
+      ],
+      "evidence_gaps": [
+        "exact project repository",
+        "repository identity and activity facts",
+        "release or build evidence",
+        "Vita-specific hardware evidence",
+        "author/developer linkage and independent corroboration"
+      ],
+      "content_hash": "3837bb8ccc475b796ea003827fabb58373433dedda1c7a1ea3d073487db103f2",
+      "review": null,
+      "incident": null
+    },
     {
       "schema_version": 2,
       "id": "reddit-1x1kkaq",
@@ -141,7 +321,7 @@
         }
       },
       "campaign": {
-        "cluster_id": "campaign-bb5a6376",
+        "cluster_id": "campaign-5a76ffd2",
         "linkage_confidence": "medium",
         "signals": [
           "shared_outbound_fingerprint"
@@ -150,7 +330,8 @@
           "reddit-1wyhqcq",
           "reddit-1wycxwx",
           "reddit-1wxgz7q",
-          "reddit-1wukxc7"
+          "reddit-1wukxc7",
+          "reddit-1x1pl2a"
         ],
         "text_fingerprint": "804c8580",
         "media_fingerprints": [
@@ -1562,19 +1743,20 @@
         }
       },
       "campaign": {
-        "cluster_id": "campaign-bb5a6376",
+        "cluster_id": "campaign-5a76ffd2",
         "linkage_confidence": "high",
         "signals": [
+          "shared_outbound_fingerprint",
           "same_author_burst",
           "same_wording_fingerprint",
-          "shared_media_fingerprint",
-          "shared_outbound_fingerprint"
+          "shared_media_fingerprint"
         ],
         "related_candidate_ids": [
+          "reddit-1x1hsq0",
           "reddit-1wycxwx",
           "reddit-1wxgz7q",
           "reddit-1wukxc7",
-          "reddit-1x1hsq0"
+          "reddit-1x1pl2a"
         ],
         "text_fingerprint": "b26a9692",
         "media_fingerprints": [
@@ -1667,19 +1849,20 @@
         }
       },
       "campaign": {
-        "cluster_id": "campaign-bb5a6376",
+        "cluster_id": "campaign-5a76ffd2",
         "linkage_confidence": "high",
         "signals": [
+          "shared_outbound_fingerprint",
           "same_author_burst",
           "same_wording_fingerprint",
-          "shared_media_fingerprint",
-          "shared_outbound_fingerprint"
+          "shared_media_fingerprint"
         ],
         "related_candidate_ids": [
+          "reddit-1x1hsq0",
           "reddit-1wyhqcq",
           "reddit-1wxgz7q",
           "reddit-1wukxc7",
-          "reddit-1x1hsq0"
+          "reddit-1x1pl2a"
         ],
         "text_fingerprint": "b26a9692",
         "media_fingerprints": [
@@ -2047,16 +2230,17 @@
         }
       },
       "campaign": {
-        "cluster_id": "campaign-bb5a6376",
+        "cluster_id": "campaign-5a76ffd2",
         "linkage_confidence": "medium",
         "signals": [
           "shared_outbound_fingerprint"
         ],
         "related_candidate_ids": [
+          "reddit-1x1hsq0",
           "reddit-1wyhqcq",
           "reddit-1wycxwx",
           "reddit-1wukxc7",
-          "reddit-1x1hsq0"
+          "reddit-1x1pl2a"
         ],
         "text_fingerprint": "9275c509",
         "media_fingerprints": [
@@ -2762,16 +2946,17 @@
         }
       },
       "campaign": {
-        "cluster_id": "campaign-bb5a6376",
+        "cluster_id": "campaign-5a76ffd2",
         "linkage_confidence": "medium",
         "signals": [
           "shared_outbound_fingerprint"
         ],
         "related_candidate_ids": [
+          "reddit-1x1hsq0",
           "reddit-1wyhqcq",
           "reddit-1wycxwx",
           "reddit-1wxgz7q",
-          "reddit-1x1hsq0"
+          "reddit-1x1pl2a"
         ],
         "text_fingerprint": "752fdcb0",
         "media_fingerprints": [
