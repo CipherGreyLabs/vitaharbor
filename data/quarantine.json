@@ -1,8 +1,184 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-08T23:47:39.148Z",
+  "generated_at": "2026-10-09T14:24:00.848Z",
   "source": "r/vitahacks + r/VitaPiracy + r/PSVitaHomebrew RSS",
   "items": [
+    {
+      "schema_version": 2,
+      "id": "reddit-1x1kkaq",
+      "external_id": "1x1kkaq",
+      "state": "QUARANTINED",
+      "state_history": [
+        {
+          "state": "DETECTED",
+          "at": "2026-10-09T14:24:00.848Z",
+          "actor": "reddit-scanner",
+          "reason": "Canonical Reddit RSS entry accepted at the ingestion boundary"
+        },
+        {
+          "state": "QUARANTINED",
+          "at": "2026-10-09T14:24:00.848Z",
+          "actor": "reddit-scanner",
+          "reason": "Explicit fake/troll language; held without public amplification"
+        }
+      ],
+      "source": {
+        "platform": "reddit",
+        "subreddit": "vitahacks",
+        "canonical_url": "https://www.reddit.com/r/vitahacks/comments/1x1kkaq/release_bounce_evolution_rovios_2009_nokia_n900/",
+        "author": "my_name_24",
+        "title": "[Release] Bounce Evolution (Rovio’s 2009 Nokia N900 tech demo) running natively on PS Vita – source on GitHub",
+        "body": "Hey everyone, I (AI vibecoded)’ve ported Bounce Evolution to the Vita. It’s a 3D tilt-and-roll ball game Rovio made for the Nokia N900 in 2009, long before Angry Birds. It runs at a steady 60 fps with music, sound effects and tilt controls. How it works The original N900 ARM binary is rebased and linked into the Vita eboot. The libc, GL, X11, EGL, PulseAudio and dbus calls it makes are replaced with shims, and vitaGL handles rendering. It isn’t a rewrite. It’s the original game code running on the Vita. The approach comes from Thomas Perl (thp) and his Maemulator project. Huge thanks to him. H",
+        "published_at": "2026-10-09T12:52:21.000Z"
+      },
+      "classification": {
+        "confidence": "high",
+        "reason": "7 dev signals: \\[release\\], \\brelease\\b, \\brender(?:s|ed|ing)?\\b · category=project_update",
+        "candidate_type": "port",
+        "category": "project_update",
+        "question": false,
+        "spam": false
+      },
+      "provenance": {
+        "repository_url": null,
+        "release_url": null,
+        "evidence_urls": [],
+        "evidence_bundle_id": null,
+        "repository_identity": null,
+        "repository_created_at": null,
+        "repository_last_activity_at": null,
+        "release_facts": [],
+        "vita_evidence": [],
+        "author_linkage": null,
+        "corroboration": [],
+        "duplicate_relation": {
+          "content_hash": "e42a5cbccb39bbaaf853f0dd671e48798b89fed8b8e4ff279ab4fc9be324035c",
+          "related_candidate_ids": []
+        }
+      },
+      "campaign": {
+        "cluster_id": null,
+        "linkage_confidence": "none",
+        "signals": [],
+        "related_candidate_ids": [],
+        "text_fingerprint": "07ba4507",
+        "media_fingerprints": [],
+        "outbound_fingerprints": [
+          "thp.io/2023/maemulator",
+          "thpmaemo.blogspot.com/2021/02/rebounce-softfp-to-hardfp-ldpreload.html",
+          "github.com/myname24/rebounce-vita",
+          "www.reddit.com/user/my_name_24",
+          "www.reddit.com/r/vitahacks/comments/1x1kkaq/release_bounce_evolution_rovios_2009_nokia_n900"
+        ],
+        "direct_intent": true,
+        "explicit_campaign_reference": false,
+        "incident_id": null
+      },
+      "risk_signals": [
+        "explicit_fake_or_troll"
+      ],
+      "evidence_gaps": [
+        "exact project repository",
+        "repository identity and activity facts",
+        "Vita-specific hardware evidence",
+        "author/developer linkage and independent corroboration"
+      ],
+      "content_hash": "e42a5cbccb39bbaaf853f0dd671e48798b89fed8b8e4ff279ab4fc9be324035c",
+      "review": null,
+      "incident": null
+    },
+    {
+      "schema_version": 2,
+      "id": "reddit-1x1hsq0",
+      "external_id": "1x1hsq0",
+      "state": "QUARANTINED",
+      "state_history": [
+        {
+          "state": "DETECTED",
+          "at": "2026-10-09T14:24:00.848Z",
+          "actor": "reddit-scanner",
+          "reason": "Canonical Reddit RSS entry accepted at the ingestion boundary"
+        },
+        {
+          "state": "QUARANTINED",
+          "at": "2026-10-09T14:24:00.848Z",
+          "actor": "reddit-scanner",
+          "reason": "Scanner result is unverified and cannot enter the curated ledger"
+        }
+      ],
+      "source": {
+        "platform": "reddit",
+        "subreddit": "vitahacks",
+        "canonical_url": "https://www.reddit.com/r/vitahacks/comments/1x1hsq0/stay_tuned_thug2_thug_pro_and_american_wasteland/",
+        "author": "grignylagrandeborn",
+        "title": "Stay tuned: THUG2, THUG Pro and American Wasteland are running natively on Vita (WIP)",
+        "body": "First of all, thank you all for the feedback on the Tony Hawk's Underground port. I'm getting a lot of issues to polish things up, but the game is playable and I'm really happy you're enjoying it. I'm a huge fan of the Tony Hawk series, and the Underground games in particular. Being able to port games to my PS Vita today thanks to AI is honestly amazing. I even caught myself just playing my own port instead of testing it. And I'm really glad other people get to enjoy a game from their childhood too. Neversoft Engine Vita Rewriting parts of the engine to fit the Vita tau",
+        "published_at": "2026-10-09T10:26:39.000Z"
+      },
+      "classification": {
+        "confidence": "medium",
+        "reason": "2 dev signal(s), 2 passive term(s), category=project_update",
+        "candidate_type": "engine",
+        "category": "project_update",
+        "question": false,
+        "spam": false
+      },
+      "provenance": {
+        "repository_url": null,
+        "release_url": null,
+        "evidence_urls": [],
+        "evidence_bundle_id": null,
+        "repository_identity": null,
+        "repository_created_at": null,
+        "repository_last_activity_at": null,
+        "release_facts": [],
+        "vita_evidence": [],
+        "author_linkage": null,
+        "corroboration": [],
+        "duplicate_relation": {
+          "content_hash": "ccced2ce14436a67fb8ac8f77fdaf3537c91df06f025b01f153ff610a530db5f",
+          "related_candidate_ids": []
+        }
+      },
+      "campaign": {
+        "cluster_id": "campaign-bb5a6376",
+        "linkage_confidence": "medium",
+        "signals": [
+          "shared_outbound_fingerprint"
+        ],
+        "related_candidate_ids": [
+          "reddit-1wyhqcq",
+          "reddit-1wycxwx",
+          "reddit-1wxgz7q",
+          "reddit-1wukxc7"
+        ],
+        "text_fingerprint": "804c8580",
+        "media_fingerprints": [
+          "external-preview.redd.it/mzrxagztexc0znvomukpbfa1sf0comldd8motce1se_cpdwhovpur36fw2rl.png"
+        ],
+        "outbound_fingerprints": [
+          "www.reddit.com/r/vitahacks/comments/1x1hsq0/stay_tuned_thug2_thug_pro_and_american_wasteland",
+          "external-preview.redd.it/mzrxagztexc0znvomukpbfa1sf0comldd8motce1se_cpdwhovpur36fw2rl.png",
+          "www.reddit.com/user/grignylagrandeborn",
+          "v.redd.it/24dxkxxw4fuh1"
+        ],
+        "direct_intent": false,
+        "explicit_campaign_reference": false,
+        "incident_id": null
+      },
+      "risk_signals": [
+        "no_project_evidence_in_post"
+      ],
+      "evidence_gaps": [
+        "exact project repository",
+        "repository identity and activity facts",
+        "release or build evidence",
+        "author/developer linkage and independent corroboration"
+      ],
+      "content_hash": "ccced2ce14436a67fb8ac8f77fdaf3537c91df06f025b01f153ff610a530db5f",
+      "review": null,
+      "incident": null
+    },
     {
       "schema_version": 2,
       "id": "reddit-1x0ymt9",
@@ -1386,7 +1562,7 @@
         }
       },
       "campaign": {
-        "cluster_id": "campaign-8989614d",
+        "cluster_id": "campaign-bb5a6376",
         "linkage_confidence": "high",
         "signals": [
           "same_author_burst",
@@ -1397,7 +1573,8 @@
         "related_candidate_ids": [
           "reddit-1wycxwx",
           "reddit-1wxgz7q",
-          "reddit-1wukxc7"
+          "reddit-1wukxc7",
+          "reddit-1x1hsq0"
         ],
         "text_fingerprint": "b26a9692",
         "media_fingerprints": [
@@ -1490,7 +1667,7 @@
         }
       },
       "campaign": {
-        "cluster_id": "campaign-8989614d",
+        "cluster_id": "campaign-bb5a6376",
         "linkage_confidence": "high",
         "signals": [
           "same_author_burst",
@@ -1501,7 +1678,8 @@
         "related_candidate_ids": [
           "reddit-1wyhqcq",
           "reddit-1wxgz7q",
-          "reddit-1wukxc7"
+          "reddit-1wukxc7",
+          "reddit-1x1hsq0"
         ],
         "text_fingerprint": "b26a9692",
         "media_fingerprints": [
@@ -1869,7 +2047,7 @@
         }
       },
       "campaign": {
-        "cluster_id": "campaign-8989614d",
+        "cluster_id": "campaign-bb5a6376",
         "linkage_confidence": "medium",
         "signals": [
           "shared_outbound_fingerprint"
@@ -1877,7 +2055,8 @@
         "related_candidate_ids": [
           "reddit-1wyhqcq",
           "reddit-1wycxwx",
-          "reddit-1wukxc7"
+          "reddit-1wukxc7",
+          "reddit-1x1hsq0"
         ],
         "text_fingerprint": "9275c509",
         "media_fingerprints": [
@@ -2583,7 +2762,7 @@
         }
       },
       "campaign": {
-        "cluster_id": "campaign-8989614d",
+        "cluster_id": "campaign-bb5a6376",
         "linkage_confidence": "medium",
         "signals": [
           "shared_outbound_fingerprint"
@@ -2591,7 +2770,8 @@
         "related_candidate_ids": [
           "reddit-1wyhqcq",
           "reddit-1wycxwx",
-          "reddit-1wxgz7q"
+          "reddit-1wxgz7q",
+          "reddit-1x1hsq0"
         ],
         "text_fingerprint": "752fdcb0",
         "media_fingerprints": [
