@@ -1,8 +1,184 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-09T18:51:41.853Z",
+  "generated_at": "2026-10-09T23:20:00.493Z",
   "source": "r/vitahacks + r/VitaPiracy + r/PSVitaHomebrew RSS",
   "items": [
+    {
+      "schema_version": 2,
+      "id": "reddit-1x1wkny",
+      "external_id": "1x1wkny",
+      "state": "QUARANTINED",
+      "state_history": [
+        {
+          "state": "DETECTED",
+          "at": "2026-10-09T23:20:00.493Z",
+          "actor": "reddit-scanner",
+          "reason": "Canonical Reddit RSS entry accepted at the ingestion boundary"
+        },
+        {
+          "state": "QUARANTINED",
+          "at": "2026-10-09T23:20:00.493Z",
+          "actor": "reddit-scanner",
+          "reason": "Explicit fake/troll language; held without public amplification"
+        }
+      ],
+      "source": {
+        "platform": "reddit",
+        "subreddit": "vitahacks",
+        "canonical_url": "https://www.reddit.com/r/vitahacks/comments/1x1wkny/material_like_music_player/",
+        "author": "Perroabuelo",
+        "title": "Material like Music Player",
+        "body": "Hey guys, I know that the doors of hell have been opened with the arrival of AI and now we are surrounded by AI Slop. So here I am contributing to it. This was a project for personal use. I wanted to have a music player for the vita with a design similar to Material You. All the merit is to the original ElevenMPV and ElevenMPV-A teams. I only did a vibecoded re-skin. But I thought that someone else might like it. The repository is public, if you wanna check it out or try it https://github.com/Perroabuelo/Material-Eleven &#32; submitted by &#32; /u/Perroabuelo [link] &#32; [comments]",
+        "published_at": "2026-10-09T20:47:47.000Z"
+      },
+      "classification": {
+        "confidence": "low",
+        "reason": "devHits=1, qHits=0, passive=0, category=new_project",
+        "candidate_type": "port",
+        "category": "new_project",
+        "question": false,
+        "spam": false
+      },
+      "provenance": {
+        "repository_url": null,
+        "release_url": null,
+        "evidence_urls": [],
+        "evidence_bundle_id": null,
+        "repository_identity": null,
+        "repository_created_at": null,
+        "repository_last_activity_at": null,
+        "release_facts": [],
+        "vita_evidence": [],
+        "author_linkage": null,
+        "corroboration": [],
+        "duplicate_relation": {
+          "content_hash": "bbd8305a7c3bf5d6ccc3901196b2e2d1d14bf6b6d2b04a678ae8ea332dfc217f",
+          "related_candidate_ids": []
+        }
+      },
+      "campaign": {
+        "cluster_id": null,
+        "linkage_confidence": "none",
+        "signals": [],
+        "related_candidate_ids": [],
+        "text_fingerprint": "c61ba64e",
+        "media_fingerprints": [
+          "preview.redd.it/uy5epcoo7iuh1.gif",
+          "i.redd.it/uy5epcoo7iuh1.gif"
+        ],
+        "outbound_fingerprints": [
+          "github.com/perroabuelo/material-eleven",
+          "www.reddit.com/r/vitahacks/comments/1x1wkny/material_like_music_player",
+          "preview.redd.it/uy5epcoo7iuh1.gif",
+          "www.reddit.com/user/perroabuelo",
+          "i.redd.it/uy5epcoo7iuh1.gif"
+        ],
+        "direct_intent": true,
+        "explicit_campaign_reference": false,
+        "incident_id": null
+      },
+      "risk_signals": [
+        "explicit_fake_or_troll"
+      ],
+      "evidence_gaps": [
+        "repository identity and activity facts",
+        "release or build evidence",
+        "Vita-specific hardware evidence",
+        "author/developer linkage and independent corroboration",
+        "independent editorial review"
+      ],
+      "content_hash": "bbd8305a7c3bf5d6ccc3901196b2e2d1d14bf6b6d2b04a678ae8ea332dfc217f",
+      "review": null,
+      "incident": null
+    },
+    {
+      "schema_version": 2,
+      "id": "reddit-1x1v4zp",
+      "external_id": "1x1v4zp",
+      "state": "QUARANTINED",
+      "state_history": [
+        {
+          "state": "DETECTED",
+          "at": "2026-10-09T23:20:00.493Z",
+          "actor": "reddit-scanner",
+          "reason": "Canonical Reddit RSS entry accepted at the ingestion boundary"
+        },
+        {
+          "state": "QUARANTINED",
+          "at": "2026-10-09T23:20:00.493Z",
+          "actor": "reddit-scanner",
+          "reason": "Scanner result is unverified and cannot enter the curated ledger"
+        }
+      ],
+      "source": {
+        "platform": "reddit",
+        "subreddit": "vitahacks",
+        "canonical_url": "https://www.reddit.com/r/vitahacks/comments/1x1v4zp/release_robot_unicorn_attack_vita_port_v10/",
+        "author": "stoicpingu",
+        "title": "[Release] Robot Unicorn Attack - Vita Port v1.0",
+        "body": "I had a few tokens to burn before my OpenAI sub ends tomorrow, so I decided to give this a shot. Turns out Astra basically one-shotted the port :) Have fun: https://github.com/stoicpingu/RUA-vita &#32; submitted by &#32; /u/stoicpingu [link] &#32; [comments]",
+        "published_at": "2026-10-09T19:50:36.000Z"
+      },
+      "classification": {
+        "confidence": "high",
+        "reason": "4 dev signals: \\[release\\], \\brelease\\b, \\bv\\d+\\.\\d+\\b · category=new_project",
+        "candidate_type": "port",
+        "category": "new_project",
+        "question": false,
+        "spam": false
+      },
+      "provenance": {
+        "repository_url": null,
+        "release_url": null,
+        "evidence_urls": [],
+        "evidence_bundle_id": null,
+        "repository_identity": null,
+        "repository_created_at": null,
+        "repository_last_activity_at": null,
+        "release_facts": [],
+        "vita_evidence": [],
+        "author_linkage": null,
+        "corroboration": [],
+        "duplicate_relation": {
+          "content_hash": "a659a2e771a88571275df5421f546e971eb7e567eda2d32bcb59bd5017289048",
+          "related_candidate_ids": []
+        }
+      },
+      "campaign": {
+        "cluster_id": "campaign-145787e3",
+        "linkage_confidence": "medium",
+        "signals": [
+          "shared_outbound_fingerprint"
+        ],
+        "related_candidate_ids": [
+          "reddit-1wz3ow3"
+        ],
+        "text_fingerprint": "d6439f83",
+        "media_fingerprints": [
+          "preview.redd.it/4vhtruufxhuh1.png",
+          "i.redd.it/4vhtruufxhuh1.png"
+        ],
+        "outbound_fingerprints": [
+          "github.com/stoicpingu/rua-vita",
+          "www.reddit.com/r/vitahacks/comments/1x1v4zp/release_robot_unicorn_attack_vita_port_v10",
+          "preview.redd.it/4vhtruufxhuh1.png",
+          "www.reddit.com/user/stoicpingu",
+          "i.redd.it/4vhtruufxhuh1.png"
+        ],
+        "direct_intent": false,
+        "explicit_campaign_reference": false,
+        "incident_id": null
+      },
+      "risk_signals": [],
+      "evidence_gaps": [
+        "repository identity and activity facts",
+        "Vita-specific hardware evidence",
+        "author/developer linkage and independent corroboration"
+      ],
+      "content_hash": "a659a2e771a88571275df5421f546e971eb7e567eda2d32bcb59bd5017289048",
+      "review": null,
+      "incident": null
+    },
     {
       "schema_version": 2,
       "id": "reddit-1x1pl2a",
@@ -327,11 +503,11 @@
           "shared_outbound_fingerprint"
         ],
         "related_candidate_ids": [
+          "reddit-1x1pl2a",
           "reddit-1wyhqcq",
           "reddit-1wycxwx",
           "reddit-1wxgz7q",
-          "reddit-1wukxc7",
-          "reddit-1x1pl2a"
+          "reddit-1wukxc7"
         ],
         "text_fingerprint": "804c8580",
         "media_fingerprints": [
@@ -1462,10 +1638,14 @@
         }
       },
       "campaign": {
-        "cluster_id": null,
-        "linkage_confidence": "none",
-        "signals": [],
-        "related_candidate_ids": [],
+        "cluster_id": "campaign-145787e3",
+        "linkage_confidence": "medium",
+        "signals": [
+          "shared_outbound_fingerprint"
+        ],
+        "related_candidate_ids": [
+          "reddit-1x1v4zp"
+        ],
         "text_fingerprint": "096f333d",
         "media_fingerprints": [
           "preview.redd.it/xuyjg9jkuuth1.jpeg",
@@ -1752,11 +1932,11 @@
           "shared_media_fingerprint"
         ],
         "related_candidate_ids": [
+          "reddit-1x1pl2a",
           "reddit-1x1hsq0",
           "reddit-1wycxwx",
           "reddit-1wxgz7q",
-          "reddit-1wukxc7",
-          "reddit-1x1pl2a"
+          "reddit-1wukxc7"
         ],
         "text_fingerprint": "b26a9692",
         "media_fingerprints": [
@@ -1858,11 +2038,11 @@
           "shared_media_fingerprint"
         ],
         "related_candidate_ids": [
+          "reddit-1x1pl2a",
           "reddit-1x1hsq0",
           "reddit-1wyhqcq",
           "reddit-1wxgz7q",
-          "reddit-1wukxc7",
-          "reddit-1x1pl2a"
+          "reddit-1wukxc7"
         ],
         "text_fingerprint": "b26a9692",
         "media_fingerprints": [
@@ -2236,11 +2416,11 @@
           "shared_outbound_fingerprint"
         ],
         "related_candidate_ids": [
+          "reddit-1x1pl2a",
           "reddit-1x1hsq0",
           "reddit-1wyhqcq",
           "reddit-1wycxwx",
-          "reddit-1wukxc7",
-          "reddit-1x1pl2a"
+          "reddit-1wukxc7"
         ],
         "text_fingerprint": "9275c509",
         "media_fingerprints": [
@@ -2952,11 +3132,11 @@
           "shared_outbound_fingerprint"
         ],
         "related_candidate_ids": [
+          "reddit-1x1pl2a",
           "reddit-1x1hsq0",
           "reddit-1wyhqcq",
           "reddit-1wycxwx",
-          "reddit-1wxgz7q",
-          "reddit-1x1pl2a"
+          "reddit-1wxgz7q"
         ],
         "text_fingerprint": "752fdcb0",
         "media_fingerprints": [
