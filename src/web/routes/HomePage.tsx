@@ -16,7 +16,8 @@ import {
   formatDay,
   formatUtcDateTime
 } from "../components/ledger/types";
-import { ArrowRight, ArrowUp, ExternalLink } from "lucide-react";
+import { ArrowRight, ArrowUp, ExternalLink, Volume2, VolumeX } from "lucide-react";
+import { isAudioEnabled, setAudioEnabled, playUiClick, playUiBlip } from "../utils/audio";
 import { countUpdatesSince, readLastVisit, readWatchlist, wasRecentlyUpdated, writeLastVisit, writeWatchlist } from "../lib/visitorState";
 import { fetchCommunityPosts, type CommunityPost } from "../lib/scannerAssets";
 
@@ -127,6 +128,7 @@ export const HomePage: React.FC = () => {
   const [communityPosts, setCommunityPosts] = useState<CommunityPost[]>([]);
   const [previousVisit, setPreviousVisit] = useState<number | null>(null);
   const [watchlistSlugs, setWatchlistSlugs] = useState<string[]>([]);
+  const [soundEnabled, setSoundEnabled] = useState(isAudioEnabled);
 
   const consoleRef = useRef<HTMLDivElement>(null);
   const searchRef = useRef<HTMLInputElement>(null);
@@ -460,6 +462,30 @@ export const HomePage: React.FC = () => {
               <span className="sm:hidden">Posts</span>
               <span className="hidden sm:inline">Community posts</span>
             </a>
+            <button
+              type="button"
+              onClick={() => {
+                const next = !soundEnabled;
+                setSoundEnabled(next);
+                setAudioEnabled(next);
+                if (next) playUiBlip();
+              }}
+              aria-label={soundEnabled ? "Mute UI sound effects" : "Enable tactile UI sound effects (PlayStation LiveArea)"}
+              title={soundEnabled ? "Sound: Enabled" : "Sound: Muted (Click to enable)"}
+              className="inline-flex min-h-[44px] items-center gap-1.5 rounded-lg px-2.5 text-caption font-medium text-ink-muted hover:text-ink transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/20"
+            >
+              {soundEnabled ? (
+                <>
+                  <Volume2 className="h-4 w-4 text-emerald-400" />
+                  <span className="hidden sm:inline text-[11px] font-mono text-emerald-400">Audio ON</span>
+                </>
+              ) : (
+                <>
+                  <VolumeX className="h-4 w-4" />
+                  <span className="hidden sm:inline text-[11px] font-mono">Audio OFF</span>
+                </>
+              )}
+            </button>
 
           </nav>
         </div>

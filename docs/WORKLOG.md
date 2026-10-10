@@ -873,3 +873,27 @@ pm run verify passed (tsc clean, 127/127 unit tests, 30 project pages, 33 sitema
 | Time | Commit / state | Change | Why | Model | Verified |
 |---|---|---|---|---|---|
 | 16:30 UTC | working tree | Integrated data worker handoff (`codex/vh-data-audit-20261007`) and completed UI corrections: 1) Integrated canonical Halo CE Vita port record (`halo-ce-vita`, BirchWoodGod v1.0.3), corrected screenshot mappings, and classifier reputation fixes; 2) In `DirectoryTable.tsx`, replaced misleading repository CTA label `'Get VPK'` with honest `'Source'` button linking to verified source repo; 3) In `VitaConsoleScene.tsx`, removed unverified generic claims (`60 FPS TARGET`, `PLAYSTATION·VITA HARDWARE BUILD`, `VITAHARBOR · SOURCE FRAME`); 4) Verified camera view presets and tactile game dock in `ConsoleStage.tsx`. | Fulfill master delegation: integrate verified data audit and eliminate misleading binary claims and generic hardware text. | gemini-3.7-flash | `npm run verify` passed (tsc clean, 134/134 unit tests, 7/7 integration tests, 28 project pages, 31 sitemap URLs); contrast audit passed 58/58 styles with 0 failures (100% WCAG AA). |
+
+### VH-UI-IMPROVEMENTS-045 3D Console viewport pause, Graduated VitaDB archive & build feed linkage (2026-10-08)
+
+| Time | Commit / state | Change | Why | Model | Verified |
+|---|---|---|---|---|---|
+| 04:35 UTC | working tree | Implemented Master Improvements 3, 4 & 5: 1) 3D Console viewport pause/resume in `VitaConsoleScene.tsx` via `IntersectionObserver` and `visibilitychange` to eliminate CPU/GPU usage when scrolled away; 2) Added 'Graduated to VitaDB' archive view mode in `DirectoryTable.tsx` and `src/shared/constants/graduatedData.ts` displaying 13 released VitaDB ports with direct external links; 3) Linked `npm run data:feeds` to `npm run build` in `package.json`. | Fulfill master delegation: optimize 3D GPU/CPU performance, document completed VitaDB ports, and synchronize public feed generation on every build. | gemini-3.7-flash | `npm run verify` passed (tsc clean, 135/135 unit tests, 7/7 integration tests, 15 project pages, 18 sitemap URLs); contrast audit passed 56/56 styles with 0 failures. |
+
+### VH-MOBILE-SEO-046 Mobile layout audit, touch target tuning & SEO OpenGraph generation (2026-10-08)
+
+| Time | Commit / state | Change | Why | Model | Verified |
+|---|---|---|---|---|---|
+| 14:50 UTC | working tree | Completed Master Options B & C: 1) Verified mobile responsiveness and touch targets via `mobile-audit.mjs` and `mobile-measure.mjs` at 375px, 390px, 412px and 768px (0 horizontal overflow, 0 small touch targets < 44px, smooth horizontal scrolling on stage filter pills); 2) Verified SEO & OpenGraph cards (`make-og.mjs` and `prerender.mjs`) with individual social share images and metadata for all active projects. | Fulfill master delegation for mobile layout fine-tuning and complete SEO card coverage. | gemini-3.7-flash | `npm run verify` passed (tsc clean, 135/135 unit tests, 7/7 integration tests, 17 project pages, 20 sitemap URLs); `mobile-audit.mjs` reported 0 overflow and 0 small targets. |
+
+### VH-SEARCH-GRADUATED-047 Direct search connection to Graduated VitaDB releases (2026-10-08)
+
+| Time | Commit / state | Change | Why | Model | Verified |
+|---|---|---|---|---|---|
+| 23:05 UTC | working tree | Added smart search fallback connection in `DirectoryTable.tsx`: when 0 active WIP ports match a search query but completed releases exist in `GRADUATED_PROJECTS`, render a helpful banner highlighting the matching VitaDB ports with a one-click 'Bekijk in VitaDB Releases' button that switches to `graduated` filter while preserving the search query. | Fulfill master delegation: guide visitors looking for completed ports (e.g. Diablo, Jedi, Barony, Aleph One, Apotris) seamlessly to their VitaDB releases. | gemini-3.7-flash | `npm run verify` passed (tsc clean, 135/135 unit tests, 7/7 integration tests, 21 project pages, 24 sitemap URLs); contrast audit passed 58/58 styles with 0 failures. |
+
+### VH-FEATURES-AUDIO-RUN-048 How to Run checklist, Similar Ports & Web Audio sound effects (2026-10-08)
+
+| Time | Commit / state | Change | Why | Model | Verified |
+|---|---|---|---|---|---|
+| 23:50 UTC | working tree | Implemented Master Improvements 1, 2, 3 & 4: 1) 'How to Run on PS Vita' installation checklist in `ProjectPanel.tsx` detailing required plugins, target data directories (`ux0:data/...`), recommended clock targets, and data instructions; 2) 'Similar Ongoing Ports' recommendations section in `ProjectPanel.tsx` suggesting 2-3 related projects with one-click navigation; 3) Authentic Web Audio API synthesizer (`src/web/utils/audio.ts`) providing soft tactile LiveArea-style blips and clicks on project selection and camera presets, with header audio toggle (default muted); 4) Compact recent activity indicator on Source repository buttons. | Fulfill master delegation: enhance project detail utility with installation checklists and related ports, and add optional tactile sound feedback. | gemini-3.7-flash | `npm run verify` passed (tsc clean, 135/135 unit tests, 7/7 integration tests, 21 project pages, 24 sitemap URLs); contrast audit passed 59/59 styles with 0 failures. |

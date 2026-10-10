@@ -1,8 +1,1314 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-07T14:32:44.596Z",
+  "generated_at": "2026-10-10T17:53:43.828Z",
   "source": "r/vitahacks + r/VitaPiracy + r/PSVitaHomebrew RSS",
   "items": [
+    {
+      "schema_version": 2,
+      "id": "reddit-1x2kzyz",
+      "external_id": "1x2kzyz",
+      "state": "QUARANTINED",
+      "state_history": [
+        {
+          "state": "DETECTED",
+          "at": "2026-10-10T17:53:43.828Z",
+          "actor": "reddit-scanner",
+          "reason": "Canonical Reddit RSS entry accepted at the ingestion boundary"
+        },
+        {
+          "state": "QUARANTINED",
+          "at": "2026-10-10T17:53:43.828Z",
+          "actor": "reddit-scanner",
+          "reason": "Scanner result is unverified and cannot enter the curated ledger"
+        }
+      ],
+      "source": {
+        "platform": "reddit",
+        "subreddit": "vitahacks",
+        "canonical_url": "https://www.reddit.com/r/vitahacks/comments/1x2kzyz/release_predators_psvita_port/",
+        "author": "AJ17O",
+        "title": "[Release] PREDATORS PSvita port",
+        "body": "Credit to Mobstudios for making the game. Credit to ShadowOsmium for decompiling the game. Lightly AI assisted (asked claude to explain the shop bug to me so i could fix it, everything else is me) Download with install instructions: https://github.com/AJ170/Predators-PSVita-Port &#32; submitted by &#32; /u/AJ17O [link] &#32; [comments]",
+        "published_at": "2026-10-10T17:30:37.000Z"
+      },
+      "classification": {
+        "confidence": "high",
+        "reason": "3 dev signals: \\[release\\], \\brelease\\b, github\\.com\\b · category=project_update",
+        "candidate_type": "port",
+        "category": "project_update",
+        "question": false,
+        "spam": false
+      },
+      "provenance": {
+        "repository_url": null,
+        "release_url": null,
+        "evidence_urls": [],
+        "evidence_bundle_id": null,
+        "repository_identity": null,
+        "repository_created_at": null,
+        "repository_last_activity_at": null,
+        "release_facts": [],
+        "vita_evidence": [],
+        "author_linkage": null,
+        "corroboration": [],
+        "duplicate_relation": {
+          "content_hash": "2b12b4e081a29f2f75bac958eb03d94e7d1082ea28c11394d21dd624d20472b3",
+          "related_candidate_ids": []
+        }
+      },
+      "campaign": {
+        "cluster_id": null,
+        "linkage_confidence": "none",
+        "signals": [],
+        "related_candidate_ids": [],
+        "text_fingerprint": "36ca81c9",
+        "media_fingerprints": [
+          "preview.redd.it/mn8ftxlidouh1.png",
+          "i.redd.it/mn8ftxlidouh1.png"
+        ],
+        "outbound_fingerprints": [
+          "github.com/aj170/predators-psvita-port",
+          "www.reddit.com/r/vitahacks/comments/1x2kzyz/release_predators_psvita_port",
+          "preview.redd.it/mn8ftxlidouh1.png",
+          "www.reddit.com/user/aj17o",
+          "i.redd.it/mn8ftxlidouh1.png"
+        ],
+        "direct_intent": false,
+        "explicit_campaign_reference": false,
+        "incident_id": null
+      },
+      "risk_signals": [],
+      "evidence_gaps": [
+        "repository identity and activity facts",
+        "Vita-specific hardware evidence",
+        "author/developer linkage and independent corroboration"
+      ],
+      "content_hash": "2b12b4e081a29f2f75bac958eb03d94e7d1082ea28c11394d21dd624d20472b3",
+      "review": null,
+      "incident": null
+    },
+    {
+      "schema_version": 2,
+      "id": "reddit-1x2jzoi",
+      "external_id": "1x2jzoi",
+      "state": "QUARANTINED",
+      "state_history": [
+        {
+          "state": "DETECTED",
+          "at": "2026-10-10T17:53:43.828Z",
+          "actor": "reddit-scanner",
+          "reason": "Canonical Reddit RSS entry accepted at the ingestion boundary"
+        },
+        {
+          "state": "QUARANTINED",
+          "at": "2026-10-10T17:53:43.828Z",
+          "actor": "reddit-scanner",
+          "reason": "Scanner result is unverified and cannot enter the curated ledger"
+        }
+      ],
+      "source": {
+        "platform": "reddit",
+        "subreddit": "vitahacks",
+        "canonical_url": "https://www.reddit.com/r/vitahacks/comments/1x2jzoi/release_vita_iptv_v02_films_series_native_1080p/",
+        "author": "mrhkyy",
+        "title": "[Release] Vita IPTV v0.2 – films & series, native 1080p H.264, stream analysis",
+        "body": "Vita IPTV v0.2 is out – a native IPTV player for PS Vita / PS TV (HENkaku / Ensō). Download (VPK) and source: https://github.com/emrhky/VitaIPTV/releases **What's new in 0.2** - **1080p is now always on.** 1080p H.264 channels and films play on the Vita's hardware decoder (through the firmware's internal decoder entry points – the public API stops at 720p). HLS channels with several qualities open in 720p, Square switches to 1080p. - **Films and series for Xtream accounts:** Live TV / Films / Series menu, categories, seasons, episodes. - **Film playback:** MKV, MP4 and TS files wit",
+        "published_at": "2026-10-10T16:49:08.000Z"
+      },
+      "classification": {
+        "confidence": "high",
+        "reason": "5 dev signals: \\[release\\], \\brelease\\b, \\bv\\d+\\.\\d+\\b · category=new_project",
+        "candidate_type": "port",
+        "category": "new_project",
+        "question": false,
+        "spam": false
+      },
+      "provenance": {
+        "repository_url": null,
+        "release_url": null,
+        "evidence_urls": [],
+        "evidence_bundle_id": null,
+        "repository_identity": null,
+        "repository_created_at": null,
+        "repository_last_activity_at": null,
+        "release_facts": [],
+        "vita_evidence": [],
+        "author_linkage": null,
+        "corroboration": [],
+        "duplicate_relation": {
+          "content_hash": "c99c1268075e124fa7b501115e0e18e354cdab64e23b46ae6e124907503ef8e7",
+          "related_candidate_ids": []
+        }
+      },
+      "campaign": {
+        "cluster_id": "campaign-3cb25532",
+        "linkage_confidence": "medium",
+        "signals": [
+          "same_author_burst",
+          "shared_outbound_fingerprint"
+        ],
+        "related_candidate_ids": [
+          "reddit-1x0brhk"
+        ],
+        "text_fingerprint": "0aac671b",
+        "media_fingerprints": [
+          "preview.redd.it/h75fknkx5ouh1.png"
+        ],
+        "outbound_fingerprints": [
+          "github.com/emrhky/vitaiptv/releases",
+          "www.reddit.com/r/vitahacks/comments/1x2jzoi/release_vita_iptv_v02_films_series_native_1080p",
+          "preview.redd.it/h75fknkx5ouh1.png",
+          "www.reddit.com/user/mrhkyy",
+          "www.reddit.com/gallery/1x2jzoi"
+        ],
+        "direct_intent": false,
+        "explicit_campaign_reference": false,
+        "incident_id": null
+      },
+      "risk_signals": [],
+      "evidence_gaps": [
+        "repository identity and activity facts",
+        "Vita-specific hardware evidence",
+        "author/developer linkage and independent corroboration"
+      ],
+      "content_hash": "c99c1268075e124fa7b501115e0e18e354cdab64e23b46ae6e124907503ef8e7",
+      "review": null,
+      "incident": null
+    },
+    {
+      "schema_version": 2,
+      "id": "reddit-1x2g9mt",
+      "external_id": "1x2g9mt",
+      "state": "QUARANTINED",
+      "state_history": [
+        {
+          "state": "DETECTED",
+          "at": "2026-10-10T17:53:43.828Z",
+          "actor": "reddit-scanner",
+          "reason": "Canonical Reddit RSS entry accepted at the ingestion boundary"
+        },
+        {
+          "state": "QUARANTINED",
+          "at": "2026-10-10T17:53:43.828Z",
+          "actor": "reddit-scanner",
+          "reason": "Scanner result is unverified and cannot enter the curated ledger"
+        }
+      ],
+      "source": {
+        "platform": "reddit",
+        "subreddit": "vitahacks",
+        "canonical_url": "https://www.reddit.com/r/vitahacks/comments/1x2g9mt/release_music_vita_10_the_ps_vitas_very_own_music/",
+        "author": "Usual_Plenty_5480",
+        "title": "[RELEASE] Music Vita 1.0 The PS Vitas Very Own Music Player With Real Time Visualizers Lyrics And Even More Here",
+        "body": "Hey everyone, I'm Bville Retro and I just released Music Vita, a music player for the PS Vita. What it does Plays MP3 and WAV, with playlists you can build on the Vita or as .m3u files Karaoke-style synced lyrics, from the MP3's tags or from Song.lrc files next to your songs Cover art in a list or a grid of albums 5 visualizers, including a Vib Ribbon-style one, plus 8 premade color themes and a custom theme Skim through a song, shuffle and repeat, and a screen-off mode that keeps playing Install: download the VPK from the releases page, install it with VitaShell, and copy your music t",
+        "published_at": "2026-10-10T14:10:43.000Z"
+      },
+      "classification": {
+        "confidence": "high",
+        "reason": "4 dev signals: \\[release\\], \\brelease\\b, \\bbuild\\b · category=new_project",
+        "candidate_type": "port",
+        "category": "new_project",
+        "question": false,
+        "spam": false
+      },
+      "provenance": {
+        "repository_url": null,
+        "release_url": null,
+        "evidence_urls": [],
+        "evidence_bundle_id": null,
+        "repository_identity": null,
+        "repository_created_at": null,
+        "repository_last_activity_at": null,
+        "release_facts": [],
+        "vita_evidence": [],
+        "author_linkage": null,
+        "corroboration": [],
+        "duplicate_relation": {
+          "content_hash": "56f89e4a29ce20fc8014a798a4bddfae88bce0013c0f40335f3f1cbb90ac2f11",
+          "related_candidate_ids": []
+        }
+      },
+      "campaign": {
+        "cluster_id": null,
+        "linkage_confidence": "none",
+        "signals": [],
+        "related_candidate_ids": [],
+        "text_fingerprint": "93d68cd7",
+        "media_fingerprints": [
+          "preview.redd.it/2h7khbsmdnuh1.png"
+        ],
+        "outbound_fingerprints": [
+          "www.reddit.com/r/vitahacks/comments/1x2g9mt/release_music_vita_10_the_ps_vitas_very_own_music",
+          "preview.redd.it/2h7khbsmdnuh1.png",
+          "github.com/bvilleretro/music-vita/releases",
+          "www.reddit.com/user/usual_plenty_5480",
+          "www.reddit.com/gallery/1x2g9mt"
+        ],
+        "direct_intent": false,
+        "explicit_campaign_reference": false,
+        "incident_id": null
+      },
+      "risk_signals": [],
+      "evidence_gaps": [
+        "exact project repository",
+        "repository identity and activity facts",
+        "Vita-specific hardware evidence",
+        "author/developer linkage and independent corroboration"
+      ],
+      "content_hash": "56f89e4a29ce20fc8014a798a4bddfae88bce0013c0f40335f3f1cbb90ac2f11",
+      "review": null,
+      "incident": null
+    },
+    {
+      "schema_version": 2,
+      "id": "reddit-1x24tze",
+      "external_id": "1x24tze",
+      "state": "QUARANTINED",
+      "state_history": [
+        {
+          "state": "DETECTED",
+          "at": "2026-10-10T13:45:09.872Z",
+          "actor": "reddit-scanner",
+          "reason": "Canonical Reddit RSS entry accepted at the ingestion boundary"
+        },
+        {
+          "state": "QUARANTINED",
+          "at": "2026-10-10T13:45:09.872Z",
+          "actor": "reddit-scanner",
+          "reason": "Scanner result is unverified and cannot enter the curated ledger"
+        }
+      ],
+      "source": {
+        "platform": "reddit",
+        "subreddit": "vitahacks",
+        "canonical_url": "https://www.reddit.com/r/vitahacks/comments/1x24tze/nfs_underground_2_vita_port/",
+        "author": "the_billy_goat",
+        "title": "NFS Underground 2 - Vita Port",
+        "body": "Hello! I previously posted over on r/VitaPiracy the other day, but figured I'd post here to share the word, I'm well under way on porting NFS Underground 2 to the Vita! It is FAR from being in a state that I'm happy with before sharing out, let alone a finished state, but it is getting there. I've so far gotten basic car customization implemented, reflections, ported most of the physics engine from the PC version (shoutout to OpenUG2 for also being of assistance), and more. There is still a fair bit to go, including adding AI opponents, adding the rest of the menus (maybe like",
+        "published_at": "2026-10-10T03:21:54.000Z"
+      },
+      "classification": {
+        "confidence": "medium",
+        "reason": "1 dev signal(s), 2 passive term(s), category=project_update",
+        "candidate_type": "engine",
+        "category": "project_update",
+        "question": false,
+        "spam": false
+      },
+      "provenance": {
+        "repository_url": null,
+        "release_url": null,
+        "evidence_urls": [],
+        "evidence_bundle_id": null,
+        "repository_identity": null,
+        "repository_created_at": null,
+        "repository_last_activity_at": null,
+        "release_facts": [],
+        "vita_evidence": [],
+        "author_linkage": null,
+        "corroboration": [],
+        "duplicate_relation": {
+          "content_hash": "759f0b259b52a3e51348fb0175ac345d2d01cec409b279e586594ddad7431ddd",
+          "related_candidate_ids": []
+        }
+      },
+      "campaign": {
+        "cluster_id": null,
+        "linkage_confidence": "none",
+        "signals": [],
+        "related_candidate_ids": [],
+        "text_fingerprint": "5979c7e9",
+        "media_fingerprints": [
+          "preview.redd.it/r7j1w9615kuh1.jpeg",
+          "i.redd.it/r7j1w9615kuh1.jpeg"
+        ],
+        "outbound_fingerprints": [
+          "www.reddit.com/r/vitahacks/comments/1x24tze/nfs_underground_2_vita_port",
+          "preview.redd.it/r7j1w9615kuh1.jpeg",
+          "www.reddit.com/user/sundaelow2086",
+          "x.com/nfsu2vita",
+          "www.reddit.com/user/the_billy_goat",
+          "i.redd.it/r7j1w9615kuh1.jpeg"
+        ],
+        "direct_intent": false,
+        "explicit_campaign_reference": false,
+        "incident_id": null
+      },
+      "risk_signals": [
+        "no_project_evidence_in_post"
+      ],
+      "evidence_gaps": [
+        "exact project repository",
+        "repository identity and activity facts",
+        "release or build evidence",
+        "Vita-specific hardware evidence",
+        "author/developer linkage and independent corroboration"
+      ],
+      "content_hash": "759f0b259b52a3e51348fb0175ac345d2d01cec409b279e586594ddad7431ddd",
+      "review": null,
+      "incident": null
+    },
+    {
+      "schema_version": 2,
+      "id": "reddit-1x1wkny",
+      "external_id": "1x1wkny",
+      "state": "QUARANTINED",
+      "state_history": [
+        {
+          "state": "DETECTED",
+          "at": "2026-10-09T23:20:00.493Z",
+          "actor": "reddit-scanner",
+          "reason": "Canonical Reddit RSS entry accepted at the ingestion boundary"
+        },
+        {
+          "state": "QUARANTINED",
+          "at": "2026-10-09T23:20:00.493Z",
+          "actor": "reddit-scanner",
+          "reason": "Explicit fake/troll language; held without public amplification"
+        }
+      ],
+      "source": {
+        "platform": "reddit",
+        "subreddit": "vitahacks",
+        "canonical_url": "https://www.reddit.com/r/vitahacks/comments/1x1wkny/material_like_music_player/",
+        "author": "Perroabuelo",
+        "title": "Material like Music Player",
+        "body": "Hey guys, I know that the doors of hell have been opened with the arrival of AI and now we are surrounded by AI Slop. So here I am contributing to it. This was a project for personal use. I wanted to have a music player for the vita with a design similar to Material You. All the merit is to the original ElevenMPV and ElevenMPV-A teams. I only did a vibecoded re-skin. But I thought that someone else might like it. The repository is public, if you wanna check it out or try it https://github.com/Perroabuelo/Material-Eleven &#32; submitted by &#32; /u/Perroabuelo [link] &#32; [comments]",
+        "published_at": "2026-10-09T20:47:47.000Z"
+      },
+      "classification": {
+        "confidence": "low",
+        "reason": "devHits=1, qHits=0, passive=0, category=new_project",
+        "candidate_type": "port",
+        "category": "new_project",
+        "question": false,
+        "spam": false
+      },
+      "provenance": {
+        "repository_url": null,
+        "release_url": null,
+        "evidence_urls": [],
+        "evidence_bundle_id": null,
+        "repository_identity": null,
+        "repository_created_at": null,
+        "repository_last_activity_at": null,
+        "release_facts": [],
+        "vita_evidence": [],
+        "author_linkage": null,
+        "corroboration": [],
+        "duplicate_relation": {
+          "content_hash": "bbd8305a7c3bf5d6ccc3901196b2e2d1d14bf6b6d2b04a678ae8ea332dfc217f",
+          "related_candidate_ids": []
+        }
+      },
+      "campaign": {
+        "cluster_id": null,
+        "linkage_confidence": "none",
+        "signals": [],
+        "related_candidate_ids": [],
+        "text_fingerprint": "c61ba64e",
+        "media_fingerprints": [
+          "preview.redd.it/uy5epcoo7iuh1.gif",
+          "i.redd.it/uy5epcoo7iuh1.gif"
+        ],
+        "outbound_fingerprints": [
+          "github.com/perroabuelo/material-eleven",
+          "www.reddit.com/r/vitahacks/comments/1x1wkny/material_like_music_player",
+          "preview.redd.it/uy5epcoo7iuh1.gif",
+          "www.reddit.com/user/perroabuelo",
+          "i.redd.it/uy5epcoo7iuh1.gif"
+        ],
+        "direct_intent": true,
+        "explicit_campaign_reference": false,
+        "incident_id": null
+      },
+      "risk_signals": [
+        "explicit_fake_or_troll"
+      ],
+      "evidence_gaps": [
+        "repository identity and activity facts",
+        "release or build evidence",
+        "Vita-specific hardware evidence",
+        "author/developer linkage and independent corroboration",
+        "independent editorial review"
+      ],
+      "content_hash": "bbd8305a7c3bf5d6ccc3901196b2e2d1d14bf6b6d2b04a678ae8ea332dfc217f",
+      "review": null,
+      "incident": null
+    },
+    {
+      "schema_version": 2,
+      "id": "reddit-1x1v4zp",
+      "external_id": "1x1v4zp",
+      "state": "QUARANTINED",
+      "state_history": [
+        {
+          "state": "DETECTED",
+          "at": "2026-10-09T23:20:00.493Z",
+          "actor": "reddit-scanner",
+          "reason": "Canonical Reddit RSS entry accepted at the ingestion boundary"
+        },
+        {
+          "state": "QUARANTINED",
+          "at": "2026-10-09T23:20:00.493Z",
+          "actor": "reddit-scanner",
+          "reason": "Scanner result is unverified and cannot enter the curated ledger"
+        }
+      ],
+      "source": {
+        "platform": "reddit",
+        "subreddit": "vitahacks",
+        "canonical_url": "https://www.reddit.com/r/vitahacks/comments/1x1v4zp/release_robot_unicorn_attack_vita_port_v10/",
+        "author": "stoicpingu",
+        "title": "[Release] Robot Unicorn Attack - Vita Port v1.0",
+        "body": "I had a few tokens to burn before my OpenAI sub ends tomorrow, so I decided to give this a shot. Turns out Astra basically one-shotted the port :) Have fun: https://github.com/stoicpingu/RUA-vita &#32; submitted by &#32; /u/stoicpingu [link] &#32; [comments]",
+        "published_at": "2026-10-09T19:50:36.000Z"
+      },
+      "classification": {
+        "confidence": "high",
+        "reason": "4 dev signals: \\[release\\], \\brelease\\b, \\bv\\d+\\.\\d+\\b · category=new_project",
+        "candidate_type": "port",
+        "category": "new_project",
+        "question": false,
+        "spam": false
+      },
+      "provenance": {
+        "repository_url": null,
+        "release_url": null,
+        "evidence_urls": [],
+        "evidence_bundle_id": null,
+        "repository_identity": null,
+        "repository_created_at": null,
+        "repository_last_activity_at": null,
+        "release_facts": [],
+        "vita_evidence": [],
+        "author_linkage": null,
+        "corroboration": [],
+        "duplicate_relation": {
+          "content_hash": "a659a2e771a88571275df5421f546e971eb7e567eda2d32bcb59bd5017289048",
+          "related_candidate_ids": []
+        }
+      },
+      "campaign": {
+        "cluster_id": "campaign-145787e3",
+        "linkage_confidence": "medium",
+        "signals": [
+          "shared_outbound_fingerprint"
+        ],
+        "related_candidate_ids": [
+          "reddit-1wz3ow3"
+        ],
+        "text_fingerprint": "d6439f83",
+        "media_fingerprints": [
+          "preview.redd.it/4vhtruufxhuh1.png",
+          "i.redd.it/4vhtruufxhuh1.png"
+        ],
+        "outbound_fingerprints": [
+          "github.com/stoicpingu/rua-vita",
+          "www.reddit.com/r/vitahacks/comments/1x1v4zp/release_robot_unicorn_attack_vita_port_v10",
+          "preview.redd.it/4vhtruufxhuh1.png",
+          "www.reddit.com/user/stoicpingu",
+          "i.redd.it/4vhtruufxhuh1.png"
+        ],
+        "direct_intent": false,
+        "explicit_campaign_reference": false,
+        "incident_id": null
+      },
+      "risk_signals": [],
+      "evidence_gaps": [
+        "repository identity and activity facts",
+        "Vita-specific hardware evidence",
+        "author/developer linkage and independent corroboration"
+      ],
+      "content_hash": "a659a2e771a88571275df5421f546e971eb7e567eda2d32bcb59bd5017289048",
+      "review": null,
+      "incident": null
+    },
+    {
+      "schema_version": 2,
+      "id": "reddit-1x1pl2a",
+      "external_id": "1x1pl2a",
+      "state": "QUARANTINED",
+      "state_history": [
+        {
+          "state": "DETECTED",
+          "at": "2026-10-09T18:51:41.853Z",
+          "actor": "reddit-scanner",
+          "reason": "Canonical Reddit RSS entry accepted at the ingestion boundary"
+        },
+        {
+          "state": "QUARANTINED",
+          "at": "2026-10-09T18:51:41.853Z",
+          "actor": "reddit-scanner",
+          "reason": "Scanner result is unverified and cannot enter the curated ledger"
+        }
+      ],
+      "source": {
+        "platform": "reddit",
+        "subreddit": "vitahacks",
+        "canonical_url": "https://www.reddit.com/r/vitahacks/comments/1x1pl2a/resident_evil_code_veronica_x_port/",
+        "author": "ziobleed1",
+        "title": "Resident Evil Code Veronica X port - Rinnegatamante's First Showcase",
+        "body": "Rinnegatamante has published on youtube the first showcase of his work on porting Resident Evil Code Veronica X on PS Vita. It's the port based on the decompilation project of the PS2 game: https://github.com/AshfordFamily/recvx-decomp &#32; submitted by &#32; /u/ziobleed1 [link] &#32; [comments]",
+        "published_at": "2026-10-09T16:15:38.000Z"
+      },
+      "classification": {
+        "confidence": "medium",
+        "reason": "2 dev signal(s), 2 passive term(s), category=new_project",
+        "candidate_type": "decompilation",
+        "category": "new_project",
+        "question": false,
+        "spam": false
+      },
+      "provenance": {
+        "repository_url": null,
+        "release_url": null,
+        "evidence_urls": [],
+        "evidence_bundle_id": null,
+        "repository_identity": null,
+        "repository_created_at": null,
+        "repository_last_activity_at": null,
+        "release_facts": [],
+        "vita_evidence": [],
+        "author_linkage": null,
+        "corroboration": [],
+        "duplicate_relation": {
+          "content_hash": "1f0074b9cc935f86b8454b5121f5e528de7e800845eb25ad98361e28ea50045b",
+          "related_candidate_ids": []
+        }
+      },
+      "campaign": {
+        "cluster_id": "campaign-5a76ffd2",
+        "linkage_confidence": "medium",
+        "signals": [
+          "shared_outbound_fingerprint"
+        ],
+        "related_candidate_ids": [
+          "reddit-1x1hsq0",
+          "reddit-1wyhqcq",
+          "reddit-1wycxwx",
+          "reddit-1wxgz7q",
+          "reddit-1wukxc7"
+        ],
+        "text_fingerprint": "07c8454f",
+        "media_fingerprints": [
+          "external-preview.redd.it/ytf6ilnvfoogs8c2vnqhlznhh7jysxztbmcozjejxuy.jpeg"
+        ],
+        "outbound_fingerprints": [
+          "github.com/ashfordfamily/recvx-decomp",
+          "www.reddit.com/r/vitahacks/comments/1x1pl2a/resident_evil_code_veronica_x_port",
+          "external-preview.redd.it/ytf6ilnvfoogs8c2vnqhlznhh7jysxztbmcozjejxuy.jpeg",
+          "www.reddit.com/user/ziobleed1",
+          "www.youtube.com/watch"
+        ],
+        "direct_intent": false,
+        "explicit_campaign_reference": false,
+        "incident_id": null
+      },
+      "risk_signals": [],
+      "evidence_gaps": [
+        "repository identity and activity facts",
+        "release or build evidence",
+        "Vita-specific hardware evidence",
+        "author/developer linkage and independent corroboration"
+      ],
+      "content_hash": "1f0074b9cc935f86b8454b5121f5e528de7e800845eb25ad98361e28ea50045b",
+      "review": null,
+      "incident": null
+    },
+    {
+      "schema_version": 2,
+      "id": "reddit-1x1n63v",
+      "external_id": "1x1n63v",
+      "state": "QUARANTINED",
+      "state_history": [
+        {
+          "state": "DETECTED",
+          "at": "2026-10-09T18:51:41.853Z",
+          "actor": "reddit-scanner",
+          "reason": "Canonical Reddit RSS entry accepted at the ingestion boundary"
+        },
+        {
+          "state": "QUARANTINED",
+          "at": "2026-10-09T18:51:41.853Z",
+          "actor": "reddit-scanner",
+          "reason": "Scanner result is unverified and cannot enter the curated ledger"
+        }
+      ],
+      "source": {
+        "platform": "reddit",
+        "subreddit": "vitahacks",
+        "canonical_url": "https://www.reddit.com/r/vitahacks/comments/1x1n63v/old_list_of_androidtops_vita_ports_with/",
+        "author": "Verellion73",
+        "title": "Old list of Android-to-PS Vita ports with \"impossible\" status",
+        "body": "As you may recall, there used to be a site by u/realRinnegatamante listing Android games that were candidates for porting to the Vita. It is now fully archived and outdated, but here is the link: https://www.rinnegatamante.eu/android/# I was particularly interested in the \"Impossible\" list. It included \"Real Racing 3\", which was eventually ported thanks to u/chutA7X , as well as the Nintendo DS emulator we got thanks to u/Grarakk . Progress moves fast, and it’s fascinating to see what we’ve gained over time. The list itself is old and incomplete. Its status is outdated, too",
+        "published_at": "2026-10-09T14:41:24.000Z"
+      },
+      "classification": {
+        "confidence": "medium",
+        "reason": "2 dev signal(s), 2 passive term(s), category=project_update",
+        "candidate_type": "port",
+        "category": "project_update",
+        "question": false,
+        "spam": false
+      },
+      "provenance": {
+        "repository_url": null,
+        "release_url": null,
+        "evidence_urls": [],
+        "evidence_bundle_id": null,
+        "repository_identity": null,
+        "repository_created_at": null,
+        "repository_last_activity_at": null,
+        "release_facts": [],
+        "vita_evidence": [],
+        "author_linkage": null,
+        "corroboration": [],
+        "duplicate_relation": {
+          "content_hash": "3837bb8ccc475b796ea003827fabb58373433dedda1c7a1ea3d073487db103f2",
+          "related_candidate_ids": []
+        }
+      },
+      "campaign": {
+        "cluster_id": null,
+        "linkage_confidence": "none",
+        "signals": [],
+        "related_candidate_ids": [],
+        "text_fingerprint": "9f555729",
+        "media_fingerprints": [
+          "preview.redd.it/f097k3l3eguh1.png",
+          "i.redd.it/f097k3l3eguh1.png"
+        ],
+        "outbound_fingerprints": [
+          "www.rinnegatamante.eu/android",
+          "www.reddit.com/r/vitahacks/comments/1x1n63v/old_list_of_androidtops_vita_ports_with",
+          "preview.redd.it/f097k3l3eguh1.png",
+          "www.reddit.com/user/verellion73",
+          "i.redd.it/f097k3l3eguh1.png"
+        ],
+        "direct_intent": false,
+        "explicit_campaign_reference": false,
+        "incident_id": null
+      },
+      "risk_signals": [
+        "no_project_evidence_in_post"
+      ],
+      "evidence_gaps": [
+        "exact project repository",
+        "repository identity and activity facts",
+        "release or build evidence",
+        "Vita-specific hardware evidence",
+        "author/developer linkage and independent corroboration"
+      ],
+      "content_hash": "3837bb8ccc475b796ea003827fabb58373433dedda1c7a1ea3d073487db103f2",
+      "review": null,
+      "incident": null
+    },
+    {
+      "schema_version": 2,
+      "id": "reddit-1x1kkaq",
+      "external_id": "1x1kkaq",
+      "state": "QUARANTINED",
+      "state_history": [
+        {
+          "state": "DETECTED",
+          "at": "2026-10-09T14:24:00.848Z",
+          "actor": "reddit-scanner",
+          "reason": "Canonical Reddit RSS entry accepted at the ingestion boundary"
+        },
+        {
+          "state": "QUARANTINED",
+          "at": "2026-10-09T14:24:00.848Z",
+          "actor": "reddit-scanner",
+          "reason": "Explicit fake/troll language; held without public amplification"
+        }
+      ],
+      "source": {
+        "platform": "reddit",
+        "subreddit": "vitahacks",
+        "canonical_url": "https://www.reddit.com/r/vitahacks/comments/1x1kkaq/release_bounce_evolution_rovios_2009_nokia_n900/",
+        "author": "my_name_24",
+        "title": "[Release] Bounce Evolution (Rovio’s 2009 Nokia N900 tech demo) running natively on PS Vita – source on GitHub",
+        "body": "Hey everyone, I (AI vibecoded)’ve ported Bounce Evolution to the Vita. It’s a 3D tilt-and-roll ball game Rovio made for the Nokia N900 in 2009, long before Angry Birds. It runs at a steady 60 fps with music, sound effects and tilt controls. How it works The original N900 ARM binary is rebased and linked into the Vita eboot. The libc, GL, X11, EGL, PulseAudio and dbus calls it makes are replaced with shims, and vitaGL handles rendering. It isn’t a rewrite. It’s the original game code running on the Vita. The approach comes from Thomas Perl (thp) and his Maemulator project. Huge thanks to him. H",
+        "published_at": "2026-10-09T12:52:21.000Z"
+      },
+      "classification": {
+        "confidence": "high",
+        "reason": "7 dev signals: \\[release\\], \\brelease\\b, \\brender(?:s|ed|ing)?\\b · category=project_update",
+        "candidate_type": "port",
+        "category": "project_update",
+        "question": false,
+        "spam": false
+      },
+      "provenance": {
+        "repository_url": null,
+        "release_url": null,
+        "evidence_urls": [],
+        "evidence_bundle_id": null,
+        "repository_identity": null,
+        "repository_created_at": null,
+        "repository_last_activity_at": null,
+        "release_facts": [],
+        "vita_evidence": [],
+        "author_linkage": null,
+        "corroboration": [],
+        "duplicate_relation": {
+          "content_hash": "e42a5cbccb39bbaaf853f0dd671e48798b89fed8b8e4ff279ab4fc9be324035c",
+          "related_candidate_ids": []
+        }
+      },
+      "campaign": {
+        "cluster_id": null,
+        "linkage_confidence": "none",
+        "signals": [],
+        "related_candidate_ids": [],
+        "text_fingerprint": "07ba4507",
+        "media_fingerprints": [],
+        "outbound_fingerprints": [
+          "thp.io/2023/maemulator",
+          "thpmaemo.blogspot.com/2021/02/rebounce-softfp-to-hardfp-ldpreload.html",
+          "github.com/myname24/rebounce-vita",
+          "www.reddit.com/user/my_name_24",
+          "www.reddit.com/r/vitahacks/comments/1x1kkaq/release_bounce_evolution_rovios_2009_nokia_n900"
+        ],
+        "direct_intent": true,
+        "explicit_campaign_reference": false,
+        "incident_id": null
+      },
+      "risk_signals": [
+        "explicit_fake_or_troll"
+      ],
+      "evidence_gaps": [
+        "exact project repository",
+        "repository identity and activity facts",
+        "Vita-specific hardware evidence",
+        "author/developer linkage and independent corroboration"
+      ],
+      "content_hash": "e42a5cbccb39bbaaf853f0dd671e48798b89fed8b8e4ff279ab4fc9be324035c",
+      "review": null,
+      "incident": null
+    },
+    {
+      "schema_version": 2,
+      "id": "reddit-1x1hsq0",
+      "external_id": "1x1hsq0",
+      "state": "QUARANTINED",
+      "state_history": [
+        {
+          "state": "DETECTED",
+          "at": "2026-10-09T14:24:00.848Z",
+          "actor": "reddit-scanner",
+          "reason": "Canonical Reddit RSS entry accepted at the ingestion boundary"
+        },
+        {
+          "state": "QUARANTINED",
+          "at": "2026-10-09T14:24:00.848Z",
+          "actor": "reddit-scanner",
+          "reason": "Scanner result is unverified and cannot enter the curated ledger"
+        }
+      ],
+      "source": {
+        "platform": "reddit",
+        "subreddit": "vitahacks",
+        "canonical_url": "https://www.reddit.com/r/vitahacks/comments/1x1hsq0/stay_tuned_thug2_thug_pro_and_american_wasteland/",
+        "author": "grignylagrandeborn",
+        "title": "Stay tuned: THUG2, THUG Pro and American Wasteland are running natively on Vita (WIP)",
+        "body": "First of all, thank you all for the feedback on the Tony Hawk's Underground port. I'm getting a lot of issues to polish things up, but the game is playable and I'm really happy you're enjoying it. I'm a huge fan of the Tony Hawk series, and the Underground games in particular. Being able to port games to my PS Vita today thanks to AI is honestly amazing. I even caught myself just playing my own port instead of testing it. And I'm really glad other people get to enjoy a game from their childhood too. Neversoft Engine Vita Rewriting parts of the engine to fit the Vita tau",
+        "published_at": "2026-10-09T10:26:39.000Z"
+      },
+      "classification": {
+        "confidence": "medium",
+        "reason": "2 dev signal(s), 2 passive term(s), category=project_update",
+        "candidate_type": "engine",
+        "category": "project_update",
+        "question": false,
+        "spam": false
+      },
+      "provenance": {
+        "repository_url": null,
+        "release_url": null,
+        "evidence_urls": [],
+        "evidence_bundle_id": null,
+        "repository_identity": null,
+        "repository_created_at": null,
+        "repository_last_activity_at": null,
+        "release_facts": [],
+        "vita_evidence": [],
+        "author_linkage": null,
+        "corroboration": [],
+        "duplicate_relation": {
+          "content_hash": "ccced2ce14436a67fb8ac8f77fdaf3537c91df06f025b01f153ff610a530db5f",
+          "related_candidate_ids": []
+        }
+      },
+      "campaign": {
+        "cluster_id": "campaign-5a76ffd2",
+        "linkage_confidence": "medium",
+        "signals": [
+          "shared_outbound_fingerprint"
+        ],
+        "related_candidate_ids": [
+          "reddit-1x1pl2a",
+          "reddit-1wyhqcq",
+          "reddit-1wycxwx",
+          "reddit-1wxgz7q",
+          "reddit-1wukxc7"
+        ],
+        "text_fingerprint": "804c8580",
+        "media_fingerprints": [
+          "external-preview.redd.it/mzrxagztexc0znvomukpbfa1sf0comldd8motce1se_cpdwhovpur36fw2rl.png"
+        ],
+        "outbound_fingerprints": [
+          "www.reddit.com/r/vitahacks/comments/1x1hsq0/stay_tuned_thug2_thug_pro_and_american_wasteland",
+          "external-preview.redd.it/mzrxagztexc0znvomukpbfa1sf0comldd8motce1se_cpdwhovpur36fw2rl.png",
+          "www.reddit.com/user/grignylagrandeborn",
+          "v.redd.it/24dxkxxw4fuh1"
+        ],
+        "direct_intent": false,
+        "explicit_campaign_reference": false,
+        "incident_id": null
+      },
+      "risk_signals": [
+        "no_project_evidence_in_post"
+      ],
+      "evidence_gaps": [
+        "exact project repository",
+        "repository identity and activity facts",
+        "release or build evidence",
+        "author/developer linkage and independent corroboration"
+      ],
+      "content_hash": "ccced2ce14436a67fb8ac8f77fdaf3537c91df06f025b01f153ff610a530db5f",
+      "review": null,
+      "incident": null
+    },
+    {
+      "schema_version": 2,
+      "id": "reddit-1x0ymt9",
+      "external_id": "1x0ymt9",
+      "state": "QUARANTINED",
+      "state_history": [
+        {
+          "state": "DETECTED",
+          "at": "2026-10-08T19:18:52.056Z",
+          "actor": "reddit-scanner",
+          "reason": "Canonical Reddit RSS entry accepted at the ingestion boundary"
+        },
+        {
+          "state": "QUARANTINED",
+          "at": "2026-10-08T19:18:52.056Z",
+          "actor": "reddit-scanner",
+          "reason": "Scanner result is unverified and cannot enter the curated ledger"
+        }
+      ],
+      "source": {
+        "platform": "reddit",
+        "subreddit": "PSVitaHomebrew",
+        "canonical_url": "https://www.reddit.com/r/PSVitaHomebrew/comments/1x0ymt9/release_vita_chess_v10_a_full_2d_chess_game_with/",
+        "author": "kygenbagels",
+        "title": "[Release] Vita Chess v1.0: A full 2D chess game, with puzzles, lessons, and 8 difficulty levels",
+        "body": "&#32; submitted by &#32; /u/kygenbagels [link] &#32; [comments]",
+        "published_at": "2026-10-08T18:27:13.000Z"
+      },
+      "classification": {
+        "confidence": "high",
+        "reason": "3 dev signals: \\[release\\], \\brelease\\b, \\bv\\d+\\.\\d+\\b · category=new_project",
+        "candidate_type": "port",
+        "category": "new_project",
+        "question": false,
+        "spam": false
+      },
+      "provenance": {
+        "repository_url": null,
+        "release_url": null,
+        "evidence_urls": [],
+        "evidence_bundle_id": null,
+        "repository_identity": null,
+        "repository_created_at": null,
+        "repository_last_activity_at": null,
+        "release_facts": [],
+        "vita_evidence": [],
+        "author_linkage": null,
+        "corroboration": [],
+        "duplicate_relation": {
+          "content_hash": "b84115d82a65684686fa27512884a8a2a8acdb299096cc30dbe0af0384f4fc33",
+          "related_candidate_ids": []
+        }
+      },
+      "campaign": {
+        "cluster_id": null,
+        "linkage_confidence": "none",
+        "signals": [],
+        "related_candidate_ids": [],
+        "text_fingerprint": "6c8161c8",
+        "media_fingerprints": [
+          "external-preview.redd.it/kh3bg0u8bh4e4bu2cxo7fkqrdhszg28evtnpqodyqfu.png"
+        ],
+        "outbound_fingerprints": [
+          "www.reddit.com/r/psvitahomebrew/comments/1x0ymt9/release_vita_chess_v10_a_full_2d_chess_game_with",
+          "external-preview.redd.it/kh3bg0u8bh4e4bu2cxo7fkqrdhszg28evtnpqodyqfu.png",
+          "www.reddit.com/user/kygenbagels"
+        ],
+        "direct_intent": false,
+        "explicit_campaign_reference": false,
+        "incident_id": null
+      },
+      "risk_signals": [],
+      "evidence_gaps": [
+        "exact project repository",
+        "repository identity and activity facts",
+        "Vita-specific hardware evidence",
+        "author/developer linkage and independent corroboration"
+      ],
+      "content_hash": "b84115d82a65684686fa27512884a8a2a8acdb299096cc30dbe0af0384f4fc33",
+      "review": null,
+      "incident": null
+    },
+    {
+      "schema_version": 2,
+      "id": "reddit-1x0mn3f",
+      "external_id": "1x0mn3f",
+      "state": "QUARANTINED",
+      "state_history": [
+        {
+          "state": "DETECTED",
+          "at": "2026-10-08T19:18:52.056Z",
+          "actor": "reddit-scanner",
+          "reason": "Canonical Reddit RSS entry accepted at the ingestion boundary"
+        },
+        {
+          "state": "QUARANTINED",
+          "at": "2026-10-08T19:18:52.056Z",
+          "actor": "reddit-scanner",
+          "reason": "Scanner result is unverified and cannot enter the curated ledger"
+        }
+      ],
+      "source": {
+        "platform": "reddit",
+        "subreddit": "PSVitaHomebrew",
+        "canonical_url": "https://www.reddit.com/r/PSVitaHomebrew/comments/1x0mn3f/strikers_port_wip/",
+        "author": "rob1n994",
+        "title": "Strikers port wip",
+        "body": "Hi guys, i saw a port of strikers, so i wanna show my status . I’m working on strikers since it went out. Actually there is no frameskip in my build because i’m trying to reach 60fps before releasing it. but if you want i can release this build that goes 25-30fps in game… I don’t have a devkit optimizing it requieres so much time. If you wanna follow the project on my github there is the repo https://github.com/robin994/strikersVita the game is powered by a porting i'm mading of Aurora https://github.com/robin994/aurora-vita , actually it renders perfectly in native vita gxm. But it is sti",
+        "published_at": "2026-10-08T09:40:22.000Z"
+      },
+      "classification": {
+        "confidence": "high",
+        "reason": "7 dev signals: \\bw\\.?i\\.?p\\.?\\b, \\brelease\\b, \\bin.?game\\b · category=project_update",
+        "candidate_type": "port",
+        "category": "project_update",
+        "question": false,
+        "spam": false
+      },
+      "provenance": {
+        "repository_url": null,
+        "release_url": null,
+        "evidence_urls": [],
+        "evidence_bundle_id": null,
+        "repository_identity": null,
+        "repository_created_at": null,
+        "repository_last_activity_at": null,
+        "release_facts": [],
+        "vita_evidence": [],
+        "author_linkage": null,
+        "corroboration": [],
+        "duplicate_relation": {
+          "content_hash": "dcab26a5994fd9d0e868c9eff8f6ce0c8620617c30b1570f345737dff7fc7bc6",
+          "related_candidate_ids": []
+        }
+      },
+      "campaign": {
+        "cluster_id": "campaign-686d6191",
+        "linkage_confidence": "medium",
+        "signals": [
+          "shared_outbound_fingerprint"
+        ],
+        "related_candidate_ids": [
+          "reddit-1wsrua2"
+        ],
+        "text_fingerprint": "7ad3072a",
+        "media_fingerprints": [
+          "external-preview.redd.it/yzvunnfkennyn3vomxaq4nkbs0shbjereemyi8d5kkrrotjrtc-y9lk_lvsg.jpeg"
+        ],
+        "outbound_fingerprints": [
+          "github.com/robin994/strikersvita",
+          "github.com/robin994/aurora-vita",
+          "www.reddit.com/r/psvitahomebrew/comments/1x0mn3f/strikers_port_wip",
+          "external-preview.redd.it/yzvunnfkennyn3vomxaq4nkbs0shbjereemyi8d5kkrrotjrtc-y9lk_lvsg.jpeg",
+          "zealouschuck.com/dev-bounty",
+          "www.reddit.com/user/rob1n994",
+          "v.redd.it/ygitgt1tr7uh1"
+        ],
+        "direct_intent": false,
+        "explicit_campaign_reference": false,
+        "incident_id": null
+      },
+      "risk_signals": [],
+      "evidence_gaps": [
+        "repository identity and activity facts",
+        "author/developer linkage and independent corroboration"
+      ],
+      "content_hash": "dcab26a5994fd9d0e868c9eff8f6ce0c8620617c30b1570f345737dff7fc7bc6",
+      "review": null,
+      "incident": null
+    },
+    {
+      "schema_version": 2,
+      "id": "reddit-1x0brhk",
+      "external_id": "1x0brhk",
+      "state": "QUARANTINED",
+      "state_history": [
+        {
+          "state": "DETECTED",
+          "at": "2026-10-08T14:36:48.872Z",
+          "actor": "reddit-scanner",
+          "reason": "Canonical Reddit RSS entry accepted at the ingestion boundary"
+        },
+        {
+          "state": "QUARANTINED",
+          "at": "2026-10-08T14:36:48.872Z",
+          "actor": "reddit-scanner",
+          "reason": "Scanner result is unverified and cannot enter the curated ledger"
+        }
+      ],
+      "source": {
+        "platform": "reddit",
+        "subreddit": "vitahacks",
+        "canonical_url": "https://www.reddit.com/r/vitahacks/comments/1x0brhk/release_vita_iptv_v01_a_native_iptv_player_for_ps/",
+        "author": "mrhkyy",
+        "title": "[Release] Vita IPTV v0.1 – a native IPTV player for PS Vita / PS TV (M3U, Xtream, HLS, HTTPS)",
+        "body": "Hi everyone! I've been working on a native IPTV player for the Vita and it's finally in a shape I'm happy to share. This is v0.1, a hobby project shared as is – no support or roadmap promised. It was developed with the help of AI and tested on my own Vita.\" **What it does** - Plays live TV and radio from your own M3U/M3U8 playlists, Xtream Codes accounts (server + user + password) or single stream links - Video through the Vita's hardware H.264 decoder (up to 720p), with A/V sync - HLS (.m3u8) live streams, MPEG-TS, MKV and MP4 - Built-in modern TLS, so https playlists, sh",
+        "published_at": "2026-10-07T23:31:12.000Z"
+      },
+      "classification": {
+        "confidence": "high",
+        "reason": "4 dev signals: \\[release\\], \\brelease\\b, \\bv\\d+\\.\\d+\\b · category=new_project",
+        "candidate_type": "port",
+        "category": "new_project",
+        "question": false,
+        "spam": false
+      },
+      "provenance": {
+        "repository_url": null,
+        "release_url": null,
+        "evidence_urls": [],
+        "evidence_bundle_id": null,
+        "repository_identity": null,
+        "repository_created_at": null,
+        "repository_last_activity_at": null,
+        "release_facts": [],
+        "vita_evidence": [],
+        "author_linkage": null,
+        "corroboration": [],
+        "duplicate_relation": {
+          "content_hash": "ea8aaf5f9484fa541f77249065b93134de65a71beccb14c60c535e5748172650",
+          "related_candidate_ids": []
+        }
+      },
+      "campaign": {
+        "cluster_id": "campaign-3cb25532",
+        "linkage_confidence": "medium",
+        "signals": [
+          "same_author_burst",
+          "shared_outbound_fingerprint"
+        ],
+        "related_candidate_ids": [
+          "reddit-1x2jzoi"
+        ],
+        "text_fingerprint": "d3e51a65",
+        "media_fingerprints": [
+          "preview.redd.it/bfbg6vsbq4uh1.png",
+          "i.redd.it/bfbg6vsbq4uh1.png"
+        ],
+        "outbound_fingerprints": [
+          "www.reddit.com/r/vitahacks/comments/1x0brhk/release_vita_iptv_v01_a_native_iptv_player_for_ps",
+          "preview.redd.it/bfbg6vsbq4uh1.png",
+          "github.com/emrhky/vitaiptv",
+          "www.reddit.com/user/mrhkyy",
+          "i.redd.it/bfbg6vsbq4uh1.png"
+        ],
+        "direct_intent": false,
+        "explicit_campaign_reference": false,
+        "incident_id": null
+      },
+      "risk_signals": [],
+      "evidence_gaps": [
+        "exact project repository",
+        "repository identity and activity facts",
+        "author/developer linkage and independent corroboration"
+      ],
+      "content_hash": "ea8aaf5f9484fa541f77249065b93134de65a71beccb14c60c535e5748172650",
+      "review": null,
+      "incident": null
+    },
+    {
+      "schema_version": 2,
+      "id": "reddit-1x005eq",
+      "external_id": "1x005eq",
+      "state": "QUARANTINED",
+      "state_history": [
+        {
+          "state": "DETECTED",
+          "at": "2026-10-08T14:36:48.872Z",
+          "actor": "reddit-scanner",
+          "reason": "Canonical Reddit RSS entry accepted at the ingestion boundary"
+        },
+        {
+          "state": "QUARANTINED",
+          "at": "2026-10-08T14:36:48.872Z",
+          "actor": "reddit-scanner",
+          "reason": "Scanner result is unverified and cannot enter the curated ledger"
+        }
+      ],
+      "source": {
+        "platform": "reddit",
+        "subreddit": "vitahacks",
+        "canonical_url": "https://www.reddit.com/r/vitahacks/comments/1x005eq/runescape_2_singleplayer_client/",
+        "author": "me11yb3an",
+        "title": "Runescape 2 singleplayer client",
+        "body": "I've been working on this RuneScape 2 port based on the work already done by GitHub.com/rustcityrs/client-c. As is is now it's able to be played on a private server but I want to make a version for people who just wanna play singleplayer. I should be done soonish (by the end of the week) so lookout for the vpk :3 &#32; submitted by &#32; /u/me11yb3an [link] &#32; [comments]",
+        "published_at": "2026-10-07T15:52:56.000Z"
+      },
+      "classification": {
+        "confidence": "medium",
+        "reason": "1 dev signal(s), 1 passive term(s), category=project_update",
+        "candidate_type": "port",
+        "category": "project_update",
+        "question": false,
+        "spam": false
+      },
+      "provenance": {
+        "repository_url": null,
+        "release_url": null,
+        "evidence_urls": [],
+        "evidence_bundle_id": null,
+        "repository_identity": null,
+        "repository_created_at": null,
+        "repository_last_activity_at": null,
+        "release_facts": [],
+        "vita_evidence": [],
+        "author_linkage": null,
+        "corroboration": [],
+        "duplicate_relation": {
+          "content_hash": "42ef826df831bc13293e5fce6cc79445e4a76f66cc39b2ba24711cf7cf4f304b",
+          "related_candidate_ids": []
+        }
+      },
+      "campaign": {
+        "cluster_id": null,
+        "linkage_confidence": "none",
+        "signals": [],
+        "related_candidate_ids": [],
+        "text_fingerprint": "3dd5dee1",
+        "media_fingerprints": [
+          "external-preview.redd.it/bnezdty4dgnomnvomtjfrx30gz1mvhnso33nisqjaj98c9j4trfidowq9sbj.png"
+        ],
+        "outbound_fingerprints": [
+          "www.reddit.com/r/vitahacks/comments/1x005eq/runescape_2_singleplayer_client",
+          "external-preview.redd.it/bnezdty4dgnomnvomtjfrx30gz1mvhnso33nisqjaj98c9j4trfidowq9sbj.png",
+          "www.reddit.com/user/me11yb3an",
+          "v.redd.it/resl1wuch2uh1"
+        ],
+        "direct_intent": false,
+        "explicit_campaign_reference": false,
+        "incident_id": null
+      },
+      "risk_signals": [
+        "generic_upstream_repository"
+      ],
+      "evidence_gaps": [
+        "repository identity and activity facts",
+        "release or build evidence",
+        "Vita-specific hardware evidence",
+        "author/developer linkage and independent corroboration"
+      ],
+      "content_hash": "42ef826df831bc13293e5fce6cc79445e4a76f66cc39b2ba24711cf7cf4f304b",
+      "review": null,
+      "incident": null
+    },
+    {
+      "schema_version": 2,
+      "id": "reddit-1wzzhv8",
+      "external_id": "1wzzhv8",
+      "state": "QUARANTINED",
+      "state_history": [
+        {
+          "state": "DETECTED",
+          "at": "2026-10-08T19:18:52.056Z",
+          "actor": "reddit-scanner",
+          "reason": "Canonical Reddit RSS entry accepted at the ingestion boundary"
+        },
+        {
+          "state": "QUARANTINED",
+          "at": "2026-10-08T19:18:52.056Z",
+          "actor": "reddit-scanner",
+          "reason": "Scanner result is unverified and cannot enter the curated ledger"
+        }
+      ],
+      "source": {
+        "platform": "reddit",
+        "subreddit": "PSVitaHomebrew",
+        "canonical_url": "https://www.reddit.com/r/PSVitaHomebrew/comments/1wzzhv8/3ds_emu_on_psvita/",
+        "author": "TutuiRl",
+        "title": "3DS emu on PSVita",
+        "body": "Hi! I’ve been working independently on a 3DS emulator for the PS Vita. If anyone is interested in giving it a try and providing some feedback to help me improve it, I’d really appreciate it! At the moment, it’s a really early beta let’s say something like version 0.0.5. It can already render images in several titles, but the performance is extremely slow, so it’s nowhere near playable or enjoyable yet. There’s still a lot of work to do! Emulator Link: https://github.com/TutuiFC/azaharvita &#32; submitted by &#32; /u/TutuiRl [link] &#32; [comments]",
+        "published_at": "2026-10-07T15:27:38.000Z"
+      },
+      "classification": {
+        "confidence": "high",
+        "reason": "4 dev signals: \\bplayable\\b, \\brender(?:s|ed|ing)?\\b, \\bbeta\\b · category=project_update",
+        "candidate_type": "port",
+        "category": "project_update",
+        "question": false,
+        "spam": false
+      },
+      "provenance": {
+        "repository_url": null,
+        "release_url": null,
+        "evidence_urls": [],
+        "evidence_bundle_id": null,
+        "repository_identity": null,
+        "repository_created_at": null,
+        "repository_last_activity_at": null,
+        "release_facts": [],
+        "vita_evidence": [],
+        "author_linkage": null,
+        "corroboration": [],
+        "duplicate_relation": {
+          "content_hash": "a02f7b511e1f5bf0bdfc75d8aa4ab1ca969d06e24fc9257fdffd4921e25052cc",
+          "related_candidate_ids": []
+        }
+      },
+      "campaign": {
+        "cluster_id": null,
+        "linkage_confidence": "none",
+        "signals": [],
+        "related_candidate_ids": [],
+        "text_fingerprint": "8f028141",
+        "media_fingerprints": [
+          "preview.redd.it/8ru3y87tc2uh1.png",
+          "i.redd.it/8ru3y87tc2uh1.png"
+        ],
+        "outbound_fingerprints": [
+          "github.com/tutuifc/azaharvita",
+          "www.reddit.com/r/psvitahomebrew/comments/1wzzhv8/3ds_emu_on_psvita",
+          "preview.redd.it/8ru3y87tc2uh1.png",
+          "www.reddit.com/user/tutuirl",
+          "i.redd.it/8ru3y87tc2uh1.png"
+        ],
+        "direct_intent": false,
+        "explicit_campaign_reference": false,
+        "incident_id": null
+      },
+      "risk_signals": [],
+      "evidence_gaps": [
+        "repository identity and activity facts",
+        "release or build evidence",
+        "author/developer linkage and independent corroboration"
+      ],
+      "content_hash": "a02f7b511e1f5bf0bdfc75d8aa4ab1ca969d06e24fc9257fdffd4921e25052cc",
+      "review": null,
+      "incident": null
+    },
     {
       "schema_version": 2,
       "id": "reddit-1wzrt36",
@@ -682,10 +1988,14 @@
         }
       },
       "campaign": {
-        "cluster_id": null,
-        "linkage_confidence": "none",
-        "signals": [],
-        "related_candidate_ids": [],
+        "cluster_id": "campaign-145787e3",
+        "linkage_confidence": "medium",
+        "signals": [
+          "shared_outbound_fingerprint"
+        ],
+        "related_candidate_ids": [
+          "reddit-1x1v4zp"
+        ],
         "text_fingerprint": "096f333d",
         "media_fingerprints": [
           "preview.redd.it/xuyjg9jkuuth1.jpeg",
@@ -963,15 +2273,17 @@
         }
       },
       "campaign": {
-        "cluster_id": "campaign-8989614d",
+        "cluster_id": "campaign-5a76ffd2",
         "linkage_confidence": "high",
         "signals": [
+          "shared_outbound_fingerprint",
           "same_author_burst",
           "same_wording_fingerprint",
-          "shared_media_fingerprint",
-          "shared_outbound_fingerprint"
+          "shared_media_fingerprint"
         ],
         "related_candidate_ids": [
+          "reddit-1x1pl2a",
+          "reddit-1x1hsq0",
           "reddit-1wycxwx",
           "reddit-1wxgz7q",
           "reddit-1wukxc7"
@@ -1067,15 +2379,17 @@
         }
       },
       "campaign": {
-        "cluster_id": "campaign-8989614d",
+        "cluster_id": "campaign-5a76ffd2",
         "linkage_confidence": "high",
         "signals": [
+          "shared_outbound_fingerprint",
           "same_author_burst",
           "same_wording_fingerprint",
-          "shared_media_fingerprint",
-          "shared_outbound_fingerprint"
+          "shared_media_fingerprint"
         ],
         "related_candidate_ids": [
+          "reddit-1x1pl2a",
+          "reddit-1x1hsq0",
           "reddit-1wyhqcq",
           "reddit-1wxgz7q",
           "reddit-1wukxc7"
@@ -1446,12 +2760,14 @@
         }
       },
       "campaign": {
-        "cluster_id": "campaign-8989614d",
+        "cluster_id": "campaign-5a76ffd2",
         "linkage_confidence": "medium",
         "signals": [
           "shared_outbound_fingerprint"
         ],
         "related_candidate_ids": [
+          "reddit-1x1pl2a",
+          "reddit-1x1hsq0",
           "reddit-1wyhqcq",
           "reddit-1wycxwx",
           "reddit-1wukxc7"
@@ -2160,12 +3476,14 @@
         }
       },
       "campaign": {
-        "cluster_id": "campaign-8989614d",
+        "cluster_id": "campaign-5a76ffd2",
         "linkage_confidence": "medium",
         "signals": [
           "shared_outbound_fingerprint"
         ],
         "related_candidate_ids": [
+          "reddit-1x1pl2a",
+          "reddit-1x1hsq0",
           "reddit-1wyhqcq",
           "reddit-1wycxwx",
           "reddit-1wxgz7q"
@@ -2835,10 +4153,14 @@
         }
       },
       "campaign": {
-        "cluster_id": null,
-        "linkage_confidence": "none",
-        "signals": [],
-        "related_candidate_ids": [],
+        "cluster_id": "campaign-686d6191",
+        "linkage_confidence": "medium",
+        "signals": [
+          "shared_outbound_fingerprint"
+        ],
+        "related_candidate_ids": [
+          "reddit-1x0mn3f"
+        ],
         "text_fingerprint": "22a8bfcb",
         "media_fingerprints": [],
         "outbound_fingerprints": [

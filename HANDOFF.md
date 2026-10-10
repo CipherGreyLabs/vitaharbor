@@ -1,30 +1,24 @@
-# Handoff - VitaHarbor final UI and data worker acceptance handoff
+# Handoff - VitaHarbor Master Improvements 1-4 Final Polish Handoff
 
-- Gegenereerd: 2026-10-07T14:30:01Z
+- Gegenereerd: 2026-10-08T21:51:14Z
 - Actor: codex
 - Model: gemini-3.7-flash
 - ProjectRoot: C:\Users\suloW\Documents\ChatGPT\VitaPort
-- Bronnen: 11
+- Bronnen: 5
 
 ## Bronintegriteit
 
 | Bestand | Bytes | SHA-256 |
 |---|---|---|
-| docs\MASTER_ACCEPTANCE_2026-10-07.md | 4301 | 79D4943DFE1061B9F83D05A9F9452C4E31EFC8B804641A561762A4C8547BDD73 |
-| docs\DATA_WORKER_ACCEPTANCE_2026-10-07.md | 7819 | C41930391AA0D961FF82580ECE77B1DEE694C9FABA26EA0C2CB9A696F52C0DB7 |
-| src\shared\constants\fallbackData.ts | 69507 | 41949DBD7FA8E3DA9E47386212B8D2AA3EF9AD3C0C9044B3CAC8735A14C50FD4 |
-| src\web\components\ledger\ConsoleStage.tsx | 18733 | D767DC80B55F6731D66376D7BAAB7F8CD47A05B088D993FB36EE1D78BF1221B4 |
-| src\web\components\ledger\DirectoryTable.tsx | 36220 | 880C4DBB1D9D0DF0153AABAA798A92B7B6918025C28F9B82554EB2ABB2BD3768 |
-| src\web\components\3d\VitaConsoleScene.tsx | 37179 | BAE8F00D40B9B6DE724A6A45974B6F81AFB7DC5C1B2ED28B1747B29F794E032F |
-| scripts\reddit-classifier.mjs | 14066 | 8A258E2CCA235D90EB06F6C0F6D5304AC29765543B1D75828726392B61807F36 |
-| tests\unit\reddit-scanner.test.mjs | 16113 | 8CAB3E2A4FC779FFC37A1DDAF760BF842239F48CAF75498B49B6DE3EC40FBBBC |
-| tests\unit\project-media.test.ts | 1658 | 56465108CDF033405A7DDFD503180F81B8BAD25B4AC5D74C2D9C7046A5538AC1 |
-| PROJECT_STATE.md | 67175 | 6D4DFC30375BE68FD7BB51C8EBAC4EB01F3B7FF99ABE4595BB8A193C50ABA607 |
-| docs\WORKLOG.md | 150540 | C9586AC26157AF95B75A02CB2879BEAF3DA6885169112A261AED429EED602C31 |
+| src\web\components\ledger\ProjectPanel.tsx | 22916 | 0320E4C5CA0E0051929B9B507099A12957CEEE0C811224B96FDF57F1467DFCC3 |
+| src\web\routes\HomePage.tsx | 32952 | 0AB9F9061C95D9DBD5979D86712F96530B52F28BB02C92C6256EBF45D43A2C47 |
+| src\web\utils\audio.ts | 2503 | E3D27EF7CC0E4C3248EE7CC8CE4A3C688125AEEA6623F22CBD80A15AAC8FE7FA |
+| PROJECT_STATE.md | 69887 | 4922212FB538D5EAD1E7DD1A72ED66DBD10746F9A3992390262768F29CE24D29 |
+| docs\WORKLOG.md | 154593 | B08731CBDA1AEE178EB767B9C9C7890B8626576D9B2FD53E9DBF926B29FF51D6 |
 
 ## Samenvatting
 
-Consolidated UI and Data Worker final acceptance handoff covering Halo CE provenance, screenshot mapping correction, repository Source button CTA, clean 3D OLED screen without generic claims, and responsive ConsoleStage verification.
+Consolidated handoff for How to Run installation checklist, Similar Ongoing Ports recommendations, Web Audio API synthesizer, and repository activity indicators.
 
 ## Verificatie
 

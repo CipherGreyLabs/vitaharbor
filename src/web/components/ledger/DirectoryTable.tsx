@@ -1,3 +1,5 @@
+import { GRADUATED_PROJECTS, type GraduatedProject } from "../../../shared/constants/graduatedData";
+import mediaManifest from "../../../../data/media-manifest.json";
 import { GameCardBanner } from "../projects/GameCardBanner";
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { createPortal } from "react-dom";
@@ -22,7 +24,8 @@ const STAGE_FILTERS = [
   { key: "playable", label: "Playable" },
   { key: "booting", label: "Early boot" },
   { key: "released", label: "Released" },
-  { key: "recent", label: "Recently updated" }
+  { key: "recent", label: "Recently updated" },
+  { key: "graduated", label: "Graduated to VitaDB" }
 ];
 
 const CATEGORY_FILTERS = [
@@ -71,6 +74,8 @@ interface DirectoryTableProps {
   latestSignal?: LatestSignal;
 }
 
+const manifestBySlug = new Map<string, any>(((mediaManifest as any)?.items || []).map((item: any) => [item.slug, item]));
+
 export const DirectoryTable: React.FC<DirectoryTableProps> = ({
   projects,
   visible,
@@ -97,7 +102,7 @@ export const DirectoryTable: React.FC<DirectoryTableProps> = ({
   latestSignal
 }) => {
   const stageCounts = useMemo(() => {
-    const counts: Record<string, number> = { all: projects.length, wip: 0, playable: 0, booting: 0, released: 0, recent: 0 };
+    const counts: Record<string, number> = { all: projects.length, wip: 0, playable: 0, booting: 0, released: 0, recent: 0, graduated: GRADUATED_PROJECTS.length };
     for (const p of projects) {
       const st = String(p.current_stage);
       if (["in_game", "booting", "early_wip", "research"].includes(st)) counts.wip++;
@@ -130,6 +135,20 @@ export const DirectoryTable: React.FC<DirectoryTableProps> = ({
   }, [projects]);
 
   const [viewMode, setViewMode] = useState<"bento" | "list">("bento");
+  const visibleGraduated = useMemo(() => {
+    if (activeFilter !== "graduated") return [];
+    const term = searchTerm.trim().toLowerCase();
+    if (!term) return GRADUATED_PROJECTS;
+    return GRADUATED_PROJECTS.filter(
+      (p) =>
+        p.title.toLowerCase().includes(term) ||
+        p.developer.toLowerCase().includes(term) ||
+        p.original_platform.toLowerCase().includes(term) ||
+        p.technologies.some((t) => t.toLowerCase().includes(term)) ||
+        p.summary.toLowerCase().includes(term)
+    );
+  }, [activeFilter, searchTerm]);
+
   const openProject = projects.find((project) => project.id === expandedId) || null;
   const drawerOpen = openProject !== null;
   const drawerRef = useRef<HTMLElement | null>(null);
@@ -255,10 +274,10 @@ export const DirectoryTable: React.FC<DirectoryTableProps> = ({
           )}
         </div>
 
-        <div className="mt-3 flex flex-wrap items-center justify-between gap-4">
-          <div className="flex flex-wrap gap-1.5">
+        <div className="mt-3 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+          <div className="no-scrollbar flex max-w-full items-center gap-1.5 overflow-x-auto py-0.5 -mx-1 px-1">
             {STAGE_FILTERS.map((filter) => (
-              <div key={filter.key} className="relative group"><button type="button" aria-pressed={activeFilter === filter.key} onClick={() => onFilterChange(filter.key)} className={"relative z-10 inline-flex min-h-[44px] items-center gap-1.5 rounded-full px-4 py-2 text-caption font-semibold transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent " + (activeFilter === filter.key ? "text-ink" : "text-ink-muted hover:text-ink")}><span>{filter.label}</span><span className="font-mono text-micro opacity-70">({stageCounts[filter.key] ?? 0})</span></button>{activeFilter === filter.key && (<div className="filter-active-bg transition-all duration-200"></div>)}</div>
+              <div key={filter.key} className="relative group shrink-0"><button type="button" aria-pressed={activeFilter === filter.key} onClick={() => onFilterChange(filter.key)} className={"relative z-10 inline-flex min-h-[44px] items-center gap-1.5 whitespace-nowrap rounded-full px-4 py-2 text-caption font-semibold transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent " + (activeFilter === filter.key ? "text-ink" : "text-ink-muted hover:text-ink")}><span>{filter.label}</span><span className="font-mono text-micro opacity-70">({stageCounts[filter.key] ?? 0})</span></button>{activeFilter === filter.key && (<div className="filter-active-bg transition-all duration-200"></div>)}</div>
             ))}
           </div>
 
@@ -385,16 +404,174 @@ export const DirectoryTable: React.FC<DirectoryTableProps> = ({
               </div>
             ))}
           </div>
-        ) : visible.length === 0 ? (
-          <div className="px-6 py-16 text-center">
-            <p className="text-body text-ink-medium">Nothing matches that search.</p>
-            <button
-              type="button"
-              onClick={onResetFilters}
-              className="mt-3 inline-flex min-h-[44px] items-center text-body font-semibold text-accent underline underline-offset-4 focus-visible:outline focus-visible:outline-2 focus-visible:outline-accent"
-            >
-              Reset filters
-            </button>
+        ) : visible.length === 0 && activeFilter !== "graduated" ? (
+          (() => {
+            const term = searchTerm.trim().toLowerCase();
+            const matchingGraduated = term
+              ? GRADUATED_PROJECTS.filter(
+                  (p) =>
+                    p.title.toLowerCase().includes(term) ||
+                    p.developer.toLowerCase().includes(term) ||
+                    p.original_platform.toLowerCase().includes(term) ||
+                    p.technologies.some((t) => t.toLowerCase().includes(term)) ||
+                    p.summary.toLowerCase().includes(term)
+                )
+              : [];
+
+            if (matchingGraduated.length > 0) {
+              return (
+                <div className="mx-auto max-w-2xl px-4 py-12 text-center">
+                  <div className="rounded-2xl border border-emerald-500/30 bg-emerald-950/20 p-6 text-emerald-300 shadow-lg backdrop-blur-md">
+                    <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-emerald-500/20 text-emerald-400">
+                      <Check className="h-6 w-6" />
+                    </div>
+                    <h3 className="mt-4 font-display text-subtitle font-semibold text-white">
+                      Geen actieve WIP-ports gevonden voor &lsquo;{searchTerm}&rsquo;
+                    </h3>
+                    <p className="mt-2 text-caption text-zinc-300 leading-relaxed">
+                      Er {matchingGraduated.length === 1 ? "is" : "zijn"} <strong className="text-emerald-400 font-semibold">{matchingGraduated.length} afgerond{matchingGraduated.length === 1 ? " project" : "e projecten"}</strong> beschikbaar in <strong className="text-white">Graduated to VitaDB</strong> ({matchingGraduated.map(p => p.title).slice(0, 3).join(", ")}{matchingGraduated.length > 3 ? "..." : ""}).
+                    </p>
+                    <div className="mt-5 flex flex-wrap items-center justify-center gap-3">
+                      <button
+                        type="button"
+                        onClick={() => onFilterChange("graduated")}
+                        className="inline-flex min-h-[44px] items-center gap-2 rounded-xl bg-emerald-600 px-5 py-2 font-mono text-[12px] font-semibold text-white shadow-md transition-all hover:bg-emerald-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-emerald-400"
+                      >
+                        <span>Bekijk in VitaDB Releases</span>
+                        <ExternalLink className="h-4 w-4" />
+                      </button>
+                      <button
+                        type="button"
+                        onClick={onResetFilters}
+                        className="inline-flex min-h-[44px] items-center rounded-xl border border-white/10 bg-white/5 px-4 py-2 text-caption font-medium text-zinc-300 hover:bg-white/10 hover:text-white transition-colors"
+                      >
+                        Reset filters
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              );
+            }
+
+            return (
+              <div className="px-6 py-16 text-center">
+                <p className="text-body text-ink-medium">Nothing matches that search.</p>
+                <button
+                  type="button"
+                  onClick={onResetFilters}
+                  className="mt-3 inline-flex min-h-[44px] items-center text-body font-semibold text-accent underline underline-offset-4 focus-visible:outline focus-visible:outline-2 focus-visible:outline-accent"
+                >
+                  Reset filters
+                </button>
+              </div>
+            );
+          })()
+        ) : activeFilter === "graduated" ? (
+          <div>
+            <div className="mb-4 rounded-xl border border-emerald-500/20 bg-emerald-950/20 p-4 text-emerald-300">
+              <div className="flex items-center gap-2 font-mono text-[11px] font-semibold uppercase tracking-wider text-emerald-400">
+                <Check className="h-4 w-4 text-emerald-400" />
+                <span>Graduated to VitaDB</span>
+              </div>
+              <p className="mt-1 text-caption text-zinc-300">
+                These ports have successfully reached full public release and are officially available directly on VitaDB / Vita Homebrew Browser.
+              </p>
+            </div>
+
+            {visibleGraduated.length === 0 ? (
+              <div className="px-6 py-12 text-center">
+                <p className="text-body text-ink-medium">No graduated projects match that search.</p>
+                <button
+                  type="button"
+                  onClick={onResetFilters}
+                  className="mt-3 inline-flex min-h-[44px] items-center text-body font-semibold text-accent underline underline-offset-4 focus-visible:outline focus-visible:outline-2 focus-visible:outline-accent"
+                >
+                  Reset filters
+                </button>
+              </div>
+            ) : viewMode === "bento" ? (
+              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                {visibleGraduated.map((project) => (
+                  <div
+                    key={project.slug}
+                    id={"graduated-" + project.slug}
+                    className="group relative flex flex-col justify-between overflow-hidden rounded-2xl border border-white/10 bg-zinc-950/80 p-5 transition-all hover:border-emerald-500/40 hover:bg-zinc-900/60"
+                  >
+                    <div>
+                      <div className="flex items-center justify-between gap-2 mb-3">
+                        <span className="rounded-md border border-emerald-500/30 bg-emerald-950/60 px-2 py-0.5 font-mono text-[10px] font-semibold uppercase text-emerald-400">
+                          Released on VitaDB
+                        </span>
+                        <span className="font-mono text-micro uppercase text-ink-muted">VitaDB #{project.vitadb_id}</span>
+                      </div>
+
+                      <div className="flex items-start gap-3 mb-2">
+                        <ProjectMark seed={project.title} size={42} className="shrink-0 rounded-xl" />
+                        <div className="min-w-0 flex-1">
+                          <h3 className="truncate text-subtitle font-semibold text-white group-hover:text-emerald-300 transition-colors">{project.title}</h3>
+                          <p className="font-mono text-micro text-ink-muted uppercase">{project.original_platform} · by {project.developer}</p>
+                        </div>
+                      </div>
+
+                      <p className="text-caption text-ink-medium leading-relaxed mb-3 line-clamp-3">
+                        {project.summary}
+                      </p>
+
+                      <div className="flex flex-wrap gap-1 mb-4">
+                        {project.technologies.map((tech) => (
+                          <span key={tech} className="vh-tech-badge">[{tech}]</span>
+                        ))}
+                      </div>
+                    </div>
+
+                    <div className="flex items-center justify-between gap-2 border-t border-white/[0.06] pt-3 mt-auto">
+                      <span className="text-micro text-ink-muted font-mono">{project.released_year || "Released"}</span>
+                      <a
+                        href={project.vitadb_url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex min-h-[34px] items-center gap-1.5 rounded-lg border border-emerald-500/40 bg-emerald-950/40 px-3 py-1 font-mono text-micro font-semibold text-emerald-300 hover:bg-emerald-900/50 hover:border-emerald-400 transition-colors"
+                      >
+                        <span>View on VitaDB</span>
+                        <ExternalLink className="h-3 w-3" />
+                      </a>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <div className="overflow-hidden rounded-2xl border border-[#334155] bg-black">
+                <div className="hidden grid-cols-[minmax(0,1.8fr)_minmax(8.5rem,0.9fr)_minmax(6rem,0.65fr)_7rem_auto] items-center gap-3 border-b border-hairline bg-white/[0.025] px-4 py-2 font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-ink-muted lg:grid">
+                  <span>Project</span><span>Developer</span><span>Platform</span><span>Status</span><span>VitaDB Link</span>
+                </div>
+                <ul className="divide-y divide-white/[0.055]">
+                  {visibleGraduated.map((project) => (
+                    <li key={project.slug} className="grid grid-cols-[minmax(0,1fr)_auto] items-center px-4 py-3 hover:bg-zinc-950 lg:grid-cols-[minmax(0,1.8fr)_minmax(8.5rem,0.9fr)_minmax(6rem,0.65fr)_7rem_auto] gap-3">
+                      <div className="min-w-0">
+                        <span className="truncate text-body font-semibold text-white">{project.title}</span>
+                        <span className="block text-caption text-zinc-400 line-clamp-1">{project.summary}</span>
+                      </div>
+                      <span className="hidden font-mono text-caption text-zinc-300 lg:block">{project.developer}</span>
+                      <span className="hidden font-mono text-micro uppercase text-zinc-400 lg:block">{project.original_platform}</span>
+                      <span className="hidden lg:block">
+                        <span className="rounded px-2 py-0.5 font-mono text-[10px] font-semibold uppercase bg-emerald-950/60 text-emerald-400 border border-emerald-500/30">
+                          Released
+                        </span>
+                      </span>
+                      <a
+                        href={project.vitadb_url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex min-h-[34px] items-center gap-1 text-caption font-semibold text-emerald-400 hover:underline"
+                      >
+                        <span>VitaDB</span>
+                        <ExternalLink className="h-3.5 w-3.5" />
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
           </div>
         ) : viewMode === "bento" ? (
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -409,8 +586,8 @@ export const DirectoryTable: React.FC<DirectoryTableProps> = ({
                 <div
                   key={project.id}
                   id={"card-" + project.slug}
-                  onMouseEnter={() => onSelectProject(project, false)}
-                  onFocus={() => onSelectProject(project, false)}
+                  
+                  
                   className={
                     "group relative flex flex-col justify-between overflow-hidden rounded-2xl border transition-all duration-200 " +
                     (selected
@@ -419,40 +596,52 @@ export const DirectoryTable: React.FC<DirectoryTableProps> = ({
                   }
                 >
                   {/* Card Media Banner */}
-                  <div className="relative aspect-[16/9] w-full overflow-hidden bg-black/60 border-b border-white/[0.06]">
-                    {project.screenshot_url ? (
-                      <img
-                        src={project.screenshot_url}
-                        alt={project.screenshot_alt || title.name}
-                        loading="lazy"
-                        className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
-                      />
-                    ) : (
-                      <GameCardBanner
-                        project={project}
-                        titleName={title.name}
-                        engineLabel={title.engine}
-                      />
-                    )}
-                    
-                    {/* Stage Badge on top of image */}
-                    <div className="absolute left-3 top-3 flex items-center gap-1.5">
-                      <span className={"rounded-md px-2 py-0.5 font-mono text-[10px] font-semibold uppercase backdrop-blur-md " + (STAGE_CHIP[String(project.current_stage)] || "bg-black/70 text-zinc-300")}>
-                        {prettyStage(project.current_stage)}
-                      </span>
-                      {isNew && <span className="rounded bg-blue-500/20 border border-blue-500/40 px-1.5 py-0.5 font-mono text-[9px] font-semibold uppercase text-blue-400">New</span>}
-                    </div>
+                  {(() => {
+                    const manifestItem = manifestBySlug.get(project.slug);
+                    const mediaUrl = project.screenshot_url || manifestItem?.media_local_path;
+                    const mediaLabel = manifestItem?.media_label || (manifestItem?.is_vita_gameplay ? 'Vita Capture' : 'Official Art');
+                    return (
+                      <div className="relative aspect-[16/9] w-full overflow-hidden bg-black/60 border-b border-white/[0.06]">
+                        {mediaUrl ? (
+                          <img
+                            src={mediaUrl}
+                            alt={project.screenshot_alt || title.name}
+                            loading="lazy"
+                            className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                          />
+                        ) : (
+                          <GameCardBanner
+                            project={project}
+                            titleName={title.name}
+                            engineLabel={title.engine}
+                          />
+                        )}
+                        
+                        {/* Stage Badge & Media Provenance Label on top of image */}
+                        <div className="absolute left-3 top-3 flex items-center gap-1.5 flex-wrap">
+                          <span className={"rounded-md px-2 py-0.5 font-mono text-[10px] font-semibold uppercase backdrop-blur-md " + (STAGE_CHIP[String(project.current_stage)] || "bg-black/70 text-zinc-300")}>
+                            {prettyStage(project.current_stage)}
+                          </span>
+                          {isNew && <span className="rounded bg-blue-500/20 border border-blue-500/40 px-1.5 py-0.5 font-mono text-[9px] font-semibold uppercase text-blue-400">New</span>}
+                          {mediaUrl && (
+                            <span className="rounded-md bg-black/75 border border-white/15 px-1.5 py-0.5 font-mono text-[9px] font-medium text-zinc-300 backdrop-blur-md">
+                              {mediaLabel}
+                            </span>
+                          )}
+                        </div>
 
-                    {/* Show on 3D Vita Quick Trigger */}
-                    <button
-                      type="button"
-                      onClick={() => onSelectProject(project, true)}
-                      title="Show on 3D Vita"
-                      className="absolute right-3 top-3 inline-flex min-h-[44px] items-center rounded-lg border border-white/20 bg-black/70 px-3 py-1.5 font-mono text-[11px] font-medium text-white opacity-0 backdrop-blur-md transition-all group-hover:opacity-100 hover:bg-black"
-                    >
-                      Show on Vita
-                    </button>
-                  </div>
+                        {/* Show on 3D Vita Quick Trigger */}
+                        <button
+                          type="button"
+                          onClick={() => onSelectProject(project, true)}
+                          title="Show on 3D Vita"
+                          className="absolute right-3 top-3 inline-flex min-h-[44px] items-center rounded-lg border border-white/20 bg-black/70 px-3 py-1.5 font-mono text-[11px] font-medium text-white opacity-0 backdrop-blur-md transition-all group-hover:opacity-100 hover:bg-black"
+                        >
+                          Show on Vita
+                        </button>
+                      </div>
+                    );
+                  })()}
 
                   {/* Card Content */}
                   <div className="flex flex-1 flex-col justify-between p-4">
@@ -547,8 +736,8 @@ export const DirectoryTable: React.FC<DirectoryTableProps> = ({
                   <li
                     key={project.id}
                     id={"entry-" + project.slug}
-                    onMouseEnter={() => onSelectProject(project, false)}
-                    onFocus={() => onSelectProject(project, false)}
+                    
+                    
                     className={"group relative rounded-lg transition-all vh-row-glass " + (selected ? "bg-accent/[0.055] border-l-2 border-l-accent" : "hover:bg-[#0f172a]")}
                   >
                     <div className="grid grid-cols-[minmax(0,1fr)_auto] items-center">

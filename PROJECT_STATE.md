@@ -1,6 +1,38 @@
 # VitaHarbor project state
 
-Updated: 2026-10-07
+Updated: 2026-10-08
+
+## Current state: VH-FEATURES-AUDIO-RUN-048 How to Run Checklist, Similar Ports & Web Audio Effects (2026-10-08)
+
+- Master Improvements 1, 2, 3 & 4 active:
+  - How to Run Checklist: Dedicated hardware & plugin requirement checklist in ProjectPanel for data-backed ports.
+  - Similar Ongoing Ports: Intelligent recommendations in ProjectPanel suggesting 2-3 related ports by technology/platform.
+  - Web Audio Effects: Pure synthetic oscillator tactile sound effects (LiveArea blip / UI clicks) with top navbar audio toggle (default muted).
+  - Activity Indicators: Compact freshness badges on Source repository buttons.
+- Verification: npm run verify passed (tsc clean, 135/135 unit tests, 7/7 integration tests, 21 prerendered project pages, 24 sitemap URLs).
+
+## Current state: VH-SEARCH-GRADUATED-047 Direct Search Connection to Graduated VitaDB Releases (2026-10-08)
+
+- Smart Search Connection active:
+  - When a search query yields 0 active WIP ports, `DirectoryTable.tsx` automatically checks `GRADUATED_PROJECTS` and shows an intelligent callout banner with a direct 'Bekijk in VitaDB Releases' action.
+  - Seamless navigation prevents dead ends for users searching for completed ports published on VitaDB.
+- Verification: npm run verify passed (tsc clean, 135/135 unit tests, 7/7 integration tests, 21 prerendered project pages, 24 sitemap URLs).
+
+## Current state: VH-MOBILE-SEO-046 Mobile Layout Audit, Touch Target Tuning & SEO OpenGraph Verification (2026-10-08)
+
+- Master Options B & C verified:
+  - Mobile Responsiveness: 0 horizontal overflow and 0 small touch targets (<44px) across 375px, 390px, 412px and 768px viewports.
+  - Filter Bar: Smooth horizontal scrolling (`no-scrollbar overflow-x-auto`) for all 7 stage filter pills.
+  - SEO & OpenGraph: Automated feed and OG card generation with unique prerendered metadata and social images across all active project deep links.
+- Verification: npm run verify passed (tsc clean, 135/135 unit tests, 7/7 integration tests, 17 prerendered project pages, 20 sitemap URLs).
+
+## Current state: VH-UI-IMPROVEMENTS-045 3D Viewport Pause, Graduated VitaDB Archive & Build Feed Linkage (2026-10-08)
+
+- Master Improvements 3, 4 & 5 active:
+  - 3D Console Performance: Render loop strictly pauses via IntersectionObserver and visibilitychange when out of view, cutting GPU/CPU idle load.
+  - Graduated to VitaDB View: Dedicated archive mode in DirectoryTable displaying 13 completed ports on VitaDB with direct info links.
+  - Build Feed Linkage: `npm run data:feeds` automatically executes during `npm run build`.
+- Verification: npm run verify passed (tsc clean, 135/135 unit tests, 7/7 integration tests, 15 prerendered project pages, 18 sitemap URLs).
 
 ## Current state: VH-UI-DATA-INTEGRATION-044 Data Worker Integration & UI Correctness (2026-10-07)
 
