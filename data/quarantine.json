@@ -1,8 +1,97 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-09T23:20:00.493Z",
+  "generated_at": "2026-10-10T13:45:09.872Z",
   "source": "r/vitahacks + r/VitaPiracy + r/PSVitaHomebrew RSS",
   "items": [
+    {
+      "schema_version": 2,
+      "id": "reddit-1x24tze",
+      "external_id": "1x24tze",
+      "state": "QUARANTINED",
+      "state_history": [
+        {
+          "state": "DETECTED",
+          "at": "2026-10-10T13:45:09.872Z",
+          "actor": "reddit-scanner",
+          "reason": "Canonical Reddit RSS entry accepted at the ingestion boundary"
+        },
+        {
+          "state": "QUARANTINED",
+          "at": "2026-10-10T13:45:09.872Z",
+          "actor": "reddit-scanner",
+          "reason": "Scanner result is unverified and cannot enter the curated ledger"
+        }
+      ],
+      "source": {
+        "platform": "reddit",
+        "subreddit": "vitahacks",
+        "canonical_url": "https://www.reddit.com/r/vitahacks/comments/1x24tze/nfs_underground_2_vita_port/",
+        "author": "the_billy_goat",
+        "title": "NFS Underground 2 - Vita Port",
+        "body": "Hello! I previously posted over on r/VitaPiracy the other day, but figured I'd post here to share the word, I'm well under way on porting NFS Underground 2 to the Vita! It is FAR from being in a state that I'm happy with before sharing out, let alone a finished state, but it is getting there. I've so far gotten basic car customization implemented, reflections, ported most of the physics engine from the PC version (shoutout to OpenUG2 for also being of assistance), and more. There is still a fair bit to go, including adding AI opponents, adding the rest of the menus (maybe like",
+        "published_at": "2026-10-10T03:21:54.000Z"
+      },
+      "classification": {
+        "confidence": "medium",
+        "reason": "1 dev signal(s), 2 passive term(s), category=project_update",
+        "candidate_type": "engine",
+        "category": "project_update",
+        "question": false,
+        "spam": false
+      },
+      "provenance": {
+        "repository_url": null,
+        "release_url": null,
+        "evidence_urls": [],
+        "evidence_bundle_id": null,
+        "repository_identity": null,
+        "repository_created_at": null,
+        "repository_last_activity_at": null,
+        "release_facts": [],
+        "vita_evidence": [],
+        "author_linkage": null,
+        "corroboration": [],
+        "duplicate_relation": {
+          "content_hash": "759f0b259b52a3e51348fb0175ac345d2d01cec409b279e586594ddad7431ddd",
+          "related_candidate_ids": []
+        }
+      },
+      "campaign": {
+        "cluster_id": null,
+        "linkage_confidence": "none",
+        "signals": [],
+        "related_candidate_ids": [],
+        "text_fingerprint": "5979c7e9",
+        "media_fingerprints": [
+          "preview.redd.it/r7j1w9615kuh1.jpeg",
+          "i.redd.it/r7j1w9615kuh1.jpeg"
+        ],
+        "outbound_fingerprints": [
+          "www.reddit.com/r/vitahacks/comments/1x24tze/nfs_underground_2_vita_port",
+          "preview.redd.it/r7j1w9615kuh1.jpeg",
+          "www.reddit.com/user/sundaelow2086",
+          "x.com/nfsu2vita",
+          "www.reddit.com/user/the_billy_goat",
+          "i.redd.it/r7j1w9615kuh1.jpeg"
+        ],
+        "direct_intent": false,
+        "explicit_campaign_reference": false,
+        "incident_id": null
+      },
+      "risk_signals": [
+        "no_project_evidence_in_post"
+      ],
+      "evidence_gaps": [
+        "exact project repository",
+        "repository identity and activity facts",
+        "release or build evidence",
+        "Vita-specific hardware evidence",
+        "author/developer linkage and independent corroboration"
+      ],
+      "content_hash": "759f0b259b52a3e51348fb0175ac345d2d01cec409b279e586594ddad7431ddd",
+      "review": null,
+      "incident": null
+    },
     {
       "schema_version": 2,
       "id": "reddit-1x1wkny",
