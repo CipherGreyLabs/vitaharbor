@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "synced_at": "2026-10-10T17:53:43.328Z",
-  "total_items": 1161,
+  "synced_at": "2026-10-10T22:02:41.459Z",
+  "total_items": 1167,
   "items": [
     {
       "id": "1582",
@@ -28,6 +28,30 @@
       "url": "https://www.rinnegatamante.eu/vitadb/get_hb_url.php?id=1567"
     },
     {
+      "id": "1578",
+      "name": "THUG Vita",
+      "author": "iwannagooutside",
+      "version": "v.1.1.0",
+      "date": "2026-10-10",
+      "type": "2",
+      "description": "Port of Tony Hawk's Underground for PSVita.",
+      "source": "https://github.com/iwannagooutside/thug-vita-port",
+      "release_page": "https://github.com/iwannagooutside/thug-vita-port/releases",
+      "url": "https://www.rinnegatamante.eu/vitadb/get_hb_url.php?id=1578"
+    },
+    {
+      "id": "1593",
+      "name": "Vita IPTV",
+      "author": "emrhky",
+      "version": "v.0.2",
+      "date": "2026-10-10",
+      "type": "4",
+      "description": "IPTV player for PSVita.",
+      "source": "https://github.com/emrhky/VitaIPTV",
+      "release_page": "https://github.com/emrhky/VitaIPTV/releases",
+      "url": "https://www.rinnegatamante.eu/vitadb/get_hb_url.php?id=1593"
+    },
+    {
       "id": "1603",
       "name": "Music Vita",
       "author": "bvilleretro",
@@ -40,6 +64,18 @@
       "url": "https://www.rinnegatamante.eu/vitadb/get_hb_url.php?id=1603"
     },
     {
+      "id": "1604",
+      "name": "Predators Vita",
+      "author": "AJ170",
+      "version": "v.1.0",
+      "date": "2026-10-10",
+      "type": "2",
+      "description": "Port of Predators for PSVita.",
+      "source": "",
+      "release_page": "https://github.com/AJ170/Predators-PSVita-Port",
+      "url": "https://www.rinnegatamante.eu/vitadb/get_hb_url.php?id=1604"
+    },
+    {
       "id": "1601",
       "name": "Prince of Persia 2: The Shadow and the Flame Vita",
       "author": "Cardas26",
@@ -50,6 +86,54 @@
       "source": "https://github.com/Cardas26/psp2-pop2",
       "release_page": "https://github.com/Cardas26/psp2-pop2/releases",
       "url": "https://www.rinnegatamante.eu/vitadb/get_hb_url.php?id=1601"
+    },
+    {
+      "id": "1605",
+      "name": "Descent Vita",
+      "author": "KiddRwxSsj",
+      "version": "v.1.0",
+      "date": "2026-10-10",
+      "type": "2",
+      "description": "Port of Descent for PSVita.",
+      "source": "https://github.com/KiddRwxSsj/descent-vita",
+      "release_page": "https://github.com/KiddRwxSsj/descent-vita/releases",
+      "url": "https://www.rinnegatamante.eu/vitadb/get_hb_url.php?id=1605"
+    },
+    {
+      "id": "1606",
+      "name": "Call of Mini Zombies Vita",
+      "author": "AJ170",
+      "version": "v.1.0.1",
+      "date": "2026-10-10",
+      "type": "2",
+      "description": "Port of Call of Mini: Zombies for PSVita.",
+      "source": "",
+      "release_page": "https://github.com/AJ170/Call-of-Mini-Zombies-1-PSVita-Port",
+      "url": "https://www.rinnegatamante.eu/vitadb/get_hb_url.php?id=1606"
+    },
+    {
+      "id": "1607",
+      "name": "Raging Thunder Vita",
+      "author": "MetalSyntax",
+      "version": "v.1.0.0",
+      "date": "2026-10-10",
+      "type": "2",
+      "description": "Port of Raging Thunder for PSVita.",
+      "source": "https://github.com/MetalSyntax/Raging-Thunder-vita",
+      "release_page": "https://github.com/MetalSyntax/Raging-Thunder-vita/releases",
+      "url": "https://www.rinnegatamante.eu/vitadb/get_hb_url.php?id=1607"
+    },
+    {
+      "id": "1608",
+      "name": "Shooter Space",
+      "author": "MetalSyntax",
+      "version": "v.1.1.0",
+      "date": "2026-10-10",
+      "type": "1",
+      "description": "Pixel-art space shooter for PSVita.",
+      "source": "https://github.com/MetalSyntax/Space-Shooter-Vita",
+      "release_page": "https://github.com/MetalSyntax/Space-Shooter-Vita/releases",
+      "url": "https://www.rinnegatamante.eu/vitadb/get_hb_url.php?id=1608"
     },
     {
       "id": "1356",
@@ -122,6 +206,18 @@
       "source": "https://github.com/Perroabuelo/Material-Eleven",
       "release_page": "https://github.com/Perroabuelo/Material-Eleven/releases",
       "url": "https://www.rinnegatamante.eu/vitadb/get_hb_url.php?id=1599"
+    },
+    {
+      "id": "1591",
+      "name": "Snail Mail Vita",
+      "author": "MetalSyntax",
+      "version": "v.01.02",
+      "date": "2026-10-09",
+      "type": "2",
+      "description": "Port of Snail Mail for PSVita.",
+      "source": "https://github.com/MetalSyntax/Snail-Mail-vita",
+      "release_page": "https://github.com/MetalSyntax/Snail-Mail-vita/releases",
+      "url": "https://www.rinnegatamante.eu/vitadb/get_hb_url.php?id=1591"
     },
     {
       "id": "1592",
@@ -256,18 +352,6 @@
       "url": "https://www.rinnegatamante.eu/vitadb/get_hb_url.php?id=1590"
     },
     {
-      "id": "1593",
-      "name": "Vita IPTV",
-      "author": "emrhky",
-      "version": "v.0.1",
-      "date": "2026-10-08",
-      "type": "4",
-      "description": "IPTV player for PSVita.",
-      "source": "https://github.com/emrhky/VitaIPTV",
-      "release_page": "https://github.com/emrhky/VitaIPTV/releases",
-      "url": "https://www.rinnegatamante.eu/vitadb/get_hb_url.php?id=1593"
-    },
-    {
       "id": "1594",
       "name": "Regular Show: Best Park in the Universe Vita",
       "author": "clickbate",
@@ -328,18 +412,6 @@
       "url": "https://www.rinnegatamante.eu/vitadb/get_hb_url.php?id=1558"
     },
     {
-      "id": "1578",
-      "name": "THUG Vita",
-      "author": "iwannagooutside",
-      "version": "v.1.0.2",
-      "date": "2026-10-07",
-      "type": "2",
-      "description": "Port of Tony Hawk's Underground for PSVita.",
-      "source": "https://github.com/iwannagooutside/thug-vita-port",
-      "release_page": "https://github.com/iwannagooutside/thug-vita-port/releases",
-      "url": "https://www.rinnegatamante.eu/vitadb/get_hb_url.php?id=1578"
-    },
-    {
       "id": "1580",
       "name": "VitaSDR",
       "author": "hiraethclub",
@@ -376,18 +448,6 @@
       "url": "https://www.rinnegatamante.eu/vitadb/get_hb_url.php?id=1585"
     },
     {
-      "id": "1591",
-      "name": "Snail Mail Vita",
-      "author": "MetalSyntax",
-      "version": "v.01.00",
-      "date": "2026-10-07",
-      "type": "2",
-      "description": "Port of Snail Mail for PSVita.",
-      "source": "https://github.com/MetalSyntax/Snail-Mail-vita",
-      "release_page": "https://github.com/MetalSyntax/Snail-Mail-vita/releases",
-      "url": "https://www.rinnegatamante.eu/vitadb/get_hb_url.php?id=1591"
-    },
-    {
       "id": "1496",
       "name": "OpenMoHAA Vita",
       "author": "HenryKun55",
@@ -410,6 +470,18 @@
       "source": "https://github.com/ggdrn/KH_COM_VITA",
       "release_page": "https://github.com/ggdrn/KH_COM_VITA/releases",
       "url": "https://www.rinnegatamante.eu/vitadb/get_hb_url.php?id=1554"
+    },
+    {
+      "id": "1609",
+      "name": "Call of Duty World at War Zombies Vita",
+      "author": "devnoname120",
+      "version": "v.1.0",
+      "date": "2026-10-06",
+      "type": "2",
+      "description": "Port of Call of Duty World at War Zombies for PSVita.",
+      "source": "",
+      "release_page": "",
+      "url": "https://www.rinnegatamante.eu/vitadb/get_hb_url.php?id=1609"
     },
     {
       "id": "1273",

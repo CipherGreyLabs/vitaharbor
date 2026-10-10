@@ -226,29 +226,13 @@ const projectMediaDefs = {
     media_label: "Official Artwork Banner",
     provenance_notes: "Insurgency tactical FPS Vita recreation by OneDumbFox."
   },
-  "vita-iptv-v02-vita": {
+  "runescape-2-vita": {
     media_type: "official_promotional_artwork",
     is_vita_gameplay: false,
-    media_local_path: null,
-    media_source_url: "https://github.com/emrhky/VitaIPTV",
-    media_label: "Official App Banner",
-    provenance_notes: "Vita IPTV native video player app by mrhkyy."
-  },
-  "music-vita-10-vita": {
-    media_type: "official_promotional_artwork",
-    is_vita_gameplay: false,
-    media_local_path: null,
-    media_source_url: "https://github.com/bville-retro/Music-Vita",
-    media_label: "Official App Banner",
-    provenance_notes: "Music Vita audio player with synced lyrics by Usual_Plenty_5480."
-  },
-  "predators-vita": {
-    media_type: "official_promotional_artwork",
-    is_vita_gameplay: false,
-    media_local_path: "/screenshots/predators.webp",
-    media_source_url: "https://github.com/AJ17O/Predators-vita",
+    media_local_path: "/screenshots/runescape-2.webp",
+    media_source_url: "https://github.com/rustcityrs/client-c",
     media_label: "Official Artwork Banner",
-    provenance_notes: "PREDATORS standalone Vita decompilation port by AJ17O."
+    provenance_notes: "RuneScape 2 native C client port by me11yb3an."
   },
   "robot-unicorn-attack-vita": {
     media_type: "official_promotional_artwork",

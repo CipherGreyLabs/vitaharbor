@@ -285,20 +285,6 @@
       ]
     },
     {
-      "id": "predators-vita",
-      "url": "https://www.reddit.com/r/vitahacks/comments/1x2kzyz/release_predators_psvita_port/",
-      "title": "PREDATORS (PS Vita Port)",
-      "content_text": "Stage: playable | Platform: Android / iOS | Summary: Native PlayStation Vita port of the action game PREDATORS based on the ShadowOsmium decompilation by AJ17O. | Hardware: Smooth 30–60 FPS with 500 MHz overclocking via PSVshell.",
-      "date_modified": "2026-10-10T02:00:00.000Z",
-      "tags": [
-        "playable",
-        "Android / iOS",
-        "Decompilation",
-        "Native C++",
-        "vitaGL"
-      ]
-    },
-    {
       "id": "robot-unicorn-attack-vita",
       "url": "https://www.reddit.com/r/vitahacks/comments/1x1v4zp/release_robot_unicorn_attack_vita_port_v10/",
       "title": "Robot Unicorn Attack (Vita Port)",
@@ -327,6 +313,20 @@
       ]
     },
     {
+      "id": "runescape-2-vita",
+      "url": "https://www.reddit.com/r/vitahacks/comments/1x005eq/runescape_2_singleplayer_client/",
+      "title": "RuneScape 2 (Singleplayer Client)",
+      "content_text": "Stage: in_game | Platform: Java / PC | Summary: Native C client port of RuneScape 2 for PlayStation Vita based on the client-c decompile project by me11yb3an. | Hardware: Stable 30–60 FPS in 3D world rendering via vitaGL.",
+      "date_modified": "2026-10-09T10:00:00.000Z",
+      "tags": [
+        "in_game",
+        "Java / PC",
+        "Native C",
+        "client-c",
+        "vitaGL"
+      ]
+    },
+    {
       "id": "strikers-port-wip-vita",
       "url": "https://www.reddit.com/r/PSVitaHomebrew/comments/1x0mn3f/strikers_port_wip/",
       "title": "Strikers port wip",
@@ -343,7 +343,7 @@
       "url": "https://www.reddit.com/r/vitahacks/comments/1x2jzoi/release_vita_iptv_v02_films_series_native_1080p/",
       "title": "Vita IPTV",
       "content_text": "Stage: playable | Platform: PS Vita Utility / App | Summary: Native IPTV player for PS Vita & PSTV supporting M3U, Xtream, HLS, live TV, and hardware-decoded 1080p H.264 video. | Hardware: 1080p H.264 playback active with hardware decoding.",
-      "date_modified": "2026-10-10T21:57:36.359Z",
+      "date_modified": "2026-10-10T22:06:10.128Z",
       "tags": [
         "playable",
         "PS Vita Utility / App",
@@ -357,7 +357,7 @@
       "url": "https://www.reddit.com/r/vitahacks/comments/1x2g9mt/release_music_vita_10_the_ps_vitas_very_own_music/",
       "title": "Music Vita",
       "content_text": "Stage: playable | Platform: PS Vita Utility / App | Summary: Full-featured PS Vita music player with real-time audio visualizers, karaoke-style synced lyrics (.lrc), and M3U playlists. | Hardware: Smooth 60 FPS real-time visualizer rendering.",
-      "date_modified": "2026-10-10T21:57:36.359Z",
+      "date_modified": "2026-10-10T22:06:10.128Z",
       "tags": [
         "playable",
         "PS Vita Utility / App",

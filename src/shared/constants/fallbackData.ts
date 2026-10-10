@@ -22,13 +22,12 @@ export const FALLBACK_GAMES: Game[] = [
   { id: 47, slug: "star-wars-dark-forces", title: "Star Wars: Dark Forces", normalized_title: "star wars: dark forces", original_release_year: 1995, original_platform: "PC / DOS", created_at: new Date('2026-09-20T20:24:59.000Z'), updated_at: new Date('2026-09-20T20:24:59.000Z') },
   { id: 48, slug: "supertuxkart", title: "SuperTuxKart", normalized_title: "supertuxkart", original_release_year: 2006, original_platform: "PC / Linux", created_at: new Date('2026-09-19T07:09:39.000Z'), updated_at: new Date('2026-09-19T07:09:39.000Z') },
   { id: 49, slug: "insurgency", title: "Insurgency", normalized_title: "insurgency", original_release_year: 2014, original_platform: "PC / Source Engine", created_at: new Date('2026-10-02T08:20:55.000Z'), updated_at: new Date('2026-10-02T08:20:55.000Z') },
-  { id: 50, slug: "predators", title: "PREDATORS", normalized_title: "predators", original_release_year: 2010, original_platform: "Android / iOS", created_at: new Date('2026-10-10T02:00:00.000Z'), updated_at: new Date('2026-10-10T02:00:00.000Z') },
   { id: 51, slug: "robot-unicorn-attack", title: "Robot Unicorn Attack", normalized_title: "robot unicorn attack", original_release_year: 2010, original_platform: "Flash / Adult Swim", created_at: new Date('2026-10-09T18:00:00.000Z'), updated_at: new Date('2026-10-09T18:00:00.000Z') },
-  { id: 52, slug: "resident-evil-code-veronica-x", title: "Resident Evil Code: Veronica X", normalized_title: "resident evil code: veronica x", original_release_year: 2001, original_platform: "PS2 / Dreamcast Decomp", created_at: new Date('2026-10-09T14:00:00.000Z'), updated_at: new Date('2026-10-09T14:00:00.000Z') }
-,
+  { id: 52, slug: "resident-evil-code-veronica-x", title: "Resident Evil Code: Veronica X", normalized_title: "resident evil code: veronica x", original_release_year: 2001, original_platform: "PS2 / Dreamcast Decomp", created_at: new Date('2026-10-09T14:00:00.000Z'), updated_at: new Date('2026-10-09T14:00:00.000Z') },
   { id: 53, slug: "strikers-port-wip-vita", title: "Strikers port wip", normalized_title: "strikers port wip", original_release_year: null, original_platform: "Various", created_at: new Date('2026-10-08T09:40:22.000Z'), updated_at: new Date('2026-10-10T21:50:16.598Z') },
+  { id: 54, slug: "runescape-2", title: "RuneScape 2", normalized_title: "runescape 2", original_release_year: 2004, original_platform: "Java / PC", created_at: new Date('2026-10-09T10:00:00.000Z'), updated_at: new Date('2026-10-09T10:00:00.000Z') },
   { id: 531, slug: "vita-iptv-v02-vita", title: "Vita IPTV", normalized_title: "vita iptv", original_release_year: 2026, original_platform: "PS Vita Utility / App", created_at: new Date(), updated_at: new Date() },
-  { id: 532, slug: "music-vita-10-vita", title: "Music Vita", normalized_title: "music vita", original_release_year: 2026, original_platform: "PS Vita Utility / App", created_at: new Date(), updated_at: new Date() },
+  { id: 532, slug: "music-vita-10-vita", title: "Music Vita", normalized_title: "music vita", original_release_year: 2026, original_platform: "PS Vita Utility / App", created_at: new Date(), updated_at: new Date() }
 ];
 
 export const FALLBACK_PROJECTS: any[] = [
@@ -1428,67 +1427,6 @@ export const FALLBACK_PROJECTS: any[] = [
     }
   },
   {
-    id: 50,
-    game_id: 50,
-    slug: "predators-vita",
-    reddit_url: "https://www.reddit.com/r/vitahacks/comments/1x2kzyz/release_predators_psvita_port/",
-    repo_url: "https://github.com/AJ17O/Predators-vita",
-    display_name: "PREDATORS (PS Vita Port)",
-    current_stage: "playable",
-    lifecycle: "active",
-    summary: "Native PlayStation Vita port of the action game PREDATORS based on the ShadowOsmium decompilation by AJ17O.",
-    playability_notes: "Playable release build with full touchscreen weapon selection, physical buttons, audio, and custom shaders.",
-    performance_notes: "Smooth 30–60 FPS with 500 MHz overclocking via PSVshell.",
-    first_seen_at: new Date('2026-10-10T02:00:00.000Z'),
-    last_activity_at: new Date('2026-10-10T02:00:00.000Z'),
-    released_at: new Date('2026-10-10T02:00:00.000Z'),
-    is_featured: true,
-    is_archived: false,
-    game_title: "PREDATORS",
-    original_platform: "Android / iOS",
-    original_release_year: 2010,
-    technologies: [
-      "Decompilation",
-      "Native C++",
-      "vitaGL"
-    ],
-    developers: [
-      {
-        id: 32,
-        role: "lead",
-        display_name: "AJ17O",
-        slug: "aj17o"
-      }
-    ],
-    setup_evidence: {
-      categoryLabel: "Decompilation Port Setup",
-      plugins: [
-        "kubridge.skprx",
-        "fd_fix.skprx",
-        "libshacccg.suprx"
-      ],
-      overclock: "500 MHz recommended",
-      assetPath: "ux0:data/predators/",
-      instructions: "Extract legitimate PREDATORS Android data assets into ux0:data/predators/ and install VPK.",
-      verifiedOnHardware: true,
-      sourceUrl: "https://github.com/AJ17O/Predators-vita"
-    },
-    stage_history: [
-      {
-        id: 500,
-        stage: "announced",
-        effective_at: new Date('2026-10-10T02:00:00.000Z'),
-        reason: "Port release published on GitHub"
-      },
-      {
-        id: 501,
-        stage: "playable",
-        effective_at: new Date('2026-10-10T02:00:00.000Z'),
-        reason: "Initial v1.0 release build available"
-      }
-    ]
-  },
-  {
     id: 51,
     game_id: 51,
     slug: "robot-unicorn-attack-vita",
@@ -1592,6 +1530,65 @@ export const FALLBACK_PROJECTS: any[] = [
         stage: "research",
         effective_at: new Date('2026-10-09T14:00:00.000Z'),
         reason: "Active decompilation port development"
+      }
+    ]
+  },
+  {
+    id: 54,
+    game_id: 54,
+    slug: "runescape-2-vita",
+    reddit_url: "https://www.reddit.com/r/vitahacks/comments/1x005eq/runescape_2_singleplayer_client/",
+    repo_url: "https://github.com/rustcityrs/client-c",
+    display_name: "RuneScape 2 (Singleplayer Client)",
+    current_stage: "in_game",
+    lifecycle: "active",
+    summary: "Native C client port of RuneScape 2 for PlayStation Vita based on the client-c decompile project by me11yb3an.",
+    playability_notes: "Standalone singleplayer mode in active development with local cache loading and touch/analog controls.",
+    performance_notes: "Stable 30–60 FPS in 3D world rendering via vitaGL.",
+    first_seen_at: new Date('2026-10-09T10:00:00.000Z'),
+    last_activity_at: new Date('2026-10-09T10:00:00.000Z'),
+    released_at: null,
+    is_featured: true,
+    is_archived: false,
+    game_title: "RuneScape 2",
+    original_platform: "Java / PC",
+    original_release_year: 2004,
+    technologies: [
+      "Native C",
+      "client-c",
+      "vitaGL"
+    ],
+    developers: [
+      {
+        id: 34,
+        role: "lead",
+        display_name: "me11yb3an",
+        slug: "me11yb3an"
+      }
+    ],
+    setup_evidence: {
+      categoryLabel: "Decompilation Client Setup",
+      plugins: [
+        "libshacccg.suprx"
+      ],
+      overclock: "444 MHz",
+      assetPath: "ux0:data/rs2/",
+      instructions: "Copy RuneScape 2 game cache data files to ux0:data/rs2/ and install VPK.",
+      verifiedOnHardware: true,
+      sourceUrl: "https://github.com/rustcityrs/client-c"
+    },
+    stage_history: [
+      {
+        id: 540,
+        stage: "announced",
+        effective_at: new Date('2026-10-09T10:00:00.000Z'),
+        reason: "RuneScape 2 C port development announced on r/vitahacks"
+      },
+      {
+        id: 541,
+        stage: "in_game",
+        effective_at: new Date('2026-10-09T10:00:00.000Z'),
+        reason: "In-game singleplayer client rendering on Vita"
       }
     ]
   }
@@ -1917,20 +1914,6 @@ export const FALLBACK_DEVELOPERS: any[] = [
     projects: []
   },
   {
-    id: 32,
-    slug: "aj17o",
-    display_name: "AJ17O",
-    description: "Homebrew developer porting PREDATORS to PlayStation Vita.",
-    is_known_developer: true,
-    identities: [
-      {
-        provider: "reddit",
-        username: "AJ17O"
-      }
-    ],
-    projects: []
-  },
-  {
     id: 33,
     slug: "stoicpingu",
     display_name: "stoicpingu",
@@ -1940,6 +1923,20 @@ export const FALLBACK_DEVELOPERS: any[] = [
       {
         provider: "reddit",
         username: "stoicpingu"
+      }
+    ],
+    projects: []
+  },
+  {
+    id: 34,
+    slug: "me11yb3an",
+    display_name: "me11yb3an",
+    description: "Homebrew developer porting the RuneScape 2 singleplayer client to PlayStation Vita.",
+    is_known_developer: true,
+    identities: [
+      {
+        provider: "reddit",
+        username: "me11yb3an"
       }
     ],
     projects: []
@@ -2349,26 +2346,6 @@ export const FALLBACK_UPDATES: any[] = [
     ]
   },
   {
-    id: "upd_predators_release",
-    port_project_id: 50,
-    project_slug: "predators-vita",
-    project_display_name: "PREDATORS (PS Vita Port)",
-    developer_display_name: "AJ17O",
-    developer_slug: "aj17o",
-    event_type: "playable_release",
-    title: "[Release] PREDATORS PSvita port",
-    summary: "AJ17O published the standalone PlayStation Vita port of PREDATORS with source code on GitHub.",
-    event_at: new Date('2026-10-10T02:00:00.000Z'),
-    verification_level: "developer_direct",
-    sources: [
-      {
-        source_item_id: "src_predators_reddit",
-        relationship: "primary",
-        canonical_url: "https://www.reddit.com/r/vitahacks/comments/1x2kzyz/release_predators_psvita_port/"
-      }
-    ]
-  },
-  {
     id: "upd_robot_unicorn_attack_v1",
     port_project_id: 51,
     project_slug: "robot-unicorn-attack-vita",
@@ -2405,6 +2382,26 @@ export const FALLBACK_UPDATES: any[] = [
         source_item_id: "src_recvx_reddit",
         relationship: "primary",
         canonical_url: "https://www.reddit.com/r/vitahacks/comments/1x1pl2a/resident_evil_code_veronica_x_port/"
+      }
+    ]
+  },
+  {
+    id: "upd_runescape2_sp",
+    port_project_id: 54,
+    project_slug: "runescape-2-vita",
+    project_display_name: "RuneScape 2 (Singleplayer Client)",
+    developer_display_name: "me11yb3an",
+    developer_slug: "me11yb3an",
+    event_type: "first_in_game",
+    title: "RuneScape 2 singleplayer client port WIP",
+    summary: "me11yb3an announced the RuneScape 2 native C singleplayer client port for PlayStation Vita based on client-c.",
+    event_at: new Date('2026-10-09T10:00:00.000Z'),
+    verification_level: "developer_direct",
+    sources: [
+      {
+        source_item_id: "src_rs2_reddit",
+        relationship: "primary",
+        canonical_url: "https://www.reddit.com/r/vitahacks/comments/1x005eq/runescape_2_singleplayer_client/"
       }
     ]
   }
