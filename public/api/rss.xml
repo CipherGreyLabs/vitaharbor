@@ -5,7 +5,7 @@
     <link>https://vitaharbor.vercel.app/</link>
     <description>Community PlayStation Vita ports tracked from r/vitahacks + r/VitaPiracy + r/PSVitaHomebrew</description>
     <language>en-us</language>
-    <lastBuildDate>Sat, 10 Oct 2026 20:15:16 GMT</lastBuildDate>
+    <lastBuildDate>Sat, 10 Oct 2026 22:04:23 GMT</lastBuildDate>
     <item>
       <title><![CDATA[Zelda: Twilight Princess Vita - EARLY_WIP]]></title>
       <link>https://www.reddit.com/r/vitahacks/comments/1w9ys9f/the_new_psvita_ports/</link>
@@ -154,13 +154,6 @@
       <description><![CDATA[Handheld recreation of the tactical FPS Insurgency (2014) on PlayStation Vita featuring weapons, attachments, maps, and audio by OneDumbFox. Hardware Status: Runs between 20–35 FPS; shader pipeline and geometry culling optimizations actively in progress.]]></description>
     </item>
     <item>
-      <title><![CDATA[PREDATORS (PS Vita Port) - PLAYABLE]]></title>
-      <link>https://www.reddit.com/r/vitahacks/comments/1x2kzyz/release_predators_psvita_port/</link>
-      <guid isPermaLink="false">predators-vita</guid>
-      <pubDate>Sat, 10 Oct 2026 02:00:00 GMT</pubDate>
-      <description><![CDATA[Native PlayStation Vita port of the action game PREDATORS based on the ShadowOsmium decompilation by AJ17O. Hardware Status: Smooth 30–60 FPS with 500 MHz overclocking via PSVshell.]]></description>
-    </item>
-    <item>
       <title><![CDATA[Robot Unicorn Attack (Vita Port) - PLAYABLE]]></title>
       <link>https://www.reddit.com/r/vitahacks/comments/1x1v4zp/release_robot_unicorn_attack_vita_port_v10/</link>
       <guid isPermaLink="false">robot-unicorn-attack-vita</guid>
@@ -173,6 +166,13 @@
       <guid isPermaLink="false">resident-evil-code-veronica-x-vita</guid>
       <pubDate>Fri, 09 Oct 2026 14:00:00 GMT</pubDate>
       <description><![CDATA[Official PlayStation Vita port of Resident Evil Code: Veronica X in active development by Rinnegatamante based on the PS2 decompilation project. Hardware Status: Initial renderer pipeline exploration on hardware; shader conversion in active progress.]]></description>
+    </item>
+    <item>
+      <title><![CDATA[RuneScape 2 (Singleplayer Client) - IN_GAME]]></title>
+      <link>https://www.reddit.com/r/vitahacks/comments/1x005eq/runescape_2_singleplayer_client/</link>
+      <guid isPermaLink="false">runescape-2-vita</guid>
+      <pubDate>Fri, 09 Oct 2026 10:00:00 GMT</pubDate>
+      <description><![CDATA[Native C client port of RuneScape 2 for PlayStation Vita based on the client-c decompile project by me11yb3an. Hardware Status: Stable 30–60 FPS in 3D world rendering via vitaGL.]]></description>
     </item>
   </channel>
 </rss>

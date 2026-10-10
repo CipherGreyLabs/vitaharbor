@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-10T20:14:05.719Z",
+  "generated_at": "2026-10-10T22:03:32.968Z",
   "curator": "vitaharbor-data-worker",
   "notes": "Source-verified media manifest distinguishing verified PS Vita hardware captures, official repository media, and promotional artwork. Artwork is explicitly labeled and never represented as Vita gameplay.",
   "total_projects": 24,
@@ -285,19 +285,6 @@
       "provenance_notes": "Insurgency tactical FPS Vita recreation by OneDumbFox."
     },
     {
-      "id": 50,
-      "slug": "predators-vita",
-      "display_name": "PREDATORS (PS Vita Port)",
-      "game_title": "PREDATORS",
-      "media_type": "official_promotional_artwork",
-      "is_vita_gameplay": false,
-      "media_local_path": "/screenshots/predators.webp",
-      "media_remote_url": null,
-      "media_source_url": "https://github.com/AJ17O/Predators-vita",
-      "media_label": "Official Artwork Banner",
-      "provenance_notes": "PREDATORS standalone Vita decompilation port by AJ17O."
-    },
-    {
       "id": 51,
       "slug": "robot-unicorn-attack-vita",
       "display_name": "Robot Unicorn Attack (Vita Port)",
@@ -322,6 +309,19 @@
       "media_source_url": "https://github.com/AshfordFamily/recvx-decomp",
       "media_label": "Official Artwork Banner",
       "provenance_notes": "Resident Evil Code: Veronica X decompilation port by Rinnegatamante."
+    },
+    {
+      "id": 54,
+      "slug": "runescape-2-vita",
+      "display_name": "RuneScape 2 (Singleplayer Client)",
+      "game_title": "RuneScape 2",
+      "media_type": "official_promotional_artwork",
+      "is_vita_gameplay": false,
+      "media_local_path": "/screenshots/runescape-2.webp",
+      "media_remote_url": null,
+      "media_source_url": "https://github.com/rustcityrs/client-c",
+      "media_label": "Official Artwork Banner",
+      "provenance_notes": "RuneScape 2 native C client port by me11yb3an."
     }
   ]
 }

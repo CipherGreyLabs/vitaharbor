@@ -75,6 +75,7 @@ export const KNOWN_REPOS: Record<string, string> = {
   "renpy-8-runtime-engine": "https://github.com/Grimiku/RenPy-Vita-8",
   "real-racing-2-vita": "https://github.com/CHUTA7X/Real-Racing-2-Vita-Port-Release",
   "gta-lcs-vita": "https://github.com/fauxrougee/GTALCS-psvita-port",
+  "runescape-2-vita": "https://github.com/rustcityrs/client-c",
 };
 
 export const STAGE_TONE: Record<string, string> = {

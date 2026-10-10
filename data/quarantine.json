@@ -7,7 +7,7 @@
       "schema_version": 2,
       "id": "reddit-1x2kzyz",
       "external_id": "1x2kzyz",
-      "state": "PROMOTED",
+      "state": "GRADUATED_TO_VITADB",
       "state_history": [
         {
           "state": "DETECTED",
@@ -27,6 +27,13 @@
           "at": "2026-10-10T20:13:35.177Z",
           "actor": "vitaharbor-data-worker",
           "reason": "Promoted to curated fallbackData.ts"
+        },
+        {
+          "from": "PROMOTED",
+          "to": "GRADUATED_TO_VITADB",
+          "at": "2026-10-10T22:03:06.457Z",
+          "actor": "vitaharbor-data-worker",
+          "reason": "Officially released on VitaDB as Predators Vita (ID 1604 on 2026-10-10 by AJ170)"
         }
       ],
       "source": {
@@ -1247,7 +1254,7 @@
       "schema_version": 2,
       "id": "reddit-1x005eq",
       "external_id": "1x005eq",
-      "state": "VERIFIED_FOR_REVIEW",
+      "state": "PROMOTED",
       "state_history": [
         {
           "state": "DETECTED",
@@ -1267,6 +1274,13 @@
           "at": "2026-10-10T20:13:35.177Z",
           "actor": "vitaharbor-data-worker",
           "reason": "Verified active client port development"
+        },
+        {
+          "from": "VERIFIED_FOR_REVIEW",
+          "to": "PROMOTED",
+          "at": "2026-10-10T22:03:06.457Z",
+          "actor": "vitaharbor-data-worker",
+          "reason": "Promoted to curated fallbackData.ts as active in-development RuneScape 2 client port"
         }
       ],
       "source": {
