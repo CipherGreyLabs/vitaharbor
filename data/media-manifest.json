@@ -1,13 +1,13 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-08T21:00:45.490Z",
+  "generated_at": "2026-10-10T20:14:05.719Z",
   "curator": "vitaharbor-data-worker",
   "notes": "Source-verified media manifest distinguishing verified PS Vita hardware captures, official repository media, and promotional artwork. Artwork is explicitly labeled and never represented as Vita gameplay.",
-  "total_projects": 21,
+  "total_projects": 24,
   "media_counts": {
     "vita_hardware_capture": 2,
     "official_repository_screenshot": 0,
-    "official_promotional_artwork": 17,
+    "official_promotional_artwork": 20,
     "title_card_fallback": 2
   },
   "items": [
@@ -283,6 +283,45 @@
       "media_source_url": "https://www.reddit.com/r/vitahacks/comments/1wvob17/insurgency_vita_gameplay_showcase_information/",
       "media_label": "Official Artwork Banner",
       "provenance_notes": "Insurgency tactical FPS Vita recreation by OneDumbFox."
+    },
+    {
+      "id": 50,
+      "slug": "predators-vita",
+      "display_name": "PREDATORS (PS Vita Port)",
+      "game_title": "PREDATORS",
+      "media_type": "official_promotional_artwork",
+      "is_vita_gameplay": false,
+      "media_local_path": "/screenshots/predators.webp",
+      "media_remote_url": null,
+      "media_source_url": "https://github.com/AJ17O/Predators-vita",
+      "media_label": "Official Artwork Banner",
+      "provenance_notes": "PREDATORS standalone Vita decompilation port by AJ17O."
+    },
+    {
+      "id": 51,
+      "slug": "robot-unicorn-attack-vita",
+      "display_name": "Robot Unicorn Attack (Vita Port)",
+      "game_title": "Robot Unicorn Attack",
+      "media_type": "official_promotional_artwork",
+      "is_vita_gameplay": false,
+      "media_local_path": "/screenshots/robot-unicorn-attack.webp",
+      "media_remote_url": null,
+      "media_source_url": "https://github.com/stoicpingu/RUA-vita",
+      "media_label": "Official Artwork Banner",
+      "provenance_notes": "Robot Unicorn Attack v1.0 standalone Vita port by stoicpingu."
+    },
+    {
+      "id": 52,
+      "slug": "resident-evil-code-veronica-x-vita",
+      "display_name": "Resident Evil Code: Veronica X (recvx-vita)",
+      "game_title": "Resident Evil Code: Veronica X",
+      "media_type": "official_promotional_artwork",
+      "is_vita_gameplay": false,
+      "media_local_path": "/screenshots/recvx.webp",
+      "media_remote_url": null,
+      "media_source_url": "https://github.com/AshfordFamily/recvx-decomp",
+      "media_label": "Official Artwork Banner",
+      "provenance_notes": "Resident Evil Code: Veronica X decompilation port by Rinnegatamante."
     }
   ]
 }

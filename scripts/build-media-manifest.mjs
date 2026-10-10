@@ -226,6 +226,30 @@ const projectMediaDefs = {
     media_label: "Official Artwork Banner",
     provenance_notes: "Insurgency tactical FPS Vita recreation by OneDumbFox."
   },
+  "predators-vita": {
+    media_type: "official_promotional_artwork",
+    is_vita_gameplay: false,
+    media_local_path: "/screenshots/predators.webp",
+    media_source_url: "https://github.com/AJ17O/Predators-vita",
+    media_label: "Official Artwork Banner",
+    provenance_notes: "PREDATORS standalone Vita decompilation port by AJ17O."
+  },
+  "robot-unicorn-attack-vita": {
+    media_type: "official_promotional_artwork",
+    is_vita_gameplay: false,
+    media_local_path: "/screenshots/robot-unicorn-attack.webp",
+    media_source_url: "https://github.com/stoicpingu/RUA-vita",
+    media_label: "Official Artwork Banner",
+    provenance_notes: "Robot Unicorn Attack v1.0 standalone Vita port by stoicpingu."
+  },
+  "resident-evil-code-veronica-x-vita": {
+    media_type: "official_promotional_artwork",
+    is_vita_gameplay: false,
+    media_local_path: "/screenshots/recvx.webp",
+    media_source_url: "https://github.com/AshfordFamily/recvx-decomp",
+    media_label: "Official Artwork Banner",
+    provenance_notes: "Resident Evil Code: Veronica X decompilation port by Rinnegatamante."
+  },
   "real-racing-3-vita": {
     media_type: "official_promotional_artwork",
     is_vita_gameplay: false,

@@ -21,7 +21,10 @@ export const FALLBACK_GAMES: Game[] = [
   { id: 46, slug: "buckshot-roulette", title: "Buckshot Roulette", normalized_title: "buckshot roulette", original_release_year: 2023, original_platform: "PC / Godot", created_at: new Date('2026-09-22T08:58:38.000Z'), updated_at: new Date('2026-09-22T08:58:38.000Z') },
   { id: 47, slug: "star-wars-dark-forces", title: "Star Wars: Dark Forces", normalized_title: "star wars: dark forces", original_release_year: 1995, original_platform: "PC / DOS", created_at: new Date('2026-09-20T20:24:59.000Z'), updated_at: new Date('2026-09-20T20:24:59.000Z') },
   { id: 48, slug: "supertuxkart", title: "SuperTuxKart", normalized_title: "supertuxkart", original_release_year: 2006, original_platform: "PC / Linux", created_at: new Date('2026-09-19T07:09:39.000Z'), updated_at: new Date('2026-09-19T07:09:39.000Z') },
-  { id: 49, slug: "insurgency", title: "Insurgency", normalized_title: "insurgency", original_release_year: 2014, original_platform: "PC / Source Engine", created_at: new Date('2026-10-02T08:20:55.000Z'), updated_at: new Date('2026-10-02T08:20:55.000Z') }
+  { id: 49, slug: "insurgency", title: "Insurgency", normalized_title: "insurgency", original_release_year: 2014, original_platform: "PC / Source Engine", created_at: new Date('2026-10-02T08:20:55.000Z'), updated_at: new Date('2026-10-02T08:20:55.000Z') },
+  { id: 50, slug: "predators", title: "PREDATORS", normalized_title: "predators", original_release_year: 2010, original_platform: "Android / iOS", created_at: new Date('2026-10-10T02:00:00.000Z'), updated_at: new Date('2026-10-10T02:00:00.000Z') },
+  { id: 51, slug: "robot-unicorn-attack", title: "Robot Unicorn Attack", normalized_title: "robot unicorn attack", original_release_year: 2010, original_platform: "Flash / Adult Swim", created_at: new Date('2026-10-09T18:00:00.000Z'), updated_at: new Date('2026-10-09T18:00:00.000Z') },
+  { id: 52, slug: "resident-evil-code-veronica-x", title: "Resident Evil Code: Veronica X", normalized_title: "resident evil code: veronica x", original_release_year: 2001, original_platform: "PS2 / Dreamcast Decomp", created_at: new Date('2026-10-09T14:00:00.000Z'), updated_at: new Date('2026-10-09T14:00:00.000Z') }
 ];
 
 export const FALLBACK_PROJECTS: any[] = [
@@ -1419,6 +1422,174 @@ export const FALLBACK_PROJECTS: any[] = [
       verifiedOnHardware: true,
       sourceUrl: "https://www.reddit.com/r/vitahacks/comments/1wvob17/insurgency_vita_gameplay_showcase_information/"
     }
+  },
+  {
+    id: 50,
+    game_id: 50,
+    slug: "predators-vita",
+    reddit_url: "https://www.reddit.com/r/vitahacks/comments/1x2kzyz/release_predators_psvita_port/",
+    repo_url: "https://github.com/AJ17O/Predators-vita",
+    display_name: "PREDATORS (PS Vita Port)",
+    current_stage: "playable",
+    lifecycle: "active",
+    summary: "Native PlayStation Vita port of the action game PREDATORS based on the ShadowOsmium decompilation by AJ17O.",
+    playability_notes: "Playable release build with full touchscreen weapon selection, physical buttons, audio, and custom shaders.",
+    performance_notes: "Smooth 30–60 FPS with 500 MHz overclocking via PSVshell.",
+    first_seen_at: new Date('2026-10-10T02:00:00.000Z'),
+    last_activity_at: new Date('2026-10-10T02:00:00.000Z'),
+    released_at: new Date('2026-10-10T02:00:00.000Z'),
+    is_featured: true,
+    is_archived: false,
+    game_title: "PREDATORS",
+    original_platform: "Android / iOS",
+    original_release_year: 2010,
+    technologies: [
+      "Decompilation",
+      "Native C++",
+      "vitaGL"
+    ],
+    developers: [
+      {
+        id: 32,
+        role: "lead",
+        display_name: "AJ17O",
+        slug: "aj17o"
+      }
+    ],
+    setup_evidence: {
+      categoryLabel: "Decompilation Port Setup",
+      plugins: [
+        "kubridge.skprx",
+        "fd_fix.skprx",
+        "libshacccg.suprx"
+      ],
+      overclock: "500 MHz recommended",
+      assetPath: "ux0:data/predators/",
+      instructions: "Extract legitimate PREDATORS Android data assets into ux0:data/predators/ and install VPK.",
+      verifiedOnHardware: true,
+      sourceUrl: "https://github.com/AJ17O/Predators-vita"
+    },
+    stage_history: [
+      {
+        id: 500,
+        stage: "announced",
+        effective_at: new Date('2026-10-10T02:00:00.000Z'),
+        reason: "Port release published on GitHub"
+      },
+      {
+        id: 501,
+        stage: "playable",
+        effective_at: new Date('2026-10-10T02:00:00.000Z'),
+        reason: "Initial v1.0 release build available"
+      }
+    ]
+  },
+  {
+    id: 51,
+    game_id: 51,
+    slug: "robot-unicorn-attack-vita",
+    reddit_url: "https://www.reddit.com/r/vitahacks/comments/1x1v4zp/release_robot_unicorn_attack_vita_port_v10/",
+    repo_url: "https://github.com/stoicpingu/RUA-vita",
+    display_name: "Robot Unicorn Attack (Vita Port)",
+    current_stage: "playable",
+    lifecycle: "active",
+    summary: "Standalone PlayStation Vita port of Adult Swim's classic runner Robot Unicorn Attack by stoicpingu.",
+    playability_notes: "Full v1.0 release with Erasmus song soundtrack, crystal dashing, and high score tracking.",
+    performance_notes: "Flawless 60 FPS on stock 333 MHz clocks.",
+    first_seen_at: new Date('2026-10-09T18:00:00.000Z'),
+    last_activity_at: new Date('2026-10-09T18:00:00.000Z'),
+    released_at: new Date('2026-10-09T18:00:00.000Z'),
+    is_featured: false,
+    is_archived: false,
+    game_title: "Robot Unicorn Attack",
+    original_platform: "Flash / Adult Swim",
+    original_release_year: 2010,
+    technologies: [
+      "Native C++",
+      "Custom Engine",
+      "vitaGL"
+    ],
+    developers: [
+      {
+        id: 33,
+        role: "lead",
+        display_name: "stoicpingu",
+        slug: "stoicpingu"
+      }
+    ],
+    setup_evidence: {
+      categoryLabel: "Standalone Homebrew Setup",
+      plugins: [
+        "libshacccg.suprx"
+      ],
+      overclock: "333 MHz (stock)",
+      assetPath: "ux0:app/RUAVITA01/",
+      instructions: "Install the standalone VPK directly; all audio and assets are packaged in the binary.",
+      verifiedOnHardware: true,
+      sourceUrl: "https://github.com/stoicpingu/RUA-vita"
+    },
+    stage_history: [
+      {
+        id: 510,
+        stage: "announced",
+        effective_at: new Date('2026-10-09T18:00:00.000Z'),
+        reason: "Port release announced on r/vitahacks"
+      },
+      {
+        id: 511,
+        stage: "playable",
+        effective_at: new Date('2026-10-09T18:00:00.000Z'),
+        reason: "v1.0 release VPK available"
+      }
+    ]
+  },
+  {
+    id: 52,
+    game_id: 52,
+    slug: "resident-evil-code-veronica-x-vita",
+    reddit_url: "https://www.reddit.com/r/vitahacks/comments/1x1pl2a/resident_evil_code_veronica_x_port/",
+    repo_url: "https://github.com/AshfordFamily/recvx-decomp",
+    display_name: "Resident Evil Code: Veronica X (recvx-vita)",
+    current_stage: "research",
+    lifecycle: "active",
+    summary: "Official PlayStation Vita port of Resident Evil Code: Veronica X in active development by Rinnegatamante based on the PS2 decompilation project.",
+    playability_notes: "First showcase demonstrates in-engine real-time rendering of environments, Claire Redfield character model, and camera geometry.",
+    performance_notes: "Initial renderer pipeline exploration on hardware; shader conversion in active progress.",
+    first_seen_at: new Date('2026-10-09T14:00:00.000Z'),
+    last_activity_at: new Date('2026-10-09T14:00:00.000Z'),
+    released_at: null,
+    is_featured: true,
+    is_archived: false,
+    game_title: "Resident Evil Code: Veronica X",
+    original_platform: "PS2 / Dreamcast Decomp",
+    original_release_year: 2001,
+    technologies: [
+      "Decompilation",
+      "Native C++",
+      "vitaGL"
+    ],
+    developers: [
+      {
+        id: 5,
+        role: "lead",
+        display_name: "Rinnegatamante",
+        slug: "rinnegatamante"
+      }
+    ],
+    stage_history: [
+      {
+        id: 520,
+        stage: "announced",
+        effective_at: new Date('2026-10-09T14:00:00.000Z'),
+        reason: "Rinnegatamante video showcase published"
+      },
+      {
+        id: 521,
+        stage: "research",
+        effective_at: new Date('2026-10-09T14:00:00.000Z'),
+        reason: "Active decompilation port development"
+      }
+    ]
   }
 ];
 
@@ -1637,6 +1808,34 @@ export const FALLBACK_DEVELOPERS: any[] = [
       {
         provider: "reddit",
         username: "OneDumbFox"
+      }
+    ],
+    projects: []
+  },
+  {
+    id: 32,
+    slug: "aj17o",
+    display_name: "AJ17O",
+    description: "Homebrew developer porting PREDATORS to PlayStation Vita.",
+    is_known_developer: true,
+    identities: [
+      {
+        provider: "reddit",
+        username: "AJ17O"
+      }
+    ],
+    projects: []
+  },
+  {
+    id: 33,
+    slug: "stoicpingu",
+    display_name: "stoicpingu",
+    description: "Homebrew author behind Robot Unicorn Attack and Umineko Vita ports.",
+    is_known_developer: true,
+    identities: [
+      {
+        provider: "reddit",
+        username: "stoicpingu"
       }
     ],
     projects: []
@@ -2012,6 +2211,66 @@ export const FALLBACK_UPDATES: any[] = [
         source_item_id: "src_insurgency_reddit",
         relationship: "primary",
         canonical_url: "https://www.reddit.com/r/vitahacks/comments/1wvob17/insurgency_vita_gameplay_showcase_information/"
+      }
+    ]
+  },
+  {
+    id: "upd_predators_release",
+    port_project_id: 50,
+    project_slug: "predators-vita",
+    project_display_name: "PREDATORS (PS Vita Port)",
+    developer_display_name: "AJ17O",
+    developer_slug: "aj17o",
+    event_type: "playable_release",
+    title: "[Release] PREDATORS PSvita port",
+    summary: "AJ17O published the standalone PlayStation Vita port of PREDATORS with source code on GitHub.",
+    event_at: new Date('2026-10-10T02:00:00.000Z'),
+    verification_level: "developer_direct",
+    sources: [
+      {
+        source_item_id: "src_predators_reddit",
+        relationship: "primary",
+        canonical_url: "https://www.reddit.com/r/vitahacks/comments/1x2kzyz/release_predators_psvita_port/"
+      }
+    ]
+  },
+  {
+    id: "upd_robot_unicorn_attack_v1",
+    port_project_id: 51,
+    project_slug: "robot-unicorn-attack-vita",
+    project_display_name: "Robot Unicorn Attack (Vita Port)",
+    developer_display_name: "stoicpingu",
+    developer_slug: "stoicpingu",
+    event_type: "playable_release",
+    title: "[Release] Robot Unicorn Attack - Vita Port v1.0",
+    summary: "stoicpingu released Robot Unicorn Attack v1.0 for PS Vita with 60 FPS gameplay and original audio.",
+    event_at: new Date('2026-10-09T18:00:00.000Z'),
+    verification_level: "developer_direct",
+    sources: [
+      {
+        source_item_id: "src_rua_reddit",
+        relationship: "primary",
+        canonical_url: "https://www.reddit.com/r/vitahacks/comments/1x1v4zp/release_robot_unicorn_attack_vita_port_v10/"
+      }
+    ]
+  },
+  {
+    id: "upd_recvx_showcase",
+    port_project_id: 52,
+    project_slug: "resident-evil-code-veronica-x-vita",
+    project_display_name: "Resident Evil Code: Veronica X (recvx-vita)",
+    developer_display_name: "Rinnegatamante",
+    developer_slug: "rinnegatamante",
+    event_type: "technical_progress",
+    title: "Resident Evil Code Veronica X port - Rinnegatamante's First Showcase",
+    summary: "Rinnegatamante showcased the first running in-engine build of Resident Evil Code: Veronica X decompilation port on PS Vita.",
+    event_at: new Date('2026-10-09T14:00:00.000Z'),
+    verification_level: "developer_direct",
+    sources: [
+      {
+        source_item_id: "src_recvx_reddit",
+        relationship: "primary",
+        canonical_url: "https://www.reddit.com/r/vitahacks/comments/1x1pl2a/resident_evil_code_veronica_x_port/"
       }
     ]
   }

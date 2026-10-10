@@ -283,6 +283,48 @@
         "Native C++",
         "vitaGL"
       ]
+    },
+    {
+      "id": "predators-vita",
+      "url": "https://www.reddit.com/r/vitahacks/comments/1x2kzyz/release_predators_psvita_port/",
+      "title": "PREDATORS (PS Vita Port)",
+      "content_text": "Stage: playable | Platform: Android / iOS | Summary: Native PlayStation Vita port of the action game PREDATORS based on the ShadowOsmium decompilation by AJ17O. | Hardware: Smooth 30–60 FPS with 500 MHz overclocking via PSVshell.",
+      "date_modified": "2026-10-10T02:00:00.000Z",
+      "tags": [
+        "playable",
+        "Android / iOS",
+        "Decompilation",
+        "Native C++",
+        "vitaGL"
+      ]
+    },
+    {
+      "id": "robot-unicorn-attack-vita",
+      "url": "https://www.reddit.com/r/vitahacks/comments/1x1v4zp/release_robot_unicorn_attack_vita_port_v10/",
+      "title": "Robot Unicorn Attack (Vita Port)",
+      "content_text": "Stage: playable | Platform: Flash / Adult Swim | Summary: Standalone PlayStation Vita port of Adult Swim's classic runner Robot Unicorn Attack by stoicpingu. | Hardware: Flawless 60 FPS on stock 333 MHz clocks.",
+      "date_modified": "2026-10-09T18:00:00.000Z",
+      "tags": [
+        "playable",
+        "Flash / Adult Swim",
+        "Native C++",
+        "Custom Engine",
+        "vitaGL"
+      ]
+    },
+    {
+      "id": "resident-evil-code-veronica-x-vita",
+      "url": "https://www.reddit.com/r/vitahacks/comments/1x1pl2a/resident_evil_code_veronica_x_port/",
+      "title": "Resident Evil Code: Veronica X (recvx-vita)",
+      "content_text": "Stage: research | Platform: PS2 / Dreamcast Decomp | Summary: Official PlayStation Vita port of Resident Evil Code: Veronica X in active development by Rinnegatamante based on the PS2 decompilation project. | Hardware: Initial renderer pipeline exploration on hardware; shader conversion in active progress.",
+      "date_modified": "2026-10-09T14:00:00.000Z",
+      "tags": [
+        "research",
+        "PS2 / Dreamcast Decomp",
+        "Decompilation",
+        "Native C++",
+        "vitaGL"
+      ]
     }
   ]
 }
