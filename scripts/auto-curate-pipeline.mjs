@@ -175,6 +175,9 @@ export function inferTechnologies(title, body) {
   if (/decomp(?:ilation)?/i.test(text)) techs.push("Decompilation");
   if (/soloader|so_loader|armv7|android/i.test(text)) techs.push("ARMv7 Wrapper");
   if (/vitagl|gxm|shader/i.test(text)) techs.push("vitaGL");
+  if (/iptv|stream|video/i.test(text)) techs.push("IPTV / Video Streaming");
+  if (/music|audio|karaoke|mp3/i.test(text)) techs.push("Audio Player");
+  if (/utility|tool/i.test(text)) techs.push("Utility");
   if (techs.length === 0) techs.push("VitaSDK");
   return techs;
 }

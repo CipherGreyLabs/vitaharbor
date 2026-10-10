@@ -46,14 +46,16 @@ export interface SetupEvidence {
   verifiedOnHardware?: boolean;
 }
 
-export type ProjectTypeKey = "native" | "decomp" | "wrapper" | "engine" | "classic";
+export type ProjectTypeKey = "native" | "decomp" | "wrapper" | "engine" | "classic" | "utility" | "media";
 
 export const PROJECT_TYPE_META: Record<ProjectTypeKey, { label: string; shortLabel: string }> = {
   native: { label: "Native port", shortLabel: "Native" },
   decomp: { label: "Decompilation", shortLabel: "Decomp" },
   wrapper: { label: "ARM wrapper / loader", shortLabel: "Wrapper" },
   engine: { label: "Engine / runtime", shortLabel: "Engine" },
-  classic: { label: "Classic / other", shortLabel: "Classic" }
+  classic: { label: "Classic / other", shortLabel: "Classic" },
+  utility: { label: "Utility & Tool", shortLabel: "Utility" },
+  media: { label: "Media & Player", shortLabel: "Media" }
 };
 
 export const VERIFICATION_META: Record<string, { label: string; description: string }> = {
@@ -182,6 +184,12 @@ export function deriveProjectType(project: LedgerProject): ProjectTypeKey {
     .join(" ")
     .toLowerCase();
 
+  if (text.includes("iptv") || text.includes("media") || text.includes("music") || text.includes("player") || text.includes("video") || text.includes("stream")) {
+    return "media";
+  }
+  if (text.includes("tool") || text.includes("utility") || text.includes("app") || text.includes("plugin") || text.includes("radio") || text.includes("sdr")) {
+    return "utility";
+  }
   if (text.includes("ren'py") || text.includes("runtime") || text.includes("engine")) {
     return "engine";
   }

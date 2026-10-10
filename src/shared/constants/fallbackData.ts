@@ -26,7 +26,9 @@ export const FALLBACK_GAMES: Game[] = [
   { id: 51, slug: "robot-unicorn-attack", title: "Robot Unicorn Attack", normalized_title: "robot unicorn attack", original_release_year: 2010, original_platform: "Flash / Adult Swim", created_at: new Date('2026-10-09T18:00:00.000Z'), updated_at: new Date('2026-10-09T18:00:00.000Z') },
   { id: 52, slug: "resident-evil-code-veronica-x", title: "Resident Evil Code: Veronica X", normalized_title: "resident evil code: veronica x", original_release_year: 2001, original_platform: "PS2 / Dreamcast Decomp", created_at: new Date('2026-10-09T14:00:00.000Z'), updated_at: new Date('2026-10-09T14:00:00.000Z') }
 ,
-  { id: 53, slug: "strikers-port-wip-vita", title: "Strikers port wip", normalized_title: "strikers port wip", original_release_year: null, original_platform: "Various", created_at: new Date('2026-10-08T09:40:22.000Z'), updated_at: new Date('2026-10-10T21:50:16.598Z') }
+  { id: 53, slug: "strikers-port-wip-vita", title: "Strikers port wip", normalized_title: "strikers port wip", original_release_year: null, original_platform: "Various", created_at: new Date('2026-10-08T09:40:22.000Z'), updated_at: new Date('2026-10-10T21:50:16.598Z') },
+  { id: 531, slug: "vita-iptv-v02-vita", title: "Vita IPTV", normalized_title: "vita iptv", original_release_year: 2026, original_platform: "PS Vita Utility / App", created_at: new Date(), updated_at: new Date() },
+  { id: 532, slug: "music-vita-10-vita", title: "Music Vita", normalized_title: "music vita", original_release_year: 2026, original_platform: "PS Vita Utility / App", created_at: new Date(), updated_at: new Date() },
 ];
 
 export const FALLBACK_PROJECTS: any[] = [
@@ -1620,7 +1622,79 @@ export const FALLBACK_PROJECTS: any[] = [
     stage_history: [
       { id: 530, stage: "playable", effective_at: new Date('2026-10-08T09:40:22.000Z'), reason: "Verified source port release/development on GitHub" }
     ]
-  }
+  },
+  {
+    id: 531,
+    game_id: 531,
+    slug: "vita-iptv-v02-vita",
+    reddit_url: "https://www.reddit.com/r/vitahacks/comments/1x2jzoi/release_vita_iptv_v02_films_series_native_1080p/",
+    repo_url: "https://github.com/emrhky/VitaIPTV",
+    display_name: "Vita IPTV",
+    current_stage: "playable",
+    lifecycle: "active",
+    summary: "Native IPTV player for PS Vita & PSTV supporting M3U, Xtream, HLS, live TV, and hardware-decoded 1080p H.264 video.",
+    playability_notes: "v0.2 release active. Streams live channels and video-on-demand films natively using the Vita internal media decoder.",
+    performance_notes: "1080p H.264 playback active with hardware decoding.",
+    first_seen_at: new Date(),
+    last_activity_at: new Date(),
+    released_at: new Date(),
+    is_featured: false,
+    is_archived: false,
+    verification: "developer_direct",
+    game_title: "Vita IPTV",
+    original_platform: "PS Vita Utility / App",
+    original_release_year: 2026,
+    technologies: ["VitaSDK","Hardware H.264","IPTV / Video Streaming"],
+    developers: [{ id: 531, role: "lead", display_name: "mrhkyy", slug: "mrhkyy" }],
+    setup_evidence: {
+      "categoryLabel": "Homebrew Media App Setup",
+      "plugins": [],
+      "overclock": "Default or 444 MHz",
+      "assetPath": "ux0:data/VitaIPTV/",
+      "instructions": "Install VPK via VitaShell. Configure your M3U or Xtream playlist credentials in the settings.",
+      "verifiedOnHardware": true,
+      "sourceUrl": "https://github.com/emrhky/VitaIPTV/releases"
+},
+    stage_history: [
+      { id: 5310, stage: "playable", effective_at: new Date(), reason: "Homebrew app / utility release on PS Vita" }
+    ]
+  },
+  {
+    id: 532,
+    game_id: 532,
+    slug: "music-vita-10-vita",
+    reddit_url: "https://www.reddit.com/r/vitahacks/comments/1x2g9mt/release_music_vita_10_the_ps_vitas_very_own_music/",
+    repo_url: "https://github.com/bville-retro/Music-Vita",
+    display_name: "Music Vita",
+    current_stage: "playable",
+    lifecycle: "active",
+    summary: "Full-featured PS Vita music player with real-time audio visualizers, karaoke-style synced lyrics (.lrc), and M3U playlists.",
+    playability_notes: "v1.0 release. Plays MP3 and WAV files with background playback and dynamic waveform rendering.",
+    performance_notes: "Smooth 60 FPS real-time visualizer rendering.",
+    first_seen_at: new Date(),
+    last_activity_at: new Date(),
+    released_at: new Date(),
+    is_featured: false,
+    is_archived: false,
+    verification: "developer_direct",
+    game_title: "Music Vita",
+    original_platform: "PS Vita Utility / App",
+    original_release_year: 2026,
+    technologies: ["VitaSDK","Audio Player","Real-Time Visualizer"],
+    developers: [{ id: 532, role: "lead", display_name: "Usual_Plenty_5480", slug: "usual-plenty-5480" }],
+    setup_evidence: {
+      "categoryLabel": "Homebrew Media App Setup",
+      "plugins": [],
+      "overclock": "Stock 333 MHz",
+      "assetPath": "ux0:music/",
+      "instructions": "Install VPK via VitaShell. Place your MP3/WAV tracks and .lrc lyrics in ux0:music/.",
+      "verifiedOnHardware": true,
+      "sourceUrl": "https://www.reddit.com/r/vitahacks/comments/1x2g9mt/release_music_vita_10_the_ps_vitas_very_own_music/"
+},
+    stage_history: [
+      { id: 5320, stage: "playable", effective_at: new Date(), reason: "Homebrew app / utility release on PS Vita" }
+    ]
+  },
 ];
 
 export const FALLBACK_DEVELOPERS: any[] = [
@@ -1881,7 +1955,25 @@ export const FALLBACK_DEVELOPERS: any[] = [
       { provider: "reddit", username: "rob1n994" }
     ],
     projects: []
-  }
+  },
+  {
+    id: 531,
+    slug: "mrhkyy",
+    display_name: "mrhkyy",
+    description: "Developer of Vita IPTV for PlayStation Vita.",
+    is_known_developer: true,
+    identities: [{ provider: "reddit", username: "mrhkyy" }],
+    projects: []
+  },
+  {
+    id: 532,
+    slug: "usual-plenty-5480",
+    display_name: "Usual_Plenty_5480",
+    description: "Developer of Music Vita for PlayStation Vita.",
+    is_known_developer: true,
+    identities: [{ provider: "reddit", username: "Usual_Plenty_5480" }],
+    projects: []
+  },
 ];
 
 export const FALLBACK_UPDATES: any[] = [
@@ -2333,5 +2425,39 @@ export const FALLBACK_UPDATES: any[] = [
       { source_item_id: "src_upd_strikers_port_wip_vita_repo", relationship: "primary", canonical_url: "https://github.com/robin994/strikersVita" },
       { source_item_id: "src_upd_strikers_port_wip_vita_reddit", relationship: "community", canonical_url: "https://www.reddit.com/r/PSVitaHomebrew/comments/1x0mn3f/strikers_port_wip/" }
     ]
-  }
+  },
+  {
+    id: "upd_vita_iptv_v02_vita",
+    port_project_id: 531,
+    project_slug: "vita-iptv-v02-vita",
+    project_display_name: "Vita IPTV",
+    developer_display_name: "mrhkyy",
+    developer_slug: "mrhkyy",
+    event_type: "release",
+    title: "Vita IPTV released for PS Vita",
+    summary: "Native IPTV player for PS Vita & PSTV supporting M3U, Xtream, HLS, live TV, and hardware-decoded 1080p H.264 video.",
+    event_at: new Date(),
+    verification_level: "developer_direct",
+    sources: [
+      { source_item_id: "src_531_repo", relationship: "primary", canonical_url: "https://github.com/emrhky/VitaIPTV" },
+      { source_item_id: "src_531_reddit", relationship: "community", canonical_url: "https://www.reddit.com/r/vitahacks/comments/1x2jzoi/release_vita_iptv_v02_films_series_native_1080p/" }
+    ]
+  },
+  {
+    id: "upd_music_vita_10_vita",
+    port_project_id: 532,
+    project_slug: "music-vita-10-vita",
+    project_display_name: "Music Vita",
+    developer_display_name: "Usual_Plenty_5480",
+    developer_slug: "usual-plenty-5480",
+    event_type: "release",
+    title: "Music Vita released for PS Vita",
+    summary: "Full-featured PS Vita music player with real-time audio visualizers, karaoke-style synced lyrics (.lrc), and M3U playlists.",
+    event_at: new Date(),
+    verification_level: "developer_direct",
+    sources: [
+      { source_item_id: "src_532_repo", relationship: "primary", canonical_url: "https://github.com/bville-retro/Music-Vita" },
+      { source_item_id: "src_532_reddit", relationship: "community", canonical_url: "https://www.reddit.com/r/vitahacks/comments/1x2g9mt/release_music_vita_10_the_ps_vitas_very_own_music/" }
+    ]
+  },
 ];
