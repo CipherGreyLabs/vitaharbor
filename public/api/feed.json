@@ -325,6 +325,18 @@
         "Native C++",
         "vitaGL"
       ]
+    },
+    {
+      "id": "strikers-port-wip-vita",
+      "url": "https://www.reddit.com/r/PSVitaHomebrew/comments/1x0mn3f/strikers_port_wip/",
+      "title": "Strikers port wip",
+      "content_text": "Stage: playable | Platform: Various | Summary: Community PlayStation Vita port of Strikers port wip with source repository on GitHub. | Hardware: Targeting native hardware performance.",
+      "date_modified": "2026-10-08T09:40:22.000Z",
+      "tags": [
+        "playable",
+        "Various",
+        "vitaGL"
+      ]
     }
   ]
 }

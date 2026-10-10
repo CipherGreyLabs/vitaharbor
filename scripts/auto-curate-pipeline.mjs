@@ -320,8 +320,7 @@ export function insertPromotionIntoLedger(candidate, evalResult, ledgerPath = LE
       { source_item_id: "src_${updateId}_reddit", relationship: "community", canonical_url: "${candidate.source?.canonical_url || ""}" }
     ]
   }`;
-  const updInsertIdx = fb.indexOf("const MILESTONE_REASONS");
-  const lastUpdBracket = fb.lastIndexOf("];", updInsertIdx);
+  const lastUpdBracket = fb.lastIndexOf("];");
   fb = fb.slice(0, lastUpdBracket) + ",\n" + newUpdate + "\n" + fb.slice(lastUpdBracket);
 
   fs.writeFileSync(ledgerPath, fb, "utf8");
@@ -403,6 +402,7 @@ export async function runAutoCuratePipeline(options = {}) {
     if (promoted.length > 0 && options.rebuildFeeds !== false) {
       try {
         console.log("[AUTO-CURATE] Rebuilding feeds and project cards...");
+        execSync("node scripts/build-media-manifest.mjs", { stdio: "inherit" });
         execSync("npx tsx scripts/make-feeds.ts", { stdio: "inherit" });
       } catch (err) {
         console.warn("[AUTO-CURATE] Warning: Feed rebuild returned:", err.message);

@@ -74,6 +74,10 @@ jobs:
         if: ${{ github.event_name == 'workflow_dispatch' || (github.event_name == 'schedule' && github.event.schedule == '17 7 * * *') }}
         run: npm run reddit:backfill
 
+      - name: Auto-curate verified candidates into ledger
+        if: ${{ github.event_name == 'schedule' || github.event_name == 'workflow_dispatch' }}
+        run: node scripts/auto-curate-pipeline.mjs
+
       - name: Rebuild public feeds
         if: ${{ github.event_name == 'schedule' || github.event_name == 'workflow_dispatch' }}
         run: npx tsx scripts/make-feeds.ts
@@ -84,7 +88,7 @@ jobs:
         run: |
           git config user.name "vitaharbor-scan"
           git config user.email "scan@users.noreply.github.com"
-          git add data/quarantine.json data/scanner-health.json data/vitadb-cache.json public/data public/api
+          git add data/quarantine.json data/scanner-health.json data/vitadb-cache.json data/media-manifest.json src/shared/constants/fallbackData.ts src/web/components/ledger/types.ts public/data public/api
           if git diff --cached --quiet; then
             echo "Nothing new detected this run."
             echo "published_sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"

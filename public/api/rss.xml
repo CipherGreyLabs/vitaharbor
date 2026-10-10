@@ -5,7 +5,7 @@
     <link>https://vitaharbor.vercel.app/</link>
     <description>Community PlayStation Vita ports tracked from r/vitahacks + r/VitaPiracy + r/PSVitaHomebrew</description>
     <language>en-us</language>
-    <lastBuildDate>Sat, 10 Oct 2026 20:15:16 GMT</lastBuildDate>
+    <lastBuildDate>Sat, 10 Oct 2026 21:50:17 GMT</lastBuildDate>
     <item>
       <title><![CDATA[Zelda: Twilight Princess Vita - EARLY_WIP]]></title>
       <link>https://www.reddit.com/r/vitahacks/comments/1w9ys9f/the_new_psvita_ports/</link>
@@ -173,6 +173,13 @@
       <guid isPermaLink="false">resident-evil-code-veronica-x-vita</guid>
       <pubDate>Fri, 09 Oct 2026 14:00:00 GMT</pubDate>
       <description><![CDATA[Official PlayStation Vita port of Resident Evil Code: Veronica X in active development by Rinnegatamante based on the PS2 decompilation project. Hardware Status: Initial renderer pipeline exploration on hardware; shader conversion in active progress.]]></description>
+    </item>
+    <item>
+      <title><![CDATA[Strikers port wip - PLAYABLE]]></title>
+      <link>https://www.reddit.com/r/PSVitaHomebrew/comments/1x0mn3f/strikers_port_wip/</link>
+      <guid isPermaLink="false">strikers-port-wip-vita</guid>
+      <pubDate>Thu, 08 Oct 2026 09:40:22 GMT</pubDate>
+      <description><![CDATA[Community PlayStation Vita port of Strikers port wip with source repository on GitHub. Hardware Status: Targeting native hardware performance.]]></description>
     </item>
   </channel>
 </rss>

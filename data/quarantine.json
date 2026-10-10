@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-10T17:53:43.828Z",
+  "generated_at": "2026-10-10T21:50:16.591Z",
   "source": "r/vitahacks + r/VitaPiracy + r/PSVitaHomebrew RSS",
   "items": [
     {
@@ -1054,7 +1054,7 @@
       "schema_version": 2,
       "id": "reddit-1x0mn3f",
       "external_id": "1x0mn3f",
-      "state": "VERIFIED_FOR_REVIEW",
+      "state": "PROMOTED",
       "state_history": [
         {
           "state": "DETECTED",
@@ -1074,6 +1074,12 @@
           "at": "2026-10-10T20:13:35.177Z",
           "actor": "vitaharbor-data-worker",
           "reason": "Verified active port development by known developer"
+        },
+        {
+          "state": "PROMOTED",
+          "at": "2026-10-10T21:50:16.591Z",
+          "actor": "auto-curate-pipeline",
+          "reason": "Automated curation: verified valid PS Vita source repository (https://github.com/robin994/strikersVita) with concrete code indicators"
         }
       ],
       "source": {

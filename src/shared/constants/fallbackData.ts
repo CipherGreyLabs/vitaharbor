@@ -25,6 +25,8 @@ export const FALLBACK_GAMES: Game[] = [
   { id: 50, slug: "predators", title: "PREDATORS", normalized_title: "predators", original_release_year: 2010, original_platform: "Android / iOS", created_at: new Date('2026-10-10T02:00:00.000Z'), updated_at: new Date('2026-10-10T02:00:00.000Z') },
   { id: 51, slug: "robot-unicorn-attack", title: "Robot Unicorn Attack", normalized_title: "robot unicorn attack", original_release_year: 2010, original_platform: "Flash / Adult Swim", created_at: new Date('2026-10-09T18:00:00.000Z'), updated_at: new Date('2026-10-09T18:00:00.000Z') },
   { id: 52, slug: "resident-evil-code-veronica-x", title: "Resident Evil Code: Veronica X", normalized_title: "resident evil code: veronica x", original_release_year: 2001, original_platform: "PS2 / Dreamcast Decomp", created_at: new Date('2026-10-09T14:00:00.000Z'), updated_at: new Date('2026-10-09T14:00:00.000Z') }
+,
+  { id: 53, slug: "strikers-port-wip-vita", title: "Strikers port wip", normalized_title: "strikers port wip", original_release_year: null, original_platform: "Various", created_at: new Date('2026-10-08T09:40:22.000Z'), updated_at: new Date('2026-10-10T21:50:16.598Z') }
 ];
 
 export const FALLBACK_PROJECTS: any[] = [
@@ -1591,6 +1593,34 @@ export const FALLBACK_PROJECTS: any[] = [
       }
     ]
   }
+,
+  {
+    id: 53,
+    game_id: 53,
+    slug: "strikers-port-wip-vita",
+    reddit_url: "https://www.reddit.com/r/PSVitaHomebrew/comments/1x0mn3f/strikers_port_wip/",
+    repo_url: "https://github.com/robin994/strikersVita",
+    display_name: "Strikers port wip",
+    current_stage: "playable",
+    lifecycle: "active",
+    summary: "Community PlayStation Vita port of Strikers port wip with source repository on GitHub.",
+    playability_notes: "Automatically promoted from verified community source with repository and code evidence.",
+    performance_notes: "Targeting native hardware performance.",
+    first_seen_at: new Date('2026-10-08T09:40:22.000Z'),
+    last_activity_at: new Date('2026-10-08T09:40:22.000Z'),
+    released_at: new Date('2026-10-08T09:40:22.000Z'),
+    is_featured: false,
+    is_archived: false,
+    verification: "developer_direct",
+    game_title: "Strikers port wip",
+    original_platform: "Various",
+    original_release_year: null,
+    technologies: ["vitaGL"],
+    developers: [{ id: 53, role: "lead", display_name: "rob1n994", slug: "rob1n994" }],
+    stage_history: [
+      { id: 530, stage: "playable", effective_at: new Date('2026-10-08T09:40:22.000Z'), reason: "Verified source port release/development on GitHub" }
+    ]
+  }
 ];
 
 export const FALLBACK_DEVELOPERS: any[] = [
@@ -1837,6 +1867,18 @@ export const FALLBACK_DEVELOPERS: any[] = [
         provider: "reddit",
         username: "stoicpingu"
       }
+    ],
+    projects: []
+  }
+,
+  {
+    id: 53,
+    slug: "rob1n994",
+    display_name: "rob1n994",
+    description: "Developer of Strikers port wip for PlayStation Vita.",
+    is_known_developer: true,
+    identities: [
+      { provider: "reddit", username: "rob1n994" }
     ],
     projects: []
   }
@@ -2272,6 +2314,24 @@ export const FALLBACK_UPDATES: any[] = [
         relationship: "primary",
         canonical_url: "https://www.reddit.com/r/vitahacks/comments/1x1pl2a/resident_evil_code_veronica_x_port/"
       }
+    ]
+  }
+,
+  {
+    id: "upd_strikers_port_wip_vita",
+    port_project_id: 53,
+    project_slug: "strikers-port-wip-vita",
+    project_display_name: "Strikers port wip",
+    developer_display_name: "rob1n994",
+    developer_slug: "rob1n994",
+    event_type: "playable_demo",
+    title: "Strikers port wip PS Vita port surfaced with repository",
+    summary: "Automated verification confirmed active repository and code evidence for Strikers port wip.",
+    event_at: new Date('2026-10-08T09:40:22.000Z'),
+    verification_level: "developer_direct",
+    sources: [
+      { source_item_id: "src_upd_strikers_port_wip_vita_repo", relationship: "primary", canonical_url: "https://github.com/robin994/strikersVita" },
+      { source_item_id: "src_upd_strikers_port_wip_vita_reddit", relationship: "community", canonical_url: "https://www.reddit.com/r/PSVitaHomebrew/comments/1x0mn3f/strikers_port_wip/" }
     ]
   }
 ];

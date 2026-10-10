@@ -1,14 +1,14 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-10T20:14:05.719Z",
+  "generated_at": "2026-10-10T21:51:28.390Z",
   "curator": "vitaharbor-data-worker",
   "notes": "Source-verified media manifest distinguishing verified PS Vita hardware captures, official repository media, and promotional artwork. Artwork is explicitly labeled and never represented as Vita gameplay.",
-  "total_projects": 24,
+  "total_projects": 25,
   "media_counts": {
     "vita_hardware_capture": 2,
     "official_repository_screenshot": 0,
     "official_promotional_artwork": 20,
-    "title_card_fallback": 2
+    "title_card_fallback": 3
   },
   "items": [
     {
@@ -322,6 +322,19 @@
       "media_source_url": "https://github.com/AshfordFamily/recvx-decomp",
       "media_label": "Official Artwork Banner",
       "provenance_notes": "Resident Evil Code: Veronica X decompilation port by Rinnegatamante."
+    },
+    {
+      "id": 53,
+      "slug": "strikers-port-wip-vita",
+      "display_name": "Strikers port wip",
+      "game_title": "Strikers port wip",
+      "media_type": "title_card_fallback",
+      "is_vita_gameplay": false,
+      "media_local_path": null,
+      "media_remote_url": null,
+      "media_source_url": "https://www.reddit.com/r/PSVitaHomebrew/comments/1x0mn3f/strikers_port_wip/",
+      "media_label": "Dynamic Title Card",
+      "provenance_notes": "No external media mapped; falls back to dynamic OLED title card."
     }
   ]
 }
