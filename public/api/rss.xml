@@ -5,7 +5,7 @@
     <link>https://vitaharbor.vercel.app/</link>
     <description>Community PlayStation Vita ports tracked from r/vitahacks + r/VitaPiracy + r/PSVitaHomebrew</description>
     <language>en-us</language>
-    <lastBuildDate>Sat, 10 Oct 2026 22:06:10 GMT</lastBuildDate>
+    <lastBuildDate>Sat, 10 Oct 2026 22:39:59 GMT</lastBuildDate>
     <item>
       <title><![CDATA[Zelda: Twilight Princess Vita - EARLY_WIP]]></title>
       <link>https://www.reddit.com/r/vitahacks/comments/1w9ys9f/the_new_psvita_ports/</link>
@@ -185,14 +185,14 @@
       <title><![CDATA[Vita IPTV - PLAYABLE]]></title>
       <link>https://www.reddit.com/r/vitahacks/comments/1x2jzoi/release_vita_iptv_v02_films_series_native_1080p/</link>
       <guid isPermaLink="false">vita-iptv-v02-vita</guid>
-      <pubDate>Sat, 10 Oct 2026 22:06:10 GMT</pubDate>
+      <pubDate>Sat, 10 Oct 2026 22:39:59 GMT</pubDate>
       <description><![CDATA[Native IPTV player for PS Vita & PSTV supporting M3U, Xtream, HLS, live TV, and hardware-decoded 1080p H.264 video. Hardware Status: 1080p H.264 playback active with hardware decoding.]]></description>
     </item>
     <item>
       <title><![CDATA[Music Vita - PLAYABLE]]></title>
       <link>https://www.reddit.com/r/vitahacks/comments/1x2g9mt/release_music_vita_10_the_ps_vitas_very_own_music/</link>
       <guid isPermaLink="false">music-vita-10-vita</guid>
-      <pubDate>Sat, 10 Oct 2026 22:06:10 GMT</pubDate>
+      <pubDate>Sat, 10 Oct 2026 22:39:59 GMT</pubDate>
       <description><![CDATA[Full-featured PS Vita music player with real-time audio visualizers, karaoke-style synced lyrics (.lrc), and M3U playlists. Hardware Status: Smooth 60 FPS real-time visualizer rendering.]]></description>
     </item>
   </channel>

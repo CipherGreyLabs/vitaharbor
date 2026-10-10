@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-10-10T17:53:43.828Z",
+  "generated_at": "2026-10-10T22:39:38.533Z",
   "source": "r/vitahacks + r/VitaPiracy + r/PSVitaHomebrew RSS",
   "items": [
     {
@@ -1056,103 +1056,6 @@
       "incident": null,
       "evidence_type": "vpk_release",
       "evidence_notes": "Vita Chess v1.0 2D chess game with puzzles and AI difficulty by kygenbagels"
-    },
-    {
-      "schema_version": 2,
-      "id": "reddit-1x0mn3f",
-      "external_id": "1x0mn3f",
-      "state": "VERIFIED_FOR_REVIEW",
-      "state_history": [
-        {
-          "state": "DETECTED",
-          "at": "2026-10-08T19:18:52.056Z",
-          "actor": "reddit-scanner",
-          "reason": "Canonical Reddit RSS entry accepted at the ingestion boundary"
-        },
-        {
-          "state": "QUARANTINED",
-          "at": "2026-10-08T19:18:52.056Z",
-          "actor": "reddit-scanner",
-          "reason": "Scanner result is unverified and cannot enter the curated ledger"
-        },
-        {
-          "from": "QUARANTINED",
-          "to": "VERIFIED_FOR_REVIEW",
-          "at": "2026-10-10T20:13:35.177Z",
-          "actor": "vitaharbor-data-worker",
-          "reason": "Verified active port development by known developer"
-        }
-      ],
-      "source": {
-        "platform": "reddit",
-        "subreddit": "PSVitaHomebrew",
-        "canonical_url": "https://www.reddit.com/r/PSVitaHomebrew/comments/1x0mn3f/strikers_port_wip/",
-        "author": "rob1n994",
-        "title": "Strikers port wip",
-        "body": "Hi guys, i saw a port of strikers, so i wanna show my status . I’m working on strikers since it went out. Actually there is no frameskip in my build because i’m trying to reach 60fps before releasing it. but if you want i can release this build that goes 25-30fps in game… I don’t have a devkit optimizing it requieres so much time. If you wanna follow the project on my github there is the repo https://github.com/robin994/strikersVita the game is powered by a porting i'm mading of Aurora https://github.com/robin994/aurora-vita , actually it renders perfectly in native vita gxm. But it is sti",
-        "published_at": "2026-10-08T09:40:22.000Z"
-      },
-      "classification": {
-        "confidence": "high",
-        "reason": "7 dev signals: \\bw\\.?i\\.?p\\.?\\b, \\brelease\\b, \\bin.?game\\b · category=project_update",
-        "candidate_type": "port",
-        "category": "project_update",
-        "question": false,
-        "spam": false
-      },
-      "provenance": {
-        "repository_url": null,
-        "release_url": null,
-        "evidence_urls": [],
-        "evidence_bundle_id": null,
-        "repository_identity": null,
-        "repository_created_at": null,
-        "repository_last_activity_at": null,
-        "release_facts": [],
-        "vita_evidence": [],
-        "author_linkage": null,
-        "corroboration": [],
-        "duplicate_relation": {
-          "content_hash": "dcab26a5994fd9d0e868c9eff8f6ce0c8620617c30b1570f345737dff7fc7bc6",
-          "related_candidate_ids": []
-        }
-      },
-      "campaign": {
-        "cluster_id": "campaign-686d6191",
-        "linkage_confidence": "medium",
-        "signals": [
-          "shared_outbound_fingerprint"
-        ],
-        "related_candidate_ids": [
-          "reddit-1wsrua2"
-        ],
-        "text_fingerprint": "7ad3072a",
-        "media_fingerprints": [
-          "external-preview.redd.it/yzvunnfkennyn3vomxaq4nkbs0shbjereemyi8d5kkrrotjrtc-y9lk_lvsg.jpeg"
-        ],
-        "outbound_fingerprints": [
-          "github.com/robin994/strikersvita",
-          "github.com/robin994/aurora-vita",
-          "www.reddit.com/r/psvitahomebrew/comments/1x0mn3f/strikers_port_wip",
-          "external-preview.redd.it/yzvunnfkennyn3vomxaq4nkbs0shbjereemyi8d5kkrrotjrtc-y9lk_lvsg.jpeg",
-          "zealouschuck.com/dev-bounty",
-          "www.reddit.com/user/rob1n994",
-          "v.redd.it/ygitgt1tr7uh1"
-        ],
-        "direct_intent": false,
-        "explicit_campaign_reference": false,
-        "incident_id": null
-      },
-      "risk_signals": [],
-      "evidence_gaps": [
-        "repository identity and activity facts",
-        "author/developer linkage and independent corroboration"
-      ],
-      "content_hash": "dcab26a5994fd9d0e868c9eff8f6ce0c8620617c30b1570f345737dff7fc7bc6",
-      "review": null,
-      "incident": null,
-      "evidence_type": "engine_wip",
-      "evidence_notes": "Super Mario Strikers Vita port in development by rob1n994 targeting 60 FPS without frameskip"
     },
     {
       "schema_version": 2,
@@ -4314,14 +4217,10 @@
         }
       },
       "campaign": {
-        "cluster_id": "campaign-686d6191",
-        "linkage_confidence": "medium",
-        "signals": [
-          "shared_outbound_fingerprint"
-        ],
-        "related_candidate_ids": [
-          "reddit-1x0mn3f"
-        ],
+        "cluster_id": null,
+        "linkage_confidence": "none",
+        "signals": [],
+        "related_candidate_ids": [],
         "text_fingerprint": "22a8bfcb",
         "media_fingerprints": [],
         "outbound_fingerprints": [
